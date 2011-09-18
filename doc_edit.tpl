@@ -3,7 +3,7 @@
 <head>
 <title></title>
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
-<script type="text/javascript" src="ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="ckeditor/ckeditor/ckeditor.js"></script>
 <link type="text/css" rel="stylesheet" href="doc.css" />
 </head>
 

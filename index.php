@@ -7,13 +7,13 @@ header('Content-Type:text/html;charset=utf8');
 $query = str_replace('/articles/', '', $_SERVER['REQUEST_URI']);
 $parts = explode('?', $query, 2);
 if (count($parts) == 2) {
-	if (preg_match('/\/([^\/]+)$/', $parts[0], $m)) {
-		$filename_utf8 = urldecode($m[1]);
+	if (preg_match('/(^|\/)([^\/]+)$/', $parts[0], $m)) {
+		$filename_utf8 = urldecode($m[2]);
 	}
 	$action = $parts[1];
 } else {
-	if (preg_match('/\/([^\/]+)$/', $parts[0], $m)) {
-		$filename_utf8 = urldecode($m[1]);
+	if (preg_match('/(^|\/)([^\/]+)$/', $parts[0], $m)) {
+		$filename_utf8 = urldecode($m[2]);
 		$action = 'view';
 	} else {
 		$action = '';

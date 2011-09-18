@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Github.com.html</title>
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<link type="text/css" rel="stylesheet" href="doc.css" />
+</head>
+
+<body>
+<div id="toolbar" style="padding: 5px">
+	<a href="./">Back to article list</a> | <a href="?edit">Edit</a>
+</div>
+
+<div style="padding: 0px 30px"><!-- start --><h2>
+	Set Up Git</h2>
+<ul>
+	<li>
+		First: Download and Install Git</li>
+	<li>
+		Next: Set Up SSH Keys
+		<ul>
+			<li>
+				Check for SSH keys.<br />
+				<p>
+					If we already have existing SSH key pair, just make sure the private key exit as ~/.ssh/id_rsa, and the public key exist on github.com, then goes step &quot;Test everything out&quot;.</p>
+			</li>
+			<li>
+				Generate a new SSH key.<br />
+				<pre class="terminal bootcamp">
+ ssh-keygen -t rsa -C &quot;<em>your_email@youremail.com</em>&quot;</pre>
+			</li>
+			<li>
+				Add your SSH key to GitHub.
+				<p>
+					On the GitHub site <em>Click &ldquo;Account Settings&rdquo;</em> &gt; <em>Click &ldquo;SSH Public Keys&rdquo;</em> &gt; <em>Click &ldquo;Add another public key&rdquo;</em></p>
+				<p>
+					Open the id_rsa.pub file with a text editor (Notepad, TextEdit, or gedit will do just fine). This is your public SSH key. You may need turn on &ldquo;view hidden files&rdquo; to find it because the <em>.ssh</em> directory is hidden. <span class="attention">It&rsquo;s important you copy your SSH key exactly as it is written without adding any newlines or whitespace.</span> Now paste it into the &ldquo;Key&rdquo; field. Then hit &ldquo;Add Key.&rdquo;</p>
+			</li>
+			<li>
+				<span class="step-title">Test everything out.</span>
+				<p>
+					To make sure everything is working you&rsquo;ll now SSH to GitHub. <span class="attention">Don&rsquo;t change the &ldquo;git@github.com&rdquo; part.</span> That&rsquo;s supposed to be there.</p>
+				<pre class="terminal bootcamp">
+<span class="codeline">$ ssh -T git@github.com</span>
+</pre>
+				<p>
+					Which should give you this:</p>
+				<pre class="terminal bootcamp">
+Don&rsquo;t worry, this is supposed to happen. Type &ldquo;yes&rdquo;.
+</pre>
+			</li>
+		</ul>
+	</li>
+	<li>
+		2011-09-15<br />
+		Then: Set Up Your Info
+		<ul>
+			<li>
+				Set your username and email.
+				<pre>
+$ git config --global user.name &quot;Firstname Lastname&quot;
+$ git config --global user.email &quot;your_email@youremail.com&quot;</pre>
+			</li>
+		</ul>
+	</li>
+</ul>
+<h2>
+	Create A Repo</h2>
+<ul>
+	<li>
+		First: Create A Repo
+		<pre>
+// Github.com use the web interface to create a repo, below are my codes:
+# git init --bare
+Initialized empty Git repository in /var/www/git/ckeditor.git/
+</pre>
+	</li>
+</ul>
+<ul>
+	<li>
+		Next: Create a README for your repo.
+		<ul>
+			<li>
+				Create the README file
+				<pre>
+// codes by Github.com
+$ mkdir ~/Hello-World
+$ cd ~/Hello-World
+$ git init
+    
+$ touch README
+
+// codes by me
+# cd [another empty directory]
+# git clone /var/www/git/ckeditor.git/ .
+Cloning into ....
+done.
+warning: You appear to have cloned an empty repository.
+</pre>
+			</li>
+			<li>
+				Commit your README
+				<pre>
+$ git add README
+$ git commit -m &#39;first commit&#39;
+$ git remote add origin git@github.com:username/Hello-World.git
+$ git push origin master
+</pre>
+			</li>
+		</ul>
+	</li>
+</ul>
+<p>
+	&nbsp;</p>
+<!-- end --></div>
+
+</body>
+</html>

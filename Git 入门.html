@@ -18,7 +18,7 @@
 <p>
 	http://git-scm.com/</p>
 <p>
-	Git is a free &amp; open source, distributed version control system designed to handle everything from small to very large projects with speed and efficiency.<br />
+	Git is a free & open source, distributed version control system designed to handle everything from small to very large projects with speed and efficiency.<br />
 	<br />
 	<strong>Every Git clone is a full-fledged repository</strong> with complete history and full revision tracking capabilities, not dependent on network access or a central server. Branching and merging are fast and easy to do.</p>
 <p>
@@ -43,10 +43,10 @@
 		The latest install directions are included with git under INSTALL and the most current version online is <a class="external text" href="http://git.kernel.org/?p=git/git.git;a=blob_plain;f=INSTALL;hb=master" rel="nofollow">here</a>.</li>
 	<li>
 		http://git.kernel.org/?p=git/git.git;a=blob_plain;f=INSTALL;hb=master<br />
-		Normally you can just do &quot;make&quot; followed by &quot;make install&quot;, and that<br />
+		Normally you can just do "make" followed by "make install", and that<br />
 		will install the git programs in your own ~/bin/ directory. 这个很好，非 root 用户时可做此选择，但会导致家目录下出现 bin lib libexec 等目录，不如使用<br />
 		&nbsp;&nbsp;&nbsp; ./configure --prefix=~/git<br />
-		&nbsp;&nbsp;&nbsp; make &amp;&amp; make install<br />
+		&nbsp;&nbsp;&nbsp; make && make install<br />
 		这样会把所有文件安装到 ~/git 下，方便管理</li>
 </ul>
 <p>
@@ -65,9 +65,9 @@ In file included from daemon.c:1:
 cache.h:18:18: error: zlib.h: No such file or directory</pre>
 	</li>
 	<li>
-		make &amp;&amp; make install</li>
+		make && make install</li>
 	<li>
-		vi /etc/profile, add: export PATH=&quot;$PATH:/usr/local/git-1.7.6/bin&quot;</li>
+		vi /etc/profile, add: export PATH="$PATH:/usr/local/git-1.7.6/bin"</li>
 </ul>
 <p>
 	2011-09-17</p>
@@ -77,75 +77,137 @@ cache.h:18:18: error: zlib.h: No such file or directory</pre>
 		&nbsp;- To build and install documentation suite, you need to have<br />
 		&nbsp;&nbsp; the asciidoc/xmlto toolchain.&nbsp; Because not many people are<br />
 		&nbsp;&nbsp; inclined to install the tools, the default build target<br />
-		&nbsp;&nbsp; (&quot;make all&quot;) does _not_ build them.<br />
+		&nbsp;&nbsp; ("make all") does _not_ build them.<br />
 		<br />
-		&nbsp;&nbsp; &quot;make doc&quot; builds documentation in man and html formats; there are<br />
-		&nbsp;&nbsp; also &quot;make man&quot;, &quot;make html&quot; and &quot;make info&quot;. Note that &quot;make html&quot;<br />
-		&nbsp;&nbsp; requires asciidoc, but not xmlto. &quot;make man&quot; (and thus make doc)<br />
+		&nbsp;&nbsp; "make doc" builds documentation in man and html formats; there are<br />
+		&nbsp;&nbsp; also "make man", "make html" and "make info". Note that "make html"<br />
+		&nbsp;&nbsp; requires asciidoc, but not xmlto. "make man" (and thus make doc)<br />
 		&nbsp;&nbsp; requires both.<br />
 		<br />
-		&nbsp;&nbsp; &quot;make install-doc&quot; installs documentation in man format only; there<br />
-		&nbsp;&nbsp; are also &quot;make install-man&quot;, &quot;make install-html&quot; and &quot;make<br />
-		&nbsp;&nbsp; install-info&quot;.<br />
-		于是可知 make 之后可有如下参数选择或组合 make, make all, make doc, make man, make html, make info， make install 之后可有选择或组合 make install, make install-doc, make install-man, make install-html, make install-info.</li>
+		&nbsp;&nbsp; "make install-doc" installs documentation in man format only; there<br />
+		&nbsp;&nbsp; are also "make install-man", "make install-html" and "make<br />
+		&nbsp;&nbsp; install-info".<br />
+		于是可知 make 之后可有如下参数选择或组合 make, make all, make doc, make man, make html, make info， make install 之后可有选择或组合 make install, make install-doc, make install-man, make install-html, make install-info.
+		<ul>
+			<li>
+				经编译测试，make html && make install install-html 的确不需要 xmlto，但安装完成后不知道如何调出这个 html 帮助文档。</li>
+		</ul>
+	</li>
 	<li>
-		经编译测试，make html &amp;&amp; make install install-html 的确不需要 xmlto，但安装完成后不知道如何调出这个 html 帮助文档。</li>
+		asciidoc 官方网址：http://www.methods.co.nz/asciidoc/index.html
+		<ul>
+			<li>
+				跳转到本页：Distribution tarball installation，找到 tar.gz 包的下载地址：http://downloads.sourceforge.net/project/asciidoc/asciidoc/8.6.6/asciidoc-8.6.6.tar.gz</li>
+			<li>
+				tar xf asciidoc-8.6.6.tar.gz && cd asciidoc-8.6.6 && ./configure && make && make install</li>
+			<li>
+				有了 asciidoc，原来出错的地方就可以正常这继续编译了。<br />
+				...<br />
+				make[1]: Entering directory `/root/soft/git-1.7.6/Documentation&#39;<br />
+				make[2]: Entering directory `/root/soft/git-1.7.6&#39;<br />
+				make[2]: &ldquo;GIT-VERSION-FILE&rdquo;是最新的。<br />
+				make[2]: Leaving directory `/root/soft/git-1.7.6&#39;<br />
+				&nbsp;&nbsp;&nbsp; ASCIIDOC git-add.html<br />
+				&nbsp;&nbsp;&nbsp; ASCIIDOC git-am.html<br />
+				&nbsp;&nbsp;&nbsp; ASCIIDOC git-annotate.html<br />
+				&nbsp;&nbsp;&nbsp; ASCIIDOC git-apply.html<br />
+				...</li>
+			<li>
+				这里要从网上读取 dtd，可能要花上几分钟<br />
+				&nbsp;&nbsp;&nbsp; ASCIIDOC user-manual.xml<br />
+				&nbsp;&nbsp;&nbsp; XSLTPROC user-manual.html<br />
+				<br />
+				user-manual.xml:2: warning: failed to load external entity "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd"<br />
+				D DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd"<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ^<br />
+				&nbsp;&nbsp;&nbsp; ASCIIDOC technical/api-allocation-growing.html</li>
+			<li>
+				出错了，需要安装 xmlto<br />
+				&nbsp;&nbsp;&nbsp; ASCIIDOC git-add.xml<br />
+				&nbsp;&nbsp;&nbsp; XMLTO git-add.1<br />
+				/bin/sh: line 1: xmlto: command not found<br />
+				make[1]: *** [git-add.1] 错误 127<br />
+				make[1]: Leaving directory `/root/soft/git-1.7.6/Documentation&#39;<br />
+				make: *** [doc] 错误 2</li>
+			<li>
+				yum install -y xmlto，结果牵连了一堆东西出来。</li>
+			<li>
+				仍然有错，跟刚才从网上下载 dtd 失败有关<br />
+				&nbsp;&nbsp;&nbsp; XMLTO git-add.1<br />
+				xmlto: input does not validate (status 3)<br />
+				/root/soft/git-1.7.6/Documentation/git-add.xml:2: warning: failed to load external entity "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd"<br />
+				D DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd"<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ^<br />
+				warning: failed to load external entity "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd"<br />
+				validity error : Could not load the external subset "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd"<br />
+				Document /root/soft/git-1.7.6/Documentation/git-add.xml does not validate<br />
+				make[1]: *** [git-add.1] 错误 3<br />
+				make[1]: Leaving directory `/root/soft/git-1.7.6/Documentation&#39;<br />
+				make: *** [doc] 错误 2</li>
+			<li>
+				手工浏览上述地址，居然说<br />
+				As part of scheduled maintenance, portions of this site will be unavailable for September 17th and 18th. We apologize for the inconvenience.<br />
+				看来我买彩票能中奖了。</li>
+			<li>
+				没折了，官网倒了，官方 git 仓库也不能用了。等以后再想办法安装帮助文档吧。</li>
+		</ul>
+	</li>
 	<li>
-		asciidoc 官方网址：http://www.methods.co.nz/asciidoc/index.html</li>
+		不过通过 yum 安装 git 也还算方便吧，帮助文档默认都有了。<br />
+		http://fedoraproject.org/wiki/EPEL/FAQ#How_can_I_install_the_packages_from_the_EPEL_software_repository.3F<br />
+		# rpm -Uvh http://download.fedora.redhat.com/pub/epel/5/i386/epel-release-5-4.noarch.rpm<br />
+		# yum install git</li>
 	<li>
-		跳转到本页：Distribution tarball installation，找到 tar.gz 包的下载地址：http://sourceforge.net/projects/asciidoc/</li>
-	<li>
-		tar xf asciidoc-8.6.6.tar.gz &amp;&amp; cd asciidoc-8.6.6 &amp;&amp; ./configure &amp;&amp; make &amp;&amp; make install</li>
-	<li>
-		有了 asciidoc，原来出错的地方就可以正常这继续编译了。<br />
-		...<br />
-		make[1]: Entering directory `/root/soft/git-1.7.6/Documentation&#39;<br />
-		make[2]: Entering directory `/root/soft/git-1.7.6&#39;<br />
-		make[2]: &ldquo;GIT-VERSION-FILE&rdquo;是最新的。<br />
-		make[2]: Leaving directory `/root/soft/git-1.7.6&#39;<br />
-		&nbsp;&nbsp;&nbsp; ASCIIDOC git-add.html<br />
-		&nbsp;&nbsp;&nbsp; ASCIIDOC git-am.html<br />
-		&nbsp;&nbsp;&nbsp; ASCIIDOC git-annotate.html<br />
-		&nbsp;&nbsp;&nbsp; ASCIIDOC git-apply.html<br />
-		...</li>
-	<li>
-		这里要从网上读取 dtd，可能要花上几分钟<br />
-		&nbsp;&nbsp;&nbsp; ASCIIDOC user-manual.xml<br />
-		&nbsp;&nbsp;&nbsp; XSLTPROC user-manual.html<br />
-		<br />
-		user-manual.xml:2: warning: failed to load external entity &quot;http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd&quot;<br />
-		D DocBook XML V4.5//EN&quot; &quot;http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd&quot;<br />
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ^<br />
-		&nbsp;&nbsp;&nbsp; ASCIIDOC technical/api-allocation-growing.html</li>
-	<li>
-		出错了，需要安装 xmlto<br />
-		&nbsp;&nbsp;&nbsp; ASCIIDOC git-add.xml<br />
-		&nbsp;&nbsp;&nbsp; XMLTO git-add.1<br />
-		/bin/sh: line 1: xmlto: command not found<br />
-		make[1]: *** [git-add.1] 错误 127<br />
-		make[1]: Leaving directory `/root/soft/git-1.7.6/Documentation&#39;<br />
-		make: *** [doc] 错误 2</li>
-	<li>
-		yum install -y xmlto，结果牵连了一堆东西出来。</li>
-	<li>
-		仍然有错，跟刚才从网上下载 dtd 失败有关<br />
-		&nbsp;&nbsp;&nbsp; XMLTO git-add.1<br />
-		xmlto: input does not validate (status 3)<br />
-		/root/soft/git-1.7.6/Documentation/git-add.xml:2: warning: failed to load external entity &quot;http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd&quot;<br />
-		D DocBook XML V4.5//EN&quot; &quot;http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd&quot;<br />
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ^<br />
-		warning: failed to load external entity &quot;http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd&quot;<br />
-		validity error : Could not load the external subset &quot;http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd&quot;<br />
-		Document /root/soft/git-1.7.6/Documentation/git-add.xml does not validate<br />
-		make[1]: *** [git-add.1] 错误 3<br />
-		make[1]: Leaving directory `/root/soft/git-1.7.6/Documentation&#39;<br />
-		make: *** [doc] 错误 2</li>
-	<li>
-		手工浏览上述地址，居然说<br />
-		As part of scheduled maintenance, portions of this site will be unavailable for September 17th and 18th. We apologize for the inconvenience.<br />
-		看来我买彩票能中奖了。</li>
-	<li>
-		没折了，官网倒了，官方 git 仓库也不能用了。等以后再想办法安装帮助文档吧。</li>
+		如何编译新版本 curl，安装 expat-devel 包，并编译出 git http-push 命令
+		<ul>
+			<li>
+				首先查看当前版本 curl 相关文件的存在路径<br />
+				# whereis curl<br />
+				curl: /usr/bin/curl /usr/share/man/man1/curl.1.gz<br />
+				<br />
+				# find / | grep libcurl<br />
+				/usr/lib/libcurl.so.3<br />
+				/usr/lib/libcurl.so.3.0.0<br />
+				/usr/lib64/libcurl.so.3<br />
+				/usr/lib64/libcurl.so.3.0.0</li>
+			<li>
+				可能出现的错误，因为缺少 --libdir=/usr/lib64<br />
+				# ./configure --prefix=/usr && make && make install<br />
+				# curl -V<br />
+				curl: error while loading shared libraries: libcurl.so.4: cannot open shared object file: No such file or directory</li>
+			<li>
+				可能出现的错误，因为缺少 --enable-shared<br />
+				# ./configure --prefix=/usr --libdir=/usr/lib64 && make && make install<br />
+				# ./configure --prefix=/usr/local/git-1.7.6 --with-curl && make && make install<br />
+				# /usr/local/git-1.7.6/bin/git http-push<br />
+				fatal: git-push is not available for http/https repository when not compiled with USE_CURL_MULTI</li>
+			<li>
+				经反复测试，能够成功的唯一编译方法为如下参数配置<br />
+				curl: ./configure --prefix=(/usr*会覆盖旧版本* | [/usr/local]*新旧版本能同时存在*) --libdir=/usr/lib64 --enable-shared<br />
+				git: ./configure --prefix=(/usr/local/git-1.7.6 | /usr | [/usr/local]) --with-curl && make && make install<br />
+				测试结果：<br />
+				# /usr/local/git-1.7.6/bin/git http-push<br />
+				usage: git http-push [--all] [--dry-run] [--force] [--verbose] <remote> [<head>...]<br />
+				<br />
+				相关查询：<br />
+				# whereis curl<br />
+				curl: /usr/bin/curl /usr/local/bin/curl /usr/share/man/man1/curl.1.gz<br />
+				<br />
+				# curl -V<br />
+				curl 7.22.0 (x86_64-unknown-linux-gnu) libcurl/7.22.0 zlib/1.2.3<br />
+				Protocols: dict file ftp gopher http imap pop3 rtsp smtp telnet tftp<br />
+				Features: Largefile libz<br />
+				<br />
+				# find /usr | grep libcurl.so<br />
+				/usr/lib/libcurl.so.3<br />
+				/usr/lib/libcurl.so.3.0.0<br />
+				/usr/lib64/libcurl.so.3<br />
+				/usr/lib64/libcurl.so.4.2.0<br />
+				/usr/lib64/libcurl.so<br />
+				/usr/lib64/libcurl.so.4<br />
+				/usr/lib64/libcurl.so.3.0.0</li>
+		</ul>
+	</li>
 </ul>
 <h3>
 	Tortoisegit - Git 在 Windows 下的客户端</h3>
@@ -199,7 +261,9 @@ Initialized empty Git repository in /var/www/git/wordpress.git/
 <p>
 	New XAMPP security concept:<br />
 	Access to the requested directory is only available from the local network.<br />
-	This setting can be configured in the file &quot;httpd-xampp.conf&quot;.</p>
+	This setting can be configured in the file "httpd-xampp.conf".</p>
+<p>
+	解决办法：切换到项目根目录，或者 bare 仓库的根目录执行 git update-server-info 即可。</p>
 <h3>
 	The remote end hung up unexpectedly</h3>
 <p>
@@ -219,8 +283,30 @@ Initialized empty Git repository in /var/www/git/wordpress.git/
 <p>
 	git clone is the command you use to clone and start working with a remote repository. Only problem is, this command does not work if the remote repository is empty.</p>
 <p>
+	2011-09-18</p>
+<h3>
+	fatal: Authentication failed</h3>
+<p>
+	明明用户名和密码都输入对了，为什么还是提示认证失败？此时需要创建 ~/.netrc 文件，并在其中填写以下内容即可，不过仍然需要手动输入。<br />
+	machine localhost(or else)<br />
+	user admin<br />
+	passwd ***</p>
+<h3>
+	git-push is not available for http/https repository when not compiled with USE_CURL_MULTI</h3>
+<p>
+	fatal: git-http-push failed。<br />
+	原因：由于 CentOS 5.5 版本中的 curl 版本过低造成的。查看 git 安装目录下的文件 /Documentation/git-http-push.txt 可看到：<br />
 	<br />
-	&nbsp;</p>
+	*NOTE*: This command is temporarily disabled if your libcurl<br />
+	is older than 7.16, as the combination has been reported<br />
+	not to work and sometimes corrupts repository.<br />
+	<br />
+	查看系统中 curl 的版本如下：<br />
+	# rpm -qa|grep curl<br />
+	curl-7.15.5-9.el5<br />
+	curl-7.15.5-9.el5<br />
+	<br />
+	解决办法：下载新版本的 curl 源代码，自行编译后，加上 --with-curl 参数重新编译 git。需要注意的是确认 expat-devel 已安装，否则 http-push 命令总是无法编译成功。具体安装步骤及参数参考上文。</p>
 <!-- end --></div>
 
 </body>
