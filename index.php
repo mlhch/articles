@@ -31,11 +31,17 @@ switch ($action) {
 		
 	case 'save':
 		$filename_gb2312 = iconv('utf-8', 'gb2312', $filename_utf8);
-		$title = $filename_utf8;
+		$title = substr($filename_utf8, 0, -5);// remove .html
 		$content = isset($_POST['content']) ? $_POST['content'] : '';
 		
 		while ($content != ($_content = htmlspecialchars_decode($content))) {//pre(array($content,$_content),1);
 			$content = $_content;
+		}
+		$new_title = getDocTitle($content, $title);
+		if ($new_title != $title) {
+			unlink($filename_gb2312);
+			$filename_gb2312 = iconv('utf-8', 'gb2312', $new_title) . '.html';
+			$filename_utf8 = $new_title . '.html';
 		}
 		
 		ob_start();
@@ -58,6 +64,14 @@ switch ($action) {
 }
 
 
+function getDocTitle($content, $default = '') {
+	if (preg_match_all('/<h1>(.*?)<\/h1>/si', $content, $m)) {
+		$title = $m[1][0];
+	} else {
+		$title = $default;
+	}
+	return trim($title);
+}
 function getDocContent($filename) {
 	$content = file_get_contents($filename);
 	if (preg_match('/<\!-- start -->(.*)<\!-- end -->/s', $content, $m)) {
