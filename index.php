@@ -1,6 +1,10 @@
 <?php
 header('Content-Type:text/html;charset=utf8');
 
+if (get_magic_quotes_gpc() && isset($_POST['content'])) {
+	$_POST['content'] = stripslashes($_POST['content']);
+}
+
 /**
  * [REQUEST_URI] => /articles/---template.html
  */
