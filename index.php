@@ -28,16 +28,16 @@ if (count($parts) == 2) {
 switch ($action) {
 	case 'create':
 		$filename_utf8 = createNewDoc();
-		$filename_gb2312 = iconv('utf-8', 'gb2312', $filename_utf8);
-		$title = $filename_utf8;
-		$content = 'Click <a href="' . urlencode($filename_utf8) . '?edit">here</a> to add content';
-		include 'doc_view.tpl';
+		header("location: " . urlencode($filename_utf8) . "?edit");
 		break;
 		
 	case 'edit':
 		$filename_gb2312 = iconv('utf-8', 'gb2312', $filename_utf8);
 		$title = $filename_utf8;
 		$content = getDocContent($filename_gb2312);
+		if (!getDocTitle($content)) {
+			$content = "<h1>$title</h1>\n\n$content";
+		}
 		include 'doc_edit.tpl';
 		break;
 		
@@ -67,6 +67,27 @@ switch ($action) {
 		$filename_gb2312 = iconv('utf-8', 'gb2312', $filename_utf8);
 		$title = $filename_utf8;
 		$content = getDocContent($filename_gb2312);
+		if (!getDocTitle($content)) {
+			$content = "<h1>$title</h1>\n\n$content";
+		}
+		if (preg_match('/<style .+?<\/style>/s', $content, $m)) {
+			$style = $m[0];
+			$content = str_replace($style, '', $content);
+		}
+		
+		if (preg_match_all('/\{plugin\:([^\}]*)\}/s', $content, $m)) {
+			for ($i = 0; $i < count($m[0]); $i++) {
+				$parts = explode(',', $m[1][$i]);
+				$plugin_func = array_shift($parts);
+				if (file_exists('doc_plugin.php') && !function_exists($plugin_func)) {
+					include_once 'doc_plugin.php';
+				}
+				if (function_exists($plugin_func)) {
+					$content = str_replace($m[0][$i], call_user_func_array($plugin_func, $parts), $content);
+				}
+			}
+		}
+		
 		include 'doc_view.tpl';
 		break;
 		

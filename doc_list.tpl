@@ -3,7 +3,7 @@
 <head>
 <title>Article list</title>
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
-<link type="text/css" rel="stylesheet" href="ckeditor/contents.css" />
+<link type="text/css" rel="stylesheet" href="doc.css" />
 </head>
 
 <body>
