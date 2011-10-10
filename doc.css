@@ -10,7 +10,8 @@ body, input {
 }
 
 pre {
-	font-family: YaHei Consolas Hybrid, Arial, Verdana, sans-serif;
+	/* Monospace is better than Consolas */
+	font-family: Monospace, Verdana, sans-serif;
 	font-size: 11px;
 	color: #888;
 	border: 1px solid silver;

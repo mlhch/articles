@@ -5,6 +5,7 @@ if (get_magic_quotes_gpc() && isset($_POST['content'])) {
 	$_POST['content'] = stripslashes($_POST['content']);
 }
 
+
 /**
  * [REQUEST_URI] => /articles/---template.html
  */
@@ -32,9 +33,8 @@ switch ($action) {
 		break;
 		
 	case 'edit':
-		$filename_gb2312 = iconv('utf-8', 'gb2312', $filename_utf8);
-		$title = $filename_utf8;
-		$content = getDocContent($filename_gb2312);
+		$title = preg_replace('/\.html$/', '', $filename_utf8);
+		$content = getDocContent($filename_utf8);
 		if (!getDocTitle($content)) {
 			$content = "<h1>$title</h1>\n\n$content";
 		}
@@ -42,7 +42,8 @@ switch ($action) {
 		break;
 		
 	case 'save':
-		$filename_gb2312 = iconv('utf-8', 'gb2312', $filename_utf8);
+		// 还是统一用 utf8 命名文件名吧，这样不论在 Windows XP cn 上还是 Mac OS X 上都一样
+		// $filename_gb2312 = iconv('utf-8', 'gb2312', $filename_utf8);
 		$title = substr($filename_utf8, 0, -5);// remove .html
 		$content = isset($_POST['content']) ? $_POST['content'] : '';
 		
@@ -51,22 +52,23 @@ switch ($action) {
 		}
 		$new_title = getDocTitle($content, $title);
 		if ($new_title != $title) {
-			unlink($filename_gb2312);
-			$filename_gb2312 = iconv('utf-8', 'gb2312', $new_title) . '.html';
+			unlink($filename_utf8);
+			// $filename_gb2312 = iconv('utf-8', 'gb2312', $new_title) . '.html';
 			$filename_utf8 = $new_title . '.html';
 		}
 		
 		ob_start();
 		include 'doc_view.tpl';
 		$html = ob_get_clean();
-		file_put_contents($filename_gb2312, $html);
+		file_put_contents($filename_utf8, $html);
 		header("location: " . urlencode($filename_utf8));
 		break;
 		
 	case 'view':
-		$filename_gb2312 = iconv('utf-8', 'gb2312', $filename_utf8);
-		$title = $filename_utf8;
-		$content = getDocContent($filename_gb2312);
+		// 还是统一用 utf8 命名文件名吧，这样不论在 Windows XP cn 上还是 Mac OS X 上都一样
+		// $filename_gb2312 = iconv('utf-8', 'gb2312', $filename_utf8);
+		$title = preg_replace('/\.html$/', '', $filename_utf8);
+		$content = getDocContent($filename_utf8);
 		if (!getDocTitle($content)) {
 			$content = "<h1>$title</h1>\n\n$content";
 		}
@@ -138,10 +140,11 @@ function getDocContent($filename) {
 }
 function getDocList($dir = './') {
 	$list = array();
-	if ($dh = opendir($dir)) {
+	$dh = opendir($dir);
+	if ($dh) {
 	    while (($file = readdir($dh)) !== false) {
 	        if (substr($file, -5) == '.html' && filetype($dir . $file) == 'file') {
-	        	$list[] = iconv('gb2312', 'utf-8', $file);
+	        	$list[] = mb_convert_encoding($file, 'utf-8', 'auto');
 	        }
 	    }
 	    closedir($dh);
