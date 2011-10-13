@@ -11,11 +11,17 @@ if (get_magic_quotes_gpc() && isset($_POST['content'])) {
  */
 $query = str_replace('/articles/', '', $_SERVER['REQUEST_URI']);
 $parts = explode('?', $query, 2);
+$params = array();
 if (count($parts) == 2) {
 	if (preg_match('/(^|\/)([^\/]+)$/', $parts[0], $m)) {
 		$filename_utf8 = urldecode($m[2]);
 	}
-	$action = $parts[1];
+	if (count($parts2 = explode('=', $parts[1])) > 1) {
+		$params[$parts2[0]] = $parts2[1];
+		$action = 'view';
+	} else {
+		$action = $parts[1];
+	}
 } else {
 	if (preg_match('/(^|\/)([^\/]+)$/', $parts[0], $m)) {
 		$filename_utf8 = urldecode($m[2]);
@@ -42,8 +48,6 @@ switch ($action) {
 		break;
 		
 	case 'save':
-		// 还是统一用 utf8 命名文件名吧，这样不论在 Windows XP cn 上还是 Mac OS X 上都一样
-		// $filename_gb2312 = iconv('utf-8', 'gb2312', $filename_utf8);
 		$title = substr($filename_utf8, 0, -5);// remove .html
 		$content = isset($_POST['content']) ? $_POST['content'] : '';
 		
@@ -65,10 +69,23 @@ switch ($action) {
 		break;
 		
 	case 'view':
-		// 还是统一用 utf8 命名文件名吧，这样不论在 Windows XP cn 上还是 Mac OS X 上都一样
-		// $filename_gb2312 = iconv('utf-8', 'gb2312', $filename_utf8);
+		/**
+		 * 还是统一用 utf8 命名文件名吧，这样不论在 Windows XP cn 上还是 Mac OS X 上都一样处理，
+		 * 只不过会导致在 XP cn 上以文件系统方式查看文件名时，都是乱码，因为 utf8 的中文编码被当成 gb2312 处理了。
+		 * EUC-CN is GB2312
+		 */
+		if (isset($params['charset']) && $params['charset'] == 'EUC-CN') {
+			// 把原有 gb2312 编码的文件名中的内容复制到新的以 utf8 编码的文件名中
+			$filename = mb_convert_encoding($filename_utf8, 'gb2312', 'utf-8');
+			if (file_exists($filename)) {
+				file_put_contents($filename_utf8, file_get_contents($filename));
+				unlink($filename);
+			}
+		}
+		$filename = $filename_utf8;
+		
 		$title = preg_replace('/\.html$/', '', $filename_utf8);
-		$content = getDocContent($filename_utf8);
+		$content = getDocContent($filename);
 		if (!getDocTitle($content)) {
 			$content = "<h1>$title</h1>\n\n$content";
 		}
@@ -142,12 +159,24 @@ function getDocList($dir = './') {
 	$list = array();
 	$dh = opendir($dir);
 	if ($dh) {
-	    while (($file = readdir($dh)) !== false) {
-	        if (substr($file, -5) == '.html' && filetype($dir . $file) == 'file') {
-	        	$list[] = mb_convert_encoding($file, 'utf-8', 'auto');
-	        }
-	    }
-	    closedir($dh);
+		while (($file = readdir($dh)) !== false) {
+			if (substr($file, -5) == '.html' && filetype($dir . $file) == 'file') {
+				/**
+				 * EUC-CN is GB2312
+				 * 如果原始文件的编码是 gb2312，那么特殊对待
+				 */
+				$charset = mb_detect_encoding($file, 'ASCII, UTF-8, EUC-CN');
+				if ($charset == 'EUC-CN') {
+					$file = mb_convert_encoding($file, 'utf-8', $charset);
+					$link = $file;
+				} else {
+					$link = $file;
+					$charset = '';
+				}
+				$list[] = compact('file', 'link', 'charset');
+			}
+		}
+		closedir($dh);
 	}
 	return $list;
 }

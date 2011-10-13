@@ -11,8 +11,9 @@
 	<input type="button" onclick="location='./?create'" value="Create new article" />
 </div>
 <ul>
-<?php foreach ($docList as $file) {?>
-	<li><a href="<?php echo urlencode($file)?>"><?php echo urldecode($file)?></a></li>
+<?php foreach ($docList as $row) {?>
+	<li><a href="<?php echo urlencode($row['link']) . ($row['charset'] ? '?charset=' . $row['charset'] : '')?>"><?php
+	 echo $row['file']?></a></li>
 <?php }?>
 </ul>
 
