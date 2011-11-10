@@ -55,6 +55,88 @@
 			Running this command will create your basic site structure, including your initial controllers and views. The tree looks like the following:</p>
 	</li>
 </ul>
+<h2>
+	Zend/File/Transfer</h2>
+<p>
+	&nbsp;</p>
+<h2>
+	Zend_Form_Element_File</h2>
+<p>
+	-> Zend_Form_Element_Xhtml ->&nbsp;Zend_Form_Element -> Zend_Validate_Interface</p>
+<ul>
+	<li>
+		$el = new Zend_Form_Element_File(&#39;file&#39;);
+		<ul>
+			<li>
+				Zend_Form_Element->__construct($spec, $options = null)</li>
+			<li>
+				is_string($spec) ?&nbsp;$this->setName($spec)<br />
+				is_array($spec) ? $this->setOptions($spec)</li>
+			<li>
+				$this->init(); // empty</li>
+			<li>
+				$this->loadDefaultDecorators();</li>
+		</ul>
+	</li>
+	<li>
+		$el ->setLabel(&#39;Upload File&#39;)<br />
+		->setDescription($serviceOrder->getFilePath())<br />
+		->addValidator(&#39;Count&#39;, false, 1)<br />
+		->addValidator(&#39;Size&#39;, false, 1024 * 1024 * 10);</li>
+	<li>
+		echo $el;
+		<ul>
+			<li>
+				Zend_Form_Element->__toString()</li>
+			<li>
+				$return = $this->render();
+				<ul>
+					<li>
+						Zend_Form_Element_File->render(Zend_View_Interface $view = null)</li>
+					<li>
+						$marker = false;<br />
+						foreach ($this->getDecorators() as $decorator) {<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;if ($decorator instanceof Zend_Form_Decorator_Marker_File_Interface) {<br />
+						&nbsp; &nbsp; &nbsp; &nbsp; $marker = true;<br />
+						&nbsp; &nbsp; }<br />
+						}</li>
+					<li>
+						if (!$marker) {<br />
+						&nbsp; &nbsp; require_once &#39;Zend/Form/Element/Exception.php&#39;;<br />
+						&nbsp; &nbsp; throw new Zend_Form_Element_Exception(&#39;No file decorator found... unable to render file element&#39;);<br />
+						}</li>
+					<li>
+						return parent::render($view);
+						<ul>
+							<li>
+								public function render(Zend_View_Interface $view = null)</li>
+							<li>
+								if ($this->_isPartialRendering) {<br />
+								&nbsp; &nbsp; return &#39;&#39;;<br />
+								}</li>
+							<li>
+								if (null !== $view) {<br />
+								&nbsp; &nbsp; $this->setView($view);<br />
+								}</li>
+							<li>
+								<p>
+									$content = &#39;&#39;;<br />
+									foreach ($this->getDecorators() as $decorator) {<br />
+									&nbsp; &nbsp; $decorator->setElement($this);<br />
+									&nbsp; &nbsp; $content = $decorator->render($content);<br />
+									}</p>
+							</li>
+							<li>
+								<p>
+									return $content;</p>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+</ul>
 <!-- end --></div>
 
 </body>
