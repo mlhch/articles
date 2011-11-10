@@ -26,3 +26,19 @@ li {
 	margin: 0.5em 0;
 	line-height: 1.382em
 }
+
+.mtime {
+	color: orange;
+	font-size: 9px;
+	-webkit-text-size-adjust:none;
+}
+.atime {
+	color: silver;
+	font-size: 9px;
+	-webkit-text-size-adjust:none;
+}
+.ctime {
+	color: #ddd;
+	font-size: 9px;
+	-webkit-text-size-adjust:none;
+}

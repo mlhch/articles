@@ -5,6 +5,11 @@
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 <script type="text/javascript" src="ckeditor/ckeditor/ckeditor.js"></script>
 <link type="text/css" rel="stylesheet" href="doc.css" />
+<script type="text/javascript">
+window.onbeforeunload = function() {
+	return '确保离开前保存已更改内容！';
+}
+</script>
 </head>
 
 <body>
