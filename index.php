@@ -1,5 +1,6 @@
 <?php
 header('Content-Type:text/html;charset=utf8');
+date_default_timezone_set('Asia/Chongqing');
 
 if (get_magic_quotes_gpc() && isset($_POST['content'])) {
 	$_POST['content'] = stripslashes($_POST['content']);
@@ -50,10 +51,10 @@ switch ($action) {
 	case 'save':
 		$title = substr($filename_utf8, 0, -5);// remove .html
 		$content = isset($_POST['content']) ? $_POST['content'] : '';
-		
-		while ($content != ($_content = htmlspecialchars_decode($content))) {//pre(array($content,$_content),1);
-			$content = $_content;
-		}
+		// 遇到 pre 标签内包含 html 内容的时候，这几行会导致 pre 标签内的内容显示不正确
+		//while ($content != ($_content = htmlspecialchars_decode($content))) {//pre(array($content,$_content),1);
+		//	$content = $_content;
+		//}
 		$new_title = getDocTitle($content, $title);
 		if ($new_title != $title) {
 			unlink($filename_utf8);
@@ -110,8 +111,33 @@ switch ($action) {
 		include 'doc_view.tpl';
 		break;
 		
+	case 'ctime':
+		$docList = getDocList();
+		
+		$ctimes = array();
+		foreach ($docList as $row) {
+			$ctimes[] = $row['ctime'];
+		}
+		array_multisort($ctimes, SORT_DESC, $docList);
+		
+		include 'doc_list.tpl';
+		break;
+		
+	case 'mtime':
+		$docList = getDocList();
+		
+		$mtimes = array();
+		foreach ($docList as $row) {
+			$mtimes[] = $row['mtime'];
+		}
+		array_multisort($mtimes, SORT_DESC, $docList);
+		
+		include 'doc_list.tpl';
+		break;
+		
 	default:
 		$docList = getDocList();
+		
 		include 'doc_list.tpl';
 }
 
@@ -149,9 +175,10 @@ function getDocContent($filename) {
 		$content = $m[1];
 	}
 	
-	while ($content != ($_content = htmlspecialchars_decode($content))) {//pre(array($content,$_content),1);
-		$content = $_content;
-	}
+	// 遇到 pre 标签内包含 html 内容的时候，这几行会导致 pre 标签内的内容显示不正确
+	//while ($content != ($_content = htmlspecialchars_decode($content))) {//pre(array($content,$_content),1);
+	//	$content = $_content;
+	//}
 	
 	return $content;
 }
@@ -173,7 +200,13 @@ function getDocList($dir = './') {
 					$link = $file;
 					$charset = '';
 				}
-				$list[] = compact('file', 'link', 'charset');
+				
+				$f = $dir . DIRECTORY_SEPARATOR . $file;
+				$mtime = filemtime($f);
+				$ctime = fileatime($f);
+				$atime = fileatime($f);
+				
+				$list[] = compact('file', 'link', 'charset', 'mtime', 'atime', 'ctime');
 			}
 		}
 		closedir($dh);
