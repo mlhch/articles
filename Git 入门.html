@@ -1,0 +1,227 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Git 入门.html</title>
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<link type="text/css" rel="stylesheet" href="doc.css" />
+</head>
+
+<body>
+<div id="toolbar" style="padding: 5px">
+	<a href="./">Back to article list</a> | <a href="?edit">Edit</a>
+</div>
+
+<div style="padding: 0px 30px"><!-- start --><h1>
+	Git 入门</h1>
+<h2>
+	官方网站</h2>
+<p>
+	http://git-scm.com/</p>
+<p>
+	Git is a free &amp; open source, distributed version control system designed to handle everything from small to very large projects with speed and efficiency.<br />
+	<br />
+	<strong>Every Git clone is a full-fledged repository</strong> with complete history and full revision tracking capabilities, not dependent on network access or a central server. Branching and merging are fast and easy to do.</p>
+<p>
+	每个 Git 拷贝都是一个功能完整的代码仓库。</p>
+<p>
+	<img alt="" src="git-scm_com.png" style="width: 600px; height: 502px;" /></p>
+<h2>
+	下载</h2>
+<p>
+	从上图右侧深红色区域中选择即可。这次选择 Windows，2011-05-09。打开下图后选择 Portable 便携版本。下载时只有 17.6MB，解压后却有 186MB。</p>
+<p>
+	这次选择 Source，2011-07-17，git-1.7.6.tar.bz2，2.67M。</p>
+<p>
+	<img alt="" src="code_google_com_p_msysgit_downloads_list_can=3.png" style="width: 600px; height: 277px;" /></p>
+<h2>
+	安装</h2>
+<p>
+	2011-07-17</p>
+<ul>
+	<li>
+		https://git.wiki.kernel.org/index.php/Installation<br />
+		The latest install directions are included with git under INSTALL and the most current version online is <a class="external text" href="http://git.kernel.org/?p=git/git.git;a=blob_plain;f=INSTALL;hb=master" rel="nofollow">here</a>.</li>
+	<li>
+		http://git.kernel.org/?p=git/git.git;a=blob_plain;f=INSTALL;hb=master<br />
+		Normally you can just do &quot;make&quot; followed by &quot;make install&quot;, and that<br />
+		will install the git programs in your own ~/bin/ directory. 这个很好，非 root 用户时可做此选择，但会导致家目录下出现 bin lib libexec 等目录，不如使用<br />
+		&nbsp;&nbsp;&nbsp; ./configure --prefix=~/git<br />
+		&nbsp;&nbsp;&nbsp; make &amp;&amp; make install<br />
+		这样会把所有文件安装到 ~/git 下，方便管理</li>
+</ul>
+<p>
+	2011-08-06</p>
+<ul>
+	<li>
+		./configure --prefix=/usr/local/git-1.7.6</li>
+	<li>
+		解决 zlib 依赖, yum install -y zlib-devel
+		<pre>
+[root@localhost git-1.7.6]# make
+GIT_VERSION = 1.7.6
+&nbsp; * new build flags or prefix
+&nbsp; CC daemon.o
+In file included from daemon.c:1:
+cache.h:18:18: error: zlib.h: No such file or directory</pre>
+	</li>
+	<li>
+		make &amp;&amp; make install</li>
+	<li>
+		vi /etc/profile, add: export PATH=&quot;$PATH:/usr/local/git-1.7.6/bin&quot;</li>
+</ul>
+<p>
+	2011-09-17</p>
+<ul>
+	<li>
+		git doc 依赖 asciidoc，见 INSTALL 文档 Issues of note 部分。<br />
+		&nbsp;- To build and install documentation suite, you need to have<br />
+		&nbsp;&nbsp; the asciidoc/xmlto toolchain.&nbsp; Because not many people are<br />
+		&nbsp;&nbsp; inclined to install the tools, the default build target<br />
+		&nbsp;&nbsp; (&quot;make all&quot;) does _not_ build them.<br />
+		<br />
+		&nbsp;&nbsp; &quot;make doc&quot; builds documentation in man and html formats; there are<br />
+		&nbsp;&nbsp; also &quot;make man&quot;, &quot;make html&quot; and &quot;make info&quot;. Note that &quot;make html&quot;<br />
+		&nbsp;&nbsp; requires asciidoc, but not xmlto. &quot;make man&quot; (and thus make doc)<br />
+		&nbsp;&nbsp; requires both.<br />
+		<br />
+		&nbsp;&nbsp; &quot;make install-doc&quot; installs documentation in man format only; there<br />
+		&nbsp;&nbsp; are also &quot;make install-man&quot;, &quot;make install-html&quot; and &quot;make<br />
+		&nbsp;&nbsp; install-info&quot;.<br />
+		于是可知 make 之后可有如下参数选择或组合 make, make all, make doc, make man, make html, make info， make install 之后可有选择或组合 make install, make install-doc, make install-man, make install-html, make install-info.</li>
+	<li>
+		经编译测试，make html &amp;&amp; make install install-html 的确不需要 xmlto，但安装完成后不知道如何调出这个 html 帮助文档。</li>
+	<li>
+		asciidoc 官方网址：http://www.methods.co.nz/asciidoc/index.html</li>
+	<li>
+		跳转到本页：Distribution tarball installation，找到 tar.gz 包的下载地址：http://sourceforge.net/projects/asciidoc/</li>
+	<li>
+		tar xf asciidoc-8.6.6.tar.gz &amp;&amp; cd asciidoc-8.6.6 &amp;&amp; ./configure &amp;&amp; make &amp;&amp; make install</li>
+	<li>
+		有了 asciidoc，原来出错的地方就可以正常这继续编译了。<br />
+		...<br />
+		make[1]: Entering directory `/root/soft/git-1.7.6/Documentation&#39;<br />
+		make[2]: Entering directory `/root/soft/git-1.7.6&#39;<br />
+		make[2]: &ldquo;GIT-VERSION-FILE&rdquo;是最新的。<br />
+		make[2]: Leaving directory `/root/soft/git-1.7.6&#39;<br />
+		&nbsp;&nbsp;&nbsp; ASCIIDOC git-add.html<br />
+		&nbsp;&nbsp;&nbsp; ASCIIDOC git-am.html<br />
+		&nbsp;&nbsp;&nbsp; ASCIIDOC git-annotate.html<br />
+		&nbsp;&nbsp;&nbsp; ASCIIDOC git-apply.html<br />
+		...</li>
+	<li>
+		这里要从网上读取 dtd，可能要花上几分钟<br />
+		&nbsp;&nbsp;&nbsp; ASCIIDOC user-manual.xml<br />
+		&nbsp;&nbsp;&nbsp; XSLTPROC user-manual.html<br />
+		<br />
+		user-manual.xml:2: warning: failed to load external entity &quot;http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd&quot;<br />
+		D DocBook XML V4.5//EN&quot; &quot;http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd&quot;<br />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ^<br />
+		&nbsp;&nbsp;&nbsp; ASCIIDOC technical/api-allocation-growing.html</li>
+	<li>
+		出错了，需要安装 xmlto<br />
+		&nbsp;&nbsp;&nbsp; ASCIIDOC git-add.xml<br />
+		&nbsp;&nbsp;&nbsp; XMLTO git-add.1<br />
+		/bin/sh: line 1: xmlto: command not found<br />
+		make[1]: *** [git-add.1] 错误 127<br />
+		make[1]: Leaving directory `/root/soft/git-1.7.6/Documentation&#39;<br />
+		make: *** [doc] 错误 2</li>
+	<li>
+		yum install -y xmlto，结果牵连了一堆东西出来。</li>
+	<li>
+		仍然有错，跟刚才从网上下载 dtd 失败有关<br />
+		&nbsp;&nbsp;&nbsp; XMLTO git-add.1<br />
+		xmlto: input does not validate (status 3)<br />
+		/root/soft/git-1.7.6/Documentation/git-add.xml:2: warning: failed to load external entity &quot;http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd&quot;<br />
+		D DocBook XML V4.5//EN&quot; &quot;http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd&quot;<br />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ^<br />
+		warning: failed to load external entity &quot;http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd&quot;<br />
+		validity error : Could not load the external subset &quot;http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd&quot;<br />
+		Document /root/soft/git-1.7.6/Documentation/git-add.xml does not validate<br />
+		make[1]: *** [git-add.1] 错误 3<br />
+		make[1]: Leaving directory `/root/soft/git-1.7.6/Documentation&#39;<br />
+		make: *** [doc] 错误 2</li>
+	<li>
+		手工浏览上述地址，居然说<br />
+		As part of scheduled maintenance, portions of this site will be unavailable for September 17th and 18th. We apologize for the inconvenience.<br />
+		看来我买彩票能中奖了。</li>
+	<li>
+		没折了，官网倒了，官方 git 仓库也不能用了。等以后再想办法安装帮助文档吧。</li>
+</ul>
+<h3>
+	Tortoisegit - Git 在 Windows 下的客户端</h3>
+<p>
+	http://code.google.com/p/tortoisegit/</p>
+<p>
+	It is porting TortoiseSVN to TortoiseGit <strong>The latest release 1.6.5.0</strong></p>
+<p>
+	<strong>Please avoid use msysgit 1.7.2.3 with 1.5.3.0</strong></p>
+<p>
+	<strong>If you use 1.2.1.0 or previous version, please uninstall it firstly. 1.6.5.0 use gitdll.dll which from git source code. gitdill.dll will miss if you install 1.6.5.0 over 1.2.1.0 or previous version</strong></p>
+<p>
+	2011-05-10</p>
+<h2>
+	项目</h2>
+<h3>
+	FancyUpload</h3>
+<p>
+	$ git clone https://github.com/digitarald/digitarald-fancyupload.git .</p>
+<p>
+	2011-05-09</p>
+<h3>
+	Wordpress</h3>
+<ol>
+	<li>
+		建立远程空版本库
+		<pre>
+# git init --bare
+Initialized empty Git repository in /var/www/git/wordpress.git/
+</pre>
+	</li>
+	<li>
+		<p>
+			用 TortoiseGit clone 到本地，url 填写为 root@50.17.46.121:/var/www/git/wordpress.git，选择合适的 Putty key</p>
+	</li>
+	<li>
+		<p>
+			本地 commit 所有 3.2.1 的代码，然后 push 到远程</p>
+		2011-08-04</li>
+</ol>
+<h2>
+	错误及解决办法</h2>
+<h3>
+	did you run git update-server-info on the server?</h3>
+<p>
+	[malian@rkserver smshosting]$ ~/git/bin/git clone http://10.10.50.207/isms.v2/.git .<br />
+	Cloning into ....<br />
+	fatal: http://10.10.50.207/isms.v2/.git/info/refs not found: did you run git update-server-info on the server?</p>
+<p>
+	原因：可能真的没有执行 git update-server-info，也可能整个路径无法访问，比如 xampp 就默认限制非本机访问：</p>
+<p>
+	New XAMPP security concept:<br />
+	Access to the requested directory is only available from the local network.<br />
+	This setting can be configured in the file &quot;httpd-xampp.conf&quot;.</p>
+<h3>
+	The remote end hung up unexpectedly</h3>
+<p>
+	[malian@rkserver test]$ ~/git/bin/git clone malian@10.10.50.7:/var/www/smshosting/.git .<br />
+	Cloning into ....<br />
+	malian@10.10.50.7&#39;s password:<br />
+	bash: git-upload-pack: command not found<br />
+	fatal: The remote end hung up unexpectedly</p>
+<p>
+	原因：远端服务器安装 git 时非默认安装，找不到 git-upload-pack 可执行文件的路径。解决办法：添加 -u 选项指明远端路径。</p>
+<p>
+	[malian@rkserver test]$ ~/git/bin/git clone -u ~/git/bin/git-upload-pack&nbsp; malian@10.10.50.7:/var/www/smshosting/.git .</p>
+<p>
+	如果客户端使用的是 TortoiseGit，那么暂时没想出好办法在客户端解决问题，在服务端如果没有权限修改 PATH 的话，可以把 ~/git/bin/ 目录下的所有可执行文件在 PATH 找得到的地方做上符号链接。</p>
+<h3 class="entry-title">
+	git &ldquo;fatal: no matching remote&nbsp;head&rdquo;</h3>
+<p>
+	git clone is the command you use to clone and start working with a remote repository. Only problem is, this command does not work if the remote repository is empty.</p>
+<p>
+	<br />
+	&nbsp;</p>
+<!-- end --></div>
+
+</body>
+</html>
