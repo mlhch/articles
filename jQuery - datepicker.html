@@ -1,0 +1,79 @@
+<h1>jQuery - datepicker</h1>
+
+<p>2013-11-12 00:40 Tuesday</p>
+
+<p>2011-06-23，smshosting 项目用到</p>
+
+<p>官方文档：<a href="http://docs.jquery.com/UI/Datepicker">http://docs.jquery.com/UI/Datepicker</a></p>
+
+<p>官方展示：<a href="http://jqueryui.com/demos/datepicker/">http://jqueryui.com/demos/datepicker/</a></p>
+
+<p>最快速的上手方法是查看官方展示，然后点击页面上展示下面的查看源码链接。</p>
+
+<pre>
+$(function() {
+&nbsp; $(&quot;#datepicker&quot;).datepicker();
+});</pre>
+
+<p>2011-10-14，Laurens 的 costcontrole 项目用到 datetimepicker，jQuery 官方还没有，但已经有人做出了解决办法。</p>
+
+<p>相关页面：http://trentrichardson.com/examples/timepicker/</p>
+
+<p>js 文件：http://trentrichardson.com/examples/timepicker/js/jquery-ui-timepicker-addon.js</p>
+
+<h2>示例步骤：</h2>
+
+<ol>
+	<li>依次引入<br />
+	&lt; script type=&quot;text/javascript&quot; src=&quot;resource/jquery-1.6.4.js&quot;&gt;<br />
+	&lt; script type=&quot;text/javascript&quot; src=&quot;resource/jquery-ui.js&quot;&gt;<br />
+	&lt; script type=&quot;text/javascript&quot; src=&quot;resource/jquery.ui.slider.js&quot;&gt;// datetimepicker 用到了 slider 来选择时间<br />
+	&lt; script type=&quot;text/javascript&quot; src=&quot;resource/jquery-ui-timepicker-addon.js&quot;&gt;</li>
+	<li>因为 jquery-ui-timepicker-addon.js 中有
+	<pre>
+$.extend($.ui, { timepicker: { version: &quot;0.9.7&quot; } });
+...
+this.hour_slider = $tp.find(&#39;#ui_tpicker_hour_&#39;+ dp_id).slider({
+&nbsp;&nbsp;&nbsp; orientation: &quot;horizontal&quot;,
+&nbsp;&nbsp;&nbsp; value: this.hour,
+&nbsp;&nbsp;&nbsp; min: o.hourMin,
+&nbsp;&nbsp;&nbsp; max: hourMax,
+&nbsp;&nbsp;&nbsp; step: o.stepHour,
+&nbsp;&nbsp;&nbsp; slide: function(event, ui) {
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;tp_inst.hour_slider.slider( &quot;option&quot;, &quot;value&quot;, ui.value);
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;tp_inst._onTimeChange();
+&nbsp;&nbsp;&nbsp; }
+});
+</pre>
+	</li>
+	<li>依次引入<br />
+	&lt; link href=&quot;resource/jquery-ui.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;<br />
+	&lt; link href=&quot;resource/jquery.ui.datepicker.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;</li>
+	<li>使用：
+	<pre>
+jQuery(function(){
+    jQuery(&#39;#datetime&#39;).datetimepicker();
+});</pre>
+	</li>
+	<li>示例：</li>
+</ol>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
