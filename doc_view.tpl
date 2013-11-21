@@ -8,7 +8,7 @@
 
 <body>
 <div id="toolbar" style="padding: 5px">
-	<a href="./">Back to article list</a> | <a href="?edit">Edit</a>
+	<a href="./">Back to article list</a> | <a href="<?php echo urlencode($filename_utf8)?>?edit">Edit</a>
 </div>
 
 <div style="padding: 0px 30px"><!-- start --><?php echo $content?><!-- end --></div>

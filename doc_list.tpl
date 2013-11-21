@@ -8,7 +8,7 @@
 
 <body>
 <div style="padding: 20px 20px 0">
-	<input type="button" onclick="location='save.php?create'" value="Create new article" />
+	<input type="button" onclick="location='./?create'" value="Create new article" />
 </div>
 <ul>
 <?php foreach ($docList as $file) {?>

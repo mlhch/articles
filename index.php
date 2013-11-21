@@ -22,6 +22,14 @@ if (count($parts) == 2) {
 
 
 switch ($action) {
+	case 'create':
+		$filename_utf8 = createNewDoc();
+		$filename_gb2312 = iconv('utf-8', 'gb2312', $filename_utf8);
+		$title = $filename_utf8;
+		$content = 'Click <a href="' . urlencode($filename_utf8) . '?edit">here</a> to add content';
+		include 'doc_view.tpl';
+		break;
+		
 	case 'edit':
 		$filename_gb2312 = iconv('utf-8', 'gb2312', $filename_utf8);
 		$title = $filename_utf8;
@@ -64,6 +72,17 @@ switch ($action) {
 }
 
 
+function createNewDoc() {
+	$i = 1;
+	while (true) {
+		$filename = 'New article' . ($i > 1 ? " ($i)" : '') . '.html';
+		if (!file_exists($filename)) {
+			break;
+		}
+		$i++;
+	}
+	return $filename;
+}
 function getDocTitle($content, $default = '') {
 	if (preg_match_all('/<h1>(.*?)<\/h1>/si', $content, $m)) {
 		$title = $m[1][0];
@@ -73,7 +92,13 @@ function getDocTitle($content, $default = '') {
 	return trim($title);
 }
 function getDocContent($filename) {
-	$content = file_get_contents($filename);
+	if (file_exists($filename)) {
+		$content = file_get_contents($filename);
+	} else {
+		touch($filename);
+		$content = '';
+	}
+	
 	if (preg_match('/<\!-- start -->(.*)<\!-- end -->/s', $content, $m)) {
 		$content = $m[1];
 	} elseif (preg_match('/<textarea .*?>(.*)<\/textarea>/s', $content, $m)) {

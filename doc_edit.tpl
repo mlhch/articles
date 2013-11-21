@@ -11,6 +11,7 @@
 <div id="toolbar" style="padding: 5px">
 	<a href="./">Back to article list</a>
 	| <a href="<?php echo urlencode($filename_utf8)?>">View</a>
+	| Use &lt;h1&gt;Title&lt;/h1&gt; to rename the article title and html filename
 </div>
 
 <form method="post" action="?save">
