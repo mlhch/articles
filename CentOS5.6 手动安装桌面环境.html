@@ -1,0 +1,337 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>CentOS 5.6 手动安装桌面环境</title>
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<link type="text/css" rel="stylesheet" href="doc.css" />
+</head>
+
+<body>
+<div id="toolbar" style="padding: 5px">
+	<a href="./">Back to article list</a> | <a href="CentOS+5.6+%E6%89%8B%E5%8A%A8%E5%AE%89%E8%A3%85%E6%A1%8C%E9%9D%A2%E7%8E%AF%E5%A2%83.html?edit">Edit</a>
+</div>
+
+<div style="padding: 0px 30px"><!-- start --><h1>
+	CentOS 5.6 手动安装桌面环境</h1>
+<p>
+	手边有光盘的话，无疑<a href="http://CentOS 5.6 使用光盘作为源.html">使用光盘作为源</a>是最好的选择。</p>
+<h2>
+	首选安装 XWindow System</h2>
+<p>
+	[root@bogon yum.repos.d]# yum --disablerepo=\* --enablerepo=c5-media groupinstall "X Window System"</p>
+<h2>
+	其次安装 Gnome Desktop Environment</h2>
+<p>
+	这个过程下载 167M 的文件。</p>
+<p>
+	[root@bogon yum.repos.d]# yum --disablerepo=\* --enablerepo=c5-media groupinstall "Gnome Desktop Environment"</p>
+<p>
+	2011-09-20</p>
+<p>
+	CentOS 6.0 中 "Gnome Desktop Environment" 已经更名为 "Desktop"，否则会提示 "Gnome Desktop Environment does not exist"。</p>
+<h2>
+	安装 VMware Tools 解决分辨率问题</h2>
+<p>
+	然后 startx 进入桌面环境，分辨率只有 800x600，要解决这个问题只有安装 VMware Tools 了。</p>
+<p>
+	命令行退出刚才的 CentOS 系统光盘，选择菜单 Install VMware Tools...，命令行挂载光盘。</p>
+<pre>
+[root@bogon ~]# umount /media/
+[root@bogon ~]# mount /dev/cdrom /media/
+mount: block device /dev/cdrom is write-protected, mounting read-only
+[root@bogon ~]# cd /tmp
+[root@bogon tmp]# tar xf /media/
+manifest.txt&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; VMwareTools-8.1.3-203739.tar.gz
+[root@bogon tmp]# tar xf /media/VMwareTools-8.1.3-203739.tar.gz
+[root@bogon tmp]# cd
+.font-unix/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mapping-root&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; vmware-tools-distrib/
+gconfd-root/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; orbit-root/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .X0-lock
+.ICE-unix/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ssh-BaFPiE1293/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .X11-unix/
+keyring-7MkZO8/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; virtual-root.5PFUWr/ &nbsp;
+[root@bogon tmp]# cd vmware-tools-distrib/
+[root@bogon vmware-tools-distrib]# ./
+bin/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; etc/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; lib/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
+doc/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; installer/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; vmware-install.pl &nbsp;
+[root@bogon vmware-tools-distrib]# ./vmware-install.pl
+</pre>
+<p>
+	一路回车，最后注销，然后再次 startx，VMware Tools 安装完毕。</p>
+<h2>
+	安装 YaHei Consolas Hbrid 字体</h2>
+<p>
+	最简单有效的步骤是在 /root 下建立 .fonts 文件夹，把下载的字体文件拷贝进去，然后打开 &ldquo;系统 -> 首选项 -> 字体&rdquo; 即可进行设置。</p>
+<h2>
+	附安装过程涉及到的包</h2>
+<p>
+	以下是一些安装结果列表，扫一眼还是蛮有意思的。</p>
+<p>
+	安装 X Window System 涉及到的包：</p>
+<pre>
+Installed:
+  authconfig-gtk.x86_64 0:5.3.21-6.el5
+  bitmap-fonts.noarch 0:0.3-5.1.1
+  dejavu-lgc-fonts.noarch 0:2.10-1
+  desktop-backgrounds-basic.noarch 0:2.0-41.el5.centos
+  firstboot.x86_64 0:1.4.27.8-1.el5.centos
+  gdm.x86_64 1:2.16.0-56.el5.centos
+  glx-utils.x86_64 0:6.5.1-7.8.el5
+  krb5-auth-dialog.x86_64 0:0.7-1
+  linuxwacom.x86_64 0:0.7.8.3-10.el5
+  openssh-askpass.x86_64 0:4.3p2-72.el5
+  pirut.noarch 0:1.3.28-19.el5.centos
+  rhgb.x86_64 0:0.16.4-8.el5.centos.3
+  synaptics.x86_64 0:0.14.4-8.fc6
+  system-config-date.noarch 0:1.8.12-4.el5.centos
+  system-config-display.noarch 0:1.0.48-2.el5
+  system-config-network.noarch 0:1.3.99.18-1.el5
+  system-config-services.noarch 0:0.9.4-5.el5
+  system-config-soundcard.noarch 0:2.0.6-1.el5
+  system-config-users.noarch 0:1.2.51-4.el5
+  vnc-server.x86_64 0:4.1.2-14.el5_5.4
+  wdaemon.x86_64 0:0.14-7
+  xorg-x11-apps.x86_64 0:7.1-4.0.1.el5
+  xorg-x11-drivers.x86_64 0:7.1-4.2.el5
+  xorg-x11-fonts-100dpi.noarch 0:7.1-2.1.el5
+  xorg-x11-fonts-75dpi.noarch 0:7.1-2.1.el5
+  xorg-x11-fonts-ISO8859-1-100dpi.noarch 0:7.1-2.1.el5
+  xorg-x11-fonts-ISO8859-1-75dpi.noarch 0:7.1-2.1.el5
+  xorg-x11-fonts-Type1.noarch 0:7.1-2.1.el5
+  xorg-x11-fonts-misc.noarch 0:7.1-2.1.el5
+  xorg-x11-fonts-truetype.noarch 0:7.1-2.1.el5
+  xorg-x11-server-Xorg.x86_64 0:1.1.1-48.76.el5_5.2
+  xorg-x11-twm.x86_64 1:1.0.1-3.1
+  xorg-x11-xauth.x86_64 1:1.0.1-2.1
+  xorg-x11-xinit.x86_64 0:1.0.2-15.el5
+  xterm.x86_64 0:215-8.el5_4.1
+
+Dependency Installed:
+  alsa-utils.x86_64 0:1.0.17-1.el5                      comps-extras.noarch 0:11.1-1.1.el5.centos
+  cpp.x86_64 0:4.1.2-50.el5                             gnome-doc-utils.noarch 0:0.8.0-2.fc6
+  gnome-python2.x86_64 0:2.16.0-1.fc6                   gnome-python2-bonobo.x86_64 0:2.16.0-1.fc6
+  gnome-python2-canvas.x86_64 0:2.16.0-1.fc6            gnome-python2-gconf.x86_64 0:2.16.0-1.fc6
+  gnome-python2-gnomevfs.x86_64 0:2.16.0-1.fc6          gtk2-engines.x86_64 0:2.8.0-3.el5
+  libXTrap.x86_64 0:1.0.0-3.1                           libXaw.x86_64 0:1.0.2-8.1
+  libXfontcache.x86_64 0:1.0.2-3.1                      libXmu.x86_64 0:1.0.2-5
+  libXpm.x86_64 0:3.5.5-3                               libXt.x86_64 0:1.0.2-3.2.el5
+  libXtst.x86_64 0:1.0.1-3.1                            libXv.x86_64 0:1.0.1-4.1
+  libXxf86dga.x86_64 0:1.0.1-3.1                        libXxf86misc.x86_64 0:1.0.1-3.1
+  libXxf86vm.x86_64 0:1.0.1-3.1                         libcroco.x86_64 0:0.6.1-2.1
+  libdmx.x86_64 0:1.0.2-3.1                             libdrm.x86_64 0:2.0.2-1.1
+  libgsf.x86_64 0:1.14.1-6.1                            libogg.x86_64 2:1.1.3-3.el5
+  librsvg2.x86_64 0:2.16.1-1.el5                        libvorbis.x86_64 1:1.1.2-3.el5_4.4
+  libxkbfile.x86_64 0:1.0.3-3.1                         mesa-libGL.x86_64 0:6.5.1-7.8.el5
+  mesa-libGLU.x86_64 0:6.5.1-7.8.el5                    metacity.x86_64 0:2.16.0-16.el5
+  notify-python.x86_64 0:0.1.0-3.fc6                    ntp.x86_64 0:4.2.2p1-9.el5.centos.2.1
+  pkgconfig.x86_64 1:0.21-2.el5                         pycairo.x86_64 0:1.2.0-1.1
+  pygtk2.x86_64 0:2.10.1-12.el5                         pygtk2-libglade.x86_64 0:2.10.1-12.el5
+  pyorbit.x86_64 0:2.14.1-3.el5                         python-numeric.x86_64 0:23.7-2.2.2
+  pyxf86config.x86_64 0:0.3.31-2.fc6                    redhat-artwork.x86_64 0:5.1.0-28.el5.centos
+  rhpxl.x86_64 0:0.41.1-9.el5                           sox.x86_64 0:12.18.1-1.el5_5.1
+  system-config-keyboard.noarch 0:1.2.11-1.el5          system-config-language.noarch 0:1.1.18-3.el5
+  system-config-securitylevel.x86_64 0:1.6.29.1-6.el5   tk.x86_64 0:8.4.13-5.el5_1.1
+  usermode-gtk.x86_64 0:1.88-3.el5.2                    vte.x86_64 0:0.14.0-2.el5
+  xkeyboard-config.noarch 0:0.8-9.el5                   xorg-x11-drv-acecad.x86_64 0:1.1.0-2.1
+  xorg-x11-drv-aiptek.x86_64 0:1.0.1-2                  xorg-x11-drv-ast.x86_64 0:0.89.9-1.el5
+  xorg-x11-drv-ati.x86_64 0:6.6.3-3.32.el5              xorg-x11-drv-calcomp.x86_64 0:1.1.0-1.1
+  xorg-x11-drv-cirrus.x86_64 0:1.1.0-2.fc6              xorg-x11-drv-citron.x86_64 0:2.2.0-1.1
+  xorg-x11-drv-digitaledge.x86_64 0:1.1.0-1.1           xorg-x11-drv-dmc.x86_64 0:1.1.0-2
+  xorg-x11-drv-dummy.x86_64 0:0.2.0-2.1                 xorg-x11-drv-dynapro.x86_64 0:1.1.0-2
+  xorg-x11-drv-elo2300.x86_64 0:1.1.0-1.1               xorg-x11-drv-elographics.x86_64 0:1.1.0-1.1
+  xorg-x11-drv-evdev.x86_64 1:1.0.0.5-5.el5             xorg-x11-drv-fbdev.x86_64 0:0.3.0-3
+  xorg-x11-drv-fpit.x86_64 0:1.1.0-1.1                  xorg-x11-drv-hyperpen.x86_64 0:1.1.0-2
+  xorg-x11-drv-i810.x86_64 0:1.6.5-9.36.el5             xorg-x11-drv-jamstudio.x86_64 0:1.1.0-1.1
+  xorg-x11-drv-joystick.x86_64 0:1.1.0-1.1              xorg-x11-drv-keyboard.x86_64 0:1.1.0-3
+  xorg-x11-drv-magellan.x86_64 0:1.1.0-1.1              xorg-x11-drv-magictouch.x86_64 0:1.0.0.5-2.1
+  xorg-x11-drv-mga.x86_64 0:1.4.13-1.el5                xorg-x11-drv-microtouch.x86_64 0:1.1.0-1.1
+  xorg-x11-drv-mouse.x86_64 0:1.1.1-1.1                 xorg-x11-drv-mutouch.x86_64 0:1.1.0-3
+  xorg-x11-drv-nv.x86_64 0:2.1.15-4.el5                 xorg-x11-drv-palmax.x86_64 0:1.1.0-1.1
+  xorg-x11-drv-penmount.x86_64 0:1.1.0-2.1              xorg-x11-drv-qxl.x86_64 0:0.0.12-1.2.el5
+  xorg-x11-drv-s3.x86_64 0:0.4.1-2.1                    xorg-x11-drv-s3virge.x86_64 0:1.9.1-2.1
+  xorg-x11-drv-savage.x86_64 0:2.1.1-5.fc6              xorg-x11-drv-siliconmotion.x86_64 0:1.4.1-2.1
+  xorg-x11-drv-sis.x86_64 0:0.9.1-7.3.el5               xorg-x11-drv-sisusb.x86_64 0:0.8.1-4.1
+  xorg-x11-drv-spaceorb.x86_64 0:1.1.0-1.1              xorg-x11-drv-summa.x86_64 0:1.1.0-1.1
+  xorg-x11-drv-tdfx.x86_64 0:1.2.1-3.1                  xorg-x11-drv-tek4957.x86_64 0:1.1.0-1.1
+  xorg-x11-drv-trident.x86_64 0:1.2.1-3.fc6             xorg-x11-drv-ur98.x86_64 0:1.1.0-1.1
+  xorg-x11-drv-vesa.x86_64 0:1.3.0-8.2.el5              xorg-x11-drv-vga.x86_64 0:4.1.0-2.1
+  xorg-x11-drv-via.x86_64 0:0.2.1-9                     xorg-x11-drv-vmmouse.x86_64 0:12.4.0-2.1
+  xorg-x11-drv-vmware.x86_64 0:10.13.0-2.1              xorg-x11-drv-void.x86_64 0:1.1.0-3.1
+  xorg-x11-drv-voodoo.x86_64 0:1.1.0-3.1                xorg-x11-fonts-base.noarch 0:7.1-2.1.el5
+  xorg-x11-server-utils.x86_64 0:7.1-4.fc6              xorg-x11-utils.x86_64 0:7.1-2.fc6
+  xorg-x11-xkb-utils.x86_64 0:1.0.2-2.1                 xsri.x86_64 1:2.1.0-10.fc6
+  xulrunner.x86_64 0:1.9.2.13-3.el5                     yelp.x86_64 0:2.16.0-26.el5
+
+Complete!
+[root@bogon yum.repos.d]#</pre>
+<p>
+	安装 Gnome Desktop Environment 涉及到的包：</p>
+<pre>
+Installed:
+  NetworkManager-gnome.x86_64 1:0.7.0-10.el5_5.2      alacarte.noarch 0:0.10.0-1.fc6
+  at-spi.i386 0:1.7.11-3.el5                          at-spi.x86_64 0:1.7.11-3.el5
+  control-center.i386 1:2.16.0-16.el5                 control-center.x86_64 1:2.16.0-16.el5
+  desktop-printing.x86_64 0:0.19-20.2.el5             dvd+rw-tools.x86_64 0:7.0-1.el5
+  eog.x86_64 0:2.16.0.1-6.el5                         esc.x86_64 0:1.1.0-12.el5
+  evince.x86_64 0:0.6.0-13.el5                        file-roller.x86_64 0:2.16.0-2.fc6
+  gedit.x86_64 1:2.16.0-9.el5                         gimp-print-utils.x86_64 0:4.2.7-22.2.el5
+  gnome-applets.x86_64 1:2.16.0.1-19.el5              gnome-audio.noarch 0:2.0.0-3.1.1
+  gnome-backgrounds.noarch 0:2.15.92-1.fc6            gnome-mag.i386 0:0.13.1-1.fc6
+  gnome-mag.x86_64 0:0.13.1-1.fc6                     gnome-media.i386 0:2.16.1-3.el5
+  gnome-media.x86_64 0:2.16.1-3.el5                   gnome-netstatus.x86_64 0:2.12.0-5.el5
+  gnome-panel.i386 0:2.16.1-7.el5                     gnome-panel.x86_64 0:2.16.1-7.el5
+  gnome-pilot.i386 0:2.0.13-16                        gnome-pilot.x86_64 0:2.0.13-16
+  gnome-power-manager.x86_64 0:2.16.0-10.el5          gnome-screensaver.x86_64 0:2.16.1-8.el5_5.2
+  gnome-session.x86_64 0:2.16.0-8.el5.centos          gnome-system-monitor.x86_64 0:2.16.0-3.el5
+  gnome-terminal.x86_64 0:2.16.0-5.3.el5              gnome-themes.noarch 0:2.16.0-1.fc6
+  gnome-user-docs.noarch 0:2.16.0-2.fc6               gnome-user-share.x86_64 0:0.10-6.el5
+  gnome-utils.i386 1:2.16.0-5.el5                     gnome-utils.x86_64 1:2.16.0-5.el5
+  gnome-vfs2-smb.x86_64 0:2.16.2-6.el5_5.1            gnome-volume-manager.x86_64 0:2.15.0-5.el5
+  gok.x86_64 0:1.2.0-2.el5                            gtk2-engines.i386 0:2.8.0-3.el5
+  gtkhtml3.i386 0:3.16.3-1.el5                        gtkhtml3.x86_64 0:3.16.3-1.el5
+  hal-gnome.x86_64 0:0.5.8.1-62.el5                   im-chooser.x86_64 0:0.3.3-6.el5
+  metacity.i386 0:2.16.0-16.el5                       nautilus.x86_64 0:2.16.2-7.el5
+  nautilus-cd-burner.i386 0:2.16.0-7.el5              nautilus-cd-burner.x86_64 0:2.16.0-7.el5
+  nautilus-open-terminal.x86_64 0:0.6-7.el5           nautilus-sendto.x86_64 0:1.0.1-6.el5.centos
+  orca.x86_64 0:1.0.0-5.el5                           sabayon-apply.x86_64 0:2.12.4-6.el5
+  vino.x86_64 0:2.13.5-9.el5_4
+
+Dependency Installed:
+  GConf2.i386 0:2.14.0-9.el5
+  ORBit2.i386 0:2.14.3-5.el5
+  PyXML.x86_64 0:0.8.4-4.el5_4.2
+  alsa-lib.i386 0:1.0.17-1.el5
+  apr.x86_64 0:1.2.7-11.el5_5.3
+  apr-util.x86_64 0:1.2.7-11.el5_5.2
+  audiofile.i386 1:0.2.6-5
+  avahi.i386 0:0.6.16-9.el5_5
+  avahi-compat-libdns_sd.x86_64 0:0.6.16-9.el5_5
+  avahi-glib.i386 0:0.6.16-9.el5_5
+  brlapi.x86_64 0:0.4.1-4.el5
+  bzip2-libs.i386 0:1.0.3-6.el5_5
+  cdparanoia-libs.i386 0:alpha9.8-27.2
+  cdparanoia-libs.x86_64 0:alpha9.8-27.2
+  cdrdao.x86_64 0:1.2.1-2
+  cdrecord.x86_64 9:2.01-10.7.el5
+  cups.x86_64 1:1.3.7-26.el5
+  cyrus-sasl-md5.x86_64 0:2.1.22-5.el5_4.3
+  dbus-x11.x86_64 0:1.1.2-14.el5
+  eel2.i386 0:2.16.1-1.el5
+  eel2.x86_64 0:2.16.1-1.el5
+  esound.i386 1:0.2.36-3
+  evolution-data-server.i386 0:1.12.3-18.el5
+  evolution-data-server.x86_64 0:1.12.3-18.el5
+  flac.x86_64 0:1.1.2-28.el5_0.1
+  foomatic.x86_64 0:3.0.2-38.3.el5
+  gail.i386 0:1.9.2-3.el5_4
+  gail.x86_64 0:1.9.2-3.el5_4
+  gamin.i386 0:0.1.7-8.el5
+  gcalctool.x86_64 0:5.8.25-1.el5
+  ghostscript.x86_64 0:8.70-6.el5
+  ghostscript-fonts.noarch 0:5.50-13.1.1
+  gimp-print.x86_64 0:4.2.7-22.2.el5
+  gnome-desktop.i386 0:2.16.0-1.el5.centos.1
+  gnome-desktop.x86_64 0:2.16.0-1.el5.centos.1
+  gnome-icon-theme.noarch 0:2.16.0.1-4.el5
+  gnome-keyring.i386 0:0.6.0-1.fc6
+  gnome-menus.i386 0:2.16.0-2.fc6
+  gnome-menus.x86_64 0:2.16.0-2.fc6
+  gnome-python2-applet.x86_64 0:2.16.0-3.el5
+  gnome-python2-desktop.x86_64 0:2.16.0-3.el5
+  gnome-python2-extras.x86_64 0:2.14.2-7.el5
+  gnome-python2-gnomeprint.x86_64 0:2.16.0-3.el5
+  gnome-python2-gtksourceview.x86_64 0:2.16.0-3.el5
+  gnome-python2-libegg.x86_64 0:2.14.2-7.el5
+  gnome-speech.x86_64 0:0.4.5-1.fc6
+  gnome-vfs2.i386 0:2.16.2-6.el5_5.1
+  gphoto2.x86_64 0:2.2.0-3.el5
+  gstreamer.i386 0:0.10.20-3.el5
+  gstreamer.x86_64 0:0.10.20-3.el5
+  gstreamer-plugins-base.i386 0:0.10.20-3.0.1.el5_3
+  gstreamer-plugins-base.x86_64 0:0.10.20-3.0.1.el5_3
+  gstreamer-plugins-good.x86_64 0:0.10.9-1.el5_3.2
+  gstreamer-tools.x86_64 0:0.10.20-3.el5
+  gthumb.x86_64 0:2.7.8-8.el5
+  gtksourceview.x86_64 0:1.8.0-1.fc6
+  gucharmap.x86_64 0:1.8.0-1.fc6
+  hal-cups-utils.x86_64 0:0.6.2-5.2.el5
+  httpd.x86_64 0:2.2.3-45.el5.centos
+  libICE.i386 0:1.0.1-2.1
+  libIDL.i386 0:0.8.7-1.fc6
+  libSM.i386 0:1.0.1-3.1
+  libXScrnSaver.i386 0:1.1.0-3.1
+  libXScrnSaver.x86_64 0:1.1.0-3.1
+  libXdamage.i386 0:1.0.3-2.1
+  libXdamage.x86_64 0:1.0.3-2.1
+  libXevie.i386 0:1.0.1-3.1
+  libXevie.x86_64 0:1.0.1-3.1
+  libXres.i386 0:1.0.1-3.1
+  libXtst.i386 0:1.0.1-3.1
+  libXv.i386 0:1.0.1-4.1
+  libXxf86misc.i386 0:1.0.1-3.1
+  libacl.i386 0:2.2.39-6.el5
+  libart_lgpl.i386 0:2.3.17-4
+  libattr.i386 0:2.4.32-1.1
+  libavc1394.x86_64 0:0.5.3-1.fc6
+  libbonobo.i386 0:2.16.0-1.1.el5_5.1
+  libbonoboui.i386 0:2.16.0-1.fc6
+  libdv.x86_64 0:0.104-4.fc6.1
+  libexif.x86_64 0:0.6.13-4.0.2.el5_1.1
+  libgail-gnome.x86_64 0:1.1.3-1.2.1
+  libglade2.i386 0:2.6.0-2
+  libgnome.i386 0:2.16.0-6.el5
+  libgnomecanvas.i386 0:2.14.0-4.1
+  libgnomecups.i386 0:0.2.2-9
+  libgnomecups.x86_64 0:0.2.2-9
+  libgnomeprint22.i386 0:2.12.1-10.el5
+  libgnomeprint22.x86_64 0:2.12.1-10.el5
+  libgnomeprintui22.i386 0:2.12.1-6
+  libgnomeprintui22.x86_64 0:2.12.1-6
+  libgnomeui.i386 0:2.16.0-5.el5
+  libgtop2.i386 0:2.14.4-8.el5_4
+  libgtop2.x86_64 0:2.14.4-8.el5_4
+  libiec61883.x86_64 0:1.0.0-11.fc6
+  libogg.i386 2:1.1.3-3.el5
+  liboil.i386 0:0.3.8-2.1
+  liboil.x86_64 0:0.3.8-2.1
+  libpurple.x86_64 0:2.6.6-5.el5_5
+  libraw1394.x86_64 0:1.3.0-1.el5
+  libsilc.x86_64 0:1.0.2-2.fc6
+  libsmbclient.x86_64 0:3.0.33-3.29.el5_5.1
+  libsoup.i386 0:2.2.98-2.el5_3.1
+  libsoup.x86_64 0:2.2.98-2.el5_3.1
+  libtheora.i386 0:1.0alpha7-1
+  libtheora.x86_64 0:1.0alpha7-1
+  libvorbis.i386 1:1.1.2-3.el5_4.4
+  libwnck.i386 0:2.16.0-4.fc6
+  libxkbfile.i386 0:1.0.3-3.1
+  libxklavier.i386 0:3.0-3.el5
+  libxklavier.x86_64 0:3.0-3.el5
+  libxml2.i386 0:2.6.26-2.1.2.8.el5_5.1
+  lockdev.x86_64 0:1.0.1-10
+  meanwhile.x86_64 0:1.0.2-5.el5
+  mkisofs.x86_64 9:2.01-10.7.el5
+  nautilus-extensions.i386 0:2.16.2-7.el5
+  nautilus-extensions.x86_64 0:2.16.2-7.el5
+  paps.x86_64 0:0.6.6-19.el5
+  pilot-link.i386 2:0.11.8-16
+  pilot-link.x86_64 2:0.11.8-16
+  poppler.x86_64 0:0.5.4-4.4.el5_5.14
+  poppler-utils.x86_64 0:0.5.4-4.4.el5_5.14
+  popt.i386 0:1.10.2.3-22.el5
+  postgresql-libs.x86_64 0:8.1.22-1.el5_5.1
+  python-ldap.x86_64 0:2.2.0-2.1
+  speex.x86_64 0:1.0.5-4.el5_1.1
+  startup-notification.i386 0:0.8-4.1
+  system-config-printer-libs.x86_64 0:0.7.32.10-1.el5
+  urw-fonts.noarch 0:2.3-6.1.1
+  xorg-x11-server-Xnest.x86_64 0:1.1.1-48.76.el5_5.2
+  zenity.x86_64 0:2.16.0-2.el5
+
+Complete!
+[root@bogon yum.repos.d]#
+</pre>
+<p>
+	&nbsp;</p>
+<!-- end --></div>
+
+</body>
+</html>

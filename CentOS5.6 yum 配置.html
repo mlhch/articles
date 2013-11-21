@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Replace Textareas by Class Name &mdash; CKEditor Sample</title>
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<script type="text/javascript" src="../ckeditor/ckeditor.js"></script>
+<script src="../ckeditor/_sample/sample.js" type="text/javascript"></script>
+<link href="../ckeditor/_sample/sample.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<textarea class="ckeditor" cols="80" id="editor1" name="editor1" rows="30">
+<p>
+	做事情不着急的时候，会发现很多容易忽略但特别有价值的信息。我们先留意一下 /etc 下有关 yum 的文件和目录。</p>
+<pre>
+[root@bogon ~]# ll /etc/yum*
+-rw-r--r-- 1 root root  461 02-01 07:12 /etc/yum.conf
+
+/etc/yum:
+总计 16
+drwxr-xr-x 2 root root 4096 05-07 20:24 pluginconf.d
+-rw-r--r-- 1 root root  490 2008-05-25 yum-updatesd.conf
+
+/etc/yum.repos.d:
+总计 36
+-rw-r--r-- 1 root root 1926 02-08 23:20 CentOS-Base.repo
+-rw-r--r-- 1 root root  631 02-08 23:20 CentOS-Debuginfo.repo
+-rw-r--r-- 1 root root  626 02-08 23:20 CentOS-Media.repo
+-rw-r--r-- 1 root root 4663 02-08 23:20 CentOS-Vault.repo
+[root@bogon ~]#
+
+静下心来，大概猜得到 yum.conf 是 yum 相关操作的核心配置文件，yum-updatesd.conf 是 yum-updatesd 服务的配置文件，yum.repos.d 就是有关源的配置文件了。</pre>
+<p>
+	查看 CentOS-Base.repo，内容有点多，看不懂，那么查看 CentOS-Media.repo，内容不多，稍微读下开始的注释，就明白了，原来使用光盘作为源是这么的简单。</p>
+<pre>
+# CentOS-Media.repo
+#
+# This repo is used to mount the default locations for a CDROM / DVD on
+#  CentOS-5.  You can use this repo and yum to install items directly off the
+#  DVD ISO that we release.
+#
+# To use this repo, put in your DVD and use it with the other repos too:
+#  yum --enablerepo=c5-media [command]
+#
+# or for ONLY the media repo, do this:
+#
+#  yum --disablerepo=\* --enablerepo=c5-media [command]
+
+[c5-media]
+name=CentOS-$releasever - Media
+baseurl=file:///media/CentOS/
+        file:///media/cdrom/
+        file:///media/cdrecorder/
+gpgcheck=1
+enabled=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-5
+</pre>
+<p>
+	于是在命令行尝试：</p>
+<pre>
+[root@bogon yum.repos.d]# yum --enablerepo=c5-media install gcc
+Loaded plugins: fastestmirror
+Determining fastest mirrors
+</pre>
+<p>
+	很慢，显然 yum 去网络上找东西了。再试：</p>
+<pre>
+[root@bogon yum.repos.d]# yum --disablerepo=\* --enablerepo=c5-media install gcc
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+&nbsp;* c5-media:
+file:///media/CentOS/repodata/repomd.xml: [Errno 5] OSError: [Errno 2] 没有那个文件或目录: &#39;/media/CentOS/repodata/repomd.xml&#39;
+Trying other mirror.
+file:///media/cdrecorder/repodata/repomd.xml: [Errno 5] OSError: [Errno 2] 没有那个文件或目录: &#39;/media/cdrecorder/repodata/repomd.xml&#39;
+Trying other mirror.
+file:///media/cdrom/repodata/repomd.xml: [Errno 5] OSError: [Errno 2] 没有那个文件或目录: &#39;/media/cdrom/repodata/repomd.xml&#39;
+Trying other mirror.
+Error: Cannot retrieve repository metadata (repomd.xml) for repository: c5-media. Please verify its path and try again
+[root@bogon yum.repos.d]#
+</pre>
+<p>
+	很快，虽然报错，但可以确定 yum 不搜索网络了。仔细阅读错误提示，可以发现问题出在 yum 找不着 repodata/repomd.xml 文件，说明 CentOS-Media.repo 的 baseurl 配置有问题。显然，我们的光盘还没有连接。</p>
+<pre>
+[root@bogon yum.repos.d]# mount /dev/cdrom /media/
+mount: block device /dev/cdrom is write-protected, mounting read-only
+[root@bogon yum.repos.d]# find /media/ | grep repomd.xml
+/media/repodata/repomd.xml
+[root@bogon yum.repos.d]#
+</pre>
+<p>
+	对比出错提示，尝试把 file:///media/cdrom/ 改为 file:///media，再次运行安装 gcc 的命令，一切都顺利了。</p>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+
+
+</textarea>
+<script type="text/javascript">
+CKEDITOR.replace( 'editor1', {
+	height : 600
+});
+</script>
+</body>
+</html>
