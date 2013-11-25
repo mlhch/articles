@@ -1,0 +1,956 @@
+<h1>Rails</h1>
+
+<p>2013-08-31 17:10 Saturday</p>
+
+<p><a href="http://rubyonrails.org/" target="_blank">http://rubyonrails.org/</a></p>
+
+<p>2013-08-31 17:11</p>
+
+<p><a href="http://rubyonrails.org/download">4.0.0 released Jun 25, 2013</a></p>
+
+<p>2013-10-27 22:46 Sunday</p>
+
+<p>3.2.8 版本以来的主要版本</p>
+
+<ol>
+	<li><a href="http://rubygems.org/gems/rails/versions/4.0.1.rc3">4.0.1.rc3</a>&nbsp;<small>October 23, 2013</small>&nbsp;(1.48 MB)</li>
+	<li><a href="http://rubygems.org/gems/rails/versions/4.0.0">4.0.0</a>&nbsp;<small>June 25, 2013</small>&nbsp;(1.47 MB)</li>
+	<li><a href="http://rubygems.org/gems/rails/versions/3.2.15">3.2.15</a>&nbsp;<small>October 16, 2013</small>&nbsp;(4.5 KB)</li>
+	<li><a href="http://rubygems.org/gems/rails/versions/3.2.14">3.2.14</a>&nbsp;<small>July 22, 2013</small>&nbsp;(3.5 KB)</li>
+	<li><a href="http://rubygems.org/gems/rails/versions/3.2.13">3.2.13</a>&nbsp;<small>March 18, 2013</small>&nbsp;(4.5 KB)</li>
+	<li><a href="http://rubygems.org/gems/rails/versions/3.2.12">3.2.12</a>&nbsp;<small>February 11, 2013</small>&nbsp;(4.5 KB)</li>
+	<li><a href="http://rubygems.org/gems/rails/versions/3.2.11">3.2.11</a>&nbsp;<small>January 8, 2013</small>&nbsp;(4.5 KB)</li>
+	<li><a href="http://rubygems.org/gems/rails/versions/3.2.10">3.2.10</a>&nbsp;<small>December 23, 2012</small>&nbsp;(4.5 KB)</li>
+	<li><a href="http://rubygems.org/gems/rails/versions/3.2.9">3.2.9</a>&nbsp;<small>November 12, 2012</small>&nbsp;(3.5 KB)</li>
+	<li><a href="http://rubygems.org/gems/rails/versions/3.2.8">3.2.8</a>&nbsp;<small>August 9, 2012</small>&nbsp;(3.5 KB)</li>
+</ol>
+
+<h2>如何使项目运行在域名的子目录下</h2>
+
+<p>似乎曾经在 rails 2.x 版本的时候通过配置 ENV[&#39;RAILS_RELATIVE_URL_ROOT&#39;] 可实现。</p>
+
+<p>但 rails 3.x 版本中不再支持。替代方法如下：</p>
+
+<p>编辑文件 config.ru&nbsp;添加如下 map ... end，然后就可通过 http://localhost:3000/app1 来访问项目了</p>
+
+<pre>
+map &quot;/app1&quot; do
+&nbsp; run FooApp::Application
+end</pre>
+
+<h2>Get Started</h2>
+
+<p><a href="http://rubyonrails.org/download" target="_blank">http://rubyonrails.org/download</a></p>
+
+<p>2012-07-19 10:10</p>
+
+<ol>
+	<li>
+	<p>Ruby</p>
+
+	<p>We recommend&nbsp;Ruby 1.9.3&nbsp;for use with Rails. Rails 3.2 is the last one that supports Ruby 1.8. Ruby 1.8.6 and earlier are not supported, neither is version 1.9.1.</p>
+
+	<p><a href="ftp://ftp.ruby-lang.org/pub/ruby/1.9/ruby-1.9.3-p0.tar.gz">Source:</a>&nbsp;Compile it yourself<br />
+	<a href="http://rubyforge.org/frs/?group_id=167">Windows installer:</a>&nbsp;Ruby, popular extensions, editor<br />
+	OS X 10.5+:&nbsp;Included with developer tools</p>
+
+	<p>(then do &quot;(sudo?) gem update rails&quot;)</p>
+
+	<p>2013-10-24 02:39 Thursday</p>
+
+	<p>We recommend&nbsp;Ruby 2.0.0&nbsp;for use with Rails. We stopped supporting Ruby 1.8.x after Rails 3.2. Ruby 1.9.2+ will be supported until Rails 5</p>
+	</li>
+	<li>
+	<p>RubyGems</p>
+
+	<p><a href="http://docs.rubygems.org/">RubyGems</a>&nbsp;is the&nbsp;standard Ruby package manager. It&#39;s similar to apt-get, emerge, and other OS package managers.&nbsp;<a href="http://rubygems.org/pages/download">Download</a></p>
+
+	<p>2013-10-24 02:41 Thursday</p>
+
+	<p>Oops? RubyGems 不在这里被列出了。</p>
+	</li>
+	<li>
+	<p>Rails</p>
+
+	<p>With RubyGems loaded, you can install all of Rails and its dependencies through the command line:</p>
+
+	<pre>
+gem install rails</pre>
+
+	<p>New versions of Rails can be installed the same way.</p>
+
+	<pre>
+$ gem install rails
+ERROR:  Could not find a valid gem &#39;rails&#39; (&gt;= 0), here is why:
+          Unable to download data from https://rubygems.org/ - SSL_connect returned=1 errno=0 state=SSLv3 read server certificate B: certificate verify failed (https://s3.amazonaws.com/production.s3.rubygems.org/latest_specs.4.8.gz)</pre>
+
+	<p>http://railsapps.github.io/openssl-certificate-verify-failed.html</p>
+
+	<pre>
+$ brew install openssl
+Warning: openssl-1.0.1e already installed</pre>
+
+	<pre>
+$ brew link openssl --force
+Linking /usr/local/Cellar/openssl/1.0.1e... 1139 symlinks created</pre>
+
+	<pre>
+$ brew install curl-ca-bundle
+Warning: curl-ca-bundle-1.87 already installed</pre>
+
+	<pre>
+$ gem install rails
+ERROR:  Could not find a valid gem &#39;rails&#39; (&gt;= 0), here is why:
+          Unable to download data from https://rubygems.org/ - SSL_connect returned=1 errno=0 state=SSLv3 read server certificate B: certificate verify failed (https://s3.amazonaws.com/production.s3.rubygems.org/latest_specs.4.8.gz)</pre>
+
+	<pre>
+$ brew tap raggi/ale
+Cloning into &#39;/usr/local/Library/Taps/raggi-ale&#39;...
+remote: Counting objects: 12, done.
+remote: Compressing objects: 100% (10/10), done.
+remote: Total 12 (delta 2), reused 11 (delta 1)
+Unpacking objects: 100% (12/12), done.
+Checking connectivity... done
+Tapped 1 formula</pre>
+
+	<pre>
+$ brew install openssl-osx-ca
+==&gt; Downloading https://github.com/raggi/openssl-osx-ca/archive/1.0.3.tar.gz
+######################################################################## 100.0%
+==&gt; make install PREFIX=&#39;/usr/local/Cellar/openssl-osx-ca/1.0.3&#39; BREW=&#39;/usr/local/bin/brew&#39;
+==&gt; Caveats
+To get instant-on, please run:
+
+    openssl-osx-ca
+
+To uninstall remove the openssl-osx-ca line from your crontab. e.g.
+
+    (crontab -l | grep -v openssl-osx-ca) | crontab -
+==&gt; Summary
+🍺  /usr/local/Cellar/openssl-osx-ca/1.0.3: 4 files, 16K, built in 7 seconds</pre>
+
+	<pre>
+$ gem install rails
+ERROR:  While executing gem ... (Errno::EACCES)
+    Permission denied - /usr/local/lib/ruby/gems/2.0.0/gems/rails-4.0.0/README.md</pre>
+
+	<pre>
+$ sudo gem install rails
+Password:
+Successfully installed rails-4.0.0
+Parsing documentation for rails-4.0.0
+Done installing documentation for rails after 1 seconds
+1 gem installed</pre>
+	</li>
+	<li>
+	<p>Make your application</p>
+
+	<p>Create your application skeleton and start the server:</p>
+
+	<pre>
+rails new path/to/your/new/application
+cd path/to/your/new/application
+rails server</pre>
+
+	<p>You&#39;re running Ruby on Rails! Follow the instructions on http://localhost:3000.</p>
+	</li>
+</ol>
+
+<p>2012-08-14 11:57 星期二</p>
+
+<p>今天在 CentOS 上执行 # gem install rails 时，提示 file &#39;lib&#39; not found 错误，实际不影响使用。解决办法为：先 gem install rdoc，再 gem install rails</p>
+
+<h2>RubyGems（简称 gems）</h2>
+
+<p>是一个用于对 Rails 组件进行打包的 Ruby 打包系统。 它提供一个分发 Ruby 程序和库的标准格式，还提供一个管理程序包安装的工具。</p>
+
+<p>RubyGems的功能类似于Linux下的apt-get。使用它可以方便第从远程服务器下载并安装Rails。</p>
+
+<h2>安装</h2>
+
+<ol>
+	<li>确认 OS X 本身已有 gem 命令</li>
+	<li>执行如下命令
+	<pre>
+hn:~ mlhch$ gem list --local
+*** LOCAL GEMS ***
+
+hn:~ mlhch$ gem update rails
+Updating installed gems
+Nothing to update
+hn:~ mlhch$ gem install rails
+WARNING:&nbsp; RubyGems 1.2+ index not found for:
+
+RubyGems will revert to legacy indexes degrading performance.
+Updating metadata for 1 gems from http://rubygems.org/
+.
+complete
+Updating metadata for 1 gems from http://rubygems.org/
+.
+complete</pre>
+	</li>
+	<li>下载 rubygems-1.8.11.zip，解压后执行命令安装。
+	<pre>
+$ ruby setup.rb
+ERROR:  While executing gem ... (Errno::EACCES)
+    Permission denied - /Library/Ruby/Site/1.8/gauntlet_rubygems.rb
+hn:rubygems-1.8.11 mlhch$ sudo ruby setup.rb
+RubyGems 1.8.11 installed
+
+== 1.8.11 / 2011-10-03
+
+* Bug fix:
+  * Deprecate was moved to Gem::Deprecate to stop polluting the top-level
+    namespace.
+
+
+------------------------------------------------------------------------------
+
+RubyGems installed the following executables:
+/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/bin/gem
+</pre>
+	</li>
+	<li>再次执行 sudo gem install rails 命令，成功了。
+	<pre>
+$ gem install rails
+Fetching: builder-3.0.0.gem (100%)
+ERROR:&nbsp; While executing gem ... (Gem::FilePermissionError)
+&nbsp;&nbsp;&nbsp; You don&#39;t have write permissions into the /Library/Ruby/Gems/1.8 directory.
+
+$ sudo gem install rails
+Password:
+Fetching: builder-3.0.0.gem (100%)
+Fetching: i18n-0.6.0.gem (100%)
+Fetching: activemodel-3.1.1.gem (100%)
+Fetching: rack-1.3.5.gem (100%)
+Fetching: rack-cache-1.1.gem (100%)
+Fetching: rack-test-0.6.1.gem (100%)
+Fetching: rack-mount-0.8.3.gem (100%)
+Fetching: hike-1.2.1.gem (100%)
+Fetching: tilt-1.3.3.gem (100%)
+Fetching: sprockets-2.0.3.gem (100%)
+Fetching: erubis-2.7.0.gem (100%)
+Fetching: actionpack-3.1.1.gem (100%)
+Fetching: arel-2.2.1.gem (100%)
+Fetching: tzinfo-0.3.31.gem (100%)
+Fetching: activerecord-3.1.1.gem (100%)
+Fetching: activeresource-3.1.1.gem (100%)
+Fetching: mime-types-1.17.2.gem (100%)
+Fetching: polyglot-0.3.3.gem (100%)
+Fetching: treetop-1.4.10.gem (100%)
+Fetching: mail-2.3.0.gem (100%)
+Fetching: actionmailer-3.1.1.gem (100%)
+Fetching: rake-0.9.2.2.gem (100%)
+Fetching: thor-0.14.6.gem (100%)
+Fetching: rack-ssl-1.3.2.gem (100%)
+Fetching: json-1.6.1.gem (100%)
+Building native extensions.&nbsp; This could take a while...
+Fetching: rdoc-3.11.gem (100%)
+Depending on your version of ruby, you may need to install ruby rdoc/ri data:
+
+&lt;= 1.8.6 : unsupported
+= 1.8.7 : gem install rdoc-data; rdoc-data --install
+= 1.9.1 : gem install rdoc-data; rdoc-data --install
+&gt;= 1.9.2 : nothing to do! Yay!
+Fetching: railties-3.1.1.gem (100%)
+Fetching: bundler-1.0.21.gem (100%)
+Fetching: rails-3.1.1.gem (100%)
+Successfully installed builder-3.0.0
+...
+Successfully installed railties-3.1.1
+Successfully installed bundler-1.0.21
+Successfully installed rails-3.1.1
+29 gems installed
+...
+Installing RDoc documentation for railties-3.1.1...
+Installing RDoc documentation for bundler-1.0.21...
+Installing RDoc documentation for rails-3.1.1...
+</pre>
+	</li>
+	<li>
+	<p>2012-07-19 11:03 yy 在看十大奇冤</p>
+
+	<pre>
+mac:~ mlhch$ sudo gem update rails
+Password:
+Updating installed gems
+Updating coffee-rails
+Fetching: activesupport-3.2.6.gem (100%)
+Fetching: activemodel-3.2.6.gem (100%)
+Fetching: rack-1.4.1.gem (100%)
+Fetching: rack-cache-1.2.gem (100%)
+Fetching: journey-1.0.4.gem (100%)
+Fetching: sprockets-2.1.3.gem (100%)
+Fetching: actionpack-3.2.6.gem (100%)
+Fetching: railties-3.2.6.gem (100%)
+Fetching: coffee-rails-3.2.2.gem (100%)
+Successfully installed activesupport-3.2.6
+Successfully installed activemodel-3.2.6
+Successfully installed rack-1.4.1
+Successfully installed rack-cache-1.2
+Successfully installed journey-1.0.4
+Successfully installed sprockets-2.1.3
+Successfully installed actionpack-3.2.6
+Successfully installed railties-3.2.6
+Successfully installed coffee-rails-3.2.2
+Updating jquery-rails
+Fetching: jquery-rails-2.0.2.gem (100%)
+Successfully installed jquery-rails-2.0.2
+Updating rails
+Fetching: arel-3.0.2.gem (100%)
+Fetching: activerecord-3.2.6.gem (100%)
+Fetching: activeresource-3.2.6.gem (100%)
+Fetching: mail-2.4.4.gem (100%)
+Fetching: actionmailer-3.2.6.gem (100%)
+Fetching: rails-3.2.6.gem (100%)
+Successfully installed arel-3.0.2
+Successfully installed activerecord-3.2.6
+Successfully installed activeresource-3.2.6
+Successfully installed mail-2.4.4
+Successfully installed actionmailer-3.2.6
+Successfully installed rails-3.2.6
+Updating sass-rails
+Fetching: sass-rails-3.2.5.gem (100%)
+Successfully installed sass-rails-3.2.5
+Gems updated: activesupport, activemodel, rack, rack-cache, journey, sprockets, actionpack, railties, coffee-rails, jquery-rails, arel, activerecord, activeresource, mail, actionmailer, rails, sass-rails
+Installing ri documentation for activesupport-3.2.6...
+...
+Installing RDoc documentation for sass-rails-3.2.5...</pre>
+	</li>
+</ol>
+
+<h2>使用</h2>
+
+<ol>
+	<li>创建项目 blog
+	<pre>
+hn:~ mlhch$ rails new blog
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; create&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; create&nbsp; README
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; create&nbsp; Rakefile
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ...
+      这里的内容跟 blog 下生成的内容一一对应
+      ...
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; create&nbsp; vendor/plugins
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; create&nbsp; vendor/plugins/.gitkeep
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; run&nbsp; bundle install
+
+Enter your password to install the bundled RubyGems to your system:
+Fetching source index for http://rubygems.org/
+Using rake (0.9.2.2)
+Using multi_json (1.0.3)
+Using activesupport (3.1.1)
+Using builder (3.0.0)
+Using i18n (0.6.0)
+Using activemodel (3.1.1)
+Using erubis (2.7.0)
+Using rack (1.3.5)
+Using rack-cache (1.1)
+Using rack-mount (0.8.3)
+Using rack-test (0.6.1)
+Using hike (1.2.1)
+Using tilt (1.3.3)
+Using sprockets (2.0.3)
+Using actionpack (3.1.1)
+Using mime-types (1.17.2)
+Using polyglot (0.3.3)
+Using treetop (1.4.10)
+Using mail (2.3.0)
+Using actionmailer (3.1.1)
+Using arel (2.2.1)
+Using tzinfo (0.3.31)
+Using activerecord (3.1.1)
+Using activeresource (3.1.1)
+Using bundler (1.0.21)
+Installing coffee-script-source (1.1.3)
+Installing execjs (1.2.9)
+Installing coffee-script (2.2.0)
+Using rack-ssl (1.3.2)
+Using json (1.6.1)
+Using rdoc (3.11)
+Using thor (0.14.6)
+Using railties (3.1.1)
+Installing coffee-rails (3.1.1)
+Installing jquery-rails (1.0.17)
+Using rails (3.1.1)
+Installing sass (3.1.10)
+Installing sass-rails (3.1.4)
+Installing sqlite3 (1.3.4) with native extensions
+Installing uglifier (1.0.4)
+Your bundle is complete! Use `bundle show [gemname]` to see where a bundled gem is installed.
+</pre>
+
+	<p>2012-08-14 12:30 星期二</p>
+
+	<p>今日在 CentOS 上测试时发现提示缺少 OpenSSL 支持。</p>
+
+	<pre>
+         ...
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; run&nbsp; bundle install
+Fetching gem metadata from https://rubygems.org/.
+Could not load OpenSSL.
+You must recompile Ruby with OpenSSL support or change the sources in your
+Gemfile from &#39;https&#39; to &#39;http&#39;. Instructions for compiling with OpenSSL
+using RVM are available at rvm.io/packages/openssl.</pre>
+	</li>
+	<li>cd blog 然后执行：
+	<pre>
+$ rails s
+=&gt; Booting WEBrick
+=&gt; Rails 3.1.1 application starting in development on http://0.0.0.0:3000
+=&gt; Call with -d to detach
+=&gt; Ctrl-C to shutdown server
+[2011-11-13 18:13:54] INFO&nbsp; WEBrick 1.3.1
+[2011-11-13 18:13:54] INFO&nbsp; ruby 1.8.7 (2010-01-10) [universal-darwin11.0]
+[2011-11-13 18:13:54] INFO&nbsp; WEBrick::HTTPServer#start: pid=4650 port=3000
+
+
+Started GET &quot;/assets/rails.png&quot; for 127.0.0.1 at Sun Nov 13 18:14:05 +0800 2011
+Served asset /rails.png - 200 OK (26ms)
+</pre>
+
+	<p>2012-08-14 12:30 星期二</p>
+
+	<p>rails 3.2.8 似乎有不少更新，依次提示安装 jquery-rails，coffee-rails，sqlite3，sass-rails，uglifier，完了 rails s 时出错信息为</p>
+
+	<pre>
+/usr/local/lib/ruby/gems/1.9.1/gems/execjs-1.4.0/lib/execjs/runtimes.rb:51:in `autodetect&#39;: Could not find a JavaScript runtime. See https://github.com/sstephenson/execjs for a list of available runtimes. (ExecJS::RuntimeUnavailable)</pre>
+
+	<p>根本原因还是没有安装 Node.js。</p>
+
+	<p>如果出现如下错误信息，那么就需要重新编译 ruby 了。</p>
+
+	<pre>
+cannot load such file -- openssl (LoadError)</pre>
+
+	<p>在编译之前，要做的是在 CentOS 上执行 yum install openssl openssl-devel，然后到&nbsp;ruby-1.9.3-p194/ext/openssl/ 目录下执行 ruby extconf.rb</p>
+
+	<p>未安装 openssl-devel 前：</p>
+
+	<pre>
+# ruby extconf.rb
+=== OpenSSL for Ruby configurator ===
+=== Checking for system dependent stuff... ===
+checking for t_open() in -lnsl... no
+checking for socket() in -lsocket... no
+checking for assert.h... yes
+=== Checking for required stuff... ===
+checking for openssl/ssl.h... no
+=== Checking for required stuff failed. ===
+Makefile wasn&#39;t created. Fix the errors above.</pre>
+
+	<p>安装 openssl-devel 后</p>
+
+	<pre>
+# ruby extconf.rb
+=== OpenSSL for Ruby configurator ===
+=== Checking for system dependent stuff... ===
+checking for t_open() in -lnsl... no
+checking for socket() in -lsocket... no
+checking for assert.h... yes
+=== Checking for required stuff... ===
+checking for openssl/ssl.h... yes
+...
+=== Checking done. ===
+creating extconf.h
+creating Makefile
+Done.
+</pre>
+	</li>
+	<li>http://localhost:3000 即可查看 blog 项目了。如果 ctrl + c 中止命令，则服务也停止。</li>
+	<li>rails g controller home index
+	<pre>
+hn:blog mlhch$ rails g controller home index
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; create&nbsp; app/controllers/home_controller.rb
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; route&nbsp; get &quot;home/index&quot;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; invoke&nbsp; erb
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; create&nbsp;&nbsp;&nbsp; app/views/home
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; create&nbsp;&nbsp;&nbsp; app/views/home/index.html.erb
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; invoke&nbsp; test_unit
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; create&nbsp;&nbsp;&nbsp; test/functional/home_controller_test.rb
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; invoke&nbsp; helper
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; create&nbsp;&nbsp;&nbsp; app/helpers/home_helper.rb
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; invoke&nbsp;&nbsp;&nbsp; test_unit
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; create&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; test/unit/helpers/home_helper_test.rb
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; invoke&nbsp; assets
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; invoke&nbsp;&nbsp;&nbsp; coffee
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; create&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; app/assets/javascripts/home.js.coffee
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; invoke&nbsp;&nbsp;&nbsp; scss
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; create&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; app/assets/stylesheets/home.css.scss
+hn:blog mlhch$&nbsp;</pre>
+	</li>
+	<li>vi app/views/home/index.html.erb 可以修改模板</li>
+	<li>vi config/routes.rb 可以修改路由</li>
+	<li>
+	<p>用&nbsp;scaffold&nbsp;创建一个可增删查改的&nbsp;Post 模块，Post 后面跟的是字段名及类型</p>
+
+	<pre>
+mac:blog mlhch$ rails generate scaffold Post name:string title:string content:text
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; invoke&nbsp; active_record
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; create&nbsp;&nbsp;&nbsp; db/migrate/20120719035240_create_posts.rb
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; create&nbsp;&nbsp;&nbsp; app/models/post.rb
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; invoke&nbsp;&nbsp;&nbsp; test_unit
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; create&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; test/unit/post_test.rb
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; create&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; test/fixtures/posts.yml
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; route&nbsp; resources :posts
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; invoke&nbsp; scaffold_controller
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; create&nbsp;&nbsp;&nbsp; app/controllers/posts_controller.rb
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; invoke&nbsp;&nbsp;&nbsp; erb
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; create&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; app/views/posts
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; create&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; app/views/posts/index.html.erb
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; create&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; app/views/posts/edit.html.erb
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; create&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; app/views/posts/show.html.erb
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; create&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; app/views/posts/new.html.erb
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; create&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; app/views/posts/_form.html.erb
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; invoke&nbsp;&nbsp;&nbsp; test_unit
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; create&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; test/functional/posts_controller_test.rb
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; invoke&nbsp;&nbsp;&nbsp; helper
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; create&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; app/helpers/posts_helper.rb
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; invoke&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; test_unit
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; create&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; test/unit/helpers/posts_helper_test.rb
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; invoke&nbsp; assets
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; invoke&nbsp;&nbsp;&nbsp; coffee
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; create&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; app/assets/javascripts/posts.js.coffee
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; invoke&nbsp;&nbsp;&nbsp; scss
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; create&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; app/assets/stylesheets/posts.css.scss
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; invoke&nbsp; scss
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; create&nbsp;&nbsp;&nbsp; app/assets/stylesheets/scaffolds.css.scss
+mac:blog mlhch$&nbsp;</pre>
+	</li>
+	<li>
+	<p>创建数据表</p>
+
+	<pre>
+mac:blog mlhch$ rake db:migrate
+==&nbsp; CreatePosts: migrating ====================================================
+-- create_table(:posts)
+&nbsp;&nbsp; -&gt; 0.0018s
+==&nbsp; CreatePosts: migrated (0.0019s) ===========================================
+</pre>
+	</li>
+	<li>
+	<p>评论相关</p>
+
+	<pre>
+mac:blog mlhch$ rails generate model Comment commenter:string body:text post:reference
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; invoke&nbsp; active_record
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; create&nbsp;&nbsp;&nbsp; db/migrate/20120719091920_create_comments.rb
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; create&nbsp;&nbsp;&nbsp; app/models/comment.rb
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; invoke&nbsp;&nbsp;&nbsp; test_unit
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; create&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; test/unit/comment_test.rb
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; create&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; test/fixtures/comments.yml</pre>
+	</li>
+	<li>
+	<p>创建数据表</p>
+
+	<pre>
+mac:blog mlhch$ rake db:migrate
+==&nbsp; CreatePosts: migrating ====================================================
+-- create_table(:posts)
+rake aborted!
+An error has occurred, this and all later migrations canceled:
+
+SQLite3::SQLException: table &quot;posts&quot; already exists: CREATE TABLE &quot;posts&quot; (&quot;id&quot; INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, &quot;name&quot; varchar(255), &quot;title&quot; varchar(255), &quot;content&quot; text, &quot;created_at&quot; datetime, &quot;updated_at&quot; datetime)
+
+Tasks: TOP =&gt; db:migrate
+(See full trace by running task with --trace)
+
+mac:blog mlhch$ rake db:migrate:reset
+==&nbsp; CreatePosts: migrating ====================================================
+-- create_table(:posts)
+&nbsp;&nbsp; -&gt; 0.0016s
+==&nbsp; CreatePosts: migrated (0.0022s) ===========================================
+
+==&nbsp; CreateComments: migrating =================================================
+-- create_table(:comments)
+&nbsp;&nbsp; -&gt; 0.0014s
+-- add_index(:comments, :post_id)
+&nbsp;&nbsp; -&gt; 0.0006s
+==&nbsp; CreateComments: migrated (0.0029s) ========================================
+</pre>
+	</li>
+	<li>
+	<p>controller</p>
+
+	<pre>
+mac:blog mlhch$ rails generate controller Comments
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; create&nbsp; app/controllers/comments_controller.rb
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; invoke&nbsp; erb
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; create&nbsp;&nbsp;&nbsp; app/views/comments
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; invoke&nbsp; test_unit
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; create&nbsp;&nbsp;&nbsp; test/functional/comments_controller_test.rb
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; invoke&nbsp; helper
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; create&nbsp;&nbsp;&nbsp; app/helpers/comments_helper.rb
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; invoke&nbsp;&nbsp;&nbsp; test_unit
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; create&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; test/unit/helpers/comments_helper_test.rb
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; invoke&nbsp; assets
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; invoke&nbsp;&nbsp;&nbsp; coffee
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; create&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; app/assets/javascripts/comments.js.coffee
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; invoke&nbsp;&nbsp;&nbsp; scss
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; create&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; app/assets/stylesheets/comments.css.scss</pre>
+	</li>
+	<li>
+	<p>s</p>
+
+	<pre>
+mac:blog mlhch$ rails generate model tag name:string post:references
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; invoke&nbsp; active_record
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; create&nbsp;&nbsp;&nbsp; db/migrate/20120719110154_create_tags.rb
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; create&nbsp;&nbsp;&nbsp; app/models/tag.rb
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; invoke&nbsp;&nbsp;&nbsp; test_unit
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; create&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; test/unit/tag_test.rb
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; create&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; test/fixtures/tags.yml
+
+mac:blog mlhch$ rake db:migrate
+==&nbsp; CreateTags: migrating =====================================================
+-- create_table(:tags)
+&nbsp;&nbsp; -&gt; 0.0013s
+-- add_index(:tags, :post_id)
+&nbsp;&nbsp; -&gt; 0.0005s
+==&nbsp; CreateTags: migrated (0.0019s) ============================================</pre>
+	</li>
+</ol>
+
+<h2>Get Better -&nbsp;<a href="http://rubyonrails.org/documentation">API, Guides, Books</a></h2>
+
+<ol>
+	<li>
+	<p>APIs</p>
+
+	<p>Browse all frameworks, classes, and methods:<br />
+	<a href="http://api.rubyonrails.org/">Rails: Complete API</a>&nbsp;|&nbsp;<a href="http://ruby-doc.org/ruby-1.9/index.html">Ruby Core</a>&nbsp;|&nbsp;<a href="http://stdlib.rubyonrails.org/">Ruby Standard Lib</a></p>
+	</li>
+	<li>
+	<p>Guides</p>
+
+	<p>When you&#39;re just getting started or want to learn about Rails in general, the&nbsp;<a href="http://guides.rubyonrails.org/">Rails Guides</a>&nbsp;is a great way to compliment the API section as well. It&#39;s being maintained as part of&nbsp;<a href="http://github.com/lifo/docrails/tree/master">the docrails project</a>.</p>
+	</li>
+</ol>
+
+<h3>API</h3>
+
+<p>http://api.rubyonrails.org/</p>
+
+<ol>
+	<li>
+	<p>Install Rails at the command prompt if you haven&rsquo;t yet:</p>
+
+	<pre>
+gem install rails</pre>
+	</li>
+	<li>
+	<p>At the command prompt, create a new Rails application:</p>
+
+	<pre>
+rails new myapp</pre>
+
+	<p>where &ldquo;myapp&rdquo; is the application name.</p>
+	</li>
+	<li>
+	<p>Change directory to&nbsp;myapp&nbsp;and start the web server:</p>
+
+	<pre>
+cd myapp; rails server</pre>
+
+	<p>Run with&nbsp;--help&nbsp;for options.</p>
+	</li>
+	<li>
+	<p>Go to&nbsp;<a href="http://localhost:3000/">localhost:3000</a>&nbsp;and you&rsquo;ll see:</p>
+
+	<pre>
+&quot;Welcome aboard: You&#39;re riding Ruby on Rails!&quot;</pre>
+	</li>
+	<li>
+	<p>Follow the guidelines to start developing your application. You may find the following resources handy:</p>
+	</li>
+</ol>
+
+<ul>
+	<li>
+	<p>The&nbsp;<a href="http://api.rubyonrails.org/files/railties/README_rdoc.html">README</a>&nbsp;file created within your application.</p>
+	</li>
+	<li>
+	<p>The&nbsp;<a href="http://guides.rubyonrails.org/getting_started.html">Getting Started with Rails</a>.</p>
+	</li>
+	<li>
+	<p>The&nbsp;<a href="http://railstutorial.org/book">Ruby on Rails Tutorial</a>.</p>
+	</li>
+	<li>
+	<p>The&nbsp;<a href="http://guides.rubyonrails.org/">Ruby on Rails Guides</a>.</p>
+	</li>
+	<li>
+	<p>The&nbsp;<a href="http://api.rubyonrails.org/">API Documentation</a>.</p>
+	</li>
+</ul>
+
+<h2>Practice</h2>
+
+<ol>
+	<li>
+	<p>controller 中的变量要去看看父类中有没有已经定义</p>
+
+	<p>@datasets_counter = catalogue_instance.datasets_by_type</p>
+	</li>
+	<li>
+	<p>nil 这样用，if 这样写。</p>
+
+	<p>if @catalogue.nil? ... end</p>
+	</li>
+	<li>
+	<p>类的动态载入机制</p>
+
+	<p>@catalogue = CatalogueTranslator.new(Rails.application.config.catalogue_address, Rails.cache)</p>
+
+	<pre>
+.rvm/gems/ruby-1.9.3-p194/gems/activesupport-3.0.3/lib/active_support/dependencies.rb
+&nbsp;&nbsp; 164&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; # Use const_missing to autoload associations so we don&#39;t have to
+&nbsp;&nbsp; 165&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; # require_association when using single-table inheritance.
+&nbsp;&nbsp; 166&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; def const_missing(const_name, nesting = nil)
+=&gt; 167&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; klass_name = name.presence || &quot;Object&quot;
+&nbsp;&nbsp; 168&nbsp;
+&nbsp;&nbsp; 169&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if !nesting
+&nbsp;&nbsp; 170&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; # We&#39;ll assume that the nesting of Foo::Bar is [&quot;Foo::Bar&quot;, &quot;Foo&quot;]
+&nbsp;&nbsp; 171&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; # even though it might not be, such as in the case of
+&nbsp;&nbsp; 172&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; # class Foo::Bar; Baz; end
+&nbsp;&nbsp; 173&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; nesting = []
+&nbsp;&nbsp; 174&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; klass_name.to_s.scan(/::|$/) { nesting.unshift $` }
+&nbsp;&nbsp; 175&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end
+&nbsp;&nbsp; 176&nbsp;
+&nbsp;&nbsp; 177&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; # If there are multiple levels of nesting to search under, the top
+&nbsp;&nbsp; 178&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; # level is the one we want to report as the lookup fail.
+&nbsp;&nbsp; 179&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; error = nil
+&nbsp;&nbsp; 180&nbsp;
+&nbsp;&nbsp; 181&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; nesting.each do |namespace|
+&nbsp;&nbsp; 182&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; begin
+&nbsp;&nbsp; 183&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return Dependencies.load_missing_constant Inflector.constantize(namespace), const_name
+&nbsp;&nbsp; 184&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; rescue NoMethodError then raise
+&nbsp;&nbsp; 185&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; rescue NameError =&gt; e
+&nbsp;&nbsp; 186&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; error ||= e
+&nbsp;&nbsp; 187&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end
+&nbsp;&nbsp; 188&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end
+&nbsp;&nbsp; 189&nbsp;
+&nbsp;&nbsp; 190&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; # Raise the first error for this set. If this const_missing came from an
+&nbsp;&nbsp; 191&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; # earlier const_missing, this will result in the real error bubbling
+&nbsp;&nbsp; 192&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; # all the way up
+&nbsp;&nbsp; 193&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; raise error
+&nbsp;&nbsp; 194&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end</pre>
+	</li>
+	<li>
+	<p>Rails Module 下的属性引用。</p>
+
+	<p>@catalogue = CatalogueTranslator.new(Rails.application.config.catalogue_address, Rails.cache)</p>
+
+	<p>Rails.application</p>
+	</li>
+	<li>
+	<pre>
+.rvm/gems/ruby-1.9.3-p194/gems/railties-3.0.3/lib/rails.rb
+&nbsp;&nbsp; 16&nbsp; # For Ruby 1.8, this initialization sets $KCODE to &#39;u&#39; to enable the
+&nbsp;&nbsp; 17&nbsp; # multibyte safe operations. Plugin authors supporting other encodings
+&nbsp;&nbsp; 18&nbsp; # should override this behaviour and set the relevant +default_charset+
+&nbsp;&nbsp; 19&nbsp; # on ActionController::Base.
+&nbsp;&nbsp; 20&nbsp; #
+&nbsp;&nbsp; 21&nbsp; # For Ruby 1.9, UTF-8 is the default internal and external encoding.
+&nbsp;&nbsp; 22&nbsp; if RUBY_VERSION &lt; &#39;1.9&#39;
+&nbsp;&nbsp; 23&nbsp;&nbsp;&nbsp; $KCODE=&#39;u&#39;
+&nbsp;&nbsp; 24&nbsp; else
+&nbsp;&nbsp; 25&nbsp;&nbsp;&nbsp; Encoding.default_external = Encoding::UTF_8
+&nbsp;&nbsp; 26&nbsp;&nbsp;&nbsp; Encoding.default_internal = Encoding::UTF_8
+&nbsp;&nbsp; 27&nbsp; end
+&nbsp;&nbsp; 28&nbsp;
+&nbsp;&nbsp; 29&nbsp; module Rails
+&nbsp;&nbsp; 30&nbsp;&nbsp;&nbsp; autoload :Info, &#39;rails/info&#39;
+&nbsp;&nbsp; 31&nbsp;&nbsp;&nbsp; autoload :InfoController, &#39;rails/info_controller&#39;
+&nbsp;&nbsp; 32 &nbsp;
+&nbsp;&nbsp; 33&nbsp;&nbsp;&nbsp; class &lt;&lt; self
+&nbsp;&nbsp; 34&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; def application
+&nbsp;&nbsp; 35&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @@application ||= nil
+&nbsp;&nbsp; 36&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end
+&nbsp;&nbsp; 37&nbsp;
+&nbsp;&nbsp; 38&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; def application=(application)
+&nbsp;&nbsp; 39&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @@application = application
+&nbsp;&nbsp; 40&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end
+&nbsp;&nbsp; 41&nbsp;
+&nbsp;&nbsp; 42&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; # The Configuration instance used to configure the Rails environment
+&nbsp;&nbsp; 43&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; def configuration
+&nbsp;&nbsp; 44&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; application.config
+&nbsp;&nbsp; 45&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end
+&nbsp;&nbsp; 46&nbsp;
+&nbsp;&nbsp; 47&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; def initialize!
+&nbsp;&nbsp; 48&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; application.initialize!
+&nbsp;&nbsp; 49&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end
+&nbsp;&nbsp; 50&nbsp;
+&nbsp;&nbsp; 51&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; def initialized?
+&nbsp;&nbsp; 52&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @@initialized || false
+&nbsp;&nbsp; 53&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end
+&nbsp;&nbsp; 54&nbsp;
+&nbsp;&nbsp; 55&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; def initialized=(initialized)
+&nbsp;&nbsp; 56&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @@initialized ||= initialized
+&nbsp;&nbsp; 57&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end
+&nbsp;&nbsp; 58&nbsp;
+&nbsp;&nbsp; 59&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; def logger
+&nbsp;&nbsp; 60&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @@logger ||= nil
+&nbsp;&nbsp; 61&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end
+&nbsp;&nbsp; 62&nbsp;
+&nbsp;&nbsp; 63&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; def logger=(logger)
+&nbsp;&nbsp; 64&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @@logger = logger
+&nbsp;&nbsp; 65&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end
+&nbsp;&nbsp; 66&nbsp;
+&nbsp;&nbsp; 67&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; def backtrace_cleaner
+&nbsp;&nbsp; 68&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @@backtrace_cleaner ||= begin
+&nbsp;&nbsp; 69&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; # Relies on Active Support, so we have to lazy load to postpone definition until AS has been loaded
+&nbsp;&nbsp; 70&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; require &#39;rails/backtrace_cleaner&#39;
+&nbsp;&nbsp; 71&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Rails::BacktraceCleaner.new
+&nbsp;&nbsp; 72&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end
+&nbsp;&nbsp; 73&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end
+&nbsp;&nbsp; 74&nbsp;
+&nbsp;&nbsp; 75&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; def root
+&nbsp;&nbsp; 76&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; application &amp;&amp; application.config.root
+&nbsp;&nbsp; 77&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end
+&nbsp;&nbsp; 78&nbsp;
+&nbsp;&nbsp; 79&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; def env
+&nbsp;&nbsp; 80&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @_env ||= ActiveSupport::StringInquirer.new(ENV[&quot;RAILS_ENV&quot;] || ENV[&quot;RACK_ENV&quot;] || &quot;development&quot;)
+&nbsp;&nbsp; 81&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end
+&nbsp;&nbsp; 82&nbsp;
+&nbsp;&nbsp; 83&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; def env=(environment)
+&nbsp;&nbsp; 84&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @_env = ActiveSupport::StringInquirer.new(environment)
+&nbsp;&nbsp; 85&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end
+&nbsp;&nbsp; 86&nbsp;
+&nbsp;&nbsp; 87&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; def cache
+=&gt; 88&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RAILS_CACHE
+&nbsp;&nbsp; 89&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end
+&nbsp;&nbsp; 90&nbsp;
+&nbsp;&nbsp; 91&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; def version
+&nbsp;&nbsp; 92&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; VERSION::STRING
+&nbsp;&nbsp; 93&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end
+&nbsp;&nbsp; 94&nbsp;
+&nbsp;&nbsp; 95&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; def public_path
+&nbsp;&nbsp; 96&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; application &amp;&amp; application.paths.public.to_a.first
+&nbsp;&nbsp; 97&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end
+&nbsp;&nbsp; 98&nbsp;
+&nbsp;&nbsp; 99&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; def public_path=(path)
+&nbsp;&nbsp; 100&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ActiveSupport::Deprecation.warn &quot;Setting Rails.public_path= is deprecated. &quot; &lt;&lt;
+&nbsp;&nbsp; 101&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &quot;Please set paths.public = in config/application.rb instead.&quot;, caller
+&nbsp;&nbsp; 102&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end
+&nbsp;&nbsp; 103&nbsp;&nbsp;&nbsp; end
+&nbsp;&nbsp; 104&nbsp; end</pre>
+
+	<p>@catalogue = CatalogueTranslator.new(Rails.application.config.catalogue_address, Rails.cache)</p>
+
+	<p>Rails.cache</p>
+
+	<pre>
+#&lt;ActiveSupport::Cache::FileStore:0x007fa014292b18 @options={}, @cache_path=&quot;/Library/WebServer/Documents/WEHub/apps/search/tmp/cache/&quot;, @thread_local_key=:active_support_cache_file_store_local_cache_70162754868620, @middleware=ActiveSupport::Cache::Strategy::LocalCache&gt;</pre>
+	</li>
+	<li>
+	<p>Rails.application.config 其实是个方法</p>
+
+	<pre>
+.rvm/gems/ruby-1.9.3-p194/gems/railties-3.0.3/lib/rails/application/configurable.rb
+module Rails
+&nbsp; class Application
+&nbsp;&nbsp;&nbsp; module Configurable
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; def self.included(base)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; base.extend ClassMethods
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; module ClassMethods
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; def inherited(base)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; raise &quot;You cannot inherit from a Rails::Application child&quot;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; def config
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @config ||= Application::Configuration.new(self.class.find_root_with_flag(&quot;config.ru&quot;, Dir.pwd))
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end
+&nbsp;&nbsp;&nbsp; end
+&nbsp; end
+end</pre>
+	</li>
+	<li>
+	<p>方法的动态调用机制。Rails.application.config.catalogue_address</p>
+
+	<pre>
+.rvm/gems/ruby-1.9.3-p194/gems/railties-3.0.3/lib/rails/railtie/configuration.rb
+require &#39;rails/configuration&#39;
+
+module Rails
+&nbsp; class Railtie
+&nbsp;&nbsp;&nbsp; class Configuration
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; def initialize
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @@options ||= {} 以@@开头的变量是类变量，以@开头的变量是实例变量
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end
+...
+...
+&nbsp;&nbsp; 67&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end
+&nbsp;&nbsp; 68&nbsp;
+&nbsp;&nbsp; 69&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; private
+&nbsp;&nbsp; 70&nbsp;
+&nbsp;&nbsp; 71&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; def method_missing(name, *args, &amp;blk)
+=&gt; 72&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if name.to_s =~ /=$/
+&nbsp;&nbsp; 73&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @@options[$`.to_sym] = args.first
+&nbsp;&nbsp; 74&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; elsif @@options.key?(name)
+&nbsp;&nbsp; 75&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @@options[name]
+&nbsp;&nbsp; 76&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else
+&nbsp;&nbsp; 77&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; super
+&nbsp;&nbsp; 78&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end
+&nbsp;&nbsp; 79&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end
+&nbsp;&nbsp; 80&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end
+&nbsp;&nbsp; 81&nbsp;&nbsp;&nbsp; end
+&nbsp;&nbsp; 82&nbsp; end</pre>
+	</li>
+	<li>
+	<p>@feature_cache = FeatureCache.new(&quot;#{Rails.root}/tmp/cache/geoserver&quot;)</p>
+
+	<pre>
+# 号表示要调用方法</pre>
+	</li>
+</ol>
+
+<h2>gem update rails</h2>
+
+<p>2012-01-11 15:17 星期五</p>
+
+<pre>
+$ gem update rails
+Updating installed gems
+Updating factory_girl_rails
+Fetching: activesupport-3.2.11.gem (100%)
+Fetching: factory_girl-4.1.0.gem (100%)
+Fetching: factory_girl_rails-4.1.0.gem (100%)
+Fetching: activemodel-3.2.11.gem (100%)
+Fetching: sprockets-2.2.2.gem (100%)
+Fetching: actionpack-3.2.11.gem (100%)
+Successfully installed activesupport-3.2.11
+Successfully installed factory_girl-4.1.0
+Successfully installed factory_girl_rails-4.1.0
+Successfully installed activemodel-3.2.11
+Successfully installed sprockets-2.2.2
+Successfully installed actionpack-3.2.11
+Updating rails
+Fetching: activerecord-3.2.11.gem (100%)
+Fetching: activeresource-3.2.11.gem (100%)
+Fetching: actionmailer-3.2.11.gem (100%)
+Fetching: railties-3.2.11.gem (100%)
+Fetching: rails-3.2.11.gem (100%)
+Successfully installed activerecord-3.2.11
+Successfully installed activeresource-3.2.11
+Successfully installed actionmailer-3.2.11
+Successfully installed railties-3.2.11
+Successfully installed rails-3.2.11
+Updating rspec-rails
+Fetching: rspec-core-2.12.2.gem (100%)
+Fetching: rspec-expectations-2.12.1.gem (100%)
+Fetching: rspec-mocks-2.12.1.gem (100%)
+Fetching: rspec-rails-2.12.1.gem (100%)
+Successfully installed rspec-core-2.12.2
+Successfully installed rspec-expectations-2.12.1
+Successfully installed rspec-mocks-2.12.1
+Successfully installed rspec-rails-2.12.1
+Gems updated: activesupport, factory_girl, factory_girl_rails, activemodel, sprockets, actionpack, activerecord, activeresource, actionmailer, railties, rails, rspec-core, rspec-expectations, rspec-mocks, rspec-rails
+Installing ri documentation for activesupport-3.2.11...
+...
+Installing ri documentation for rspec-rails-2.12.1...
+Installing RDoc documentation for activesupport-3.2.11...
+...
+Installing RDoc documentation for rspec-rails-2.12.1...</pre>
