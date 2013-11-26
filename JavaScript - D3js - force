@@ -1,0 +1,297 @@
+<h1>JavaScript - D3js - force</h1>
+
+<p>2013-11-04 11:23 Monday</p>
+
+<p>经查，13-9-29 下午4:19 最后编辑了 directives.js 文件，所以应该是国庆节的时候由于 DGGeofencing 暂停了 d3 的研究</p>
+
+<p>12-7-11 上午3:41 创建了 vis.min.js 文件，这个时间看来早了。</p>
+
+<h2>使用 d3.layout.force 的一般步骤</h2>
+
+<ol>
+	<li>
+	<p>找个 div，准备 svg 画布，设置宽和高，以及相关元素。svg 的 id 可要可不要。</p>
+
+	<pre>
+var svg = d3.select(&quot;#vis&quot;).append(&quot;svg&quot;)
+  .attr(&quot;id&quot;, &quot;vis-svg&quot;).attr(&quot;width&quot;, svgWidth).attr(&quot;height&quot;, svgHeight);
+svg.append(&quot;rect&quot;)
+ &nbsp;.attr(&quot;width&quot;, svgWidth).attr(&quot;height&quot;, svgHeight)
+ &nbsp;.attr(&quot;fill&quot;, &quot;none&quot;).attr(&quot;pointer-events&quot;, &quot;all&quot;);
+var graph = svg.append(&quot;g&quot;).attr(&quot;class&quot;, &quot;node_group&quot;);
+</pre>
+
+	<pre>
+vis = d3.select(&#39;#d3a&#39;).append(&quot;svg&quot;).attr(&quot;width&quot;, width).attr(&quot;height&quot;, height);
+</pre>
+	</li>
+	<li>
+	<p>创造 force</p>
+
+	<pre>
+var force = d3.layout.force().charge(-20).size([svgWidth, svgHeight]).linkDistance(50);</pre>
+	</li>
+	<li>
+	<p>当数据准备好时，告诉 force 数据 nodes</p>
+
+	<pre>
+d3.json(&quot;scripts/links_and_nodes_name_hash.json&quot;, function(json) {
+  nodes_links = data = json;
+&nbsp; ...通过过滤或其他处理得到想要展示的 nodes
+&nbsp; force.nodes(nodes);
+</pre>
+	</li>
+	<li>
+	<p>用 data(), enter(), exit() 来展示 nodes，同时可以添加一些事件</p>
+
+	<pre>
+nodeCircles = graph.selectAll(&quot;circle.node&quot;).data(nodes, function(a) {
+  return a.name_hash
+});
+nodeCircles.enter().append(&quot;circle&quot;).attr(&quot;class&quot;, &quot;node&quot;)
+  .attr(&quot;cx&quot;, function(a) {
+&nbsp;&nbsp; &nbsp;return a.x
+&nbsp;&nbsp;}).attr(&quot;cy&quot;, function(a) {
+&nbsp;&nbsp; &nbsp;return a.y
+&nbsp;&nbsp;}).attr(&quot;r&quot;, function(a) {
+&nbsp;&nbsp; &nbsp;var key = a.first_name.toLowerCase() + &quot; &quot; + a.last_name.toLowerCase();
+&nbsp;&nbsp; &nbsp;return (weights[key] || 1) * 5;
+&nbsp;&nbsp;}).style(&quot;fill&quot;, function(a) {
+&nbsp;&nbsp; &nbsp;return changeColorType(colorType, a)
+&nbsp;&nbsp;});
+nodeCircles.on(&quot;mouseover&quot;, function(a, b) {
+ &nbsp;return onMouseOver(a, b, this)
+});
+nodeCircles.on(&quot;mouseout&quot;, function(a, b) {
+ &nbsp;if (nodesMapLines[a.name_hash]) return t(nodesMapLines[a.name_hash], !1)
+});
+nodeCircles.exit().remove();</pre>
+	</li>
+	<li>
+	<p>处理 links 数据并展示</p>
+
+	<pre>
+// 过滤掉无效的连线，即找不到两头结点的连线
+var links = nodes_links.links.filter(function(link) {
+&nbsp;&nbsp; &nbsp;return force.nodes().filter(function(node) {
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;return node.name_hash === link.source
+&nbsp;&nbsp; &nbsp;})[0] &amp;&amp; force.nodes().filter(function(node) {
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;return node.name_hash === link.target
+&nbsp;&nbsp; &nbsp;})[0]
+});
+linkLines = mainSvg.selectAll(&quot;line.link&quot;).data(links);
+linkLines.enter().insert(&quot;line&quot;, &quot;.node_group&quot;)
+&nbsp;&nbsp; &nbsp;.attr(&quot;class&quot;, &quot;link&quot;).attr(&quot;stroke&quot;, strokeColor).attr(&quot;stroke-opacity&quot;, 0).attr(&quot;stroke-width&quot;, strokeWidth);
+linkLines.exit().remove();</pre>
+	</li>
+	<li>
+	<p>开始用力</p>
+
+	<pre>
+force.start();
+force.on(&quot;tick&quot;, function(a) {
+&nbsp;&nbsp; &nbsp;var d = a.alpha * .1;
+&nbsp;&nbsp; &nbsp;nodeCircles.each(function(node, c) {
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;var groupPosition = styleId !== &quot;spiral&quot; ? groupPositions[node.group] : groupPositions[node.name_hash];
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;if (groupPosition) {
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;node.x += (groupPosition.x - node.x) * d;
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;node.y += (groupPosition.y - node.y) * d;
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;if (Q % 2 === 0) {
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;d3.select(this).attr(&quot;cx&quot;, node.x);
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;d3.select(this).attr(&quot;cy&quot;, node.y);
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}
+&nbsp;&nbsp; &nbsp;});
+&nbsp;&nbsp; &nbsp;if (++Q &gt; 100) return force.stop(), showLinks()
+})</pre>
+	</li>
+</ol>
+
+<h2>深层原理</h2>
+
+<p>默认情况下，一共有 3 种力在起作用：</p>
+
+<ul>
+	<li>gravity 指向图中心的拉力，与距离成正比，运动到中心时，力消失</li>
+	<li>charge 所有节点相互的斥力，保证结点与结点不会重叠</li>
+	<li>link 的牵引与排斥，保证结点与结点之间一定的距离</li>
+</ul>
+
+<ol>
+	<li>
+	<p>force.start()</p>
+
+	<ol>
+		<li>
+		<p>根据 link 计算 weight，weight 的意思就是一个节点的连线数。因此 weight 设置无效，index 在此重新标记序号。link.source 和 link.target 可以设置为 node 的序号，但实际上完全可以自己手动完成 link 到 node 的直接引用。</p>
+
+		<pre>
+&nbsp; &nbsp; &nbsp; for (i = 0; i &lt; n; ++i) {
+&nbsp; &nbsp; &nbsp; &nbsp; (o = nodes[i]).index = i;
+&nbsp; &nbsp; &nbsp; &nbsp; o.weight = 0;
+&nbsp; &nbsp; &nbsp; }
+&nbsp; &nbsp; &nbsp; for (i = 0; i &lt; m; ++i) {
+&nbsp; &nbsp; &nbsp; &nbsp; o = links[i];
+&nbsp; &nbsp; &nbsp; &nbsp; if (typeof o.source == &quot;number&quot;) o.source = nodes[o.source];
+&nbsp; &nbsp; &nbsp; &nbsp; if (typeof o.target == &quot;number&quot;) o.target = nodes[o.target];
+&nbsp; &nbsp; &nbsp; &nbsp; ++o.source.weight;
+&nbsp; &nbsp; &nbsp; &nbsp; ++o.target.weight;
+&nbsp; &nbsp; &nbsp; }</pre>
+		</li>
+		<li>
+		<p>给每个节点一个初始位置。无 x/y 的则随机梟。有 link 相连接的，初始位置设置为相同的随机位置。</p>
+
+		<pre>
+&nbsp; &nbsp; &nbsp;for (i = 0; i &lt; n; ++i) {//##这里首次设置每个结点的位置
+&nbsp; &nbsp; &nbsp; &nbsp; o = nodes[i];
+&nbsp; &nbsp; &nbsp; &nbsp; if (isNaN(o.x)) o.x = position(&quot;x&quot;, w);
+&nbsp; &nbsp; &nbsp; &nbsp; if (isNaN(o.y)) o.y = position(&quot;y&quot;, h);
+&nbsp; &nbsp; &nbsp; &nbsp; if (isNaN(o.px)) o.px = o.x;
+&nbsp; &nbsp; &nbsp; &nbsp; if (isNaN(o.py)) o.py = o.y;
+&nbsp; &nbsp; &nbsp; }</pre>
+
+		<pre>
+&nbsp; &nbsp; &nbsp; function position(dimension, size) {//## neighbors 的用意应该是凡是有 link 相连的，初始位置都要相同
+&nbsp; &nbsp; &nbsp; &nbsp; var neighbors = neighbor(i), j = -1, m = neighbors.length, x;
+&nbsp; &nbsp; &nbsp; &nbsp; while (++j &lt; m) if (!isNaN(x = neighbors[j][dimension])) return x;//##没有邻居，就随机分配位置
+&nbsp; &nbsp; &nbsp; &nbsp; return Math.random() * size;
+&nbsp; &nbsp; &nbsp; }
+</pre>
+		</li>
+		<li>
+		<p>初始化每个结点的 linkDistance, strength, charge</p>
+
+		<pre>
+&nbsp; &nbsp; &nbsp; distances = [];
+&nbsp; &nbsp; &nbsp; if (typeof linkDistance === &quot;function&quot;)
+&nbsp;         for (i = 0; i &lt; m; ++i) distances[i] = +linkDistance.call(this, links[i], i);
+&nbsp;     else
+&nbsp;         for (i = 0; i &lt; m; ++i) distances[i] = linkDistance;
+&nbsp; &nbsp; &nbsp; strengths = [];
+&nbsp; &nbsp; &nbsp; if (typeof linkStrength === &quot;function&quot;)
+&nbsp;         for (i = 0; i &lt; m; ++i) strengths[i] = +linkStrength.call(this, links[i], i);
+&nbsp;     else
+&nbsp;         for (i = 0; i &lt; m; ++i) strengths[i] = linkStrength;
+&nbsp; &nbsp; &nbsp; charges = [];
+&nbsp; &nbsp; &nbsp; if (typeof charge === &quot;function&quot;)
+&nbsp;         for (i = 0; i &lt; n; ++i) charges[i] = +charge.call(this, nodes[i], i);
+&nbsp;     else
+&nbsp;         for (i = 0; i &lt; n; ++i) charges[i] = charge;
+</pre>
+		</li>
+		<li>
+		<p>通过 force.resume() 来正式启动 force.alpha(.1)，可注意到此时给定的 alpha 初始值是 0.1。force.alpha() 中启动 d3.timer(force.tick)，接下来看</p>
+
+		<pre>
+&nbsp; &nbsp; force.resume = function() {
+&nbsp; &nbsp; &nbsp; return force.alpha(.1);
+&nbsp; &nbsp; };</pre>
+
+		<pre>
+&nbsp; &nbsp; force.alpha = function(x) {
+&nbsp; &nbsp; &nbsp; if (!arguments.length) return alpha;
+&nbsp; &nbsp; &nbsp; x = +x;
+&nbsp; &nbsp; &nbsp; if (alpha) {
+&nbsp; &nbsp; &nbsp; &nbsp; if (x &gt; 0) alpha = x; else alpha = 0;
+&nbsp; &nbsp; &nbsp; } else if (x &gt; 0) {
+&nbsp; &nbsp; &nbsp; &nbsp; event.start({
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; type: &quot;start&quot;,
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; alpha: alpha = x
+&nbsp; &nbsp; &nbsp; &nbsp; });
+&nbsp; &nbsp; &nbsp; &nbsp; d3.timer(force.tick);
+&nbsp; &nbsp; &nbsp; }
+&nbsp; &nbsp; &nbsp; return force;
+&nbsp; &nbsp; };
+</pre>
+		</li>
+	</ol>
+	</li>
+	<li>
+	<p>force.tick()</p>
+
+	<ol>
+		<li>
+		<p>可见 alpha 从默认初始值 0.1&nbsp;逐渐减小，直到小于&nbsp;0.005，之后触发 end 事件。如果所有结点仍有调整空间，一个思路是手动重新设置 alpha 的值。</p>
+
+		<pre>
+&nbsp; &nbsp; force.tick = function() {
+&nbsp; &nbsp; &nbsp; if ((alpha *= 0.99) &lt; .005) {
+&nbsp; &nbsp; &nbsp; &nbsp; event.end({
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; type: &quot;end&quot;,
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; alpha: alpha = 0
+&nbsp; &nbsp; &nbsp; &nbsp; });
+&nbsp; &nbsp; &nbsp; &nbsp; return true;
+&nbsp; &nbsp; &nbsp; }</pre>
+		</li>
+		<li>
+		<p>针对一个 link，其长度 &gt;&nbsp;linkDistance，则此 link 处于拉伸状态，产生拉近力，其长度 &lt; linkDistance，则产生排斥力。由于初始所有有 link 相连的结点位置完全相同，故第一帧 l = x*x + y*y 一定是 0，此步骤无实际效果。</p>
+
+		<pre>
+&nbsp; &nbsp; &nbsp; for (i = 0; i &lt; m; ++i) {
+&nbsp; &nbsp; &nbsp; &nbsp; o = links[i];
+&nbsp; &nbsp; &nbsp; &nbsp; s = o.source;
+&nbsp; &nbsp; &nbsp; &nbsp; t = o.target;
+&nbsp; &nbsp; &nbsp; &nbsp; x = t.x - s.x;
+&nbsp; &nbsp; &nbsp; &nbsp; y = t.y - s.y;
+&nbsp; &nbsp; &nbsp; &nbsp; if (l = x * x + y * y) {
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; l = alpha * strengths[i] * ((l = Math.sqrt(l)) - distances[i]) / l;//## 以 distance 为静止平衡点
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; x *= l;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; y *= l;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; t.x -= x * (k = s.weight / (t.weight + s.weight));//## 根据各自 links 的多少按比例分配
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; t.y -= y * k;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; s.x += x * (k = 1 - k);
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; s.y += y * k;
+&nbsp; &nbsp; &nbsp; &nbsp; }
+&nbsp; &nbsp; &nbsp; }</pre>
+		</li>
+		<li>
+		<p>计算重力 gravity 的效果。此重力位置图中心，对所有结点产生吸向中心的效果。显然这是一个天体尺度的效果。</p>
+
+		<pre>
+&nbsp; &nbsp; &nbsp; if (k = alpha * gravity) {//## 此处可理解为橡皮筋在中心，所以要向中心运动
+&nbsp; &nbsp; &nbsp; &nbsp; x = size[0] - 50;// / 2;
+&nbsp; &nbsp; &nbsp; &nbsp; y = size[1] / 2;
+&nbsp; &nbsp; &nbsp; &nbsp; i = -1;
+&nbsp; &nbsp; &nbsp; &nbsp; if (k) while (++i &lt; n) {//## 此橡皮筋的拉力可累积，所以就出现越过中心点的情况
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; o = nodes[i];//## 但是因为结点无质量，所以没有动能，导致反复拉过几次，结点就会停在中心点
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; o.x += (x - o.x) * k * (o.m || 1);//## 橡皮筋的力与距离成正比，距离中心越近，力越小
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //o.y += (y - o.y) * k;//## px/py 即是力矢量的箭尾，x/y 即是力矢量的箭头
+&nbsp; &nbsp; &nbsp; &nbsp; }
+&nbsp; &nbsp; &nbsp; }</pre>
+		</li>
+		<li>
+		<p>charge 代表了所有结点相互之前的斥力，而且与平方成反比，这样所有结点就不会相互重叠，因为太近时斥力就要起主要作用。这里用到了四叉树结构，一定程度上简化了重力的模拟并提高了效率。</p>
+
+		<pre>
+&nbsp; &nbsp; &nbsp; if (charge) {
+&nbsp; &nbsp; &nbsp; &nbsp; d3_layout_forceAccumulate(q = d3.geom.quadtree(nodes), alpha, charges);
+&nbsp; &nbsp; &nbsp; &nbsp; i = -1;
+&nbsp; &nbsp; &nbsp; &nbsp; while (++i &lt; n) {
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (!(o = nodes[i]).fixed) {
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; q.visit(repulse(o));//## 计算每个格子对当前结点的合力
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }
+&nbsp; &nbsp; &nbsp; &nbsp; }
+&nbsp; &nbsp; &nbsp; }</pre>
+		</li>
+		<li>
+		<p>体现最终的运动结果。结点由 px/py 实际运动到位置 x/y，并且 x/y 指向新的运动趋势位置。</p>
+
+		<pre>
+&nbsp; &nbsp; &nbsp; while (++i &lt; n) {
+&nbsp; &nbsp; &nbsp; &nbsp; o = nodes[i];
+&nbsp; &nbsp; &nbsp; &nbsp; if (o.fixed) {
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; o.x = o.px;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; o.y = o.py;
+&nbsp; &nbsp; &nbsp; &nbsp; } else {//## 结点由 px/py 实际运动到 x/y，预期位置 x/y 更新为上一步的 0.9 倍
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; o.x = Math.max(10, Math.min(o.x, size[0] - 10));
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; o.y = Math.max(10, Math.min(o.y, size[1] - 10));
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; o.px = Math.max(10, Math.min(o.px, size[0] - 10));
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; o.py = Math.max(10, Math.min(o.py, size[1] - 10));
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; o.x -= (o.px - (o.px = o.x)) * friction;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; o.y -= (o.py - (o.py = o.y)) * friction;
+&nbsp; &nbsp; &nbsp; &nbsp; }
+&nbsp; &nbsp; &nbsp; }</pre>
+		</li>
+	</ol>
+	</li>
+</ol>
