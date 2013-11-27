@@ -1,0 +1,98 @@
+<h1>Google Map API</h1>
+
+<p>2013-10-05 00:20 Saturday</p>
+
+<p><a href="https://developers.google.com/maps/?hl=zh-cn" target="_blank">https://developers.google.com/maps/?hl=zh-cn</a></p>
+
+<ul>
+	<li><a href="https://developers.google.com/maps/documentation/?hl=zh-cn">文档</a></li>
+	<li><a href="https://developers.google.com/maps/documentation/javascript/?hl=zh-cn" target="_blank">Maps JavaScript API</a>&nbsp;使用 JavaScript 在网页中嵌入互动式 Google 地图。-&gt;&nbsp;https://developers.google.com/maps/documentation/javascript/?hl=zh-cn</li>
+	<li><a href="https://developers.google.com/maps/documentation/javascript/reference?hl=zh-cn">API Reference</a>&nbsp;-&gt;&nbsp;https://developers.google.com/maps/documentation/javascript/reference?hl=zh-cn</li>
+</ul>
+
+<h2>Google Maps JavaScript API v3</h2>
+
+<blockquote>
+<p>V3：同时适用于桌面计算机和移动设备的地图应用解决方案</p>
+</blockquote>
+
+<p><span class="marker">注意：Google Maps JavaScript API 第 3 版现在是正式的 JavaScript API 版本</span>。根据我们的弃用政策，该 API 的第 2 版已正式弃用。我们建议您将代码迁移至这一最近更新的功能更强的版本！</p>
+
+<p>Google Maps JavaScript API 可让您在自己的网页中嵌入 Google 地图。<span class="marker">此 API 的第 3 版是专为移动设备设计的，速度更快，更适用；它同时也适用于传统的桌面浏览器应用</span>。</p>
+
+<p>该 API 提供了大量实用工具用于处理地图（正如&nbsp;<a href="http://maps.google.com/">http://maps.google.com</a>&nbsp;网页上的地图），并通过各种服务向地图添加内容，从而能让您在自己的网站上创建功能全面的地图应用。</p>
+
+<p>JavaScript Maps API V3 是一项免费的服务，在用户可免费访问的任何网站上均可使用。有关详情，请参阅<a href="https://developers.google.com/maps/terms?hl=zh-cn">使用条款</a></p>
+
+<h2>获取 API 密钥</h2>
+
+<p>所有的 Maps API 应用*都应使用 API 密钥加载 Maps API。使用 API 密钥可让您监控应用的 Maps API 使用情况，并确保 Google 能够在需要时与您联系讨论您的应用。如果您应用的 Maps API 使用次数超出<a href="https://developers.google.com/maps/documentation/javascript/usage?hl=zh-cn#usage_limits">使用限制</a>，就必须使用 API 密钥加载 Maps API 来购买额外配额。</p>
+
+<p>*Google Maps API for Business&nbsp;开发者不得在其请求中加入密钥。有关 Business 专用说明，请参考<a href="https://developers.google.com/maps/documentation/business/clientside?hl=zh-cn#MapsJS">加载 Google Maps JavaScript API</a>。</p>
+
+<p>要创建 API 密钥，请执行以下操作：</p>
+
+<ol>
+	<li>访问 API 控制台（网址为&nbsp;<a href="https://code.google.com/apis/console">https://code.google.com/apis/console</a>）并使用您的 Google 帐户登录。</li>
+	<li>点击左侧菜单中的服务链接。</li>
+	<li>激活&nbsp;Google Maps API v3&nbsp;服务。</li>
+	<li>点击左侧菜单中的&nbsp;API 访问链接。您可以从&nbsp;API 访问页上的简单 API 访问部分获取 API 密钥。Maps API 应用会使用适用于浏览器应用的密钥。
+	<p><img src="https://developers.google.com/maps/documentation/javascript/images/api_console_key.jpg" /></p>
+	</li>
+</ol>
+
+<p>默认情况下，密钥可在任何网站上使用。强烈建议您将自己的密钥限制为在您所管理的域中使用，以防止未授权的网站使用该密钥。针对您的密钥点击修改允许的引用者...链接，即可指定要允许哪些域使用该 API 密钥。</p>
+
+<h2>Hello, World</h2>
+
+<p>要开始了解 Google Maps API，最简单的方法就是查看简单的示例。以下网页显示了一张以澳大利亚新南威尔士的悉尼为中心的地图：</p>
+
+<pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&nbsp; &lt;head&gt;
+&nbsp; &nbsp; &lt;meta name=&quot;viewport&quot; content=&quot;initial-scale=1.0, user-scalable=no&quot; /&gt;
+&nbsp; &nbsp; &lt;style type=&quot;text/css&quot;&gt;
+&nbsp; &nbsp; &nbsp; html { height: 100% }
+&nbsp; &nbsp; &nbsp; body { height: 100%; margin: 0; padding: 0 }
+&nbsp; &nbsp; &nbsp; #map_canvas { height: 100% }
+&nbsp; &nbsp; &lt;/style&gt;
+&nbsp; &nbsp; &lt;script type=&quot;text/javascript&quot;
+&nbsp; &nbsp; &nbsp; src=&quot;http://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&amp;sensor=SET_TO_TRUE_OR_FALSE&quot;&gt;
+&nbsp; &nbsp; &lt;/script&gt;
+&nbsp; &nbsp; &lt;script type=&quot;text/javascript&quot;&gt;
+&nbsp; &nbsp; &nbsp; function initialize() {
+&nbsp; &nbsp; &nbsp; &nbsp; var mapOptions = {
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; center: new google.maps.LatLng(-34.397, 150.644),
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; zoom: 8,
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; mapTypeId: google.maps.MapTypeId.ROADMAP
+&nbsp; &nbsp; &nbsp; &nbsp; };
+&nbsp; &nbsp; &nbsp; &nbsp; var map = new google.maps.Map(document.getElementById(&quot;map_canvas&quot;),
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; mapOptions);
+&nbsp; &nbsp; &nbsp; }
+&nbsp; &nbsp; &lt;/script&gt;
+&nbsp; &lt;/head&gt;
+&nbsp; &lt;body onload=&quot;initialize()&quot;&gt;
+&nbsp; &nbsp; &lt;div id=&quot;map_canvas&quot; style=&quot;width:100%; height:100%&quot;&gt;&lt;/div&gt;
+&nbsp; &lt;/body&gt;
+&lt;/html&gt;</pre>
+
+<h2>路线服务</h2>
+
+<p><a href="https://developers.google.com/maps/documentation/javascript/directions?hl=zh-cn" target="_blank">https://developers.google.com/maps/documentation/javascript/directions?hl=zh-cn</a></p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
