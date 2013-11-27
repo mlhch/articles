@@ -1,0 +1,889 @@
+<h1>Ruby</h1>
+
+<p>2012-10-28 10:37:39 +08:00 Sunday</p>
+
+<p><a href="http://www.ruby-lang.org/en/" target="_blank">http://www.ruby-lang.org/en/</a>&nbsp;|&nbsp;<a href="http://www.ruby-lang.org/zh_TW/" target="_blank">http://www.ruby-lang.org/zh_TW/</a></p>
+
+<h3>C API 还得去日文官方网站去找</h3>
+
+<p>2013-11-04 02:09 Monday</p>
+
+<ul>
+	<li><a href="http://docs.ruby-lang.org/" target="_blank">http://docs.ruby-lang.org/</a></li>
+	<li><a href="http://docs.ruby-lang.org/ja/2.0.0/doc/index.html">2.0.0</a>&nbsp;-&gt;&nbsp;http://docs.ruby-lang.org/ja/2.0.0/doc/index.html</li>
+	<li><a href="http://docs.ruby-lang.org/ja/2.0.0/function/index.html">All C API</a>&nbsp;-&gt;&nbsp;<a href="http://docs.ruby-lang.org/ja/2.0.0/function/index.html" target="_blank">http://docs.ruby-lang.org/ja/2.0.0/function/index.html</a></li>
+</ul>
+
+<h3>ruby 2.0.0</h3>
+
+<p>2013-08-31 01:23 Saturday</p>
+
+<p>https://www.ruby-lang.org/en/downloads/</p>
+
+<p>Here you can get the latest Ruby distributions in your favorite flavor. The current stable version is 2.0.0-p247.</p>
+
+<p>试图启动 tracker-web 项目，报如下警告</p>
+
+<pre>
+Your Ruby version is 1.9.3, but your Gemfile specified 2.0.0</pre>
+
+<p>看来需要更新 ruby 了。记得修改 $PATH 中的 ruby 路径。</p>
+
+<pre>
+$ ruby -v
+ruby 1.9.3p286 (2012-10-12 revision 37165) [x86_64-darwin12.2.0]
+$ which ruby
+/usr/local/bin/ruby
+$ ll /usr/local/bin/ruby 
+lrwxr-xr-x  1 mlhch  admin  34 11  6  2012 /usr/local/bin/ruby -&gt; ../Cellar/ruby/1.9.3-p286/bin/ruby</pre>
+
+<pre>
+$ brew upgrade ruby
+==&gt; Upgrading 1 outdated package, with result:
+ruby 2.0.0-p247
+==&gt; Upgrading ruby
+==&gt; Downloading http://ftp.ruby-lang.org/pub/ruby/2.0/ruby-2.0.0-p247.tar.bz2
+######################################################################## 100.0%
+==&gt; ./configure --prefix=/usr/local/Cellar/ruby/2.0.0-p247 --enable-shared --with-out-ext=tk --disable-install-doc --with-openssl-dir=/usr
+==&gt; make
+==&gt; make install
+==&gt; Caveats
+NOTE: By default, gem installed binaries will be placed into:
+  /usr/local/opt/ruby/bin
+
+You may want to add this to your PATH.
+==&gt; Summary
+🍺  /usr/local/Cellar/ruby/2.0.0-p247: 878 files, 19M, built in 3.3 minutes</pre>
+
+<h3>ruby 之相关命令</h3>
+
+<p><code>brew install ruby</code> 之后，可以看到相关的 gem/rake/rdoc/irb/erb 等也一起存在了。在 ubuntu 上安装好 ruby 后，这些命令也存在，不过不像这样集中在一起。</p>
+
+<pre>
+$ ll /usr/local/Cellar/ruby/1.9.3-p286/bin/
+-r-xr-xr-x&nbsp;&nbsp; 1 mlhch&nbsp; admin&nbsp; 4422 11&nbsp; 6 12:21 erb
+-r-xr-xr-x&nbsp;&nbsp; 1 mlhch&nbsp; admin&nbsp;&nbsp; 571 11&nbsp; 6 12:21 gem
+-r-xr-xr-x&nbsp;&nbsp; 1 mlhch&nbsp; admin&nbsp;&nbsp; 343 11&nbsp; 6 12:21 irb
+-r-xr-xr-x&nbsp;&nbsp; 1 mlhch&nbsp; admin&nbsp; 1256 11&nbsp; 6 12:21 rake
+-r-xr-xr-x&nbsp;&nbsp; 1 mlhch&nbsp; admin&nbsp;&nbsp; 813 11&nbsp; 6 12:21 rdoc
+-r-xr-xr-x&nbsp;&nbsp; 1 mlhch&nbsp; admin&nbsp;&nbsp; 213 11&nbsp; 6 12:21 ri
+-r-xr-xr-x&nbsp;&nbsp; 1 mlhch&nbsp; admin&nbsp; 8960 11&nbsp; 6 12:18 ruby
+-r-xr-xr-x&nbsp;&nbsp; 1 mlhch&nbsp; admin&nbsp;&nbsp; 323 11&nbsp; 6 12:21 testrb</pre>
+
+<p>经确认，刚安装好的 ruby-2.0.0-p247 中的 gem 已经是最新的 2.0.7 版本</p>
+
+<pre>
+$ which gem
+/usr/local/bin/gem
+$ ll /usr/local/bin/gem
+lrwxr-xr-x &nbsp;1 mlhch &nbsp;admin &nbsp;33 &nbsp;8 31 05:28 /usr/local/bin/gem -&gt; ../Cellar/ruby/2.0.0-p247/bin/gem
+$ gem -v
+2.0.7
+</pre>
+
+<h2>Install Ruby on Ubuntu</h2>
+
+<p>2013-05-29 09:59 Wednsday 要在 pycsw 上部署 chisp</p>
+
+<pre>
+$ sudo apt-get install ruby
+Reading package lists... Done
+Building dependency tree &nbsp; &nbsp; &nbsp;&nbsp;
+Reading state information... Done
+The following extra packages will be installed:
+&nbsp; libreadline5 libruby1.8 <span class="marker">ruby1.8</span>
+Suggested packages:
+&nbsp; ri ruby-dev ruby1.8-examples ri1.8
+The following NEW packages will be installed:
+&nbsp; libreadline5 libruby1.8 ruby ruby1.8
+0 upgraded, 4 newly installed, 0 to remove and 88 not upgraded.
+Need to get 1,964 kB of archives.
+After this operation, 7,118 kB of additional disk space will be used.
+Do you want to continue [Y/n]? Y
+Get:1 http://us-east-1.ec2.archive.ubuntu.com/ubuntu/ precise/main libreadline5 amd64 5.2-11 [128 kB]
+Get:2 http://us-east-1.ec2.archive.ubuntu.com/ubuntu/ precise-updates/main libruby1.8 amd64 1.8.7.352-2ubuntu1.2 [1,797 kB]
+Get:3 http://us-east-1.ec2.archive.ubuntu.com/ubuntu/ precise-updates/main ruby1.8 amd64 1.8.7.352-2ubuntu1.2 [34.0 kB]
+Get:4 http://us-east-1.ec2.archive.ubuntu.com/ubuntu/ precise/main ruby all 4.8 [5,054 B]
+Fetched 1,964 kB in 0s (4,354 kB/s)
+Selecting previously unselected package libreadline5.
+(Reading database ... 55754 files and directories currently installed.)
+Unpacking libreadline5 (from .../libreadline5_5.2-11_amd64.deb) ...
+Selecting previously unselected package libruby1.8.
+Unpacking libruby1.8 (from .../libruby1.8_1.8.7.352-2ubuntu1.2_amd64.deb) ...
+Selecting previously unselected package ruby1.8.
+Unpacking ruby1.8 (from .../ruby1.8_1.8.7.352-2ubuntu1.2_amd64.deb) ...
+Selecting previously unselected package ruby.
+Unpacking ruby (from .../apt/archives/ruby_4.8_all.deb) ...
+Processing triggers for man-db ...
+Setting up libreadline5 (5.2-11) ...
+Setting up libruby1.8 (1.8.7.352-2ubuntu1.2) ...
+Setting up ruby1.8 (1.8.7.352-2ubuntu1.2) ...
+update-alternatives: using /usr/bin/ruby1.8 to provide /usr/bin/ruby (ruby) in auto mode.
+Setting up ruby (4.8) ...
+Processing triggers for libc-bin ...
+ldconfig deferred processing now taking place</pre>
+
+<p>ruby-dev 也需要安装，可以解决&nbsp;no such file to load -- mkmf (LoadError) 这样的问题</p>
+
+<pre>
+$ sudo apt-get install ruby-dev
+Reading package lists... Done
+Building dependency tree &nbsp; &nbsp; &nbsp;&nbsp;
+Reading state information... Done
+The following extra packages will be installed:
+&nbsp; ruby1.8-dev
+The following NEW packages will be installed:
+&nbsp; ruby-dev ruby1.8-dev
+0 upgraded, 2 newly installed, 0 to remove and 88 not upgraded.
+Need to get 636 kB of archives.
+After this operation, 2,347 kB of additional disk space will be used.
+Do you want to continue [Y/n]? Y
+Get:1 http://us-east-1.ec2.archive.ubuntu.com/ubuntu/ precise-updates/main ruby1.8-dev amd64 1.8.7.352-2ubuntu1.2 [632 kB]
+Get:2 http://us-east-1.ec2.archive.ubuntu.com/ubuntu/ precise/main ruby-dev all 4.8 [4,572 B]
+Fetched 636 kB in 0s (7,395 kB/s)
+Selecting previously unselected package ruby1.8-dev.
+(Reading database ... 56486 files and directories currently installed.)
+Unpacking ruby1.8-dev (from .../ruby1.8-dev_1.8.7.352-2ubuntu1.2_amd64.deb) ...
+Selecting previously unselected package ruby-dev.
+Unpacking ruby-dev (from .../archives/ruby-dev_4.8_all.deb) ...
+Setting up ruby1.8-dev (1.8.7.352-2ubuntu1.2) ...
+Setting up ruby-dev (4.8) ...
+</pre>
+
+<h2>用 brew 安装 ruby 新版本</h2>
+
+<pre>
+$ ll /usr/bin/ru
+ruby&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; runocc.d&nbsp; ruptime&nbsp;&nbsp;
+$ ll /usr/bin/ruby
+lrwxr-xr-x&nbsp; 1 root&nbsp; wheel&nbsp; 76&nbsp; 1&nbsp; 3&nbsp; 2001 /usr/bin/ruby -&gt; ../../System/Library/Frameworks/Ruby.framework/Versions/Current/usr/bin/ruby</pre>
+
+<pre>
+$ ruby -v
+ruby 1.8.7 (2012-02-08 patchlevel 358) [universal-darwin12.0]</pre>
+
+<pre>
+$ brew install ruby
+==&gt; Installing ruby dependency: readline
+==&gt; Downloading http://ftpmirror.gnu.org/readline/readline-6.2.tar.gz
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0.0%
+curl: (7) couldn&#39;t connect to host
+Trying a mirror...
+==&gt; Downloading http://ftp.gnu.org/gnu/readline/readline-6.2.tar.gz
+######################################################################## 100.0%
+==&gt; Patching
+patching file callback.c
+patching file input.c
+patching file patchlevel
+patching file support/shobj-conf
+patching file vi_mode.c
+==&gt; ./configure --prefix=/usr/local/Cellar/readline/6.2.4 --mandir=/usr/local/Ce
+==&gt; make install
+==&gt; Caveats
+This formula is keg-only: so it was not symlinked into /usr/local.
+
+OS X provides the BSD libedit library, which shadows libreadline.
+In order to prevent conflicts when programs look for libreadline we are
+defaulting this GNU Readline installation to keg-only.
+
+Generally there are no consequences of this for you. If you build your
+own software and it requires this formula, you&#39;ll need to add to your
+build variables:
+
+&nbsp;&nbsp;&nbsp; LDFLAGS:&nbsp; -L/usr/local/opt/readline/lib
+&nbsp;&nbsp;&nbsp; CPPFLAGS: -I/usr/local/opt/readline/include
+
+==&gt; Summary
+/usr/local/Cellar/readline/6.2.4: 30 files, 1.6M, built in 3.8 minutes
+==&gt; Installing ruby dependency: gdbm
+==&gt; Downloading http://ftpmirror.gnu.org/gdbm/gdbm-1.10.tar.gz
+######################################################################## 100.0%
+==&gt; ./configure --prefix=/usr/local/Cellar/gdbm/1.10 --mandir=/usr/local/Cellar/
+==&gt; make install
+/usr/local/Cellar/gdbm/1.10: 10 files, 232K, built in 19 seconds
+==&gt; Installing ruby dependency: libyaml
+==&gt; Downloading http://pyyaml.org/download/libyaml/yaml-0.1.4.tar.gz
+######################################################################## 100.0%
+==&gt; ./configure --prefix=/usr/local/Cellar/libyaml/0.1.4
+==&gt; make install
+/usr/local/Cellar/libyaml/0.1.4: 7 files, 336K, built in 32 seconds
+==&gt; Installing ruby
+==&gt; Downloading http://ftp.ruby-lang.org/pub/ruby/1.9/ruby-1.9.3-p286.tar.gz
+######################################################################## 100.0%
+==&gt; Patching
+patching file missing/setproctitle.c
+==&gt; ./configure --prefix=/usr/local/Cellar/ruby/1.9.3-p286 --enable-shared --dis
+==&gt; make
+==&gt; make install
+==&gt; Caveats
+NOTE: By default, gem installed binaries will be placed into:
+&nbsp; /usr/local/Cellar/ruby/1.9.3-p286/bin
+
+You may want to add this to your PATH.
+==&gt; Summary
+/usr/local/Cellar/ruby/1.9.3-p286: 14141 files, 70M, built in 4.8 minutes</pre>
+
+<pre>
+$ ruby -v
+ruby 1.8.7 (2012-02-08 patchlevel 358) [universal-darwin12.0]</pre>
+
+<h2>ruby 常用语</h2>
+
+<ul>
+	<li>
+	<p>__FILE__ 代表的是当前文件的相对路径，比如 ./current_file.rb</p>
+	</li>
+	<li>
+	<p>$:.unshift -- http://stackoverflow.com/questions/5155995/what-is-this-doing-unshift-file-dirname-file</p>
+
+	<p>$: is a magic variable and more clearly referenced by $LOAD_PATH.</p>
+	</li>
+	<li>
+	<p>%W %Q 相当于双引号, &nbsp; %w %q 相当于单引号.</p>
+	</li>
+	<li>
+	<p>This is an alternative for double-quoted strings, when you have more quote characters in a string.Instead of putting backslashes in front of them, you can easily write:</p>
+	&gt;&gt; %Q(Joe said: &quot;Frank said: &quot;#{what_frank_said}&quot;&quot;)<br />
+	=&gt; &quot;Joe said: &quot;Frank said: &quot;Hello!&quot;&quot;&quot;
+	<p>The parenthesis &ldquo;(&hellip;)&rdquo; can be replaced with any other non-alphanumeric characters and non-printing characters (pairs), so the following commands are equivalent:<br />
+	&gt;&gt; %Q!Joe said: &quot;Frank said: &quot;#{what_frank_said}&quot;&quot;!<br />
+	&gt;&gt; %Q[Joe said: &quot;Frank said: &quot;#{what_frank_said}&quot;&quot;]<br />
+	&gt;&gt; %Q+Joe said: &quot;Frank said: &quot;#{what_frank_said}&quot;&quot;+</p>
+
+	<p>You can use also:<br />
+	&gt;&gt; %/Joe said: &quot;Frank said: &quot;#{what_frank_said}&quot;&quot;/<br />
+	=&gt; &quot;Joe said: &quot;Frank said: &quot;Hello!&quot;&quot;&quot;</p>
+	</li>
+	<li>
+	<p>%q</p>
+
+	<p>Used for single-quoted strings.The syntax is similar to&nbsp;<a href="https://www.zxproxy.com/browse.php?u=c00ed513549c5fc6Oi8vc2ltcGxlcm9yLndvcmRwcmVzcy5jb20vMjAwOS8wMy8xNS9xLXEtdy13LXgtci1zLw%3D%3D&amp;b=6&amp;f=norefer">%Q</a>, but single-quoted strings are not subject to expression substitution or escape sequences.<br />
+	&gt;&gt; %q(Joe said: &#39;Frank said: &#39;#{what_frank_said} &#39; &#39;)<br />
+	=&gt; &quot;Joe said: &#39;Frank said: &#39;\#{what_frank_said} &#39; &#39;&quot;</p>
+	</li>
+	<li>
+	<p>%W</p>
+
+	<p>Used for double-quoted array elements.The syntax is similar to&nbsp;<a href="https://www.zxproxy.com/browse.php?u=c00ed513549c5fc6Oi8vc2ltcGxlcm9yLndvcmRwcmVzcy5jb20vMjAwOS8wMy8xNS9xLXEtdy13LXgtci1zLw%3D%3D&amp;b=6&amp;f=norefer">%Q</a><br />
+	&gt;&gt; %W(#{foo} Bar Bar\ with\ space)<br />
+	=&gt; [&quot;Foo&quot;, &quot;Bar&quot;, &quot;Bar with space&quot;]</p>
+	</li>
+	<li>
+	<p>%w</p>
+
+	<p>Used for single-quoted array elements.The syntax is similar to&nbsp;<a href="https://www.zxproxy.com/browse.php?u=c00ed513549c5fc6Oi8vc2ltcGxlcm9yLndvcmRwcmVzcy5jb20vMjAwOS8wMy8xNS9xLXEtdy13LXgtci1zLw%3D%3D&amp;b=6&amp;f=norefer">%Q</a>, but single-quoted elements are not subject to expression substitution or escape sequences.<br />
+	&gt;&gt; %w(#{foo} Bar Bar\ with\ space)<br />
+	=&gt; [&quot;\#{foo}&quot;, &quot;Bar&quot;, &quot;Bar with space&quot;]</p>
+	</li>
+	<li>
+	<p>%x</p>
+
+	<p>Uses the&nbsp;`&nbsp;method and returns the standard output of running the command in a subshell.The syntax is similar to&nbsp;<a href="https://www.zxproxy.com/browse.php?u=c00ed513549c5fc6Oi8vc2ltcGxlcm9yLndvcmRwcmVzcy5jb20vMjAwOS8wMy8xNS9xLXEtdy13LXgtci1zLw%3D%3D&amp;b=6&amp;f=norefer">%Q</a>.<br />
+	&gt;&gt; %x(echo foo:#{foo})<br />
+	=&gt; &quot;foo:Foo\n&quot;</p>
+	</li>
+	<li>
+	<p>%r</p>
+
+	<p>Used for regular expressions.The syntax is similar to&nbsp;<a href="https://www.zxproxy.com/browse.php?u=c00ed513549c5fc6Oi8vc2ltcGxlcm9yLndvcmRwcmVzcy5jb20vMjAwOS8wMy8xNS9xLXEtdy13LXgtci1zLw%3D%3D&amp;b=6&amp;f=norefer">%Q</a>.<br />
+	&gt;&gt; %r(/home/#{foo})<br />
+	=&gt; &quot;/\\/home\\/Foo/&quot;</p>
+	</li>
+	<li>
+	<p>%s</p>
+
+	<p>Used for symbols.It&rsquo;s not subject to expression substitution or escape sequences.<br />
+	&gt;&gt; %s(foo)<br />
+	=&gt; :foo<br />
+	&gt;&gt; %s(foo bar)<br />
+	=&gt; :&quot;foo bar&quot;<br />
+	&gt;&gt; %s(#{foo} bar)<br />
+	=&gt; :&quot;\#{foo} bar&quot;</p>
+	</li>
+	<li>
+	<p>一般来说*用于把一个array展开：&nbsp;</p>
+
+	<pre>
+a, *b = [1,2,3]  ＃a = 1, b = [2,3]  </pre>
+	</li>
+</ul>
+
+<h2>Ruby 语法积累</h2>
+
+<p>http://www.ruby-doc.org/docs/ruby-doc-bundle/</p>
+
+<p>2012-12-06 18:48</p>
+
+<ol>
+	<li>
+	<p>ARGV</p>
+
+	<p>http://www.rubycc.com/column/ruby1.9.2/doc/spec=2frubycmd.html,&nbsp;http://www.kuqin.com/rubycndocument/man/kidou.html</p>
+
+	<p>请使用如下命令行启动Ruby解释器.</p>
+
+	<pre>
+ruby [ option ...] [ -- ] [ programfile ] [ argument ...]
+</pre>
+
+	<p>这里的&quot;option&quot;指下文将要提到的<a href="http://www.kuqin.com/rubycndocument/man/kidou.html#a.a5.b3.a5.de.a5.f3.a5.c9.a5.e9.a5.a4.a5.f3.a5.aa.a5.d7.a5.b7.a5.e7.a5.f3">命令行选项</a>中的一个。&quot;--&quot;则显式地表明选项字符串到此结束。&quot;programfile&quot;是装载Ruby脚本的文件。若省略不写或者写成&quot;-&quot;时,Ruby会把标准输入当做Ruby脚本进行处理。</p>
+
+	<p>programfile若以&ldquo;#!&rdquo;开始，则进行特殊的处理。详细情况请参考下文的<a href="http://www.kuqin.com/rubycndocument/man/kidou.html#a.a5.a4.a5.f3.a5.bf.a5.d7.a5.ea.a5.bf.b9.d4.a4.ce.b2.f2.bc.e1">关于解释器行</a>。</p>
+
+	<p>argument中的字符串将变成内部常数<a href="http://www.kuqin.com/rubycndocument/man/stdlib_constant.html#ARGV">ARGV</a>的初始值。在有的环境中(Win32)，标准shell不会展开通配符，这时Ruby解释器将自行展开通配符然后赋值给<a href="http://www.kuqin.com/rubycndocument/man/stdlib_constant.html#ARGV">ARGV</a>。此时，可使用的通配符有&ldquo;*&rdquo;、&ldquo;?&rdquo;、&ldquo;[]&rdquo;和&ldquo;**/&rdquo;(与<a href="http://www.kuqin.com/rubycndocument/man/built-in-class/class_object_dir.html#Dir.2eglob">Dir.glob</a>不同，这里不能使用&ldquo;{..}&rdquo;)。在Win32环境中，若不想展开通配符的话，请使用单引号(&#39;)将参数括起来。</p>
+	</li>
+	<li>
+	<p>Array.first</p>
+
+	<p>http://www.ruby-doc.org/core-1.9.3/Array.html#method-i-first</p>
+	</li>
+	<li>
+	<p>gem &#39;unicorn&#39;, version</p>
+
+	<p>http://docs.rubygems.org/read/chapter/4</p>
+
+	<p>2012-11-14 14:20 昨天晚上从一篇文章&ldquo;<a href="http://meladet.iteye.com/blog/421903" target="_blank">Rails源码学习</a>&rdquo;中受到启发</p>
+
+	<p>终于明白此处&nbsp;gem 是通过 require &#39;rubygems&#39; 而获得的函数，因此答案就在&nbsp;/usr/local/Cellar/ruby/1.9.3-p286/lib/ruby/1.9.1/rubygems.rb 中</p>
+
+	<pre>
+module Kernel
+
+&nbsp; remove_method :gem if &#39;method&#39; == defined? gem # from gem_prelude.rb on 1.9
+
+&nbsp; ##
+&nbsp; # Use Kernel#gem to activate a specific version of +gem_name+.
+&nbsp; #
+&nbsp; # +requirements+ is a list of version requirements that the
+&nbsp; # specified gem must match, most commonly &quot;= example.version.number&quot;.&nbsp; See
+&nbsp; # Gem::Requirement for how to specify a version requirement.
+&nbsp; #
+&nbsp; # If you will be activating the latest version of a gem, there is no need to
+&nbsp; # call Kernel#gem, Kernel#require will do the right thing for you.
+&nbsp; #
+&nbsp; # Kernel#gem returns true if the gem was activated, otherwise false.&nbsp; If the
+&nbsp; # gem could not be found, didn&#39;t match the version requirements, or a
+&nbsp; # different version was already activated, an exception will be raised.
+&nbsp; #
+&nbsp; # Kernel#gem should be called *before* any require statements (otherwise
+&nbsp; # RubyGems may load a conflicting library version).
+&nbsp; #
+&nbsp; # In older RubyGems versions, the environment variable GEM_SKIP could be
+&nbsp; # used to skip activation of specified gems, for example to test out changes
+&nbsp; # that haven&#39;t been installed yet.&nbsp; Now RubyGems defers to -I and the
+&nbsp; # RUBYLIB environment variable to skip activation of a gem.
+&nbsp; #
+&nbsp; # Example:
+&nbsp; #
+&nbsp; #&nbsp;&nbsp; GEM_SKIP=libA:libB ruby -I../libA -I../libB ./mycode.rb
+
+&nbsp; def gem(gem_name, *requirements) # :doc:
+&nbsp;&nbsp;&nbsp; skip_list = (ENV[&#39;GEM_SKIP&#39;] || &quot;&quot;).split(/:/)
+&nbsp;&nbsp;&nbsp; raise Gem::LoadError, &quot;skipping #{gem_name}&quot; if skip_list.include? gem_name
+&nbsp;&nbsp;&nbsp; spec = Gem::Dependency.new(gem_name, *requirements).to_spec
+&nbsp;&nbsp;&nbsp; spec.activate if spec
+&nbsp; end
+
+&nbsp; private :gem
+
+end</pre>
+	</li>
+	<li>
+	<p>＝～ 是模式匹配运算符，对应的是 !~</p>
+	</li>
+	<li>
+	<p>module Gem ... end，定义模块 module。http://www.kuqin.com/rubycndocument/man/syntax_defcm.html#a.a5.e2.a5.b8.a5.e5.a1.bc.a5.eb.c4.ea.b5.c1</p>
+	</li>
+	<li>
+	<p>defined? 表达式，http://www.kuqin.com/rubycndocument/man/syntax_defcm.html#defined.3f</p>
+	</li>
+	<li>
+	<p>yield。http://www.kuqin.com/rubycndocument/man/syntax_callmethod.html#yield</p>
+	</li>
+	<li>
+	<p>require。http://www.kuqin.com/rubycndocument/man/stdlib_function.html</p>
+
+	<p>require &#39;rubygems&#39; -&gt;&nbsp;/usr/local/Cellar/ruby/1.9.3-p286/lib/ruby/1.9.1/rubygems.rb<br />
+	require &#39;rubygems/defaults&#39; -&gt;&nbsp;/usr/local/Cellar/ruby/1.9.3-p286/lib/ruby/1.9.1/rubygems/defaults.rb<br />
+	require &#39;rbconfig&#39;&nbsp;-&gt;&nbsp;/usr/local/Cellar/ruby/1.9.3-p286/lib/ruby/1.9.1/x86_64-darwin12.2.0/rbconfig.rb<br />
+	require &quot;rubygems/deprecate&quot; -&gt; /usr/local/Cellar/ruby/1.9.3-p286/lib/ruby/1.9.1/rubygems/deprecate.rb</p>
+	</li>
+	<li>
+	<p>类定义。http://www.kuqin.com/rubycndocument/man/syntax_defcm.html</p>
+	</li>
+	<li>
+	<p>双冒号的用法。双冒号开关表示在全局范围内。</p>
+	</li>
+	<li>
+	<p>Class 的继承路线如下，Module,&nbsp;Object, BasicObject 依次类推，它们的 class 都是 Class，但 Kernel 则不同，它没有继承任何类，因为它的 class&nbsp;是 Module。</p>
+
+	<pre>
+&gt; puts Class.ancestors
+Class
+Module
+Object
+Kernel
+BasicObject
+=&gt; nil
+</pre>
+
+	<pre>
+&gt; puts Kernel.ancestors
+Kernel
+=&gt; nil</pre>
+
+	<pre>
+&gt; puts BasicObject.ancestors
+BasicObject
+=&gt; nil</pre>
+
+	<p>然而如下的测试却发现 Kernel 并不在继承链中，因此 Object 实际可能就是混入了&nbsp;Kernel，即 Object 的类定义中应该有 include Kernel 这样的语句。因为 Object 混入了 Kernel 这个模块，又由于 Object 是 Ruby 中所有类的父类，这样一来，Kernel 中内建的核心函数就可以被 Ruby 中所有的类和对象访问。</p>
+
+	<pre>
+&gt; Class.superclass
+=&gt; Module
+&gt; Module.superclass
+=&gt; Object
+&gt; Object.superclass
+=&gt; BasicObject
+&gt; BasicObject.superclass
+=&gt; nil
+</pre>
+
+	<p>而实际上，使用 included_methods 方法即可</p>
+
+	<pre>
+&gt; Class.included_modules
+=&gt; [Kernel]
+</pre>
+	</li>
+	<li>
+	<p>使用 public_methods 查看 Class 或 Module 的公有方法。</p>
+
+	<pre>
+&gt; BasicObject.public_methods
+=&gt; [:allocate, :new, :superclass, :freeze, :===, :==, :&lt;=&gt;, :&lt;, :&lt;=, :&gt;, :&gt;=, :to_s, :included_modules, :include?, :name, :ancestors, :instance_methods, :public_instance_methods, :protected_instance_methods, :private_instance_methods, :constants, :const_get, :const_set, :const_defined?, :const_missing, :class_variables, :remove_class_variable, :class_variable_get, :class_variable_set, :class_variable_defined?, :public_constant, :private_constant, :module_exec, :class_exec, :module_eval, :class_eval, :method_defined?, :public_method_defined?, :private_method_defined?, :protected_method_defined?, :public_class_method, :private_class_method, :autoload, :autoload?, :instance_method, :public_instance_method, :nil?, :=~, :!~, :eql?, :hash, :class, :singleton_class, :clone, :dup, :initialize_dup, :initialize_clone, :taint, :tainted?, :untaint, :untrust, :untrusted?, :trust, :frozen?, :inspect, :methods, :singleton_methods, :protected_methods, :private_methods, :public_methods, :instance_variables, :instance_variable_get, :instance_variable_set, :instance_variable_defined?, :instance_of?, :kind_of?, :is_a?, :tap, :send, :public_send, :respond_to?, :respond_to_missing?, :extend, :display, :method, :public_method, :define_singleton_method, :object_id, :to_enum, :enum_for, :equal?, :!, :!=, :instance_eval, :instance_exec, :__send__, :__id__]</pre>
+
+	<pre>
+&gt; Kernel.public_methods
+=&gt; [:sprintf, :format, :Integer, :Float, :String, :Array, :warn, :raise, :fail, :global_variables, :__method__, :__callee__, :eval, :local_variables, :iterator?, :block_given?, :catch, :throw, :loop, :caller, :trace_var, :untrace_var, :at_exit, :syscall, :open, :printf, :print, :putc, :puts, :gets, :readline, :select, :readlines, :`, :p, :test, :srand, :rand, :trap, :exec, :fork, :exit!, :system, :spawn, :sleep, :exit, :abort, :load, :require, :require_relative, :autoload, :autoload?, :proc, :lambda, :binding, :set_trace_func, :Rational, :Complex, :freeze, :===, :==, :&lt;=&gt;, :&lt;, :&lt;=, :&gt;, :&gt;=, :to_s, :included_modules, :include?, :name, :ancestors, :instance_methods, :public_instance_methods, :protected_instance_methods, :private_instance_methods, :constants, :const_get, :const_set, :const_defined?, :const_missing, :class_variables, :remove_class_variable, :class_variable_get, :class_variable_set, :class_variable_defined?, :public_constant, :private_constant, :module_exec, :class_exec, :module_eval, :class_eval, :method_defined?, :public_method_defined?, :private_method_defined?, :protected_method_defined?, :public_class_method, :private_class_method, :instance_method, :public_instance_method, :nil?, :=~, :!~, :eql?, :hash, :class, :singleton_class, :clone, :dup, :initialize_dup, :initialize_clone, :taint, :tainted?, :untaint, :untrust, :untrusted?, :trust, :frozen?, :inspect, :methods, :singleton_methods, :protected_methods, :private_methods, :public_methods, :instance_variables, :instance_variable_get, :instance_variable_set, :instance_variable_defined?, :instance_of?, :kind_of?, :is_a?, :tap, :send, :public_send, :respond_to?, :respond_to_missing?, :extend, :display, :method, :public_method, :define_singleton_method, :object_id, :to_enum, :enum_for, :equal?, :!, :!=, :instance_eval, :instance_exec, :__send__, :__id__]
+</pre>
+	</li>
+	<li>require 和 load 应该是 Kernel 的内置方法， gem 是 rubygems.rb 中通过扩展 Kernel 而引入的方法。</li>
+	<li>
+	<p>requirements = Gem::Requirement.default if&nbsp;requirements.empty?</p>
+
+	<p>http://rubygems.rubyforge.org/rubygems-update/Gem/Requirement.html</p>
+
+	<p>使用 raise 抛出异常来查看 back trace 的结果，为</p>
+
+	<pre>
+$ unicorn
+/usr/local/Cellar/ruby/1.9.3-p286/lib/ruby/1.9.1/rubygems/requirement.rb:2:in `&lt;top (required)&gt;&#39;: xx (LoadError)
+from /usr/local/Cellar/ruby/1.9.3-p286/lib/ruby/1.9.1/rubygems/custom_require.rb:36:in `require&#39;
+from /usr/local/Cellar/ruby/1.9.3-p286/lib/ruby/1.9.1/rubygems/custom_require.rb:36:in `require&#39;
+from /usr/local/Cellar/ruby/1.9.3-p286/lib/ruby/1.9.1/rubygems/dependency.rb:1:in `&lt;top (required)&gt;&#39;
+from /usr/local/Cellar/ruby/1.9.3-p286/lib/ruby/1.9.1/rubygems.rb:1231:in `gem&#39;
+from /usr/local/Cellar/ruby/1.9.3-p286/bin/unicorn:22:in `&lt;main&gt;&#39;</pre>
+	</li>
+	<li>
+	<p>因而我们了解到 custom_require.rb 文件中 require 的如下定义</p>
+
+	<pre>
+module Kernel
+
+  if defined?(gem_original_require) then
+    # Ruby ships with a custom_require, override its require
+    remove_method :require
+  else
+    ##
+    # The Kernel#require from before RubyGems was loaded.
+
+    alias gem_original_require require
+    private :gem_original_require
+  end
+
+  ##
+  # When RubyGems is required, Kernel#require is replaced with our own which
+  # is capable of loading gems on demand.
+  #
+  # When you call <tt>require &#39;x&#39;</tt>, this is what happens:
+  # * If the file can be loaded from the existing Ruby loadpath, it
+  #   is.
+  # * Otherwise, installed gems are searched for a file that matches.
+  #   If it&#39;s found in gem &#39;y&#39;, that gem is activated (added to the
+  #   loadpath).
+  #
+  # The normal <tt>require</tt> functionality of returning false if
+  # that file has already been loaded is preserved.
+
+  def require path
+    if Gem.unresolved_deps.empty? then
+      gem_original_require path
+    else
+      spec = Gem::Specification.find { |s|
+        s.activated? and s.contains_requirable_file? path
+      }
+
+      unless spec then
+        found_specs = Gem::Specification.find_in_unresolved path
+        unless found_specs.empty? then
+          found_specs = [found_specs.last]
+        else
+          found_specs = Gem::Specification.find_in_unresolved_tree path
+        end
+
+        found_specs.each do |found_spec|
+          found_spec.activate
+        end
+      end
+
+      return gem_original_require path
+    end
+  rescue LoadError =&gt; load_error
+    if load_error.message.start_with?(&quot;Could not find&quot;) or
+        (load_error.message.end_with?(path) and Gem.try_activate(path)) then
+      return gem_original_require(path)
+    end
+    raise load_error
+  end
+  private :require
+end
+</pre>
+	</li>
+	<li>def self.method_name 中，self 的意义是指明这是个类方法，不加则默认为实例方法。</li>
+	<li>Gem.location_of_caller 可用于调试</li>
+	<li>
+	<p>block_given? 是 Kernel 的一个 public_methods。</p>
+
+	<p>http://www.kuqin.com/rubycndocument/man/stdlib_function.html，http://www.rubycc.com/column/ruby1.9.2/class/Kernel.html</p>
+	</li>
+	<li>
+	<p>$0，http://ruby.wikia.com/wiki/Special_variable</p>
+
+	<pre>
+op = OptionParser.new(&quot;&quot;, 24, &#39;&nbsp; &#39;) do |opts|
+&nbsp; cmd = File.basename($0)</pre>
+	</li>
+	<li>
+	<p>Block，Proc，lambda</p>
+	</li>
+	<li>
+	<p>Object.dup，http://localhost/manuals/ruby_1_9_3_core/Object.html#method-i-dup</p>
+	</li>
+	<li>
+	<p>?a，以前表示求得 a 的 ascii 码值，现在表示字符串&nbsp;&quot;a&quot;</p>
+	</li>
+	<li>
+	<p>inherited、included、extended 方法在继承时自动触发</p>
+
+	<p>Constructors cannot be inherited</p>
+	</li>
+	<li>
+	<p>super 的用法，表示调用父类同名方法，参数默认全部依次传递。super() 则表示不传入任何参数</p>
+	</li>
+	<li>
+	<p>self.class.superclass.instance_method(&#39;xxx&#39;).source_location</p>
+	</li>
+	<li>
+	<p>2012-11-20 16:10 星期二 明天再有一天，老婆的理考学时就能刷够啦</p>
+
+	<p>用 send 调用方法</p>
+	</li>
+	<li>
+	<p>2012-11-21 09:55 星期三</p>
+
+	<p>Railties 有一个自动触发的 inherited 方法，其中让子类自动包含 Railties::Configurable 模块</p>
+
+	<pre>
+module Rails
+&nbsp; class Railtie
+&nbsp;&nbsp;&nbsp; class &lt;&lt; self
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; def subclasses
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @subclasses ||= []
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; def inherited(base)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; unless base.abstract_railtie?
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; base.send(:include, Railtie::Configurable)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; subclasses &lt;&lt; base
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end</pre>
+	</li>
+	<li>
+	<p>module 的一种用法</p>
+
+	<pre>
+module Rails
+&nbsp; module Initializable
+&nbsp;&nbsp;&nbsp; def self.included(base)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; base.extend ClassMethods
+&nbsp;&nbsp;&nbsp; end
+&nbsp;&nbsp;&nbsp; module ClassMethods
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; def sub_class_method_a
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; def sub_class_method_b
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end
+&nbsp;&nbsp;&nbsp; end</pre>
+	</li>
+	<li>&nbsp; autoload :Bootstrap,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &#39;rails/application/bootstrap&#39; 的用法</li>
+	<li>
+	<p>2012-11-21 21:43 星期三 电视节目：货币3</p>
+
+	<p>ruby 中的 inject</p>
+	</li>
+	<li>
+	<p>2012-11-21 22:57 星期三 贵宾狗</p>
+
+	<p>http://railspikes.com/2008/9/8/lambda-in-ruby-1-9<br />
+	http://innig.net/software/ruby/closures-in-ruby</p>
+
+	<p>proc is now an alias of Proc.new. In 1.8, proc was an alias for lambda. a_proc_name.call(a_param) === a_proc_name[a_param]</p>
+	</li>
+	<li>
+	<p>2012-11-22 02:03 星期四</p>
+
+	<p>dup vs. clone</p>
+	</li>
+	<li>
+	<p>2012-11-22 17:42 星期四 中午去漳涧吃席</p>
+
+	<p>root_path = self.class.called_from, caller</p>
+	</li>
+	<li>
+	<p>2012-11-22 22:11</p>
+
+	<p>数组的&nbsp;partition 方法</p>
+	</li>
+	<li>
+	<p>2012-11-22 09:43</p>
+
+	<p>针对 module 的 extend self 的用法</p>
+	</li>
+	<li>
+	<p>2012-11-22 12:37</p>
+
+	<p>The Inflector transforms words from singular to plural, class names to table names, modularized class names to ones without, and class names to foreign keys. The default inflections for pluralization, singularization, and uncountable words are kept in inflections.rb.</p>
+	</li>
+	<li>
+	<p>2012-11-22 14:55</p>
+
+	<p>respond_to? 的用法</p>
+	</li>
+	<li>
+	<p>2013-01-09 01:53</p>
+
+	<pre>
+require &#39;net/http&#39;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; uri = URI.parse(params[&#39;url&#39;])
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; response = Net::HTTP.get_response(uri)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; # handle error: invalid byte sequence in UTF-8
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; # HTTP/1.1 302 D�plac� Temporairement
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; #response = response.force_encoding(&#39;binary&#39;)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; #header, body = response.split(&quot;\r\n\r\n&quot;, 2)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; #status = header.lines.first[9..11]
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if response.code == &quot;200&quot;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; self.response_body = response.body
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; elsif response.code == &quot;302&quot;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; #redirect = header.match(/^Location: (.*)\r\n/)[1] + &quot;INFO_FORMAT=text/xml&quot;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; redirect = response[&quot;location&quot;] + &quot;INFO_FORMAT=text/xml&quot;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; self.response_body = Net::HTTP.get_response(URI.parse(redirect)).body
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; self.</pre>
+	</li>
+</ol>
+
+<h2>Ubuntu, Ruby, RVM, Rails, and You</h2>
+
+<p>http://ryanbigg.com/2010/12/ubuntu-ruby-rvm-rails-and-you/</p>
+
+<p><small>25 Dec 2010</small><br />
+<strong>Last updated: Thursday January 31st 2013</strong></p>
+
+<p><strong>This beginner&#39;s guide will set up with Ruby 1.9.3, RVM and Rails 3.2.9 and is specifically written for a&nbsp;<em>development</em>environment on Ubuntu 12.04, but will probably work on many other operating systems, including older / newer versions of Ubuntu and Debian. YMMV.</strong></p>
+
+<p><strong>If you&#39;re looking for a way to set this up on a production server then I would recommend the use of&nbsp;<a href="https://github.com/joshfng/railsready">the railsready script</a>which installs all the necessary packages for Ruby 1.9.3p0 and then that version of Ruby itself, Bundler and Rails. Then it leaves it up to you to install Apache or nginx to get your application online.</strong></p>
+
+<h2>Under no circumstance should you install Ruby, Rubygems or any Ruby-related packages from apt-get. This system is out-dated and leads to major headaches. Avoid it for Ruby-related packages. We do Ruby, we know what&#39;s best. Trust us.</h2>
+
+<p>Still not convinced?&nbsp;<a href="http://news.ycombinator.org/item?id=2039438">Read this</a>.</p>
+
+<p>This guide will go through installing the&nbsp;<a href="http://rvm.io/">RVM (Ruby Version Manager)</a>, then a version of Ruby (1.9.3), then&nbsp;<a href="http://rubyonrails.org/">Rails</a>&nbsp;and finally&nbsp;<a href="http://gembundler.com/">Bundler</a>.</p>
+
+<p>By the end of this guide, you will have these things installed and have some very, very easy ways to manage gem dependencies for your different applications / libraries, as well as having multiple Ruby versions installed and usable all at once.</p>
+
+<p>We assume you have&nbsp;<code>sudo</code>&nbsp;access to your machine, and that you have an understanding of the basic concepts of Ruby, such as &ldquo;What is Rubygems?&rdquo; and more importantly &ldquo;How do I turn this computer-thing on?&rdquo;. This knowledge can be garnered by reading the first chapter of&nbsp;<a href="http://manning.com/black2">any Ruby book</a>.</p>
+
+<p>If you&rsquo;re looking for a good Rails book, I wrote one called&nbsp;<a href="http://manning.com/katz">Rails 3 in Action</a>.</p>
+
+<h3>Housekeeping</h3>
+
+<p>First of all, we&rsquo;re going to run&nbsp;<code>sudo apt-get update</code>&nbsp;so that we have the latest sources on our box so that we don&rsquo;t run into any package-related issues, such as not being able to install some packages.</p>
+
+<p>Next, we&rsquo;re going to install&nbsp;<code>curl</code>, which we&rsquo;ll use to fetch the RVM script:</p>
+
+<pre>
+<code>sudo apt-get install curl</code></pre>
+
+<h3>RVM</h3>
+
+<p>RVM is a&nbsp;<a href="http://rvm.io/">Ruby Version Manager</a>&nbsp;created by Wayne E. Seguin and is extremely helpful for installing and managing many different versions of Ruby all at once. Sometimes you could be working on a project that requires an older (1.8.7) version of Ruby but also need a new version (1.9.3) for one of your newer projects. This is a problem that RVM solves beautifully.</p>
+
+<p>Another situation could be that you want to have different sets of gems on the same version of Ruby but don&rsquo;t want to have to do deal with Gem Conflict Hell. RVM has&nbsp;<a href="http://rvm.io/gemsets/basics/">gemsets</a>&nbsp;for this.&nbsp;<strong>This is a feature you wouldn&#39;t have if you used the packaged Ruby</strong>.</p>
+
+<p>We&rsquo;re going to use it to install only one version of Ruby, but we can&nbsp;<a href="http://rvm.io/">consult the documentation</a>&nbsp;if we want to install a different version of Ruby.</p>
+
+<p>With&nbsp;<code>curl</code>&nbsp;installed we&rsquo;ll be able to install RVM with this command:</p>
+
+<pre>
+<code>curl -L get.rvm.io | bash -s stable --auto</code></pre>
+
+<p>The beautiful part of this is that it installs RVM and Ruby to our home directory, providing a sandboxed environment just for us.</p>
+
+<p>Then we&rsquo;ll need to reload the&nbsp;<code>~/.bash_profile</code>&nbsp;file which we can do with this small command:</p>
+
+<pre>
+<code>. ~/.bash_profile</code></pre>
+
+<p>The next command we run will tell us what other packages we need to install for Ruby to work:</p>
+
+<pre>
+<code>rvm requirements
+...
+# For Ruby / Ruby HEAD (MRI, Rubinius, &amp; REE), install the following:
+ruby: /usr/bin/apt-get install build-essential openssl libreadline6 libreadline6-dev 
+curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev
+libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison subversion pkg-config</code></pre>
+
+<p>A couple of things to note in this is that the&nbsp;<code>build-essential</code>&nbsp;package is installed, which will install all the essential build tools for Ubuntu, so we&rsquo;ll be able to download and compile Ruby, amongst other things.</p>
+
+<p>This will also install&nbsp;<a href="http://git-scm.org/">Git</a>, which is a version control system tool that you should be using if you&rsquo;re not already. This is used by RVM to fetch the latest source for some versions of Ruby.</p>
+
+<p>These packages will lessen the pain when we&rsquo;re working with Ruby. For example, the&nbsp;<code>libssl-dev</code>&nbsp;package will make OpenSSL support in Ruby work,&nbsp;<code>libsqlite3-0</code>&nbsp;and&nbsp;<code>libsqlite3-dev</code>&nbsp;are required for the&nbsp;<code>sqlite3-ruby</code>&nbsp;gem and the&nbsp;<code>libxml2-dev</code>and&nbsp;<code>libxslt-dev</code>&nbsp;packages are required for the&nbsp;<code>nokogiri</code>&nbsp;gem. Let&rsquo;s install all these packages now using this command:</p>
+
+<pre>
+<code>sudo apt-get install build-essential openssl libreadline6 libreadline6-dev \
+curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-dev sqlite3 \
+libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison  \
+subversion pkg-config</code></pre>
+
+<p>If you&rsquo;re using an older version of Ubuntu, the&nbsp;<code>pkg-config</code>&nbsp;package is called&nbsp;<code>pkgconfig</code>. You will need to install that instead:</p>
+
+<pre>
+<code>sudo apt-get install pkgconfig</code></pre>
+
+<p>Now our Ruby lives will be as painless as possible.</p>
+
+<h3>Ruby</h3>
+
+<p>With RVM and these packages we can install Ruby 1.9.3:</p>
+
+<pre>
+<code>rvm install 1.9.3</code></pre>
+
+<p>This command will take a couple of minutes, so grab your $DRINKOFCHOICE and go outside or something. Once it&rsquo;s done, we&rsquo;ll have Ruby 1.9.3 installed. To begin using it we can use this lovely command:</p>
+
+<pre>
+<code>rvm use 1.9.3</code></pre>
+
+<p>Please note, using &lsquo;1.9.3&rsquo; as a default allows for when ruby is updated for that version then ALL projects using 1.9.3 as their string will be updated as well. This is a side affect people might not want. The preferred method is to include the patch level to the &rsquo;&ndash;default&rsquo; parameter so that if 1.9.3 gets updated, other projects don&rsquo;t automatically have that change applied to to them as well. If, say for example, for some reason some method/action gets deprecated in a patchlevel or some method signature gets changed between patchlevels, this will affect&nbsp;<em>all</em>&nbsp;projects defined using the &lsquo;1.9.3&rsquo; string. This may or may not be what people want. Please be aware of this! Now, to continue on..</p>
+
+<p>Are we using 1.9.3? You betcha:</p>
+
+<pre>
+<code>ruby -v
+ruby 1.9.3p327 (2012-04-20 revision 35410) [x86_64-linux]</code></pre>
+
+<p>Or, even better, would be to make this the&nbsp;<em>default</em>&nbsp;for our user! Oooh, yes! Noting the &lsquo;1.9.3&rsquo; side-note above, lets take note of the patchlevel, which in this case is &lsquo;-p327&rsquo; and add that to our default selection.</p>
+
+<pre>
+<code>rvm --default use 1.9.3-p327</code></pre>
+
+<p>Now whenever we open a new bash session for this user we&rsquo;ll have Ruby available for us to use! Yay!</p>
+
+<p>As an additional side-note: Users can, and should, use a gemset when possible so that they don&rsquo;t pollute their &lsquo;default&rsquo; which is what is selected when a gemset is not specified in either a project&rsquo;s .rvmrc, or at the command-line. Each installed Ruby has a &lsquo;@global&rsquo; gemset. This is used to share gems with other gemsets created under that specific Ruby, and with the &lsquo;default&rsquo; gemset. This can be selected by running &lsquo;rvm gemset use global&rsquo; and then installing the gems you wish to share to other gemsets including &lsquo;default&rsquo;. You can, of course simply install in each gemset but this will cause needless duplication and use up more disk-space and bandwidth.</p>
+
+<h3>Rails</h3>
+
+<p>Now that RVM and a version of Ruby is installed, we can install Rails. Because RVM is installed to our home directory, we don&rsquo;t need to use that nasty&nbsp;<code>sudo</code>&nbsp;to install things; we&rsquo;ve got write-access! To install the Rails gem we&rsquo;ll run this command:</p>
+
+<pre>
+<code>gem install rails -v 3.2.9</code></pre>
+
+<p>This will install the&nbsp;<code>rails</code>&nbsp;gem and the multitude of gems that it and its dependencies depend on, including Bundler.</p>
+
+<h3>MySQL</h3>
+
+<p>If you&rsquo;re planning on using the&nbsp;<code>mysql2</code>&nbsp;gem for your application then you&rsquo;ll want to install the&nbsp;<code>libmysqlclient-dev</code>&nbsp;package before you do that. Without it, you&rsquo;ll get an error when the gem tries to compile its native extensions:</p>
+
+<pre>
+<code>Building native extensions.  This could take a while...
+ERROR:  Error installing mysql2:
+	ERROR: Failed to build gem native extension.
+
+/home/ryan/.rvm/rubies/ruby-1.9.3-p0/bin/ruby extconf.rb
+checking for rb_thread_blocking_region()... yes
+checking for mysql_query() in -lmysqlclient... no
+checking for main() in -lm... yes
+checking for mysql_query() in -lmysqlclient... no
+checking for main() in -lz... yes
+checking for mysql_query() in -lmysqlclient... no
+checking for main() in -lsocket... no
+checking for mysql_query() in -lmysqlclient... no
+checking for main() in -lnsl... yes
+checking for mysql_query() in -lmysqlclient... no
+checking for main() in -lmygcc... no
+checking for mysql_query() in -lmysqlclient... no
+*** extconf.rb failed ***
+Could not create Makefile due to some reason, probably lack of
+necessary libraries and/or headers.  Check the mkmf.log file for more
+details.  You may need configuration options.</code></pre>
+
+<h3>PostgreSQL</h3>
+
+<p>Similar to the&nbsp;<code>mysql2</code>&nbsp;gem&rsquo;s error above, you&rsquo;ll also get an error with the&nbsp;<code>pg</code>&nbsp;gem if you don&rsquo;t have the&nbsp;<code>libpq-dev</code>&nbsp;package installed you&rsquo;ll get this error:</p>
+
+<pre>
+<code>    Building native extensions.  This could take a while...
+ERROR:  Error installing pg:
+	ERROR: Failed to build gem native extension.
+
+/home/ryan/.rvm/rubies/ruby-1.9.3-p0/bin/ruby extconf.rb
+checking for pg_config... no
+checking for libpq-fe.h... no
+Can&#39;t find the &#39;libpq-fe.h header
+*** extconf.rb failed ***
+Could not create Makefile due to some reason, probably lack of
+necessary libraries and/or headers.  Check the mkmf.log file for more
+details.  You may need configuration options.</code></pre>
+
+<h3>Fin.</h3>
+
+<p>And that&rsquo;s it! Now you&rsquo;ve got a Ruby environment you can use to write your (first?) Rails application in with such minimal effort. A good read after this would be the&nbsp;<a href="http://guides.rubyonrails.org/">official guides for Ruby on Rails</a>. Or perhaps the documentation on the&nbsp;<a href="http://rvm.io/">RVM site</a>&nbsp;which goes into using things such as&nbsp;<a href="http://rvm.io/gemsets/basics/">gemsets</a>&nbsp;and the exceptionally helpful&nbsp;<a href="http://rvm.io/workflow/rvmrc/#project">per-project .rvmrc file</a>. A quick way to generate an&nbsp;<code>.rvmrc</code>&nbsp;file is to run a command like this inside the project:</p>
+
+<pre>
+<code>rvm use 1.9.3-p327@rails3 --rvmrc</code></pre>
+
+<p>RVM is such a powerful tool and comes in handy for day-to-day Ruby development. Use it, and not the packages from apt to live a life of development luxury.</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
