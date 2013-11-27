@@ -10,7 +10,7 @@
 	<li>
 	<p>2013-11-27 11:34</p>
 
-	<p>今日发现 yo webapp 的 Gruntfile.js 中的 copy 任务，并不包含 bower_components</p>
+	<p>今日发现 yo webapp 的 Gruntfile.js 中的 copy 任务，并不包含 bower_components，因此 grunt serve:dist 时需注意 requirejs 的 amd 方式对其的依赖。同时也发现 yo webapp 提示 grunt server 已过期，推荐使用 grunt serve:dist。而 yo angular 生成的 Gruntfile.js 中仍然使用 grunt server:dist</p>
 	</li>
 </ul>
 
