@@ -1,0 +1,390 @@
+<h1>Zend Framework</h1>
+
+<p>2013-10-23 02:05 Wednesday</p>
+
+<p><a href="http://framework.zend.com/" target="_blank">http://framework.zend.com/</a></p>
+
+<ul>
+	<li><a href="http://www.zend.com" target="_blank">http://www.zend.com</a> =&gt; http://www.zend.com/en/</li>
+	<li><strong>Develop</strong><br />
+	Build high-quality PHP applications faster with the Zend developer solutions - <a href="http://framework.zend.com/">Zend Framework</a>, <a href="http://www.zend.com/en/products/studio">Zend Studio</a> and <a href="http://www.zend.com/en/products/server">Zend Server</a>. Build up your skills with PHP and Zend Framework training and certification. <a href="http://www.zend.com/en/solutions/build-quality-php">More &raquo;</a></li>
+	<li><a href="http://framework.zend.com/" target="_blank">Zend Framework</a> =&gt; http://framework.zend.com/</li>
+</ul>
+
+<h3>2013-10-23 02:17 Wednesday</h3>
+
+<p>今日重拾 WE-Realtime，发现用了 ZF。</p>
+
+<pre>
+$ sudo vi /etc/php.ini
+​include_path = &quot;.:/php/includes&quot;
+</pre>
+
+<pre>
+$ sudo mkdir -p /php/includes</pre>
+
+<pre>
+$ sudo ln -s ~/www_apache/docs/ZendFramework-1.12.3/library/Zend/ /php/includes/Zend
+</pre>
+
+<p><a href="http://framework.zend.com/blog/zend-framework-2-2-4-released.html">Zend Framework 2.2.4 Released!</a></p>
+
+<table>
+	<tbody>
+		<tr>
+			<td>Zend Framework 1.12.3 Full<br />
+			Released 2013-03-13</td>
+		</tr>
+		<tr>
+			<td>Zend Framework 1.12.3 Minimal<br />
+			Released 2013-03-13</td>
+		</tr>
+		<tr>
+			<td>Zend Framework 1.12.3 Documentation<br />
+			Released 2013-03-13</td>
+		</tr>
+	</tbody>
+</table>
+
+<h3>2012-11-13 12:43 昨日走鹤壁回安阳</h3>
+
+<ul>
+	<li>Zend Framework 2.0.3 Full Released 2012-10-17 -&gt;&nbsp;http://www.zend.com/community/downloads</li>
+	<li>Zend Framework 2.0 full (recommended) 2.0.3&nbsp;<a href="http://www.zend.com/en/download/603">(TAR.GZ) 1.23 MB</a>&nbsp;-&gt; http://downloads.zend.com/framework/2.0.3/ZendFramework-2.0.3.tgz</li>
+</ul>
+
+<h3>2011-12-19</h3>
+
+<p>Zend Framework 2.0.0beta1 Released!, http://devzone.zend.com/1935/zend-framework-200beta1-released/</p>
+
+<h3>2011-10-10</h3>
+
+<p>ZendFramework-1.11.11-minimal Downloaded&nbsp;</p>
+
+<h3>2011-07-08</h3>
+
+<p><a href="http://devzone.zend.com/article/16243-Zend-Framework-1.11.8-Released" target="_blank">Zend Framework 1.11.8 Released</a>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<ul>
+	<li>ZF2 Packages, <a href="http://packages.zendframework.com/" target="_blank">http://packages.zendframework.com/</a></li>
+	<li>Source Packages<br />
+	Pyrus Packages<br />
+	Github Source<br />
+	这是三种不同的获取 ZF 代码的方式，选一种就可以了。</li>
+	<li>Fatal error: Class &#39;Zend\Tool\Framework\Client\Console\Console&#39; not found，查找了一文章，可能还附带其它错误，还是用目前最新的 1.11.11&nbsp;版本吧。</li>
+</ul>
+
+<h2>ZF2 vs. ZF1</h2>
+
+<h3><strong>Quick Verdict</strong></h3>
+
+<p>It depends on what stage you are beginner. If you are pretty smooth with concepts of OOP and MVC then ZF1 would make you feel home. ZF2 is based on MOVE = Model Operations Views Events</p>
+
+<h3><strong>More about ZF2</strong></h3>
+
+<p>However ZF2 on the other hand deals with latest implemented concepts like Dependency Injection for Zend fans. Also you will have to learn to use composer -phar. ZF2 tutorial also deals with lots of namespace concepts.</p>
+
+<h3><strong>Performance</strong></h3>
+
+<p>It takes a lot more time to execute Hello World in ZF2 compared to ZF1 but that&#39;s for different reasons and debatable topic. That performance issue would vary depending upon size of your application and various other factors</p>
+
+<p>You should learn both, but I&#39;d personally put more emphasis on ZF2.</p>
+
+<p>ZF2 is the package that will have the longest lifespan ahead of it, whilst ZF1 is probably going to go into maintained mode once ZF2 is generally available, so if you limit yourself to ZF1 you&#39;ll eventually have to learn ZF2 anyway if you want to maintain your employability. If you only learn ZF1, you&#39;re dooming yourself to the life of a maintainance engineer keeping legacy codebases in working order.</p>
+
+<p>Having said that, it would be unwise to ignore ZF1 as nearly all Zend Framework applications currently deployed will use that.</p>
+
+<p><strong>Architecture</strong></p>
+
+<p>ZF1 is based on MVC , ZF2 is based on MOVE. Huge difference. MOVE = Model Operations Views Events , MVC = Models Views Controllers.&nbsp;<a href="http://cirw.in/blog/time-to-move-on">More here</a>. Zend Framework 2 uses 100% object-oriented code and utilises most of the new features of PHP 5.3, namely namespaces, late static binding, lambda functions and closures.&nbsp;<a href="http://framework.zend.com/manual/2.0/en/ref/overview.html">source</a></p>
+
+<p><strong>Size of installation</strong></p>
+
+<p>The latest ZF1 file is approx 30Mb and ZF2 is approx 2.5Mb (Zipped).</p>
+
+<p><strong>Dependency</strong></p>
+
+<p>ZF1 is core set of libraries and very loosely coupled architecture (with respect to its competitor/player - CakePHP). ZF1 does not require much of &#39;gems&#39; (as in ruby) but, can do better with plugins. ZF2 requires you to know about&nbsp;<a href="https://github.com/composer/composer">composer</a>&nbsp;-&nbsp;<a href="http://php.net/manual/en/book.phar.php">phar</a>&nbsp;and soon it may out-match any other framework. New concept :&nbsp;<a href="http://framework.zend.com/manual/2.0/en/tutorials/quickstart.di.html">Dependency Injection</a>&nbsp;for Zend fans.</p>
+
+<p><strong>Certification</strong></p>
+
+<p>Certification is available only for ZF1, however, there are rumours about their talks for ZF2 certs though training material is available online.</p>
+
+<p><strong>Conventions</strong></p>
+
+<p>classname in ZF1 was Zend_Db_Table for class in Zend/Db/Table.php whereas in ZF2, it is class My\Auth\Adapter . Enough said.</p>
+
+<p><strong>Community</strong></p>
+
+<p>ZF1 was backed by Zend Technologies (and few other, unnamed). ZF2 has remarkable supporters including Google and Microsoft.&nbsp;<a href="http://framework.zend.com/manual/2.0/en/ref/overview.html">Source here</a></p>
+
+<p><strong>Speed</strong></p>
+
+<p>It took approx 20 times more time to execute &quot;Hello World!&quot; in ZF2. I am not judging here. I could be wrong here. DIY.</p>
+
+<p><strong>Which one should I opt for?</strong></p>
+
+<p>MVC is been around since almost a decade and if you are one of them who are feeling sad for a new architecture altogether then hey! IT is &#39;your chosen&#39; domain, keep up with the trends and update yourself! Start ZF2 from&nbsp;<a href="http://framework.zend.com/manual/2.0/en/user-guide/overview.html">here</a>.</p>
+
+<h2>INSTALLATION</h2>
+
+<p>see: ZendFramework-1.11.11-minimal/INSTALL.txt</p>
+
+<p>Zend Framework requires no special installation steps. Simply download the framework, extract it to the folder you would like to keep it in, and add the library directory to your PHP include_path. To use components in the extras library, add the extras/library directory to your PHP include_path, as well. If you would like to use Zend_Tool, simply add bin/zf.bat (for Windows) or bin/zf.sh (for anything else) to your system executable path.</p>
+
+<h2>Zend Framework Quickstart</h2>
+
+<p><a href="http://framework.zend.com/docs/quickstart" target="_blank">http://framework.zend.com/docs/quickstart</a></p>
+
+<p>Zend Framework is an open source, object oriented web application framework for PHP 5. Zend Framework is often called a &#39;component library&#39;, because it has many loosely coupled components that you can use more or less independently. But Zend Framework also provides an advanced Model-View-Controller (MVC) implementation that can be used to establish a basic structure for your Zend Framework applications. A full list of Zend Framework components along with short descriptions may be found in the <a href="http://framework.zend.com/about/components">&raquo; components overview</a>. This QuickStart will introduce you to some of Zend Framework&#39;s most commonly used components, including Zend_Controller, Zend_Layout, Zend_Config, Zend_Db, Zend_Db_Table, Zend_Registry, along with a few view helpers.</p>
+
+<p>Using these components, we will build a simple database-driven guest book application within minutes.</p>
+
+<h2>Create Your Project</h2>
+
+<p><a href="http://framework.zend.com/manual/1.12/en/learning.quickstart.create-project.html" target="_blank">http://framework.zend.com/manual/1.12/en/learning.quickstart.create-project.html</a></p>
+
+<h3>Install Zend Framework</h3>
+
+<p>The easiest way to get Zend Framework along with a complete&nbsp;PHP&nbsp;stack is by installing&nbsp;<a href="http://www.zend.com/en/products/server-ce/downloads">&raquo; Zend Server</a>. Zend Server has native installers for Mac OSX, Windows, Fedora Core, and Ubuntu, as well as a universal installation package compatible with most Linux distributions.</p>
+
+<p>After you have installed Zend Server, the Framework files may be found under&nbsp;<var>/usr/local/zend/share/ZendFramework</var>&nbsp;on Mac OSX and Linux, and&nbsp;<var>C:\Program Files\Zend\ZendServer\share\ZendFramework</var>&nbsp;on Windows. The&nbsp;<strong><tt>include_path</tt></strong>&nbsp;will already be configured to include Zend Framework.</p>
+
+<p>Alternately, you can&nbsp;<a href="http://framework.zend.com/download/latest">&raquo; Download the latest version of Zend Framework</a>&nbsp;and extract the contents; make a note of where you have done so.</p>
+
+<p>Optionally, you can <span class="marker">add the path to the&nbsp;<var>library/</var>&nbsp;subdirectory of the archive to your&nbsp;<var>php.ini</var>&#39;s&nbsp;<strong><tt>include_path</tt></strong>&nbsp;setting</span>.</p>
+
+<p>That&#39;s it! Zend Framework is now installed and ready to use.</p>
+
+<h3>Create Your Project</h3>
+
+<ul>
+	<li>Add ZEND_TOOL_INCLUDE_PATH envioronment variable with value like ...\ZendFramework-1.11.8-minimal\library</li>
+	<li>Add parent directory of php.exe to %PATH%. 2011-10-10 update</li>
+	<li>Open a terminal (in Windows, <strong>Start -&gt; Run</strong>, and then use <strong>cmd</strong>). Navigate to a directory where you would like to start a project. Then, use the path to the appropriate script, and execute one of the following:
+	<pre>
+/absolute/path/to/ZendFramework-1.11.11-minimal/bin/zf.bat create project {projectname}</pre>
+
+	<p>Running this command will create your basic site structure, including your initial controllers and views. The tree looks like the following:</p>
+	</li>
+	<li>
+	<p>2011-12-19</p>
+
+	<p>In fact, if we use Zend Studio 8 or later, we will get an existing project structure once we create a PHP project.</p>
+	</li>
+</ul>
+
+<p>&nbsp;</p>
+
+<p>At this point, if you haven&#39;t added Zend Framework to your&nbsp;<strong><tt>include_path</tt></strong>, we recommend either copying or symlinking it into your&nbsp;<var>library/</var>&nbsp;directory. In either case, you&#39;ll want to either recursively copy or symlink the&nbsp;<var>library/Zend/</var>&nbsp;directory of your Zend Framework installation into the&nbsp;<var>library/</var>&nbsp;directory of your project. On unix-like systems, that would look like one of the following:</p>
+
+<pre>
+# Symlink:
+$ cd library; ln -s path/to/ZendFramework/library/Zend .
+# Copy:
+$ cd library; cp -r path/to/ZendFramework/library/Zend .</pre>
+
+<h2>index</h2>
+
+<ul>
+	<li>application = new Zend_Application(<br />
+	&nbsp;&nbsp;&nbsp; APPLICATION_ENV,<br />
+	&nbsp;&nbsp;&nbsp; APPLICATION_PATH . &#39;/configs/application.ini&#39;<br />
+	);
+	<ul>
+		<li>$this-&gt;_environment = (string) $environment;</li>
+		<li>$this-&gt;_autoloader = Zend_Loader_Autoloader::getInstance();</li>
+		<li>$options = $this-&gt;_loadConfig($options);</li>
+		<li>$this-&gt;setOptions($options);
+		<ul>
+			<li>if (!empty($options[&#39;phpsettings&#39;])) {</li>
+			<li>if (!empty($options[&#39;includepaths&#39;])) {</li>
+			<li>if (!empty($options[&#39;autoloadernamespaces&#39;])) {</li>
+			<li>if (!empty($options[&#39;bootstrap&#39;])) {</li>
+			<li>$this-&gt;setBootstrap($path, $class);
+			<ul>
+				<li>$this-&gt;_bootstrap = new $class($this);</li>
+			</ul>
+			</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li>$application-&gt;bootstrap()
+	<ul>
+		<li>&nbsp;public function bootstrap($resource = null)</li>
+		<li>$this-&gt;getBootstrap()-&gt;bootstrap($resource);
+		<ul>
+			<li>final public function bootstrap($resource = null)</li>
+			<li>$this-&gt;_bootstrap($resource);
+			<ul>
+				<li>$this-&gt;getClassResourceNames()</li>
+				<li>$this-&gt;getPluginResourceNames()</li>
+			</ul>
+			</li>
+		</ul>
+		</li>
+		<li>return $this;</li>
+	</ul>
+	</li>
+	<li>-&gt;run();
+	<ul>
+		<li>public function run()</li>
+		<li>$this-&gt;getBootstrap()-&gt;run();
+		<ul>
+			<li>$front&nbsp;&nbsp; = $this-&gt;getResource(&#39;FrontController&#39;);</li>
+			<li>$default = $front-&gt;getDefaultModule();</li>
+			<li>&nbsp;$response = $front-&gt;dispatch();
+			<ul>
+				<li>public function dispatch(Zend_Controller_Request_Abstract $request = null, Zend_Controller_Response_Abstract $response = null)</li>
+				<li>$request = new Zend_Controller_Request_Http();</li>
+				<li>$response = new Zend_Controller_Response_Http();</li>
+				<li>$router = $this-&gt;getRouter();<br />
+				$router-&gt;setParams($this-&gt;getParams());</li>
+				<li>$dispatcher = $this-&gt;getDispatcher();<br />
+				$dispatcher-&gt;setParams($this-&gt;getParams())<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -&gt;setResponse($this-&gt;_response);</li>
+				<li>$router-&gt;route($this-&gt;_request);</li>
+				<li>$this-&gt;_plugins-&gt;routeShutdown($this-&gt;_request);<br />
+				$this-&gt;_plugins-&gt;dispatchLoopStartup($this-&gt;_request);</li>
+				<li>$dispatcher-&gt;dispatch($this-&gt;_request, $this-&gt;_response);
+				<ul>
+					<li>public function dispatch(Zend_Controller_Request_Abstract $request, Zend_Controller_Response_Abstract $response) {</li>
+					<li>$className = $this-&gt;getControllerClass($request);</li>
+					<li>$controller = new $className($request, $this-&gt;getResponse(), $this-&gt;getParams());</li>
+					<li>$action = $this-&gt;getActionMethod($request);</li>
+					<li>$controller-&gt;dispatch($action);
+					<ul>
+						<li>$this-&gt;$action();</li>
+						<li>$this-&gt;_helper-&gt;notifyPostDispatch();
+						<ul>
+							<li>foreach (self::getStack() as $helper) {<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $helper-&gt;postDispatch();<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</li>
+							<li>$this-&gt;render(); //Zend_Controller_Action_Helper_ViewRenderer
+							<ul>
+								<li>public function render($action = null, $name = null, $noController = null)</li>
+								<li>$path = $this-&gt;getViewScript();</li>
+								<li>$this-&gt;renderScript($path, $name);
+								<ul>
+									<li>$this-&gt;getResponse()-&gt;appendBody(<br />
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $this-&gt;view-&gt;render($script),<br />
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $name<br />
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; );</li>
+								</ul>
+								</li>
+							</ul>
+							</li>
+						</ul>
+						</li>
+					</ul>
+					</li>
+				</ul>
+				</li>
+				<li>$this-&gt;_plugins-&gt;postDispatch($this-&gt;_request);
+				<ul>
+					<li>foreach ($this-&gt;_plugins as $plugin) {<br />
+					&nbsp; &nbsp; &nbsp; &nbsp; $plugin-&gt;postDispatch($request);
+					<ul>
+						<li>public function postDispatch(Zend_Controller_Request_Abstract $request) //Zend_Layout_Controller_Plugin_Layout</li>
+						<li>$fullContent = $layout-&gt;render();
+						<ul>
+							<li>public function render($name = null)</li>
+							<li>$view = $this-&gt;getView();</li>
+							<li>return $view-&gt;render($name);
+							<ul>
+								<li>$this-&gt;_file = $this-&gt;_script($name);</li>
+								<li>。。。</li>
+							</ul>
+							</li>
+						</ul>
+						</li>
+						<li>$response-&gt;setBody($fullContent);</li>
+					</ul>
+					</li>
+				</ul>
+				</li>
+			</ul>
+			</li>
+		</ul>
+		</li>
+		<li>&nbsp;public function render($name)</li>
+		<li>$this-&gt;_file = $this-&gt;_script($name);</li>
+		<li>$this-&gt;_run($this-&gt;_file);
+		<ul>
+			<li>protected function _run()</li>
+			<li>include func_get_arg(0);</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+</ul>
+
+<p>&nbsp;</p>
+
+<h2>Zend/File/Transfer</h2>
+
+<p>&nbsp;</p>
+
+<h2>Zend_Form_Element_File</h2>
+
+<p>-&gt; Zend_Form_Element_Xhtml -&gt;&nbsp;Zend_Form_Element -&gt; Zend_Validate_Interface</p>
+
+<ul>
+	<li>$el = new Zend_Form_Element_File(&#39;file&#39;);
+	<ul>
+		<li>Zend_Form_Element-&gt;__construct($spec, $options = null)</li>
+		<li>is_string($spec) ?&nbsp;$this-&gt;setName($spec)<br />
+		is_array($spec) ? $this-&gt;setOptions($spec)</li>
+		<li>$this-&gt;init(); // empty</li>
+		<li>$this-&gt;loadDefaultDecorators();</li>
+	</ul>
+	</li>
+	<li>$el -&gt;setLabel(&#39;Upload File&#39;)<br />
+	-&gt;setDescription($serviceOrder-&gt;getFilePath())<br />
+	-&gt;addValidator(&#39;Count&#39;, false, 1)<br />
+	-&gt;addValidator(&#39;Size&#39;, false, 1024 * 1024 * 10);</li>
+	<li>echo $el;
+	<ul>
+		<li>Zend_Form_Element-&gt;__toString()</li>
+		<li>$return = $this-&gt;render();
+		<ul>
+			<li>Zend_Form_Element_File-&gt;render(Zend_View_Interface $view = null)</li>
+			<li>$marker = false;<br />
+			foreach ($this-&gt;getDecorators() as $decorator) {<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;if ($decorator instanceof Zend_Form_Decorator_Marker_File_Interface) {<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; $marker = true;<br />
+			&nbsp; &nbsp; }<br />
+			}</li>
+			<li>if (!$marker) {<br />
+			&nbsp; &nbsp; require_once &#39;Zend/Form/Element/Exception.php&#39;;<br />
+			&nbsp; &nbsp; throw new Zend_Form_Element_Exception(&#39;No file decorator found... unable to render file element&#39;);<br />
+			}</li>
+			<li>return parent::render($view);
+			<ul>
+				<li>public function render(Zend_View_Interface $view = null)</li>
+				<li>if ($this-&gt;_isPartialRendering) {<br />
+				&nbsp; &nbsp; return &#39;&#39;;<br />
+				}</li>
+				<li>if (null !== $view) {<br />
+				&nbsp; &nbsp; $this-&gt;setView($view);<br />
+				}</li>
+				<li>
+				<p>$content = &#39;&#39;;<br />
+				foreach ($this-&gt;getDecorators() as $decorator) {<br />
+				&nbsp; &nbsp; $decorator-&gt;setElement($this);<br />
+				&nbsp; &nbsp; $content = $decorator-&gt;render($content);<br />
+				}</p>
+				</li>
+				<li>
+				<p>return $content;</p>
+				</li>
+			</ul>
+			</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+</ul>
