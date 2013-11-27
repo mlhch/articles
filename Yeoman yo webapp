@@ -1,0 +1,123 @@
+<h1>Yeoman yo webapp</h1>
+
+<p>2013-11-13 14:56 Wednesday</p>
+
+<p><a href="https://npmjs.org/package/generator-webapp" target="_blank">https://npmjs.org/package/generator-webapp</a></p>
+
+<p>Scaffold out a front-end web app</p>
+
+<pre>
+npm install generator-webapp</pre>
+
+<table>
+	<tbody>
+		<tr>
+			<td>148</td>
+			<td>downloads in the last day</td>
+		</tr>
+		<tr>
+			<td>4 398</td>
+			<td>downloads in the last week</td>
+		</tr>
+		<tr>
+			<td>13 794</td>
+			<td>downloads in the last month</td>
+		</tr>
+	</tbody>
+</table>
+
+<table>
+	<tbody>
+		<tr>
+			<th>Maintainers</th>
+			<td><a href="https://npmjs.org/~sindresorhus">sindresorhus</a><br />
+			<a href="https://npmjs.org/~passy">passy</a><br />
+			<a href="https://npmjs.org/~addyosmani">addyosmani</a><br />
+			<a href="https://npmjs.org/~paulirish">paulirish</a></td>
+		</tr>
+		<tr>
+			<th>Version</th>
+			<td>0.4.4&nbsp;last updated 6 days ago</td>
+		</tr>
+		<tr>
+			<th>License</th>
+			<td><a href="https://npmjs.org/package/undefined">BSD</a></td>
+		</tr>
+		<tr>
+			<th>Keywords</th>
+			<td><a href="https://npmjs.org/browse/keyword/yeoman-generator">yeoman-generator</a>,&nbsp;<a href="https://npmjs.org/browse/keyword/web">web</a>,&nbsp;<a href="https://npmjs.org/browse/keyword/app">app</a>,&nbsp;<a href="https://npmjs.org/browse/keyword/front-end">front-end</a>,&nbsp;<a href="https://npmjs.org/browse/keyword/h5bp">h5bp</a>,<a href="https://npmjs.org/browse/keyword/modernizr">modernizr</a></td>
+		</tr>
+		<tr>
+			<th>Repository</th>
+			<td><a href="https://github.com/yeoman/generator-webapp">git://github.com/yeoman/generator-webapp.git</a>&nbsp;(git)</td>
+		</tr>
+		<tr>
+			<th>Homepage</th>
+			<td><a href="https://github.com/yeoman/generator-webapp">https://github.com/yeoman/generator-webapp</a></td>
+		</tr>
+		<tr>
+			<th>Dependencies</th>
+			<td><a href="https://npmjs.org/package/yeoman-generator">yeoman-generator</a>,&nbsp;<a href="https://npmjs.org/package/cheerio">cheerio</a></td>
+		</tr>
+		<tr>
+			<th>Dependents</th>
+			<td><a href="https://npmjs.org/package/generator-cordova">generator-cordova</a></td>
+		</tr>
+		<tr>
+			<th>Starred by</th>
+			<td><a href="https://npmjs.org/~passy">passy</a></td>
+		</tr>
+	</tbody>
+</table>
+
+<ul>
+	<li><a href="https://npmjs.org/package/generator-webapp#readme">Read Me</a></li>
+</ul>
+
+<h1>Web app generator</h1>
+
+<p>Yeoman generator that scaffolds out a front-end web app.</p>
+
+<h2>Features</h2>
+
+<ul>
+	<li>CSS Autoprefixing (new)</li>
+	<li>Built-in preview server with LiveReload</li>
+	<li>Automagically compile CoffeeScript &amp; Compass</li>
+	<li>Automagically lint your scripts</li>
+	<li>Automagically wire up your Bower components with&nbsp;<a href="https://github.com/stephenplusplus/grunt-bower-install">bower-install</a>.</li>
+	<li>Awesome Image Optimization (via OptiPNG, pngquant, jpegtran and gifsicle)</li>
+	<li>Mocha Unit Testing with PhantomJS</li>
+	<li>Optional - Twitter Bootstrap for SASS</li>
+	<li>Optional - Leaner Modernizr builds (new)</li>
+</ul>
+
+<p>For more information on what&nbsp;generator-webapp&nbsp;can do for you, take a look at the&nbsp;<a href="https://github.com/yeoman/generator-webapp/blob/master/app/templates/_package.json">Grunt tasks</a>&nbsp;used in our&nbsp;package.json.</p>
+
+<h2>Getting Started</h2>
+
+<ul>
+	<li>Install:&nbsp;npm install -g generator-webapp</li>
+	<li>Run:&nbsp;yo webapp</li>
+	<li>Run&nbsp;grunt&nbsp;for building and&nbsp;grunt serve&nbsp;for preview</li>
+</ul>
+
+<h2>Options</h2>
+
+<ul>
+	<li>
+	<p>--skip-install</p>
+
+	<p>Skips the automatic execution of&nbsp;bower&nbsp;and&nbsp;npm&nbsp;after scaffolding has finished.</p>
+	</li>
+	<li>
+	<p>--test-framework &lt;framework&gt;</p>
+
+	<p>Defaults to&nbsp;mocha. Can be switched for another supported testing framework like&nbsp;jasmine.</p>
+	</li>
+	<li>
+	<p>--coffee</p>
+
+	<p>Add support for&nbsp;<a href="http://coffeescript.org/">CoffeeScript</a>.</p>
+	</li>
+</ul>
