@@ -1,0 +1,560 @@
+<h1>JavaScript - RequireJS</h1>
+
+<p>2013-02-18 18:20:11 +08:00 Monday</p>
+
+<p><a href="http://requirejs.org/" target="_blank">http://requirejs.org/</a></p>
+
+<p>/* ---</p>
+
+<p>RequireJS is a JavaScript file and module loader. It is optimized for in-browser use, but it can be used in other JavaScript environments, like Rhino and&nbsp;<a href="http://requirejs.org/docs/node.html">Node</a>. Using a modular script loader like RequireJS will improve the speed and quality of your code.</p>
+
+<p>IE 6+ .......... compatible ✔<br />
+Firefox 2+ ..... compatible ✔<br />
+Safari 3.2+ .... compatible ✔<br />
+Chrome 3+ ...... compatible ✔<br />
+Opera 10+ ...... compatible ✔</p>
+
+<p><a href="http://requirejs.org/docs/start.html">Get started</a>&nbsp;then check out the&nbsp;<a href="http://requirejs.org/docs/api.html">API</a>.</p>
+
+<p>--- */</p>
+
+<p>2013-10-09 21:05 Wednesday</p>
+
+<p>Latest Release:&nbsp;<a href="http://requirejs.org/docs/download.html">2.1.8</a></p>
+
+<p>2013-11-18 02:53 Monday</p>
+
+<p>Latest Release:&nbsp;<a href="http://requirejs.org/docs/download.html">2.1.9</a></p>
+
+<h2>Source</h2>
+
+<pre>
+var requirejs, require, define;
+(function (global) {</pre>
+
+<p>给其他框架的 define 一个机会</p>
+
+<pre>
+&nbsp; &nbsp; if (typeof define !== &#39;undefined&#39;) {
+&nbsp; &nbsp; &nbsp; &nbsp; //If a define is already in play via another AMD loader,
+&nbsp; &nbsp; &nbsp; &nbsp; //do not overwrite.
+&nbsp; &nbsp; &nbsp; &nbsp; return;
+&nbsp; &nbsp; }</pre>
+
+<p>不重复加载自己</p>
+
+<pre>
+&nbsp; &nbsp; if (typeof requirejs !== &#39;undefined&#39;) {
+&nbsp; &nbsp; &nbsp; &nbsp; if (isFunction(requirejs)) {
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //Do not overwrite and existing requirejs instance.
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return;
+&nbsp; &nbsp; &nbsp; &nbsp; }
+&nbsp; &nbsp; &nbsp; &nbsp; cfg = requirejs;
+&nbsp; &nbsp; &nbsp; &nbsp; requirejs = undefined;
+&nbsp; &nbsp; }
+</pre>
+
+<p>允许 require 是一个配置对象</p>
+
+<pre>
+&nbsp; &nbsp; //Allow for a require config object
+&nbsp; &nbsp; if (typeof require !== &#39;undefined&#39; &amp;&amp; !isFunction(require)) {
+&nbsp; &nbsp; &nbsp; &nbsp; //assume it is a config object.
+&nbsp; &nbsp; &nbsp; &nbsp; cfg = require;
+&nbsp; &nbsp; &nbsp; &nbsp; require = undefined;
+&nbsp; &nbsp; }
+</pre>
+
+<pre>
+&nbsp; &nbsp;/**
+&nbsp; &nbsp; &nbsp;* Main entry point.
+&nbsp; &nbsp; &nbsp;*
+&nbsp; &nbsp; &nbsp;* If the only argument to require is a string, then the module that
+&nbsp; &nbsp; &nbsp;* is represented by that string is fetched for the appropriate context.
+&nbsp; &nbsp; &nbsp;*
+&nbsp; &nbsp; &nbsp;* If the first argument is an array, then it will be treated as an array
+&nbsp; &nbsp; &nbsp;* of dependency string names to fetch. An optional function callback can
+&nbsp; &nbsp; &nbsp;* be specified to execute when all of those dependencies are available.
+&nbsp; &nbsp; &nbsp;*
+&nbsp; &nbsp; &nbsp;* Make a local req variable to help Caja compliance (it assumes things
+&nbsp; &nbsp; &nbsp;* on a require that are not standardized), and to give a short
+&nbsp; &nbsp; &nbsp;* name for minification/local scope use.
+&nbsp; &nbsp; &nbsp;*/
+&nbsp; &nbsp; req = requirejs = function (deps, callback, errback, optional) {
+</pre>
+
+<pre>
+&nbsp; &nbsp; /**
+&nbsp; &nbsp; &nbsp;* Export require as a global, but only if it does not already exist.
+&nbsp; &nbsp; &nbsp;*/
+&nbsp; &nbsp; if (!require) {
+&nbsp; &nbsp; &nbsp; &nbsp; require = req;
+&nbsp; &nbsp; }
+</pre>
+
+<pre>
+&nbsp; &nbsp; //Create default context.
+&nbsp; &nbsp; req({});
+</pre>
+
+<pre>
+    //Look for a data-main script attribute, which could also adjust the baseUrl.
+    if (isBrowser) {
+        //Figure out baseUrl. Get it from the script tag with require.js in it.
+        eachReverse(scripts(), function (script) {
+            //Set the &#39;head&#39; where we can append children by
+            //using the script&#39;s parent.
+            if (!head) {
+                head = script.parentNode;
+            }
+
+            //Look for a data-main attribute to set main script for the page
+            //to load. If it is there, the path to data main becomes the
+            //baseUrl, if it is not already set.
+            <span class="marker">dataMain = script.getAttribute(&#39;data-main&#39;);</span>
+            if (dataMain) {
+                //Preserve dataMain in case it is a path (i.e. contains &#39;?&#39;)
+                mainScript = dataMain;
+
+                //Set final baseUrl if there is not already an explicit one.
+                if (!cfg.baseUrl) {
+                    //Pull off the directory of data-main for use as the
+                    //baseUrl.
+                    src = mainScript.split(&#39;/&#39;);
+                    mainScript = src.pop();
+                    subPath = src.length ? src.join(&#39;/&#39;)  + &#39;/&#39; : &#39;./&#39;;
+
+                    cfg.baseUrl = subPath;
+                }
+
+                //Strip off any trailing .js since mainScript is now
+                //like a module name.
+                mainScript = mainScript.replace(jsSuffixRegExp, &#39;&#39;);
+
+                 //If mainScript is still a path, fall back to dataMain
+                if (req.jsExtRegExp.test(mainScript)) {
+                    mainScript = dataMain;
+                }
+
+                //Put the data-main script in the files to load.
+                cfg.deps = cfg.deps ? cfg.deps.concat(mainScript) : [mainScript];
+
+                return true;
+            }
+        });
+    }</pre>
+
+<pre>
+&nbsp; &nbsp; /**
+&nbsp; &nbsp; &nbsp;* The function that handles definitions of modules. Differs from
+&nbsp; &nbsp; &nbsp;* require() in that a string for the module should be the first argument,
+&nbsp; &nbsp; &nbsp;* and the function to execute after dependencies are loaded should
+&nbsp; &nbsp; &nbsp;* return a value to define the module corresponding to the first argument&#39;s
+&nbsp; &nbsp; &nbsp;* name.
+&nbsp; &nbsp; &nbsp;*/
+&nbsp; &nbsp; define = function (name, deps, callback) {
+&nbsp;   ...
+&nbsp;   }
+</pre>
+
+<p>最后执行这个</p>
+
+<pre>
+&nbsp; &nbsp; //Set up with config info.
+&nbsp; &nbsp; req(cfg);
+</pre>
+
+<pre>
+})(this)
+</pre>
+
+<h2>API</h2>
+
+<p><a href="http://requirejs.org/docs/api.html" target="_blank">http://requirejs.org/docs/api.html</a></p>
+
+<h3><a href="http://requirejs.org/docs/api.html#jsfiles">Load JavaScript Files</a>&sect; 1.1</h3>
+
+<p><span class="marker">RequireJS takes a different approach to script loading than traditional &lt;script&gt; tags</span>. Its goal is to encourage modular code. While it can also run fast and optimize well, the primary goal is to encourage modular code. As part of that, it encourages using&nbsp;module IDs&nbsp;instead of URLs for script tags.</p>
+
+<p>RequireJS loads all code relative to a&nbsp;<a href="http://requirejs.org/docs/api.html#config-baseUrl">baseUrl</a>. The baseUrl is normally set to the same directory as the script used in a data-main attribute for the top level script to load for a page. <span class="marker">The&nbsp;<a href="http://requirejs.org/docs/api.html#data-main">data-main attribute</a>&nbsp;is a special attribute that require.js will check to start script loading</span>. This example will end up with a baseUrl of&nbsp;scripts:</p>
+
+<pre>
+&lt;!--This sets the baseUrl to the &quot;scripts&quot; directory, and
+    loads a script that will have a module ID of &#39;main&#39;--&gt;
+&lt;script data-main=&quot;scripts/main.js&quot; src=&quot;scripts/require.js&quot;&gt;&lt;/script&gt;
+</pre>
+
+<p>Or, baseUrl can be set manually via the&nbsp;<a href="http://requirejs.org/docs/api.html#config">RequireJS config</a>. If there is no explicit config and data-main is not used, then the default baseUrl is the directory that contains the HTML page running RequireJS.</p>
+
+<p>RequireJS also assumes by default that all dependencies are scripts, so it does not expect to see a trailing &quot;.js&quot; suffix on module IDs. RequireJS will automatically add it when translating the module ID to a path. With the&nbsp;<a href="http://requirejs.org/docs/api.html#config-paths">paths config</a>, you can set up locations of a group of scripts. All of these capabilities allow you to use smaller strings for scripts as compared to traditional &lt;script&gt; tags.</p>
+
+<p>There may be times when you do want to reference a script directly and not conform to the &quot;baseUrl + paths&quot; rules for finding it. If a module ID has one of the following characterstics, the ID will not be passed through the &quot;baseUrl + paths&quot; configuration, and just be treated like a regular URL that is relative to the document:</p>
+
+<ul>
+	<li>Ends in &quot;.js&quot;.</li>
+	<li>Starts with a &quot;/&quot;.</li>
+	<li>Contains an URL protocol, like &quot;http:&quot; or &quot;https:&quot;.</li>
+</ul>
+
+<p>In general though, it is best to use the baseUrl and &quot;paths&quot; config to set paths for module IDs. By doing so, it gives you more flexibility in renaming and configuring the paths to different locations for optimization builds.</p>
+
+<p>Similarly, to avoid a bunch of configuration, it is best to avoid deep folder hierarchies for scripts, and instead either keep all the scripts in baseUrl, or if you want to separate your library/vendor-supplied code from your app code, use a directory layout like this:</p>
+
+<ul>
+	<li>www/
+	<ul>
+		<li>index.html</li>
+		<li>js/
+		<ul>
+			<li>app/
+			<ul>
+				<li>sub.js</li>
+			</ul>
+			</li>
+			<li>lib/
+			<ul>
+				<li>jquery.js</li>
+				<li>canvas.js</li>
+			</ul>
+			</li>
+			<li>app.js</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+</ul>
+
+<p>in index.html:</p>
+
+<pre>
+&lt;script data-main=&quot;js/app.js&quot; src=&quot;js/require.js&quot;&gt;&lt;/script&gt;</pre>
+
+<p>and in app.js:</p>
+
+<pre>
+requirejs.config({
+    //By default load any module IDs from js/lib
+    baseUrl: &#39;js/lib&#39;,
+    //except, if the module ID starts with &quot;app&quot;,
+    //load it from the js/app directory. paths
+    //config is relative to the baseUrl, and
+    //never includes a &quot;.js&quot; extension since
+    //the paths config could be for a directory.
+    paths: {
+        app: &#39;../app&#39;
+    }
+});
+
+// Start the main app logic.
+requirejs([&#39;jquery&#39;, &#39;canvas&#39;, &#39;app/sub&#39;],
+function   ($,        canvas,   sub) {
+    //jQuery, canvas and the app/sub module are all
+    //loaded and can be used here now.
+});
+</pre>
+
+<p>Notice as part of that example, vendor libraries like jQuery did not have their version numbers in their file names. It is recommended to store that version info in a separate text file if you want to track it, or if you use a tool like&nbsp;<a href="https://github.com/volojs/volo">volo</a>, it will stamp the package.json with the version information but keep the file on disk as &quot;jquery.js&quot;. This allows you to have the very minimal configuration instead of having to put an entry in the &quot;paths&quot; config for each library. For instance, configure &quot;jquery&quot; to be &quot;jquery-1.7.2&quot;.</p>
+
+<p>Ideally the scripts you load will be modules that are defined by calling&nbsp;<a href="http://requirejs.org/docs/api.html#define">define()</a>. However, you may need to use some traditional/legacy &quot;browser globals&quot; scripts that do not express their dependencies via define(). For those, you can use the&nbsp;<a href="http://requirejs.org/docs/api.html#config-shim">shim config</a>. To properly express their dependencies.</p>
+
+<p>If you do not express the dependencies, you will likely get loading errors since RequireJS loads scripts asynchronously and out of order for speed.</p>
+
+<h3><a href="http://requirejs.org/docs/api.html#data-main" name="data-main">data-main Entry Point</a>&sect; 1.2</h3>
+
+<p>The data-main attribute is a special attribute that require.js will check to start script loading:</p>
+
+<pre>
+&lt;!--when require.js loads it will inject another script tag
+    (with async attribute) for scripts/main.js--&gt;
+&lt;script data-main=&quot;scripts/main&quot; src=&quot;scripts/require.js&quot;&gt;&lt;/script&gt;
+</pre>
+
+<p>You will typically use a data-main script to&nbsp;<a href="http://requirejs.org/docs/api.html#config">set configuration options</a>&nbsp;and then load the first application module. Note: the script tag require.js generates for your data-main module includes the&nbsp;<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script#attr-async">async attribute</a>. This means that&nbsp;you cannot assume that the load and execution of your data-main script will finish prior to other scripts referenced later in the same page.</p>
+
+<p>For example, this arrangement will fail randomly when the require.config path for the &#39;foo&#39; module has not been set prior to it being require()&#39;d later:</p>
+
+<pre>
+&lt;script data-main=&quot;scripts/main&quot; src=&quot;scripts/require.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;scripts/other.js&quot;&gt;&lt;/script&gt;
+</pre>
+
+<pre>
+// contents of main.js:
+require.config({
+    paths: {
+        foo: &#39;libs/foo-1.1.3&#39;
+    }
+});
+</pre>
+
+<pre>
+// contents of other.js:
+
+// This code might be called before the require.config() in main.js
+// has executed. When that happens, require.js will attempt to
+// load &#39;scripts/foo.js&#39; instead of &#39;scripts/libs/foo-1.1.3.js&#39;
+require( [&#39;foo&#39;], function( foo ) {
+
+});
+</pre>
+
+<h3><a href="http://requirejs.org/docs/api.html#define" name="define">Define a Module</a>&sect; 1.3</h3>
+
+<p>A module is different from a traditional script file in that it defines a well-scoped object that avoids polluting the global namespace. It can explicitly list its dependencies and get a handle on those dependencies without needing to refer to global objects, but instead receive the dependencies as arguments to the function that defines the module. Modules in RequireJS are an extension of the&nbsp;<a href="http://www.adequatelygood.com/2010/3/JavaScript-Module-Pattern-In-Depth">Module Pattern</a>, with the benefit of not needing globals to refer to other modules.</p>
+
+<p>The RequireJS syntax for modules allows them to be loaded as fast as possible, even out of order, but evaluated in the correct dependency order, and since global variables are not created, it makes it possible to&nbsp;<a href="http://requirejs.org/docs/api.html#multiversion">load multiple versions of a module in a page</a>.</p>
+
+<p>(If you are familiar with or are using CommonJS modules, then please also see&nbsp;<a href="http://requirejs.org/docs/commonjs.html">CommonJS Notes</a>&nbsp;for information on how the RequireJS module format maps to CommonJS modules).</p>
+
+<p>There should only be&nbsp;one&nbsp;module definition per file on disk. The modules can be grouped into optimized bundles by the&nbsp;<a href="http://requirejs.org/docs/optimization.html">optimization tool</a>.</p>
+
+<h4><a href="http://requirejs.org/docs/api.html#defsimple" name="defsimple">Simple Name/Value Pairs</a>&sect; 1.3.1</h4>
+
+<p>If the module does not have any dependencies, and it is just a collection of name/value pairs, then just pass an object literal to define():</p>
+
+<pre>
+//Inside file my/shirt.js:
+define({
+    color: &quot;black&quot;,
+    size: &quot;unisize&quot;
+});
+</pre>
+
+<h4><a href="http://requirejs.org/docs/api.html#deffunc" name="deffunc">Definition Functions</a>&sect; 1.3.2</h4>
+
+<p>If the module does not have dependencies, but needs to use a function to do some setup work, then define itself, pass a function to define():</p>
+
+<pre>
+//my/shirt.js now does setup work
+//before returning its module definition.
+define(function () {
+    //Do setup work here
+
+    return {
+        color: &quot;black&quot;,
+        size: &quot;unisize&quot;
+    }
+});
+</pre>
+
+<h4><a href="http://requirejs.org/docs/api.html#defdep" name="defdep">Definition Functions with Dependencies</a>&sect; 1.3.3</h4>
+
+<p>If the module has dependencies, the first argument should be an array of dependency names, and the second argument should be a definition function. The function will be called to define the module once all dependencies have loaded. The function should return an object that defines the module. The dependencies will be passed to the definition function as function arguments, listed in the same order as the order in the dependency array:</p>
+
+<pre>
+//my/shirt.js now has some dependencies, a cart and inventory
+//module in the same directory as shirt.js
+define([&quot;./cart&quot;, &quot;./inventory&quot;], function(cart, inventory) {
+        //return an object to define the &quot;my/shirt&quot; module.
+        return {
+            color: &quot;blue&quot;,
+            size: &quot;large&quot;,
+            addToCart: function() {
+                inventory.decrement(this);
+                cart.add(this);
+            }
+        }
+    }
+);
+</pre>
+
+<p>In this example, a my/shirt module is created. It depends on my/cart and my/inventory. On disk, the files are structured like this:</p>
+
+<ul>
+	<li>my/cart.js</li>
+	<li>my/inventory.js</li>
+	<li>my/shirt.js</li>
+</ul>
+
+<p>The function call above specifies two arguments, &quot;cart&quot; and &quot;inventory&quot;. These are the modules represented by the &quot;./cart&quot; and &quot;./inventory&quot; module names.</p>
+
+<p>The function is not called until the my/cart and my/inventory modules have been loaded, and the function receives the modules as the &quot;cart&quot; and &quot;inventory&quot; arguments.</p>
+
+<p>Modules that define globals are explicitly discouraged, so that multiple versions of a module can exist in a page at a time (see&nbsp;Advanced Usage). Also, the order of the function arguments should match the order of the dependencies.</p>
+
+<p>The return object from the function call defines the &quot;my/shirt&quot; module. By defining modules in this way, &quot;my/shirt&quot; does not exist as a global object.</p>
+
+<h4><a href="http://requirejs.org/docs/api.html#funcmodule" name="funcmodule">Define a Module as a Function</a>&sect; 1.3.4</h4>
+
+<p>Modules do not have to return objects. Any valid return value from a function is allowed. Here is a module that returns a function as its module definition:</p>
+
+<pre>
+//A module definition inside foo/title.js. It uses
+//my/cart and my/inventory modules from before,
+//but since foo/bar.js is in a different directory than
+//the &quot;my&quot; modules, it uses the &quot;my&quot; in the module dependency
+//name to find them. The &quot;my&quot; part of the name can be mapped
+//to any directory, but by default, it is assumed to be a
+//sibling to the &quot;foo&quot; directory.
+define([&quot;my/cart&quot;, &quot;my/inventory&quot;],
+    function(cart, inventory) {
+        //return a function to define &quot;foo/title&quot;.
+        //It gets or sets the window title.
+        return function(title) {
+            return title ? (window.title = title) :
+                   inventory.storeName + &#39; &#39; + cart.name;
+        }
+    }
+);
+</pre>
+
+<h4><a href="http://requirejs.org/docs/api.html#cjsmodule" name="cjsmodule">Define a Module with Simplified CommonJS Wrapper</a>&sect; 1.3.5</h4>
+
+<p>If you wish to reuse some code that was written in the traditional&nbsp;<a href="http://wiki.commonjs.org/wiki/Modules/1.1.1">CommonJS module format</a>&nbsp;it may be difficult to re-work to the array of dependencies used above, and you may prefer to have direct alignment of dependency name to the local variable used for that dependency. You can use the&nbsp;<a href="http://requirejs.org/docs/commonjs.html">simplified CommonJS wrapper</a>&nbsp;for those cases:</p>
+
+<pre>
+define(function(require, exports, module) {
+        var a = require(&#39;a&#39;),
+            b = require(&#39;b&#39;);
+
+        //Return the module value
+        return function () {};
+    }
+);
+</pre>
+
+<p>This wrapper relies on Function.prototype.toString() to give a useful string value of the function contents. This does not work on some devices like the PS3 and some older Opera mobile browsers. Use the&nbsp;<a href="http://requirejs.org/docs/optimization.html">optimizer</a>&nbsp;to pull out the dependencies in the array format for use on those devices.</p>
+
+<p>More information is available on the&nbsp;<a href="http://requirejs.org/docs/commonjs.html">CommonJS page</a>, and in the in the&nbsp;<a href="http://requirejs.org/docs/whyamd.html#sugar">&quot;Sugar&quot; section in the Why AMD page</a>.</p>
+
+<h4><a href="http://requirejs.org/docs/api.html#modulename" name="modulename">Define a Module with a Name</a>&sect; 1.3.6</h4>
+
+<p>You may encounter some define() calls that include a name for the module as the first argument to define():</p>
+
+<pre>
+    //Explicitly defines the &quot;foo/title&quot; module:
+    define(&quot;foo/title&quot;,
+        [&quot;my/cart&quot;, &quot;my/inventory&quot;],
+        function(cart, inventory) {
+            //Define foo/title object in here.
+       }
+    );
+</pre>
+
+<p>These are normally generated by the&nbsp;<a href="http://requirejs.org/docs/optimization.html">optimization tool</a>. You can explicitly name modules yourself, but it makes the modules less portable -- if you move the file to another directory you will need to change the name. It is normally best to avoid coding in a name for the module and just let the optimization tool burn in the module names. The optimization tool needs to add the names so that more than one module can be bundled in a file, to allow for faster loading in the browser.</p>
+
+<h4><a href="http://requirejs.org/docs/api.html#modulenotes" name="modulenotes">Other Module Notes</a>&sect; 1.3.7</h4>
+
+<p>One module per file.: Only one module should be defined per JavaScript file, given the nature of the module name-to-file-path lookup algorithm. Multiple modules will be grouped into optimized files by the&nbsp;<a href="http://requirejs.org/docs/optimization.html">optimization tool</a>, but you should only use the optimization tool to place more than one module in a file.</p>
+
+<p>Relative module names inside define(): For require(&quot;./relative/name&quot;) calls that can happen inside a define() function call, be sure to ask for &quot;require&quot; as a dependency, so that the relative name is resolved correctly:</p>
+
+<pre>
+define([&quot;require&quot;, &quot;./relative/name&quot;], function(require) {
+    var mod = require(&quot;./relative/name&quot;);
+});
+</pre>
+
+<p>Or better yet, use the shortened syntax that is available for use with&nbsp;<a href="http://requirejs.org/docs/commonjs.html">translating CommonJS</a>&nbsp;modules:</p>
+
+<pre>
+define(function(require) {
+    var mod = require(&quot;./relative/name&quot;);
+});
+</pre>
+
+<p>This form will use Function.prototype.toString() to find the require() calls, and add them to the dependency array, along with &quot;require&quot;, so the code will work correctly with relative paths.</p>
+
+<p>Relative paths are really useful if you are creating a few modules inside a directory, so that you can share the directory with other people or other projects, and you want to be able to get a handle on the sibling modules in that directory without having to know the directory&#39;s name.</p>
+
+<p>Generate URLs relative to module: You may need to generate an URL that is relative to a module. To do so, ask for &quot;require&quot; as a dependency and then use require.toUrl() to generate the URL:</p>
+
+<pre>
+define([&quot;require&quot;], function(require) {
+    var cssUrl = require.toUrl(&quot;./style.css&quot;);
+});
+</pre>
+
+<p>Console debugging: If you need to work with a module you already loaded via a require([&quot;module/name&quot;], function(){}) call in the JavaScript console, then you can use the require() form that just uses the string name of the module to fetch it:</p>
+
+<pre>
+require(&quot;module/name&quot;).callSomeFunction()
+</pre>
+
+<p>Note this only works if &quot;module/name&quot; was previously loaded via the async version of require: require([&quot;module/name&quot;]). If using a relative path, like &#39;./module/name&#39;, those only work inside define</p>
+
+<h4><a href="http://requirejs.org/docs/api.html#circular" name="circular">Circular Dependencies</a>&sect; 1.3.8</h4>
+
+<p>If you define a circular dependency (a needs b and b needs a), then in this case when b&#39;s module function is called, it will get an undefined value for a. b can fetch a later after modules have been defined by using the require() method (be sure to specify require as a dependency so the right context is used to look up a):</p>
+
+<pre>
+//Inside b.js:
+define([&quot;require&quot;, &quot;a&quot;],
+    function(require, a) {
+        //&quot;a&quot; in this case will be null if a also asked for b,
+        //a circular dependency.
+        return function(title) {
+            return require(&quot;a&quot;).doSomething();
+        }
+    }
+);
+</pre>
+
+<p>Normally you should not need to use require() to fetch a module, but instead rely on the module being passed in to the function as an argument. Circular dependencies are rare, and usually a sign that you might want to rethink the design. However, sometimes they are needed, and in that case, use require() as specified above.</p>
+
+<p>If you are familiar with CommonJS modules, you could instead use&nbsp;exports&nbsp;to create an empty object for the module that is available immediately for reference by other modules. By doing this on both sides of a circular dependency, you can then safely hold on to the the other module. This only works if each module is exporting an object for the module value, not a function:</p>
+
+<pre>
+//Inside b.js:
+define(function(require, exports, module) {
+    //If &quot;a&quot; has used exports, then we have a real
+    //object reference here. However, we cannot use
+    //any of a&#39;s properties until after b returns a value.
+    var a = require(&quot;a&quot;);
+
+    exports.foo = function () {
+        return a.bar();
+    };
+});
+</pre>
+
+<p>Or, if you are using the dependency array approach, ask for the special&nbsp;<a href="https://github.com/jrburke/requirejs/wiki/Differences-between-the-simplified-CommonJS-wrapper-and-standard-AMD-define#wiki-magic">&#39;exports&#39; dependency:</a></p>
+
+<pre>
+//Inside b.js:
+define([&#39;a&#39;, &#39;exports&#39;], function(a, exports) {
+    //If &quot;a&quot; has used exports, then we have a real
+    //object reference here. However, we cannot use
+    //any of a&#39;s properties until after b returns a value.
+
+    exports.foo = function () {
+        return a.bar();
+    };
+});
+</pre>
+
+<h4><a href="http://requirejs.org/docs/api.html#jsonp" name="jsonp">Specify a JSONP Service Dependency</a>&sect; 1.3.9</h4>
+
+<p><a href="http://en.wikipedia.org/wiki/JSON#JSONP">JSONP</a>&nbsp;is a way of calling some services in JavaScript. It works across domains and it is an established approach to calling services that just require an HTTP GET via a script tag.</p>
+
+<p>To use a JSONP service in RequireJS, specify &quot;define&quot; as the callback parameter&#39;s value. This means you can get the value of a JSONP URL as if it was a module definition.</p>
+
+<p>Here is an example that calls a JSONP API endpoint. In this example, the JSONP callback parameter is called &quot;callback&quot;, so &quot;callback=define&quot; tells the API to wrap the JSON response in a &quot;define()&quot; wrapper:</p>
+
+<pre>
+require([&quot;http://example.com/api/data.json?callback=define&quot;],
+    function (data) {
+        //The data object will be the API response for the
+        //JSONP data call.
+        console.log(data);
+    }
+);
+</pre>
+
+<p>This use of JSONP should be limited to JSONP services for initial application setup. If the JSONP service times out, it means other modules you define via define() may not get executed, so the error handling is not robust.</p>
+
+<p>Only JSONP return values that are JSON objects are supported. A JSONP response that is an array, a string or a number will not work.</p>
+
+<p>This functionality should not be used for long-polling JSONP connections -- APIs that deal with real time streaming. Those kinds of APIs should do more script cleanup after receiving each response, and RequireJS will only fetch a JSONP URL once -- subsequent uses of the same URL as a dependency in a require() or define() call will get a cached value.</p>
+
+<p>Errors in loading a JSONP service are normally surfaced via timeouts for the service, since script tag loading does not give much detail into network problems. To detect errors, you can override requirejs.onError() to get errors. There is more information in the&nbsp;<a href="http://requirejs.org/docs/api.html#errors">Handling Errors</a>&nbsp;section.</p>
+
+<h4><a href="http://requirejs.org/docs/api.html#undef" name="undef">Undefining a Module</a>&sect; 1.3.10</h4>
+
+<p>There is a global function,&nbsp;requirejs.undef(), that allows undefining a module. It will reset the loader&#39;s internal state to forget about the previous definition of the module.</p>
+
+<p>However, it will not remove the module from other modules that are already defined and got a handle on that module as a dependency when they executed. So it is really only useful to use in error situations when no other modules have gotten a handle on a module value, or as part of any future module loading that may use that module. See the&nbsp;<a href="http://requirejs.org/docs/api.html#errbacks">errback section</a>&nbsp;for an example.</p>
+
+<p>If you want to do more sophisticated dependency graph analysis for undefining work, the semi-private&nbsp;<a href="https://github.com/jrburke/requirejs/wiki/Internal-API:-onResourceLoad">onResourceLoad API</a>&nbsp;may be helpful.</p>
+
+<p>&nbsp;</p>
