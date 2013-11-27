@@ -6,6 +6,14 @@
 
 <p>Scaffold out a front-end web app</p>
 
+<ul>
+	<li>
+	<p>2013-11-27 11:34</p>
+
+	<p>今日发现 yo webapp 的 Gruntfile.js 中的 copy 任务，并不包含 bower_components</p>
+	</li>
+</ul>
+
 <pre>
 npm install generator-webapp</pre>
 
