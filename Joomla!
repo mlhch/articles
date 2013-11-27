@@ -1,0 +1,89 @@
+<h1>Joomla!</h1>
+
+<p>2012-03-29 21:20:50 +08:00 Thursday</p>
+
+<p><a href="http://www.joomla.org/" target="_blank">http://www.joomla.org/</a></p>
+
+<p>2012-09-17 15:04 重新部署 www.chuangshubeijing.com</p>
+
+<p>1.x 最新版依然是 1.5.26</p>
+
+<h3>Joomla! 1.5.26</h3>
+
+<p>已经是目前最新版本</p>
+
+<table border="0" cellpadding="0" cellspacing="0">
+	<tbody>
+		<tr>
+			<th>
+			<p>LANGUAGE</p>
+			</th>
+			<th>
+			<p>VERSION</p>
+			</th>
+			<th>
+			<p>DOWNLOAD</p>
+			</th>
+		</tr>
+		<tr>
+			<td>English (UK)</td>
+			<td>1.5.26 Full Package</td>
+			<td><a href="http://joomlacode.org/gf/download/frsrelease/16890/73390/Joomla_1.5.26-Stable-Full_Package.zip">ZIP</a></td>
+		</tr>
+	</tbody>
+</table>
+
+<pre>
+$ ll sync/soft/Develop/Joomla/Joomla_1.5.26-Stable-Full_Package.zip
+-rw-r--r--&nbsp; 1 mlhch&nbsp; staff&nbsp; 7060432&nbsp; 3 29 21:41 sync/soft/Develop/Joomla/Joomla_1.5.26-Stable-Full_Package.zip</pre>
+
+<h3>Joomla! 2.5</h3>
+
+<p>2012-05-11 04:41 星期五</p>
+
+<p>目前最新版本是 2.5.4</p>
+
+<p>Joomla is one of the world&rsquo; s most popular open source CMS (content management system). With millions of websites running on Joomla, the software is used by individuals, small &amp; medium-sized businesses, and large organizations worldwide to easily create &amp; build a variety of websites &amp; web-enabled applications.<a href="http://www.joomla.org/25">Find out more about Joomla! 2.5</a></p>
+
+<table border="0" cellpadding="0" cellspacing="0">
+	<tbody>
+		<tr>
+			<th>
+			<p>LANGUAGE</p>
+			</th>
+			<th>
+			<p>VERSION</p>
+			</th>
+			<th>
+			<p>DOWNLOAD</p>
+			</th>
+		</tr>
+		<tr>
+			<td>English (UK)</td>
+			<td>2.5.4 Full Package</td>
+			<td><a href="http://joomlacode.org/gf/download/frsrelease/16914/73508/Joomla_2.5.4-Stable-Full_Package.zip">ZIP</a></td>
+		</tr>
+	</tbody>
+</table>
+
+<h2>如何快速下载历史版本</h2>
+
+<ol>
+	<li>首页 : http://www.joomla.org/</li>
+	<li><a href="http://community.joomla.org/">Community &amp; Support</a>&nbsp;-&gt;&nbsp;<a href="http://docs.joomla.org/">Joomla! Documentation</a>&nbsp;:&nbsp;http://docs.joomla.org/</li>
+	<li><a href="http://docs.joomla.org/Category:Top_Level">Browse categories</a>&nbsp;:&nbsp;http://docs.joomla.org/Category:Top_Level</li>
+	<li><a href="http://docs.joomla.org/Category:Joomla!_versions">Joomla! versions</a>&lrm; :&nbsp;http://docs.joomla.org/Category:Joomla!_versions</li>
+	<li><a href="http://docs.joomla.org/Category:Joomla!_1.5">Joomla! 1.5</a>&lrm;&nbsp;:&nbsp;http://docs.joomla.org/Category:Joomla!_1.5</li>
+	<li><a href="http://docs.joomla.org/Joomla_1.5_version_history">Joomla 1.5 version history</a>&nbsp;:&nbsp;http://docs.joomla.org/Joomla_1.5_version_history</li>
+	<li>Wojmamni ama naiki<br />
+	30 July 2009<br />
+	<a href="http://www.joomla.org/announcements/release-news/5244-joomla-1514-released.html">Release Notes</a><br />
+	<a href="http://joomlacode.org/gf/project/joomla/frs/?action=FrsReleaseBrowse&amp;frs_package_id=4734">Packages and MD5s</a></li>
+	<li><a href="http://joomlacode.org/gf/download/frsrelease/10785/42655/Joomla_1.5.14-Stable-Full_Package.zip">Click here to download Joomla 1.5.14 (Full package) &raquo;</a>&nbsp;:&nbsp;http://joomlacode.org/gf/download/frsrelease/10785/42655/Joomla_1.5.14-Stable-Full_Package.zip</li>
+</ol>
+
+<h2>安装数据库时&nbsp;TYPE=MyISAM 出错的问题</h2>
+
+<p>手动创建一个新表，然后对比出错时提示的 SQL 语句，很容易就发现原因是新版本的 MySQL&nbsp;不再兼容&nbsp;TYPE=MyISAM&nbsp;的指令， 需要使用&nbsp;ENGINE=MyISAM。解决办法是打开文件 &lt;joomlafolder&gt;/installation/sql/mysql/joomla.sql，替换所有的 TYPE=MyISAM。</p>
+
+<p>已知 1.5.14 存在此问题，1.5.26 不存在此问题。</p>
