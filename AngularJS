@@ -1,0 +1,1219 @@
+<h1>AngularJS</h1>
+
+<p>2013-02-18 18:55:21 +08:00 Monday</p>
+
+<p><a href="http://angularjs.org/" target="_blank">http://angularjs.org/</a>,&nbsp;<a href="http://www.angularjs.cn/" target="_blank">http://www.angularjs.cn/</a></p>
+
+<p>HTML enhanced for web apps!</p>
+
+<p><a href="http://angularjs.org/">Download&nbsp;(1.0.4/1.1.2)</a></p>
+
+<p>2013-04-30 12:28 星期二</p>
+
+<p><a href="http://angularjs.org/">Download&nbsp;(1.0.6/1.1.4)</a></p>
+
+<p>2013-08-02 20:05 Friday</p>
+
+<p><a href="http://angularjs.org/">&nbsp;Download&nbsp;(1.0.7/1.1.5)</a></p>
+
+<p>2013-10-18 13:26 Friday</p>
+
+<p>http://www.youtube.com/watch?v=WqmeI5fZcho</p>
+
+<p><a href="http://stackoverflow.com/questions/15672709/how-to-require-a-controller-in-an-angularjs-directive" target="_blank">http://stackoverflow.com/questions/15672709/how-to-require-a-controller-in-an-angularjs-directive</a></p>
+
+<p><a href="http://stackoverflow.com/questions/12546945/difference-between-the-controller-and-link-functions-when-defining-an-angula" target="_blank">http://stackoverflow.com/questions/12546945/difference-between-the-controller-and-link-functions-when-defining-an-angula</a></p>
+
+<p><a href="http://stackoverflow.com/questions/11605917/this-vs-scope-in-angularjs-controllers/14168699#14168699" target="_blank">http://stackoverflow.com/questions/11605917/this-vs-scope-in-angularjs-controllers/14168699#14168699</a></p>
+
+<p><a href="http://stackoverflow.com/questions/16881478/how-to-call-a-method-defined-in-an-angularjs-directive" target="_blank">http://stackoverflow.com/questions/16881478/how-to-call-a-method-defined-in-an-angularjs-directive</a></p>
+
+<h2>Why AngularJS?</h2>
+
+<p>HTML is great for declaring static documents, but it falters when we try to use it for declaring dynamic views in web-applications. AngularJS lets you extend HTML vocabulary for your application. The resulting environment is extraordinarily expressive, readable, and quick to develop.</p>
+
+<h2>体会要点</h2>
+
+<h3>service and provider</h3>
+
+<p>一个 $someServiceProvider，通常缓存为&nbsp;providerCache.$someServiceProvider，是一个含有 $get 方法的 Object，既可以是从一个通常名为&nbsp;$SomeServiceProvider 的函数派生的，也可以是简单的&nbsp;{ $get: function(...) {...} }</p>
+
+<p>一个 $someService，通常缓存为 instanceCache.$someService，是 $someServiceProvider.$get 方法执行后的返回结果。</p>
+
+<h3>providerCache.$provide</h3>
+
+<p>系统初始时，只有 $provide 这个原始发动机。</p>
+
+<pre>
+      providerCache = {
+        $provide: {
+            provider: supportObject(provider),
+            factory: supportObject(factory),
+            service: supportObject(service),
+            value: supportObject(value),
+            constant: supportObject(constant),
+            decorator: decorator
+          }
+      },</pre>
+
+<p>形如 angular.module(&#39;someModuleName&#39;, []).provider(&#39;$aName&#39;, $aProviderInitFn) 的调用，实质执行的是 providerCache.$provide.provider(&#39;$aName&#39;, $aProviderInitFn)，$aProviderInitFn 作为在一个空实例上被执行的第一个方法，必须赋予这个空实例一个 $get 方法。得到的结果是</p>
+
+<pre>
+providerCache = {
+  $provide: {...}
+  $aNameProvider: Constructor {
+    $get: function(...) {...}
+&nbsp; }
+}
+</pre>
+
+<p>&#39;someModuleName&#39; 并没什么实际意义，仅仅起到一个盒子的作用，方便把相关的 invokeLater 归类到&nbsp;&nbsp;invokeQueue，invokeQueue 中的每个 invokeLater 被调用时，并不知道自己是属于哪个 &#39;someModuleName&#39;。</p>
+
+<h3>moduleInstance.config</h3>
+
+<p>moduleInstance.config 与 moduleInstance.provider 虽然都是 invokeLater，但本质区别是 config 的东西只会仅仅被执行，但 provider 的会创造一个相关 instance&nbsp;并缓存到 provideCache 下。</p>
+
+<pre>
+var config = invokeLater(&#39;$injector&#39;, &#39;invoke&#39;);</pre>
+
+<pre>
+provider: invokeLater(&#39;$provide&#39;, &#39;provider&#39;),</pre>
+
+<h3>moduleInstance.factory</h3>
+
+<p>moduleInstance.factory 的特点又是什么呢？从其代码可以看出，其本质是将参数 factoryFn 直接构造为一个单例的唯一的 $get 方法，然后像 provider 那样将此单例注册到 providerCache</p>
+
+<pre>
+function factory(name, factoryFn) { return provider(name, { $get: factoryFn }); }</pre>
+
+<h3>$compileProvider.directive</h3>
+
+<h3>moduleInstance.directive</h3>
+
+<p>moduleInstance.directive 实际调用的是 providerCache.$compileProvider.directive。此时仅仅是使得比如&nbsp;hasDirectives[&#39;ngHref&#39;][] = function or [&#39;a&#39;,&#39;b&#39;,function(a,b){...}]</p>
+
+<pre>
+directive: invokeLater(&#39;$compileProvider&#39;, &#39;directive&#39;),</pre>
+
+<h3>系统阶段</h3>
+
+<ol>
+	<li>
+	<p>var injector = createInjector(modules);</p>
+
+	<p>该阶段主要动作是 createInjector 函数中的 loadModules([ng, $rootElement, theApp])，而&nbsp;loadModule 函数中主要使用的是&nbsp;providerInjector.$invoke（因为 $injector 总是和 invoke 配对出现的）。还有&nbsp;providerInjector.get(&#39;$provide&#39;).provider(...) =&gt; providerCache.$provide.provider(...) =&gt;&nbsp;providerInjector.instantiate(provider_)，<span class="marker">所以该阶段的 invoke 只在 providerInjector 生成时传入的参数 providerCache 上工作</span>。</p>
+
+	<p>也就是说，该阶段的所有依赖注入，都属于 serviceProvider 的相互依赖</p>
+
+	<pre>
+forEach(loadModules(modulesToLoad), function(fn) { instanceInjector.invoke(fn || noop); });</pre>
+
+	<pre>
+          for(var invokeQueue = moduleFn._invokeQueue, i = 0, ii = invokeQueue.length; i &lt; ii; i++) {
+            var invokeArgs = invokeQueue[i],
+                provider = invokeArgs[0] == &#39;$injector&#39;
+                    ? providerInjector
+                    : providerInjector.get(invokeArgs[0]);
+
+            provider[invokeArgs[1]].apply(provider, invokeArgs[2]);
+          }</pre>
+	</li>
+	<li>
+	<p>injector.invoke([&#39;$rootScope&#39;, &#39;$rootElement&#39;, &#39;$compile&#39;, &#39;$injector&#39;, function(...){...}])</p>
+
+	<p>该阶段的 injector 是上一步返回的 instanceInjector，调用它的 invoke 方法自然导致所有的依赖注入都属于 service 的依赖注入。</p>
+
+	<pre>
+      instanceInjector = (instanceCache.$injector =
+          createInternalInjector(instanceCache, function(servicename) {
+            var provider = providerInjector.get(servicename + providerSuffix);//console.log(&#39;    &#39; + servicename + &#39;.$get -&gt; &#39; + (typeof provider.$get == &#39;function&#39; ? provider.$get : provider.$get[provider.$get.length-1]).toString().replace(/\{[\s\S]*$/, &#39;&#39;))
+            return instanceInjector.invoke(provider.$get, provider);
+          }));</pre>
+	</li>
+	<li>
+	<p>aApp.config 所处阶段还在 loadModule 阶段，所以自然要依赖 $locationProvider，而不是 $location</p>
+
+	<pre>
+var aApp = angular.module(&#39;aApp&#39;, [&#39;directives&#39;, &#39;services&#39;, &#39;ngResource&#39;, &#39;ngSanitize&#39;])
+  .config([&#39;$routeProvider&#39;, &#39;$locationProvider&#39;, function($routeProvider, $locationProvider) {
+
+  $locationProvider.hashPrefix(&#39;!&#39;);//html5Mode(true);</pre>
+	</li>
+	<li>
+	<p>compile(element)(scope) 的 compile 阶段，依赖到了 $location，$locationProvider.$get 被执行，返回的&nbsp;$location 根据是否是 html5Mode 而可能是 new LocationHashbangInHtml5Url 或者 new LocationHashbangUrl</p>
+
+	<pre>
+[&quot;ngViewDirective&quot;, &quot;$route&quot;, &quot;$location&quot;]</pre>
+
+	<pre>
+   if (html5Mode) {
+      basePath = $browser.baseHref() || &#39;/&#39;;
+      pathPrefix = pathPrefixFromBase(basePath);
+      appBaseUrl =
+          composeProtocolHostPort(initUrlParts.protocol, initUrlParts.host, initUrlParts.port) +
+          pathPrefix + &#39;/&#39;;
+
+      if ($sniffer.history) {
+        $location = new LocationUrl(
+          convertToHtml5Url(initUrl, basePath, hashPrefix),
+          pathPrefix, appBaseUrl);
+      } else {
+        $location = new LocationHashbangInHtml5Url(
+          convertToHashbangUrl(initUrl, basePath, hashPrefix),
+          hashPrefix, appBaseUrl, basePath.substr(pathPrefix.length + 1));
+      }
+    } else {
+      appBaseUrl =
+          composeProtocolHostPort(initUrlParts.protocol, initUrlParts.host, initUrlParts.port) +
+          (initUrlParts.path || &#39;&#39;) +
+          (initUrlParts.search ? (&#39;?&#39; + initUrlParts.search) : &#39;&#39;) +
+          &#39;#&#39; + hashPrefix + &#39;/&#39;;
+
+      $location = new LocationHashbangUrl(initUrl, hashPrefix, appBaseUrl);
+    }</pre>
+	</li>
+</ol>
+
+<h2>Step by step</h2>
+
+<ol>
+	<li>Start form Overview
+	<pre>
+(function(window, document, undefined) {
+&#39;use strict&#39;;
+
+var /** holds major version number for IE or NaN for real browsers */
+    msie              = int((/msie (\d+)/.exec(lowercase(navigator.userAgent)) || [])[1]),
+    jqLite,           // delay binding since jQuery could be loaded after us.
+    jQuery,           // delay binding
+    slice             = [].slice,
+    push              = [].push,
+    toString          = Object.prototype.toString,
+
+    /** @name angular */
+    <span class="marker">angular</span>           = window.angular || (window.angular = {}),
+    angularModule,
+    nodeName_,
+    uid               = [&#39;0&#39;, &#39;0&#39;, &#39;0&#39;];
+...
+...
+...
+&nbsp; bindJQuery(); /// after here, angular now is only an Object {element: function ( selector, context ) {...}}
+
+&nbsp; publishExternalAPI(angular);
+
+&nbsp; jqLite(document).ready(function() {
+&nbsp;&nbsp;&nbsp; angularInit(document, bootstrap);
+&nbsp; });
+})(window, document);
+angular.element(document).find(&#39;head&#39;).append(&#39;&lt;style type=&quot;text/css&quot;&gt;@charset &quot;UTF-8&quot;;[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak{display:none;}ng\\:form{display:block;}&lt;/style&gt;&#39;);</pre>
+
+	<p>2013-05-31 20:01 Friday</p>
+
+	<p>This is still the same. ng-cloak is to hide the uncompiled angular template. See what bindJQuery() do.</p>
+
+	<pre>
+function bindJQuery() {
+&nbsp; // bind to jQuery if present;
+&nbsp; jQuery = window.jQuery;
+&nbsp; // reset to jQuery or default to us.
+&nbsp; if (jQuery) {
+&nbsp; &nbsp; jqLite = jQuery;
+&nbsp; &nbsp; extend(jQuery.fn, {
+&nbsp; &nbsp; &nbsp; scope: JQLitePrototype.scope,
+&nbsp; &nbsp; &nbsp; controller: JQLitePrototype.controller,
+&nbsp; &nbsp; &nbsp; injector: JQLitePrototype.injector,
+&nbsp; &nbsp; &nbsp; inheritedData: JQLitePrototype.inheritedData
+&nbsp; &nbsp; });
+&nbsp; &nbsp; JQLitePatchJQueryRemove(&#39;remove&#39;, true);
+&nbsp; &nbsp; JQLitePatchJQueryRemove(&#39;empty&#39;);
+&nbsp; &nbsp; JQLitePatchJQueryRemove(&#39;html&#39;);
+&nbsp; } else {
+&nbsp; &nbsp; jqLite = JQLite;
+&nbsp; }
+&nbsp; angular.element = jqLite;
+}</pre>
+	</li>
+	<li>
+	<p>publishExternalAPI(angular) 依次把内部的 bootstrap, copy 等等放到 angular 命名下。</p>
+
+	<pre>
+function publishExternalAPI(angular){
+&nbsp; extend(angular, {
+&nbsp;&nbsp;&nbsp; &#39;bootstrap&#39;: bootstrap,
+&nbsp;&nbsp;&nbsp; &#39;copy&#39;: copy,
+&nbsp;&nbsp;&nbsp; &#39;extend&#39;: extend,
+&nbsp;&nbsp;&nbsp; &#39;equals&#39;: equals,
+&nbsp;&nbsp;&nbsp; &#39;element&#39;: jqLite,
+&nbsp;&nbsp;&nbsp; &#39;forEach&#39;: forEach,
+&nbsp;&nbsp;&nbsp; &#39;injector&#39;: createInjector,
+&nbsp;&nbsp;&nbsp; &#39;noop&#39;:noop,
+&nbsp;&nbsp;&nbsp; &#39;bind&#39;:bind,
+&nbsp;&nbsp;&nbsp; &#39;toJson&#39;: toJson,
+&nbsp;&nbsp;&nbsp; &#39;fromJson&#39;: fromJson,
+&nbsp;&nbsp;&nbsp; &#39;identity&#39;:identity,
+&nbsp;&nbsp;&nbsp; &#39;isUndefined&#39;: isUndefined,
+&nbsp;&nbsp;&nbsp; &#39;isDefined&#39;: isDefined,
+&nbsp;&nbsp;&nbsp; &#39;isString&#39;: isString,
+&nbsp;&nbsp;&nbsp; &#39;isFunction&#39;: isFunction,
+&nbsp;&nbsp;&nbsp; &#39;isObject&#39;: isObject,
+&nbsp;&nbsp;&nbsp; &#39;isNumber&#39;: isNumber,
+&nbsp;&nbsp;&nbsp; &#39;isElement&#39;: isElement,
+&nbsp;&nbsp;&nbsp; &#39;isArray&#39;: isArray,
+&nbsp;&nbsp;&nbsp; &#39;version&#39;: version,
+&nbsp;&nbsp;&nbsp; &#39;isDate&#39;: isDate,
+&nbsp;&nbsp;&nbsp; &#39;lowercase&#39;: lowercase,
+&nbsp;&nbsp;&nbsp; &#39;uppercase&#39;: uppercase,
+&nbsp;&nbsp;&nbsp; &#39;callbacks&#39;: {counter: 0}
+&nbsp; });
+
+&nbsp; angularModule = setupModuleLoader(window);
+
+  try {
+    angularModule(&#39;ngLocale&#39;); /// 无第二个参数定义情况下，如果没有发现 ngLocale，则会抛出异常。有第二个参数，表示要进行定义。
+  } catch (e) {
+    angularModule(&#39;ngLocale&#39;, []).provider(&#39;$locale&#39;, $LocaleProvider);
+  }
+
+  angularModule(&#39;ng&#39;, [&#39;ngLocale&#39;], [&#39;$provide&#39;,
+    function ngModule($provide) {
+      $provide.provider(&#39;$compile&#39;, $CompileProvider).
+        directive({
+            a: htmlAnchorDirective,
+            input: inputDirective,
+            textarea: inputDirective,
+            form: formDirective,
+            script: scriptDirective,
+            select: selectDirective,
+            style: styleDirective,
+            option: optionDirective,
+            ngBind: ngBindDirective,
+            ngBindHtmlUnsafe: ngBindHtmlUnsafeDirective,
+            ngBindTemplate: ngBindTemplateDirective,
+            ngClass: ngClassDirective,
+            ngClassEven: ngClassEvenDirective,
+            ngClassOdd: ngClassOddDirective,
+            ngCsp: ngCspDirective,
+            ngCloak: ngCloakDirective,
+            ngController: ngControllerDirective,
+            ngForm: ngFormDirective,
+            ngHide: ngHideDirective,
+            ngInclude: ngIncludeDirective,
+            ngInit: ngInitDirective,
+            ngNonBindable: ngNonBindableDirective,
+            ngPluralize: ngPluralizeDirective,
+            ngRepeat: ngRepeatDirective,
+            ngShow: ngShowDirective,
+            ngSubmit: ngSubmitDirective,
+            ngStyle: ngStyleDirective,
+            ngSwitch: ngSwitchDirective,
+            ngSwitchWhen: ngSwitchWhenDirective,
+            ngSwitchDefault: ngSwitchDefaultDirective,
+            ngOptions: ngOptionsDirective,
+            ngView: ngViewDirective,
+            ngTransclude: ngTranscludeDirective,
+            ngModel: ngModelDirective,
+            ngList: ngListDirective,
+            ngChange: ngChangeDirective,
+            required: requiredDirective,
+            ngRequired: requiredDirective,
+            ngValue: ngValueDirective
+        }).
+        directive(ngAttributeAliasDirectives).
+        directive(ngEventDirectives);
+      $provide.provider({
+        $anchorScroll: $AnchorScrollProvider,
+        $browser: $BrowserProvider,
+        $cacheFactory: $CacheFactoryProvider,
+        $controller: $ControllerProvider,
+        $document: $DocumentProvider,
+        $exceptionHandler: $ExceptionHandlerProvider,
+        $filter: $FilterProvider,
+        $interpolate: $InterpolateProvider,
+        $http: $HttpProvider,
+        $httpBackend: $HttpBackendProvider,
+        $location: $LocationProvider,
+        $log: $LogProvider,
+        $parse: $ParseProvider,
+        $route: $RouteProvider,
+        $routeParams: $RouteParamsProvider,
+        $rootScope: $RootScopeProvider,
+        $q: $QProvider,
+        $sniffer: $SnifferProvider,
+        $templateCache: $TemplateCacheProvider,
+        $timeout: $TimeoutProvider,
+        $window: $WindowProvider
+      });
+    }
+  ]);</pre>
+	</li>
+	<li>
+	<p>angularModule = setupModuleLoader(window)，它干的事情就是确保&nbsp;window.angular 有定义，然后确保 window.angular.module 定义为代码中的匿名函数<span class="marker">执行结果的返回值</span>，就是方法&nbsp;function module(name, requires, configFn)。</p>
+
+	<p>最终的结果就是 angularModule = angular.module = function module(name, requires, configFn)，而 modules = {} 作为这个方法的唯一可见变量。</p>
+
+	<pre>
+function setupModuleLoader(window) {
+
+&nbsp; function ensure(obj, name, factory) {
+&nbsp;&nbsp;&nbsp; return obj[name] || (obj[name] = factory());
+&nbsp; }
+
+&nbsp; return ensure(ensure(window, &#39;angular&#39;, Object), &#39;module&#39;, function() {
+    var modules = {};
+    return <span class="marker">function module(name, requires, configFn)</span> {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (requires &amp;&amp; modules.hasOwnProperty(name)) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; modules[name] = null;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return ensure(modules, name, function() {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (!requires) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; throw Error(&#39;No module: &#39; + name);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var invokeQueue = [];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var runBlocks = [];
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="marker">var config = invokeLater(&#39;$injector&#39;, &#39;invoke&#39;);</span>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var moduleInstance = {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Private state
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; _invokeQueue: invokeQueue,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; _runBlocks: runBlocks,
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; requires: requires,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; name: name,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="marker">provider: invokeLater(&#39;$provide&#39;, &#39;provider&#39;),</span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; factory: invokeLater(&#39;$provide&#39;, &#39;factory&#39;),
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; service: invokeLater(&#39;$provide&#39;, &#39;service&#39;),
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; value: invokeLater(&#39;$provide&#39;, &#39;value&#39;),
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; constant: invokeLater(&#39;$provide&#39;, &#39;constant&#39;, &#39;unshift&#39;),
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; filter: invokeLater(&#39;$filterProvider&#39;, &#39;register&#39;),
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; controller: invokeLater(&#39;$controllerProvider&#39;, &#39;register&#39;),
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; directive: invokeLater(&#39;$compileProvider&#39;, &#39;directive&#39;),
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; run: function(block) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; runBlocks.push(block);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return this;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; };
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (configFn) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; config(configFn);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return&nbsp; moduleInstance;
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; function invokeLater(provider, method, insertMethod) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return function() {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; invokeQueue[insertMethod || &#39;push&#39;]([provider, method, arguments]);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return moduleInstance;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; });
+    }
+  }</pre>
+	</li>
+	<li>
+	<p>var app = angular.module(&#39;trackerApp&#39;, [&#39;trackerServices&#39;, &#39;trackerDirectives&#39;, &#39;trackerControllers&#39;])，最后 app 变为如下这个 moduleInstance，唯一特殊的地方就是 requires 的值。同时这个 app 注册到了 modules.trackerApp = app。</p>
+
+	<pre>
+var moduleInstance = {
+  ...
+  requires: [&#39;trackerServices&#39;, &#39;trackerDirectives&#39;, &#39;trackerControllers&#39;]
+  ...
+}</pre>
+
+	<p>另一个例子。</p>
+
+	<pre>
+var aApp = angular.module(&#39;aApp&#39;, [&#39;directives&#39;, &#39;services&#39;, &#39;ngResource&#39;, &#39;ngSanitize&#39;])
+  .config([&#39;$routeProvider&#39;, function($routeProvider) {
+
+  $routeProvider.when(&#39;/&#39;, {
+    templateUrl: &#39;views/main.html&#39;,
+    controller: &#39;MainCtrl&#39;
+  })
+
+    .otherwise({
+    redirectTo: &#39;/&#39;
+  });
+}]);</pre>
+
+	<p>其中 config 在 angular.module 内部的定义如下</p>
+
+	<pre>
+var config = invokeLater(&#39;$injector&#39;, &#39;invoke&#39;);
+</pre>
+
+	<p>angular.module(&#39;trackerControllers&#39;, []).controller(&#39;trackerCtlr&#39;, [function(tile) {}])，此句中，前边的 module 部分与 app 无异，主要是后面调用了 controller 方法</p>
+
+	<p>而 controller 在 angular.module 中的定义为 controller: invokeLater(&#39;$controllerProvider&#39;, &#39;register&#39;),</p>
+
+	<p>以上执行之后，才轮得到</p>
+
+	<pre>
+/*
+&nbsp;* Use this directive to auto-bootstrap an application. Only
+&nbsp;* one ngApp directive can be used per HTML document. The directive
+&nbsp;* designates the root of the application and is typically placed
+&nbsp;* at the root of the page.
+ * 用这个函数自动启动 angular 应用。每个 HTML 文档只能有一个 ngApp 指令。这个指令标出了 angular 应用的根节点，通常放在页面的根节点上。
+&nbsp;*
+&nbsp;* The first ngApp found in the document will be auto-bootstrapped. To use multiple applications in an
+&nbsp;* HTML document you must manually bootstrap them using {@link angular.bootstrap}.
+&nbsp;* Applications cannot be nested.
+&nbsp;* 文档中第一个出现的 ngApp 指令会自动启动。为了在 HTML 文档中使用多个应用，你必须通过调用 angular.bootstrap 手动启动它们。应该不可被嵌套。
+&nbsp;*
+&nbsp;* `ngApp` is the easiest way to bootstrap an application.
+&nbsp;* ngApp 是启动应用最简单的方式
+&nbsp;*/
+angularInit(document, bootstrap);</pre>
+
+	<p>这个函数干的事，就是要找出 appElement，然后开始 bootstrap(appElement, [&#39;appName&#39;])。</p>
+
+	<p>2013-09-11 22:57 Wednsday</p>
+
+	<p>Yves 主导的项目表明，通常不在 html 中给出 ng-app，也就是不让 angularInit 成功找出 appElement，而后自行调用 bootstrap(someElement, [&#39;appName&#39;])</p>
+
+	<pre>
+function angularInit(element, bootstrap) {
+  var elements = [element],
+      appElement,
+      module,
+      names = [&#39;ng:app&#39;, &#39;ng-app&#39;, &#39;x-ng-app&#39;, &#39;data-ng-app&#39;],
+      NG_APP_CLASS_REGEXP = /\sng[:\-]app(:\s*([\w\d_]+);?)?\s/;
+
+  function append(element) {
+    element &amp;&amp; elements.push(element);
+  }
+
+  forEach(names, function(name) {
+    names[name] = true;
+    append(document.getElementById(name));
+    name = name.replace(&#39;:&#39;, &#39;\\:&#39;);
+    if (element.querySelectorAll) {
+      forEach(element.querySelectorAll(&#39;.&#39; + name), append);
+      forEach(element.querySelectorAll(&#39;.&#39; + name + &#39;\\:&#39;), append);
+      forEach(element.querySelectorAll(&#39;[&#39; + name + &#39;]&#39;), append);
+    }
+  });
+
+  forEach(elements, function(element) {
+    if (!appElement) {
+      var className = &#39; &#39; + element.className + &#39; &#39;;
+      var match = NG_APP_CLASS_REGEXP.exec(className);
+      if (match) {
+        appElement = element;
+        module = (match[2] || &#39;&#39;).replace(/\s+/g, &#39;,&#39;);
+      } else {
+        forEach(element.attributes, function(attr) {
+          if (!appElement &amp;&amp; names[attr.name]) {
+            appElement = element;
+            <span class="marker">module = attr.value</span>;
+          }
+        });
+      }
+    }
+  });
+  if (appElement) {
+    bootstrap(appElement, module ? [module] : []);
+  }
+}</pre>
+
+	<p>2013-08-02 21:21 Friday</p>
+
+	<p>今天发现 TSI-Tracker 项目中的 angularjs 为如下结构，导致的结果就是上面的 appElement 无效，所以不执行 bootstrap(...)。不过该项目能够正常运行的原因是如下手动调用了 angular.bootstrap(...)。与默认的 ng-app 的使用方式 &lt;el ng-app=&quot;module-name&quot;&gt;...&lt;/el&gt;&nbsp;一比，同时参考上面 module = attr.value，即可明白，此处手动调用 angular.bootstrap 的目的是能够根据不同条件选择不同的 &quot;module-name&quot;</p>
+
+	<pre>
+&lt;html&gt;
+  &lt;head id=&quot;ng-app&quot;&gt;
+  ...
+  &lt;/head&gt;
+&nbsp; &lt;body ng-controller=&quot;trackerCtrl&quot;&gt;
+    ...
+  &lt;/body&gt;
+&lt;/html&gt;</pre>
+
+	<pre>
+angular.element(document).ready(function() {
+ &nbsp;angular.bootstrap(document, [&#39;trackerAppWeb&#39;]);
+});</pre>
+	</li>
+</ol>
+
+<ul>
+	<li>
+	<p>此步目的主要在用 createInjector 处理 modules : [&#39;ng&#39;, [&#39;$provide&#39;, function() {...}], &#39;theApp&#39;]。从字面可推断，ng 是 angular 的框架功能所在，匿名函数指明了 $rootElement，最后开始处理当前 app。</p>
+
+	<pre>
+function bootstrap(element, modules) {
+&nbsp; var resumeBootstrapInternal = function() {
+&nbsp;   element = jqLite(element);
+&nbsp;   modules = modules || [];
+&nbsp;   modules.unshift([&#39;$provide&#39;, function($provide) {
+&nbsp;     $provide.value(&#39;$rootElement&#39;, element);
+&nbsp;   }]);
+&nbsp;   modules.unshift(&#39;ng&#39;);
+&nbsp;   var injector = createInjector(modules);
+&nbsp;   injector.invoke([&#39;$rootScope&#39;, &#39;$rootElement&#39;, &#39;$compile&#39;, &#39;$injector&#39;,
+&nbsp;     function(scope, element, compile, injector) {
+&nbsp;       scope.$apply(function() {
+&nbsp;         element.data(&#39;$injector&#39;, injector);
+&nbsp;         compile(element)(scope);
+&nbsp;       });
+&nbsp;     }]
+&nbsp;   );
+    return injector;
+  };
+
+&nbsp; var NGDEFERBOOTSTRAP = /^NGDEFERBOOTSTRAP!/;
+
+&nbsp; if (window &amp;&amp; !NGDEFERBOOTSTRAP.test(window.name)) {
+&nbsp;   return resumeBootstrapInternal();
+  }
+
+&nbsp; window.name = window.name.replace(NGDEFERBOOTSTRAP, &#39;&#39;);
+&nbsp; angular.resumeBootstrap = function(extraModules) {
+&nbsp;   forEach(extraModules, function(module) {
+&nbsp;     modules.push(module);
+&nbsp;   });
+  &nbsp; resumeBootstrapInternal();
+  };
+}
+</pre>
+	</li>
+	<li>
+	<p>createInjector 的主要意图就是用&nbsp;LoadModules 处理上述三个 module: ng, $rootElement, app。然后返回 instanceInjector 供后续使用。&nbsp;注意当前&nbsp;providerCache 中只有 $provide 这一个键和值。</p>
+
+	<pre>
+function createInjector(modulesToLoad) {
+&nbsp; var INSTANTIATING = {},
+&nbsp;   providerSuffix = &#39;Provider&#39;,
+&nbsp;   path = [],
+&nbsp;   loadedModules = new HashMap(),
+&nbsp;   providerCache = {
+&nbsp;     $provide: {
+&nbsp;       provider: supportObject(provider), <span class="marker">// providerCache.$provide.provider(&#39;aa&#39;, fn) 的目的是创建 providerCache.aaProvider = fn 的返回结果，或者被其初始化过的空实例，该实例强制包含 $get 方法。</span>
+&nbsp;       factory: supportObject(factory), // factory(&#39;bb&#39;, fn) 的目的是创建 providerCache.bbProvider = { $get: fn }
+&nbsp;       service: supportObject(service),
+&nbsp;       value: supportObject(value),
+&nbsp;       constant: supportObject(constant),
+&nbsp;       decorator: decorator
+&nbsp;     }
+&nbsp;   },
+&nbsp;   providerInjector = createInternalInjector(providerCache, function() {
+&nbsp;     throw Error(&quot;Unknown provider: &quot; + path.join(&#39; &lt;- &#39;));
+&nbsp;   }),
+&nbsp;   instanceCache = {},
+&nbsp;   instanceInjector = (instanceCache.$injector = createInternalInjector(instanceCache, function(servicename) {
+&nbsp;     var provider = providerInjector.get(servicename + providerSuffix);
+&nbsp;     return instanceInjector.invoke(provider.$get, provider);
+&nbsp;   }));
+
+&nbsp; forEach(loadModules(modulesToLoad), function(fn) { instanceInjector.invoke(fn || noop); });
+  return instanceInjector;
+&nbsp; ...
+</pre>
+
+	<p><code>其中 createInternalInjector 的目的仅仅是简单的把内部的方法映射出来。传入providerCache 或者 instanceCache 就实现不同的功能。后者因传入了有效的 factory 方法，使得 instanceCache 可以被动态的加入新的实例。</code></p>
+
+	<pre>
+function createInternalInjector(cache, factory) {
+
+&nbsp; function getService(serviceName) {...}
+
+&nbsp; function invoke(fn, self, locals){...}
+
+&nbsp; function instantiate(Type, locals) {...}
+
+  return {
+    invoke: invoke,
+    instantiate: instantiate,
+    get: getService,
+    annotate: annotate
+  };</pre>
+
+	<p>首先被处理的就是 ngLocale(ng 对 ngLocale 有依赖) 通过 provider 方法加到&nbsp;invokeQueue 中的 [$provide, &#39;provider&#39;, [&#39;$locale&#39;, $LocaleProvider]]</p>
+
+	<pre>
+angularModule(&#39;ngLocale&#39;, []).provider(&#39;$locale&#39;, $LocaleProvider);</pre>
+
+	<p>结合 moduleInstance.provider = invokeLater(&#39;$provide&#39;, &#39;provider&#39;) 的定义来看，上句可解释为：稍后，用 providerInjector 获取 providerCache 中的 $provide（因为 &#39;$provide&#39;&nbsp;!＝ &#39;$injector&#39;），调用它的 provider 方法，以字符串 $locale 和方法 $LocaleProvider 为参数。</p>
+
+	<pre>
+function loadModules(modulesToLoad){
+&nbsp; var runBlocks = [];
+&nbsp; forEach(modulesToLoad, function(module) {
+&nbsp;   if (loadedModules.get(module)) return;
+&nbsp;   loadedModules.put(module, true);
+&nbsp;   if (isString(module)) {
+&nbsp;     var moduleFn = <span class="marker">angularModule(module); // ng, ngLocale 已经被处理过了，此处直接返回先前的 moduleInstance 实例</span>
+&nbsp;     runBlocks = runBlocks.concat(loadModules(moduleFn.requires)).concat(moduleFn._runBlocks);
+      try {
+        for(var invokeQueue = moduleFn._invokeQueue, i = 0, ii = invokeQueue.length; i &amp;lt; ii; i++) {
+          var invokeArgs = invokeQueue[i],
+            provider = invokeArgs[0] == &#39;$injector&#39;
+                ? <span class="marker">providerInjector</span>
+                : providerInjector.get(invokeArgs[0]);
+
+          <span class="marker">provider[invokeArgs[1]].apply(provider, invokeArgs[2])</span>
+        }
+      } catch (e) {
+        if (e.message) e.message += &amp;#39; from &amp;#39; + module;
+        throw e;
+      }
+&nbsp; &nbsp; } else if (isFunction(module)) { 
+&nbsp; &nbsp; &nbsp; try {
+&nbsp; &nbsp; &nbsp; &nbsp; runBlocks.push(providerInjector.invoke(module));
+&nbsp; &nbsp; &nbsp; } catch (e) {
+&nbsp; &nbsp; &nbsp; &nbsp; if (e.message) e.message += &#39; from &#39; + module;
+&nbsp; &nbsp; &nbsp; &nbsp; throw e;
+&nbsp; &nbsp; &nbsp; }
+&nbsp; &nbsp; } else if (isArray(module)) { // modules.unshift([&#39;$provide&#39;, function($provide) {
+&nbsp;                                 //   $provide.value(&#39;$rootElement&#39;, element);
+&nbsp;                                 // }]); 进入此处
+&nbsp; &nbsp; &nbsp; try {
+&nbsp; &nbsp; &nbsp; &nbsp; runBlocks.push(providerInjector.invoke(module));
+&nbsp; &nbsp; &nbsp; } catch (e) {
+&nbsp; &nbsp; &nbsp; &nbsp; if (e.message) e.message += &#39; from &#39; + String(module[module.length - 1]);
+&nbsp; &nbsp; &nbsp; &nbsp; throw e;
+&nbsp; &nbsp; &nbsp; }
+&nbsp; &nbsp; } else {
+&nbsp; &nbsp; &nbsp; assertArgFn(module, &#39;module&#39;);
+&nbsp; &nbsp; }</pre>
+
+	<p>providerCache.$provide.provider 方法干了什么呢？providerInjector.instantiate 方法将最初传入的 $LocaleProvider 方法作为初始化方法，应用到以 Constructor 这个空函数和 $LocaleProvider.prototype 的结合体为样板的新实例上，有返回值则使用返回值，没有则使用这个新实例，作为 providerCache 中新的资源。并强制这个新实例存在 $get 方法。所以这是一个在 providerCache 上生成并注册新&nbsp;provider 的方法，<span class="marker">其结果就是使得&nbsp;providerCache[&#39;$localeProvider&#39;] = { $get:&nbsp;$LocaleProvider }</span></p>
+
+	<pre>
+function provider(name, provider) {
+&nbsp; if (isFunction(provider) || isArray(provider)) {
+&nbsp;   provider = providerInjector.instantiate(provider);
+&nbsp; }
+&nbsp; if (!provider.$get) {
+&nbsp;   throw Error(&#39;Provider &#39; + name + &#39; must define $get factory method.&#39;);
+&nbsp; }
+&nbsp; return providerCache[name + providerSuffix] = provider_;
+}</pre>
+
+	<pre>
+<code>function instantiate(Type, locals) {
+  var Constructor = function() {},
+      instance, returnedValue;
+
+  // Check if Type is annotated and use just the given function at n-1 as parameter
+  // e.g. someModule.factory(&#39;greeter&#39;, [&#39;$window&#39;, function(renamed$window) {}]);
+  Constructor.prototype = (isArray(Type) ? Type[Type.length - 1] : Type).prototype;
+  instance = new Constructor();
+  returnedValue = invoke(Type, instance, locals);
+
+</code>  return isObject(returnedValue) ? returnedValue : instance;
+}</pre>
+
+	<p>ngLocale 的 provider(&#39;$locale&#39;, $LocaleProvider) 完了后，就该 angularModule(&#39;ng&#39;, [&#39;ngLocale&#39;], [&#39;$provide&#39;,&nbsp;function ngModule($provide) {...})]) 了。这可是 angular 的核心加载。作为 angularModule 的第三个参数 configFn，能够被执行是因为在&nbsp;moduleInstance 的创建过程中被 config 函数做了处理：</p>
+
+	<pre>
+return ensure(modules, name, function() {
+&nbsp; ...
+  var config = invokeLater(&#39;$injector&#39;, &#39;invoke&#39;);
+&nbsp; ...
+&nbsp; if (configFn) { config(configFn); }
+
+&nbsp; return &nbsp;moduleInstance;
+
+&nbsp; function invokeLater(provider, method, insertMethod) {
+&nbsp;   return function() {
+&nbsp; &nbsp; &nbsp; invokeQueue[insertMethod || &#39;push&#39;]([provider, method, arguments]);
+&nbsp; &nbsp; &nbsp; return moduleInstance;
+&nbsp; &nbsp; }
+&nbsp; }
+}</pre>
+	</li>
+	<li>
+	<p>$CompileProvider 被实例化为 providerCache.$compileProvider，因为&nbsp;return providerCache[name + providerSuffix] = provider_，然后就开始调用它的 directive 开始注册所有的系统定义过的 directive 了。</p>
+
+	<pre>
+$provide.provider(&#39;$compile&#39;, $CompileProvider).
+&nbsp; directive({...})
+</pre>
+	</li>
+	<li>
+	<p>接下来就开始每一个 Provider 的实例化并注册。第一个就是可能和 anchor 失效有关的 $AnchorScrollProvider。</p>
+
+	<pre>
+$provide.provider({
+&nbsp; $anchorScroll: $AnchorScrollProvider,
+&nbsp; $browser: $BrowserProvider,
+&nbsp; $cacheFactory: $CacheFactoryProvider,
+&nbsp; $controller: $ControllerProvider,
+&nbsp; $document: $DocumentProvider,
+&nbsp; $exceptionHandler: $ExceptionHandlerProvider,
+&nbsp; $filter: $FilterProvider, $interpolate: $InterpolateProvider, $http: $HttpProvider, $httpBackend: $HttpBackendProvider, $location: $LocationProvider, $log: $LogProvider, $parse: $ParseProvider, $route: $RouteProvider, $routeParams: $RouteParamsProvider, $rootScope: $RootScopeProvider, $q: $QProvider, $sniffer: $SnifferProvider, $templateCache: $TemplateCacheProvider, $timeout: $TimeoutProvider, $window: $WindowProvider });
+</pre>
+	</li>
+	<li>
+	<p>下面轮到 directives 这个 module 的出现。于是明白了，在下面的语句中，directives 仅仅是个模块的名字而已，叫什么都一样</p>
+
+	<pre>
+angular.module(&#39;directives&#39;, [])
+ &nbsp;.directive(&#39;navbar&#39;, [...])</pre>
+
+	<p>其根本内在在于 moduleInstance 的 directive 方法，其意图是：稍后&nbsp;invokeQueue 被处理时，用 instanceCache[&#39;$compileProvider&#39;] 的&nbsp;directive 方法来处理所有参数（&#39;navbar&#39;, [...]）</p>
+
+	<pre>
+directive: invokeLater(&#39;$compileProvider&#39;, &#39;directive&#39;),</pre>
+	</li>
+	<li>
+	<p>接下来看&nbsp;ngResource 的定义。其中&nbsp;factory: invokeLater(&#39;$provide&#39;, &#39;factory&#39;) 使得 providerCache.$resourceProvider = { $get: [&#39;$http&#39;, &#39;$parse&#39;,&nbsp;function() {...}] }</p>
+
+	<pre>
+angular.module(&#39;ngResource&#39;, [&#39;ng&#39;]). &nbsp; factory(&#39;$resource&#39;, [&#39;$http&#39;, &#39;$parse&#39;, function($http, $parse) {
+</pre>
+
+	<pre>
+function factory(name, factoryFn) { return provider(name, { $get: factoryFn }); }
+</pre>
+	</li>
+	<li>
+	<p>对于 services 这个模块，很奇怪，它没有使用 .service 方法，而是如同 ngResource 一样，使用的是 .factory 方法。最终得到的是 providerCache.$ArticleProvider = { $get: [...] }</p>
+
+	<pre>
+angular.module(&#39;services&#39;, [&#39;ngResource&#39;]) &nbsp; .factory(&#39;Article&#39;, [&#39;$resource&#39;,
+</pre>
+	</li>
+	<li>
+	<p>最后轮到的就是&nbsp;aApp 了，现在开始切实执行&nbsp;.config, .controller, 等等中的具体内容。</p>
+
+	<pre>
+var aApp = angular.module(&#39;aApp&#39;, [&#39;directives&#39;, &#39;services&#39;, &#39;ngResource&#39;, &#39;ngSanitize&#39;])
+&nbsp; .config([&#39;$routeProvider&#39;, function($routeProvider) {
+&nbsp;   $routeProvider.when(&#39;/&#39;, {
+&nbsp;     templateUrl: &#39;views/main.html&#39;,
+&nbsp;     controller: &#39;MainCtrl&#39;
+&nbsp;   })
+    .otherwise({
+    redirectTo: &#39;/&#39;
+  });
+}]);
+</pre>
+
+	<pre>
+controller: invokeLater(&#39;$controllerProvider&#39;, &#39;register&#39;),</pre>
+	</li>
+	<li>
+	<p>var injector = createInjector(modules); 终于执行完了。现在 injector 就是&nbsp;instanceInjector，当前的 instanceInjector&nbsp;只有 $injector 一个实例，$rootScope 实例在 instanceInjector 下不存在，于是启动了 factory。providerInjector.get =&gt; getService =&gt; providerCache.$rootScopeProvider =&gt; provider.$get =&gt; return&nbsp;$rootScope = new Scope();</p>
+
+	<p><code>其它依次类推。这是个调用 provider.$get 把 provider 实例化的过程。</code></p>
+
+	<pre>
+injector.invoke([&#39;$rootScope&#39;, &#39;$rootElement&#39;, &#39;$compile&#39;, &#39;$injector&#39;,
+&nbsp; function(scope, element, compile, injector) {
+&nbsp;   scope.$apply(function() {
+&nbsp;     element.data(&#39;$injector&#39;, injector);
+&nbsp;     compile(element)(scope);
+&nbsp;   });
+  }
+]);</pre>
+
+	<pre>
+  instanceInjector = (instanceCache.$injector =
+      createInternalInjector(instanceCache, function(servicename) {
+        var provider = providerInjector.get(servicename + providerSuffix);
+        return instanceInjector.invoke(provider.$get, provider);
+      }));
+</pre>
+
+	<pre>
+function $RootScopeProvider(){
+&nbsp; var TTL = 10;
+  this.digestTtl = function(value) {
+&nbsp;   if (arguments.length) {
+&nbsp;     TTL = value;
+&nbsp;   }
+&nbsp;   return TTL;
+&nbsp; };
+
+  this.$get = [&#39;$injector&#39;, &#39;$exceptionHandler&#39;, &#39;$parse&#39;, function( $injector, $exceptionHandler, $parse) {</pre>
+
+	<pre>
+function Scope() {
+  this.$id = nextUid();
+  this.$$phase = this.$parent = this.$$watchers =
+                 this.$$nextSibling = this.$$prevSibling =
+                 this.$$childHead = this.$$childTail = null;
+  &lt;span class=&quot;marker&quot;&gt;this[&amp;#39;this&amp;#39;] = this.$root =  this;&lt;/span&gt;
+  this.$$destroyed = false;
+  this.$$asyncQueue = [];
+  this.$$listeners = {};
+  this.$$isolateBindings = {};
+}
+Scope.prototype = {
+  ...
+}
+var $rootScope = new Scope();
+return $rootScope;
+}</pre>
+	</li>
+</ul>
+
+<h1>Communication Between Directives in AngularJS</h1>
+
+<p>2013-03-10 08:59 星期天 终于找到一篇讲解详细的文章，原来一切的关键在于 directive 内部的 controller</p>
+
+<p>http://thesmithfam.org/blog/2012/12/17/communicating-between-directives-in-angularjs/ December 17th, 2012</p>
+
+<h2>Prerequisites to this article</h2>
+
+<p>Before reading this, get to know these AngularJS terms. You don&rsquo;t need too much depth, but you need to know what they are:</p>
+
+<ul>
+	<li><a href="http://docs.angularjs.org/guide/directive">Directive</a></li>
+	<li><a href="http://docs.angularjs.org/guide/scope">Scope</a></li>
+	<li><a href="http://docs.angularjs.org/guide/dev_guide.mvc.understanding_controller">Controller</a></li>
+	<li><a href="http://docs.angularjs.org/guide/dev_guide.services.injecting_controllers">Injecting services into controllers</a></li>
+	<li><a href="http://docs.angularjs.org/api/ng.directive:ngShow">ng-show</a>&nbsp;and&nbsp;<a href="http://docs.angularjs.org/api/ng.directive:ngHide">ng-hide</a></li>
+	<li><a href="http://docs.angularjs.org/api/ng.directive:ngClick">ng-click</a></li>
+	<li><a href="http://docs.angularjs.org/api/ng.directive:ngModel">ng-model</a></li>
+	<li><a href="http://docs.angularjs.org/api/ng.directive:ngRepeat">ng-repeat</a></li>
+</ul>
+
+<h2>Step 0: Roadmap</h2>
+
+<p>We&rsquo;re going to create two custom directives that communicate with each other. We&rsquo;ll really dig deep into the first directive, explaining every line of code as we go.</p>
+
+<p>Then we&rsquo;ll glue the directive to a controller via a scope object.</p>
+
+<p>Lastly, we&rsquo;ll create a second directive and glue it all together.</p>
+
+<h2>Step 1: A basic directive, dissected</h2>
+
+<p>For this example, we&rsquo;ll create a custom search box that can be placed in our app with a custom&nbsp;&lt;my-search-box&gt;&nbsp;element. This directive causes Angular to convert&nbsp;&lt;my-search-box&gt;&nbsp;in your HTML into&nbsp;&lt;span&gt;My Custom Search Box&lt;/span&gt;. This is not useful yet, but it will become immensely useful as we grow this concept in a few paragraphs.</p>
+
+<p>We&rsquo;ll create a file called &ldquo;app.js&rdquo; with this content:</p>
+
+<pre>
+angular.module(&quot;MyApp&quot;, []).
+&nbsp; directive(&#39;mySearchBox&#39;, function() {
+&nbsp;&nbsp;&nbsp; return {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; restrict: &#39;E&#39;,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; replace: true,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; template: &#39;&lt;span&gt;My Custom Search Box&lt;/span&gt;&#39;
+&nbsp;&nbsp;&nbsp; };
+&nbsp; });</pre>
+
+<p>Let&rsquo;s walk through each line of that directive:</p>
+
+<pre>
+angular.module(&quot;MyApp&quot;, []).</pre>
+
+<p>This line declares a new module called &ldquo;MyApp&rdquo;. The empty array to the right can contain the names of other modules on which this module depends (this is where you would put AngularUI modules for example if you want to use AngularUI). In this case, this module happens to be our &ldquo;main&rdquo; application module, but Angular really doesn&rsquo;t know that from this line of code. That happens in the HTML with&nbsp;&lt;html ng-app=&quot;MyApp&quot;&gt;. Also, you only declare your main application module once, even if you have many directives. There are ways to look up your module if your code spans multiple files, or you can just create a global variable to reference your module and use that when building your directive.</p>
+
+<pre>
+directive(&#39;mySearchBox&#39;, function() {
+</pre>
+
+<p>Here we are declaring a new directive. Notice that we camel case the directive name. When Angular encounters&lt;my-search-box&gt;&nbsp;in the HTML, it will normalize that into &ldquo;mySearchBox&rdquo; to look up the directive. Thus, &ldquo;mySearchBox&rdquo; is called the &ldquo;normalized&rdquo; name.</p>
+
+<pre>
+return {
+</pre>
+
+<p>Angular expects the directive function to return an object with properties that describe the directive.</p>
+
+<pre>
+restrict: &#39;E&#39;,
+</pre>
+
+<p>This tells Angular that &ldquo;my-search-box&rdquo; must be an&nbsp;element. Angular directives can also exist as HTML attributes, HTML class names, and even HTML comments (!). It&rsquo;s okay if this doesn&rsquo;t make sense yet.</p>
+
+<pre>
+replace: true,
+</pre>
+
+<p>This tells Angular to fully replace&nbsp;&lt;my-search-box&gt;&nbsp;with the directive&rsquo;s template HTML. Alternatively, Angular can&nbsp;add&nbsp;the directive&rsquo;s template HTML to the&nbsp;&lt;my-search-box&gt;&nbsp;element as a&nbsp;child&nbsp;element. For our example, we want Angular to fully replace&nbsp;&lt;my-search-box&gt;&nbsp;because&nbsp;&lt;my-search-box&gt;&nbsp;is not a valid HTML element name. You can imagine wanting Angular to simply&nbsp;augment&nbsp;an element with child elements in some scenarios, but not this example. We&rsquo;re effectively creating a &ldquo;widget&rdquo; that can be instantiated and reused in our HTML.</p>
+
+<pre>
+template: &#39;&lt;span&gt;My Custom Search Box&lt;/span&gt;&#39;
+</pre>
+
+<p>This is the directive&rsquo;s HTML template that will be rendered by the browser. I don&rsquo;t recommend using hard-coded template strings in your directives like I&rsquo;ve done here. I do it this way to make the example clear. Normally, I use the&nbsp;templateUrl&nbsp;property and serve the HTML as a &ldquo;partial&rdquo; from my web server. Angular caches these partials, and you can even pre-load them when your app loads. This way, I can use server-side template technologies for things like localization. Although, for the best performance, I recommend that you serve these partials statically from a CDN or other fast caching service.</p>
+
+<p>Now we can use this directive in our HTML like this:</p>
+
+<pre>
+&lt;html ng-app=&quot;MyApp&quot;&gt;
+&nbsp; &lt;head&gt;
+&nbsp;&nbsp;&nbsp; &lt;script src=&quot;http://ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.min.js&quot;&gt;&lt;/script&gt;
+&nbsp;&nbsp;&nbsp; &lt;script src=&quot;app.js&quot;&gt;&lt;/script&gt;
+&nbsp; &lt;/head&gt;
+&nbsp; &lt;body&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;my-search-box&gt;&lt;/my-search-box&gt;
+&nbsp; &lt;/body&gt;
+&lt;/html&gt;</pre>
+
+<p>When you visit that page in your browser, you&rsquo;ll see &ldquo;My Custom Search Box&rdquo; if all went well above.</p>
+
+<p>So far this is a pretty useless directive, but we&rsquo;are about to take it to the next level.</p>
+
+<h2>Step 2: Giving your directive its own scope</h2>
+
+<p>Each instance of a directive has its own scope. And of course, the scope is a child of the enclosing scope where you instantiated the directive in the HTML. For example, if your directive exists inside a&nbsp;&lt;div ng-controller=&quot;MyController&quot;&gt;, then your directive&rsquo;s scope will be a child of&nbsp;MyController&lsquo;s&nbsp;$scope.</p>
+
+<p>For example, the following HTML uses two&nbsp;&lt;my-search-box&gt;&nbsp;elements. Angular gives each&nbsp;&lt;my-search-box&gt;&nbsp;its own independent scope:</p>
+
+<pre>
+&lt;body&gt;
+&nbsp;&nbsp;&nbsp; &lt;my-search-box&gt;&lt;/my-search-box&gt;
+&nbsp;&nbsp;&nbsp; &lt;my-search-box&gt;&lt;/my-search-box&gt;
+&lt;/body&gt;</pre>
+
+<p>Let&rsquo;s define our directive&rsquo;s interface to the outside world using the&nbsp;scope&nbsp;property. Our interface will have two values:&nbsp;searchText&nbsp;and&nbsp;isSearching. We will use&nbsp;searchText&nbsp;to store the user&rsquo;s search text that they enter into an&nbsp;&lt;input&gt;&nbsp;box, and we&rsquo;ll use&nbsp;isSearching&nbsp;to tell the directive when a search is in progress.</p>
+
+<pre>
+angular.module(&quot;MyApp&quot;, []).
+&nbsp; directive(&#39;mySearchBox&#39;, function() {
+&nbsp;&nbsp;&nbsp; return {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; restrict: &#39;E&#39;,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; replace: true,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; scope: {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; searchText: &#39;=&#39;,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; isSearching: &#39;=&#39;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; },
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; template: &#39;&lt;span&gt;My Custom Search Box&lt;/span&gt;&#39;
+&nbsp;&nbsp;&nbsp; };
+&nbsp; });</pre>
+
+<p>Did you see the&nbsp;scope = {...}&nbsp;property above? That defines the public elements of this directive&rsquo;s scope. Notice how we used&nbsp;&#39;=&#39;? That tells Angular that we want a scope variable to have&nbsp;two way binding&nbsp;to the outside world. This is part of the directive&rsquo;s HTML interface. This allows callers to use our directive like this:</p>
+
+<pre>
+&lt;my-search-box
+&nbsp; search-text=&quot;someScopeVariable&quot;
+&nbsp; is-searching=&quot;someOtherScopeVariable&quot;&gt;
+&lt;/my-search-box&gt;</pre>
+
+<p>In other words, the directive allows outside callers to&nbsp;bind&nbsp;their own scope variables to this directive&rsquo;ssearchText&nbsp;and&nbsp;isSearching&nbsp;variables. This is how you communicate with the directive from the outside world.</p>
+
+<p>The variables&nbsp;someScopeVariable&nbsp;and&nbsp;someOtherScopeVariable&nbsp;come from the&nbsp;enclosing&nbsp;scope, which usually is managed by a controller outside the directive. If, for example, we had&nbsp;&lt;div ng-controller=&quot;MyController&quot;&gt;&nbsp;enclosing&nbsp;&lt;my-search-box&gt;, then&nbsp;someScopeVariable&nbsp;andsomeOtherScopeVariable&nbsp;would be managed by&nbsp;MyController.</p>
+
+<p>In the code above, the&nbsp;search-text&nbsp;gets normalized into&nbsp;searchText&nbsp;in the directive&rsquo;s scope. Likewise,is-searching&nbsp;becomes&nbsp;isSearching.</p>
+
+<p>When we assign&nbsp;search-text=&quot;someScopeVariable&quot;, we are telling Angular to bind this directive&rsquo;ssearchText&nbsp;scope variable to a scope variable from the enclosing scope called&nbsp;someScopeVariable. Any time the enclosing scope&rsquo;s&nbsp;someScopeVariable&nbsp;changes, the directive&rsquo;s scope variable&nbsp;searchText&nbsp;will also change. And it works in the other direction too. Any time the directive changes its&nbsp;searchText&nbsp;variable, Angular will automatically change the enclosing scope&rsquo;s&nbsp;someScopeVariable&nbsp;to match.</p>
+
+<p>These scope variables are useless unless we also make them visible somehow, so let&rsquo;s modify our template HTML to use them. While we&rsquo;re at it, let&rsquo;s make this actually look like a search box instead of a simple piece of text:</p>
+
+<pre>
+angular.module(&quot;MyApp&quot;, []).
+&nbsp; directive(&#39;mySearchBox&#39;, function() {
+&nbsp;&nbsp;&nbsp; return {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; restrict: &#39;E&#39;,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; scope: {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; searchText: &#39;=&#39;,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; isSearching: &#39;=&#39;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; },
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; controller: function($scope) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $scope.localSearchText = &#39;&#39;;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $scope.clearSearch = function() {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $scope.searchText = &quot;&quot;;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $scope.localSearchText = &quot;&quot;;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; };
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $scope.doSearch = function() {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $scope.searchText = $scope.localSearchText;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; };
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; },
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; replace: true,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; template:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &#39;&lt;form&gt;&#39; +
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &#39;&lt;div&gt;&#39; +
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &#39;&lt;input ng-model=&quot;localSearchText&quot; type=&quot;text&quot; /&gt;&#39; +
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &#39;&lt;/div&gt;&#39; +
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &#39;&lt;div&gt;&#39; +
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &#39;&lt;button ng-click=&quot;clearSearch()&quot; class=&quot;btn btn-small&quot;&gt;Clear&lt;/button&gt;&#39; +
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &#39;&lt;button ng-click=&quot;doSearch()&quot;&nbsp;&nbsp;&nbsp; class=&quot;btn btn-small&quot;&gt;Search&lt;/button&gt;&#39; +
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &#39;&lt;/div&gt; &#39; +
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &#39;&lt;div ng-show=&quot;isSearching&quot;&gt;&#39; +
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &#39;&lt;img ng-show=&quot;isSearching&quot; src=&quot;http://loadinggif.com/images/image-selection/3.gif&quot; /&gt; &#39; +
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &#39;Searching...&#39; +
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &#39;&lt;/div&gt;&#39; +
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &#39;&lt;/form&gt;&#39;
+&nbsp;&nbsp;&nbsp; };
+&nbsp; })</pre>
+
+<p>Remember, I suggest you use&nbsp;templateUrl&nbsp;instead of&nbsp;template&nbsp;when your HTML starts to grow like this.</p>
+
+<p>Now we have a search box form that lets the user enter some search terms, which we store in the directive&rsquo;s scope as&nbsp;localSearchText. Notice that we didn&rsquo;t put&nbsp;localSearchText&nbsp;in the&nbsp;scope: {&hellip;}&nbsp;definition, because it needs no external binding. In other words, this is a &ldquo;private&rdquo; scope variable that the directive uses to store the human text input until we are ready to actually do the search. This is because we don&rsquo;t want every single keystroke to initiate a search. Only when the user clicks the &ldquo;Search&rdquo; button.</p>
+
+<p>Notice also that we added a controller with&nbsp;controller: function($scope) {...}. This code defines a typical controller so our directive can take action in response to user input, like button clicks with&nbsp;ng-click.</p>
+
+<p>This HTML also provides a &ldquo;Clear&rdquo; button to zero out the search box and a spinner to show when the search is in progress. The directive relies on outside callers to tell it when a search is in progress by setting theisSearching&nbsp;variable to a &ldquo;truthy&rdquo; value.</p>
+
+<p>After making these changes to&nbsp;app.js, our page should look like this:</p>
+
+<p><img src="http://thesmithfam.org/images/my-search-box-1.png" /></p>
+
+<p>Now that directive is finished. Notice it doesn&rsquo;t do much. It requires an outsider to stimulate it into action.</p>
+
+<h2>Step 3: Creating a Controller</h2>
+
+<p>Let&rsquo;s create a controller that communicates with the directive we wrote. This isn&rsquo;t strictly required to allow two directives to communicate, but in most cases it will be necessary because someone has to glue them together with the business logic specific to your application. This is a job well suited to an Angular controller.</p>
+
+<p>Let&rsquo;s make a simulated city search that allows the user to search for cities. Because it&rsquo;s an example, the search will always return the same results.</p>
+
+<pre>
+&lt;div ng-controller=&quot;CitySearchController&quot;&gt;
+&nbsp; &lt;h1&gt;Search for Cities&lt;/h1&gt;
+&nbsp; &lt;my-search-box search-text=&quot;citySearchText&quot; is-searching=&quot;isSearchingForCities&quot;&gt;&lt;/my-search-box&gt;
+&lt;/div&gt;</pre>
+
+<p>And the accompanying controller, which I placed in&nbsp;app.js:</p>
+
+<pre>
+function CitySearchController($scope, $timeout) {
+&nbsp; $scope.$watch(&quot;citySearchText&quot;, function(citySearchText) {
+&nbsp;&nbsp;&nbsp; $scope.citySearchResults = [];
+&nbsp;&nbsp;&nbsp; if (citySearchText) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $scope.isSearchingForCities = true;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $timeout(function() {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // simulated search that always gives the same results
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $scope.isSearchingForCities = false;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $scope.citySearchResults = [&#39;New York&#39;, &#39;London&#39;, &#39;Paris&#39;, &#39;Moab&#39;];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }, 1000);
+&nbsp;&nbsp;&nbsp; } else {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $scope.isSearchingForCities = false;
+&nbsp;&nbsp;&nbsp; }
+&nbsp; });
+}</pre>
+
+<p>This controller&rsquo;s&nbsp;$scope.citySearchText&nbsp;and&nbsp;$scope.isSearchingForCities&nbsp;variables are&nbsp;bound&nbsp;to the directive&rsquo;s scope variables&nbsp;searchText&nbsp;and&nbsp;isSearching&nbsp;because of the HTML attributes that we specified on&nbsp;&lt;my-search-box&gt;.</p>
+
+<p>This controller is pretty basic, so I won&rsquo;t describe every line of code. All it does is&nbsp;$watch()&nbsp;for changes tocitySearchText&nbsp;and get some fake search results with Angular&rsquo;s&nbsp;$timeout&nbsp;service.</p>
+
+<p>Because of Angular&rsquo;s excellent isolation-centric design, this controller would be very easy to write unit tests for, but that&rsquo;s another article.</p>
+
+<p>When you visit the page, you should now see a search box. If you enter some text into the input box and click &ldquo;Search&rdquo;, you&rsquo;ll see a spinner for 1 second, which then disappears:</p>
+
+<p><img src="http://thesmithfam.org/images/my-search-box-2.png" /></p>
+
+<h2>Step 4: Finally add a second directive</h2>
+
+<p>Now we&rsquo;re ready to add another directive. For this example, we&rsquo;ll create a search&nbsp;results&nbsp;directive. This directive has almost the same public interface (i.e., scope) as the&nbsp;&lt;my-search-box&gt;&nbsp;directive, with one extra variable: the actual search results that caller wants to display.</p>
+
+<p>It looks like this:</p>
+
+<pre>
+directive(&#39;mySearchResults&#39;, function() {
+&nbsp;&nbsp; return {
+&nbsp;&nbsp;&nbsp;&nbsp; restrict: &#39;E&#39;,
+&nbsp;&nbsp;&nbsp;&nbsp; transclude: true,
+&nbsp;&nbsp;&nbsp;&nbsp; scope: {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; isSearching: &#39;=&#39;,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; searchResults: &#39;=&#39;,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; searchText: &#39;=&#39;
+&nbsp;&nbsp;&nbsp;&nbsp; },
+&nbsp;&nbsp;&nbsp;&nbsp; replace: true,
+&nbsp;&nbsp;&nbsp;&nbsp; template:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &#39;&lt;div ng-hide=&quot;isSearching&quot;&gt;&#39; +
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &#39;&lt;h4 ng-show=&quot;searchResults&quot;&gt;Found {{searchResults.length}} Search Results For &quot;{{searchText}}&quot;:&lt;/h4&gt;&#39; +
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &#39;&lt;ul ng-show=&quot;searchResults&quot;&gt;&#39; +
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &#39;&lt;li ng-repeat=&quot;searchResult in searchResults&quot;&gt;&#39; +
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &#39;{{searchResult}}&#39; +
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &#39;&lt;/li&gt;&#39; +
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &#39;&lt;/ul&gt;&#39; +
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &#39;&lt;/div&gt;&#39;
+&nbsp;&nbsp; };
+});</pre>
+
+<p>Everything should look familiar from your study of the first directive. There are no new concepts here. Let&rsquo;s use our directive in our HTML:</p>
+
+<pre>
+&lt;div ng-controller=&quot;CitySearchController&quot; style=&quot;margin: 20px&quot;&gt;
+&nbsp;&nbsp;&nbsp; &lt;h1&gt;Search for Cities&lt;/h1&gt;
+&nbsp;&nbsp;&nbsp; &lt;my-search-box search-text=&quot;citySearchText&quot; is-searching=&quot;isSearchingForCities&quot;&gt;&lt;/my-search-box&gt;
+&nbsp;&nbsp;&nbsp; &lt;my-search-results is-searching=&quot;isSearchingForCities&quot; search-results=&quot;citySearchResults&quot; search-text=&quot;citySearchText&quot;&gt;&lt;/my-search-results&gt;
+&nbsp; &lt;/div&gt;</pre>
+
+<p>Now your page should show some search results after clicking the &ldquo;Search&rdquo; button and waiting for 1 second:</p>
+
+<p><img src="http://thesmithfam.org/images/my-search-box-3.png" /></p>
+
+<p>Just to prove that there is indeed&nbsp;zero coupling&nbsp;between the two directives and the controller, I added a second controller and a second instance of each directive to search for fruits, which you can see in the plunk below.</p>
+
+<hr />
+<h1>AngularJS and scope.$apply</h1>
+
+<p>2013-03-10 11:38 星期天</p>
+
+<p>http://jimhoskins.com/2012/12/17/angularjs-and-apply.html</p>
+
+<p>If you&rsquo;ve written a non-trivial amount of code in AngularJS, you may have come across the&nbsp;$scope.$apply()&nbsp;method. On the surface, it may seem like just a method you call to get your bindings to update. But why does it exist? And when do you need to use it?</p>
+
+<p>To really understand&nbsp;when&nbsp;to use&nbsp;$apply, it&rsquo;s good to know exactly&nbsp;why&nbsp;we need to use it, so let&rsquo;s dive in!</p>
+
+<h2>JavaScript is Turn Based</h2>
+
+<p>The JavaScript code we write doesn&rsquo;t all run in one go, instead it executes in turns. Each of these turns runs uninterupted from start to finish, and when a turn is running, nothing else happens in our browser. No other JavaScript code runs, and our web page interface is completely frozen. This is why poorly coded JavaScript can freeze a web page.</p>
+
+<p>Instead, whenever there is a task that takes some amount of time, such as an Ajax request, waiting for a click event, or setting a timeout, we set up a callback function and finish our current turn. Later, when the Ajax request completes, a click is detected, or the timer completes, a new JavaScript turn is created and the callback is run to completion.</p>
+
+<p>Let&rsquo;s look at an example JavaScript file:</p>
+
+<pre>
+<code>var button = document.getElementById(&#39;clickMe&#39;);
+
+function buttonClicked () {
+  alert(&#39;the button was clicked&#39;);
+}
+
+button.addEventListener(&#39;click&#39;, buttonClicked);
+
+function timerComplete () {
+  alert(&#39;timer complete&#39;);
+}
+
+setTimeout(timerComplete, 2000);</code></pre>
+
+<p>When the JavaScript code is loaded, that is a single turn. It finds a button, adds a click listener, and sets a timeout. Then the turn is complete, and the browser will update the web page if necessary, and begin accepting user input.</p>
+
+<p>If the browser detects a click on&nbsp;#clickMe, it creates a new turn, which executes the&nbsp;buttonClicked&nbsp;function. When that function returns, that turn is complete.</p>
+
+<p>After 2000 milliseconds, the browser creates a new turn which calls&nbsp;timerComplete.</p>
+
+<p>Our JavaScript code is run in turns, and in between the turns is when the page is repainted, and input is accepted.</p>
+
+<h2>How do we update bindings?</h2>
+
+<p>So Angular lets us bind parts of our interface to data in our JavaScript code, but how does it know when data changes, and the page needs updating?</p>
+
+<p>There are a few solutions. The code needs to know when a value has changed. Right now there is no way for our code to be directly notified of changes on an object&nbsp;<a href="http://jimhoskins.com/2012/12/17/angularjs-and-apply.html#fn:1">1</a>. Instead there are two main strategies.</p>
+
+<p>One strategy is to use special objects, where data is set via methods, not property assignments. Then changes can then be noted, and the page can be updated. This has the downside in that we must extend some special object. Also, for assigning, we must use a more verbose form&nbsp;obj.set(&#39;key&#39;, &#39;value&#39;)&nbsp;instead ofobj.key = &#39;value&#39;. Frameworks like&nbsp;<a href="http://emberjs.org/">EmberJS</a>&nbsp;and&nbsp;<a href="http://knockoutjs.org/">KnockoutJS</a>&nbsp;use this strategy.</p>
+
+<p>AngularJS takes a different approach: allow any value to be used as a binding target. Then at the end of any JavaScript code turn, check to see if the value has changed. This may seem inneficient at first, but there are some clever strategies to reduce the performance hit. The big benefit is we can use normal objects and update our data however we want, and the changes will be noticed and reflected in our bindings.</p>
+
+<p>For this strategy to work, we need to know when data has possibly changed, and this is where&nbsp;$scope.$apply&nbsp;comes into play.</p>
+
+<h2>$apply and $digest</h2>
+
+<p>That step that checks to see if any binding values have changed actually has a method,&nbsp;$scope.$digest(). That&rsquo;s actually where the magic happens, but we almost never call it directly, instead we use&nbsp;$scope.$apply()&nbsp;which will call&nbsp;$scope.$digest()&nbsp;for you.</p>
+
+<p>$scope.$apply()&nbsp;takes a function or an Angular expression string, and executes it, then calls&nbsp;$scope.$digest()&nbsp;to update any bindings or watchers.</p>
+
+<p>So, when do you need to call&nbsp;$apply()? Very rarely, actually. AngularJS actually calls almost all of your code within an $apply call. Events like&nbsp;ng-click, controller initialization,&nbsp;$http&nbsp;callbacks are all wrapped in&nbsp;$scope.$apply(). So you don&rsquo;t need to call it yourself, in fact you can&rsquo;t. Calling $apply inside $apply will throw an error.</p>
+
+<p>You do need to use it if you are going to run code in a new turn. And only if that turn isn&rsquo;t being created from a method in the AngularJS library. Inside that new turn, you should wrap your code in&nbsp;$scope.$apply(). Here is an example. We are using&nbsp;setTimeout, which will execute a function in a new turn after a delay. Since Angular doesn&rsquo;t know about that new turn, the update will not be reflected.</p>
+
+<p>...</p>
+
+<p>But, if we wrap the code for that turn in&nbsp;$scope.$apply(), the change will be noticed, and the page is updated.</p>
+
+<p>...</p>
+
+<p>As a convenience, AngularJS provides&nbsp;<a href="http://docs.angularjs.org/api/ng.$timeout">$timeout</a>, which is like&nbsp;setTimeout, but automatically wraps your code in $apply by default. Use that, not this</p>
+
+<p>If you write any code that uses Ajax without&nbsp;$http, or listens for events without using Angular&rsquo;s&nbsp;ng-*&nbsp;listeners, or sets a timeout without&nbsp;$timeout, you should wrap your code in&nbsp;$scope.$apply</p>
+
+<h2>$scope.$apply() vs $scope.$apply(fn)</h2>
+
+<p>Sometimes I see examples where data is updated, and then$scope.$apply()&nbsp;is called with no arguments. This achieves the desired result, but misses some opportunities.</p>
+
+<p>If your code isn&rsquo;t wrapped in a function passed to $apply, and it throws an error, that error is thrown outside of AngularJS, which means any error handling being used in your application is going to miss it. $apply not only runs your code, but it runs it in atry/catch&nbsp;so your error is always caught, and the $digest call is in a&nbsp;finally&nbsp;clause, meaning it will run regardless of an error being thrown. That&rsquo;s pretty nice.</p>
+
+<p>Hopefully now you understand what&nbsp;$apply&nbsp;is and when to use it. If you only use what AngularJS provides you, you shouldn&rsquo;t need to use it often. But if you begin writing directives where you are observing DOM elements directly, it is going to become necessary.</p>
+
+<p>&nbsp;</p>
