@@ -1,0 +1,16 @@
+<h1>Google Maps Image APIs</h1>
+
+<p>2013-11-28 13:51 Thursday</p>
+
+<ul>
+	<li>Google Maps APIs 首页 -&gt; <a href="https://developers.google.com/maps/" target="_blank">https://developers.google.com/maps/</a>（如果带了语言参数 &nbsp;hl=zh-cn，并不会看到 Maps Image APIs 的相关链接）</li>
+	<li><a href="https://developers.google.com/maps/documentation/imageapis/">Maps Image APIs</a>&nbsp;-&gt;&nbsp;https://developers.google.com/maps/documentation/imageapis/</li>
+</ul>
+
+<p>The Google Maps Image APIs make it easy to embed a static Google Maps image or Street View panorama into your web page, with no need for JavaScript.</p>
+
+<p>Google Maps Image APIs 让网页中嵌入静态的 Google Maps 图片或街景变得更简单，并且不需要使用 JavaScript。</p>
+
+<p>The APIs are as simple as constructing a URL with the information about your image; once the URL is loaded from an image tag, Google will create and return your map or Street View scene.</p>
+
+<p>这个 APIs 很简单，仅仅是组合一个包含你的图片信息的&nbsp;URL。</p>
