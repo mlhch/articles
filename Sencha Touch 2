@@ -1,0 +1,318 @@
+<h1>Sencha Touch 2</h1>
+
+<p>2012-01-29 19:13:04 +08:00 Sunday</p>
+
+<p><a href="http://www.sencha.com/products/touch/" target="_blank">http://www.sencha.com/products/touch/</a></p>
+
+<blockquote>
+<p>What is Sencha Touch?</p>
+</blockquote>
+
+<p>Sencha Touch, a high-performance HTML5 mobile application framework, is the cornerstone of the Sencha HTML5 platform. Built for enabling world-class user experiences, Sencha Touch is the only framework that enables developers to build powerful apps that work on iOS, Android, BlackBerry, Windows Phone, and more.</p>
+
+<h3>What&#39;s New?</h3>
+
+<p>2013-10-09 04:33 Wednesday</p>
+
+<p>Sencha Touch 2.3 is the latest version of our industry-leading mobile app framework. In Sencha Touch 2.3 we updated the device APIs to make&nbsp;<a href="http://cordova.apache.org/" target="_new">Apache Cordova</a>&nbsp;a fully supported component in the library, including a support (using the latest version of Sencha Command) for the&nbsp;<a href="https://build.phonegap.com/apps" target="_new">Adobe PhoneGap Build</a>.&nbsp;</p>
+
+<h2>Installing Sencha Touch</h2>
+
+<p>To install Sencha Touch:</p>
+
+<ol>
+	<li>Download&nbsp;<a href="http://www.sencha.com/products/sencha-cmd/download">Sencha Cmd</a>. Sencha Cmd enables you to publish, package, and simulate an application, as well as to upgrade Sencha software. Sencha Cmd also installs Apache Ant, Compass, and Sass.
+
+	<p>SenchaCmd-4.0.0.203-osx.app.zip&nbsp;|&nbsp;<a href="http://cdn.sencha.com/cmd/4.0.0.203/SenchaCmd-4.0.0.203-osx.app.zip" target="_blank">http://cdn.sencha.com/cmd/4.0.0.203/SenchaCmd-4.0.0.203-osx.app.zip</a></p>
+	</li>
+	<li>Download&nbsp;<a href="http://www.ruby-lang.org/en/downloads/">Ruby version 1.9.3</a>&nbsp;(Ruby version 2.0 doesn&#39;t work correctly with Sencha Cmd).
+	<ul>
+		<li><strong>Mac OS</strong>: Ruby is pre-installed. You can test which version you have with the&nbsp;<strong>ruby -v</strong>command. If you have version 2.0, download the&nbsp;<a href="https://rvm.io/">Ruby version manager</a>&nbsp;(rvm) and use this command to download and install Ruby:&nbsp;<strong>rvm install 1.9.3 --with-gcc=clang</strong>and set your PATH variable to point to the Ruby 1.9.3 install directory.</li>
+		<li><strong>Windows</strong>&nbsp;Download the open source&nbsp;<a href="http://www.7-zip.org">7-Zip</a>&nbsp;archiver. Download Ruby 1.9.3.n from<a href="http://rubyinstaller.org/downloads/">rubyinstaller.org</a>. Set the Path environment variable to point to the directory in which you unzip the installer file.</li>
+		<li><strong>Ubuntu</strong>: Use&nbsp;<strong>sudo apt-get install ruby1.9.3</strong>&nbsp;to download and install Ruby 1.9.3.</li>
+	</ul>
+	</li>
+	<li>Open a new command line window and start the Sencha Cmd web server. This server runs until you close the window or press CTRL+C to stop the process. The directory name can be any directory where you want to serve your applications. To start the Sencha Cmd web server, use:<br />
+	<strong>sencha fs web -port 8000 start -map</strong>&nbsp;&lt;dir_name&gt;<br />
+	You can access the Sencha Cmd web server using:<br />
+	http://localhost:8000/&lt;dir_name&gt;/&lt;app_name&gt;</li>
+	<li>If you are using Windows and running the IIS web server, add &quot;application/x-json&quot; as a MIME type; otherwise, IIS returns the JSON file with an error when you preview your project. In Windows, enable IIS from the add/remove programs or programs and features dialog (add/remove windows features), you can also add extra functionality by downloading the web platform toolkit to make config of IIS features extra simple. For information on adding this MIME type, see this&nbsp;<a href="http://stackoverflow.com/a/1121114/273985">Stackoverflow article</a>.</li>
+	<li>Use a modern web browser such as&nbsp;<a href="https://www.google.com/intl/en/chrome/browser">Chrome</a>&nbsp;or&nbsp;<a href="http://www.apple.com/safari/">Safari</a>.</li>
+</ol>
+
+<p>&nbsp;</p>
+
+<h3>Sencha Touch 2 &mdash; Built for Amazing Apps</h3>
+
+<p>From gmail at 2012-03-08</p>
+
+<p>We&#39;re proud to announce the most advanced version of our industry-leading mobile app framework, Sencha Touch. Sencha Touch 2 is a high-performance HTML5 framework that lets developers create amazing, cross-browser, cross-platform mobile apps.</p>
+
+<p>With an all-new MVC architecture, incredibly smooth scrolling and animations, and an adaptive layout engine, you&rsquo;ll develop rich web apps that rival native technology. Plus, Sencha Touch 2 now provides native packaging, which lets you access device-layer APIs and wrap your app for distribution on app stores.</p>
+
+<p><a href="http://mkto-j0085.com/track?type=click&amp;enid=bWFpbGluZ2lkPXNlbmNoYUJldGFjdXN0LTE4MzItMjc5NS0wLTM1OC1wcm9kLTEwMDMmbWVzc2FnZWlkPTAmZGF0YWJhc2VpZD0xMDAzJnNlcmlhbD0xMjYwNjQyNzIyJmVtYWlsaWQ9bWFsaGNoQGdtYWlsLmNvbSZ1c2VyaWQ9NTgzNjc1NS01MyZleHRyYT0mJiY=&amp;&amp;&amp;http://www.sencha.com/products/touch/download?mkt_tok=3RkMMJWWfF9wsRons6%2FLZKXonjHpfsX94%2B8rXqKzlMI%2F0ER3fOvrPUfGjI4CScp0dvycMRAVFZl5nR9dFOOdfQ%3D%3D" target="_blank">Download Sencha Touch 2</a>, and get started today. It&rsquo;s the easiest, most powerful version yet.</p>
+
+<p>Also here is the relative blog&nbsp;<a href="http://www.sencha.com/blog/announcing-sencha-touch-2/" target="_blank">http://www.sencha.com/blog/announcing-sencha-touch-2/</a></p>
+
+<h3>Free Commercial Version by filling email</h3>
+
+<p>2012-04-29 11:08 星期日</p>
+
+<p>http://cdn.sencha.io/touch/sencha-touch-2.0.1-commercial.zip,&nbsp;53 MB</p>
+
+<p>First, unzip the archive to your local web server and navigate to&nbsp;http://localhost/your-touch-install/&nbsp;to view the documentation and complete working examples. Any samples that use Ajax will need to be on an web server in order to work correctly.</p>
+
+<ol>
+	<li>
+	<p>Get Started</p>
+
+	<p>Check out the&nbsp;<a href="http://www.sencha.com/learn/getting-started-with-sencha-touch-2/">Getting Started with Sencha Touch 2</a>&nbsp;guide to learn the fundamentals and create a Sencha Touch 2 Hello World example. Next, go through the&nbsp;<a href="http://docs.sencha.com/touch/2-0/#!/guide/first_app">First Application</a>&nbsp;guide to create a Sencha Touch 2 application in around 15 min.</p>
+
+	<p>Visit the&nbsp;<a href="http://www.sencha.com/learn">Sencha Learning Center</a>&nbsp;for more helpful guides and tutorials.</p>
+
+	<ul>
+		<li>
+		<p>Find&nbsp;<a href="http://www.sencha.com/learn/getting-started-with-sencha-touch-2/">Getting Started with Sencha Touch 2</a>&nbsp;here:&nbsp;http://localhost/sencha-touch-2.0.1/docs/#!/guide/getting_started</p>
+
+		<ul>
+			<li>
+			<p>First, you&#39;ll need to download the free Sencha Touch 2 SDK and SDK Tools from the Sencha website.</p>
+
+			<p>OK, Sencha Touch 2 SDK is just&nbsp;sencha-touch-2.0.1-commercial.zip</p>
+
+			<p>And, SDK Tools is <a href="http://cdn.sencha.io/sdk-tools/SenchaSDKTools-2.0.0-beta3-osx.app.zip">Version 2.0.0 Beta 3 for Mac</a></p>
+			</li>
+			<li>
+			<p>You&#39;ll also need:</p>
+			A web server running locally on your computer
+
+			<p>A modern web browser; Chrome and Safari are recommended</p>
+			</li>
+			<li>
+			<p>Unzip&nbsp;SenchaSDKTools-2.0.0-beta3-osx.app.zip and double click SenchaSDKTools-2.0.0-beta3-osx.app to install. Then open a new Terminal and&nbsp;cd to $webroot/sencha-touch-2.0.1/ and execute command &quot;$ sencha&quot; to see what is displayed.</p>
+			</li>
+			<li>
+			<p>Generating your first app</p>
+
+			<p>Now you have Sencha Touch and the SDK Tools installed, lets generate an application. Make sure you&#39;re still in the Sencha Touch SDK folder, and type the following:</p>
+
+			<p>2012-06-18 23:45<br />
+			(Sencha Touch SDK folder means something like .../manuals/sencha-touch-2.0.1)</p>
+
+			<pre>
+$ sencha generate app GS ../GS
+[INFO] Created file /Users/nickpoulden/Projects/sencha/GS/.senchasdk
+[INFO] Created file /Users/nickpoulden/Projects/sencha/GS/index.html
+[INFO] Created file /Users/nickpoulden/Projects/sencha/GS/app.js
+...
+
+Below is my another example:
+$ pwd
+/Library/WebServer/Documents/manuals/sencha-touch-2.0.1
+$ sencha generate app senchaExample ../../SenchaTouch2Example/</pre>
+
+			<p>This will generate a skeleton Sencha Touch application namespaced to the&nbsp;GS&nbsp;variable (short for Getting Started) and located in the directory../GS&nbsp;(one level up from the Sencha Touch SDK directory). The skeleton app contains all the files you need to create a Touch application, including the default index.html, a copy of the Touch SDK, CSS, images and configuration files for packaging your app for native.</p>
+
+			<p>Note: make sure the up level directory&nbsp;of GS is writable for current user, or you will have to add &quot;sudo&quot; and cause&nbsp;&quot;SENCHA_SDK_TOOLS_2_0_0_BETA3 environment variable is not set&quot;</p>
+			</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li>
+	<p>Take a Spin</p>
+
+	<p>Wondered what&rsquo;s possible with Sencha Touch? This&nbsp;SDK&nbsp;includes a whole suite of&nbsp;<a href="http://www.sencha.com/products/touch/download/sencha-touch-2.0.1/demos/">examples</a>. View with a desktop WebKit browser such as&nbsp;<a href="http://www.google.com/chrome">Google Chrome</a>,&nbsp;<a href="http://www.apple.com/safari/">Apple Safari</a>, or with a mobile emulator such as those in the&nbsp;<a href="http://developer.android.com/sdk/index.html">Android</a>&nbsp;or&nbsp;<a href="http://developer.apple.com/xcode/">Xcode</a>&nbsp;SDKs.</p>
+
+	<p>Even better, visit the&nbsp;<a href="http://dev.sencha.com/deploy/touch/examples/">Sencha Touch examples</a>&nbsp;online with your own mobile device.</p>
+	</li>
+	<li>
+	<p>Become a Guru (Or Find One!)</p>
+
+	<p>It&rsquo;s worth knowing your way around the definitive&nbsp;<a href="http://docs.sencha.com/touch/">Sencha Touch&nbsp;API&nbsp;documentation</a>. Be sure to check out the documented source code for our examples and demos.</p>
+
+	<p>Our&nbsp;<a href="http://www.sencha.com/forum/">forums</a>&nbsp;are filled with talented and friendly professionals, and&nbsp;<a href="http://www.sencha.com/meetups">lively meetups</a>&nbsp;are held around the world. Finally, make sure you check out&nbsp;<a href="http://www.senchadevs.com/">SenchaDevs</a>, the definitive list of Sencha developers, to promote your skills or find partners.</p>
+	</li>
+</ol>
+
+<h3>Open Source Version</h3>
+
+<p>http://www.sencha.com/products/touch/download/sencha-touch-2.0.1/</p>
+
+<p>http://cdn.sencha.io/touch/sencha-touch-2.0.1-gpl.zip</p>
+
+<p>Seems the difference is only the file sencha-touch-2.0.1/license.txt</p>
+
+<h2>How-tos</h2>
+
+<h3>How to&nbsp;deploy sencha-touch-all.js instead of sencha-touch.js?</h3>
+
+<p>2012-06-21 14:47</p>
+
+<p>Just open PROJECT_HOME/app.json and change sencha-touch.js to sencha-touch-all.js in &quot;js&quot; section.</p>
+
+<pre>
+&nbsp;&nbsp;&nbsp; &quot;js&quot;: [
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &quot;path&quot;: &quot;sdk/sencha-touch.js&quot;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; },
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &quot;path&quot;: &quot;app.js&quot;,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &quot;bundle&quot;: true,&nbsp; /* Indicates that all class dependencies are concatenated into this file when build */
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &quot;update&quot;: &quot;delta&quot;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }
+&nbsp;&nbsp;&nbsp; ],</pre>
+
+<h2>Error messages</h2>
+
+<h3>Uncaught TypeError: Object [object Object] has no method &#39;getDockedItems&#39;</h3>
+
+<p>replace:</p>
+
+<pre>
+cards.listCard.getDockedItems()[0].setTitle(...);</pre>
+
+<p>with:</p>
+
+<pre>
+cards.listCard.items.items[0].setTitle(...);</pre>
+
+<h3>[WARN][Anonymous] [Ext.Loader] Synchronously loading &#39;Ext.dataview.List&#39;; consider adding &#39;Ext.dataview.List&#39; explicitly as a require of the corresponding class</h3>
+
+<p>2012-05-07 02:06 星期一</p>
+
+<p>解决办法，在 app.js 中加入如下行。</p>
+
+<pre>
+​Ext.application({
+&nbsp;&nbsp;&nbsp; name: &#39;finance&#39;,
+
+&nbsp;&nbsp;&nbsp; requires: [
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &#39;Ext.MessageBox&#39;,//
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &#39;Ext.dataview.List&#39;,//
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ...
+&nbsp;&nbsp;&nbsp; ],</pre>
+
+<p>2012-05-27 09:18 星期天 finance project</p>
+
+<h3>TypeError: &#39;undefined&#39; is not a function (evaluating &#39;this.getFullYear()&#39;)</h3>
+
+<p>这个错误通常是由于类似 Ext.Date.format(dt, &#39;Y-m-d&#39;) 这样的代码中，dt 不是 Date 类型引起的。</p>
+
+<h2>Usage cases</h2>
+
+<h3>Ext.form.Panel</h3>
+
+<p><a href="http://localhost/sencha-touch-2.0.1/docs/#!/api/Ext.form.Panel-method-getValues">getValues</a>(&nbsp;<a href="http://localhost/sencha-touch-2.0.1/docs/#!/api/Boolean">Boolean</a>&nbsp;enabled&nbsp;) :&nbsp;<a href="http://localhost/sencha-touch-2.0.1/docs/#!/api/Object">Object</a></p>
+
+<p>Returns an object containing the value of each field in the form, keyed to the field&#39;s name. For groups of checkbox fields with the same name, it will be arrays of values.</p>
+
+<p>&nbsp;</p>
+
+<p><a href="http://localhost/sencha-touch-2.0.1/docs/#!/api/Ext.form.Panel-method-setValues">setValues</a>(&nbsp;<a href="http://localhost/sencha-touch-2.0.1/docs/#!/api/Object">Object</a>&nbsp;values&nbsp;) :&nbsp;<a href="http://localhost/sencha-touch-2.0.1/docs/#!/api/Ext.form.Panel">Ext.form.Panel</a></p>
+
+<p>Sets the values of form fields in bulk.</p>
+
+<p>&nbsp;</p>
+
+<h3>Ext.field.Text</h3>
+
+<p>不设置 label 则不显示 label。</p>
+
+<p>不设置 name 会使得 Ext.form.Panel.getValues() 的结果中出现 &#39;null&#39; 键值</p>
+
+<pre>
+{
+&nbsp;&nbsp;&nbsp;&nbsp; id : &#39;field-desc&#39;,
+&nbsp;&nbsp;&nbsp;&nbsp; xtype : &#39;textfield&#39;,
+&nbsp;&nbsp;&nbsp;&nbsp; label : &#39;Description&#39;,
+&nbsp;&nbsp;&nbsp;&nbsp; placeHolder : &#39;Trade description&#39;
+}</pre>
+
+<h3>Ext.data.Store</h3>
+
+<p>Ext.data.Store.grouper 配合 Ext.dataview.List.grouped = true 来实现分组</p>
+
+<pre>
+grouper: {
+    groupFn: function(record) {
+&nbsp;&nbsp;&nbsp;&nbsp;    return record.get(&#39;last_name&#39;).substr(0, 1);
+&nbsp;&nbsp;&nbsp;&nbsp;},
+&nbsp;&nbsp;&nbsp;&nbsp;sortProperty: &#39;last_name&#39;
+}</pre>
+
+<p>&nbsp;</p>
+
+<pre>
+userStore = Ext.create(&#39;Ext.data.Store&#39;, {
+&nbsp;&nbsp;&nbsp; model: &#39;User&#39;,
+&nbsp;&nbsp;&nbsp; data: [
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {firstName: &#39;Ed&#39;,&nbsp;&nbsp;&nbsp; lastName: &#39;Spencer&#39;},
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {firstName: &#39;Tommy&#39;, lastName: &#39;Maintz&#39;},
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {firstName: &#39;Aaron&#39;, lastName: &#39;Conran&#39;},
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {firstName: &#39;Jamie&#39;, lastName: &#39;Avins&#39;}
+&nbsp;&nbsp;&nbsp; ]
+});
+
+
+Ext.regStore(&quot;businesses&quot;, {
+model: &#39;Business&#39;,
+&nbsp;&nbsp;&nbsp; autoLoad: true,
+&nbsp;&nbsp;&nbsp; proxy: {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // call Yelp to get business data
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type: &#39;scripttag&#39;,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; url: &#39;index.php&#39;,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; reader: {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type: &#39;json&#39;,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; rootProperty: &#39;businesses&#39;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }
+&nbsp;&nbsp;&nbsp; },
+&nbsp;&nbsp;&nbsp; listeners: {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // when the records load, fire the callback
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &#39;load&#39;: function (store) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cards.dataList.setStore(store);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cards.setActiveItem(cards.listCard);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }
+&nbsp;&nbsp;&nbsp; }
+})</pre>
+
+<h3>Ext.Function</h3>
+
+<p>&nbsp;</p>
+
+<pre>
+/**
+* @class Ext.Function
+*
+* A collection of useful static methods to deal with function callbacks
+* @singleton
+* @alternateClassName Ext.util.Functions
+*/
+Ext.Function = {
+    ...
+    alias: function(object, methodName) {
+        return function() {
+            return object[methodName].apply(object, arguments);
+        };
+    },
+    ...
+}</pre>
+
+<ol>
+	<li>Ext.defer = Ext.Function.alias(Ext.Function, &#39;defer&#39;);</li>
+	<li>Ext.pass = Ext.Function.alias(Ext.Function, &#39;pass&#39;);</li>
+	<li>Ext.bind = Ext.Function.alias(Ext.Function, &#39;bind&#39;);</li>
+	<li>Ext.apply(Ext, {
+	<ol>
+		<li>create: alias(Manager, &#39;instantiate&#39;),</li>
+		<li>createByAlias: alias(Manager, &#39;instantiateByAlias&#39;),</li>
+		<li>getClassName: alias(Manager, &#39;getName&#39;),</li>
+		<li>getClass: alias(Manager, &#39;getClass&#39;),</li>
+		<li>namespace: alias(Manager, &#39;createNamespaces&#39;)</li>
+	</ol>
+	</li>
+	<li>Ext.require = alias(Loader, &#39;require&#39;);</li>
+	<li>Ext.syncRequire = alias(Loader, &#39;syncRequire&#39;);</li>
+	<li>Ext.exclude = alias(Loader, &#39;exclude&#39;);</li>
+	<li>Ext.query = Ext.Function.alias(Ext.DomQuery, &#39;select&#39;);</li>
+</ol>
