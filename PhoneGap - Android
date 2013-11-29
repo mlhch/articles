@@ -1,0 +1,73 @@
+<h1>PhoneGap - Android</h1>
+
+<p>2013-08-15 17:06 Thursday</p>
+
+<p><a href="http://docs.phonegap.com/en/3.0.0/guide_platforms_android_tools.md.html#Android%20Command-line%20Tools" target="_blank">http://docs.phonegap.com/en/3.0.0/guide_platforms_android_tools.md.html#Android%20Command-line%20Tools</a></p>
+
+<p>文中说的很清楚：这个 cordova 命令行工具的老版本为每种平台都提供了一套命令。下载并解压相关的平台包以后就可以把它当做 CLI 的另一种替代来使用。</p>
+
+<ul>
+	<li><a href="http://docs.phonegap.com" target="_blank">http://docs.phonegap.com</a></li>
+	<li>http://docs.phonegap.com/en/3.0.0/index.html</li>
+	<li><a href="http://docs.phonegap.com/en/3.0.0/guide_platforms_index.md.html#Platform%20Guides">Platform Guides</a> Set up each SDK and update projects -&nbsp;http://docs.phonegap.com/en/3.0.0/guide_platforms_index.md.html#Platform%20Guides</li>
+	<li><a href="http://docs.phonegap.com/en/3.0.0/guide_platforms_android_tools.md.html#Android%20Command-line%20Tools">Android Command-line Tools</a>&nbsp;-&nbsp;http://docs.phonegap.com/en/3.0.0/guide_platforms_android_tools.md.html#Android%20Command-line%20Tools</li>
+</ul>
+
+<p>The&nbsp;<code>cordova</code>&nbsp;command-line utility is a high-level tool that allows you to build applications across several platforms at once. An older version of the Cordova framework provides sets of command-line tools <span class="marker">specific to each platform</span>. <span class="marker">To use them as an alternative to the CLI,</span> you need to download this version of Cordova from&nbsp;<a href="http://cordova.apache.org/">cordova.apache.org</a>. The download contains separate archives for each platform. <span class="marker">Expand the platform you wish to target</span>. The tools described here are typically available in the top-level&nbsp;<code>bin</code>&nbsp;directory, <span class="marker">otherwise consult the&nbsp;<strong>README</strong></span>&nbsp;file for more detailed directions.</p>
+
+<h2><a name="Android%20Command-line%20Tools_create_a_project">Create a project</a></h2>
+
+<p>Run the&nbsp;<code>create</code>&nbsp;command, specifying the existing path to the project, the reverse-domain-style package identifier, and the app&#39;s display name. Here is the syntax for both Mac and Windows:</p>
+
+<pre>
+<code>$ /path/to/cordova-android/bin/create /path/to/project com.example.project_name ProjectName
+$ C:\path\to\cordova-android\bin\create.bat C:\path\to\project com.example.project_name ProjectName
+</code></pre>
+
+<h2><a name="Android%20Command-line%20Tools_build">Build</a></h2>
+
+<p>This cleans then builds a project.</p>
+
+<p>Debug, on Mac or Windows:</p>
+
+<pre>
+<code>$ /path/to/project/cordova/build --debug
+$ C:\path\to\project\cordova\build.bat --debug
+</code></pre>
+
+<p>Release, on Mac or Windows:</p>
+
+<pre>
+<code>$ /path/to/project/cordova/build --release
+$ C:\path\to\project\cordova\build.bat --release
+</code></pre>
+
+<h2><a name="Android%20Command-line%20Tools_run_the_app">Run the App</a></h2>
+
+<p>The&nbsp;<code>run</code>&nbsp;command accepts the following&nbsp;<em>optional</em>&nbsp;parameters:</p>
+
+<ul>
+	<li>
+	<p>Target specification. This includes&nbsp;<code>--emulator</code>,&nbsp;<code>--device</code>, or&nbsp;<code>--target=&lt;targetID&gt;</code>.</p>
+	</li>
+	<li>
+	<p>Build specification. This includes&nbsp;<code>--debug</code>,&nbsp;<code>--release</code>, or&nbsp;<code>--nobuild</code>.</p>
+
+	<p>$ /path/to/project/cordova/run [Target] [Build] $ C:\path\to\project\cordova\run.bat [Target] [Build]</p>
+	</li>
+</ul>
+
+<p>Make sure you create at least one Android Virtual&nbsp;<a href="http://docs.phonegap.com/en/3.0.0/cordova_device_device.md.html#Device">Device</a>, otherwise you&#39;re prompted to do so with the&nbsp;<code>android</code>&nbsp;command. If more than one AVD is available as a target, you&#39;re prompted to select one. By default the&nbsp;<code>run</code>&nbsp;command detects a connected device, or a currently running emulator if no device is found.</p>
+
+<h2><a name="Android%20Command-line%20Tools_logging">Logging</a></h2>
+
+<pre>
+<code>$ /path/to/project/cordova/log
+$ C:\path\to\project\cordova\log.bat
+</code></pre>
+
+<h3>Cleaning</h3>
+
+<pre>
+<code>$ /path/to/project/cordova/clean
+$ C:\path\to\project\cordova\clean.bat</code></pre>
