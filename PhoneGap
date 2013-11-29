@@ -1,0 +1,807 @@
+<h1>PhoneGap</h1>
+
+<p>2013-08-09 18:10 Friday Initial date:&nbsp;2011-11-10</p>
+
+<p><a href="http://phonegap.com/" target="_blank">http://phonegap.com/</a>&nbsp;|&nbsp;<a href="https://npmjs.org/package/phonegap" target="_blank">https://npmjs.org/package/phonegap</a></p>
+
+<p>PhoneGap是一个开源的跨平台移动应用开发框架，让 Web 开发人员能够使用熟悉的&nbsp;HTML，CSS&nbsp;和&nbsp;JavaScript&nbsp;构建跨平台的移动本地应用,且开发跨平台应用时只需使用标准网络技术（HTML5、CSS和JavaScript）的情况下。通过 PhoneGap 框架提供的&nbsp;JavaScript&nbsp;API 能够以非常简单的方式调用移动设备的核心功能，包括地理位置，摄像头，加速器，通讯录，多媒体，文件和网络等功能。因此，目前开发商 可以只编写一次应用程序，然后在6个主要的移动平台和应用程序商店(app store)里进行发布，这些移动平台和应用程序商店包括：iOS、Android、BlackBerry、webOS、bada以及Symbian。</p>
+
+<p>PhoneGap最初由Nitobi开发，2011年10月，Nitobi被Adobe收购，而PhoneGap项目也被贡献给Apache软件基金会，并有了一个新的名字<a href="http://cordova.io/" target="_blank">Apache Cordova</a>。</p>
+
+<p>2013-10-21 17:16</p>
+
+<pre>
+$ npm update -g phonegap
+...
+/usr/local/share/npm/bin/phonegap -&gt; /usr/local/share/npm/lib/node_modules/phonegap/bin/phonegap.js
+phonegap@3.1.0-0.15.0 /usr/local/share/npm/lib/node_modules/phonegap
+├── colors@0.6.0-1
+├── semver@1.1.0
+├── pluralize@0.0.4
+├── qrcode-terminal@0.9.4
+├── shelljs@0.1.4
+├── optimist@0.6.0 (wordwrap@0.0.2, minimist@0.0.5)
+├── node-static@0.7.0 (colors@0.6.2, mime@1.2.11)
+├── prompt@0.2.11 (revalidator@0.1.5, pkginfo@0.3.0, read@1.0.5, winston@0.6.2, utile@0.2.0)
+├── phonegap-build@0.8.4 (qrcode-terminal@0.8.0, optimist@0.3.7, shelljs@0.0.9, phonegap-build-api@0.3.3)
+└── cordova@3.1.0-0.1.0 (ncallbacks@1.0.0, open@0.0.3, colors@0.6.2, mime@1.2.11, follow-redirects@0.0.3, shelljs@0.1.2, elementtree@0.1.5, prompt@0.2.7, glob@3.2.6, tar@0.1.18, xcode@0.5.1, express@3.0.0, request@2.22.0, npm@1.3.11, ripple-emulator@0.9.18, plugman@0.13.0, plist@0.4.3)</pre>
+
+<pre>
+$ phonegap -v
+3.1.0-0.15.0</pre>
+
+<p>发现 create 命令越来越轻量化了，不像 cordova 那样还在 www 目录下保留一个模板。接着发现 phonegap 居然没有 platform 子命令，反而提示要用 cordova 命令，所以继续全面转向 cordova。</p>
+
+<pre>
+$ phonegap create pg-hello com.malian.pghello HelloPhoneGap
+[phonegap] created project at /Users/mlhch/tpls/pg-hello</pre>
+
+<pre>
+$ find pg-hello/
+pg-hello/
+pg-hello//.cordova
+pg-hello//.cordova/config.json
+pg-hello//.cordova/hooks
+pg-hello//.cordova/hooks/after_build
+pg-hello//.cordova/hooks/after_compile
+pg-hello//.cordova/hooks/after_docs
+pg-hello//.cordova/hooks/after_emulate
+pg-hello//.cordova/hooks/after_platform_add
+pg-hello//.cordova/hooks/after_platform_ls
+pg-hello//.cordova/hooks/after_platform_rm
+pg-hello//.cordova/hooks/after_plugin_add
+pg-hello//.cordova/hooks/after_plugin_ls
+pg-hello//.cordova/hooks/after_plugin_rm
+pg-hello//.cordova/hooks/after_prepare
+pg-hello//.cordova/hooks/after_run
+pg-hello//.cordova/hooks/before_build
+pg-hello//.cordova/hooks/before_compile
+pg-hello//.cordova/hooks/before_docs
+pg-hello//.cordova/hooks/before_emulate
+pg-hello//.cordova/hooks/before_platform_add
+pg-hello//.cordova/hooks/before_platform_ls
+pg-hello//.cordova/hooks/before_platform_rm
+pg-hello//.cordova/hooks/before_plugin_add
+pg-hello//.cordova/hooks/before_plugin_ls
+pg-hello//.cordova/hooks/before_plugin_rm
+pg-hello//.cordova/hooks/before_prepare
+pg-hello//.cordova/hooks/before_run
+pg-hello//merges
+pg-hello//platforms
+pg-hello//plugins
+pg-hello//www
+pg-hello//www/config.xml
+</pre>
+
+<p>2013-10-01 13:47</p>
+
+<pre>
+$ npm update -g phonegap
+npm http GET https://registry.npmjs.org/phonegap
+npm http 200 https://registry.npmjs.org/phonegap
+npm http GET https://registry.npmjs.org/phonegap/-/phonegap-3.0.0-0.14.4.tgz
+npm http 200 https://registry.npmjs.org/phonegap/-/phonegap-3.0.0-0.14.4.tgz
+npm http GET https://registry.npmjs.org/phonegap/3.0.0-0.14.4
+npm http 200 https://registry.npmjs.org/phonegap/3.0.0-0.14.4
+npm http GET https://registry.npmjs.org/phonegap/-/phonegap-3.0.0-0.14.4.tgz
+npm http 200 https://registry.npmjs.org/phonegap/-/phonegap-3.0.0-0.14.4.tgz
+npm http GET https://registry.npmjs.org/cordova/3.0.9
+...
+/usr/local/share/npm/bin/phonegap -&gt; /usr/local/share/npm/lib/node_modules/phonegap/bin/phonegap.js
+phonegap@3.0.0-0.14.4 /usr/local/share/npm/lib/node_modules/phonegap
+├── pluralize@0.0.4
+├── colors@0.6.0-1
+├── semver@1.1.0
+├── qrcode-terminal@0.9.4
+├── shelljs@0.1.4
+├── optimist@0.6.0 (minimist@0.0.5, wordwrap@0.0.2)
+├── node-static@0.7.0 (mime@1.2.11, colors@0.6.2)
+├── prompt@0.2.11 (revalidator@0.1.5, pkginfo@0.3.0, read@1.0.5, utile@0.2.0, winston@0.6.2)
+├── phonegap-build@0.8.4 (qrcode-terminal@0.8.0, optimist@0.3.7, shelljs@0.0.9, phonegap-build-api@0.3.3)
+└── cordova@3.0.9 (ncallbacks@1.0.0, colors@0.6.2, open@0.0.3, shelljs@0.1.2, follow-redirects@0.0.3, elementtree@0.1.3, glob@3.2.6, tar@0.1.18, prompt@0.2.7, xcode@0.5.1, express@3.0.0, npm@1.3.11, plugman@0.11.0, plist@0.4.3, ripple-emulator@0.9.18, request@2.22.0)</pre>
+
+<h3>PhoneGap 和 Cordova的关系阐述</h3>
+
+<p>2013-08-10 09:37 Saturday</p>
+
+<p>百度百科</p>
+
+<p>Cordova 是 PhoneGap 贡献给 Apache 后的开源项目，是从 PhoneGap 中抽出的核心代码，是驱动PhoneGap的核心引擎。你可以把他想象成类似于 Webkit 和 Google Chrome 的关系。</p>
+
+<p>目前&nbsp;PhoneGap 和 Apache Cordova 之间的唯一区别是下载的包的名字。</p>
+
+<h3>What&#39;s the difference between Apache Cordova and PhoneGap?</h3>
+
+<p><a href="http://phonegap.com/2012/03/19/phonegap-cordova-and-what%E2%80%99s-in-a-name/" target="_blank">http://phonegap.com/2012/03/19/phonegap-cordova-and-what%E2%80%99s-in-a-name/</a>&nbsp;by Brian&nbsp;|&nbsp;19 Mar 2012&nbsp;</p>
+
+<p>以下是关键摘要</p>
+
+<p><span class="marker">PhoneGap is a distribution of Apache Cordova. You can think of Apache Cordova as the engine that powers PhoneGap, similar to how WebKit is the engine that powers Chrome or Safari. (Browser geeks, please allow me the affordance of this analogy and I&rsquo;ll buy you a beer later.)</span></p>
+
+<p>Over time, the PhoneGap distribution may contain additional tools that tie into other Adobe services, which would not be appropriate for an Apache project. For example,&nbsp;<a href="http://build.phonegap.com/">PhoneGap Build</a>&nbsp;and&nbsp;<a href="http://labs.adobe.com/technologies/shadow/">Adobe Shadow</a>&nbsp;together make a whole lot of strategic sense. PhoneGap will always remain free, open source software and will always be a free distribution of Apache Cordova.</p>
+
+<p>Currently, the only difference is in the name of the download package and will remain so for some time.</p>
+
+<h3>~/forks/phonegap/.git</h3>
+
+<p>2013-08-11 17:51 Sunday</p>
+
+<p>似乎这个库在 phonegap 使用了 NodeJS 后不需要再维护了</p>
+
+<pre>
+$ git t
+* 2013-02-28 14:26:54 -0800 d2b10d9 &nbsp;(HEAD, 2.5.0, origin/master, origin/HEAD, master)
+* 2013-02-22 11:42:45 -0800 57d7201 &nbsp;(2.5.0rc1)
+* 2013-02-12 16:56:41 -0800 b2c05b6 &nbsp;(2.4.0)
+...
+</pre>
+
+<pre>
+$ git pull
+remote: Counting objects: 2883, done.
+remote: Compressing objects: 100% (1152/1152), done.
+remote: Total 2546 (delta 1523), reused 2137 (delta 1134)
+Receiving objects: 100% (2546/2546), 7.97 MiB | 619 KiB/s, done.
+Resolving deltas: 100% (1523/1523), completed with 216 local objects.
+From https://github.com/phonegap/phonegap
+&nbsp; &nbsp;d2b10d9..a918398 &nbsp;master &nbsp; &nbsp; -&gt; origin/master
+&nbsp;* [new tag] &nbsp; &nbsp; &nbsp; &nbsp; 2.9.0 &nbsp; &nbsp; &nbsp;-&gt; 2.9.0
+From https://github.com/phonegap/phonegap
+&nbsp;* [new tag] &nbsp; &nbsp; &nbsp; &nbsp; 2.6.0 &nbsp; &nbsp; &nbsp;-&gt; 2.6.0
+&nbsp;* [new tag] &nbsp; &nbsp; &nbsp; &nbsp; 2.6.0rc1 &nbsp; -&gt; 2.6.0rc1
+&nbsp;* [new tag] &nbsp; &nbsp; &nbsp; &nbsp; 2.7.0 &nbsp; &nbsp; &nbsp;-&gt; 2.7.0
+&nbsp;* [new tag] &nbsp; &nbsp; &nbsp; &nbsp; 2.7.0rc1 &nbsp; -&gt; 2.7.0rc1
+&nbsp;* [new tag] &nbsp; &nbsp; &nbsp; &nbsp; 2.8.0 &nbsp; &nbsp; &nbsp;-&gt; 2.8.0
+&nbsp;* [new tag] &nbsp; &nbsp; &nbsp; &nbsp; 2.8.1 &nbsp; &nbsp; &nbsp;-&gt; 2.8.1
+&nbsp;* [new tag] &nbsp; &nbsp; &nbsp; &nbsp; 2.9.0rc1 &nbsp; -&gt; 2.9.0rc1
+Updating d2b10d9..a918398</pre>
+
+<pre>
+$ git t
+* 2013-06-26 17:38:11 -0700 a918398 &nbsp;(HEAD, 2.9.0, origin/master, origin/HEAD, master)
+* 2013-06-21 12:54:34 -0700 64b1caa &nbsp;(2.9.0rc1)
+* 2013-06-12 16:11:07 -0700 1a49fed &nbsp;(2.8.1)
+* 2013-06-07 15:50:08 -0700 3aa739e &nbsp;(2.8.0)
+...
+</pre>
+
+<h2>PhoneGap 3.0.0</h2>
+
+<p>2013-08-11 07:42 Sunday 昨天夜里下了大阵雨，但时间很短</p>
+
+<p>这个版本是个重大的里程碑。以下是官方博客的说法。个人体会最显著的变化是：</p>
+
+<ul>
+	<li>目录结构全变了，它不再以 jar 包的形式依附在比如 Android 项目下，而是以 www 目录为主，辅以 plugins 目录和 platforms 目录。</li>
+	<li>基于 NodeJS 的 phonegap 替代了以往的 .../bin/create 脚本，同时增加了 build, install, run 等功能。</li>
+</ul>
+
+<h3>Adobe PhoneGap 3.0 Released</h3>
+
+<p><a href="http://phonegap.com/blog/2013/07/19/adobe-phonegap-3.0-released/" target="_blank">http://phonegap.com/blog/2013/07/19/adobe-phonegap-3.0-released/</a></p>
+
+<p>by Colene Chow&nbsp;|&nbsp;19 Jul 2013</p>
+
+<p>Today we&rsquo;re celebrating the launch of PhoneGap 3.0 at PhoneGap Day in Portland, OR! We couldn&rsquo;t have done it without the entire PhoneGap/Apache Cordova community working together to hit this major milestone. Thank you for all for your hard work!</p>
+
+<p>Here&rsquo;s our official announcement:</p>
+
+<p><strong>Adobe PhoneGap 3.0 Released at 3rd Annual PhoneGap Day</strong><br />
+<em>Popular open source mobile development framework gets upgrades including new plugin architecture, improved tools, new platforms, and new APIs.</em></p>
+
+<p>Adobe&reg; PhoneGap(tm), the popular open source mobile app development framework, released PhoneGap 3.0 today at the 3rd annual PhoneGap Day in Portland, Oregon. PhoneGap allows developers to build cross-platform mobile applications using HTML5, CSS3 and Javascript. With PhoneGap, you can re-use your existing web developer skills and use the PhoneGap API to gain access to native features that aren&rsquo;t accessible in mobile browsers.</p>
+
+<p>We&rsquo;re excited to announce the following major new features in PhoneGap 3.0:</p>
+
+<ul>
+	<li>New plugin architecture - Our plugin architecture keeps your app small and fast. You only include the APIs you need and plugins can be automatically installed and removed.</li>
+	<li>Better tools - We&rsquo;ve made it easier to quickly shift between native platforms without learning new vocabularies by aligning the native platform CLI tooling. Don&rsquo;t have a native platform SDK installed? No problem! Our tools now integrate with PhoneGap/Build.</li>
+	<li>New platforms - Earlier this year we welcomed support for iOS6 (with work on iOS7 happening now!), Windows Phone 8, and BlackBerry 10. Firefox OS and Ubuntu are coming soon.</li>
+	<li>New APIs - Welcome to two new APIs &ndash; InAppBrowser (formerly known as the ChildBrowser plugin) and Globalization API.</li>
+</ul>
+
+<p><img alt="" src="http://phonegap.com/uploads/blog/2013-06/cordova_plugin_diagram.png" style="margin:0px" /></p>
+
+<p>With the PhoneGap CLI, users will be able to directly install PhoneGap from the Node Package Manager (NPM). You no longer need to download a ZIP file every time PhoneGap has a new release. This is all part of our effort to improve user workflow and make the process lightning fast.</p>
+
+<blockquote>
+<p>&ldquo;PhoneGap 3 makes building for all the major mobile platforms a consistently smooth experience with the new CLI tools. I&rsquo;m particularly excited to see what the community does with the new plugin infrastructure in the coming year. We&rsquo;re committed to working with plugin developers to make sure the entire community ecosystem works well on the PhoneGap 3 bits.&ldquo; - Brian LeRoux</p>
+</blockquote>
+
+<blockquote>
+<p>&ldquo;PhoneGap 3 represents a significant step forward in authoring mobile apps using HTML, CSS, JavaScript. We couldn&rsquo;t have done it without the support of all the committers at Apache Cordova and our partners at Intel, Google, Microsoft, Blackberry, IBM, and Mozilla.&rdquo; - Andre Charland</p>
+</blockquote>
+
+<p>Here is more information to get you on your way!</p>
+
+<ul>
+	<li><strong><a href="http://docs.phonegap.com/en/edge/guide_platforms_index.md.html#Platform%20Guides">Getting Started Guides</a></strong>&nbsp;If you are new to PhoneGap, this is the ultimate resource for you. It has many guides for all of the platforms.</li>
+	<li><strong><a href="http://docs.phonegap.com/en/edge/guide_upgrading_index.md.html#Upgrading%20Guides">Upgrade Guides</a>:</strong>&nbsp;If you are looking to upgrade your existing PhoneGap based projects, take a look at these guides.</li>
+	<li><strong><a href="https://github.com/mwbrooks/phonegap-cli/">PhoneGap CLI</a>:</strong>&nbsp;The PhoneGap CLI is a command line tool to build, deploy and manage PhoneGap based applications and has PhoneGap Build integration. It uses the Cordova-CLI under the hood.&nbsp;<a href="https://twitter.com/mwbrooks">Michael Brooks</a>has a great post about getting started with the PhoneGap CLI on his&nbsp;<a href="http://log.michaelbrooks.ca/post/phonegap-cli-preview">blog</a>.</li>
+	<li><strong><a href="https://github.com/apache/cordova-cli/">Cordova CLI</a>:</strong>&nbsp;The Cordova CLI is a command line tool to build, deploy and manage Cordova based applications. Make sure to read our&nbsp;<a href="http://docs.phonegap.com/en/edge/guide_cli_index.md.html#The%20Cordova%20Command-line%20Interface">Cordova CLI guide</a>.</li>
+	<li><strong><a href="http://cordova.apache.org/docs/en/edge/plugin_ref_plugman.md.html">Plugman Usage Guide</a>:</strong>&nbsp;This guide has instructions on how to install the core plugins into your project using<a href="https://github.com/apache/cordova-plugman/">Plugman</a>. Users can see the repos where the core plugins now live.</li>
+	<li><strong><a href="https://github.com/phonegap/phonegap-2-style-3/">PhoneGap 3.0 sample project with plugins</a>:</strong>&nbsp;This is a sample PhoneGap project that comes with all of the plugins installed. It requires either Cordova CLI or PhoneGap CLI to be installed.</li>
+	<li><strong><a href="http://docs.phonegap.com/en/edge/guide_plugins_index.md.html#Plugin%20Development%20Guide">Plugin Development Guide</a>:</strong>&nbsp;This guide covers the basics of developing a plugin for PhoneGap.</li>
+</ul>
+
+<h3>Install</h3>
+
+<p>Ensure that you have&nbsp;<a href="http://nodejs.org/" target="_blank">NodeJS</a>&nbsp;installed, then open your commandline and run the following:</p>
+
+<pre>
+<code>$ sudo npm install -g phonegap</code></pre>
+
+<p>​晕，phonegap 需要 node &gt;= 0.10.0，这可不是个好消息，node 0.10 还有好多不兼容性的吧。用 nvm 搞定它。</p>
+
+<pre>
+$ sudo npm install -g phonegap
+Password:
+npm http GET https://registry.npmjs.org/phonegap
+npm http 200 https://registry.npmjs.org/phonegap
+npm http GET https://registry.npmjs.org/phonegap/-/phonegap-2.9.0rc1-0.12.0.tgz
+npm http 200 https://registry.npmjs.org/phonegap/-/phonegap-2.9.0rc1-0.12.0.tgz
+npm WARN engine phonegap@2.9.0rc1-0.12.0: wanted: {&quot;node&quot;:&quot;&gt;=0.10.0&quot;} (current: {&quot;node&quot;:&quot;v0.8.14&quot;,&quot;npm&quot;:&quot;1.1.65&quot;})
+npm http GET https://registry.npmjs.org/cordova/2.9.0rc1
+</pre>
+
+<p>Once installation completes, you can invoke&nbsp;<code>phonegap</code>&nbsp;on command line for further help.</p>
+
+<h3>Usage</h3>
+
+<pre>
+<code>$ phonegap create my-app</code></pre>
+
+<blockquote>
+<pre>
+$ phonegap create aaa
+&nbsp;[warning] missing library phonegap/www/3.0.0
+[phonegap] downloading https://github.com/phonegap/phonegap-app-hello-world/archive/3.0.0.tar.gz...
+[phonegap] created project at /Users/mlhch/tmp/aaa
+</pre>
+
+<p>这一个项目里同时包含这么多支持不同平台的图片，光 res 目录就已经 1.3 M了，有必要吗</p>
+
+<pre>
+$ find .
+.
+./.cordova
+./.cordova/config.json
+./.cordova/hooks
+./.cordova/hooks/after_build
+...
+./merges
+./platforms
+./plugins
+./www
+./www/config.xml
+./www/css
+./www/css/index.css
+./www/icon.png
+./www/img
+./www/img/logo.png
+./www/index.html
+./www/js
+./www/js/index.js
+./www/res
+./www/res/icon
+./www/res/icon/android
+...
+./www/res/icon/bada
+./www/res/icon/bada/icon-128.png
+./www/res/icon/bada-wac
+...
+./www/res/icon/blackberry
+./www/res/icon/blackberry/icon-80.png
+./www/res/icon/ios
+...
+./www/res/icon/tizen
+./www/res/icon/tizen/icon-128.png
+./www/res/icon/webos
+./www/res/icon/webos/icon-64.png
+./www/res/icon/windows-phone
+...
+./www/res/screen
+./www/res/screen/android
+...
+./www/res/screen/bada
+./www/res/screen/bada/screen-portrait.png
+./www/res/screen/bada-wac
+...
+./www/res/screen/blackberry
+./www/res/screen/blackberry/screen-225.png
+./www/res/screen/ios
+...
+./www/res/screen/tizen
+./www/res/screen/tizen/README.md
+./www/res/screen/webos
+./www/res/screen/webos/screen-64.png
+./www/res/screen/windows-phone
+./www/res/screen/windows-phone/screen-portrait.jpg
+./www/spec
+./www/spec/helper.js
+./www/spec/index.js
+./www/spec/lib
+./www/spec/lib/jasmine-1.2.0
+./www/spec/lib/jasmine-1.2.0/jasmine-html.js
+./www/spec/lib/jasmine-1.2.0/jasmine.css
+./www/spec/lib/jasmine-1.2.0/jasmine.js
+./www/spec/lib/jasmine-1.2.0/MIT.LICENSE
+./www/spec.html
+</pre>
+
+<p>&nbsp;</p>
+</blockquote>
+
+<p>&nbsp;</p>
+
+<pre>
+<code>$ cd my-app
+$ phonegap run android</code>
+</pre>
+
+<blockquote>
+<p>看样子这玩意儿需要注册，注册时可以使用 GitHub 的帐户，但如 waring 所说，GitHub 现在并不被支持，所以还得在 phonegap 网站上登录后编辑帐户时&nbsp;Link a Adobe ID。</p>
+
+<pre>
+$ phonegap run android
+[phonegap] detecting Android SDK environment...
+[phonegap] using the remote environment
+[phonegap] PhoneGap/Build Login
+[phonegap] Sign up at build.phonegap.com
+&nbsp;[warning] GitHub accounts are unsupported
+&nbsp; [prompt] enter username:
+</pre>
+
+<p>后来帐户搞定了，但看到 uploading the app... 就不知所以然了</p>
+
+<pre>
+$ phonegap run android
+[phonegap] detecting Android SDK environment...
+[phonegap] using the remote environment
+[phonegap] compressing the app...
+[phonegap] uploading the app...
+</pre>
+</blockquote>
+
+<p>Learn more at&nbsp;<a href="http://docs.phonegap.com/">docs.phonegap.com</a></p>
+
+<p>2013-08-11 09:32</p>
+
+<p>在正确配置了&nbsp;.../adt-bundle-mac/sdk/tools:.../adt-bundle-mac/sdk/platform-tools 之后，就可以使用 local environment 了，安装后 app 会自动运行。</p>
+
+<pre>
+$ phonegap run android
+[phonegap] detecting Android SDK environment...
+[phonegap] using the local environment
+[phonegap] compiling Android...
+[phonegap] successfully compiled Android app
+[phonegap] trying to install app onto device
+[phonegap] successfully installed onto device</pre>
+
+<h3>PhoneGap 1.2.0</h3>
+
+<p>Updated Nov 7, 2011<br />
+PhoneGap has been accepted into the Apache Software Foundation for incubation as Apache Callback, where it will remain free and open source. More information on Apache Callback and the incubation process can be found here.<br />
+This download and all other PhoneGap code is hosted by Apache Incubator Project Callback on GitHub.</p>
+
+<p>2011-11-30</p>
+
+<p>还是 1.2.0 版本。</p>
+
+<p>2011-12-14</p>
+
+<p>PhoneGap 1.2.0 need to be installed from /callback-phonegap-9f0856d/iOS/PhoneGap-1.2.0.dmg</p>
+
+<h3>PhoneGap 2.4.0</h3>
+
+<p>2013-02-23 05:16 今天一会儿就回临淇</p>
+
+<p><img alt="" src="../images/2013-02-23 05.00.01.png" style="height:439px; width:600px" /></p>
+
+<p>PhoneGap 2.0 的新特性包括：</p>
+
+<ul>
+	<li>Cordova WebView：允许将PhoneGap作为一个视图片段整合进更大的本地应用程序中。</li>
+	<li>命令行工具（CLI）：可用于Android、iOS和BlackBerry平台，为跨平台任务（如创建、调试、模拟等）提供了一个标准的命令操作方式。</li>
+	<li>文档改善：包括快速入门指南、插件迁移指南以及其他文档，以帮助开发者加快和简化移动应用的开发，</li>
+	<li>Web Inspector Remote（Weinre）移植到nodejs：意味着可以通过NMP（Node Package Manager）来轻松安装。</li>
+	<li>Cordovajs：性能、安全性、平台间API一致性得到了显著改进。</li>
+	<li>项目过渡到Apache Cordova，即将从孵化器中毕业。</li>
+	<li>改善了iOS应用的创建</li>
+</ul>
+
+<h3>PhoneGap 2.6.0</h3>
+
+<p>2013-04-26 20:06 研究一下 onDeviceReady 事件的如何从 Android 触发的</p>
+
+<p><a href="https://s3.amazonaws.com/phonegap.download/phonegap-2.6.0.zip">Download (32.0mb)</a></p>
+
+<p>Check out our&nbsp;<a href="http://phonegap.com/blog/2013/04/09/pg-260-released/">release blog post</a>. View the 2.6.0 commits in the change log on&nbsp;<a href="https://github.com/phonegap/phonegap/blob/2.6.0/changelog">GitHub</a>.</p>
+
+<p>PhoneGap is a distribution of Apache Cordova.</p>
+
+<p>Released 09 Apr 2013</p>
+
+<h3>PhoneGap 2.9.0</h3>
+
+<p>2013-08-09 18:15 Friday 这是 phonegap 命令行采用 NodeJS 之前的最后一个版本</p>
+
+<p><a href="https://github.com/phonegap/phonegap/archive/2.9.0.zip">PhoneGap 2.9.0 Released 26 Jun 2013</a></p>
+
+<p>v2.4 与 v2.9 的大致对比，为什么 symbian 和 webos 被去掉了？还增加了 osx？</p>
+
+<table border="1" cellpadding="1" cellspacing="1">
+	<tbody>
+		<tr>
+			<td style="vertical-align:top">phonegap-2.4.0\doc<br />
+			phonegap-2.4.0\lib<br />
+			phonegap-2.4.0\lib\android<br />
+			phonegap-2.4.0\lib\bada<br />
+			phonegap-2.4.0\lib\badaWac<br />
+			phonegap-2.4.0\lib\blackberry<br />
+			phonegap-2.4.0\lib\cordova-cli<br />
+			phonegap-2.4.0\lib\ios<br />
+			<br />
+			<span class="marker">phonegap-2.4.0\lib\symbian<br />
+			phonegap-2.4.0\lib\webos</span><br />
+			phonegap-2.4.0\lib\windows8<br />
+			phonegap-2.4.0\lib\windows-phone-7<br />
+			phonegap-2.4.0\lib\windows-phone-8</td>
+			<td style="vertical-align:top">phonegap-2.9.0\doc<br />
+			phonegap-2.9.0\lib<br />
+			phonegap-2.9.0\lib\android<br />
+			<br />
+			<br />
+			phonegap-2.9.0\lib\blackberry<br />
+			phonegap-2.9.0\lib\cordova-cli<br />
+			phonegap-2.9.0\lib\ios<br />
+			<span class="marker">phonegap-2.9.0\lib\osx</span><br />
+			<br />
+			<br />
+			phonegap-2.9.0\lib\windows8<br />
+			phonegap-2.9.0\lib\windows-phone-7<br />
+			phonegap-2.9.0\lib\windows-phone-8</td>
+		</tr>
+	</tbody>
+</table>
+
+<h2>Start</h2>
+
+<p>http://phonegap.com/start</p>
+
+<h3>iPhone 备忘</h3>
+
+<ol>
+	<li>修改 TARGETS - Summary - Identifier 的值后引起变化的文件内容有
+	<ul>
+		<li>/aaa/aaa-Info.plist 中 &lt;key&gt;CFBundleIdentifier&lt;/key&gt; 的值 &lt;string&gt;com.explorus.ccc&lt;/string&gt;</li>
+	</ul>
+	</li>
+	<li>修改 Project Name 的值后引起变化的文件内容有
+	<ul>
+		<li>/aaa.xcodeproj/xcuserdata/mlhch.xcuserdatad/xcschemes/aaa.xcscheme 中的每个 ReferencedContainer = &quot;container:ddd.xcodeproj&quot;&gt;</li>
+		<li>/aaa.xcodeproj/project.xcworkspace/contents.xcworkspacedata 中的 location = &quot;self:ddd.xcodeproj&quot;&gt;</li>
+	</ul>
+	</li>
+</ol>
+
+<h3>Android 备忘</h3>
+
+<ol>
+	<li>创建新项目时，选择 Android -&gt; Android Project</li>
+	<li>指定目标 Android 版本，比如，Android 2.2</li>
+	<li>起一个包名，比如 com.phonegap.hello</li>
+	<li>In the root directory of the project, create two new directories:<br />
+	/libs<br />
+	/assets/www<br />
+	Copy phonegap.js from your PhoneGap download earlier to /assets/www<br />
+	Copy phonegap.jar from your PhoneGap download earlier to /libs<br />
+	Copy xml folder from your PhoneGap download earlier to /res</li>
+	<li>Make a few adjustments to&nbsp;the project&#39;s main Java file found in the src folder in Eclipse: (view image below)<br />
+	Change the class&#39;s extend from Activity to DroidGap<br />
+	Replace the setContentView() line with super.loadUrl(&quot;file:///android_asset/www/index.html&quot;);<br />
+	Add import com.phonegap.*;<br />
+	Remove import android.app.Activity;</li>
+	<li>
+	<p>You might experience an error here, where Eclipse can&#39;t find phonegap-1.0.0.jar. In this case, right click on the /libs folder and go to Build Paths/ &gt; Configure Build Paths. Then, in the Libraries tab, add phonegap-1.0.0.jar to the Project. If Eclipse is being temperamental, you might need to refresh (F5) the project once again.<br />
+	Right click on AndroidManifest.xml and select Open With &gt; Text Editor<br />
+	Paste the following permissions under versionName: (view image below)</p>
+	&lt;supports-screens<br />
+	android:largeScreens=&quot;true&quot;<br />
+	android:normalScreens=&quot;true&quot;<br />
+	android:smallScreens=&quot;true&quot;<br />
+	android:resizeable=&quot;true&quot;<br />
+	android:anyDensity=&quot;true&quot;<br />
+	/&gt;<br />
+	&lt;uses-permission android:name=&quot;android.permission.CAMERA&quot; /&gt;<br />
+	&lt;uses-permission android:name=&quot;android.permission.VIBRATE&quot; /&gt;<br />
+	&lt;uses-permission android:name=&quot;android.permission.ACCESS_COARSE_LOCATION&quot; /&gt;<br />
+	&lt;uses-permission android:name=&quot;android.permission.ACCESS_FINE_LOCATION&quot; /&gt;<br />
+	&lt;uses-permission android:name=&quot;android.permission.ACCESS_LOCATION_EXTRA_COMMANDS&quot; /&gt;<br />
+	&lt;uses-permission android:name=&quot;android.permission.READ_PHONE_STATE&quot; /&gt;<br />
+	&lt;uses-permission android:name=&quot;android.permission.INTERNET&quot; /&gt;<br />
+	&lt;uses-permission android:name=&quot;android.permission.RECEIVE_SMS&quot; /&gt;<br />
+	&lt;uses-permission android:name=&quot;android.permission.RECORD_AUDIO&quot; /&gt;<br />
+	&lt;uses-permission android:name=&quot;android.permission.MODIFY_AUDIO_SETTINGS&quot; /&gt;<br />
+	&lt;uses-permission android:name=&quot;android.permission.READ_CONTACTS&quot; /&gt;<br />
+	&lt;uses-permission android:name=&quot;android.permission.WRITE_CONTACTS&quot; /&gt;<br />
+	&lt;uses-permission android:name=&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot; /&gt;<br />
+	&lt;uses-permission android:name=&quot;android.permission.ACCESS_NETWORK_STATE&quot; /&gt; &lt;uses-permission android:name=&quot;android.permission.GET_ACCOUNTS&quot; /&gt;<br />
+	Add android:configChanges=&quot;orientation|keyboardHidden&quot; to the activity tag in AndroidManifest. (view image below)<br />
+	Add a second activity under you appliction tag in AndroidManifest. (view image below)<br />
+	&lt;activity android:name=&quot;com.phonegap.DroidGap&quot; android:label=&quot;@string/app_name&quot; android:configChanges=&quot;orientation|keyboardHidden&quot;&gt; &lt;intent-filter&gt; &lt;/intent-filter&gt; &lt;/activity&gt;</li>
+	<li>第一次连机调试的时候选择&nbsp;Run As&nbsp;and click&nbsp;Android Application。手机未连接时会进一步提示选择哪个设备，真实的还是虚拟的。插上手机，真实设备列表中自动会探测到并显示出来。</li>
+	<li>项目 bin 目录下有 apk 文件。或者在项目上右键，找 Android Tools 就看到了。</li>
+	<li>下面是修改好的 xml
+	<pre>
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+package=&quot;com.explorus.flowchart&quot; android:versionCode=&quot;1&quot; android:versionName=&quot;1.0&quot;&gt;
+&lt;supports-screens android:largeScreens=&quot;true&quot; android:normalScreens=&quot;true&quot;
+&nbsp; android:smallScreens=&quot;true&quot; android:resizeable=&quot;true&quot; android:anyDensity=&quot;true&quot;/&gt;
+&lt;uses-permission android:name=&quot;android.permission.CAMERA&quot;/&gt;
+&lt;uses-permission android:name=&quot;android.permission.VIBRATE&quot;/&gt;
+&lt;uses-permission android:name=&quot;android.permission.ACCESS_COARSE_LOCATION&quot;/&gt;
+&lt;uses-permission android:name=&quot;android.permission.ACCESS_FINE_LOCATION&quot;/&gt;
+&lt;uses-permission android:name=&quot;android.permission.ACCESS_LOCATION_EXTRA_COMMANDS&quot;/&gt;
+&lt;uses-permission android:name=&quot;android.permission.READ_PHONE_STATE&quot;/&gt;
+&lt;uses-permission android:name=&quot;android.permission.INTERNET&quot;/&gt;
+&lt;uses-permission android:name=&quot;android.permission.RECEIVE_SMS&quot;/&gt;
+&lt;uses-permission android:name=&quot;android.permission.RECORD_AUDIO&quot;/&gt;
+&lt;uses-permission android:name=&quot;android.permission.MODIFY_AUDIO_SETTINGS&quot;/&gt;
+&lt;uses-permission android:name=&quot;android.permission.READ_CONTACTS&quot;/&gt;
+&lt;uses-permission android:name=&quot;android.permission.WRITE_CONTACTS&quot;/&gt;
+&lt;uses-permission android:name=&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot;/&gt;
+&lt;uses-permission android:name=&quot;android.permission.ACCESS_NETWORK_STATE&quot;/&gt;
+&lt;uses-permission android:name=&quot;android.permission.GET_ACCOUNTS&quot;/&gt;
+&lt;uses-sdk android:minSdkVersion=&quot;8&quot;/&gt;
+
+&lt;application android:icon=&quot;@drawable/icon&quot; android:label=&quot;@string/app_name&quot;&gt;
+&nbsp; &lt;activity android:name=&quot;.FlowchartActivity&quot; android:label=&quot;@string/app_name&quot;
+&nbsp;&nbsp; android:configChanges=&quot;orientation|keyboardHidden&quot;&gt;
+&nbsp;&nbsp; &lt;intent-filter&gt;
+&nbsp;&nbsp;&nbsp; &lt;action android:name=&quot;android.intent.action.MAIN&quot;/&gt;
+&nbsp;&nbsp;&nbsp; &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot;/&gt;
+&nbsp;&nbsp; &lt;/intent-filter&gt;
+&nbsp; &lt;/activity&gt;
+&nbsp; &lt;activity android:name=&quot;com.phonegap.DroidGap&quot; android:label=&quot;@string/app_name&quot;
+&nbsp;&nbsp; android:configChanges=&quot;orientation|keyboardHidden&quot;&gt;
+&nbsp;&nbsp; &lt;intent-filter&gt; &lt;/intent-filter&gt;
+&nbsp; &lt;/activity&gt;
+&lt;/application&gt;
+&lt;/manifest&gt;</pre>
+	</li>
+	<li>2011-12-15<br />
+	修改 /res/values/strings.xml 中的 &lt;string name=&quot;app_name&quot;&gt;Flowchart&lt;/string&gt; 可以改变安装时 app 出现的 Android 系统中的名称。</li>
+</ol>
+
+<h2>Release Notes for PhoneGap (1.2.0)</h2>
+
+<p>2011-12-14</p>
+
+<p>PhoneGap is a static library and static framework that enables users to include the PhoneGap API in their iPhone application projects easily, and also create new PhoneGap-based iPhone application projects through an Xcode project template.<br />
+1.2.0 (20111103)<br />
+&bull; Update for iOS 5 - Switched to using LLVM Compiler and fixed associated warnings. Added armv6 to architectures so can use devices running &lt; iOS5<br />
+&bull; Fixed phonegap/phonegap-iphone#313 - return MediaError in error callback<br />
+&bull; Added documentation for correctOrientation and saveToAlbum options of camera.getPicture<br />
+&bull; Fixed phonegap/phonegap-iphone#302 Compiler warnings in PGMotion<br />
+&bull; Fixed phonegap/phonegap-iphone#296 iFrames open in Mobile Safari<br />
+&bull; Fixed callback/callback-ios#5 - Optimization: If white-list contains &quot;*&quot; (wildcard), do not do URL processing<br />
+&bull; Fixed callback/callback-ios#3 - UniversalFramework target of PhoneGapLib does not compile under Xcode 4.2<br />
+&bull; Fixed callback/callback-ios#2 - Convert SBJson library use to JSONKit use<br />
+&bull; Fixed problem where deploying to device using PhoneGap.framework, the armv7 slice is missing from the fat binary<br />
+&bull; Connection plugin (Reachability) - stop/start notifier on pause/resume of app (attempt at Reachability crash fix)<br />
+&bull; Added OpenAllWhitelistURLsInWebView setting in PhoneGap.plist (to open all white-listed URLs in the PhoneGap webview)</p>
+
+<hr />
+<h2>Embedding Cordova WebView on Android</h2>
+
+<p>http://docs.phonegap.com/en/2.4.0/guide_cordova-webview_android.md.html</p>
+
+<p>Beginning in Cordova 1.9, with the assistance of the&nbsp;CordovaActivity, you can use Cordova as a component in a larger native Android application. This component is known in Android as the&nbsp;CordovaWebView. New Cordova-based applications from 1.9 onwards will be using the&nbsp;CordovaWebView&nbsp;as its main view, whether the legacy&nbsp;DroidGap&nbsp;approach is used or not.</p>
+
+<p>The prerequisites are the same as the prerequisites for Android application development. It is assumed that you are familiar with Android development. If not, please look at the Getting Started guide to developing a Cordova Application and start there before continuing with this approach. This is not the main approach used to author Android Cordova applications. Thus the instructions are currently manual. In the future, we may try to further automate project generation via this method.</p>
+
+<h2>Prerequisites</h2>
+
+<ol>
+	<li>Cordova 1.9&nbsp;or greater</li>
+	<li>Android SDK updated with 15</li>
+</ol>
+
+<h2>Guide to using CordovaWebView in an Android Project</h2>
+
+<ol>
+	<li>
+	<p>Use&nbsp;bin/create&nbsp;to fetch the commons-codec-1.6.jar.</p>
+
+	<p>这个似乎并不是必须，而且 cordova-2.4.0/cordova-android/bin/create 命令创建的项目中并未找到 commons-codec-*.jar。实际上这个文件的官方路径在&nbsp;http://archive.apache.org/dist/commons/codec/binaries/</p>
+	</li>
+	<li>
+	<p>cd&nbsp;into&nbsp;/framework&nbsp;and run&nbsp;ant jar&nbsp;to build the cordova jar (it will create the .jar file in the form&nbsp;cordova-x.x.x.jar&nbsp;in the&nbsp;/framework&nbsp;folder)</p>
+
+	<p>这一步似乎也不是必须的，无论 cordova-2.4.0 中还是 phonegap-2.4.0 中都可以轻松找到 cordova-2.4.0.jar，拷贝到 libs 中并手动加入 Build Path 即可</p>
+
+	<p>2013-03-12 01:15 星期二 cordova-2.4.0 对付不了 Android-4.2 了，需要cordova-2.5.0 出马了，可是在 cordova-2.5.0 中找不到 cordova-2.5.0.jar，上次真的轻松找到了吗？可能弄错了，cordova-2.4.0.jar 并不在 cordova-2.4.0 中，但确实在 phonegap-2.4.0 中轻松找到。</p>
+	</li>
+	<li>Copy the cordova jar into your Android project&#39;s&nbsp;/libs&nbsp;directory</li>
+	<li>
+	<p>Edit your application&#39;s&nbsp;main.xml&nbsp;file (under&nbsp;/res/xml) to look similar the following. The&nbsp;layout_height,&nbsp;layout_width&nbsp;and&nbsp;id&nbsp;can be modified to suit your application</p>
+
+	<pre>
+&lt;org.apache.cordova.CordovaWebView
+&nbsp; &nbsp; android:id=&quot;@+id/tutorialView&quot;
+&nbsp; &nbsp; android:layout_width=&quot;match_parent&quot;
+&nbsp; &nbsp; android:layout_height=&quot;match_parent&quot; /&gt;
+</pre>
+
+	<pre>
+<code>&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Modify your activity so that it implements the&amp;nbsp;CordovaInterface. It is recommended that you implement the methods that are included. You may wish to copy the methods from&amp;nbsp;/framework/src/org/apache/cordova/DroidGap.java, or you may wish to implement your own methods. Below is a fragment of code from a basic application that uses the interface (note how the view id referenced matches the&amp;nbsp;id&amp;nbsp;attribute specified in the above XML fragment from step 4):&lt;/p&gt;
+
+&lt;pre&gt;
+</code></pre>
+
+	<p>public class CordovaViewTestActivity extends Activity implements CordovaInterface { &nbsp; &nbsp; CordovaWebView cwv; &nbsp; &nbsp; /* Called when the activity is first created. */ &nbsp; &nbsp; @Override &nbsp; &nbsp; public void onCreate(Bundle savedInstanceState) { &nbsp; &nbsp; &nbsp; &nbsp; super.onCreate(savedInstanceState); &nbsp; &nbsp; &nbsp; &nbsp; setContentView(R.layout.main); &nbsp; &nbsp; &nbsp; &nbsp; cwv = (CordovaWebView) findViewById(R.id.tutorialView); &nbsp; &nbsp; &nbsp; &nbsp; Config.init(this); &nbsp; &nbsp; &nbsp; &nbsp; cwv.loadUrl(Config.getStartUrl()); &nbsp; &nbsp; }</p>
+	</li>
+	<li>
+	<p>最重要的一步，官方没有说明。修改如下方法用 return this 代替 return null</p>
+
+	<p>&nbsp;</p>
+
+	<pre>
+<code>&lt;pre&gt;
+</code></pre>
+
+	<p>@Override public Activity getActivity() { &nbsp; return this; }</p>
+	</li>
+</ol>
+
+<p>&nbsp;</p>
+
+<p>In addition to this, if you are using camera, you will want to implement this as well:</p>
+
+<pre>
+@Override
+public void setActivityResultCallback(CordovaPlugin plugin) {
+&nbsp; &nbsp; this.activityResultCallback = plugin; &nbsp; &nbsp; &nbsp; &nbsp;
+}
+/**
+&nbsp;* Launch an activity for which you would like a result when it finished. When this activity exits, 
+&nbsp;* your onActivityResult() method will be called.
+&nbsp;*
+&nbsp;* @param command &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; The command object
+&nbsp;* @param intent &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;The intent to start
+&nbsp;* @param requestCode &nbsp; &nbsp; &nbsp; The request code that is passed to callback to identify the activity
+&nbsp;*/
+public void startActivityForResult(CordovaPlugin command, Intent intent, int requestCode) {
+&nbsp; &nbsp; this.activityResultCallback = command;
+&nbsp; &nbsp; this.activityResultKeepRunning = this.keepRunning;
+
+&nbsp; &nbsp; // If multitasking turned on, then disable it for activities that return results
+&nbsp; &nbsp; if (command != null) {
+&nbsp; &nbsp; &nbsp; &nbsp; this.keepRunning = false;
+&nbsp; &nbsp; }
+
+&nbsp; &nbsp; // Start activity
+&nbsp; &nbsp; super.startActivityForResult(intent, requestCode);
+}
+
+@Override
+/**
+&nbsp;* Called when an activity you launched exits, giving you the requestCode you started it with,
+&nbsp;* the resultCode it returned, and any additional data from it.
+&nbsp;*
+&nbsp;* @param requestCode &nbsp; &nbsp; &nbsp; The request code originally supplied to startActivityForResult(),
+&nbsp;* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;allowing you to identify who this result came from.
+&nbsp;* @param resultCode &nbsp; &nbsp; &nbsp; &nbsp;The integer result code returned by the child activity through its setResult().
+&nbsp;* @param data &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;An Intent, which can return result data to the caller (various data can be attached to Intent &quot;extras&quot;).
+&nbsp;*/
+protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+&nbsp; &nbsp; super.onActivityResult(requestCode, resultCode, intent);
+&nbsp; &nbsp; CordovaPlugin callback = this.activityResultCallback;
+&nbsp; &nbsp; if (callback != null) {
+&nbsp; &nbsp; &nbsp; &nbsp; callback.onActivityResult(requestCode, resultCode, intent);
+&nbsp; &nbsp; }
+}
+</pre>
+
+<p>Finally, remember to add the thread pool, otherwise the plugins will have no threads to run on.</p>
+
+<pre>
+@Override
+public ExecutorService getThreadPool() {
+&nbsp; &nbsp; return threadPool;
+}
+</pre>
+
+<ol>
+	<li>Copy your application&#39;s HTML and JavaScript used to the&nbsp;/assets/www&nbsp;directory of your Android project</li>
+	<li>Copy&nbsp;cordova.xml&nbsp;and&nbsp;plugins.xml&nbsp;from&nbsp;/framework/res/xml&nbsp;to the&nbsp;/res/xml&nbsp;folder in your project</li>
+</ol>
+
+<p>很不幸，Android 调试结果在日志中有如下错误提示</p>
+
+<pre>
+02-23 13:03:31.850: E/PluginManager(1462): =====================================================================================
+02-23 13:03:31.880: E/PluginManager(1462): ERROR: plugin.xml is missing. &nbsp;Add res/xml/plugins.xml to your project.
+02-23 13:03:31.880: E/PluginManager(1462): https://git-wip-us.apache.org/repos/asf?p=incubator-cordova-android.git;a=blob;f=framework/res/xml/plugins.xml
+02-23 13:03:31.880: E/PluginManager(1462): =====================================================================================</pre>
+
+<p>尝试打开日志中的链接，发现此文件并不存在。而&nbsp;https://git-wip-us.apache.org/repos/asf 这个地址所列出的所有 git 仓库中，有 cordova-android.git，但并没有 incubator-cordova-android.git。多次搜索无果，暂且作罢。（答案如下）</p>
+
+<h2>Upgrading Cordova Android</h2>
+
+<p>2013-02-24 16:33 星期四</p>
+
+<p>http://docs.phonegap.com/en/2.4.0/guide_upgrading_android_index.md.html</p>
+
+<p>This document is for people who need to upgrade their Cordova versions from an older version to a current version of Cordova.</p>
+
+<h3>Notes about 2.0.0 release</h3>
+
+<p>config.xml will be replacing cordova.xml and plugins.xml. This new file is a combination of the previous two. However, the old files are deprecated, and and while currently still work, will cease working in a future release.</p>
+
+<hr />
+<h2>Plugin Development Guide</h2>
+
+<p><a href="http://docs.phonegap.com/en/2.4.0/guide_plugin-development_index.md.html" target="_blank">http://docs.phonegap.com/en/2.4.0/guide_plugin-development_index.md.html</a>&nbsp;右上角可以切换版本</p>
+
+<p>A Cordova plugin bridges a bit of functionality between the WebView powering a Cordova application and the native platform the Cordova application is running on. Plugins are composed of a single JavaScript interface used across all platforms, and native implementations following platform-specific Plugin interfaces that the JavaScript will call into. It should be noted that all of the core Cordova APIs are implemented using this exact architecture.</p>
+
+<p>This guide will go through each step necessary to write a simple Echo Plugin. The Echo Plugin will pass a string from JavaScript and send it into the native environment for the supported platforms. The native code will then return the same string back into the callbacks inside the plugin&#39;s JavaScript.</p>
+
+<p>This guide should give anyone the necessary overview and level of detail to write more complex plugins.</p>
+
+<h2>JavaScript</h2>
+
+<p>The entry point for any plugin is JavaScript. The reason developers use Cordova is so they can use and write JavaScript, not Objective-C, not Java, not C#. The JavaScript interface for your plugin is the front-facing and arguably most important part of your Cordova plugin.</p>
+
+<p>You can structure your plugin&#39;s JavaScript however you like. The one thing you&nbsp;must&nbsp;use to communicate between the Cordova JavaScript and native environments is the&nbsp;cordova.exec&nbsp;function. Here is an example:</p>
+
+<pre>
+cordova.exec(function(winParam) {}, function(error) {}, &quot;service&quot;,
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&quot;action&quot;, [&quot;firstArgument&quot;, &quot;secondArgument&quot;, 42,
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;false]);
+</pre>
+
+<p>The parameters explained in more detail:</p>
+
+<ol>
+	<li>function(winParam) {}&nbsp;- Success function callback. Assuming your&nbsp;exec&nbsp;call completes successfully, this function will be invoked (optionally with any parameters you pass back to it)</li>
+	<li>function(error) {}&nbsp;- Error function callback. If the operation does not complete successfully, this function will be invoked (optionally with an error parameter)</li>
+	<li>&quot;service&quot;&nbsp;- The service name to call into on the native side. This will be mapped to a native class. More on this in the native guides below</li>
+	<li>&quot;action&quot;&nbsp;- The action name to call into. This is picked up by the native class receiving the&nbsp;exec&nbsp;call, and, depending on the platform, essentially maps to a class&#39;s method. For more detail please check out the native guides located at the end of this article.</li>
+	<li>[/* arguments */]&nbsp;- Arguments to get passed into the native environment</li>
+</ol>
+
+<h3>Echo Plugin JavaScript Example</h3>
+
+<pre>
+window.echo = function(str, callback) {
+&nbsp; &nbsp; cordova.exec(callback, function(err) {
+&nbsp; &nbsp; &nbsp; &nbsp; callback(&#39;Nothing to echo.&#39;);
+&nbsp; &nbsp; }, &quot;Echo&quot;, &quot;echo&quot;, [str]);
+};
+</pre>
+
+<p>Let&#39;s dive into this. The plugin attaches itself to&nbsp;window, specifically to the&nbsp;echo&nbsp;function. Plugin users would then use it as follows:</p>
+
+<pre>
+window.echo(&quot;echome&quot;, function(echoValue) {
+&nbsp; &nbsp; alert(echoValue == &quot;echome&quot;); // should alert true.
+});
+</pre>
+
+<p>First, let&#39;s take a look at the last three arguments to the&nbsp;exec&nbsp;function. We will be calling the&nbsp;Echo&nbsp;&quot;service&quot;, requesting the&nbsp;echo&nbsp;&quot;action&quot;, and passing an array of arguments containing the echo string, which is the first parameter into the&nbsp;window.echo&nbsp;function.</p>
+
+<p>The success callback passed into&nbsp;exec&nbsp;is simply a reference to the callback function that&nbsp;window.echo&nbsp;takes. We do a bit more for the error callback: if the native side fires off the error callback, we simply invoke the success callback and pass into it a &quot;default&quot; string.</p>
+
+<h2>Native</h2>
+
+<p>Once you have defined a JavaScript for your plugin, you need to complement it with at least one native implementation. Below are specific guides for each platform Cordova supports. The below guides will continue on building the simple Echo Plugin example we started in this guide.</p>
+
+<ul>
+	<li><a href="http://docs.phonegap.com/en/2.4.0/guide_plugin-development_android_index.md.html#Developing%20a%20Plugin%20on%20Android">Developing a Plugin on Android</a></li>
+</ul>
