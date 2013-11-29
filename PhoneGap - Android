@@ -1,5 +1,42 @@
 <h1>PhoneGap - Android</h1>
 
+<p>2013-11-29 19:42 Friday</p>
+
+<p><a href="http://docs.phonegap.com/en/3.2.0/guide_cli_index.md.html#The%20Command-Line%20Interface" target="_blank">http://docs.phonegap.com/en/3.2.0/guide_cli_index.md.html#The%20Command-Line%20Interface</a></p>
+
+<ol>
+	<li>
+	<p>安装 cordova 这个 npm 包，略过</p>
+
+	<p>$ sudo npm install -g cordova</p>
+	</li>
+	<li>
+	<pre>
+创建项目</pre>
+
+	<pre>
+$ cordova create hello com.example.hello HelloWorld</pre>
+	</li>
+	<li>
+	<p>添加平台，注意保证 platforms 和 plugins 目录的存在，即使为空，否则会出错</p>
+
+	<pre>
+$ cordova platform add android</pre>
+	</li>
+	<li>
+	<p>build</p>
+
+	<pre>
+$ cordova build android</pre>
+	</li>
+	<li>
+	<p>run on device</p>
+
+	<pre>
+$ cordova run</pre>
+	</li>
+</ol>
+
 <p>2013-08-15 17:06 Thursday</p>
 
 <p><a href="http://docs.phonegap.com/en/3.0.0/guide_platforms_android_tools.md.html#Android%20Command-line%20Tools" target="_blank">http://docs.phonegap.com/en/3.0.0/guide_platforms_android_tools.md.html#Android%20Command-line%20Tools</a></p>
