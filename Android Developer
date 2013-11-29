@@ -6,6 +6,14 @@
 
 <p>adt-bundle-mac-x86_64.zip 解压后即有现成的 Eclipse.app 可用</p>
 
+<ul>
+	<li>
+	<p>2013-11-29 14:00 Friday</p>
+
+	<p>今天回头整理 Flowchart.Android，发现最新版本已经是&nbsp;<a href="http://www.android.com/versions/kit-kat-4-4/">Introducing Android 4.4,&nbsp;KitKat</a></p>
+	</li>
+</ul>
+
 <h2>Introducing Android 4.1,&nbsp;Jelly Bean</h2>
 
 <p>2012-08-20 01:54 星期一</p>
@@ -550,3 +558,66 @@ $ adb devices
 
 List of devices attached
 emulator-5554 device</pre>
+
+<h2>Building and Running from the Command Line</h2>
+
+<p><a href="http://developer.android.com/tools/building/building-cmdline.html" target="_blank">http://developer.android.com/tools/building/building-cmdline.html</a></p>
+
+<p>If you don&#39;t have Ant, you can obtain it from the&nbsp;<a href="http://ant.apache.org/">Apache Ant home page</a>. Install it and make sure it is in your executable PATH. Before calling Ant, you need to declare the JAVA_HOME environment variable to specify the path to where the JDK is installed.</p>
+
+<p>Note:&nbsp;When installing JDK on Windows, the default is to install in the &quot;Program Files&quot; directory. This location will cause&nbsp;ant&nbsp;to fail, because of the space. To fix the problem, you can specify the JAVA_HOME variable like this:</p>
+
+<pre>
+set JAVA_HOME=c:\Progra~1\Java\&lt;jdkdir&gt;</pre>
+
+<p>The easiest solution, however, is to install JDK in a non-space directory, for example:</p>
+
+<pre>
+c:\java\jdk1.6.0_02</pre>
+
+<p>但实际上，会提示如下错误：</p>
+
+<pre>
+$ ant debug
+Buildfile: build.xml does not exist!
+Build failed</pre>
+
+<p>这是因为文件 build.xml 是给命令行创建的项目而且被 ant 命令使用的。更多内容参见：</p>
+
+<p>http://developer.android.com/tools/projects/index.html</p>
+
+<p>http://developer.android.com/tools/building/index.html</p>
+
+<p>If you are developing in a non-Eclipse environment, you can build your project with the generated&nbsp;build.xml&nbsp;Ant file that is in the project directory. The Ant file calls targets that automatically call the build tools for you.</p>
+
+<p>最终解决方案如下：</p>
+
+<pre>
+$ android update project -p .
+Error: The project either has no target set or the target is invalid.
+Please provide a --target to the &#39;android update&#39; command.
+It seems that there are sub-projects. If you want to update them
+please use the --subprojects parameter.</pre>
+
+<pre>
+$ android list targets
+Available Android targets:
+----------
+id: 1 or &quot;android-17&quot;
+     Name: Android 4.2.2
+     Type: Platform
+     API level: 17
+     Revision: 2
+     Skins: HVGA, QVGA, WQVGA400, WQVGA432, WSVGA, WVGA800 (default), WVGA854, WXGA720, WXGA800, WXGA800-7in
+     ABIs : armeabi-v7a</pre>
+
+<pre>
+$ android update project -p . --target android-17
+Updated and renamed default.properties to project.properties
+Updated local.properties
+No project name specified, using Activity name &#39;FlowchartActivity&#39;.
+If you wish to change it, edit the first line of build.xml.
+Added file ./build.xml
+Added file ./proguard-project.txt
+It seems that there are sub-projects. If you want to update them
+please use the --subprojects parameter.</pre>
