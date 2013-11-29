@@ -1,0 +1,420 @@
+<h1>Sencha Cmd</h1>
+
+<p>2013-10-09 13:47 Wednesday</p>
+
+<p><a href="http://docs.sencha.com/touch/2.3.0/#!/guide/command" target="_blank">http://docs.sencha.com/touch/2.3.0/#!/guide/command</a>|<a href="http://www.sencha.com/products/sencha-cmd/download" target="_blank">http://www.sencha.com/products/sencha-cmd/download</a></p>
+
+<p><a href="http://www.sencha.com/products/sencha-cmd/download">Sencha Cmd</a>&nbsp;is a cross-platform command line tool that provides many automated tasks around the full life-cycle of your applications from generating a new project to deploying an application to production.</p>
+
+<p>Cmd 在 Products 中并没有正式列出，文档中的相关介绍页给出了其下载地址。</p>
+
+<p>SenchaCmd-4.0.0.203-osx.app.zip -&gt;&nbsp;<a href="http://cdn.sencha.com/cmd/4.0.0.203/SenchaCmd-4.0.0.203-osx.app.zip" target="_blank">http://cdn.sencha.com/cmd/4.0.0.203/SenchaCmd-4.0.0.203-osx.app.zip</a></p>
+
+<p>下载后解压得到&nbsp;SenchaCmd-4.0.0.203-osx 可执行文件，.app 后缀自动隐藏。双击后根据对话框的引导进行安装。所谓安装，就是解压到一个目录，然后自动添加相关 $PATH。</p>
+
+<pre>
+$ cat .bashrc 
+...
+export PATH=/Users/mlhch/app/Sencha/Cmd/4.0.0.203:$PATH
+export SENCHA_CMD_3_0_0=&quot;/Users/mlhch/app/Sencha/Cmd/4.0.0.203&quot;</pre>
+
+<pre>
+$ cat .bash_profile
+...
+export PATH=/Users/mlhch/app/Sencha/Cmd/4.0.0.203:$PATH
+export SENCHA_CMD_3_0_0=&quot;/Users/mlhch/app/Sencha/Cmd/4.0.0.203&quot;</pre>
+
+<p>实践证明，还是上面的方式比下面的 ln -s 方式好。</p>
+
+<pre>
+$ ln -s ~/app/sencha/Cmd/4.0.0.203/sencha ~/bin/sencha</pre>
+
+<pre>
+$ sencha
+Sencha Cmd folder (/Users/mlhch/bin) is missing sencha.cfg - aborting!
+</pre>
+
+<pre>
+$ cp ~/app/sencha/Cmd/4.0.0.203/sencha.cfg ~/bin/</pre>
+
+<pre>
+$&nbsp;sencha
+Unable to access jarfile /Users/mlhch/bin/sencha.jar
+</pre>
+
+<pre>
+$ ln -s ~/app/sencha/Cmd/4.0.0.203/sencha.jar ~/bin/sencha.jar</pre>
+
+<h2>Developing Applications</h2>
+
+<p>The starting point for most projects is to generate an application skeleton. This is done using the following:</p>
+
+<pre>
+sencha -sdk /path/to/sdk generate app MyApp /path/to/MyApp</pre>
+
+<p>Ext JS and Sencha Touch applications are structured differently from each other. Further, particularly with Ext JS, applications can be quite large and may contain multiple pages.</p>
+
+<h2>Sencha Cmd Web Server</h2>
+
+<p>The Sencha Cmd web server lets you serve files from your applications directory. Use this command to start the web server:</p>
+
+<pre>
+sencha web start</pre>
+
+<p>This command uses default port 1841 and the current directory. The web server runs until stopped with Ctrl+C or from another window with:</p>
+
+<pre>
+sencha web stop</pre>
+
+<p>To access the Sencha Cmd web server, use:</p>
+
+<pre>
+http://localhost:1841/</pre>
+
+<p>You can use the&nbsp;-port&nbsp;option to specify another port, and you can use the&nbsp;-map&nbsp;option to specify the path to another directory.</p>
+
+<h2>Current Directory</h2>
+
+<p>In many cases, Sencha Cmd requires that you set a specific current directory. Or it may just need to know details about the relevant SDK. The appropriate SDK can be determined automatically by Sencha Cmd when it is run from a generated application folder or, for some few commands, from an extracted SDK folder.</p>
+
+<p>Important&nbsp;For the following commands, Sencha Cmd needs to be run from the root folder of a generated application. The commands fail if not run from the application&#39;s root folder.</p>
+
+<pre>
+* `sencha generate ...` (for commands other than `app`, `package` and `workspace`)
+* `sencha app ...`</pre>
+
+<p>To generate an application, run the following command from an extracted SDK folder:</p>
+
+<pre>
+cd /path/to/SDK
+sencha generate app ...</pre>
+
+<p>Or you can use the&nbsp;-sdk&nbsp;switch:</p>
+
+<pre>
+sencha -sdk /path/to/sdk generate app ...</pre>
+
+<p>When using the compiler, Sencha Cmd detects the framework in use when run from an application folder. If you are not running from a generated application, you may need to use the&nbsp;-sdk&nbsp;switch:</p>
+
+<pre>
+sencha -sdk /path/to/sdk compile ...</pre>
+
+<blockquote>
+<p>Important</p>
+
+<p>Do not specify the&nbsp;-sdk&nbsp;parameter for&nbsp;sencha app&nbsp;commands. As noted above, these commands must be run from the application&#39;s root folder and therefore automatically know which SDK to use. Using&nbsp;-sdk&nbsp;on these commands causes Sencha Cmd to believe your current directory is the SDK specified which is not the proper current directory for an application.</p>
+</blockquote>
+
+<h2>实战</h2>
+
+<pre>
+$ sencha -sdk ~/app/touch-2.3.0/ generate app HelloSenchaTouch hello-sencha-touch</pre>
+
+<p>touch 目录居然有 80M</p>
+
+<pre>
+$ du -sh hello-sencha-touch/*
+&nbsp;28K&nbsp;&nbsp; &nbsp;hello-sencha-touch/app
+4.0K&nbsp;&nbsp; &nbsp;hello-sencha-touch/app.js
+8.0K&nbsp;&nbsp; &nbsp;hello-sencha-touch/app.json
+&nbsp;44K&nbsp;&nbsp; &nbsp;hello-sencha-touch/bootstrap.js
+4.0K&nbsp;&nbsp; &nbsp;hello-sencha-touch/bootstrap.json
+4.0K&nbsp;&nbsp; &nbsp;hello-sencha-touch/build
+4.0K&nbsp;&nbsp; &nbsp;hello-sencha-touch/build.xml
+4.0K&nbsp;&nbsp; &nbsp;hello-sencha-touch/index.html
+8.0K&nbsp;&nbsp; &nbsp;hello-sencha-touch/packager.json
+&nbsp; 0B&nbsp;&nbsp; &nbsp;hello-sencha-touch/packages
+1.3M&nbsp;&nbsp; &nbsp;hello-sencha-touch/resources
+&nbsp;80M&nbsp;&nbsp; &nbsp;hello-sencha-touch/touch
+</pre>
+
+<p>大头在这里</p>
+
+<pre>
+$ du -sh touch/*
+8.0K&nbsp;&nbsp; &nbsp;touch/build.xml
+4.0K&nbsp;&nbsp; &nbsp;touch/cmd
+4.0K&nbsp;&nbsp; &nbsp;touch/file-header.txt
+4.0K&nbsp;&nbsp; &nbsp;touch/license.txt
+&nbsp;40K&nbsp;&nbsp; &nbsp;touch/microloader
+&nbsp;56M&nbsp;&nbsp; &nbsp;touch/packages
+&nbsp;11M&nbsp;&nbsp; &nbsp;touch/resources
+3.5M&nbsp;&nbsp; &nbsp;touch/sencha-touch-all-debug.js
+3.5M&nbsp;&nbsp; &nbsp;touch/sencha-touch-all.js
+528K&nbsp;&nbsp; &nbsp;touch/sencha-touch-debug.js
+528K&nbsp;&nbsp; &nbsp;touch/sencha-touch.js
+5.2M&nbsp;&nbsp; &nbsp;touch/src
+4.0K&nbsp;&nbsp; &nbsp;touch/version.txt
+</pre>
+
+<pre>
+$ du -sh touch/packages/sencha-touch-grid/examples/*
+864K&nbsp;&nbsp; &nbsp;touch/packages/sencha-touch-grid/examples/bufferedgrid
+&nbsp;29M&nbsp;&nbsp; &nbsp;touch/packages/sencha-touch-grid/examples/grid
+&nbsp;25M&nbsp;&nbsp; &nbsp;touch/packages/sencha-touch-grid/examples/summarygrid</pre>
+
+<p>用 sencha 命令启动 http server 后就可以在浏览器中查看效果了。</p>
+
+<pre>
+$ sencha web start
+Sencha Cmd v4.0.0.203
+[INF] Starting shutdown listener socket
+[INF] Listening for stop requests on: 61202
+[INF] Mapping http://localhost:1841/ to ....
+[INF] Starting http://localhost:1841
+[INF] jetty-8.1.7.v20120910
+[INF] NO JSP Support for /, did not find org.apache.jasper.servlet.JspServlet
+[INF] started o.e.j.w.WebAppContext{/,file:/Users/mlhch/www_cdv/hello-sencha-touch/}
+[INF] started o.e.j.w.WebAppContext{/,file:/Users/mlhch/www_cdv/hello-sencha-touch/}
+[INF] Started SelectChannelConnector@0.0.0.0:1841</pre>
+
+<p>启动模拟器进行调试看效果</p>
+
+<pre>
+$ sencha app build -run native</pre>
+
+<p>为真机调试 build app。</p>
+
+<pre>
+$ sencha app build native
+...
+INF] -after-page:
+[INF]&nbsp;
+[INF] native-package:
+[INF]&nbsp;
+[INF] -before-native-package:
+[INF]&nbsp;
+[INF] -native-package-mobile:
+[INF] &nbsp; &nbsp; &nbsp;[echo] Building all specified mobile packager configs.
+[INF] &nbsp; &nbsp; &nbsp;[echo]&nbsp;
+[INF] &nbsp; &nbsp; &nbsp;[echo] &nbsp; &nbsp; Processing Mobile Packager config file
+[INF] &nbsp; &nbsp; &nbsp;[echo] &nbsp; &nbsp; &nbsp; &nbsp; config: /Users/mlhch/www_cdv/hello-sencha-touch/packager.json
+[INF] &nbsp; &nbsp; &nbsp;[echo] &nbsp; &nbsp; &nbsp; &nbsp; inputPath: /Users/mlhch/www_cdv/hello-sencha-touch/cordova/www
+[INF] &nbsp; &nbsp; &nbsp;[echo] &nbsp; &nbsp; &nbsp; &nbsp; outputPath: /Users/mlhch/www_cdv/hello-sencha-touch/build/native-package-mobile/HelloSenchaTouch/packager.json
+[INF] &nbsp; &nbsp; &nbsp;[echo] Running mobile packager action build on file /Users/mlhch/www_cdv/hello-sencha-touch/packager.temp.json
+[INF]&nbsp;
+[INF] -native-package:
+[INF]&nbsp;
+[INF] -after-native-package:
+[INF]&nbsp;
+[INF] -build:
+[INF]&nbsp;
+[INF] -after-build:
+[INF]&nbsp;
+[INF] build:
+[INF]&nbsp;
+[INF] app-build:</pre>
+
+<p>钥匙串访问中如果没有相应的证书，则会出现如下错误</p>
+
+<pre>
+[INF] &nbsp; &nbsp; &nbsp;[echo] Running mobile packager action build on file /Users/mlhch/Desktop/camera/packager.temp.json
+[ERR]&nbsp;
+<span class="marker">iPhone Developer</span>: no identity found
+The application was successfully packaged
+Failed to execute system command while signing application with error 256
+Failed to package application
+</pre>
+
+<p>实际证实，最少只需修改如下两处，即可使得弹出 &quot;codesign&quot; 想要使用您的钥匙串中的密钥&ldquo;Ma Lian&rdquo;进行签名，进而成功在 iTunes 中进行 app 的安装。当然，系统中必须事先要有形如&nbsp;iPhone Developer: Lian Ma (46QDR96XVT) 的证书支持。</p>
+
+<pre>
+--- a/packager.json
++++ b/packager.json
+@@ -82,7 +82,7 @@
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;* &nbsp;- Android
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;* &nbsp;- AndroidEmulator
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;*/
+- &nbsp; &nbsp; &nbsp; &quot;platform&quot;:&quot;iOSSimulator&quot;,
++ &nbsp; &nbsp; &nbsp; &quot;platform&quot;:&quot;iOS&quot;,
+&nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; /**
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;* @cfg &nbsp;deviceType
+@@ -116,7 +116,7 @@
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;*
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;* When using a certificatePath on Windows, you do not need to specify this.
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;*/
+- &nbsp; &nbsp; &nbsp; &quot;certificateAlias&quot;:&quot;&quot;,
++ &nbsp; &nbsp; &nbsp; &quot;certificateAlias&quot;:&quot;iPhone Developer&quot;,
+&nbsp; &nbsp; &nbsp; &nbsp; /**
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;* @cfg &nbsp;certificatePassword
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;* The password which was specified during certificate export</pre>
+
+<p>至于 bundleSeedId，不知何时默认为&nbsp;KPXFEPZ6EF，却不影响真机测试。</p>
+
+<p>&nbsp;</p>
+
+<p>更新 Java 6 到 Java 7 可解决如下错误：</p>
+
+<pre>
+$ sencha cordova init com.malian.sencha.HelloSencha HelloSencha
+$ sencha app build -run native
+...
+[ERR] The following error occurred while executing this line:
+/Users/mlhch/www_cdv/hello-sencha-touch/.sencha/app/build-impl.xml:414: The following error occurred while executing this line:
+/Users/mlhch/www_cdv/hello-sencha-touch/.sencha/app/cordova-impl.xml:141: javax.script.ScriptException: sun.org.mozilla.javascript.internal.EvaluatorException: Java class &quot;[Ljava.lang.String;&quot; has no public instance field or method named &quot;forEach&quot;. (&lt;Unknown source&gt;#10) in &lt;Unknown source&gt; at line number 10</pre>
+
+<pre>
+$&nbsp;sencha cordova init com.malian.HelloSenchaCordova HelloSenchaCordova
+Sencha Cmd v4.0.0.203
+[INF]&nbsp;
+[INF] sencha-cordova-init:
+[INF]&nbsp;
+[INF] init-cordova:
+[INF] &nbsp; &nbsp; &nbsp;[echo] Adding Cordova to Application
+[INF] &nbsp; &nbsp; &nbsp;[echo] Adding Cordova template files
+[INF] &nbsp; &nbsp; &nbsp;[echo] Adding Native properties
+[INF] [x-property-file] Updating property file: /Users/mlhch/www_cdv/hello-sencha-touch/<span class="marker">.sencha/app/native.properties</span>
+[INF] [x-property-file] Updating property file: /Users/mlhch/www_cdv/hello-sencha-touch/<span class="marker">.sencha/app/build.properties</span>
+[INF] &nbsp; &nbsp; &nbsp;[echo] <span class="marker">Patching build.xml for Cordova Support</span>
+[INF] &nbsp; &nbsp; &nbsp;[echo] Building Cordova App
+[INF] &nbsp; &nbsp; &nbsp;[echo] <span class="marker">Adding Cordova config.xml to App</span>
+[INF] &nbsp; &nbsp; &nbsp;[copy] Copying 1 file to /Users/mlhch/www_cdv/hello-sencha-touch
+[INF] &nbsp; &nbsp; &nbsp;[echo] <span class="marker">Adding cordova.js to app.json</span>
+[INF] &nbsp; &nbsp; &nbsp;[echo] <span class="marker">Adding config.xml to Resources in app.json</span>
+</pre>
+
+<pre>
+$ sencha cordova remove
+</pre>
+
+<h2>sencha 脚本</h2>
+
+<pre>
+#!/bin/bash
+
+CURDIR=${PWD}
+BASEDIR=&quot;$( cd &quot;$( dirname &quot;${BASH_SOURCE[0]}&quot; )&quot; &amp;&amp; pwd )&quot;
+
+#------------------------------------------------------------------------------
+# Utility functions and such
+
+function die () {
+    echo $1
+    exit 1
+}
+
+function warn () {
+    echo $1
+}
+
+# Reads property $2 from properties file $1 and echos the value. To call this method do:
+#
+#     V=$(getProp filename property)
+#
+function getProp () {
+    # ignore lines with &#39;#&#39; as the first non-space character (comments)
+    # grep for the property we want
+    # get the last match just in case
+    # strip the &quot;property=&quot; part but leave any &#39;=&#39; characters in the value
+
+    echo `sed &#39;/^[[:space:]]*\#/d&#39; $1 | grep $2  | tail -n 1 | cut -d &quot;=&quot; -f2- | sed &#39;s/^[[:space:]]*//;s/[[:space:]]*$//&#39;`
+}
+
+#------------------------------------------------------------------------------
+# Main Script
+
+#echo baseDir=$BASEDIR
+#echo curDir=$CURDIR
+</pre>
+
+<p>此处检查同目录下的 sencha.cfg</p>
+
+<pre>
+if [ ! -f &quot;$BASEDIR&quot;/sencha.cfg ]; then
+    die &quot;Sencha Cmd folder ($BASEDIR) is missing sencha.cfg - aborting!&quot;
+fi
+
+# Read the version info for this executing version of the SDK Tools:
+toolsCfg=&quot;$BASEDIR&quot;/sencha.cfg
+jvmArgs=$(getProp $toolsCfg cmd.jvm.args)
+
+
+# For Cygwin, switch $BASEDIR to Windows format before running java
+cygwin=false
+case &quot;`uname`&quot; in
+    CYGWIN*) cygwin=true;;
+esac
+
+if $cygwin; then
+    BASEDIR=`cygpath --absolute --windows &quot;$BASEDIR&quot;`
+fi
+</pre>
+
+<p>此处调用 sencha.jar，当然 sencha.jar 不可或缺</p>
+
+<pre>
+# Delegate to Java all of the arguments and exit with its exit code:
+java $jvmArgs -jar &quot;$BASEDIR&quot;/sencha.jar &quot;$@&quot;
+ecode=$?
+# test for the redirect code
+if [ $ecode == 42 ]
+then
+    redirect=$(getProp sencha.redirect redirect)
+    rm sencha.redirect
+    $redirect/sencha &quot;$@&quot;
+    exit $?
+else
+    exit $ecode
+fi</pre>
+
+<p>&nbsp;</p>
+
+<pre>
+$ sencha
+Sencha Cmd v4.0.0.203
+Sencha Cmd provides several categories of commands and some global switches. In
+most cases, the first step is to generate an application based on a Sencha SDK
+such as Ext JS or Sencha Touch:
+
+    sencha -sdk /path/to/sdk generate app MyApp /path/to/myapp
+
+Sencha Cmd supports Ext JS 4.1.1a and higher and Sencha Touch 2.1 and higher.
+
+To get help on commands use the help command:
+
+    sencha help generate app
+
+For more information on using Sencha Cmd, consult the guides found here:
+
+http://docs.sencha.com/ext-js/4-2/#!/guide/command
+http://docs.sencha.com/ext-js/4-1/#!/guide/command
+
+http://docs.sencha.com/touch/2-2/#!/guide/command
+http://docs.sencha.com/touch/2-1/#!/guide/command
+
+
+Options
+  * --background, -b - Runs the web server in a background thread
+  * --cwd, -cw - Sets the directory from which commands should execute
+  * --debug, -d - Sets log level to higher verbosity
+  * --nologo, -n - Suppress the initial Sencha Cmd version display
+  * --plain, -pl - enables plain logging output (no highlighting)
+  * --quiet, -q - Sets log level to warnings and errors only
+  * --sdk-path, -s - The location of the SDK to use for non-app commands
+  * --time, -ti - Display the execution time after executing all commands
+
+Categories
+  * app - Perform various application build processes
+  * compass - Wraps execution of compass for sass compilation
+  * compile - Compile sources to produce concatenated output and metadata
+  * cordova -  
+  * fs - Utility commands to work with files
+  * generate - Generates models, controllers, etc. or an entire application
+  * io - Create, deploy and manage applications on the Sencha.io cloud platform
+  * iofs - Manage Files stored in the Sencha.io cloud platform
+  * manifest - Extract class metadata
+  * package - Manages local and remote packages
+  * phonegap -  
+  * repository - Manage local repository and remote repository connections
+  * theme - Commands for low-level operations on themes
+  * web - Manages a simple HTTP file server
+
+Commands
+  * ant - Invoke Ant with helpful properties back to Sencha Cmd
+  * build - Builds a project from a legacy JSB3 file.
+  * config - Load a properties file or sets a configuration property
+  * help - Displays help for commands
+  * js - Executes arbitrary JavaScript file(s)
+  * upgrade - Upgrades Sencha Cmd
+  * which - Displays the path to the current version of Sencha Cmd</pre>
