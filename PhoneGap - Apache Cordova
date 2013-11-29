@@ -1,0 +1,233 @@
+<h1>PhoneGap - Apache Cordova</h1>
+
+<p>2013-08-10 09:51 Saturday</p>
+
+<p><a href="http://cordova.apache.org/" target="_blank">http://cordova.apache.org/</a>|<a href="https://npmjs.org/package/cordova" target="_blank">https://npmjs.org/package/cordova</a></p>
+
+<p>Apache Cordova&nbsp;is a platform&nbsp;for building native mobile&nbsp;applications using&nbsp;HTML,&nbsp;CSS&nbsp;and&nbsp;JavaScript</p>
+
+<p>2013-11-29 16:19 Friday 要更新 Flowchart.Android</p>
+
+<p><a href="http://cordova.apache.org/#download">DOWNLOADCordova version 3.1.0</a></p>
+
+<p>npm cordova 更新后版本从 3.1.0 升级到了 3.2.0</p>
+
+<pre>
+$ npm ls cordova -g
+/usr/local/share/npm/lib
+├── cordova@3.1.0-0.1.0 
+└─┬ phonegap@3.1.0-0.15.0
+  └── cordova@3.1.0-0.1.0</pre>
+
+<pre>
+$ npm ls cordova -g
+/usr/local/share/npm/lib
+├── cordova@3.2.0-0.2.0 
+└─┬ phonegap@3.1.0-0.15.0
+  └── cordova@3.1.0-0.1.0 </pre>
+
+<p>2013-10-01 16:52 Tuesday</p>
+
+<p><a href="http://cordova.apache.org/#download">DOWNLOAD Cordova version 3.0.0</a></p>
+
+<p>经 Beyond Compare 3&nbsp;仔细比对确认，该主页上提供的 3.0.0 可下载版本中的 cordova-cli，就是&nbsp;https://git-wip-us.apache.org/repos/asf/cordova-cli.git 版本库中的 3.0.0 版本，唯一的区别是解压后的 VERSION 文件，前者内容是 dev，后者内容是 3.0.0。</p>
+
+<p>而经过 npm install -g cordova 安装的版本，就是&nbsp;https://git-wip-us.apache.org/repos/asf/cordova-cli.git 版本库中的当前 latest 版本。今日看到 3.0.10 已出，但是 npm 中的最新版本还是 3.0.9。</p>
+
+<p>所以，直接用 npm update -g cordova 去使用最新版本即可。</p>
+
+<h2>News</h2>
+
+<ul>
+	<li>23 Jul 2013&nbsp;&raquo;&nbsp;<a href="http://cordova.apache.org/blog/releases/2013/07/23/cordova-3.html">Apache Cordova 3.0</a>
+
+	<p>It went live on Friday! Snapshot available on our&nbsp;<a href="https://www.apache.org/dist/cordova/">download page</a>&nbsp;but before downloading please read on to find out whats new including for more ways to work with Cordova!</p>
+
+	<p><a href="http://cordova.apache.org/blog/releases/2013/07/23/cordova-3.html">Read More...</a></p>
+	</li>
+	<li>11 Jul 2013&nbsp;&raquo;&nbsp;<a href="http://cordova.apache.org/blog/2013/07/11/cordova-has-a-blog.html">Apache Cordova Gets an Official Blog</a>
+	<p>Cordova now has a Blog! Look here to stay up-to-date with what&rsquo;s happening with the project. There is a major release&nbsp;<a href="https://issues.apache.org/jira/browse/CB/fixforversion/12322491">3.0</a>&nbsp;just around the corner (July 19, 2013), and we are really excited about it!</p>
+	<a href="http://cordova.apache.org/blog/2013/07/11/cordova-has-a-blog.html">Read More...</a></li>
+</ul>
+
+<h2>About Apache Cordova&trade;</h2>
+
+<p>Apache Cordova is a set of device APIs that allow a mobile app developer to access native device function such as the camera or accelerometer from JavaScript. Combined with a UI framework such as jQuery Mobile or Dojo Mobile or Sencha Touch, this allows a smartphone app to be developed with just HTML, CSS, and JavaScript.</p>
+
+<p>When using the Cordova APIs, an app can be built without any native code (Java, Objective-C, etc) from the app developer. Instead, web technologies are used, and they are hosted in the app itself locally (generally not on a remote http server).</p>
+
+<p>And because these JavaScript APIs are consistent across multiple device platforms and built on web standards, the app should be portable to other device platforms with minimal to no changes.</p>
+
+<p>Apps using Cordova are still packaged as apps using the platform SDKs, and can be made available for installation from each device&#39;s app store.</p>
+
+<p>Cordova provides a set of uniform JavaScript libraries that can be invoked, with device-specific native backing code for those JavaScript libraries. Cordova is available for the following platforms: iOS, Android, Blackberry, Windows Phone, Palm WebOS, Bada, and Symbian.</p>
+
+<p>If you want to use Cordova in your mobile application, take a look at our&nbsp;<a href="http://cordova.apache.org/docs/en/2.4.0/">documentation</a>. It includes Getting Started guides, the JavaScript APIs reference and examples, instructions on Upgrading from previous versions of Cordova, how to write your own Cordova plugin, and more. The selector in the top-right corner of the documentation will let you pick different Cordova versions and language translations.</p>
+
+<p>Apache Cordova graduated in October 2012 as a top level project within the Apache Software Foundation (ASF). Through the ASF, future Cordova development will ensure open stewardship of the project. It will always remain free and open source under the Apache License, Version 2.0.</p>
+
+<h2>cordova-cli</h2>
+
+<p>2013-10-01 15:48 Tuesday</p>
+
+<pre>
+$ npm install cordova -g
+npm http GET https://registry.npmjs.org/cordova
+npm http 304 https://registry.npmjs.org/cordova
+npm http GET https://registry.npmjs.org/elementtree/0.1.3
+npm http GET https://registry.npmjs.org/plist
+npm http GET https://registry.npmjs.org/plugman
+npm http GET https://registry.npmjs.org/xcode/0.5.1
+npm http GET https://registry.npmjs.org/express/3.0.0
+...
+/usr/local/share/npm/bin/cordova -&gt; /usr/local/share/npm/lib/node_modules/cordova/bin/cordova
+cordova@3.0.9 /usr/local/share/npm/lib/node_modules/cordova
+├── ncallbacks@1.0.0
+├── semver@1.1.0
+├── open@0.0.3
+├── colors@0.6.2
+├── shelljs@0.1.2
+├── follow-redirects@0.0.3 (underscore@1.5.2)
+├── optimist@0.6.0 (wordwrap@0.0.2, minimist@0.0.5)
+├── elementtree@0.1.3 (sax@0.3.5)
+├── glob@3.2.6 (inherits@2.0.1, minimatch@0.2.12)
+├── xcode@0.5.1 (node-uuid@1.3.3, pegjs@0.6.2)
+├── tar@0.1.18 (inherits@2.0.1, block-stream@0.0.7, fstream@0.1.24)
+├── prompt@0.2.7 (revalidator@0.1.5, pkginfo@0.3.0, read@1.0.5, utile@0.1.7, winston@0.6.2)
+├── express@3.0.0 (methods@0.0.1, fresh@0.1.0, range-parser@0.0.4, cookie@0.0.4, crc@0.2.0, debug@0.7.2, commander@0.6.1, mkdirp@0.3.3, send@0.1.0, connect@2.6.0)
+├── request@2.22.0 (json-stringify-safe@4.0.0, forever-agent@0.5.0, aws-sign@0.3.0, qs@0.6.5, tunnel-agent@0.3.0, oauth-sign@0.3.0, cookie-jar@0.3.0, node-uuid@1.4.1, mime@1.2.11, http-signature@0.10.0, hawk@0.13.1, form-data@0.0.8)
+├── npm@1.3.11
+├── ripple-emulator@0.9.18 (connect-xcors@0.5.2, colors@0.6.0-1, accounting@0.3.2, request@2.12.0, moment@1.7.2, express@3.1.0)
+├── plist@0.4.3 (xmlbuilder@0.4.2, xmldom@0.1.16)
+└── plugman@0.11.0 (ncallbacks@1.1.0, osenv@0.0.3, bplist-parser@0.0.4, semver@2.0.11, underscore@1.4.4, nopt@1.0.10, elementtree@0.1.5, dep-graph@1.1.0, xcode@0.6.1, rc@0.3.0, tar.gz@0.1.1, npm@1.3.4)
+</pre>
+
+<p>2013-10-19 20:38 Saturday</p>
+
+<pre>
+$ cordova -v
+3.0.9</pre>
+
+<pre>
+$ npm update -g cordova
+...
+/usr/local/share/npm/bin/cordova -&gt; /usr/local/share/npm/lib/node_modules/cordova/bin/cordova
+cordova@3.1.0-0.1.0 /usr/local/share/npm/lib/node_modules/cordova
+├── ncallbacks@1.0.0
+├── semver@1.1.0
+├── colors@0.6.2
+├── open@0.0.3
+├── mime@1.2.11
+├── shelljs@0.1.2
+├── elementtree@0.1.5 (sax@0.3.5)
+├── follow-redirects@0.0.3 (underscore@1.5.2)
+├── optimist@0.6.0 (wordwrap@0.0.2, minimist@0.0.5)
+├── glob@3.2.6 (inherits@2.0.1, minimatch@0.2.12)
+├── xcode@0.5.1 (node-uuid@1.3.3, pegjs@0.6.2)
+├── tar@0.1.18 (inherits@2.0.1, block-stream@0.0.7, fstream@0.1.24)
+├── prompt@0.2.7 (revalidator@0.1.5, pkginfo@0.3.0, read@1.0.5, utile@0.1.7, winston@0.6.2)
+├── express@3.0.0 (methods@0.0.1, fresh@0.1.0, range-parser@0.0.4, cookie@0.0.4, crc@0.2.0, debug@0.7.2, commander@0.6.1, mkdirp@0.3.3, send@0.1.0, connect@2.6.0)
+├── request@2.22.0 (json-stringify-safe@4.0.0, forever-agent@0.5.0, aws-sign@0.3.0, qs@0.6.5, tunnel-agent@0.3.0, oauth-sign@0.3.0, cookie-jar@0.3.0, node-uuid@1.4.1, http-signature@0.10.0, hawk@0.13.1, form-data@0.0.8)
+├── ripple-emulator@0.9.18 (connect-xcors@0.5.2, colors@0.6.0-1, accounting@0.3.2, request@2.12.0, moment@1.7.2, express@3.1.0)
+├── npm@1.3.11
+├── plugman@0.13.0 (ncallbacks@1.1.0, osenv@0.0.3, bplist-parser@0.0.4, semver@2.0.11, underscore@1.4.4, nopt@1.0.10, dep-graph@1.1.0, rc@0.3.0, tar.gz@0.1.1, xcode@0.6.1, npm@1.3.4)
+└── plist@0.4.3 (xmlbuilder@0.4.2, xmldom@0.1.16)</pre>
+
+<pre>
+$ cordova -v
+3.1.0-0.1.0
+</pre>
+
+<p>创建项目时发现，明显的变化是，原来 www 下的文件都放到了 ./www/cordova-app-hello-world-x.x.x-xxxxxxx/www 下</p>
+
+<pre>
+$ ordova create hello-jqm com.malian.hellojqm HellojQueryMobile
+</pre>
+
+<pre>
+$ find hello-jqm
+.cordova
+...
+./merges
+./platforms
+./plugins
+./www
+./www/config.xml
+./www/cordova-app-hello-world-3.1.0-5683220
+...
+</pre>
+
+<h2>cordova serve</h2>
+
+<p>2013-10-20 07:50 Sunday</p>
+
+<p>为什么执行 cordova serve 后用浏览器访问 http://localhost:8000 问题提示 404 Not Found? 因为正确的访问方式是 <span class="marker">http://locahost:8080/{platform}/(config.xml|project.json|www/...)</span></p>
+
+<pre>
+function launchServer(projectRoot, port) {
+    var server = http.createServer(function(request, response) {
+        function do404() {
+            response.writeHead(404, {&quot;Content-Type&quot;: &quot;text/plain&quot;});
+            response.write(&quot;404 Not Found\n&quot;);
+            response.end();
+        }
+        var urlPath = url.parse(request.url).pathname;
+        var firstSegment = /\/(.*?)\//.exec(urlPath);
+        if (!firstSegment) {
+            return do404();
+        }
+        var platformId = firstSegment[1];
+        if (!platforms[platformId]) {
+            return do404();
+        }
+        // Strip the platform out of the path.
+        urlPath = urlPath.slice(platformId.length + 1);
+
+        var parser = new platforms[platformId].parser(path.join(projectRoot, &#39;platforms&#39;, platformId));
+        var filePath = null;
+
+        if (urlPath == <span class="marker">&#39;/config.xml&#39;</span>) {
+            filePath = parser.config_xml();
+        } else if (urlPath == <span class="marker">&#39;/project.json&#39;</span>) {
+            processAddRequest(request, response, platformId, projectRoot);
+            return;
+        } else if (<span class="marker">/^\/www\//.test(urlPath)</span>) {
+            filePath = path.join(parser.www_dir(), urlPath.slice(5));
+        } else {
+            return do404();
+        }
+
+        fs.exists(filePath, function(exists) {
+            if (exists) {
+                if (fs.statSync(filePath).isDirectory()) {
+                    response.writeHead(200, {&quot;Content-Type&quot;: &quot;text/plain&quot;});
+                    response.write(&quot;TODO: show a directory listing.\n&quot;);
+                    response.end();
+                } else {
+                    var mimeType = mime.lookup(filePath);
+                    var respHeaders = {
+                      &#39;Content-Type&#39;: mimeType
+                    };
+                    var readStream = fs.createReadStream(filePath);
+
+                    var acceptEncoding = request.headers[&#39;accept-encoding&#39;] || &#39;&#39;;
+                    if (acceptEncoding.match(/\bdeflate\b/)) {
+                        respHeaders[&#39;content-encoding&#39;] = &#39;deflate&#39;;
+                        readStream = readStream.pipe(zlib.createDeflate());
+                    } else if (acceptEncoding.match(/\bgzip\b/)) {
+                        respHeaders[&#39;content-encoding&#39;] = &#39;gzip&#39;;
+                        readStream = readStream.pipe(zlib.createGzip());
+                    }
+                    response.writeHead(200, respHeaders);
+                    readStream.pipe(response);
+                }
+            } else {
+                return do404();
+            }
+        });
+
+    }).listen(port);
+
+    console.log(&quot;Static file server running at\n  =&gt; http://0.0.0.0:&quot; + port + &quot;/\nCTRL + C to shutdown&quot;);
+    return server;
+}</pre>
