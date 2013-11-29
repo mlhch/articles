@@ -1,0 +1,22 @@
+<h1>Apache Ant</h1>
+
+<p>2013-11-29 15:08 Friday</p>
+
+<p><a href="http://ant.apache.org/" target="_blank">http://ant.apache.org/</a></p>
+
+<h3>Apache Ant 1.9.2</h3>
+
+<h3>July 12, 2013 - Apache Ant 1.9.2 Released</h3>
+
+<p>Apache Ant 1.9.2 is now available for download as source or binary from&nbsp;<a href="http://ant.apache.org/bindownload.cgi">http://ant.apache.org/bindownload.cgi</a>.</p>
+
+<p>Ant 1.9.2&#39;s javadoc task provides a workaround for the recently patched frame injection vulnerability of the javadoc tool found in Oracle JDKs prior to Java 7u25 known as CVE-2013-1571. The task will now post-process the generated files and remove the vulnerability if detected.</p>
+
+<p>In addition some interoperability patches to the tar and zip classes have been applied.</p>
+
+<pre>
+$ brew install ant
+==&gt; Downloading http://www.apache.org/dyn/closer.cgi?path=ant/binaries/apache-ant-1.9.2-bin.tar.gz
+==&gt; Best Mirror http://apache.fayea.com/apache-mirror/ant/binaries/apache-ant-1.9.2-bin.tar.gz
+######################################################################## 100.0%
+🍺  /usr/local/Cellar/ant/1.9.2: 1590 files, 39M, built in 13 seconds</pre>
