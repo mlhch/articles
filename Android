@@ -1,3 +1,552 @@
 <h1>Android</h1>
 
-<p>2013-11-29 13:50 Friday</p>
+<p>2012-04-20 17:44:04 +08:00 Friday</p>
+
+<p>Android NDK 是运行于 Android 平台上的 Native Development Kit 的缩写。</p>
+
+<p>adt-bundle-mac-x86_64.zip 解压后即有现成的 Eclipse.app 可用</p>
+
+<h2>Introducing Android 4.1,&nbsp;Jelly Bean</h2>
+
+<p>2012-08-20 01:54 星期一</p>
+
+<p><a href="http://www.android.com/" target="_blank">http://www.android.com/</a></p>
+
+<p>Android 4.1, Jelly Bean, is the fastest and smoothest version of Android yet. Jelly Bean improves on the simplicity and beauty of Android 4.0, and introduces a new Google search experience on Android.</p>
+
+<p>2012-12-11 13:19 星期二 胖妞明天结婚</p>
+
+<p>Android 4.2 introduces a completely new camera experience, a new form of typing that helps you power through your messages, and much more.</p>
+
+<p>2013-04-13 18:37 星期六 Tracker 项目预算快要完了</p>
+
+<p>Android 4.2 Jelly Bean!</p>
+
+<p>The latest version of Jelly Bean is here, with performance optimizations, a refreshed UI, and great new features for developers.</p>
+
+<p>Android 4.2 includes APIs for developing lock sceen widgets and Daydream screensavers, using external displays, creating RTL layouts, building flexible UI with nested Fragments, and much more.</p>
+
+<p>An even sweeter&nbsp;Jelly Bean</p>
+
+<p>2013-08-09 09:19 Friday 昨天把遮阳网又搭好了</p>
+
+<p>Android 4.3 introduces restricted profiles, Bluetooth Smart support, improved graphics with the latest version of OpenGL, and more.</p>
+
+<p>Available now on Nexus 4, 7, and 10.</p>
+
+<h2>Get the Android SDK</h2>
+
+<p><a href="http://developer.android.com/index.html" target="_blank">http://developer.android.com/index.html</a></p>
+
+<h3>SDK Tools Only</h3>
+
+<p><a href="http://developer.android.com/sdk/index.html">Get the SDK</a>&nbsp;-&nbsp;http://developer.android.com/sdk/index.html</p>
+
+<p>The Android SDK provides you the API libraries and developer tools necessary to build, test, and debug apps for Android.</p>
+
+<p><a href="http://dl.google.com/android/android-sdk_r20.0.3-macosx.zip">Download the SDK for Mac</a></p>
+
+<p>2012-12-11 14:28 星期二</p>
+
+<table>
+	<tbody>
+		<tr>
+			<td>Mac OS X</td>
+			<td><a href="http://dl.google.com/android/android-sdk_r21-macosx.zip">android-sdk_r21-macosx.zip</a></td>
+			<td>65792626 bytes</td>
+			<td>67e46adca90dd18d7291443f6c15d6af</td>
+		</tr>
+	</tbody>
+</table>
+
+<p>http://dl.google.com/android/android-sdk_r21-macosx.zip</p>
+
+<p>2013-04-14 00:18 星期日</p>
+
+<p>USE AN EXISTING IDE</p>
+
+<p>If you already have an IDE you want to use for Android app development, setting up a new SDK requires that you download the SDK Tools, then select additional Android SDK packages to install (such as the Android platform and system image). If you&#39;ll be using an existing version of Eclipse, then you can add the ADT plugin to it.</p>
+
+<p><a href="http://dl.google.com/android/android-sdk_r21.1-macosx.zip">Download the SDK Tools for Mac</a>&nbsp;-&gt; http://dl.google.com/android/android-sdk_r21.1-macosx.zip</p>
+
+<h3>ADT Bundle</h3>
+
+<p>2012-12-11 14:28 星期二</p>
+
+<p>If you&#39;re a new Android developer, we recommend you download the ADT Bundle to quickly start developing apps. It includes the essential Android SDK components and a version of the Eclipse IDE with built-in&nbsp;ADT (Android Developer Tools)&nbsp;to streamline your Android app development.</p>
+
+<p>With a single download, the ADT Bundle includes everything you need to begin developing apps:</p>
+
+<ul>
+	<li>Eclipse + ADT plugin</li>
+	<li>Android SDK Tools</li>
+	<li>Android Platform-tools</li>
+	<li>The latest Android platform</li>
+	<li>The latest Android system image for the emulator</li>
+</ul>
+
+<table>
+	<tbody>
+		<tr>
+			<td>Mac OS X 64-bit</td>
+			<td><a href="http://dl.google.com/android/adt/adt-bundle-mac-x86_64.zip">adt-bundle-mac-x86_64.zip</a></td>
+			<td>382957959 bytes</td>
+			<td>a320f8bbaee8572a36e68c434564bdd0</td>
+		</tr>
+	</tbody>
+</table>
+
+<p>ADT Build: v21.0.0-519525</p>
+
+<p>2013-04-13 20:01 斗地主一直输，唉，从1450输到1250了</p>
+
+<p><a href="http://developer.android.com/sdk/index.html#mac-bundle">Download the SDK&nbsp;<br />
+ADT Bundle for Mac</a></p>
+
+<p>adt-bundle-mac-x86_64-20130219.zip -&nbsp;259 KB/s - 29.9 MB，共 373 MB，还有 22 分钟</p>
+
+<p><a href="https://dl.google.com/android/adt/adt-bundle-mac-x86_64-20130219.zip" target="_blank">https://dl.google.com/android/adt/adt-bundle-mac-x86_64-20130219.zip</a></p>
+
+<p>ADT Build: v21.1.0-569685，版本小有升级。</p>
+
+<p>使用新版本的 ADT 的办法，主要需要考虑的是已创建项目的移植。打开 Preferences，搜索 Workspaces，移除已配置的目录，勾选 Prompt for workspace on startup，然后重新启动即可选择先前用过的目录进行设置，这样之前的项目就可以在 ADT 中进行浏览了。</p>
+
+<h3>Setting Up the ADT Bundle</h3>
+
+<p>The ADT Bundle provides everything you need to start developing apps, including a version of the Eclipse IDE with built-inADT (Android Developer Tools)&nbsp;to streamline your Android app development. If you haven&#39;t already, go download the<a href="http://developer.android.com/sdk/index.html">Android ADT Bundle</a>. (If you downloaded the SDK Tools only, for use with an existing IDE, you should instead read&nbsp;<a href="http://developer.android.com/sdk/installing/index.html">Setting Up an Existing IDE</a>.)</p>
+
+<p>Install the SDK and Eclipse IDE</p>
+
+<ol>
+	<li>Unpack the ZIP file (named&nbsp;adt-bundle-&lt;os_platform&gt;.zip) and save it to an appropriate location, such as a &quot;Development&quot; directory in your home directory.</li>
+	<li>Open the&nbsp;adt-bundle-&lt;os_platform&gt;/eclipse/&nbsp;directory and launch&nbsp;eclipse.</li>
+</ol>
+
+<p>That&#39;s it! The IDE is already loaded with the Android Developer Tools plugin and the SDK is ready to go. To start developing, read&nbsp;<a href="http://developer.android.com/training/basics/firstapp/index.html">Building Your First App</a>.</p>
+
+<p>Caution:&nbsp;Do not move any of the files or directories from the&nbsp;adt-bundle-&lt;os_platform&gt;&nbsp;directory. If you move theeclipse&nbsp;or&nbsp;sdk&nbsp;directory, ADT will not be able to locate the SDK and you&#39;ll need to manually update the ADT preferences.</p>
+
+<h3>old releases, difference between&nbsp;android-sdk-mac_x86 and&nbsp;android-sdk-macosx</h3>
+
+<p>家目录下有两个文件夹：android-sdk-mac_x86 和 android-sdk-macosx。</p>
+
+<p>查看简介，看到前者的创建时间为&nbsp;2011年8月24日星期三下午2:47，后者为&nbsp;2012年8月9日星期四下午1:20。</p>
+
+<p>前者&nbsp;./android-sdk-mac_x86/tools/android 运行后显示的是 Android SDK and AVD Manager，Revison 13</p>
+
+<p><img alt="" src="../images/2012-09-14T23.52.32.png" style="width:500px" /></p>
+
+<p>后者&nbsp;./android-sdk-macosx/tools/android 运行后显示的是 Android SDK Manager，并且从顶部菜单 About Android SDK Manager 中看到的是Resision 20.0.3。</p>
+
+<p><img alt="" src="../images/2012-09-15T12.04.06.png" style="height:357px; width:500px" /></p>
+
+<p>经网上搜索后尝试，Revision 12 的名称为&nbsp;<a href="file:///Users/mlhch/Downloads/android-sdk_r12-mac_x86.zip">android-sdk_r12-mac_x86.zip</a>，下载地址是&nbsp;<a href="http://dl.google.com/android/android-sdk_r12-mac_x86.zip" target="_blank">http://dl.google.com/android/android-sdk_r12-mac_x86.zip</a></p>
+
+<p>而 Revision 14 的名称已经变为&nbsp;<a href="file:///Users/mlhch/Downloads/android-sdk_r14-macosx.zip">android-sdk_r14-macosx.zip</a>，下载地址就成了 &nbsp;h<a href="http://dl.google.com/android/android-sdk_r14-macosx.zip" target="_blank">ttp://dl.google.com/android/android-sdk_r14-macosx.zip</a></p>
+
+<p>从而猜测 Revision 13 的名称为 android-sdk_r13-mac_x86.zip，下载地址是&nbsp;<a href="http://dl.google.com/android/android-sdk_r13-mac_x86.zip" target="_blank">http://dl.google.com/android/android-sdk_r13-mac_x86.zip</a>，实际确实如此。为了加快下载，偶然打开迅雷，居然提示任务已经存在，哦，原来当时是用迅雷下载的 Revision 13，下载时间显示为 2011-10-05 11:11:33。查看其下载来源页面，是&nbsp;http://developer.android.com/sdk/index.html，所以无疑这就是当时下载的官方最新 Revision 13 版本。</p>
+
+<p>以下为官方历史 Revision 发布的时间参考</p>
+
+<p>http://developer.android.com/tools/sdk/tools-notes.html</p>
+
+<p>2012-12-11 14:30 星期二 果然这里有更新</p>
+
+<p><a href="http://developer.android.com/tools/sdk/tools-notes.html#">SDK Tools, Revision 21</a>&nbsp;(November 2012)</p>
+
+<p><a href="http://developer.android.com/tools/sdk/tools-notes.html#"><img alt="" src="http://developer.android.com/assets/images/triangle-closed.png" />SDK Tools, Revision 20.0.3</a>&nbsp;(August 2012)</p>
+
+<p><a href="http://developer.android.com/tools/sdk/tools-notes.html#"><img alt="" src="http://developer.android.com/assets/images/triangle-closed.png" />SDK Tools, Revision 20.0.1</a>&nbsp;(July 2012)</p>
+
+<p><a href="http://developer.android.com/tools/sdk/tools-notes.html#"><img alt="" src="http://developer.android.com/assets/images/triangle-closed.png" />SDK Tools, Revision 20</a>&nbsp;(June 2012)</p>
+
+<p><a href="http://developer.android.com/tools/sdk/tools-notes.html#"><img alt="" src="http://developer.android.com/assets/images/triangle-closed.png" />SDK Tools, Revision 19</a>&nbsp;(April 2012)</p>
+
+<p><a href="http://developer.android.com/tools/sdk/tools-notes.html#"><img alt="" src="http://developer.android.com/assets/images/triangle-closed.png" />SDK Tools, Revision 18</a>&nbsp;(April 2012)</p>
+
+<p><a href="http://developer.android.com/tools/sdk/tools-notes.html#"><img alt="" src="http://developer.android.com/assets/images/triangle-closed.png" />SDK Tools, Revision 17</a>&nbsp;(March 2012)</p>
+
+<p><a href="http://developer.android.com/tools/sdk/tools-notes.html#"><img alt="" src="http://developer.android.com/assets/images/triangle-closed.png" />SDK Tools, Revision 16</a>&nbsp;(December 2011)</p>
+
+<p><a href="http://developer.android.com/tools/sdk/tools-notes.html#"><img alt="" src="http://developer.android.com/assets/images/triangle-closed.png" />SDK Tools, Revision 15</a>&nbsp;(October 2011)</p>
+
+<p><a href="http://developer.android.com/tools/sdk/tools-notes.html#"><img alt="" src="http://developer.android.com/assets/images/triangle-closed.png" />SDK Tools, Revision 14</a>&nbsp;(October 2011)</p>
+
+<p><a href="http://developer.android.com/tools/sdk/tools-notes.html#"><img alt="" src="http://developer.android.com/assets/images/triangle-closed.png" />SDK Tools, Revision 13</a>&nbsp;(September 2011)</p>
+
+<p><a href="http://developer.android.com/tools/sdk/tools-notes.html#"><img alt="" src="http://developer.android.com/assets/images/triangle-closed.png" />SDK Tools, Revision 12</a>&nbsp;(July 2011)</p>
+
+<p><a href="http://developer.android.com/tools/sdk/tools-notes.html#"><img alt="" src="http://developer.android.com/assets/images/triangle-closed.png" />SDK Tools, Revision 11</a>&nbsp;(May 2011)</p>
+
+<p><a href="http://developer.android.com/tools/sdk/tools-notes.html#"><img alt="" src="http://developer.android.com/assets/images/triangle-closed.png" />SDK Tools, Revision 10</a>&nbsp;(February 2011)</p>
+
+<p><a href="http://developer.android.com/tools/sdk/tools-notes.html#"><img alt="" src="http://developer.android.com/assets/images/triangle-closed.png" />SDK Tools, Revision 9</a>&nbsp;(January 2011)</p>
+
+<p><a href="http://developer.android.com/tools/sdk/tools-notes.html#"><img alt="" src="http://developer.android.com/assets/images/triangle-closed.png" />SDK Tools, Revision 8</a>&nbsp;(December 2010)</p>
+
+<p><a href="http://developer.android.com/tools/sdk/tools-notes.html#"><img alt="" src="http://developer.android.com/assets/images/triangle-closed.png" />SDK Tools, Revision 7</a>&nbsp;(September 2010)</p>
+
+<p><a href="http://developer.android.com/tools/sdk/tools-notes.html#"><img alt="" src="http://developer.android.com/assets/images/triangle-closed.png" />SDK Tools, Revision 6</a>&nbsp;(May 2010)</p>
+
+<p><a href="http://developer.android.com/tools/sdk/tools-notes.html#"><img alt="" src="http://developer.android.com/assets/images/triangle-closed.png" />SDK Tools, Revision 5</a>&nbsp;(March 2010)</p>
+
+<p><a href="http://developer.android.com/tools/sdk/tools-notes.html#"><img alt="" src="http://developer.android.com/assets/images/triangle-closed.png" />SDK Tools, Revision 4</a>&nbsp;(December 2009)</p>
+
+<p><a href="http://developer.android.com/tools/sdk/tools-notes.html#"><img alt="" src="http://developer.android.com/assets/images/triangle-closed.png" />SDK Tools, Revision 3</a>&nbsp;(October 2009)</p>
+
+<h2>Installing the SDK</h2>
+
+<p>http://developer.android.com/sdk/installing/index.html</p>
+
+<p>The SDK you&#39;ve downloaded is not the complete SDK environment. It includes only the core SDK tools, which you can use to download the rest of the SDK packages (such as the latest system image).</p>
+
+<p>2012-12-11 14:36</p>
+
+<p>You should have already downloaded the&nbsp;<a href="http://developer.android.com/sdk/index.html#ExistingIDE">Android SDK Tools</a>. (If you downloaded the ADT Bundle, you should instead read&nbsp;<a href="http://developer.android.com/sdk/installing/bundle.html">Setting Up the ADT Bundle</a>.)</p>
+
+<p>The SDK Tools package is not the complete SDK environment. It includes only the core SDK tools, which you can use to download the rest of the SDK packages (such as the latest system image).</p>
+
+<h3>Getting started on Mac</h3>
+
+<p>Your download package is&nbsp;.zip. Unpack it to a safe location on your machine. By default, the SDK files are unpacked into a directory named&nbsp;android-sdk-mac_x86.</p>
+
+<p>Make a note of the name and location of the SDK directory on your system&mdash;you will need to refer to the SDK directory later, when setting up the ADT plugin and when using the SDK tools from the command line.</p>
+
+<p>2012-12-11 14:33</p>
+
+<ol>
+	<li>Unpack the ZIP file you&#39;ve downloaded. By default, it&#39;s unpacked into a directory named&nbsp;android-sdk-mac_x86. Move it to an appropriate location on your machine, such as a &quot;Development&quot; directory in your home directory.
+	<p>Make a note of the name and location of the SDK directory on your system&mdash;you will need to refer to the SDK directory later, when setting up the ADT plugin and when using the SDK tools from the command line.</p>
+	</li>
+	<li>If you&#39;re using Eclipse, move on to&nbsp;<a href="http://developer.android.com/sdk/installing/installing-adt.html">Installing the Eclipse Plugin</a>. Otherwise, if you&#39;re using a different IDE, read&nbsp;<a href="http://developer.android.com/sdk/installing/adding-packages.html">Adding Platforms and Packages</a>.</li>
+</ol>
+
+<h3>Adding Platforms and Packages</h3>
+
+<p>The Android SDK separates tools, platforms, and other components into packages you can download using the Android SDK Manager. The original SDK package you&#39;ve downloaded includes only the SDK Tools. To develop an Android app, you also need to download at least one Android platform and the latest SDK Platform-tools.</p>
+
+<p>You can update and install SDK packages at any time using the Android SDK Manager.</p>
+
+<p>If you&#39;ve used the Windows installer to install the SDK tools, you should already have the Android SDK Manager open. Otherwise, you can launch the Android SDK Manager in one of the following ways:</p>
+
+<ul>
+	<li>On Windows, double-click the&nbsp;SDK Manager.exe&nbsp;file at the root of the Android SDK directory.</li>
+	<li>On Mac or Linux, open a terminal and navigate to the&nbsp;tools/&nbsp;directory in the Android SDK, then execute &quot;android sdk&quot;.</li>
+</ul>
+
+<p>When you open the Android SDK Manager, it automatically selects a set of recommended packages. Simply click&nbsp;Install&nbsp;to install the recommended packages. The Android SDK Manager installs the selected packages into your Android SDK environment. The following sections describe some of the available SDK packages and more about which ones we recommend you install.</p>
+
+<p>2012-12-11 15:07 星期二</p>
+
+<p>The Android SDK separates tools...</p>
+
+<ol>
+	<li>Launch the SDK Manager.
+	<p>If you&#39;ve used the Windows installer...</p>
+
+	<ul>
+		<li>On Windows...</li>
+		<li>On Mac or Linux...</li>
+	</ul>
+	</li>
+	<li>The SDK Manager shows all the SDK packages available for you to add to your Android SDK. As a minimum configuration for your SDK, we recommend you install the following:
+	<ul>
+		<li>The latest Tools packages (check the&nbsp;Tools&nbsp;folder).</li>
+		<li>The latest version of Android (check the first&nbsp;Android&nbsp;folder).</li>
+		<li>The Android Support Library (open the&nbsp;Extras&nbsp;folder and check&nbsp;Android Support Library).</li>
+	</ul>
+
+	<p><img alt="" src="../images/2012-12-11T15.17.01.png" style="height:960px; width:804px" /></p>
+
+	<p>Once you&#39;ve chosen your packages, click&nbsp;Install. The Android SDK Manager installs the selected packages into your Android SDK environment.</p>
+	</li>
+</ol>
+
+<p>这种方式似乎占用更大的空间，可以看到安装完 Tools - Android SDK Platform-tools 空间由 85M 上升到 120 M，安装完 Android 4.2(API 17) 后，空间由 120M 上升到了 1.3G，而 adt-bundle-mac 目前只有 549M。</p>
+
+<pre>
+$ du -sh android-sdk-macosx/
+85M android-sdk-macosx/</pre>
+
+<pre>
+$ du -sh android-sdk-macosx/
+120M android-sdk-macosx/</pre>
+
+<pre>
+$ du -sh android-sdk-macosx/
+1.3G android-sdk-macosx/</pre>
+
+<pre>
+$ du -sh adt-bundle-mac/
+549M adt-bundle-mac/</pre>
+
+<p>With these packages installed, you&#39;re ready to start developing. To get started, read&nbsp;<a href="http://developer.android.com/training/basics/firstapp/index.html">Building Your First App</a>.</p>
+
+<h3>Recommended Packages</h3>
+
+<hr />
+<p>Here&#39;s an outlines of the packages required and those we recommend you use:</p>
+
+<p>SDK Tools</p>
+
+<p>Required.&nbsp;Your new SDK installation already has the latest version. Make sure you keep this up to date.</p>
+
+<p>SDK Platform-tools</p>
+
+<p>Required.&nbsp;You must install this package when you install the SDK for the first time.</p>
+
+<p>SDK Platform</p>
+
+<p>Required.You must download&nbsp;at least one platform&nbsp;into your environment so you&#39;re able to compile your application. In order to provide the best user experience on the latest devices, we recommend that you use the latest platform version as your build target. You&#39;ll still be able to run your app on older versions, but you must build against the latest version in order to use new features when running on devices with the latest version of Android.</p>
+
+<p>To get started, download the latest Android version, plus the lowest version you plan to support (we recommend Android 2.2 for your lowest version).</p>
+
+<p>System Image</p>
+
+<p>Recommended. Although you might have one or more Android-powered devices on which to test your app, it&#39;s unlikely you have a device for every version of Android your app supports. It&#39;s a good practice to download system images for all versions of Android your app supports and test your app running on them with the&nbsp;<a href="http://developer.android.com/tools/devices/emulator.html">Android emulator</a>.</p>
+
+<p>Android Support</p>
+
+<p>Recommended. Includes a static library that allows you to use some of the latest Android APIs (such as<a href="http://developer.android.com/guide/components/fragments.html">fragments</a>, plus others not included in the framework at all) on devices running a platform version as old as Android 1.6. All of the activity templates available when creating a new project with the&nbsp;<a href="http://developer.android.com/tools/sdk/eclipse-adt.html">ADT Plugin</a>require this. For more information, read&nbsp;<a href="http://developer.android.com/tools/extras/support-library.html">Support Library</a>.</p>
+
+<p>SDK Samples</p>
+
+<p>Recommended. The samples give you source code that you can use to learn about Android, load as a project and run, or reuse in your own app. Note that multiple samples packages are available &mdash; one for each Android platform version. When you are choosing a samples package to download, select the one whose API Level matches the API Level of the Android platform that you plan to use.</p>
+
+<p>Tip:&nbsp;For easy access to the SDK tools from a command line, add the location of the SDK&#39;s&nbsp;tools/&nbsp;andplatform-tools&nbsp;to your&nbsp;PATH&nbsp;environment variable.</p>
+
+<h2>Start coding</h2>
+
+<ul>
+	<li>Follow the training class for&nbsp;<a href="http://developer.android.com/training/basics/firstapp/index.html">Building Your First App</a>.
+
+	<p>This class is an essential first step for new Android developers.</p>
+
+	<p>It gives you step by step instructions for building a simple app. You&rsquo;ll learn how to create an Android project and run a debuggable version of the app. You&#39;ll also learn some fundamentals of Android app design, including how to build a simple user interface and handle user input.</p>
+	</li>
+</ul>
+
+<h3>Learn how to design your app</h3>
+
+<ul>
+	<li>Learn the best practices for Android design and user experience by reading the Android&nbsp;<a href="http://developer.android.com/design/index.html">Design</a>&nbsp;guidelines.</li>
+</ul>
+
+<h3>Read up on the API framework</h3>
+
+<ul>
+	<li>Start reading about fundamental framework topics in the collection of&nbsp;<a href="http://developer.android.com/guide/components/index.html">API Guides</a>.</li>
+	<li>Browse the API specifications in the&nbsp;<a href="http://developer.android.com/reference/packages.html">Reference</a>.</li>
+</ul>
+
+<h3>Explore the development tools</h3>
+
+<ul>
+	<li>Learn about developing an app with the Android Developer Tools plugin for Eclipse and other tools from the&nbsp;<a href="http://developer.android.com/tools/workflow/index.html">Workflow</a>.</li>
+</ul>
+
+<h3>Explore some code</h3>
+
+<ul>
+	<li>Browse the sample apps available from the Android SDK Manager. You&#39;ll find them in&lt;sdk&gt;/samples/&lt;platform-version&gt;/.</li>
+</ul>
+
+<h2>Building Your First App</h2>
+
+<p><a href="http://developer.android.com/training/basics/firstapp/creating-project.html">GET STARTED</a></p>
+
+<h3>DEPENDENCIES AND PREREQUISITES</h3>
+
+<ul>
+	<li><a href="http://developer.android.com/sdk/index.html">Android SDK</a></li>
+	<li><a href="http://developer.android.com/tools/sdk/eclipse-adt.html">ADT Plugin</a>&nbsp;20.0.0 or higher (if you&#39;re using Eclipse)</li>
+</ul>
+
+<p>Welcome to Android application development!</p>
+
+<p>This class teaches you how to build your first Android app. You&rsquo;ll learn how to create an Android project and run a debuggable version of the app. You&#39;ll also learn some fundamentals of Android app design, including how to build a simple user interface and handle user input.</p>
+
+<p>Before you start this class, be sure you have your development environment set up. You need to:</p>
+
+<ol>
+	<li>Download the Android SDK.</li>
+	<li>Install the ADT plugin for Eclipse (if you&rsquo;ll use the Eclipse IDE).</li>
+	<li>Download the latest SDK tools and platforms using the SDK Manager.</li>
+</ol>
+
+<p>If you haven&#39;t already done these tasks, start by downloading the&nbsp;<a href="http://developer.android.com/sdk/index.html">Android SDK</a>&nbsp;and following the install steps. Once you&#39;ve finished the setup, you&#39;re ready to begin this class.</p>
+
+<p>This class uses a tutorial format that incrementally builds a small Android app that teaches you some fundamental concepts about Android development, so it&#39;s important that you follow each step.</p>
+
+<h1>Creating an Android Project</h1>
+
+<p>http://developer.android.com/training/basics/firstapp/creating-project.html</p>
+
+<p>An Android project contains all the files that comprise the source code for your Android app. The Android SDK tools make it easy to start a new Android project with a set of default project directories and files.</p>
+
+<p>This lesson shows how to create a new project either using Eclipse (with the ADT plugin) or using the SDK tools from a command line.</p>
+
+<p>Note:&nbsp;You should already have the Android SDK installed, and if you&#39;re using Eclipse, you should also have the&nbsp;<a href="http://developer.android.com/tools/sdk/eclipse-adt.html">ADT plugin</a>installed (version 21.0.0 or higher). If you don&#39;t have these, follow the guide to&nbsp;<a href="http://developer.android.com/sdk/installing/index.html">Installing the Android SDK</a>&nbsp;before you start this lesson.</p>
+
+<h2>Create a Project with Eclipse</h2>
+
+<hr />
+<p><img alt="" src="http://developer.android.com/images/training/firstapp/adt-firstapp-setup.png" /></p>
+
+<p>Figure 1.&nbsp;The New Android App Project wizard in Eclipse.</p>
+
+<ol>
+	<li>Click&nbsp;New&nbsp;<img src="http://developer.android.com/images/tools/eclipse-new.png" />&nbsp;in the toolbar.</li>
+	<li>In the window that appears, open the&nbsp;Android&nbsp;folder, select&nbsp;Android Application Project, and click&nbsp;Next.</li>
+	<li>Fill in the form that appears:
+	<ul>
+		<li>Application Name&nbsp;is the app name that appears to users. For this project, use &quot;My First App.&quot;</li>
+		<li>Project Name&nbsp;is the name of your project directory and the name visible in Eclipse.</li>
+		<li>Package Name&nbsp;is the package namespace for your app (following the same rules as packages in the Java programming language). Your package name must be unique across all packages installed on the Android system. For this reason, it&#39;s generally best if you use a name that begins with the reverse domain name of your organization or publisher entity. For this project, you can use something like &quot;com.example.myfirstapp.&quot; However, you cannot publish your app on Google Play using the &quot;com.example&quot; namespace.</li>
+		<li>Minimum Required SDK&nbsp;is the lowest version of Android that your app supports, indicated using the&nbsp;<a href="http://developer.android.com/guide/topics/manifest/uses-sdk-element.html#ApiLevels">API level</a>. To support as many devices as possible, you should set this to the lowest version available that allows your app to provide its core feature set. If any feature of your app is possible only on newer versions of Android and it&#39;s not critical to the app&#39;s core feature set, you can enable the feature only when running on the versions that support it (as discussed in&nbsp;<a href="http://developer.android.com/training/basics/supporting-devices/platforms.html">Supporting Different Platform Versions</a>). Leave this set to the default value for this project.</li>
+		<li>Target SDK&nbsp;indicates the highest version of Android (also using the&nbsp;<a href="http://developer.android.com/guide/topics/manifest/uses-sdk-element.html#ApiLevels">API level</a>) with which you have tested with your application.
+		<p>As new versions of Android become available, you should test your app on the new version and update this value to match the latest API level in order to take advantage of new platform features.</p>
+		</li>
+		<li>Compile With&nbsp;is the platform version against which you will compile your app. By default, this is set to the latest version of Android available in your SDK. (It should be Android 4.1 or greater; if you don&#39;t have such a version available, you must install one using the&nbsp;<a href="http://developer.android.com/sdk/installing/adding-packages.html">SDK Manager</a>). You can still build your app to support older versions, but setting the build target to the latest version allows you to enable new features and optimize your app for a great user experience on the latest devices.</li>
+		<li>Theme&nbsp;specifies the Android UI style to apply for your app. You can leave this alone.</li>
+	</ul>
+
+	<p>Click&nbsp;Next.</p>
+	</li>
+	<li>On the next screen to configure the project, leave the default selections and click&nbsp;Next.</li>
+	<li>The next screen can help you create a launcher icon for your app.
+	<p>You can customize an icon in several ways and the tool generates an icon for all screen densities. Before you publish your app, you should be sure your icon meets the specifications defined in the&nbsp;<a href="http://developer.android.com/design/style/iconography.html">Iconography</a>&nbsp;design guide.</p>
+
+	<p>Click&nbsp;Next.</p>
+	</li>
+	<li>Now you can select an activity template from which to begin building your app.
+	<p>For this project, select&nbsp;BlankActivity&nbsp;and click&nbsp;Next.</p>
+	</li>
+	<li>Leave all the details for the activity in their default state and click&nbsp;Finish.</li>
+</ol>
+
+<p>Your Android project is now set up with some default files and you&rsquo;re ready to begin building the app. Continue to the&nbsp;<a href="http://developer.android.com/training/basics/firstapp/running-app.html">next lesson</a>.</p>
+
+<h2>Create a Project with Command Line Tools</h2>
+
+<hr />
+<p>If you&#39;re not using the Eclipse IDE with the ADT plugin, you can instead create your project using the SDK tools from a command line:</p>
+
+<ol>
+	<li>Change directories into the Android SDK&rsquo;s&nbsp;tools/&nbsp;path.</li>
+	<li>Execute:
+	<pre>
+android list targets</pre>
+
+	<p>This prints a list of the available Android platforms that you&rsquo;ve downloaded for your SDK. Find the platform against which you want to compile your app. Make a note of the target id. We recommend that you select the highest version possible. You can still build your app to support older versions, but setting the build target to the latest version allows you to optimize your app for the latest devices.</p>
+
+	<p>If you don&#39;t see any targets listed, you need to install some using the Android SDK Manager tool. See&nbsp;<a href="http://developer.android.com/sdk/installing/adding-packages.html">Adding Platforms and Packages</a>.</p>
+	</li>
+	<li>Execute:
+	<pre>
+android create project --target &lt;target-id&gt; --name MyFirstApp \
+--path &lt;path-to-workspace&gt;/MyFirstApp --activity MainActivity \
+--package com.example.myfirstapp
+</pre>
+
+	<p>Replace&nbsp;&lt;target-id&gt;&nbsp;with an id from the list of targets (from the previous step) and replace&nbsp;&lt;path-to-workspace&gt;&nbsp;with the location in which you want to save your Android projects.</p>
+	</li>
+</ol>
+
+<p>Your Android project is now set up with several default configurations and you&rsquo;re ready to begin building the app. Continue to the&nbsp;<a href="http://developer.android.com/training/basics/firstapp/running-app.html">next lesson</a>.</p>
+
+<p>Tip:&nbsp;Add the&nbsp;platform-tools/&nbsp;as well as the&nbsp;tools/&nbsp;directory to your&nbsp;PATH&nbsp;environment variable.</p>
+
+<h2>Running Your App</h2>
+
+<p><a href="http://developer.android.com/training/basics/firstapp/running-app.html" target="_blank">http://developer.android.com/training/basics/firstapp/running-app.html</a></p>
+
+<p>If you followed the&nbsp;<a href="http://developer.android.com/training/basics/firstapp/creating-project.html">previous lesson</a>&nbsp;to create an Android project, it includes a default set of &quot;Hello World&quot; source files that allow you to immediately run the app.</p>
+
+<p>How you run your app depends on two things: whether you have a real Android-powered device and whether you&rsquo;re using Eclipse. This lesson shows you how to install and run your app on a real device and on the Android emulator, and in both cases with either Eclipse or the command line tools.</p>
+
+<p>Before you run your app, you should be aware of a few directories and files in the Android project:</p>
+
+<p>AndroidManifest.xml</p>
+
+<p>The&nbsp;<a href="http://developer.android.com/guide/topics/manifest/manifest-intro.html">manifest file</a>&nbsp;describes the fundamental characteristics of the app and defines each of its components. You&#39;ll learn about various declarations in this file as you read more training classes.</p>
+
+<p>src/</p>
+
+<p>Directory for your app&#39;s main source files. By default, it includes an&nbsp;<a href="http://developer.android.com/reference/android/app/Activity.html">Activity</a>&nbsp;class that runs when your app is launched using the app icon.</p>
+
+<p>res/</p>
+
+<p>Contains several sub-directories for&nbsp;<a href="http://developer.android.com/guide/topics/resources/overview.html">app resources</a>. Here are just a few:</p>
+
+<p>drawable-hdpi/</p>
+
+<p>Directory for drawable objects (such as bitmaps) that are designed for high-density (hdpi) screens. Other drawable directories contain assets designed for other screen densities.</p>
+
+<p>layout/</p>
+
+<p>Directory for files that define your app&#39;s user interface.</p>
+
+<p>values/</p>
+
+<p>Directory for other various XML files that contain a collection of resources, such as string and color definitions.</p>
+
+<p>When you build and run the default Android app, the default&nbsp;<a href="http://developer.android.com/reference/android/app/Activity.html">Activity</a>&nbsp;class starts and loads a layout file that says &quot;Hello World.&quot; The result is nothing exciting, but it&#39;s important that you understand how to run your app before you start developing.</p>
+
+<h2>Run on a Real Device</h2>
+
+<hr />
+<p>If you have a real Android-powered device, here&#39;s how you can install and run your app:</p>
+
+<ol>
+	<li>Plug in your device to your development machine with a USB cable. If you&rsquo;re developing on Windows, you might need to install the appropriate USB driver for your device. For help installing drivers, see the&nbsp;<a href="http://developer.android.com/tools/extras/oem-usb.html">OEM USB Drivers</a>&nbsp;document.</li>
+	<li>Ensure that&nbsp;USB debugging&nbsp;is enabled in the device Settings (open Settings and navitage to&nbsp;Applications &gt; Development&nbsp;on most devices, or click&nbsp;Developer options&nbsp;on Android 4.0 and higher).</li>
+</ol>
+
+<p>To run the app from Eclipse, open one of your project&#39;s files and click Run&nbsp;<img src="http://developer.android.com/images/tools/eclipse-run.png" />&nbsp;from the toolbar. Eclipse installs the app on your connected device and starts it.</p>
+
+<p>Or to run your app from a command line:</p>
+
+<ol>
+	<li>Change directories to the root of your Android project and execute:
+	<pre>
+ant debug</pre>
+
+	<p>2013-08-06 14:38 Tuesday 昨天奶奶过了80大寿，实际今天才是她老人家的生日</p>
+
+	<p>如果出现如下错误提示，编辑项目根目录下的 local.properties 文件，设置 sdk.dir 的路径即可</p>
+
+	<pre>
+BUILD FAILED
+/path/to/project/build.xml:90: Cannot find /path/to/adt-bundle-mac/sdk/tools/ant/build.xml imported from /path/to/project/build.xml</pre>
+	</li>
+	<li>Make sure the Android SDK&nbsp;platform-tools/&nbsp;directory is included in your&nbsp;PATH&nbsp;environment variable, then execute:
+	<pre>
+adb install bin/MyFirstApp-debug.apk</pre>
+
+	<p>如果命令行没反应，可以重启设备然后再试。</p>
+	</li>
+	<li>On your device, locate&nbsp;MyFirstActivity&nbsp;and open it.</li>
+</ol>
+
+<p>That&#39;s how you build and run your Android app on a device! To start developing, continue to the<a href="http://developer.android.com/training/basics/firstapp/building-ui.html">next lesson</a>.</p>
+
+<p>在真实设备和虚拟设备之间切换时，可能出现提示</p>
+
+<pre>
+error: device not found
+- waiting for device -</pre>
+
+<p>此时可以执行如下操作，完了再 adb install bin/... 就好了。</p>
+
+<pre>
+$ adb devices
+List of devices attached
+
+$ adb kill-server
+$ adb devices
+* daemon not running. starting it now on port 5037 *
+* daemon started successfully *
+
+List of devices attached
+emulator-5554 device</pre>
