@@ -1,0 +1,11 @@
+<h1>Project seeds</h1>
+
+<p>2013-11-29 16:43 Friday</p>
+
+<p>&nbsp;</p>
+
+<pre>
+$ cordova create cordova-hello com.malian.cordova_hello HelloCordova
+Creating a new cordova project with name &quot;HelloCordova&quot; and id &quot;com.malian.cordova_hello&quot; at location &quot;/Users/mlhch/seeds/cordova-hello&quot;
+Downloading cordova library for www...
+Download complete</pre>
