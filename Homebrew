@@ -1,0 +1,783 @@
+<h1>Homebrew</h1>
+
+<p>2012-09-29 23:32:14 +08:00 Saturday</p>
+
+<p><a href="http://mxcl.github.com/homebrew/" target="_blank">http://mxcl.github.com/homebrew/</a>&nbsp;|&nbsp;<a href="http://brew.sh/" target="_blank">http://brew.sh</a></p>
+
+<p>Homebrew installs&nbsp;<a href="https://github.com/mxcl/homebrew/tree/master/Library/Formula">the stuff you need</a>&nbsp;that Apple didn&#39;t.</p>
+
+<p>The missing package manager for OS X.</p>
+
+<h3>2013-11-29 14:47</h3>
+
+<p>版本升级了。而且就几分钟，又有一次小更新。</p>
+
+<pre>
+$ brew update
+Updated Homebrew from c6370157 to e167b210.
+==&gt; Updated Formulae
+hatari
+</pre>
+
+<pre>
+$ brew -v
+Homebrew 0.9.5</pre>
+
+<h3>2013-08-31 05:17</h3>
+
+<p>还好，只有公式的更新，没有版本的更新，还没落伍</p>
+
+<pre>
+$ brew -v
+Homebrew 0.9.4
+$ brew update
+Updated Homebrew from 87fa1904 to 054ddcda.
+$ brew -v
+Homebrew 0.9.4</pre>
+
+<p>2013-10-24 03:01 Thursday 要用 brew 看&nbsp;openssl 有没有更新</p>
+
+<pre>
+$ brew update
+Updated Homebrew from d090ba2a to e726b151.
+</pre>
+
+<pre>
+$ brew -v
+Homebrew 0.9.5</pre>
+
+<h3>legacy</h3>
+
+<pre>
+$ brew update
+Updated Homebrew from 518aaabc to 037c8905.</pre>
+
+<p>This is really the &#39;last&#39; (latest) commit.</p>
+
+<pre>
+$ brew update
+Updated Homebrew from 037c8905 to 87fa1904.
+==&gt; Updated Formulae
+discount &nbsp; &nbsp;easy-tag&nbsp;&nbsp; &nbsp;gnupg2&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;groovyserv&nbsp;&nbsp; &nbsp;libslax&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;rust&nbsp;&nbsp; &nbsp;wgetpaste
+e2fsprogs &nbsp; fish&nbsp;&nbsp; &nbsp;gpg-agent &nbsp; libgcrypt&nbsp;&nbsp; &nbsp;lilypond &nbsp; &nbsp;weechat</pre>
+
+<p>时隔一天，又有了更新</p>
+
+<h2>brew remove --force sqlite</h2>
+
+<pre>
+$ brew uninstall sqlite
+Error: sqlite has multiple installed versions
+Use `brew remove --force sqlite` to remove all versions.</pre>
+
+<h2>brew versions</h2>
+
+<p>2013-07-04 18:16 Thursday</p>
+
+<p>查看项目都有哪些版本</p>
+
+<pre>
+       versions [--compact] formulae
+              List previous versions of formulae, along with a command to checkout each version.
+
+              If --compact is passed, show all options on a single line separated by spaces.</pre>
+
+<pre>
+$ brew versions libspatialite
+3.0.1 &nbsp; &nbsp;git checkout 621f367 /usr/local/Library/Formula/libspatialite.rb
+2.4.0-rc5 git checkout 935d2db /usr/local/Library/Formula/libspatialite.rb
+2.4.0-rc4 git checkout 0476235 /usr/local/Library/Formula/libspatialite.rb
+2.4.0-rc3a git checkout d46c98b /usr/local/Library/Formula/libspatialite.rb
+2.4.0 &nbsp; &nbsp;git checkout d0efd9e /usr/local/Library/Formula/libspatialite.rb</pre>
+
+<pre>
+$ brew versions spatialite-gui
+1.5.0 &nbsp; &nbsp;git checkout 6f0faa7 /usr/local/Library/Formula/spatialite-gui.rb
+</pre>
+
+<h2>Errors</h2>
+
+<p>用如下方法删除类似&nbsp;Error: Failed to import: composer-requirement 的错误，brew --prefix 实际就是 /usr/local</p>
+
+<pre>
+$ find $(brew --prefix)/Library/Formula -type l -name &quot;*requirement.rb&quot; -delete</pre>
+
+<h2>brew --config</h2>
+
+<p>2013-03-25 22:21</p>
+
+<pre>
+$ brew --config
+HOMEBREW_VERSION: 0.9.4
+ORIGIN: https://github.com/mxcl/homebrew
+HEAD: 518aaabc12fee766d5197eefe548c1d46a560fc4
+HOMEBREW_PREFIX: /usr/local
+HOMEBREW_CELLAR: /usr/local/Cellar
+CPU: dual-core 64-bit penryn
+OS X: 10.8.2-x86_64
+Xcode: 4.6.1
+CLT: 4.6.0.0.1.1362189000
+LLVM-GCC: build 2336
+Clang: 4.2 build 425
+X11: 2.7.4 =&gt; /opt/X11
+System Ruby: 1.8.7-358
+Perl: /usr/bin/perl
+Python: /usr/bin/python
+Ruby: /usr/local/Cellar/ruby/1.9.3-p286/bin/ruby</pre>
+
+<h2>brew list</h2>
+
+<p>列出已安装项目的版本</p>
+
+<pre>
+$ brew ls node --versions
+node 0.10.1 0.8.14</pre>
+
+<h2>brew switch</h2>
+
+<pre>
+$ brew switch node 0.10.1
+Cleaning /usr/local/Cellar/node/0.10.1
+Cleaning /usr/local/Cellar/node/0.8.14
+5 links created for /usr/local/Cellar/node/0.10.1</pre>
+
+<h2>brew doctor</h2>
+
+<p>一切都好时，输出如下</p>
+
+<pre>
+$ brew doctor
+Your system is ready to brew.</pre>
+
+<p>2013-07-05 08:23 刚更新过 Xcode 到 4.6.3</p>
+
+<ul>
+	<li>brew update 后解决了&nbsp;Error: Homebrew doesn&#39;t know what compiler versions</li>
+	<li>sudo vi /etc/bashrc&nbsp;解决 /usr/local/bin 的次序问题，还有 /usr/local/sbin 的问题</li>
+	<li>brew unlink ossp-uuid,&nbsp;brew unlink openssl</li>
+</ul>
+
+<pre>
+$ brew doctor
+Error: Homebrew doesn&#39;t know what compiler versions ship with your version
+of Xcode (4.6.3). Please `brew update` and if that doesn&#39;t help, file
+an issue with the output of `brew --config`:
+  https://github.com/mxcl/homebrew/issues
+
+Thanks!
+Warning: /usr/bin occurs before /usr/local/bin
+This means that system-provided programs will be used instead of those
+provided by Homebrew. The following tools exist at both paths:
+
+    clusterdb
+    ...
+    vacuumdb
+
+Consider amending your PATH so that /usr/local/bin
+occurs before /usr/bin in your PATH.
+
+Warning: Homebrew&#39;s sbin was not found in your path.
+Consider amending your PATH variable so it contains:
+  /usr/local/sbin
+Error: Failed to import: lapack
+
+Warning: Some keg-only formula are linked into the Cellar.
+Linking a keg-only formula, such as gettext, into the cellar with
+`brew link ` will cause other formulae to detect them during
+the `./configure` step. This may cause problems when compiling those
+other formulae.
+
+Binaries provided by keg-only formulae may override system binaries
+with other strange results.
+
+You may wish to `brew unlink` these brews:
+
+    ossp-uuid
+    openssl
+
+Warning: Your Homebrew is outdated.
+You haven&#39;t updated for at least 24 hours, this is a long time in brewland!
+To update Homebrew, run `brew update`.</pre>
+
+<p>2013-02-22 16:37 星期五</p>
+
+<pre>
+$ brew doctor
+Warning: Your Xcode (4.5.2) is outdated
+Please install Xcode 4.6.
+Warning: Some directories in your path end in a slash.
+Directories in your path should not end in a slash. This can break other
+doctor checks. The following directories should be edited:
+&nbsp;&nbsp;&nbsp; /Users/mlhch/app/android-sdk-macosx/platform-tools/&nbsp;&nbsp;&nbsp; /Users/mlhch/app/android-sdk-macosx/tools/&nbsp;&nbsp;&nbsp; /usr/local/Cellar/ruby/1.9.3-p286/bin/
+Warning: /usr/bin occurs before /usr/local/bin
+This means that system-provided programs will be used instead of those
+provided by Homebrew. The following tools exist at both paths:
+
+&nbsp;&nbsp;&nbsp; clusterdb
+&nbsp;&nbsp;&nbsp; ...
+&nbsp;&nbsp;&nbsp; vacuumdb
+
+Consider amending your PATH so that /usr/local/bin
+occurs before /usr/bin in your PATH.
+Warning: Homebrew&#39;s sbin was not found in your path.
+Consider amending your PATH variable so it contains:
+&nbsp; /usr/local/sbin
+Error: Failed to import: composer-requirement
+Error: Failed to import: homebrew-php-requirement
+Error: Failed to import: phar-building-requirement
+Error: Failed to import: phar-requirement
+Error: Failed to import: php-meta-requirement
+Warning: Some keg-only formula are linked into the Cellar.
+Linking a keg-only formula, such as gettext, into the cellar with
+`brew link &lt;formula&gt;` will cause other formulae to detect them during
+the `./configure` step. This may cause problems when compiling those
+other formulae.
+
+Binaries provided by keg-only formulae may override system binaries
+with other strange results.
+
+You may wish to `brew unlink` these brews:
+
+&nbsp;&nbsp;&nbsp; ossp-uuid</pre>
+
+<p>和 $PATH 有关的文件</p>
+
+<pre>
+$ cat /etc/paths
+/usr/bin
+/bin
+/usr/sbin
+/sbin
+/usr/local/bin</pre>
+
+<pre>
+$ cat /etc/paths.d/40-XQuartz
+/opt/X11/bin</pre>
+
+<pre>
+$ cat /etc/profile
+# System-wide .profile for sh(1)
+
+if [ -x /usr/libexec/path_helper ]; then
+eval `/usr/libexec/path_helper -s`
+fi
+
+if [ &quot;${BASH-no}&quot; != &quot;no&quot; ]; then
+[ -r /etc/bashrc ] &amp;&amp; . /etc/bashrc
+fi</pre>
+
+<p>PATH=/usr/local/bin:/usr/local/sbin:$PATH 这行提高 /usr/local/bin 的优先级，同时去除末尾的斜线，brew doctor 就不警告了。</p>
+
+<pre>
+$ cat /etc/bashrc
+...
+...
+
+alias ll=&#39;ls -al&#39;
+
+PATH=/usr/local/bin/:/usr/local/sbin/:$PATH
+PATH=/usr/local/Cellar/ruby/1.9.3-p286/bin/:$PATH
+PATH=/Users/mlhch/app/android-sdk-macosx/tools/:$PATH
+PATH=/Users/mlhch/app/android-sdk-macosx/platform-tools/:$PATH
+
+export PATH
+
+export CLASSPATH=$CLASSPATH:/Users/mlhch/Documents/ADT-workspace/Money/libs/javamail-1.4.5/mail.jar:.</pre>
+
+<h2>文件缓存目录</h2>
+
+<p>2012-12-03 20:45</p>
+
+<pre>
+$ brew install tomcat
+==&gt; Downloading http://www.apache.org/dyn/closer.cgi?path=tomcat/tomcat-7/v7.0.32/bin/apache-tomcat-7.0.32.tar.gz
+Already downloaded: /Library/Caches/Homebrew/tomcat-7.0.32.tar.gz
+/usr/local/Cellar/tomcat/7.0.32: 561 files, 13M, built in 2 seconds</pre>
+
+<h2>Install Homebrew</h2>
+
+<pre>
+ruby -e &quot;$(curl -fsSkL raw.github.com/mxcl/homebrew/go)&quot;</pre>
+
+<pre>
+$ ruby -e &quot;$(curl -fsSkL raw.github.com/mxcl/homebrew/go)&quot;
+==&gt; This script will install:
+/usr/local/bin/brew
+/usr/local/Library/...
+/usr/local/share/man/man1/brew.1
+==&gt; The following directories will be made group writable:
+/usr/local/.
+/usr/local/bin
+/usr/local/include
+/usr/local/lib
+/usr/local/lib/pkgconfig
+/usr/local/share
+/usr/local/share/man
+/usr/local/share/man/man1
+/usr/local/share/info
+/usr/local/share/doc
+==&gt; The following directories will have their group set to admin:
+/usr/local/.
+/usr/local/bin
+/usr/local/include
+/usr/local/lib
+/usr/local/lib/pkgconfig
+/usr/local/share
+/usr/local/share/man
+/usr/local/share/man/man1
+/usr/local/share/info
+/usr/local/share/doc
+
+Press enter to continue
+==&gt; /usr/bin/sudo /bin/chmod g+rwx /usr/local/. /usr/local/bin /usr/local/include /usr/local/lib /usr/local/lib/pkgconfig /usr/local/share /usr/local/share/man /usr/local/share/man/man1 /usr/local/share/info /usr/local/share/doc
+Password:
+==&gt; /usr/bin/sudo /usr/bin/chgrp admin /usr/local/. /usr/local/bin /usr/local/include /usr/local/lib /usr/local/lib/pkgconfig /usr/local/share /usr/local/share/man /usr/local/share/man/man1 /usr/local/share/info /usr/local/share/doc
+==&gt; Downloading and Installing Homebrew...
+remote: Counting objects: 84279, done.
+remote: Compressing objects: 100% (39783/39783), done.
+remote: Total 84279 (delta 58302), reused 67008 (delta 43671)
+Receiving objects: 100% (84279/84279), 11.95 MiB | 376 KiB/s, done.
+Resolving deltas: 100% (58302/58302), done.
+From https://github.com/mxcl/homebrew
+* [new branch]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; master&nbsp;&nbsp;&nbsp;&nbsp; -&gt; origin/master
+HEAD is now at 4e4517c Restore HOMEBREW_LOG functionality
+Warning: Install the &quot;Command Line Tools for Xcode&quot;: http://connect.apple.com
+==&gt; Installation successful!
+You should run `brew doctor&#39; *before* you install anything.
+Now type: brew help</pre>
+
+<p>2012-11-02 23:35 星期五 笔记本换了硬盘修好了，全新系统下安装 Homebrew</p>
+
+<pre>
+$ ruby -e &quot;$(curl -fsSkL raw.github.com/mxcl/homebrew/go)&quot;
+==&gt; This script will install:
+/usr/local/bin/brew
+/usr/local/Library/...
+/usr/local/share/man/man1/brew.1
+
+Press ENTER to continue or any other key to abort
+==&gt; Downloading and Installing Homebrew...
+remote: Counting objects: 87435, done.
+remote: Compressing objects: 100% (41191/41191), done.
+remote: Total 87435 (delta 60723), reused 69461 (delta 45414)
+Receiving objects: 100% (87435/87435), 12.52 MiB | 152 KiB/s, done.
+Resolving deltas: 100% (60723/60723), done.
+From https://github.com/mxcl/homebrew
+* [new branch]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; master&nbsp;&nbsp;&nbsp;&nbsp; -&gt; origin/master
+Checking out files: 100% (2490/2490), done.
+HEAD is now at f0b81bf HAProxy: add --devel with SSL
+Warning: Install the &quot;Command Line Tools for Xcode&quot;: http://connect.apple.com
+==&gt; Installation successful!
+You should run `brew doctor&#39; *before* you install anything.
+Now type: brew help</pre>
+
+<p>Paste that at a Terminal prompt.</p>
+
+<p>The script explains what it will do and then pauses before it does it. There are more installation options<a href="https://github.com/mxcl/homebrew/wiki/Installation">here</a>.</p>
+
+<pre>
+$ brew doctor
+Warning: Your Xcode (4.2) is outdated
+Please install Xcode 4.5.
+Warning: You have Macports or Fink installed.
+This can cause trouble. You don&#39;t have to uninstall them, but you may like to
+try temporarily moving them away, eg.
+
+&nbsp; sudo mv /opt/local ~/macports
+Warning: Unbrewed dylibs were found in /usr/local/lib.
+If you didn&#39;t put them there on purpose they could cause problems when
+building Homebrew formulae, and may need to be deleted.
+
+Unexpected dylibs:
+&nbsp;&nbsp;&nbsp; /usr/local/lib/liblzma.5.dylib
+Warning: Unbrewed .pc files were found in /usr/local/lib/pkgconfig.
+If you didn&#39;t put them there on purpose they could cause problems when
+building Homebrew formulae, and may need to be deleted.
+
+Unexpected .pc files:
+&nbsp;&nbsp;&nbsp; /usr/local/lib/pkgconfig/liblzma.pc&nbsp;&nbsp;&nbsp; /usr/local/lib/pkgconfig/nettle.pc
+Warning: Unbrewed static libraries were found in /usr/local/lib.
+If you didn&#39;t put them there on purpose they could cause problems when
+building Homebrew formulae, and may need to be deleted.
+
+Unexpected static libraries:
+&nbsp;&nbsp;&nbsp; /usr/local/lib/liblzma.a&nbsp;&nbsp;&nbsp; /usr/local/lib/libnettle.a
+Warning: Some directories in your path end in a slash.
+Directories in your path should not end in a slash. This can break other
+doctor checks. The following directories should be edited:
+&nbsp;&nbsp;&nbsp; /Users/mlhch/android-sdk-macosx/platform-tools/
+Warning: You have a non-Homebrew &#39;pkg-config&#39; in your PATH:
+&nbsp; /opt/local/bin/pkg-config
+
+`./configure` may have problems finding brew-installed packages using
+this other pkg-config.</pre>
+
+<pre>
+$&nbsp;brew help
+Example usage:
+&nbsp; brew install FORMULA...
+&nbsp; brew uninstall FORMULA...
+&nbsp; brew search [foo]
+&nbsp; brew list [FORMULA...]
+&nbsp; brew update
+&nbsp; brew upgrade [FORMULA...]
+&nbsp; brew [info | home] [FORMULA...]
+
+Troubleshooting:
+&nbsp; brew doctor
+&nbsp; brew install -vd FORMULA
+&nbsp; brew [--env | --config]
+
+Brewing:
+&nbsp; brew create [URL [--no-fetch]]
+&nbsp; brew edit [FORMULA...]
+&nbsp; open https://github.com/mxcl/homebrew/wiki/Formula-Cookbook
+
+Further help:
+&nbsp; man brew
+&nbsp; brew home</pre>
+
+<h2>Homebrew vs. MacPorts</h2>
+
+<p>Homebrew 胜出的主要原因：</p>
+
+<ul>
+	<li>MacPorts 不管现有的软件包，连带下载所有软件包</li>
+</ul>
+
+<p>If you do development on a Mac and you have a Unix background, you immediately start noticing missing tools and utilities. OS/X doesn&rsquo;t have an apt-get for package management (or even one of the lousy RPM variants). There are options though. Two of them have been around for quite a while,&nbsp;<a href="http://www.macports.org/">MacPorts</a>&nbsp;and&nbsp;<a href="http://www.finkproject.org/">Fink</a>.</p>
+
+<p>MacPorts is strongly influenced by the BSD&nbsp;<a href="http://www.freebsd.org/ports/">&lsquo;ports&rsquo;</a>&nbsp;system. Ports are essentially recipes for taking source code and build scripts and making them compile and install on the target operating system. BSD ports organize the recipes and source code into a tree that make adding software easy.</p>
+
+<p>Fink takes a different approach. It&rsquo;s based around Debian&rsquo;s packaging tools and&nbsp;<a href="http://en.wikipedia.org/wiki/Advanced_Packaging_Tool">apt-get</a>. Fink mainly manages pre-compiled/pre-built applications. So the applications you install using Fink don&rsquo;t need to be compiled and built on your system.</p>
+
+<p>Between the two of them, MacPorts tends to be the easier solution. Software is more up to date, there are more options, it&rsquo;s somewhat less intrusive into your system and you get new versions faster when Apple updates OS/X. Ironic when you consider that MacPorts code is compiled on your system while Fink is just downloading binaries.</p>
+
+<p>But MacPorts is still no walk in the park. Even though it&rsquo;s less intrusive then Fink, it still isn&rsquo;t a great citizen on OS/X. MacPorts eschews many of the system libraries and software already available in OS/X for other variants. Installing a seemingly simple utility might somehow require a new version of Perl, Python or other set of large software.</p>
+
+<p>Homebrew is a reaction to the complexity of MacPorts. It&rsquo;s extremely simple. Homebrew appears to be targeted more at individual packages. If you want to pull in the entire world of open source software and&nbsp;want&nbsp;every package, then you&rsquo;re better off with MacPorts or Fink. But if you&rsquo;re looking for the occasional tool or utility, Homebrew is for you.</p>
+
+<p>Installation is dead simple:</p>
+
+<pre>
+--- sh
+ruby -e &quot;$(curl -fsS http://gist.github.com/raw/323731/install_homebrew.rb)&quot;
+</pre>
+
+<p>That downloads the installer and executes it. Homebrew is based on Ruby and the install script is no exception.</p>
+
+<p>By default Homebrew will try to take over your /usr/local directory. If you&rsquo;ve already installed anything there (MySQL, etc.) then Homebrew will complain. You can install Homebrew anywhere, but then you&rsquo;ll have to add that directory to your PATH.</p>
+
+<p>Homebrew also assumes that you&rsquo;re on a single user system. If that&rsquo;s not you, then you definitely want to install it to a user-specific location and alter your PATH. But, for most people, the default works just fine.</p>
+
+<p>Once installed, you control Homebrew using the&nbsp;brew&nbsp;command. You can find packages using&nbsp;brew search, install them using&nbsp;brew install&nbsp;and remove them using&nbsp;brew uninstall. Just like any other package manager, Homebrew tracks package dependencies so it will pull in dependent packages as needed and warn you if you try to uninstall a required package.</p>
+
+<p>The major benefits of Homebrew over MacPorts are simplicity, lack of intrusiveness, and speed. Homebrew&rsquo;s recipes try very hard to use the existing tools and libraries in OS/X, so they tend to build much faster and require fewer dependent libraries. The recipes themselves are Ruby scripts and are small, simple to understand and easy to create and modify. But, honestly, if all you want is to install&nbsp;wget&nbsp;and newer versions of&nbsp;git&nbsp;and other open source tools, you&rsquo;ll never need to look at or understand Homebrew&rsquo;s recipes. Just&nbsp;brew install wget,&nbsp;brew install git&nbsp;and be happy.</p>
+
+<h2>brew install wget</h2>
+
+<pre>
+$ brew install wget
+Warning: Your Xcode (4.2) is outdated
+Please install Xcode 4.5.
+Warning: It appears you have MacPorts or Fink installed.
+Software installed with other package managers causes known problems for
+Homebrew. If a formula fails to build, uninstall MacPorts/Fink and try again.
+==&gt; Downloading http://ftpmirror.gnu.org/wget/wget-1.14.tar.gz
+######################################################################## 100.0%
+==&gt; ./configure --prefix=/usr/local/Cellar/wget/1.14 --sysconfdir=/usr/local/etc -
+==&gt; make install
+/usr/local/Cellar/wget/1.14: 7 files, 688K, built in 112 seconds</pre>
+
+<p>出现以下错误是因为没有安装 Command Line Tools for Xcode</p>
+
+<pre>
+$ brew install wget
+==&gt; Downloading http://ftpmirror.gnu.org/wget/wget-1.14.tar.gz
+######################################################################## 100.0%
+==&gt; ./configure --prefix=/usr/local/Cellar/wget/1.14 --sysconfdir=/usr/local/etc
+checking for gcc... cc
+checking whether the C compiler works... no
+configure: error: in `/private/tmp/wget-xnrq/wget-1.14&#39;:
+configure: error: C compiler cannot create executables
+See `config.log&#39; for more details</pre>
+
+<p>brew install php，注意 brew tap 的用法。</p>
+
+<pre>
+$ brew tap homebrew/dupes
+Cloning into &#39;/usr/local/Library/Taps/homebrew-dupes&#39;...
+remote: Counting objects: 617, done.
+remote: Compressing objects: 100% (258/258), done.
+Receiving objects: 100% (617/617), 89.00 KiB | 46 KiB/s, done.
+Resolving deltas: 100% (388/388), done.
+remote: Total 617 (delta 388), reused 583 (delta 359)
+Tapped 35 formula
+
+bogon:~ mlhch$ brew install php54
+Error: No available formula for php54
+
+bogon:~ mlhch$ brew tap josegonzalez/homebrew-php
+Cloning into &#39;/usr/local/Library/Taps/josegonzalez-php&#39;...
+remote: Counting objects: 2045, done.
+remote: Compressing objects: 100% (808/808), done.
+remote: Total 2045 (delta 1216), reused 1933 (delta 1132)
+Receiving objects: 100% (2045/2045), 298.24 KiB | 66 KiB/s, done.
+Resolving deltas: 100% (1216/1216), done.
+Tapped 85 formula
+
+bogon:~ mlhch$ brew install php54
+==&gt; Installing php54 dependency: pkg-config
+==&gt; Downloading https://downloads.sf.net/project/machomebrew/Bottles/pkg-config-
+######################################################################## 100.0%
+==&gt; Pouring pkg-config-0.27.1.mountainlion.bottle.tar.gz
+/usr/local/Cellar/pkg-config/0.27.1: 9 files, 624K
+==&gt; Installing php54 dependency: curl
+==&gt; Downloading http://curl.haxx.se/download/curl-7.28.0.tar.gz
+######################################################################## 100.0%
+==&gt; ./configure --prefix=/usr/local/Cellar/curl/7.28.0
+==&gt; make install
+==&gt; Caveats
+This formula is keg-only: so it was not symlinked into /usr/local.
+
+Mac OS X already provides this software and installing another version in
+parallel can cause all kinds of trouble.
+
+The libcurl provided by Leopard is too old for CouchDB to use.
+
+Generally there are no consequences of this for you. If you build your
+own software and it requires this formula, you&#39;ll need to add to your
+build variables:
+
+&nbsp;&nbsp;&nbsp; LDFLAGS:&nbsp; -L/usr/local/opt/curl/lib
+&nbsp;&nbsp;&nbsp; CPPFLAGS: -I/usr/local/opt/curl/include
+
+==&gt; Summary
+/usr/local/Cellar/curl/7.28.0: 75 files, 1.9M, built in 5.1 minutes
+==&gt; Installing php54 dependency: freetype
+==&gt; Downloading https://downloads.sf.net/project/machomebrew/Bottles/freetype-2.
+######################################################################## 100.0%
+==&gt; Pouring freetype-2.4.10.mountainlion.bottle.tar.gz
+/usr/local/Cellar/freetype/2.4.10: 56 files, 2.5M
+==&gt; Installing php54 dependency: gettext
+==&gt; Downloading https://downloads.sf.net/project/machomebrew/Bottles/gettext-0.1
+######################################################################## 100.0%
+==&gt; Pouring gettext-0.18.1.1.mountainlion.bottle.tar.gz
+==&gt; Caveats
+This formula is keg-only: so it was not symlinked into /usr/local.
+
+OS X provides the BSD gettext library and some software gets confused if both are in the library path.
+
+Generally there are no consequences of this for you. If you build your
+own software and it requires this formula, you&#39;ll need to add to your
+build variables:
+
+&nbsp;&nbsp;&nbsp; LDFLAGS:&nbsp; -L/usr/local/opt/gettext/lib
+&nbsp;&nbsp;&nbsp; CPPFLAGS: -I/usr/local/opt/gettext/include
+
+==&gt; Summary
+/usr/local/Cellar/gettext/0.18.1.1: 366 files, 12M
+==&gt; Installing php54 dependency: jpeg
+==&gt; Downloading https://downloads.sf.net/project/machomebrew/Bottles/jpeg-8d.mou
+######################################################################## 100.0%
+==&gt; Pouring jpeg-8d.mountainlion.bottle.tar.gz
+/usr/local/Cellar/jpeg/8d: 18 files, 1.3M
+==&gt; Installing php54 dependency: libpng
+==&gt; Downloading https://downloads.sf.net/project/machomebrew/Bottles/libpng-1.5.
+######################################################################## 100.0%
+==&gt; Pouring libpng-1.5.13.mountainlion.bottle.tar.gz
+/usr/local/Cellar/libpng/1.5.13: 14 files, 1.0M
+==&gt; Installing php54 dependency: mcrypt
+==&gt; Downloading http://sourceforge.net/projects/mcrypt/files/Libmcrypt/2.5.8/lib
+######################################################################## 100.0%
+==&gt; ./configure --prefix=/usr/local/Cellar/mcrypt/2.5.8 --mandir=/usr/local/Cell
+==&gt; make install
+/usr/local/Cellar/mcrypt/2.5.8: 10 files, 328K, built in 77 seconds
+==&gt; Installing php54 dependency: zlib
+==&gt; Downloading http://zlib.net/zlib-1.2.7.tar.gz
+######################################################################## 100.0%
+==&gt; Patching
+patching file configure
+==&gt; ./configure --prefix=/usr/local/Cellar/zlib/1.2.7
+==&gt; make install
+==&gt; Caveats
+This formula is keg-only: so it was not symlinked into /usr/local.
+
+Mac OS X already provides this software and installing another version in
+parallel can cause all kinds of trouble.
+
+Generally there are no consequences of this for you. If you build your
+own software and it requires this formula, you&#39;ll need to add to your
+build variables:
+
+&nbsp;&nbsp;&nbsp; LDFLAGS:&nbsp; -L/usr/local/opt/zlib/lib
+&nbsp;&nbsp;&nbsp; CPPFLAGS: -I/usr/local/opt/zlib/include
+
+==&gt; Summary
+/usr/local/Cellar/zlib/1.2.7: 9 files, 384K, built in 20 seconds
+==&gt; Installing php54
+==&gt; Downloading http://www.php.net/get/php-5.4.7.tar.bz2/from/this/mirror
+######################################################################## 100.0%
+==&gt; ./configure --prefix=/usr/local/Cellar/php54/5.4.7 --localstatedir=/usr/loca
+==&gt; make
+==&gt; make install
+==&gt; /usr/local/Cellar/php54/5.4.7/bin/pear config-set php_ini /usr/local/etc/php
+==&gt; Caveats
+For 10.5 and Apache:
+&nbsp;&nbsp;&nbsp; Apache needs to run in 32-bit mode. You can either force Apache to start
+&nbsp;&nbsp;&nbsp; in 32-bit mode or you can thin the Apache executable.
+
+To enable PHP in Apache add the following to httpd.conf and restart Apache:
+&nbsp;&nbsp;&nbsp; LoadModule php5_module&nbsp;&nbsp;&nbsp; /usr/local/Cellar/php54/5.4.7/libexec/apache2/libphp5.so
+
+The php.ini file can be found in:
+&nbsp;&nbsp;&nbsp; /usr/local/etc/php/5.4/php.ini
+
+✩✩✩✩ PEAR ✩✩✩✩
+
+If pear complains about permissions, &#39;Fix&#39; the default PEAR permissions and config:
+&nbsp;&nbsp;&nbsp; chmod -R ug+w /usr/local/Cellar/php54/5.4.7/lib/php
+&nbsp;&nbsp;&nbsp; pear config-set php_ini /usr/local/etc/php/5.4/php.ini
+
+✩✩✩✩ Extensions ✩✩✩✩
+
+If you are having issues with custom extension compiling, ensure that this php is
+in your PATH:
+&nbsp;&nbsp;&nbsp; PATH=&quot;$(brew --prefix josegonzalez/php/php54)/bin:$PATH&quot;
+
+PHP54 Extensions will always be compiled against this PHP. Please install them
+using --without-homebrew-php to enable compiling against system PHP.
+
+✩✩✩✩ FPM ✩✩✩✩
+
+If you have installed the formula with --with-fpm, to launch php-fpm on startup:
+&nbsp;&nbsp;&nbsp; * If this is your first install:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mkdir -p ~/Library/LaunchAgents
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cp /usr/local/Cellar/php54/5.4.7/homebrew-php.josegonzalez.php54.plist ~/Library/LaunchAgents/
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; launchctl load -w ~/Library/LaunchAgents/homebrew-php.josegonzalez.php54.plist
+
+&nbsp;&nbsp;&nbsp; * If this is an upgrade and you already have the homebrew-php.josegonzalez.php54.plist loaded:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; launchctl unload -w ~/Library/LaunchAgents/homebrew-php.josegonzalez.php54.plist
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cp /usr/local/Cellar/php54/5.4.7/homebrew-php.josegonzalez.php54.plist ~/Library/LaunchAgents/
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; launchctl load -w ~/Library/LaunchAgents/homebrew-php.josegonzalez.php54.plist
+
+Mountain Lion comes with php-fpm pre-installed, to ensure you are using the brew version you need to make sure /usr/local/sbin is before /usr/sbin in your PATH:
+
+&nbsp; PATH=&quot;/usr/local/sbin:$PATH&quot;
+
+You may also need to edit the plist to use the correct &quot;UserName&quot;.
+
+Please note that the plist was called &#39;org.php-fpm.plist&#39; in old versions
+of this formula.
+==&gt; Summary
+/usr/local/Cellar/php54/5.4.7: 462 files, 35M, built in 7.4 minutes</pre>
+
+<h2>brew install mysql</h2>
+
+<pre>
+$ brew install mysql
+==&gt; Installing mysql dependency: cmake
+==&gt; Downloading https://downloads.sf.net/project/machomebrew/Bottles/cmake-2.8.9
+######################################################################## 100.0%
+==&gt; Pouring cmake-2.8.9.mountainlion.bottle.tar.gz
+/usr/local/Cellar/cmake/2.8.9: 662 files, 32M
+==&gt; Installing mysql
+==&gt; Downloading https://downloads.sf.net/project/machomebrew/Bottles/mysql-5.5.2
+######################################################################## 100.0%
+==&gt; Pouring mysql-5.5.27.mountainlion.bottle.tar.gz
+==&gt; Caveats
+Set up databases to run AS YOUR USER ACCOUNT with:
+&nbsp;&nbsp;&nbsp; unset TMPDIR
+&nbsp;&nbsp;&nbsp; mysql_install_db --verbose --user=`whoami` --basedir=&quot;$(brew --prefix mysql)&quot; --datadir=/usr/local/var/mysql --tmpdir=/tmp
+
+To set up base tables in another folder, or use a different user to run
+mysqld, view the help for mysqld_install_db:
+&nbsp;&nbsp;&nbsp; mysql_install_db --help
+
+and view the MySQL documentation:
+&nbsp; * http://dev.mysql.com/doc/refman/5.5/en/mysql-install-db.html
+&nbsp; * http://dev.mysql.com/doc/refman/5.5/en/default-privileges.html
+
+To run as, for instance, user &quot;mysql&quot;, you may need to `sudo`:
+&nbsp;&nbsp;&nbsp; sudo mysql_install_db ...options...
+
+Start mysqld manually with:
+&nbsp;&nbsp;&nbsp; mysql.server start
+
+&nbsp;&nbsp;&nbsp; Note: if this fails, you probably forgot to run the first two steps up above
+
+A &quot;/etc/my.cnf&quot; from another install may interfere with a Homebrew-built
+server starting up correctly.
+
+To connect:
+&nbsp;&nbsp;&nbsp; mysql -uroot
+
+To launch on startup:
+* if this is your first install:
+&nbsp;&nbsp;&nbsp; mkdir -p ~/Library/LaunchAgents
+&nbsp;&nbsp;&nbsp; cp /usr/local/Cellar/mysql/5.5.27/homebrew.mxcl.mysql.plist ~/Library/LaunchAgents/
+&nbsp;&nbsp;&nbsp; launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist
+
+* if this is an upgrade and you already have the homebrew.mxcl.mysql.plist loaded:
+&nbsp;&nbsp;&nbsp; launchctl unload -w ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist
+&nbsp;&nbsp;&nbsp; cp /usr/local/Cellar/mysql/5.5.27/homebrew.mxcl.mysql.plist ~/Library/LaunchAgents/
+&nbsp;&nbsp;&nbsp; launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist
+
+You may also need to edit the plist to use the correct &quot;UserName&quot;.
+
+==&gt; Summary
+/usr/local/Cellar/mysql/5.5.27: 6385 files, 222M</pre>
+
+<h3>如何手动启动 mysql</h3>
+
+<p>查看 mysql.server 后的结论是 $datadir 不正确，手动在 mysql.server 中设置一下就好了</p>
+
+<pre>
+$ mysql_install_db
+
+FATAL ERROR: Could not find ./bin/my_print_defaults
+
+If you compiled from source, you need to run &#39;make install&#39; to
+copy the software into the correct location ready for operation.
+
+If you are using a binary release, you must either be at the top
+level of the extracted archive, or pass the --basedir option
+pointing to that location.
+
+$ which mysql
+/usr/local/bin/mysql
+bogon:~ mlhch$ which my_print_defaults
+/usr/local/bin/my_print_defaults
+
+$ cd /usr/local/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+$ mysql_install_db
+Installing MySQL system tables...
+OK
+Filling help tables...
+OK
+
+To start mysqld at boot time you have to copy
+support-files/mysql.server to the right place for your system
+
+PLEASE REMEMBER TO SET A PASSWORD FOR THE MySQL root USER !
+To do so, start the server, then issue the following commands:
+
+./bin/mysqladmin -u root password &#39;new-password&#39;
+./bin/mysqladmin -u root -h bogon password &#39;new-password&#39;
+
+Alternatively you can run:
+./bin/mysql_secure_installation
+
+which will also give you the option of removing the test
+databases and anonymous user created by default.&nbsp; This is
+strongly recommended for production servers.
+
+See the manual for more instructions.
+
+You can start the MySQL daemon with:
+cd . ; ./bin/mysqld_safe &amp;
+
+You can test the MySQL daemon with mysql-test-run.pl
+cd ./mysql-test ; perl mysql-test-run.pl
+
+Please report any problems with the ./bin/mysqlbug script!</pre>
