@@ -11,8 +11,7 @@
 	<p>$ sudo npm install -g cordova</p>
 	</li>
 	<li>
-	<pre>
-创建项目</pre>
+	<p>创建项目</p>
 
 	<pre>
 $ cordova create hello com.example.hello HelloWorld</pre>
