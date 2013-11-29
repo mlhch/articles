@@ -1,0 +1,230 @@
+<h1>PhoneGap - npm cordova</h1>
+
+<p>2013-10-02 15:10 Wednesday</p>
+
+<p>2013-11-29 19:19 Friday</p>
+
+<p>今日发现如下错误，</p>
+
+<pre>
+$ cordova platform add android
+Checking Android requirements...
+Creating android project...
+[Error: An error occured during creation of android sub-project. Looks like your environment fully supports cordova-android development!
+Creating Cordova project for the Android platform:
+	Path: platforms/android
+	Package: com.malian.cordova_hello
+	Name: HelloCordova
+	Android target: android-17
+Copying template files...
+platforms/android/assets
+shell.js: internal error
+Error: ENOENT, no such file or directory &#39;platforms/android/assets&#39;
+    at Object.fs.mkdirSync (fs.js:642:18)
+    at /Users/mlhch/.cordova/lib/android/cordova/3.2.0/bin/node_modules/shelljs/src/cp.js:173:14
+    at Array.forEach (native)
+    at Object._cp (/Users/mlhch/.cordova/lib/android/cordova/3.2.0/bin/node_modules/shelljs/src/cp.js:156:11)
+    at Object.cp (/Users/mlhch/.cordova/lib/android/cordova/3.2.0/bin/node_modules/shelljs/src/common.js:172:23)
+    at /Users/mlhch/.cordova/lib/android/cordova/3.2.0/bin/lib/create.js:152:19
+    at setShellFatal (/Users/mlhch/.cordova/lib/android/cordova/3.2.0/bin/lib/create.js:46:5)
+    at /Users/mlhch/.cordova/lib/android/cordova/3.2.0/bin/lib/create.js:150:9
+    at _fulfilled (/Users/mlhch/.cordova/lib/android/cordova/3.2.0/bin/node_modules/q/q.js:798:54)
+    at self.promiseDispatch.done (/Users/mlhch/.cordova/lib/android/cordova/3.2.0/bin/node_modules/q/q.js:827:30)
+
+]</pre>
+
+<p>跟踪一翻后发现，原来是因为当前目录下的目录 platforms 不存在，而造成此的原因是 git fetch 项目的 seed 时，空目录并不会被创建。手动创建 platforms 目录即可解决问题。plugins 目录同理。</p>
+
+<pre>
+// copy project template
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; shell.cp(&#39;-r&#39;, path.join(project_template_dir, &#39;assets&#39;), project_path);</pre>
+
+<p>2013-10-02 15:10 Wednesday</p>
+
+<h2>$ node --debug-brk `which cordova` platform add ios</h2>
+
+<ul>
+	<li>
+	<p>cordova/bin/cordova</p>
+
+	<pre>
+var CLI = require(&#39;../src/cli&#39;);
+new CLI(process.argv);</pre>
+	</li>
+	<li>
+	<p>cordova/src/cli.js</p>
+
+	<pre>
+var optimist = require(&#39;optimist&#39;),
+cordova = require(&#39;../cordova&#39;),
+plugman = require(&#39;plugman&#39;),
+platforms = require(&quot;../platforms&quot;);</pre>
+	</li>
+	<li>
+	<p>cordova/src/cli.js</p>
+
+	<pre>
+// platform/plugins add/rm [target(s)]
+var invocation = tokens.slice(0,1); // this has the sub-command, i.e. &quot;platform add&quot; or &quot;plugin rm&quot;
+var targets = tokens.slice(1); // this should be an array of targets, be it platforms or plugins
+invocation.push(targets);
+cordova[cmd].apply(this, invocation);</pre>
+	</li>
+	<li>
+	<p>cordova/src/platform.js</p>
+
+	<pre>
+    switch(command) {
+        case &#39;add&#39;:
+            var end = n(targets.length, function() {
+                hooks.fire(&#39;after_platform_add&#39;, opts, function(err) {
+                    if (err) {
+                        if (callback) callback(err);
+                        else throw err;
+                    } else {
+                        if (callback) callback();
+                    }
+                });
+            });
+            hooks.fire(&#39;before_platform_add&#39;, opts, function(err) {
+                if (err) {
+                    if (callback) callback(err);
+                    else throw err;
+                } else {
+                    var config_json = config.read(projectRoot);
+                    targets.forEach(function(t) {
+                        lazy_load.based_on_config(projectRoot, t, function(err) {
+                            if (err) {
+                                if (callback) callback(err);
+                                else throw err;
+                            } else {
+                                if (config_json.lib &amp;&amp; config_json.lib[t]) {
+                                    call_into_create(t, projectRoot, cfg, config_json.lib[t].id, config_json.lib[t].version, config_json.lib[t].template, callback, end);
+                                } else {
+                                    call_into_create(t, projectRoot, cfg, &#39;cordova&#39;, platforms[t].version, null, callback, end);
+                                }
+                            }
+                        });
+                    });
+                }
+            });
+            break;</pre>
+	</li>
+	<li>
+	<p>platforms.ios.url -&gt;&nbsp;<a href="https://git-wip-us.apache.org/repos/asf?p=cordova-ios.git" target="_blank">https://git-wip-us.apache.org/repos/asf?p=cordova-ios.git</a><br />
+	platforms.ios.version -&gt; 3.0.0<br />
+	url -&gt;&nbsp;<a href="https://git-wip-us.apache.org/repos/asf?p=cordova-ios.git;a=snapshot;h=3.0.0;sf=tgz" target="_blank">https://git-wip-us.apache.org/repos/asf?p=cordova-ios.git;a=snapshot;h=3.0.0;sf=tgz</a></p>
+
+	<pre>
+module.exports = {
+    cordova:function lazy_load(platform, callback) {
+        if (!(platform in platforms)) {
+            var err = new Error(&#39;Cordova library &quot;&#39; + platform + &#39;&quot; not recognized.&#39;);
+            if (callback) return callback(err);
+            else throw err;
+        }
+
+        var url = platforms[platform].url + &#39;;a=snapshot;h=&#39; + platforms[platform].version + &#39;;sf=tgz&#39;;
+        module.exports.custom(url, &#39;cordova&#39;, platform, platforms[platform].version, function(err) {
+            if (err) {
+                if (callback) return callback(err);
+                else throw err;
+            } else {
+                if (callback) callback();
+            }
+        });
+    },</pre>
+	</li>
+	<li>
+	<p>由此可见，所谓的 cordova platform add ios，最终调用的仍然是 cordova-iso 下的 /bin/create 脚本</p>
+
+	<p>&quot;/Users/mlhch/.cordova/lib/ios/cordova/3.0.0/bin/create&quot; --arc &quot;/Users/mlhch/www_ios/tmp/hello/platforms/ios&quot; &quot;com.mlhch.phonegap.hello&quot; &quot;HelloPhonegap&quot;</p>
+	</li>
+	<li>
+	<pre>
+                // Create a platform app using the ./bin/create scripts that exist in each repo.
+                // Run platform&#39;s create script
+                var bin = path.join(cordova_util.libDirectory, target, id, version, &#39;bin&#39;, &#39;create&#39;);
+                if(target == &#39;wp7&#39;) bin = path.join(cordova_util.libDirectory, &#39;wp&#39;, id, version, &#39;wp7&#39;, &#39;bin&#39;, &#39;create&#39;);
+                if(target == &#39;wp8&#39;) bin = path.join(cordova_util.libDirectory, &#39;wp&#39;, id, version, &#39;wp8&#39;, &#39;bin&#39;, &#39;create&#39;);
+                var args = (target==&#39;ios&#39;) ? &#39;--arc&#39; : &#39;&#39;;
+                var pkg = cfg.packageName().replace(/[^\w.]/g,&#39;_&#39;);
+                var name = cfg.name();
+                var command = util.format(&#39;&quot;%s&quot; %s &quot;%s&quot; &quot;%s&quot; &quot;%s&quot;&#39;, bin, args, output, pkg, name);
+                if (template_dir) {
+                    command += &#39; &quot;&#39; + template_dir + &#39;&quot;&#39;;
+                }
+                events.emit(&#39;log&#39;, &#39;Running bin/create for platform &quot;&#39; + target + &#39;&quot; with command: &quot;&#39; + command + &#39;&quot; (output to follow)&#39;);
+
+                shell.exec(command, {silent:true,async:true}, function(code, create_output) </pre>
+	</li>
+	<li>
+	<p>这时就是为什么 npm cordova 生成的项目不同于 cordova-ios 生成的项目的原因了</p>
+
+	<pre>
+    update_project:function(cfg, callback) {
+        var self = this;
+        this.update_from_config(cfg, function(err) {
+            if (err) {
+                if (callback) callback(err);
+                else throw err;
+            } else {
+                self.update_www();
+                self.update_overrides();
+                self.update_staging();
+                util.deleteSvnFolders(self.www_dir());
+                if (callback) callback();
+            }
+        });
+    }</pre>
+	</li>
+</ul>
+
+<h2>$ node --debug-brk `which cordova` plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-dialogs.git</h2>
+
+<ul>
+	<li>
+	<p>cordova/bin/cordova</p>
+
+	<pre>
+var CLI = require(&#39;../src/cli&#39;);
+new CLI(process.argv);</pre>
+	</li>
+	<li>
+	<p>cordova/src/plugin.js</p>
+
+	<pre>
+// Fetch the plugin first.
+events.emit(&#39;log&#39;, &#39;Calling plugman.fetch on plugin &quot;&#39; + target + &#39;&quot;&#39;);
+plugman.fetch(target, pluginsDir, {}, function(err, dir) {</pre>
+
+	<ul>
+		<li>
+		<pre>
+// Read the plugin.xml file and extract the plugin&#39;s ID.
+tmp_dir = path.join(tmp_dir, subdir);
+// TODO: what if plugin.xml does not exist?
+var xml_file = path.join(tmp_dir, &#39;plugin.xml&#39;);
+var xml = xml_helpers.parseElementtreeSync(xml_file);
+var plugin_id = xml.getroot().attrib.id;</pre>
+		</li>
+	</ul>
+	</li>
+	<li>
+	<pre>
+plugman.install(platform, platformRoot, path.basename(dir), pluginsDir, options, function() {
+  doInstall(platformIndex+1);
+});</pre>
+
+	<ul>
+		<li>
+		<pre>
+if (platform == &#39;ios&#39;) {
+  // write out xcodeproj file
+  require(&#39;../../plugman&#39;).emit(&#39;log&#39;, &#39;Writing out iOS pbxproj file...&#39;);
+  fs.writeFileSync(project_files.pbx, project_files.xcode.writeSync());
+}</pre>
+		</li>
+	</ul>
+	</li>
+</ul>
