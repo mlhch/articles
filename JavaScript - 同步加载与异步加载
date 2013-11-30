@@ -1,0 +1,86 @@
+<h1>JavaScript - 同步加载与异步加载</h1>
+
+<p>2013-10-09 22:44 Wednesday</p>
+
+<p>script 标签在HTML5中除了具备HTML5新标准定义的属性以外，和HTML4.01相比移除了language属性，修改了type属性为可选的（默认text/javascript），并新增了一个属性async。</p>
+
+<p>async :boolean, 属性的作用，定义脚本是否异步执行，取值true或false。</p>
+
+<p>如果 async 设为 true ，会忽略 defer 属性。</p>
+
+<p>异步执行的 js 文件被假定为不使用 document.write() &nbsp;向加载中的 document 写入内容，因此不要在 异步执行的 js 文件的加载执行过程中使用 document.write()</p>
+
+<p>除了 script 标签属性外，页面引入 js 文件的方式影响其加载执行方式：</p>
+
+<ul>
+	<li>任何以添加 script 节点(例如 appendChild(scriptNode)&nbsp;) 的方式引入的js文件都是异步执行的&nbsp;(scriptNode&nbsp;需要插入document中，只创建节点和设置&nbsp;src&nbsp;是不会加载&nbsp;js&nbsp;文件的(IE6-9 除外)，这跟&nbsp;img&nbsp;的预加载不能类比&nbsp;)&nbsp; ,无需特别设置script.type，如果过设置，需要设置为 javascript 类型，否则不会加载 js 文件（text/javascript ，或者带版本号的，如果有特殊需求）</li>
+	<li>html文件中的&lt;script&gt;标签中的代码或src引用的js文件中的代码是同步加载和执行的(较新的浏览器对阻塞的 js 可以并行加载了，但执行依然是同步的)</li>
+	<li>html文件中的&lt;script&gt;标签中的代码使用document.write()方式引入的js文件是异步执行的</li>
+	<li>html文件中的&lt;script&gt;标签src属性所引用的js文件的代码内再使用document.write()方式引入的js文件是同步执行的</li>
+	<li>使用 Image 对象异步预加载 js 文件(不会被执行,onload 事件不会触发,但是会触发onerror)</li>
+</ul>
+
+<p>不要使用类似下面这种做法，这样并不会发起加载 js 文件的请求：</p>
+
+<p>divNode.innerHTML = &#39;&lt;script src=&quot;xxx.js&quot;&gt;&lt;/script&gt;&#39;;</p>
+
+<p>window.onload&nbsp;事件会在 js 文件加载完毕才触发(即使是异步加载,还有 iframe 中网页的加载 &nbsp;)</p>
+
+<ol>
+	<li>
+	<p>页面内代码：同步</p>
+
+	<pre>
+&lt;script&gt;
+//同步加载执行的代码
+&lt;/script&gt;</pre>
+	</li>
+	<li>
+	<p>页面内链接：同步</p>
+
+	<pre>
+&lt;script src=&quot;xx.js&quot;&gt;&lt;/script&gt;  //同步加载执行xx.js中的代码</pre>
+
+	<p>因为是同步的，可以使用document.wirte()， 比如 jsonp ，嵌入一个 js 文件，从服务器取数据并用服务器脚本输出 js 代码向 document 中写入内容.</p>
+	</li>
+	<li>
+	<p>页面内代码写出链接：异步</p>
+
+	<pre>
+&lt;script&gt;
+document.write(&#39;&lt;script&nbsp;src=&quot;xx.js&quot;&gt;&lt;\/script&gt;&#39;);&nbsp;&nbsp;&nbsp;//异步加载执行xx.js中的代码
+&lt;/script&gt;</pre>
+	</li>
+	<li>
+	<p>页面内链接写出链接：同步</p>
+
+	<pre>
+&lt;script src=&quot;xx.js&quot;&gt;&lt;/script&gt;</pre>
+
+	<p>xx.js中有下面代码：</p>
+
+	<pre>
+document.write(&#39;&lt;script src=&quot;11.js&quot;&gt;&lt;\/script&gt;&#39;);
+document.write(&#39;&lt;script&nbsp;src=&quot;22.js&quot;&gt;&lt;\/script&gt;&#39;);</pre>
+
+	<p>则xx.js和11.js、22.js&nbsp;都是同步加载和执行的。</p>
+
+	<p>如果&nbsp;xx.js 、11.js&nbsp;和&nbsp;22.js 以插入 script 节点方式异步加载，则&nbsp;11.js&nbsp;和&nbsp;22.js 是异步加载的。</p>
+
+	<blockquote>
+	<p>这里的情况太复杂了，暂时用不到，以后再研究</p>
+
+	<p>如果 xx.js 以script 节点方式异步加载, &nbsp;11.js&nbsp;和&nbsp;22.js 以 document.write(script) 方式加载，则 11.js&nbsp;和&nbsp;22.js 是同步加载的（经最新的浏览器测试, 在chrome 下，xx.js 异步加载执行已经无法使用 document.write() 向文档写入内容，不过如果不在document 加载过程插入，在插入之前使用 document.write() 开启对页面的重写，则异步加载的 js 仍能写入内容，比如页面上一个 按钮的 onclick 回调函数里面document.write(1),然后 headNode.appendChild(scriptNode) ，但是 firefox 和IE 却可以在 document 关闭之前写入(方法是在 xx.js中alert阻止文档关闭)）</p>
+
+	<p>测试：在11.js中&nbsp;alert()（最好的方式是使用 服务器脚本输出js代码，在输出前延迟几秒 , 比如 &nbsp;php : sleep(5) ;不要用 for 循环，js 引擎是单线程执行的，持续执行任何一段代码都会导致其余代码被阻塞）,&nbsp;22.js 中&nbsp; console.log()&nbsp; ,可以看到&nbsp;22.js中的代码被阻塞.</p>
+	</blockquote>
+	</li>
+	<li>
+	<p>下面这种方式，xx.js会在appendChild执行之后异步加载执行</p>
+
+	<pre>
+var script = document.createElement(&quot;script&quot;);
+script.setAttribute(&quot;src&quot;,&quot;xx.js&quot;);
+documenrt.getElementsByTagName(&quot;head&quot;)[0].appendChild(script);</pre>
+	</li>
+</ol>
