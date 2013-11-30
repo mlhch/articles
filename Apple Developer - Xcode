@@ -4,6 +4,19 @@
 
 <ul>
 	<li>
+	<p>2013-11-30 10:48 Saturday</p>
+
+	<p>今日运行 Xcode 时提示：</p>
+
+	<blockquote>
+	<p>Install additional required components?</p>
+
+	<p>Xcode 5 requires additional components to support running and debugging. Choose Install to add required components.</p>
+	</blockquote>
+
+	<p>经确认，已经是最新的 5.0.2 版本。</p>
+	</li>
+	<li>
 	<p>2013-10-10 01:28 Thursday</p>
 
 	<p>之所以 Xcode 中左上角出现 2 个手机设备是因为 iPhone 上&ldquo;设置&gt;通用&gt;描述文件&rdquo;里重复安装了 2 个预置描述文件&ldquo;iOS Team Provisioning...&rdquo;，删除一个就好了</p>
