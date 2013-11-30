@@ -6,6 +6,19 @@
 
 <p><a href="http://www.sencha.com/products/sencha-cmd/download">Sencha Cmd</a>&nbsp;is a cross-platform command line tool that provides many automated tasks around the full life-cycle of your applications from generating a new project to deploying an application to production.</p>
 
+<ul>
+	<li>
+	<p>2013-11-30 13:17 Saturday</p>
+
+	<pre>
+$ sencha upgrade
+Sencha Cmd v4.0.0.203
+[INF] Determining the latest version of Sencha Cmd
+[INF] The latest version of Sencha Cmd is 4.0.1.45
+[INF] Downloading SenchaCmd-4.0.1.45-osx.app.zip from http://cdn.sencha.com/cmd/4.0.1.45/ to temp folder /var/folders/l6/n70m9cv15758ggwm76vr26_r0000gn/T/sencha1385788579480</pre>
+	</li>
+</ul>
+
 <p>Cmd 在 Products 中并没有正式列出，文档中的相关介绍页给出了其下载地址。</p>
 
 <p>SenchaCmd-4.0.0.203-osx.app.zip -&gt;&nbsp;<a href="http://cdn.sencha.com/cmd/4.0.0.203/SenchaCmd-4.0.0.203-osx.app.zip" target="_blank">http://cdn.sencha.com/cmd/4.0.0.203/SenchaCmd-4.0.0.203-osx.app.zip</a></p>
@@ -172,6 +185,69 @@ Sencha Cmd v4.0.0.203
 
 <pre>
 $ sencha app build -run native</pre>
+
+<p>2013-11-30 11:35 Saturday</p>
+
+<p>今日尝试发现如下错误，但不影响 iOS 模拟器的运行</p>
+
+<pre>
+[INF]      [echo] Running mobile packager action run on file /Users/mlhch/www_cdv/sencha-touch-hello/packager.temp.json
+[ERR] 
+[DEBUG] Session could not be started: Error Domain=DTiPhoneSimulatorErrorDomain Code=2 &quot;Simulator session timed out.&quot; UserInfo=0x7fd489c58f70 {NSLocalizedDescription=Simulator session timed out.}
+The application was successfully packaged</pre>
+
+<blockquote>
+<p>默认配置的是 iOS 的模拟器：</p>
+
+<pre>
+&quot;platform&quot;:&quot;iOSSimulator&quot;,
+</pre>
+
+<p><em>对于 Android，则需要如下配置：</em></p>
+
+<pre>
+&quot;platform&quot;:&quot;Android&quot;,
+</pre>
+
+<p>配置 sdkPath 确定 android 命令所在地</p>
+
+<pre>
+&quot;sdkPath&quot;:&quot;/path/to/android-sdk&quot;,
+=&gt;&quot;sdkPath&quot;:&quot;/Users/mlhch/app/adt-bundle-mac/sdk&quot;,
+</pre>
+
+<pre>
+[ERR] 
+sh: /path/to/android-sdk/tools/android: No such file or directory
+&quot;/path/to/android-sdk/tools/android&quot; create project --target android-8 --name SenchaTouchHello --activity STActivity --path &quot;/Users/mlhch/www_cdv/sencha-touch-hello/build/native-package-mobile/SenchaTouchHello/packager.json/&quot; --package SenchaTouchHello
+Failed to create android project
+Failed to package application</pre>
+
+<p>配置 androidAPILevel 以匹配 target</p>
+
+<pre>
+&quot;androidAPILevel&quot;:&quot;8&quot;,
+=&gt;&quot;androidAPILevel&quot;:&quot;17&quot;,
+</pre>
+
+<pre>
+[ERR] 
+Error: Target id is not valid. Use &#39;android list targets&#39; to get the target ids.</pre>
+
+<p>修改 applicationId 以符合 com.xx.xxx 的规则</p>
+
+<pre>
+    &quot;applicationName&quot;:&quot;SenchatouchHello&quot;,
+    &quot;applicationId&quot;:&quot;SenchatouchHello&quot;,
+=&gt; &quot;applicaitonId&quot;:&quot;com.malian.SenchatouchHello&quot;,
+</pre>
+
+<pre>
+[ERR] 
+Error: Package name &#39;SenchatouchHello&#39; contains invalid characters.
+A package name must be constitued of two Java identifiers.
+Each identifier allowed characters are: a-z A-Z 0-9 _</pre>
+</blockquote>
 
 <p>为真机调试 build app。</p>
 
