@@ -1,0 +1,153 @@
+<h1>Apple Developer - Xcode</h1>
+
+<p>2013-07-05 07:29 Friday</p>
+
+<ul>
+	<li>
+	<p>2013-10-10 01:28 Thursday</p>
+
+	<p>之所以 Xcode 中左上角出现 2 个手机设备是因为 iPhone 上&ldquo;设置&gt;通用&gt;描述文件&rdquo;里重复安装了 2 个预置描述文件&ldquo;iOS Team Provisioning...&rdquo;，删除一个就好了</p>
+	</li>
+</ul>
+
+<h2>下载历史版本</h2>
+
+<p>2013-10-03 19:03 Thursday 今日想在 Xcode 5 中使用 iOS 6.1，所以下载历史版本</p>
+
+<ul>
+	<li><a href="https://developer.apple.com/" target="_blank">https://developer.apple.com/</a></li>
+	<li>Xcode 5 |&nbsp;See what&#39;s new in version 5.0.&nbsp;<a href="https://developer.apple.com/technologies/tools/whats-new.html">Learn more</a>&nbsp;|&nbsp;<a href="https://developer.apple.com/xcode/">Download</a>&nbsp;-&gt;&nbsp;https://developer.apple.com/xcode/</li>
+	<li>Xcode 5 |&nbsp;The most recent version of Xcode, including the latest SDKs for building Mac, iPhone, and iPad apps, is available from the Mac App Store.<br />
+	For past versions of Xcode or additional tools &mdash; <a href="https://developer.apple.com/downloads/">View downloads</a></li>
+	<li>Categories -&gt; &nbsp;Developer Tools -&gt; Xcode 4.6.3</li>
+	<li><img src="chrome://fileicon/%2FUsers%2Fmlhch%2Fsync%2Fsoft%2FMacOSX%2Fxcode4630916281a.dmg?scale=1x" />xcode4630916281a.dmg -&gt;&nbsp;<a href="http://adcdownload.apple.com/Developer_Tools/xcode_4.6.3/xcode4630916281a.dmg" target="_blank">http://adcdownload.apple.com/Developer_Tools/xcode_4.6.3/xcode4630916281a.dmg</a></li>
+</ul>
+
+<p>使用方法：</p>
+
+<pre>
+$ cd /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/</pre>
+
+<pre>
+$ ll
+total 0
+drwxr-xr-x  3 root  wheel  102  8  8 04:33 .
+drwxr-xr-x  5 root  wheel  170  9 17 09:12 ..
+drwxr-xr-x  8 root  wheel  272  8 27 05:47 iPhoneOS7.0.sdk</pre>
+
+<pre>
+$ ln -s /Volumes/Xcode/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.0.sdk .
+ln: ./iPhoneOS6.0.sdk: Permission denied</pre>
+
+<pre>
+$ sudo ln -s /Volumes/Xcode/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.0.sdk .
+Password:</pre>
+
+<pre>
+$ ll
+total 8
+drwxr-xr-x &nbsp;4 root &nbsp;wheel &nbsp;136 10 &nbsp;3 18:52 .
+drwxr-xr-x &nbsp;5 root &nbsp;wheel &nbsp;170 &nbsp;9 17 09:12 ..
+lrwxr-xr-x &nbsp;1 root &nbsp;wheel &nbsp;102 10 &nbsp;3 18:52 iPhoneOS6.0.sdk -&gt; /Volumes/Xcode/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.0.sdk
+drwxr-xr-x &nbsp;8 root &nbsp;wheel &nbsp;272 &nbsp;8 27 05:47 iPhoneOS7.0.sdk
+</pre>
+
+<p>或者直接拷贝过来即可。</p>
+
+<h2>Xcode 5.0</h2>
+
+<p>2013-09-23 04:03</p>
+
+<p>今天跟踪 phonegap build ios 看为什么找不到本地编译库时，发现 xcodebuild -version 命令被执行。</p>
+
+<pre>
+module.exports.check_requirements = function(project_root, callback) {
+    events.emit(&#39;log&#39;, &#39;Checking iOS requirements...&#39;);
+    // Check xcode + version.
+    var command = &#39;xcodebuild -version&#39;;
+    events.emit(&#39;log&#39;, &#39;Running &quot;&#39; + command + &#39;&quot; (output to follow)&#39;);
+    shell.exec(command, {silent:true, async:true}, function(code, output) {...});
+};</pre>
+
+<p>尝试本机终端中执行，却提示如下错误：</p>
+
+<pre>
+$ xcodebuild -version
+xcrun: Error: could not stat active Xcode path &#39;/Volumes/Xcode/Xcode.app/Contents/Developer&#39;. (No such file or directory)</pre>
+
+<p>&nbsp;查到解决办法如下：</p>
+
+<pre>
+$ xcode-select -switch /Applications/Xcode.app
+xcode-select: Error: -switch must be run as root (e.g. sudo xcode-select -switch ).
+$ sudo xcode-select -switch /Applications/Xcode.app
+Password:</pre>
+
+<pre>
+$ xcodebuild -version
+Xcode 4.6.3
+Build version 4H1503</pre>
+
+<p>查得 App Store 上最新版本如下</p>
+
+<pre>
+更新：2013年09月18日
+版本：5.0
+大小：1.96GB
+兼容性：OS X 10.8.4 或更高版本</pre>
+
+<p>果断更新之</p>
+
+<h2>Xcode 4.6.3</h2>
+
+<p>2013-07-05 07:29 Friday 昨天下大雨，老婆场考过了</p>
+
+<p>今天更新到 4.6.3，免得 brew 老提示。</p>
+
+<h2>Xcode 4.2 Installation</h2>
+
+<p>2012-10-04 21:39:46 +08:00 Thursday</p>
+
+<ol>
+	<li>同事说下载到 1.8G 的时候停了，白下了。还好，虽然我下载的时候从 1.79G 走到 1.80G 用了不少时间，最终还是顺利下载完了。奇怪的是，进度条走完以后，还需要一段时间，原以为是下载完成后在自动安装，因为 App Store 里后来显示&ldquo;已安装&rdquo;。</li>
+	<li>实际上，仅仅是下载完成了而已，并没有安装。因为试图启动 Xcode 的时候，仍然提示 Xcode 4.0 需要 Mac OS X 10.6.7。</li>
+	<li>打开 Finder -&gt; Applications，找到 Install Xcode，大小为 1.81 GB，确定就是刚刚下载完的 Xcode 4.2，当然，显示简介后也可看到版本是 4.2。</li>
+	<li>双击开始安装，过程中可能会提示关闭 iTunes，这个时候除了确定 iTunes 没在运行之外，还要确定关闭 iTunes helper 进程，用活动监视器可以做到查看并结束。</li>
+	<li>安装完成后提示&ldquo;为了使用 ** 的 iPhone 来开发，Xcode 需要下载并安装 iOS 3.0 - 3.2.2 设备调试支持...&rdquo;，大概是因为我连接了自己的一代 iphone。</li>
+	<li>点击 Install，登录后没反应了，不知道干什么去了。不过 Xcode 可以使用了。</li>
+	<li>进入 Xcode 后发现设备里多了 iPad 5.0 和 iPhone 5.0 模拟器，平时显示编译进度条的地方现在显示 2 个正在安装项，就是在安装 iOS 3.0 - 3.2.2 Device Debugging Support。</li>
+</ol>
+
+<h2>Xcode 4.5 Installation</h2>
+
+<p>在 Apple Store 里搜索到 xcode，很奇怪无法进行点击安装。</p>
+
+<p>https://developer.apple.com/downloads/index.action</p>
+
+<p>This is the release version of the complete Xcode developer toolset for Mac, iPhone, iPod touch, and iPad and includes the iOS 6 SDK and OS X 10.8 SDK.</p>
+
+<p>Xcode 4.5 requires OS X Mountain Lion or OS X Lion.</p>
+
+<p>用浏览器下载后得到直接下载地址，用迅雷下载。http://adcdownload.apple.com/Developer_Tools/xcode_4.5/xcode_4.5.dmg</p>
+
+<h2>Xcode 4.5.2 Installation</h2>
+
+<p>在 Apple Store 里搜索到 xcode，点击进行安装，当下载到 1.61G/1.61G 时停止了，就再也无法继续了。有提示说设置系统的 AppleID 后可以断点续传，设置后确实不再从 0&nbsp;开始下载了，但仍然提示错误不能继续。&nbsp;</p>
+
+<p>https://developer.apple.com/downloads/index.action，这里已经有了 4.5.2 版本。</p>
+
+<p>The is the release version of the complete Xcode developer toolset for Mac, iPhone, iPod touch, and iPad. It includes the iOS 6 SDK and OS X 10.8 SDK. Xcode 4.5.2 requires OS X Mountain Lion or OS X Lion.</p>
+
+<p>用迅雷无法下载，只能用浏览器以 60~90k 的速度下载了 3~4 个小时。下载后挂载，把其中的 Xcode 拷贝到 /Application 下即可。</p>
+
+<h2>Command Line Tools (OS X Mountain Lion) for Xcode - November 2012</h2>
+
+<p>装了这个东西，就有了 gcc 等，就可以使用 Homebrew 编译安装其他软件了。</p>
+
+<p>This package enables UNIX-style development via Terminal by installing command line developer tools, as well as Mac OS X SDK frameworks and headers. Many useful tools are included, such as the Apple LLVM compiler, linker, and Make. If you use Xcode, these tools are also embedded within the Xcode IDE,&nbsp;and can be installed on your system using the Downloads preferences pane within Xcode 4.5.</p>
+
+<p>2013-03-25 21:51</p>
+
+<p>安装方法：Xcode -&gt; Preferences -&gt; Downloads -&gt; Components</p>
+
+<p>&nbsp;</p>
