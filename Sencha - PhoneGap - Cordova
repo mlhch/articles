@@ -1,0 +1,77 @@
+<h1>Sencha - PhoneGap - Cordova</h1>
+
+<p>2013-11-30 22:26 Saturday</p>
+
+<p><a href="http://docs.sencha.com/touch/2.3.0/#!/guide/cordova" target="_blank">http://docs.sencha.com/touch/2.3.0/#!/guide/cordova</a></p>
+
+<p>PhoneGap 和 Cordova 没什么好说的，几乎一样，以下主要提及 Cordova。目前网上找不到 Cordova 整合 Sencha Touch 的现成资料，Sencha 倒是提供了整合 Cordova 的方法，但整合的有些粗糙，命令行有时需要交替使用 sencha 和 cordova。</p>
+
+<p>以下从 Sencha Cmd 说起。</p>
+
+<p>创建：</p>
+
+<pre>
+$ sencha -sdk ~/app/touch-2.3.0/ generate app HelloSenchaTouch hello-sencha-touch</pre>
+
+<p>如需版本升级</p>
+
+<pre>
+$ sencha app upgrade</pre>
+
+<p>默认启动的是 iOS 的模拟器：</p>
+
+<pre>
+$ sencha app build -run native</pre>
+
+<p>有如下错误提示，不知原因，但不影响模拟器运行</p>
+
+<pre>
+[ERR] 
+[DEBUG] Session could not be started: Error Domain=DTiPhoneSimulatorErrorDomain Code=2 &quot;Simulator session timed out.&quot; UserInfo=0x7fd5d3533960 {NSLocalizedDescription=Simulator session timed out.}
+The application was successfully packaged</pre>
+
+<p>以下配置用来 Android 真机调试，这时错误提示没有了</p>
+
+<pre>
+&quot;applicationId&quot;:&quot;HelloSenchaTouch&quot;,
+=&gt;&quot;applicationId&quot;:&quot;com.malian.HelloSenchaTouch&quot;,
+&quot;platform&quot;:&quot;Android&quot;,
+&quot;sdkPath&quot;:&quot;/Users/mlhch/app/adt-bundle-mac/sdk&quot;,
+&quot;androidAPILevel&quot;:&quot;17&quot;,
+</pre>
+
+<p>初始化 cordova，主要变化是一些配置文件，还有 /cordova 目录，该目录即典型的 cordova create 所创建目录</p>
+
+<pre>
+$sencha cordova init com.malian.CordovaHello HelloCordova</pre>
+
+<p>配置 android 平台</p>
+
+<pre>
+$ cat cordova.local.properties
+cordova.platforms=android</pre>
+
+<p>但此后试图真机调试 android 时，却默认试图启动 android 的模拟器，并且由于没有创建 adv 而给出错误信息</p>
+
+<pre>
+$ sencha app build -run native</pre>
+
+<p>经观察错误信息发现，sencha 实际调用的是 ./cordova/platorms/android/cordova/run 脚本，主要问题在于附加了 --emulator 参数。</p>
+
+<pre>
+[INF] -cordova-build:
+[INF] [shellscript] Generating config.xml from defaults for platform &quot;android&quot;
+[INF] [shellscript] Preparing android project
+[INF] [shellscript] Compiling app on platform &quot;android&quot; via command &quot;/Users/mlhch/seeds/sencha-touch-hello/cordova/platforms/android/cordova/build&quot; 
+[INF] [shellscript] Platform &quot;android&quot; compiled successfully.
+[INF] 
+[INF] -cordova-emulate:
+[INF] [shellscript] Generating config.xml from defaults for platform &quot;android&quot;
+[INF] [shellscript] Preparing android project
+[INF] [shellscript] Running on emulator for platform &quot;android&quot; via command &quot;/Users/mlhch/seeds/sencha-touch-hello/cordova/platforms/android/cordova/run&quot;<span class="marker"> --emulator</span>
+[INF] [shellscript] [Error: An error occurred while emulating/deploying the android project. </pre>
+
+<p>因此，为了达到真机调试的目的，折中办法是</p>
+
+<pre>
+$ sencha app build native &amp;&amp; ./cordova/platforms/android/cordova/run</pre>
