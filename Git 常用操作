@@ -1,0 +1,816 @@
+<h1>Git 常用操作</h1>
+
+<p>2013-06-08 14:10 Saturday</p>
+
+<p>wordpress 中有一篇同名文章&ldquo;git 常用操作&rdquo;。</p>
+
+<h2>git symbolic-ref</h2>
+
+<p>2013-11-22 10:09 Friday</p>
+
+<p>From&nbsp;<a href="http://book.git-scm.com/5_creating_new_empty_branches.html">Git Community Book</a>:</p>
+
+<pre>
+git symbolic-ref HEAD refs/heads/newbranch 
+rm .git/index 
+git clean -fdx 
+&lt;do work&gt; 
+git add your files 
+git commit -m &#39;Initial commit&#39;</pre>
+
+<h2>git archive 打包</h2>
+
+<p>由于有命令嵌套，不方便用 git config --global alias.xxx，所以做成命令放在 ~/bin/git-zip 里。</p>
+
+<pre>
+git archive --format zip -o &quot;$(git log --date=short --pretty=format:&quot;%ad.%h&quot; -1).zip&quot; HEAD</pre>
+
+<h2>git fetch 指定分支或版本</h2>
+
+<pre>
+# make a new blank repository in the current directory
+git init
+
+# add a remote
+git remote add origin url://to/source/repository
+
+# fetch a commit (or branch or tag) of interest
+# Note: the full history of this commit will be retrieved
+git fetch origin &lt;sha1-of-commit-of-interest&gt;
+
+# reset this repository&#39;s master branch to the commit of interest
+git reset --hard FETCH_HEAD</pre>
+
+<h2>gitk --all</h2>
+
+<p>2013-03-11 02:37 星期一 用 gitk --all 查看 angularjs 的 1.01 版本到 1.05 版本中 ng/compile.js 有哪些变化</p>
+
+<p>可以指定分支</p>
+
+<pre>
+gitk master origin/master origin/experiment
+</pre>
+
+<p>这个最好，只显示有 tag 的 commits，很方便看整个树的分支情况</p>
+
+<pre>
+gitk --simplify-by-decoration --all</pre>
+
+<h2>git svn clone</h2>
+
+<p>2012-12-10 21:12 星期一</p>
+
+<p>当 git svn clone 中断时，可用 git svn fetch 来继续</p>
+
+<h2>git describe --all</h2>
+
+<p>2012-12-07 14:24 星期五 去买五花，顺便吃了顿扁粉菜</p>
+
+<p>查看当前状态对应到的&nbsp;tags 或 branch</p>
+
+<h2>git fsck --full</h2>
+
+<p>情况一</p>
+
+<pre>
+$ git fsck --full
+fatal: loose object 7f293110647d17aa454306063b0b0533e90ff671 (stored in .git/objects/7f/293110647d17aa454306063b0b0533e90ff671) is corrupt</pre>
+
+<p>挨个把情况一中的 object 移出 .git/objects 目录后，出现情况二</p>
+
+<pre>
+$ git fsck --full
+Checking object directories: 100% (256/256), done.
+broken link from&nbsp;&nbsp;&nbsp; tree 0f427d289d53bd685752f6bf15ed387c3ba1126c
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; to&nbsp;&nbsp;&nbsp; tree bd85c06a192699f22d59bcb9e2f2702a29577b6c
+broken link from&nbsp;&nbsp;&nbsp; tree b3daa1448a6751886e9b8c69b5f329afef4b1788
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; to&nbsp;&nbsp;&nbsp; tree 7f293110647d17aa454306063b0b0533e90ff671
+missing tree bd85c06a192699f22d59bcb9e2f2702a29577b6c
+dangling blob 648d0d023d3b216e00dc6ac32d8ca2ee5e88d55c
+dangling blob b69a97506dfe2c7fa0d99d7fff8190d3cd023613
+missing tree 7f293110647d17aa454306063b0b0533e90ff671
+dangling blob 0b6bbc371ed31c946e02d88a86a1085275eb502e</pre>
+
+<pre>
+$ git ls-tree 0f427d289d53bd685752f6bf15ed387c3ba1126c
+100644 blob 4a6cd8f44b614c1d98406606c4a652a2d8f5cedf account-address.phtml
+100644 blob b6c7f20f978647dfc1edf7afb1f67dce69abfd04 account-bank.phtml
+100644 blob a871901e6e45362b2abe2fa93ca133ae8742b2c6 account-extra.phtml
+040000 tree bd85c06a192699f22d59bcb9e2f2702a29577b6c error
+100644 blob 0baca506c8dead5f38aeb7c1a8c2b602c64fc85a footer.phtml
+100644 blob c33fbbaf32881281f3a24b4210c7691ec3f92da6 header.phtml
+040000 tree 85ea4e947b3946a3f6cecc71f1377802408b20d2 index
+040000 tree 983689eab0d38bafc681a926f3dc110e32e98622 memory
+100644 blob b389b685bf7a10c7f08cc9149985276d9b6de979 timezone.phtml</pre>
+
+<p>用 update-ref 命令删除一些东西？？，执行以后不再提示错误了，但 git log 已经什么都没有了。继续提交，就当一个新的开始。</p>
+
+<pre>
+$ git update-ref -d refs/heads/master
+mlac:tmp mlhch$ git for-each-ref --format=&#39;%(refname)&#39; | while read ref; do git rev-list --objects $ref &gt;/dev/null || echo &quot;in $ref&quot;; done
+error: Could not read bd85c06a192699f22d59bcb9e2f2702a29577b6c
+fatal: bad tree object bd85c06a192699f22d59bcb9e2f2702a29577b6c
+in refs/remotes/origin/master
+mlac:tmp mlhch$ git update-ref -d refs/remotes/origin/master
+mlac:tmp mlhch$ git for-each-ref --format=&#39;%(refname)&#39; | while read ref; do git rev-list --objects $ref &gt;/dev/null || echo &quot;in $ref&quot;; done</pre>
+
+<p>2013-11-22 01:10 Friday</p>
+
+<pre>
+$ git fsck --full
+Checking object directories: 100% (256/256), done.
+error: in tree cba16a9e335258be00d8e8651c5a7b761572be15: entry  s? has bad mode 147562
+error in tree cba16a9e335258be00d8e8651c5a7b761572be15: broken links
+error: in tree d76be3559ea103051d923df8fda18f1cddfd54c9: entry 5?B&quot;?ٻ?M?7icy)?ی? has bad mode 030715
+error in tree d76be3559ea103051d923df8fda18f1cddfd54c9: broken links
+error: in tree eff01a844211f427ef0884ceb7f509cf707671fe: entry Ma Lian has bad mode 171252
+error in tree eff01a844211f427ef0884ceb7f509cf707671fe: broken links
+error: in tree fbc6c902d087206b369ac6240b5e98bad4943f41: entry ??? has bad mode 072057
+error in tree fbc6c902d087206b369ac6240b5e98bad4943f41: broken links
+error: in tree 53b0677ef24d29721b0be57e19b23d866c1b0f27: entry Ma Lian has bad mode 151150
+error in tree 53b0677ef24d29721b0be57e19b23d866c1b0f27: broken links
+error: in tree 6c6f0cd240c397d5202981186153bf472f368b58: entry ??ak??????t?B?`LU`? has bad mode 171252
+error in tree 6c6f0cd240c397d5202981186153bf472f368b58: broken links
+Checking objects: 100% (998/998), done.
+error: in tree cba16a9e335258be00d8e8651c5a7b761572be15: entry  s? has bad mode 147562
+error: in tree d76be3559ea103051d923df8fda18f1cddfd54c9: entry 5?B&quot;?ٻ?M?7icy)?ی? has bad mode 030715
+error: in tree 53b0677ef24d29721b0be57e19b23d866c1b0f27: entry Ma Lian has bad mode 151150
+broken link from    tree 85d8616bc3d7def4a2e474da42b4604c5560801e
+              to    blob 39f47e26a3fad36f60a3399ecb56ac0f2f2e6769
+error: in tree 6c6f0cd240c397d5202981186153bf472f368b58: entry ??ak??????t?B?`LU`? has bad mode 171252
+error: in tree fbc6c902d087206b369ac6240b5e98bad4943f41: entry ??? has bad mode 072057
+dangling blob 01f02e32ce8a128dd7b1d16a45f2eff66ec23c2d
+dangling tree eff01a844211f427ef0884ceb7f509cf707671fe
+dangling commit 1073d7a6f5307011ed925523bde44e799d458120
+dangling blob 35a3422287d9bbbf4de03769637929f20edb8cf0
+dangling commit 2f8420bc82eb018cb171ac819ae5aade57cb5d5a
+missing blob 39f47e26a3fad36f60a3399ecb56ac0f2f2e6769
+dangling commit 72c5a67420ade267fa83446f49bfa8d5162031b2
+dangling commit b1e5d4a2d2ed41ca144cadd993e81d026606d717
+dangling commit 2656dd4537b880f3ee9a53f78d46ba858e0758d2
+dangling commit dfa657698b5ee388c6ae9a91cae9cb7c878ea467
+dangling commit e05b2f7cd256e5d7b73d1ee9b0b283286fbdc9b7</pre>
+
+<pre>
+$ git ls-tree cba16a
+147562 blob 10b88c6825baccb4fe404799e18031c500000000	&quot; s\213&quot;
+100644 blob 35a3422287d9bbbf4de03769637929f20edb8cf0	0 - test</pre>
+
+<p>如下前两个命令奏效了，日后再细查用法</p>
+
+<pre>
+git reflog expire --expire=now --all
+git gc --aggressive --prune=now
+git repack -a -d -l</pre>
+
+<p>First of all, there is a&nbsp;reflog&nbsp;which keeps track of all branch history. By default it is 90 days (gc.reflogExpire). Also there is&nbsp;gc.reflogExpireUnreachable&nbsp;which is 30 days. So, if you have made&nbsp;reset&nbsp;on a branch the dangling commit will be here for 30 days accessible via&nbsp;fsck.</p>
+
+<p>Also, there is a garbage collector prune settings, which drop dangling objects after 2 weeks by default (gc.pruneExpire&nbsp;config setting).</p>
+
+<p>Regarding how to wipe out objects from a repository you could read other questions here, e.g.&nbsp;<a href="http://stackoverflow.com/questions/2882375/how-to-really-delete-a-git-branch-i-e-remove-all-of-its-objects-commits">How to REALLY delete a git branch (i.e. remove all of its objects/commits)?</a></p>
+
+<h2>git config</h2>
+
+<p>2011-12-22 星期四</p>
+
+<ul>
+	<li>receive.denyCurrentBranch = ignore/warn, ignore allow non-bare git repo to be pushed</li>
+</ul>
+
+<pre>
+$ git config --global alias.s status
+$ cat ~/.gitconfig
+[alias]
+s = status
+</pre>
+
+<pre>
+git config --global alias.l &quot;log --all --graph --max-count=20 --date=relative --date-order --oneline --format=format:&#39;%C(bold blue)%h%C(reset) - %C(green)%ad%C(reset) - %C(white)%s%C(reset)&#39;&quot;</pre>
+
+<p>2013-09-06 22:14</p>
+
+<pre>
+$ cat ~/.gitconfig&nbsp;
+[alias]
+&nbsp;&nbsp; &nbsp;s = status
+&nbsp;&nbsp; &nbsp;co = checkout
+&nbsp;&nbsp; &nbsp;cm = commit -m
+&nbsp; &nbsp; &nbsp; &nbsp; l = log --graph --max-count=30 --date=relative --date-order --oneline --format=format:&#39;%C(bold blue)%h%C(reset) - %C(green)%ad%C(reset) - %an - %C(cyan)%d%C(reset) - %C(white)%s%C(reset)&#39;
+&nbsp;&nbsp; &nbsp;ll = log --all --graph --max-count=50 --date=relative --date-order --oneline --format=format:&#39;%C(bold blue)%h%C(reset) - %C(green)%ad%C(reset) - %an - %C(cyan)%d%C(reset) - %C(white)%s%C(reset)&#39;
+&nbsp;&nbsp; &nbsp;b = branch
+&nbsp;&nbsp; &nbsp;df = diff
+&nbsp;&nbsp; &nbsp;t = log --date-order --graph --tags --simplify-by-decoration --pretty=format:&#39;%ai %h %d&#39;
+[user]
+&nbsp;&nbsp; &nbsp;name = Ma Lian
+&nbsp;&nbsp; &nbsp;email = malhch@gmail.com
+[core]
+&nbsp;&nbsp; &nbsp;autocrlf = false
+</pre>
+
+<h2>git clean</h2>
+
+<p>git submodule add repo_absolute_path repo_name</p>
+
+<h2>比较与合并</h2>
+
+<p>2011-11-12</p>
+
+<p># git diff awp 859c --diff-filter=MRC --</p>
+
+<p># git diff awp 859c --diff-filter=MRC --raw --</p>
+
+<h2>查看指定目录或文件的变动情况</h2>
+
+<p>$ git log --name-status --pretty=oneline -- www/flotr</p>
+
+<p>9c7ba017ae923ceffe23dc966134f85210ae7b32 Fix chart axis and javascript errors<br />
+M&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; www/flotr/flotr.debug-0.2.0-alpha.js<br />
+0015430ebeea42654cbf758e082a061f6fdeaa21 master: for Spencer and Peter to review<br />
+M&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; www/flotr/flotr.debug-0.2.0-alpha.js<br />
+187d8bac26a000320157822f63298a71e1ece2b8 build a 100 stations only version to test performance<br />
+A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; www/flotr/flotr.debug-0.2.0-alpha.js</p>
+
+<h2>推送 Refspec</h2>
+
+<p>http://progit.org/book/zh/ch9-5.html</p>
+
+<p>采用命名空间的方式确实很棒，但QA组成员第1次是如何将他们的分支推送到 qa/ 空间里面的呢？答案是你可以使用 refspec 来推送。</p>
+
+<p>如果QA组成员想把他们的 master 分支推送到远程的 qa/master 分支上，可以这样运行：</p>
+
+<p>$ git push origin master:refs/heads/qa/master</p>
+
+<p>如果他们想让 Git 每次运行 git push origin 时都这样自动推送，他们可以在配置文件中添加 push 值：</p>
+
+<p>[remote &quot;origin&quot;]<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; url = git@github.com:schacon/simplegit-progit.git<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fetch = +refs/heads/*:refs/remotes/origin/*<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; push = refs/heads/master:refs/heads/qa/master</p>
+
+<h2>跟踪远程分支</h2>
+
+<ul>
+	<li>$ git checkout --track origin_remote_repo/remote_branch_name</li>
+	<li>$ git checkout -b local_branch_name origin_remote_repo/remote_branch_name
+	<p>这个命令可以为本地分支设定不同于远程分支的名字</p>
+	</li>
+	<li>
+	<p>2011-12-21 星期三<br />
+	需要注意的是，如果本地刚刚 git init 过，没有任何内容的情况下试图跟踪远程分支，会得到如下错误：</p>
+
+	<pre>
+# git checkout --track origin/ampp
+fatal: git checkout: updating paths is incompatible with switching branches.
+Did you intend to checkout &#39;origin/ampp&#39; which can not be resolved as commit?</pre>
+	大概可以理解为，本地并没有处于 clean 的状态，所以不允许 checkout。</li>
+	<li>
+	<p>2013-02-14 22:12</p>
+
+	<p>git pull --all 并非所愿，只能用 bash 来代替。给出的错误尚不明白什么意思，但似乎不影响得到正确的结果。</p>
+
+	<pre>
+$ for remote in `git branch -r | grep -v master`; do git checkout --track $remote; done
+error: Not tracking: ambiguous information for ref refs/remotes/origin/maint
+Switched to a new branch &#39;maint&#39;
+error: Not tracking: ambiguous information for ref refs/remotes/origin/next
+Switched to a new branch &#39;next&#39;
+error: Not tracking: ambiguous information for ref refs/remotes/origin/pu
+Switched to a new branch &#39;pu&#39;
+error: Not tracking: ambiguous information for ref refs/remotes/origin/todo
+Switched to a new branch &#39;todo&#39;</pre>
+
+	<pre>
+$ git b
+&nbsp; maint
+&nbsp; master
+&nbsp; next
+&nbsp; pu
+* todo
+</pre>
+
+	<p>git push --all 确实就是我们想要的</p>
+
+	<pre>
+$ git push --all ml
+Counting objects: 12294, done.
+Delta compression using up to 2 threads.
+Compressing objects: 100% (3359/3359), done.
+Writing objects: 100% (10268/10268), 4.01 MiB, done.
+Total 10268 (delta 6780), reused 10225 (delta 6738)
+To mlhch@ml.git:fork/git
+&nbsp;&nbsp; 5a90748..5bf72ed&nbsp; master -&gt; master
+* [new branch]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; maint -&gt; maint
+* [new branch]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; next -&gt; next
+* [new branch]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pu -&gt; pu
+* [new branch]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; todo -&gt; todo</pre>
+	</li>
+	<li>
+	<p>2013-09-06</p>
+
+	<p>在Git中&lsquo;追踪分支&rsquo;是用与联系本地分支和远程分支的. 如果你在&rsquo;追踪分支&#39;(Tracking Branches)上执行推送(push)或拉取(pull)时,　它会自动推送(push)或拉取(pull)到关联的远程分支上.</p>
+
+	<p>如果你经常要从远程仓库里拉取(pull)分支到本地,并且不想很麻烦的使用&quot;git pull&nbsp;&quot;这种格式; 那么就应当使用&lsquo;追踪分支&#39;(Tracking Branches).</p>
+
+	<p>&lsquo;git clone&lsquo;命令会自动在本地建立一个&#39;master&#39;分支，它是&#39;origin/master&#39;的&lsquo;追踪分支&rsquo;. 而&#39;origin/master&#39;就是被克隆(clone)仓库的&#39;master&#39;分支.</p>
+
+	<p>译者注: origin一般是指原始仓库地址的别名.</p>
+
+	<p>你可以在使用&#39;git branch&#39;命令时加上&#39;--track&#39;参数, 来手动创建一个&#39;追踪分支&#39;.</p>
+
+	<pre>
+<code>git branch --track experimental origin/experimental
+</code></pre>
+
+	<p>当你运行下命令时:</p>
+
+	<pre>
+<code>$ git pull experimental
+</code></pre>
+
+	<p>它会自动从&lsquo;origin&#39;抓取(fetch)内容，再把远程的&#39;origin/experimental&#39;分支合并进(merge)本地的&#39;experimental&#39;分支.</p>
+
+	<p>当要把修改推送(push)到origin时, 它会将你本地的&#39;experimental&#39;分支中的修改推送到origin的&lsquo;experimental&#39;分支里,　而无需指定它(origin).</p>
+	</li>
+</ul>
+
+<h2>找回丢失的 commit</h2>
+
+<ul>
+	<li>
+	<h3>git reflog</h3>
+	这个命令实际是查询 .git/logs/ 目录下的内容</li>
+	<li>
+	<h3>git log&nbsp;-g</h3>
+	这命令可以查看更详细的信息</li>
+	<li>
+	<h3>git fsck --full</h3>
+	如果前两个命令如果不能奏效，就试试这个</li>
+</ul>
+
+<h2>(彻底）删除 commit</h2>
+
+<p>要彻底删除一个 commit，首先需要删除所有对其的引用，包括 .git/refs，.git/logs，以及 .git/packed-refs，然后用 git gc 命令配合相关参数来实现</p>
+
+<ul>
+	<li>
+	<h3>git gc</h3>
+	2011-12-18，星期日
+
+	<p>参考：http://progit.org/book/zh/ch9-7.html</p>
+
+	<p>运行 git gc, refs 下的所有文件都会消失。Git 会将这些文件挪到 .git/packed-refs 文件中去以提高效率，所以只删除 .git/logs 文件下还不够。</p>
+	</li>
+	<li>
+	<h3>git reset --hard &lt;commit&gt;</h3>
+	git-reset - Reset current HEAD to the specified state</li>
+</ul>
+
+<h3>git rebase --onto &lt;newbase&gt;&nbsp;&lt;upstream&gt; [&lt;branch&gt;]</h3>
+
+<p>A range of commits could also be removed with rebase. If we have the following situation:</p>
+
+<p>E---F---G---H---I---J&nbsp; topicA<br />
+then the command<br />
+git rebase --onto topicA~5 topicA~3 topicA<br />
+would result in the removal of commits F and G:<br />
+E---H&#39;---I&#39;---J&#39;&nbsp; topicA</p>
+
+<h2>重构</h2>
+
+<h3>重新安排目录</h3>
+
+<p>$ git mv README.txt README 实际上等价于下面三行</p>
+
+<p>$ mv README.txt README<br />
+$ git rm README.txt<br />
+$ git add README</p>
+
+<h3>修改最后一次提交的说明</h3>
+
+<p>$ git commit --amend</p>
+
+<h2>操作分支</h2>
+
+<h3>删除远程分支</h3>
+
+<p>$ git push origin_remote_repo :remote_branch_name</p>
+
+<h2>git status</h2>
+
+<p>to check if working copy is clean</p>
+
+<h2>git log</h2>
+
+<pre>
+git log --pretty=oneline --abbrev-commit</pre>
+
+<pre>
+git log --graph --pretty=oneline --abbrev-commit</pre>
+
+<p>2013-02-14 22:30</p>
+
+<pre>
+alias.l=log --graph --max-count=20 --date=relative --date-order --oneline --format=format:&#39;%C(bold blue)%h%C(reset) - %C(green)%ad%C(reset) - %an - %C(white)%s%C(reset)&#39;</pre>
+
+<pre>
+alias.ll=log --all --graph --max-count=20 --date=relative --date-order --oneline --format=format:&#39;%C(bold blue)%h%C(reset) - %C(green)%ad%C(reset) - %an - %C(white)%s%C(reset)&#39;</pre>
+
+<h2>git stash</h2>
+
+<p>存储当前仓库未提交的改动</p>
+
+<p>$ git stash save &quot;temp save&quot;<br />
+Saved working directory and index state On master: temp save<br />
+HEAD is now at e3c9b6b Greetings</p>
+
+<h2>git rm</h2>
+
+<p>2011-11-17</p>
+
+<p>http://progit.org/book/zh/ch2-2.html</p>
+
+<p>另外一种情况是，我们想把文件从 Git 仓库中删除（亦即从暂存区域移除），但仍然希望保留在当前工作目录中。换句话说，仅是从跟踪清单中删除。比如一些大型日志文件或者一堆 .a 编译文件，不小心纳入仓库后，要移除跟踪但不删除文件，以便稍后在 .gitignore 文件中补上，用 --cached 选项即可：</p>
+
+<p>$ git rm --cached readme.txt</p>
+
+<h2>git rev-list --all --graph</h2>
+
+<p>git rev-list --all --graph</p>
+
+<h2>git clone</h2>
+
+<p>--bare + .git 直接而且仅仅克隆版本库</p>
+
+<p>git clone --bare git@github.com:mlhch/my-scripts.git .git</p>
+
+<h2>git remote</h2>
+
+<p>git remote show 列出远程仓库名</p>
+
+<p>git remote show origin 列出远程仓库 origin 的详细信息</p>
+
+<p>git remote add origin_or_else_for_exapmle_github_awp user@host:path/to/repo.git</p>
+
+<h2>git push</h2>
+
+<p>2013-02-14 23:45 分享标签&nbsp;https://github.com/progit/progit/blob/master/zh/02-git-basics/01-chapter2.markdown#-34</p>
+
+<p>默认情况下，git push&nbsp;并不会把标签传送到远端服务器上，只有通过显式命令才能分享标签到远端仓库。其命令格式如同推送分支，运行&nbsp;git push origin [tagname]&nbsp;即可：</p>
+
+<pre>
+$ git push origin v1.5
+Counting objects: 50, done.
+Compressing objects: 100% (38/38), done.
+Writing objects: 100% (44/44), 4.56 KiB, done.
+Total 44 (delta 18), reused 8 (delta 1)
+To git@github.com:schacon/simplegit.git
+* [new tag]         v1.5 -&gt; v1.5
+</pre>
+
+<p>如果要一次推送所有本地新增的标签上去，可以使用&nbsp;--tags&nbsp;选项：</p>
+
+<pre>
+$ git push origin --tags
+Counting objects: 50, done.
+Compressing objects: 100% (38/38), done.
+Writing objects: 100% (44/44), 4.56 KiB, done.
+Total 44 (delta 18), reused 8 (delta 1)
+To git@github.com:schacon/simplegit.git
+ * [new tag]         v0.1 -&gt; v0.1
+ * [new tag]         v1.2 -&gt; v1.2
+ * [new tag]         v1.4 -&gt; v1.4
+ * [new tag]         v1.4-lw -&gt; v1.4-lw
+ * [new tag]         v1.5 -&gt; v1.5
+</pre>
+
+<p>现在，其他人克隆共享仓库或拉取数据同步后，也会看到这些标签。</p>
+
+<hr />
+<p># git push origin :working<br />
+To mlhch@172.16.37.1:github/awp.git<br />
+- [deleted]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; working</p>
+
+<pre>
+# git log --pretty=oneline --abbrev-commit
+be2d80a brbc/reports will not be tracked
+3ee843a brbc without images,2005-SOWReport,cache
+5b71a1f add seawa without dmdocuments,images
+14b7a2d awp without libraries
+9afae2e joomla all necessary
+37b845b joomla basic docs
+54e3cd3 let&#39;s start from awp index
+8b90a73 first commit
+
+
+# git count-objects -v
+count: 0
+size: 0
+in-pack: 14351
+packs: 1
+size-pack: 168045
+prune-packable: 0
+garbage: 0
+
+
+# git verify-pack -v .git/objects/pack/pack-67bd1e604672ebeee472d90e5a033ad473b85a01.idx | sort -k 3 -n | tail -20
+d205684d1ce89f80ee2a00d9df13af8ef07dd5c6 blob&nbsp;&nbsp; 3037994 2382536 168562247
+c7ef76001c0d4dc06ceba7a6f87025eeac4e8ab8 blob&nbsp;&nbsp; 3306997 3036739 67849887
+8988935b0b29730acfc008930e07809d30941d46 blob&nbsp;&nbsp; 3660855 3332705 91463841
+ad0e447bc3f806a828b23bce21197b825a8bb409 blob&nbsp;&nbsp; 3992051 3934278 72591470
+9f680db2caa8b6307553de5cec8b36ef8243eec9 blob&nbsp;&nbsp; 4276428 3007926 64841961
+71d597d178b4e046ce24177e841126dd66d84d89 blob&nbsp;&nbsp; 4465491 3477355 36383927
+b660fdec7eab661714047f379c9e2e6b5b49a1d0 blob&nbsp;&nbsp; 4817546 4670474 94796546
+43c92cf73a52c11f09a9dcb64deb68a634436a3f blob&nbsp;&nbsp; 5224037 4551087 99467020
+689a62a74ff4f31874e07c11eb9aef8acecaea23 blob&nbsp;&nbsp; 5767362 5693697 148651951
+114f680f2bbf89b4593c686261737a22c68fe81d blob&nbsp;&nbsp; 5869022 5641998 57001330
+4de949de58478aab136713f007fcfa09fda32f57 blob&nbsp;&nbsp; 5945585 4928304 50863731
+9e03b2f176321a590ae938dd7c91cfe9175e59a4 blob&nbsp;&nbsp; 6272154 4376849 46486882
+18d29ed2ddb156353dfb7922409422e19df70b27 blob&nbsp;&nbsp; 6316406 6175711 114591486
+d99d0b8576b728d549bc19f127c97acfac1f447e blob&nbsp;&nbsp; 6956762 5917846 15929833
+1f5d324116eb6185750c45fcf30e2c6f857ece2e blob&nbsp;&nbsp; 7201271 6378886 39861282
+a41ed3474f0e784091c9939658ef1eccd8b80d70 blob&nbsp;&nbsp; 8013064 7911216 120767197
+ba256f1a4eb6bc2f6425e653cdedd9ae8f9ae697 blob&nbsp;&nbsp; 10313890 9243856 155463645
+cbc02ffa60dd4896be36d558388c131f8c9421b4 blob&nbsp;&nbsp; 10824704 10487393 78215527
+fb49a0157c7ac98a095f4408a3332f69c31a1d49 blob&nbsp;&nbsp; 12004781 11682228 134688004
+d73123b63837c3931a6377bb4b57e0858be83343 blob&nbsp;&nbsp; 14872643 10494951 104096535
+
+
+# git rev-list --objects --all | grep d73123
+d73123b63837c3931a6377bb4b57e0858be83343 brbc/reports/JCWP-StateWatershed2009.pdf
+
+
+# git filter-branch --index-filter &#39;git rm --cached --ignore-unmatch brbc/reports/JCWP-StateWatershed2009.pdf&#39;
+Rewrite 5872a8886d0cae0f3e1da9845d1d5aea82f37d7f (7/8)rm &#39;brbc/reports/JCWP-StateWatershed2009.pdf&#39;
+Rewrite 395840f1cd748082ffbf3d3397fe4dd6b96a872e (8/8)
+Ref &#39;refs/heads/master&#39; was rewritten
+
+
+# rm -rf .git/refs/original .git/logs
+# git gc
+Counting objects: 14356, done.
+Compressing objects: 100% (10143/10143), done.
+Writing objects: 100% (14356/14356), done.
+Total 14356 (delta 3944), reused 14348 (delta 3939)
+
+# git count-objects -v
+count: 0
+size: 0
+in-pack: 14356
+packs: 1
+size-pack: 168046
+prune-packable: 0
+garbage: 0
+
+
+# ll brbc/reports/
+total 136216
+-rwxr-xr-x. 1 root root&nbsp;&nbsp; 535656 Nov 16 21:58 advisorygroup.pdf
+-rwxr-xr-x. 1 root root&nbsp; 5767362 Nov 16 21:58 aerialvideo-riparian.pdf
+-rwxr-xr-x. 1 root root&nbsp;&nbsp;&nbsp; 77312 Nov 16 21:58 ANPC_2010_Native_Plant_Source_List.xls
+-rwxr-xr-x. 1 root root&nbsp; 1629624 Nov 16 21:58 BBWMP.pdf
+-rwxr-xr-x. 1 root root&nbsp;&nbsp; 724810 Nov 16 21:58 bearspaw_water_treatment_plant.pdf
+-rwxr-xr-x. 1 root root&nbsp; 1268570 Nov 16 21:58 BenthicInvertebrates-EpilithicAlgae.pdf
+-rwxr-xr-x. 1 root root&nbsp;&nbsp; 253813 Nov 16 21:58 BRBC-glacierfactsheet.pdf
+-rwxr-xr-x. 1 root root&nbsp; 4465491 Nov 16 21:58 BRBC-Grdwater.pdf
+-rwxr-xr-x. 1 root root&nbsp; 7201271 Nov 16 21:58 BRBC-SOW-Booklet.pdf
+-rwxr-xr-x. 1 root root&nbsp; 6272154 Nov 16 21:58 BRBCWSOWBookletOct25.pdf
+-rwxr-xr-x. 1 root root&nbsp; 5945585 Nov 16 21:58 BRBCWSOWBookletV2-Dec28.pdf
+-rwxr-xr-x. 1 root root&nbsp; 2289995 Nov 16 21:58 ChestemereMuniDevPlan.pdf
+-rwxr-xr-x. 1 root root&nbsp;&nbsp; 210424 Nov 16 21:58 crowfootcreek.pdf
+-rwxr-xr-x. 1 root root&nbsp; 5869022 Nov 16 21:58 CRPWaterStudyPh2.pdf
+-rwxr-xr-x. 1 root root&nbsp; 4276428 Nov 16 21:58 CurrentFutureWaterUse-Bow.pdf
+-rwxr-xr-x. 1 root root&nbsp;&nbsp; 356361 Nov 16 21:58 elbowrivertrends.pdf
+-rwxr-xr-x. 1 root root&nbsp; 3306997 Nov 16 21:58 ENSC502-04-05-FinalReport-FateCalgaryEffluent.pdf
+-rwxr-xr-x. 1 root root&nbsp; 1417789 Nov 16 21:58 ERBWMP_Final.pdf
+-rwxr-xr-x. 1 root root&nbsp;&nbsp; 346823 Nov 16 21:58 FCPPBirdsandChecklistDec2007.pdf
+-rwxr-xr-x. 1 root root&nbsp; 1794033 Nov 16 21:58 FishCreekStudy2.pdf
+-rwxr-xr-x. 1 root root&nbsp; 3992051 Nov 16 21:58 FishCreekStudy.pdf
+-rwxr-xr-x. 1 root root 10824704 Nov 16 21:58 FishCrkStudyWaterQuality.ppt
+-rwxr-xr-x. 1 root root 10313890 Nov 16 21:58 frewg-report.pdf
+-rwxr-xr-x. 1 root root&nbsp;&nbsp; 436663 Nov 16 21:58 GhostStewardshipMonitoringGroup-2009AnnualReport.pdf
+-rwxr-xr-x. 1 root root&nbsp; 1367040 Nov 16 21:58 GhostStudyWaterQuality.ppt
+-rwxr-xr-x. 1 root root&nbsp;&nbsp; 742481 Nov 16 21:58 GhostWaiparousOperationalAccessManagementPlan.pdf
+-rwxr-xr-x. 1 root root&nbsp;&nbsp; 337553 Nov 16 21:58 GlossaryWaterTerms.pdf
+-rwxr-xr-x. 1 root root&nbsp; 3660855 Nov 16 21:58 HandbookStateWatershedReporting.pdf
+-rwxr-xr-x. 1 root root&nbsp; 1180618 Nov 16 21:58 highwoodwaterplan2.pdf
+-rwxr-xr-x. 1 root root&nbsp;&nbsp; 660256 Nov 16 21:58 highwoodwaterplan.pdf
+-rwxr-xr-x. 1 root root&nbsp; 4817546 Nov 16 21:58 ImpactsOnWaterQuality-UpperElbowRiver.pdf
+-rwxr-xr-x. 1 root root&nbsp; 5224037 Nov 16 21:58 IndicatorsAssessingEnvironmentalPerformanceWatershedSouthernAlberta.pdf
+-rwxr-xr-x. 1 root root&nbsp;&nbsp;&nbsp; 93481 Nov 16 21:58 InfoSheet_WCOs.pdf
+-rwxr-xr-x. 1 root root&nbsp; 6316406 Nov 16 21:58 JCWP-WaterBalanceStudy.pdf
+-rwxr-xr-x. 1 root root&nbsp; 8013064 Nov 16 21:58 K-Country.pdf
+-rwxr-xr-x. 1 root root&nbsp;&nbsp; 455536 Nov 16 21:58 KCpolicy.pdf
+-rwxr-xr-x. 1 root root&nbsp; 1229191 Nov 16 21:58 NoseCreekWMP2008.pdf
+-rwxr-xr-x. 1 root root&nbsp;&nbsp; 122884 Nov 16 21:58 OkotoksWMPlan.pdf
+-rwxr-xr-x. 1 root root&nbsp;&nbsp; 941337 Nov 16 21:58 Periphyton-AquaticMacrophytes.pdf
+-rwxr-xr-x. 1 root root&nbsp; 2453344 Nov 16 21:58 riparianhealth.pdf
+-rwxr-xr-x. 1 root root&nbsp;&nbsp;&nbsp; 65599 Nov 16 21:58 RWQI_Objectives.pdf
+-rwxr-xr-x. 1 root root&nbsp;&nbsp; 381445 Nov 16 21:58 SSRB_Plan_Phase2.pdf
+-rwxr-xr-x. 1 root root&nbsp; 1223650 Nov 16 21:58 SSRB-RiparianHealthOverview2004Report024-026.pdf
+-rwxr-xr-x. 1 root root&nbsp;&nbsp;&nbsp; 36315 Nov 16 21:58 SSRP-Groundwater.pdf
+-rwxr-xr-x. 1 root root&nbsp;&nbsp;&nbsp; 31479 Nov 16 21:58 SSRP-RiparianAreas.pdf
+-rwxr-xr-x. 1 root root&nbsp;&nbsp;&nbsp; 28639 Nov 16 21:58 SSRP-WaterAllocationTransfers.pdf
+-rwxr-xr-x. 1 root root&nbsp;&nbsp; 282466 Nov 16 21:58 SSRP-Wetlands.pdf
+-rwxr-xr-x. 1 root root&nbsp;&nbsp; 351744 Nov 16 21:58 SummaryOct2.doc
+-rwxr-xr-x. 1 root root&nbsp;&nbsp; 152185 Nov 16 21:58 TU-Riparian.pdf
+-rwxr-xr-x. 1 root root&nbsp; 1580173 Nov 16 21:58 UBBCES-Phase1.pdf
+-rwxr-xr-x. 1 root root 12004781 Nov 16 21:58 UpperBowRiver.pdf
+-rwxr-xr-x. 1 root root&nbsp; 3037994 Nov 16 21:58 wetlandmgmtpolicy.pdf
+-rwxr-xr-x. 1 root root&nbsp;&nbsp; 310155 Nov 16 21:58 Wetland_Restoration_Compensation.pdf
+-rwxr-xr-x. 1 root root&nbsp;&nbsp; 779844 Nov 16 21:58 wetlands.pdf
+-rwxr-xr-x. 1 root root&nbsp; 1916411 Nov 16 21:58 WPPTPolicy.pdf
+
+
+
+# git filter-branch --index-filter &#39;git rm -r --cached --ignore-unmatch brbc/reports&#39;
+Rewrite 3ee843a5216a5724ac24be49e95786b872eb4cda (7/8)rm &#39;brbc/reports/ANPC_2010_Native_Plant_Source_List.xls&#39;
+rm &#39;brbc/reports/BBWMP.pdf&#39;
+rm &#39;brbc/reports/BRBC-Grdwater.pdf&#39;
+rm &#39;brbc/reports/BRBC-SOW-Booklet.pdf&#39;
+rm &#39;brbc/reports/BRBC-glacierfactsheet.pdf&#39;
+rm &#39;brbc/reports/BRBCWSOWBookletOct25.pdf&#39;
+rm &#39;brbc/reports/BRBCWSOWBookletV2-Dec28.pdf&#39;
+rm &#39;brbc/reports/BenthicInvertebrates-EpilithicAlgae.pdf&#39;
+rm &#39;brbc/reports/CRPWaterStudyPh2.pdf&#39;
+rm &#39;brbc/reports/ChestemereMuniDevPlan.pdf&#39;
+rm &#39;brbc/reports/CurrentFutureWaterUse-Bow.pdf&#39;
+rm &#39;brbc/reports/ENSC502-04-05-FinalReport-FateCalgaryEffluent.pdf&#39;
+rm &#39;brbc/reports/ERBWMP_Final.pdf&#39;
+rm &#39;brbc/reports/FCPPBirdsandChecklistDec2007.pdf&#39;
+rm &#39;brbc/reports/FishCreekStudy.pdf&#39;
+rm &#39;brbc/reports/FishCreekStudy2.pdf&#39;
+rm &#39;brbc/reports/FishCrkStudyWaterQuality.ppt&#39;
+rm &#39;brbc/reports/GhostStewardshipMonitoringGroup-2009AnnualReport.pdf&#39;
+rm &#39;brbc/reports/GhostStudyWaterQuality.ppt&#39;
+rm &#39;brbc/reports/GhostWaiparousOperationalAccessManagementPlan.pdf&#39;
+rm &#39;brbc/reports/GlossaryWaterTerms.pdf&#39;
+rm &#39;brbc/reports/HandbookStateWatershedReporting.pdf&#39;
+rm &#39;brbc/reports/ImpactsOnWaterQuality-UpperElbowRiver.pdf&#39;
+rm &#39;brbc/reports/IndicatorsAssessingEnvironmentalPerformanceWatershedSouthernAlberta.pdf&#39;
+rm &#39;brbc/reports/InfoSheet_WCOs.pdf&#39;
+rm &#39;brbc/reports/JCWP-WaterBalanceStudy.pdf&#39;
+rm &#39;brbc/reports/K-Country.pdf&#39;
+rm &#39;brbc/reports/KCpolicy.pdf&#39;
+rm &#39;brbc/reports/NoseCreekWMP2008.pdf&#39;
+rm &#39;brbc/reports/OkotoksWMPlan.pdf&#39;
+rm &#39;brbc/reports/Periphyton-AquaticMacrophytes.pdf&#39;
+rm &#39;brbc/reports/RWQI_Objectives.pdf&#39;
+rm &#39;brbc/reports/SSRB-RiparianHealthOverview2004Report024-026.pdf&#39;
+rm &#39;brbc/reports/SSRB_Plan_Phase2.pdf&#39;
+rm &#39;brbc/reports/SSRP-Groundwater.pdf&#39;
+rm &#39;brbc/reports/SSRP-RiparianAreas.pdf&#39;
+rm &#39;brbc/reports/SSRP-WaterAllocationTransfers.pdf&#39;
+rm &#39;brbc/reports/SSRP-Wetlands.pdf&#39;
+rm &#39;brbc/reports/SummaryOct2.doc&#39;
+rm &#39;brbc/reports/TU-Riparian.pdf&#39;
+rm &#39;brbc/reports/UBBCES-Phase1.pdf&#39;
+rm &#39;brbc/reports/UpperBowRiver.pdf&#39;
+rm &#39;brbc/reports/WPPTPolicy.pdf&#39;
+rm &#39;brbc/reports/Wetland_Restoration_Compensation.pdf&#39;
+rm &#39;brbc/reports/advisorygroup.pdf&#39;
+rm &#39;brbc/reports/aerialvideo-riparian.pdf&#39;
+rm &#39;brbc/reports/bearspaw_water_treatment_plant.pdf&#39;
+rm &#39;brbc/reports/crowfootcreek.pdf&#39;
+rm &#39;brbc/reports/elbowrivertrends.pdf&#39;
+rm &#39;brbc/reports/frewg-report.pdf&#39;
+rm &#39;brbc/reports/highwoodwaterplan.pdf&#39;
+rm &#39;brbc/reports/highwoodwaterplan2.pdf&#39;
+rm &#39;brbc/reports/riparianhealth.pdf&#39;
+rm &#39;brbc/reports/wetlandmgmtpolicy.pdf&#39;
+rm &#39;brbc/reports/wetlands.pdf&#39;
+Rewrite be2d80a5f2d1068207f5648cb2b8363b15387b4b (8/8)
+Ref &#39;refs/heads/master&#39; was rewritten
+
+
+
+# git gc --prune=now
+Counting objects: 14354, done.
+Compressing objects: 100% (10141/10141), done.
+Writing objects: 100% (14354/14354), done.
+Total 14354 (delta 3942), reused 14348 (delta 3939)
+
+
+# git gc --aggressive --prune=now
+Counting objects: 14354, done.
+Compressing objects: 100% (14080/14080), done.
+Writing objects: 100% (14354/14354), done.
+Total 14354 (delta 4719), reused 0 (delta 0)
+
+
+# git push origin master --force
+Counting objects: 354, done.
+Compressing objects: 100% (331/331), done.
+Writing objects: 100% (352/352), 1.47 MiB, done.
+Total 352 (delta 30), reused 245 (delta 20)
+
+To git@github.com:tesera/AWP--legacy-.git
++ 395840f...26447f7 master -&gt; master (forced update)
+
+
+# git clone git@github.com:tesera/AWP--legacy-.git .
+Initialized empty Git repository in /var/www/html/www.awp.com/.git/
+remote: Counting objects: 14293, done.
+remote: Compressing objects: 100% (10739/10739), done.
+remote: Total 14293 (delta 3936), reused 13637 (delta 3280)
+Receiving objects: 100% (14293/14293), 33.35 MiB | 54 KiB/s, done.
+Resolving deltas: 100% (3936/3936), done.
+</pre>
+
+<h2>清除 .svn</h2>
+
+<pre>
+# git lol
+* 656be08 (HEAD, origin/master, origin/HEAD, master) all .svn files are cleaned
+* 26447f7 brbc/reports will not be tracked
+* 721ba0f brbc without images,2005-SOWReport,cache
+* 5b71a1f add seawa without dmdocuments,images
+* 14b7a2d awp without libraries
+* 9afae2e joomla all necessary
+* 37b845b joomla basic docs
+* 54e3cd3 let&#39;s start from awp index
+* 8b90a73 first commit
+
+
+# git count-objects -v
+count: 87
+size: 356
+in-pack: 14293
+packs: 1
+size-pack: 34542
+prune-packable: 0
+garbage: 0
+
+
+# git filter-branch --index-filter &#39;git rm --ignore-unmatch brbc/xmlrpc/C*&#39;
+Rewrite 721ba0f0a438577ee699e6d4e586d57a6f0c7483 (7/9)rm &#39;brbc/xmlrpc/C:/Server/Apache/htdocs/tmp/Joomla_1.5.23-Stable-Full_Package.zip&#39;
+Rewrite 26447f7bce8a7212ba5c9c46a3e658c9d41feab6 (8/9)rm &#39;brbc/xmlrpc/C:/Server/Apache/htdocs/tmp/Joomla_1.5.23-Stable-Full_Package.zip&#39;
+Rewrite 656be08782e7bb769b04b86ecec1dcdca03ac11c (9/9)rm &#39;brbc/xmlrpc/C:/Server/Apache/htdocs/tmp/Joomla_1.5.23-Stable-Full_Package.zip&#39;
+Ref &#39;refs/heads/master&#39; was rewritten
+
+
+# git reflog expire --expire=now --all
+# git gc --prune=now
+Counting objects: 14380, done.
+Compressing objects: 100% (10162/10162), done.
+Writing objects: 100% (14380/14380), done.
+Total 14380 (delta 4001), reused 14283 (delta 3936)
+
+
+# git gc --aggressive --prune=now
+Counting objects: 14380, done.
+Compressing objects: 100% (14098/14098), done.
+Writing objects: 100% (14380/14380), done.
+Total 14380 (delta 4761), reused 0 (delta 0)
+
+
+# git verify-pack -v .git/objects/pack/pack-a2345eedb4bcfaa3be8f6b1ae3c33fbbd6691aa7.idx | sort -k 3 -n | tail -20
+5c5a27676d40937d7afb9620966a230c9fa05305 blob&nbsp;&nbsp; 254646 231366 2271215
+9549dd4d84f2f1d9ee33d8f2677e05c2b108a5fc blob&nbsp;&nbsp; 264427 41958 22838922
+4ee5a2ebf4dbae0d6b2358246eb82cc3bc501076 blob&nbsp;&nbsp; 272396 272398 12282115
+89138630ced32f5a248c7d1dd305b4aeea32a48d blob&nbsp;&nbsp; 280032 262457 23551135
+6e8751f2761682b8f4a8975d4d35fcadeb98ef1e blob&nbsp;&nbsp; 294042 48979 10220431
+4c02d3261d30563d26dc74ab53607fbce6d3279e blob&nbsp;&nbsp; 301185 301290 14197075
+f6de2a1970fdb98ccd6d7bc21e47e6b4c4e926ca blob&nbsp;&nbsp; 305997 306102 15441746
+7dd9644dba9af252fa0a144015923806b1ae9391 blob&nbsp;&nbsp; 323002 84030 12625193
+f16f8935fd70d7acc7e7bcd12d910e761c802f0c blob&nbsp;&nbsp; 333312 42746 25174290
+05371c2d3d55c72214eb7e188b8796085db00335 blob&nbsp;&nbsp; 373634 15089 6523849
+8c2430a78600a15bab79c83915c00dae64ab53f3 blob&nbsp;&nbsp; 388010 67959 10092210
+8bb75375061ca967284f3fcec15f4d3651c69f85 blob&nbsp;&nbsp; 498191 498328 52805
+4bef2377a1380f5178acea1fa36604312b586e70 blob&nbsp;&nbsp; 662593 656337 13040262
+d4feac9ac2d7578dabad8e304fd5e53db619a0da blob&nbsp;&nbsp; 708277 655598 18433069
+f700a8263c9ec0c0e11a15ed9a574d8a3a6c07aa blob&nbsp;&nbsp; 780977 71011 7590994
+75545ca4310884b4a4ba151b581122580860bad6 blob&nbsp;&nbsp; 838900 814379 17332882
+43e67e81958399756bd27c3e20ef90d7379b59b1 blob&nbsp;&nbsp; 945828 212647 7233415
+354470352805e746323b6e8631f33c59e19da0d5 blob&nbsp;&nbsp; 1444284 1403518 19682358
+31d1ff1491a5b4ef3200307147508bbd7ca90ac3 blob&nbsp;&nbsp; 1722880 501336 579873
+d99d0b8576b728d549bc19f127c97acfac1f447e blob&nbsp;&nbsp; 6956762 5917846 28085092
+
+
+# git rev-list --objects --all | grep d99d0b
+d99d0b8576b728d549bc19f127c97acfac1f447e xmlrpc/C:/Server/Apache/htdocs/tmp/Joomla_1.5.23-Stable-Full_Package.zip
+# git rev-list --objects --all | grep 31d1ff1
+31d1ff1491a5b4ef3200307147508bbd7ca90ac3 administrator/C:/Server/Apache/htdocs/tmp/gzip4df8f6e835309
+# git rev-list --objects --all | grep 3544703
+354470352805e746323b6e8631f33c59e19da0d5 components/com_community/uploads/resume/1311015630Shaping Alberta&rsquo;s Future-Water Sum..docx
+# git rev-list --objects --all | grep 43e67e8
+43e67e81958399756bd27c3e20ef90d7379b59b1 awp/js/OpenLayers.js
+# git rev-list --objects --all | grep 75545c
+75545ca4310884b4a4ba151b581122580860bad6 components/com_community/frontend.zip
+# git rev-list --objects --all | grep f700a8
+f700a8263c9ec0c0e11a15ed9a574d8a3a6c07aa awp/ml/core/xdebug.xt
+# git rev-list --objects --all | grep d4feac
+d4feac9ac2d7578dabad8e304fd5e53db619a0da components/com_community/templates.zip
+# git rev-list --objects --all | grep 4bef23
+4bef2377a1380f5178acea1fa36604312b586e70 brbc/plugins/plgBonckoLen15/BonckoLen/boncko.mp3
+# git rev-list --objects --all | grep 8bb753
+8bb75375061ca967284f3fcec15f4d3651c69f85 administrator/C:/Server/Apache/htdocs/tmp/docman-v1.5.10.r1430.tar.gz
+# git rev-list --objects --all | grep 8c2430
+8c2430a78600a15bab79c83915c00dae64ab53f3 brbc/libraries/simplepie/simplepie.php
+# git rev-list --objects --all | grep 05371c
+05371c2d3d55c72214eb7e188b8796085db00335 awp/dirst.dir.txt
+# git rev-list --objects --all | grep f16f89
+f16f8935fd70d7acc7e7bcd12d910e761c802f0c seawa/plugins/editors/jce/tiny_mce/plugins/mediamanager/swf/flvplayer.fla
+# git rev-list --objects --all | grep 7dd964
+7dd9644dba9af252fa0a144015923806b1ae9391 brbc/plugins/editors/tinymce/jscripts/tiny_mce/tiny_mce_src.js</pre>
+
+<p>2012-11-18 10:47:36 +08:00 Sunday</p>
