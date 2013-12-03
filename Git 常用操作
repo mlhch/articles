@@ -4,6 +4,12 @@
 
 <p>wordpress 中有一篇同名文章&ldquo;git 常用操作&rdquo;。</p>
 
+<h2>git log --follow -- &lt;path&gt;</h2>
+
+<p>2013-12-03 23:12 Tuesday</p>
+
+<p>如此可列出已删除文件的情况</p>
+
 <h2>git symbolic-ref</h2>
 
 <p>2013-11-22 10:09 Friday</p>
