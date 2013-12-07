@@ -5,13 +5,12 @@
 <p><a href="http://prototypejs.org/" target="_blank">http://prototypejs.org/</a></p>
 
 <ul>
-	<li><a href="http://prototypejs.org/download">1.7.1&nbsp;(June 5, 2012) &amp; Git</a></li>
-	<li><a href="http://prototypejs.org/learn">Docs &amp; tutorials</a></li>
-	<li><a href="http://prototypejs.org/discuss">Mailing lists &amp; IRC</a></li>
-	<li><a href="http://prototypejs.org/contribute">Report bugs &amp; patches</a></li>
-</ul>
+	<li>
+	<p>2013-12-07 23:01 Saturday</p>
 
-<h3><a href="http://prototypejs.org/blog">Weblog</a></h3>
+	<p>近日 git rebase WEHUB Flowchart 项目，重拾 prototpye.js 1.6 版本破坏本地函数&nbsp;JSON.stringify 的原因是其覆盖了 Array.prototype.toJSON 方法</p>
+	</li>
+</ul>
 
 <h4><a href="http://prototypejs.org/2012/08/08/prototype-1-7-1">Prototype 1.7.1</a></h4>
 
