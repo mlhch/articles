@@ -1,0 +1,448 @@
+<h1>JavaScript.Chart - Flotr</h1>
+
+<p>2013-12-08 18:16 Sunday</p>
+
+<h2>起源</h2>
+
+<ol>
+	<li>一个类似 Google Finance 效果的，基于 HTML5 的纯 JavaScript 做出的图。展示地址：http://www.humblesoftware.com/finance/index</li>
+	<li>其基于 Flotr 和 Prototype.js
+	<ol>
+		<li>Flotr 官方网站&nbsp;http://solutoire.com/flotr/，项目地址 http://code.google.com/p/flotr/，代码库&nbsp;http://flotr.googlecode.com/svn/trunk/</li>
+		<li>已知 prototype-1.6.1.js 及以下在把数组序列化为 JSON 时有 bug，建议使用目前最新稳定版 prototype-1.7.0.0.js（https://ajax.googleapis.com/ajax/libs/prototype/1.7.0.0/prototype.js）</li>
+	</ol>
+	</li>
+	<li>Flotr，a javascript plotting library，一个 JavaScript 做图库，也基于 Prototype.js，从 Flot 获得灵感</li>
+	<li>Flot，<a href="http://code.google.com/p/flot/">Attractive Javascript plotting for jQuery</a>，是扩展&nbsp;jQuery 的。项目地址&nbsp;http://code.google.com/p/flot/，代码库&nbsp;http://flot.googlecode.com/svn/trunk/</li>
+</ol>
+
+<h2>Canvas 的一些知识</h2>
+
+<ul>
+	<li>width 属性控制的是 canvas 的像素精度，值越小，清晰的曲线就越模糊，style.width 控制的是 canvas 的实际宽度</li>
+</ul>
+
+<h2>Outline of flotr.js</h2>
+
+<p><a href="images/screen-2011.10.08-flotr.outline" target="_blank"><img alt="" src="images/screen-2011.10.08-flotr.outline" style="height:577px; width:288px" /></a></p>
+
+<h2>Trace example: flotr/flotr/examples/prototype/basic.html</h2>
+
+<pre>
+/**
+  * Wait till dom&#39;s finished loading.
+&nbsp; */
+&nbsp;&nbsp; document.observe(&#39;dom:loaded&#39;, function(){
+&nbsp;&nbsp;&nbsp; /**
+&nbsp;&nbsp;&nbsp;&nbsp; * Fill series d1 and d2.
+&nbsp;&nbsp;&nbsp;&nbsp; */
+&nbsp;&nbsp;&nbsp; var d1 = [];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for(var i = 0; i &lt; 14; i += 0.5)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; d1.push([i, Math.sin(i)]);
+&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var d2 = [[0, 3], [4, 8], [8, 5], [9, 13]];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; /**
+&nbsp;&nbsp;&nbsp;&nbsp; * Draw the graph.
+&nbsp;&nbsp;&nbsp;&nbsp; */
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var f = Flotr.draw($(&#39;container&#39;), [ d1, d2 ], {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; xaxis: {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; minorTickFreq: 4
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; },
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; grid: {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; minorVerticalLines: true
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; });
+&nbsp;&nbsp; }); &nbsp;</pre>
+
+<ul>
+	<li>Flotr.draw(el, [d1, d2], options) // 画图入口
+	<ul>
+		<li>draw: function(el, data, options, GraphKlass){</li>
+		<li>GraphKlass = GraphKlass || Flotr.Graph;</li>
+		<li>return new GraphKlass(el, data, options);</li>
+	</ul>
+	</li>
+	<li>
+	<p>Flotr.Graph.initialize: function(el, data, options){ // 实际画图对象</p>
+
+	<ul>
+		<li>this.registerPlugins();</li>
+		<li>this.el.fire(&#39;flotr:beforeinit&#39;, [this]);</li>
+		<li>this.series = Flotr.getSeries(data); // 数据处理
+		<ul>
+			<li>getSeries: function(data){</li>
+			<li>serie = (serie.data) ? Object.clone(serie) : {data: serie};<br />
+			serie.data[i][1] = (serie.data[i][1] === null ? null : parseFloat(serie.data[i][1]));</li>
+		</ul>
+		</li>
+		<li>this.setOptions(options); // 参数合并
+		<ul>
+			<li>var options = Flotr.clone(Flotr.defaultOptions);<br />
+			options.x2axis = Object.extend(Object.clone(options.xaxis), options.x2axis);<br />
+			options.y2axis = Object.extend(Object.clone(options.yaxis), options.y2axis);<br />
+			this.options = Flotr.merge(opts || {}, options);</li>
+		</ul>
+		</li>
+		<li>this.constructCanvas(); // 准备画布，覆盖层，及画面分辨率
+		<ul>
+			<li>constructCanvas: function(){</li>
+			<li>this.canvas = el.select(&#39;.flotr-canvas&#39;)[0];<br />
+			this.overlay = el.select(&#39;.flotr-overlay&#39;)[0];</li>
+			<li>size = el.getDimensions();<br />
+			this.canvasWidth = size.width;<br />
+			this.canvasHeight = size.height;</li>
+			<li>var o = this.options;<br />
+			size.width *= o.resolution;<br />
+			size.height *= o.resolution;</li>
+			<li>c = this.canvas.writeAttribute(size).show().setStyle(style);<br />
+			oc = this.overlay.writeAttribute(size).show().setStyle(style);</li>
+			<li>this.textEnabled = !!this.ctx.drawText;</li>
+		</ul>
+		</li>
+		<li>this.el.fire(&#39;flotr:afterconstruct&#39;, [this]);</li>
+		<li>this.initEvents(); // 设置鼠标事件
+		<ul>
+			<li>this.overlay.stopObserving()<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;.observe(&#39;mousedown&#39;, this.mouseDownHandler.bindAsEventListener(this))<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;.observe(&#39;mousemove&#39;, this.mouseMoveHandler.bindAsEventListener(this))<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;.observe(&#39;mouseout&#39;, this.clearHit.bindAsEventListener(this))<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;.observe(&#39;click&#39;, this.clickHandler.bindAsEventListener(this));</li>
+		</ul>
+		</li>
+		<li>this.findDataRanges();
+		<ul>
+			<li>var s = this.series,&nbsp;a = this.axes;<br />
+			for(i = 0; i &lt; s.length; ++i) {<br />
+			&nbsp; &nbsp; data = s[i].data,<br />
+			&nbsp; &nbsp; if (data.length &gt; 0 &amp;&amp; !s[i].hide) {<br />
+			&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;for(h = data.length - 1; h &gt; -1; --h){<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; for(j = 1; j &lt; data[h].length; j++){</li>
+			<li>this.findAxesValues();</li>
+			<li>this.calculateRange(a.x, &#39;x&#39;);<br />
+			this.calculateRange(a.y, &#39;y&#39;);
+			<ul>
+				<li>calculateRange: function(axis, type){</li>
+				<li>&nbsp;</li>
+			</ul>
+			</li>
+		</ul>
+		</li>
+		<li>this.calculateSpacing();
+		<ul>
+			<li>calculateSpacing: function(){</li>
+			<li>var margin = options.grid.labelMargin,<br />
+			&nbsp; &nbsp; maxOutset = 2</li>
+			<li>if (axis.options.showLabels) {<br />
+			&nbsp; &nbsp;&nbsp;maxLabel = axis.ticks[i].label;</li>
+			<li>axis.maxLabel&nbsp; = this.getTextDimensions(maxLabel, {<br />
+			&nbsp; &nbsp; size:options.fontSize,<br />
+			&nbsp; &nbsp; angle: Flotr.toRad(axis.options.labelsAngle)<br />
+			}, &#39;font-size:smaller;&#39;, &#39;flotr-grid-label&#39;);</li>
+			<li>axis.titleSize = this.getTextDimensions(axis.options.title, {<br />
+			&nbsp; &nbsp; size: options.fontSize*1.2,<br />
+			&nbsp; &nbsp; angle: Flotr.toRad(axis.options.titleAngle)<br />
+			}, &#39;font-weight:bold;&#39;, &#39;flotr-axis-title&#39;);
+			<ul>
+				<li>getTextDimensions: function(text, canvasStyle, HtmlStyle, className) {</li>
+				<li>if (!this.options.HtmlText &amp;&amp; this.textEnabled) {<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;var bounds = this.ctx.getTextBounds(text, canvasStyle);</li>
+				<li>} else {<br />
+				&nbsp; &nbsp; var dummyDiv = this.el.insert(&#39;
+				<p>&#39; + text + &#39;</p>
+				&#39;).select(&quot;.flotr-dummy-div&quot;)[0],<br />
+				&nbsp; &nbsp;&nbsp;dim = dummyDiv.getDimensions();</li>
+			</ul>
+			</li>
+			<li>var p = this.plotOffset;<br />
+			if (x.options.margin === false) {<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;p.bottom = 0;<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;p.top&nbsp;&nbsp;&nbsp; = 0;<br />
+			} else {<br />
+			&nbsp; &nbsp; p.bottom += (options.grid.circular ? 0 : (x.options.showLabels ?&nbsp; (x.maxLabel.height + margin) : 0)) +<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (x.options.title ? (x.titleSize.height + margin) : 0) + maxOutset;<br />
+			&nbsp;&nbsp;&nbsp;<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;p.top&nbsp;&nbsp;&nbsp; += (options.grid.circular ? 0 : (x2.options.showLabels ? (x2.maxLabel.height + margin) : 0)) +<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (x2.options.title ? (x2.titleSize.height + margin) : 0) + this.subtitleHeight + this.titleHeight + maxOutset;<br />
+			}</li>
+			<li>if (y.options.margin === false) {<br />
+			&nbsp; &nbsp; p.left&nbsp; = 0;<br />
+			&nbsp; &nbsp; p.right = 0;<br />
+			} else {<br />
+			&nbsp; &nbsp; p.left&nbsp;&nbsp; += (options.grid.circular ? 0 : (y.options.showLabels ?&nbsp; (y.maxLabel.width + margin) : 0)) +<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (y.options.title ? (y.titleSize.width + margin) : 0) + maxOutset;<br />
+			&nbsp;&nbsp;&nbsp;<br />
+			&nbsp; &nbsp; p.right&nbsp; += (options.grid.circular ? 0 : (y2.options.showLabels ? (y2.maxLabel.width + margin) : 0)) +<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (y2.options.title ? (y2.titleSize.width + margin) : 0) + maxOutset;<br />
+			}</li>
+			<li>p.top = Math.floor(p.top); // In order the outline not to be blured<br />
+			&nbsp;&nbsp;&nbsp;<br />
+			this.plotWidth&nbsp; = this.canvasWidth - p.left - p.right;<br />
+			this.plotHeight = this.canvasHeight - p.bottom - p.top;</li>
+		</ul>
+		</li>
+		<li>this.setupAxes();
+		<ul>
+			<li>setupAxes: function(){</li>
+			<li>function d2p(v, o){<br />
+			function p2d(v, o){</li>
+			<li>x.scale&nbsp; = pw / (d2p(x.max, x.options) - d2p(x.min, x.options));<br />
+			y.scale&nbsp; = ph / (d2p(y.max, y.options) - d2p(y.min, y.options));</li>
+			<li>x.d2p = x2.d2p = function(xval){&nbsp;return (xval - this.min) * this.scale;&nbsp;};<br />
+			x.p2d = this.axes.x2.p2d = function(xval){&nbsp;return xval / this.scale + this.min;&nbsp;};<br />
+			y.d2p = y2.d2p = function(yval){&nbsp;return ph - (yval - this.min) * this.scale;&nbsp;};<br />
+			y.p2d = y2.p2d = function(yval){&nbsp;return (ph - yval) / this.scale + this.min;&nbsp;};</li>
+		</ul>
+		</li>
+		<li>this.draw(after);
+		<ul>
+			<li>draw: function(after) {</li>
+			<li>var afterImageLoad = function() {<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;this.drawGrid();<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;this.drawLabels();<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;this.drawTitles();
+			<p>&nbsp;&nbsp;&nbsp;&nbsp;if(this.series.length){<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.el.fire(&#39;flotr:beforedraw&#39;, [this.series, this]);<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for(var i = 0; i &lt; this.series.length; i++){<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (!this.series[i].hide)<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; this.drawSeries(this.series[i]);<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+			&nbsp; &nbsp; }<br />
+			&nbsp; &nbsp; &nbsp;<br />
+			&nbsp; &nbsp; this.drawOutline();<br />
+			&nbsp; &nbsp; this.el.fire(&#39;flotr:afterdraw&#39;, [this.series, this]);<br />
+			&nbsp; &nbsp; after();<br />
+			}.bind(this);</p>
+			</li>
+			<li>
+			<p>drawTitles: function(){<br />
+			&nbsp; &nbsp; if (!options.HtmlText &amp;&amp; this.textEnabled) {<br />
+			&nbsp; &nbsp; } else {<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; if (a.y.options.title &amp;&amp; a.y.used)<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; html.push(<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &#39;</p>
+
+			<p>&#39;, a.y.options.title, &#39;</p>
+			&#39;<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; );<br />
+			&nbsp; &nbsp; }
+			<p>&nbsp;</p>
+			</li>
+			<li>
+			<p>drawSeries: function(series){<br />
+			&nbsp; &nbsp; this[type].draw(series);<br />
+			&nbsp;&nbsp;&nbsp; if (!drawn) {<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; this[this.options.defaultType].draw(series);<br />
+			&nbsp;&nbsp;&nbsp; }</p>
+			</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+</ul>
+
+<h2>mouseMoveHandler</h2>
+
+<ul>
+	<li>mouseMoveHandler: function(event){
+	<ul>
+		<li>var pos = this.getEventPosition(event);
+		<ul>
+			<li>getEventPosition: function (event){</li>
+			<li>var offset = this.overlay.cumulativeOffset(),<br />
+			&nbsp; &nbsp; pointer = Event.pointer(event),<br />
+			&nbsp; &nbsp; rx = (pointer.x - offset.left - this.plotOffset.left),<br />
+			&nbsp; &nbsp; ry = (pointer.y - offset.top - this.plotOffset.top);</li>
+			<li>return {<br />
+			&nbsp; &nbsp; x:&nbsp; this.axes.x.p2d(rx),// 鼠标位置对应的数据坐标<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;x2: this.axes.x2.p2d(rx),<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;y:&nbsp; this.axes.y.p2d(ry),<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;y2: this.axes.y2.p2d(ry),<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;relX: rx,// 鼠标相对位置，像素坐标<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;relY: ry,<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;absX: pointer.x,// 鼠标绝对位置<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;absY: pointer.y<br />
+			};</li>
+		</ul>
+		</li>
+		<li>if (this.options.crosshair.mode)<br />
+		&nbsp; &nbsp; this.clearCrosshair();</li>
+		<li>if&nbsp;(this.selectionInterval == null &amp;&amp; (this.options.mouse.track || this.series.any(function(s){return s.mouse &amp;&amp; s.mouse.track;})))<br />
+		&nbsp; &nbsp; this.hit(pos);</li>
+		<li>if (this.options.crosshair.mode)<br />
+		&nbsp; &nbsp; this.drawCrosshair(pos);</li>
+		<li>this.el.fire(&#39;flotr:mousemove&#39;, [event, pos, this]);</li>
+	</ul>
+	</li>
+	<li>hit: function(mouse){
+	<ul>
+		<li>​if (options.mouse.trackAll) {
+		<ul>
+			<li>xsens = (2*options.points.lineWidth)/xa.scale * s.mouse.sensibility;</li>
+			<li>for(var j = 0; j &lt; data.length; j++){<br />
+			&nbsp; &nbsp; var xdiff = Math.abs(x - mx);<br />
+			&nbsp;&nbsp;&nbsp;<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;// Bars and Pie are not supported yet. Not sure how it should look with bars or Pie<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;if((!s.bars.show &amp;&amp; xdiff &lt; xsens)&nbsp;|| (s.bars.show &amp;&amp; xdiff &lt; s.bars.barWidth/2)&nbsp;|| (y &lt; 0 &amp;&amp; my &lt; 0 &amp;&amp; my &gt; y)) {<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var distance = xdiff;<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (distance &lt; n.dist) {<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; n.dist = distance;</li>
+			<li>if(n.x !== null &amp;&amp; n.y !== null){<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mt.show();<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.clearHit();<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.drawHit(n);<br />
+			<br />
+			&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;mt.innerHTML = n.mouse.trackFormatter({...});<br />
+			&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;mt.fire(&#39;flotr:hit&#39;, [n, this]);</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+</ul>
+
+<h2>Flotr.defaultOptions</h2>
+
+<pre>
+Flotr.defaultOptions = {
+&nbsp; colors: [&#39;#00A8F0&#39;, &#39;#C0D800&#39;, &#39;#CB4B4B&#39;, &#39;#4DA74D&#39;, &#39;#9440ED&#39;], //=&gt; The default colorscheme. When there are &gt; 5 series, additional colors are generated.
+&nbsp; title: null,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // =&gt; The graph&#39;s title
+&nbsp; subtitle: null,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // =&gt; The graph&#39;s subtitle
+&nbsp; shadowSize: 4,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // =&gt; size of the &#39;fake&#39; shadow
+&nbsp; defaultType: null,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // =&gt; default series type
+&nbsp; HtmlText: true,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // =&gt; wether to draw the text using HTML or on the canvas
+&nbsp; fontSize: 7.5,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // =&gt; canvas&#39; text font size
+&nbsp; resolution: 1,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // =&gt; resolution of the graph, to have printer-friendly graphs !
+&nbsp; legend: {
+&nbsp;&nbsp;&nbsp; show: true,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // =&gt; setting to true will show the legend, hide otherwise
+&nbsp;&nbsp;&nbsp; noColumns: 1,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // =&gt; number of colums in legend table // @todo: doesn&#39;t work for HtmlText = false
+&nbsp;&nbsp;&nbsp; labelFormatter: function(v){return v}, // =&gt; fn: string -&gt; string
+&nbsp;&nbsp;&nbsp; labelBoxBorderColor: &#39;#CCCCCC&#39;, // =&gt; border color for the little label boxes
+&nbsp;&nbsp;&nbsp; labelBoxWidth: 14,
+&nbsp;&nbsp;&nbsp; labelBoxHeight: 10,
+&nbsp;&nbsp;&nbsp; labelBoxMargin: 5,
+&nbsp;&nbsp;&nbsp; container: null,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // =&gt; container (as jQuery object) to put legend in, null means default on top of graph
+&nbsp;&nbsp;&nbsp; position: &#39;nw&#39;,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // =&gt; position of default legend container within plot
+&nbsp;&nbsp;&nbsp; margin: 5,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // =&gt; distance from grid edge to default legend container within plot
+&nbsp;&nbsp;&nbsp; backgroundColor: null, // =&gt; null means auto-detect
+&nbsp;&nbsp;&nbsp; backgroundOpacity: 0.85// =&gt; set to 0 to avoid background, set to 1 for a solid background
+&nbsp; },
+&nbsp; xaxis: {
+&nbsp;&nbsp;&nbsp; ticks: null,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // =&gt; format: either [1, 3] or [[1, &#39;a&#39;], 3]
+&nbsp;&nbsp;&nbsp; minorTicks: null,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // =&gt; format: either [1, 3] or [[1, &#39;a&#39;], 3]
+&nbsp;&nbsp;&nbsp; showLabels: true,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // =&gt; setting to true will show the axis ticks labels, hide otherwise
+&nbsp;&nbsp;&nbsp; showMinorLabels: false,// =&gt; true to show the axis minor ticks labels, false to hide
+&nbsp;&nbsp;&nbsp; labelsAngle: 0,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // =&gt; labels&#39; angle, in degrees
+&nbsp;&nbsp;&nbsp; title: null,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // =&gt; axis title
+&nbsp;&nbsp;&nbsp; titleAngle: 0,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // =&gt; axis title&#39;s angle, in degrees
+&nbsp;&nbsp;&nbsp; noTicks: 5,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // =&gt; number of ticks for automagically generated ticks
+&nbsp;&nbsp;&nbsp; minorTickFreq: null,&nbsp;&nbsp; // =&gt; number of minor ticks between major ticks for autogenerated ticks
+&nbsp;&nbsp;&nbsp; tickFormatter: Flotr.defaultTickFormatter, // =&gt; fn: number -&gt; string
+&nbsp;&nbsp;&nbsp; tickDecimals: null,&nbsp;&nbsp;&nbsp; // =&gt; no. of decimals, null means auto
+&nbsp;&nbsp;&nbsp; min: null,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // =&gt; min. value to show, null means set automatically
+&nbsp;&nbsp;&nbsp; max: null,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // =&gt; max. value to show, null means set automatically
+&nbsp;&nbsp;&nbsp; autoscale: false,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // =&gt; Turns autoscaling on with true
+&nbsp;&nbsp;&nbsp; autoscaleMargin: 0,&nbsp;&nbsp;&nbsp; // =&gt; margin in % to add if auto-setting min/max
+&nbsp;&nbsp;&nbsp; color: null,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // =&gt; color of the ticks
+&nbsp;&nbsp;&nbsp; mode: &#39;normal&#39;,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // =&gt; can be &#39;time&#39; or &#39;normal&#39;
+&nbsp;&nbsp;&nbsp; timeFormat: null,
+&nbsp;&nbsp;&nbsp; scaling: &#39;linear&#39;,&nbsp;&nbsp;&nbsp;&nbsp; // =&gt; Scaling, can be &#39;linear&#39; or &#39;logarithmic&#39;
+&nbsp;&nbsp;&nbsp; base: Math.E,
+&nbsp;&nbsp;&nbsp; titleAlign: &#39;center&#39;,
+&nbsp;&nbsp;&nbsp; margin: true&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // =&gt; Turn off margins with false
+&nbsp; },
+&nbsp; x2axis: {},
+&nbsp; yaxis: {
+&nbsp;&nbsp;&nbsp; ticks: null,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // =&gt; format: either [1, 3] or [[1, &#39;a&#39;], 3]
+&nbsp;&nbsp;&nbsp; minorTicks: null,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // =&gt; format: either [1, 3] or [[1, &#39;a&#39;], 3]
+&nbsp;&nbsp;&nbsp; showLabels: true,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // =&gt; setting to true will show the axis ticks labels, hide otherwise
+&nbsp;&nbsp;&nbsp; showMinorLabels: false,// =&gt; true to show the axis minor ticks labels, false to hide
+&nbsp;&nbsp;&nbsp; labelsAngle: 0,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // =&gt; labels&#39; angle, in degrees
+&nbsp;&nbsp;&nbsp; title: null,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // =&gt; axis title
+&nbsp;&nbsp;&nbsp; titleAngle: 90,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // =&gt; axis title&#39;s angle, in degrees
+&nbsp;&nbsp;&nbsp; noTicks: 5,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // =&gt; number of ticks for automagically generated ticks
+&nbsp;&nbsp;&nbsp; minorTickFreq: null,&nbsp;&nbsp; // =&gt; number of minor ticks between major ticks for autogenerated ticks
+&nbsp;&nbsp;&nbsp; tickFormatter: Flotr.defaultTickFormatter, // =&gt; fn: number -&gt; string
+&nbsp;&nbsp;&nbsp; tickDecimals: null,&nbsp;&nbsp;&nbsp; // =&gt; no. of decimals, null means auto
+&nbsp;&nbsp;&nbsp; min: null,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // =&gt; min. value to show, null means set automatically
+&nbsp;&nbsp;&nbsp; max: null,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // =&gt; max. value to show, null means set automatically
+&nbsp;&nbsp;&nbsp; autoscale: false,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // =&gt; Turns autoscaling on with true
+&nbsp;&nbsp;&nbsp; autoscaleMargin: 0,&nbsp;&nbsp;&nbsp; // =&gt; margin in % to add if auto-setting min/max
+&nbsp;&nbsp;&nbsp; color: null,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // =&gt; The color of the ticks
+&nbsp;&nbsp;&nbsp; scaling: &#39;linear&#39;,&nbsp;&nbsp;&nbsp;&nbsp; // =&gt; Scaling, can be &#39;linear&#39; or &#39;logarithmic&#39;
+&nbsp;&nbsp;&nbsp; base: Math.E,
+&nbsp;&nbsp;&nbsp; titleAlign: &#39;center&#39;,
+&nbsp;&nbsp;&nbsp; margin: true&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // =&gt; Turn off margins with false
+&nbsp; },
+&nbsp; y2axis: {
+&nbsp;&nbsp;&nbsp; titleAngle: 270
+&nbsp; },
+&nbsp; grid: {
+&nbsp;&nbsp;&nbsp; color: &#39;#545454&#39;,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // =&gt; primary color used for outline and labels
+&nbsp;&nbsp;&nbsp; backgroundColor: null, // =&gt; null for transparent, else color
+&nbsp;&nbsp;&nbsp; backgroundImage: null, // =&gt; background image. String or object with src, left and top
+&nbsp;&nbsp;&nbsp; watermarkAlpha: 0.4,&nbsp;&nbsp; // =&gt;
+&nbsp;&nbsp;&nbsp; tickColor: &#39;#DDDDDD&#39;,&nbsp; // =&gt; color used for the ticks
+&nbsp;&nbsp;&nbsp; labelMargin: 3,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // =&gt; margin in pixels
+&nbsp;&nbsp;&nbsp; verticalLines: true,&nbsp;&nbsp; // =&gt; whether to show gridlines in vertical direction
+&nbsp;&nbsp;&nbsp; minorVerticalLines: null, // =&gt; whether to show gridlines for minor ticks in vertical dir.
+&nbsp;&nbsp;&nbsp; horizontalLines: true, // =&gt; whether to show gridlines in horizontal direction
+&nbsp;&nbsp;&nbsp; minorHorizontalLines: null, // =&gt; whether to show gridlines for minor ticks in horizontal dir.
+&nbsp;&nbsp;&nbsp; outlineWidth: 2,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // =&gt; width of the grid outline/border in pixels
+&nbsp;&nbsp;&nbsp; circular: false&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // =&gt; if set to true, the grid will be circular, must be used when radars are drawn
+&nbsp; },
+&nbsp; selection: {
+&nbsp;&nbsp;&nbsp; mode: null,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // =&gt; one of null, &#39;x&#39;, &#39;y&#39; or &#39;xy&#39;
+&nbsp;&nbsp;&nbsp; color: &#39;#B6D9FF&#39;,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // =&gt; selection box color
+&nbsp;&nbsp;&nbsp; fps: 20&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // =&gt; frames-per-second
+&nbsp; },
+&nbsp; crosshair: {
+&nbsp;&nbsp;&nbsp; mode: null,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // =&gt; one of null, &#39;x&#39;, &#39;y&#39; or &#39;xy&#39;
+&nbsp;&nbsp;&nbsp; color: &#39;#FF0000&#39;,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // =&gt; crosshair color
+&nbsp;&nbsp;&nbsp; hideCursor: true&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // =&gt; hide the cursor when the crosshair is shown
+&nbsp; },
+&nbsp; mouse: {
+&nbsp;&nbsp;&nbsp; track: false,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // =&gt; true to track the mouse, no tracking otherwise
+&nbsp;&nbsp;&nbsp; trackAll: false,
+&nbsp;&nbsp;&nbsp; position: &#39;se&#39;,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // =&gt; position of the value box (default south-east)
+&nbsp;&nbsp;&nbsp; relative: false,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // =&gt; next to the mouse cursor
+&nbsp;&nbsp;&nbsp; trackFormatter: Flotr.defaultTrackFormatter, // =&gt; formats the values in the value box
+&nbsp;&nbsp;&nbsp; margin: 5,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // =&gt; margin in pixels of the valuebox
+&nbsp;&nbsp;&nbsp; lineColor: &#39;#FF3F19&#39;,&nbsp; // =&gt; line color of points that are drawn when mouse comes near a value of a series
+&nbsp;&nbsp;&nbsp; trackDecimals: 1,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // =&gt; decimals for the track values
+&nbsp;&nbsp;&nbsp; sensibility: 2,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // =&gt; the lower this number, the more precise you have to aim to show a value
+&nbsp;&nbsp;&nbsp; trackY: true,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // =&gt; whether or not to track the mouse in the y axis
+&nbsp;&nbsp;&nbsp; radius: 3,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // =&gt; radius of the track point
+&nbsp;&nbsp;&nbsp; fillColor: null,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // =&gt; color to fill our select bar with only applies to bar and similar graphs (only bars for now)
+&nbsp;&nbsp;&nbsp; fillOpacity: 0.4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // =&gt; opacity of the fill color, set to 1 for a solid fill, 0 hides the fill
+&nbsp; }
+};</pre>
+
+<h2>Customized Options Example</h2>
+
+<pre>
+var p = Flotr.draw(
+    $(&#39;priceGraph&#39;),
+&nbsp;&nbsp;&nbsp; [data],
+&nbsp;&nbsp;&nbsp; {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; lines: {show: true, fill: true, fillOpacity: .1, lineWidth: 1},
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; yaxis: {min: ymin, max: ymax, tickFormatter: this.yTickFormatter, noTicks: 3, autoscaleMargin: .5,&nbsp; tickDecimals: 0,
+            margin: false // 避免图被 y 轴标签挤离开，参见 plogOffset 如何取值
+        },
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; xaxis: {min: xmin, max: xmax,
+            showLabels: false // price 图是放大图，可以不显示 x 轴标签，但似乎显示了更好
+        },
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; grid: {outlineWidth: 0, labelMargin: 0},
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mouse: { track: true,
+            trackAll: true, // trackAll: false, // 鼠标 y 方向不需要靠近数据点，即可高亮数据点
+            sensibility: 1, trackDecimals: 4, trackFormatter: this.trackFormatter, position: &#39;ne&#39;
+        },
+    &nbsp;&nbsp;&nbsp;&nbsp;shadowSize: false,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; HtmlText: true
+&nbsp;&nbsp;&nbsp; }
+);</pre>
+
+<p>&nbsp;</p>
+
+<p>2013-01-01 13:36:14 +08:00 Tuesday</p>
