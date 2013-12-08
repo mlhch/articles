@@ -1,0 +1,182 @@
+<h1>HTML5 - Web Storage</h1>
+
+<p>2013-12-08 14:07 Sunday</p>
+
+<p><a href="http://www.w3.org/TR/webstorage/" target="_blank">http://www.w3.org/TR/webstorage/</a></p>
+
+<h2>4&nbsp;The API</h2>
+
+<h3>4.1&nbsp;The&nbsp;<code><a href="http://www.w3.org/TR/webstorage/#storage-0">Storage</a></code>&nbsp;interface</h3>
+
+<pre>
+interface Storage {
+  readonly attribute unsigned long <a href="http://www.w3.org/TR/webstorage/#dom-storage-length">length</a>;
+  DOMString? <a href="http://www.w3.org/TR/webstorage/#dom-storage-key">key</a>(unsigned long index);
+  getter DOMString <a href="http://www.w3.org/TR/webstorage/#dom-storage-getitem">getItem</a>(DOMString key);
+  setter creator void <a href="http://www.w3.org/TR/webstorage/#dom-storage-setitem">setItem</a>(DOMString key, DOMString value);
+  deleter void <a href="http://www.w3.org/TR/webstorage/#dom-storage-removeitem">removeItem</a>(DOMString key);
+  void <a href="http://www.w3.org/TR/webstorage/#dom-storage-clear">clear</a>();
+};</pre>
+
+<p>Each&nbsp;<code><a href="http://www.w3.org/TR/webstorage/#storage-0">Storage</a></code>&nbsp;object provides access to a list of key/value pairs, which are sometimes called items. Keys are strings. Any string (including the empty string) is a valid key. Values are similarly strings.</p>
+
+<p>Each&nbsp;<code><a href="http://www.w3.org/TR/webstorage/#storage-0">Storage</a></code>&nbsp;object is associated with a list of key/value pairs when it is created, as defined in the sections on the&nbsp;<code><a href="http://www.w3.org/TR/webstorage/#dom-sessionstorage">sessionStorage</a></code>and&nbsp;<code><a href="http://www.w3.org/TR/webstorage/#dom-localstorage">localStorage</a></code>&nbsp;attributes. Multiple separate objects implementing the&nbsp;<code><a href="http://www.w3.org/TR/webstorage/#storage-0">Storage</a></code>&nbsp;interface can all be associated with the same list of key/value pairs simultaneously.</p>
+
+<p>The&nbsp;<code>length</code>&nbsp;attribute must return the number of key/value pairs currently present in the list associated with the object.</p>
+
+<p>The&nbsp;<code>key(<var>n</var>)</code>&nbsp;method must return the name of the&nbsp;<var>n</var>th key in the list. The order of keys is user-agent defined, but must be consistent within an object so long as the number of keys doesn&#39;t change. (Thus,&nbsp;<a href="http://www.w3.org/TR/webstorage/#dom-storage-setitem">adding</a>&nbsp;or&nbsp;<a href="http://www.w3.org/TR/webstorage/#dom-storage-removeitem">removing</a>&nbsp;a key may change the order of the keys, but merely changing the value of an existing key must not.) If&nbsp;<var>n</var>&nbsp;is greater than or equal to the number of key/value pairs in the object, then this method must return null.</p>
+
+<p>The&nbsp;supported property names&nbsp;on a&nbsp;<code><a href="http://www.w3.org/TR/webstorage/#storage-0">Storage</a></code>&nbsp;object are the keys of each key/value pair currently present in the list associated with the object.</p>
+
+<p>The&nbsp;<code>getItem(<var>key</var>)</code>&nbsp;method must return the current value associated with the given&nbsp;<var>key</var>. If the given&nbsp;<var>key</var>&nbsp;does not exist in the list associated with the object then this method must return null.</p>
+
+<p>The&nbsp;<code>setItem(<var>key</var>,&nbsp;<var>value</var>)</code>&nbsp;method must first check if a key/value pair with the given&nbsp;<var>key</var>&nbsp;already exists in the list associated with the object.</p>
+
+<p>If it does not, then a new key/value pair must be added to the list, with the given&nbsp;<var>key</var>&nbsp;and with its value set to&nbsp;<var>value</var>.</p>
+
+<p>If the given&nbsp;<var>key</var>&nbsp;<em>does</em>&nbsp;exist in the list, then it must have its value updated to&nbsp;<var>value</var>.</p>
+
+<p>If it couldn&#39;t set the new value, the method must throw an&nbsp;<code>QuotaExceededError</code>&nbsp;exception. (Setting could fail if, e.g., the user has disabled storage for the site, or if the quota has been exceeded.)</p>
+
+<p>The&nbsp;<code>removeItem(<var>key</var>)</code>&nbsp;method must cause the key/value pair with the given&nbsp;<var>key</var>&nbsp;to be removed from the list associated with the object, if it exists. If no item with that key exists, the method must do nothing.</p>
+
+<p>The&nbsp;<code><a href="http://www.w3.org/TR/webstorage/#dom-storage-setitem">setItem()</a></code>&nbsp;and&nbsp;<code><a href="http://www.w3.org/TR/webstorage/#dom-storage-removeitem">removeItem()</a></code>&nbsp;methods must be atomic with respect to failure. In the case of failure, the method does nothing. That is, changes to the data storage area must either be successful, or the data storage area must not be changed at all.</p>
+
+<p>The&nbsp;<code>clear()</code>&nbsp;method must atomically cause the list associated with the object to be emptied of all key/value pairs, if there are any. If there are none, then the method must do nothing.</p>
+
+<p>When the&nbsp;<code><a href="http://www.w3.org/TR/webstorage/#dom-storage-setitem">setItem()</a></code>,&nbsp;<code><a href="http://www.w3.org/TR/webstorage/#dom-storage-removeitem">removeItem()</a></code>, and&nbsp;<code><a href="http://www.w3.org/TR/webstorage/#dom-storage-clear">clear()</a></code>&nbsp;methods are invoked, events are fired on other&nbsp;<code>Document</code>&nbsp;objects that can access the newly stored or removed data, as defined in the sections on the&nbsp;<code><a href="http://www.w3.org/TR/webstorage/#dom-sessionstorage">sessionStorage</a></code>&nbsp;and&nbsp;<code><a href="http://www.w3.org/TR/webstorage/#dom-localstorage">localStorage</a></code>attributes.</p>
+
+<p>This specification does not require that the above methods wait until the data has been physically written to disk. Only consistency in what different scripts accessing the same underlying list of key/value pairs see is required.</p>
+
+<h3>4.2&nbsp;The&nbsp;<code><a href="http://www.w3.org/TR/webstorage/#dom-sessionstorage">sessionStorage</a></code>&nbsp;attribute</h3>
+
+<pre>
+[NoInterfaceObject]
+interface WindowSessionStorage {
+  readonly attribute <a href="http://www.w3.org/TR/webstorage/#storage-0">Storage</a> <a href="http://www.w3.org/TR/webstorage/#dom-sessionstorage">sessionStorage</a>;
+};
+Window implements <a href="http://www.w3.org/TR/webstorage/#windowsessionstorage">WindowSessionStorage</a>;</pre>
+
+<p>The&nbsp;<code>sessionStorage</code>&nbsp;attribute represents the set of storage areas specific to the current&nbsp;top-level browsing context.</p>
+
+<p>Each&nbsp;top-level browsing context&nbsp;has a unique set of session storage areas, one for each&nbsp;origin.</p>
+
+<p>User agents should not expire data from a browsing context&#39;s session storage areas, but may do so when the user requests that such data be deleted, or when the UA detects that it has limited storage space, or for security reasons. User agents should always avoid deleting data while a script that could access that data is running. When a top-level browsing context is destroyed (and therefore permanently inaccessible to the user) the data stored in its session storage areas can be discarded with it, as the API described in this specification provides no way for that data to ever be subsequently retrieved.</p>
+
+<p>The lifetime of a browsing context can be unrelated to the lifetime of the actual user agent process itself, as the user agent may support resuming sessions after a restart.</p>
+
+<p>When a new&nbsp;<code>Document</code>&nbsp;is created in a&nbsp;browsing context&nbsp;which has a&nbsp;top-level browsing context, the user agent must check to see if that&nbsp;top-level browsing context&nbsp;has a session storage area for that document&#39;s&nbsp;origin. If it does, then that is the&nbsp;<code>Document</code>&#39;s assigned session storage area. If it does not, a new storage area for that document&#39;s&nbsp;origin&nbsp;must be created, and then&nbsp;<em>that</em>&nbsp;is the<code>Document</code>&#39;s assigned session storage area. A&nbsp;<code>Document</code>&#39;s assigned storage area does not change during the lifetime of a&nbsp;<code>Document</code>, even in the case of a&nbsp;nested browsing context&nbsp;(e.g. in an&nbsp;<code>iframe</code>) being moved to another&nbsp;parent browsing context.</p>
+
+<p>The&nbsp;<code><a href="http://www.w3.org/TR/webstorage/#dom-sessionstorage">sessionStorage</a></code>&nbsp;attribute must return a&nbsp;<code><a href="http://www.w3.org/TR/webstorage/#storage-0">Storage</a></code>&nbsp;object associated with the&nbsp;<code>Document</code>&#39;s assigned session storage area, if any, or null if there isn&#39;t one. Each&nbsp;<code>Document</code>&nbsp;object must have a separate object for its&nbsp;<code>Window</code>&#39;s&nbsp;<code><a href="http://www.w3.org/TR/webstorage/#dom-sessionstorage">sessionStorage</a></code>&nbsp;attribute.</p>
+
+<p>When a new&nbsp;top-level browsing context&nbsp;is created by cloning an existing&nbsp;browsing context, the new browsing context must start with the same session storage areas as the original, but the two sets must from that point on be considered separate, not affecting each other in any way.</p>
+
+<p>When a new&nbsp;top-level browsing context&nbsp;is created by a&nbsp;script&nbsp;in an existing&nbsp;browsing context, or by the user following a link in an existing browsing context, or in some other way related to a specific&nbsp;<code>Document</code>, then the session storage area of the&nbsp;origin&nbsp;of that<code>Document</code>&nbsp;must be copied into the new browsing context when it is created. From that point on, however, the two session storage areas must be considered separate, not affecting each other in any way.</p>
+
+<p>When the&nbsp;<code><a href="http://www.w3.org/TR/webstorage/#dom-storage-setitem">setItem()</a></code>,&nbsp;<code><a href="http://www.w3.org/TR/webstorage/#dom-storage-removeitem">removeItem()</a></code>, and&nbsp;<code><a href="http://www.w3.org/TR/webstorage/#dom-storage-clear">clear()</a></code>&nbsp;methods are called on a&nbsp;<code><a href="http://www.w3.org/TR/webstorage/#storage-0">Storage</a></code>&nbsp;object&nbsp;<var>x</var>&nbsp;that is associated with a session storage area, if the methods did something, then in every&nbsp;<code>Document</code>&nbsp;object whose&nbsp;<code>Window</code>&nbsp;object&#39;s&nbsp;<code><a href="http://www.w3.org/TR/webstorage/#dom-sessionstorage">sessionStorage</a></code>&nbsp;attribute&#39;s<code><a href="http://www.w3.org/TR/webstorage/#storage-0">Storage</a></code>&nbsp;object is associated with the same storage area, other than&nbsp;<var>x</var>, a&nbsp;<code><a href="http://www.w3.org/TR/webstorage/#event-storage">storage</a></code>&nbsp;event must be fired, as&nbsp;<a href="http://www.w3.org/TR/webstorage/#event-storage">described below</a>.</p>
+
+<h3>4.3&nbsp;The&nbsp;<code><a href="http://www.w3.org/TR/webstorage/#dom-localstorage">localStorage</a></code>&nbsp;attribute</h3>
+
+<pre>
+[NoInterfaceObject]
+interface WindowLocalStorage {
+  readonly attribute <a href="http://www.w3.org/TR/webstorage/#storage-0">Storage</a> <a href="http://www.w3.org/TR/webstorage/#dom-localstorage">localStorage</a>;
+};
+Window implements <a href="http://www.w3.org/TR/webstorage/#windowlocalstorage">WindowLocalStorage</a>;</pre>
+
+<p>The&nbsp;<code>localStorage</code>&nbsp;object provides a&nbsp;<code><a href="http://www.w3.org/TR/webstorage/#storage-0">Storage</a></code>&nbsp;object for an&nbsp;origin.</p>
+
+<p>User agents must have a set of local storage areas, one for each&nbsp;origin.</p>
+
+<p>User agents should expire data from the local storage areas only for security reasons or when requested to do so by the user. User agents should always avoid deleting data while a script that could access that data is running.</p>
+
+<p>When the&nbsp;<code><a href="http://www.w3.org/TR/webstorage/#dom-localstorage">localStorage</a></code>&nbsp;attribute is accessed, the user agent must run the following steps, which are known as the&nbsp;<code>Storage</code>&nbsp;object initialization steps:</p>
+
+<ol>
+	<li>
+	<p>The user agent may throw a&nbsp;<code>SecurityError</code>&nbsp;exception instead of returning a&nbsp;<code><a href="http://www.w3.org/TR/webstorage/#storage-0">Storage</a></code>&nbsp;object if the request violates a policy decision (e.g. if the user agent is configured to not allow the page to persist data).</p>
+	</li>
+	<li>
+	<p>If the&nbsp;<code>Document</code>&#39;s&nbsp;origin&nbsp;is not a scheme/host/port tuple, then throw a&nbsp;<code>SecurityError</code>&nbsp;exception and abort these steps.</p>
+	</li>
+	<li>
+	<p>Check to see if the user agent has allocated a local storage area for the&nbsp;origin&nbsp;of the&nbsp;<code>Document</code>&nbsp;of the&nbsp;<code>Window</code>&nbsp;object on which the attribute was accessed. If it has not, create a new storage area for that&nbsp;origin.</p>
+	</li>
+	<li>
+	<p>Return the&nbsp;<code><a href="http://www.w3.org/TR/webstorage/#storage-0">Storage</a></code>&nbsp;object associated with that origin&#39;s local storage area. Each&nbsp;<code>Document</code>&nbsp;object must have a separate object for its&nbsp;<code>Window</code>&#39;s&nbsp;<code><a href="http://www.w3.org/TR/webstorage/#dom-localstorage">localStorage</a></code>&nbsp;attribute.</p>
+	</li>
+</ol>
+
+<p>When the&nbsp;<code><a href="http://www.w3.org/TR/webstorage/#dom-storage-setitem">setItem()</a></code>,&nbsp;<code><a href="http://www.w3.org/TR/webstorage/#dom-storage-removeitem">removeItem()</a></code>, and&nbsp;<code><a href="http://www.w3.org/TR/webstorage/#dom-storage-clear">clear()</a></code>&nbsp;methods are called on a&nbsp;<code><a href="http://www.w3.org/TR/webstorage/#storage-0">Storage</a></code>&nbsp;object&nbsp;<var>x</var>&nbsp;that is associated with a local storage area, if the methods did something, then in every&nbsp;<code>Document</code>&nbsp;object whose&nbsp;<code>Window</code>&nbsp;object&#39;s&nbsp;<code><a href="http://www.w3.org/TR/webstorage/#dom-localstorage">localStorage</a></code>&nbsp;attribute&#39;s&nbsp;<code><a href="http://www.w3.org/TR/webstorage/#storage-0">Storage</a></code>&nbsp;object is associated with the same storage area, other than&nbsp;<var>x</var>, a&nbsp;<code><a href="http://www.w3.org/TR/webstorage/#event-storage">storage</a></code>&nbsp;event must be fired, as&nbsp;<a href="http://www.w3.org/TR/webstorage/#event-storage">described below</a>.</p>
+
+<p>Whenever the properties of a&nbsp;<code><a href="http://www.w3.org/TR/webstorage/#dom-localstorage">localStorage</a></code>&nbsp;attribute&#39;s&nbsp;<code><a href="http://www.w3.org/TR/webstorage/#storage-0">Storage</a></code>&nbsp;object are to be examined, returned, set, or deleted, whether as part of a direct property access, when checking for the presence of a property, during property enumeration, when determining the number of properties present, or as part of the execution of any of the methods or attributes defined on the<code><a href="http://www.w3.org/TR/webstorage/#storage-0">Storage</a></code>&nbsp;interface, the user agent must first&nbsp;obtain the storage mutex.</p>
+
+<h4>4.3.1&nbsp;Security</h4>
+
+<p>User agents must throw a&nbsp;<code>SecurityError</code>&nbsp;exception whenever any of the members of a&nbsp;<code><a href="http://www.w3.org/TR/webstorage/#storage-0">Storage</a></code>&nbsp;object originally returned by the<code><a href="http://www.w3.org/TR/webstorage/#dom-localstorage">localStorage</a></code>&nbsp;attribute are accessed by scripts whose&nbsp;effective script origin&nbsp;is not the&nbsp;same&nbsp;as the&nbsp;origin&nbsp;of the&nbsp;<code>Document</code>&nbsp;of the<code>Window</code>&nbsp;object on which the&nbsp;<code><a href="http://www.w3.org/TR/webstorage/#dom-localstorage">localStorage</a></code>&nbsp;attribute was accessed.</p>
+
+<p>This means&nbsp;<code><a href="http://www.w3.org/TR/webstorage/#storage-0">Storage</a></code>&nbsp;objects are neutered when the&nbsp;<code>document.domain</code>&nbsp;attribute is used.</p>
+
+<h3>4.4&nbsp;The&nbsp;<code><a href="http://www.w3.org/TR/webstorage/#event-storage">storage</a></code>&nbsp;event</h3>
+
+<p>The&nbsp;<code>storage</code>&nbsp;event is fired when a storage area changes, as described in the previous two sections (<a href="http://www.w3.org/TR/webstorage/#sessionStorageEvent">for session storage</a>,&nbsp;<a href="http://www.w3.org/TR/webstorage/#localStorageEvent">for local storage</a>).</p>
+
+<p>When this happens, the user agent must&nbsp;queue a task&nbsp;to fire an event with the name&nbsp;<code><a href="http://www.w3.org/TR/webstorage/#storage-0">storage</a></code>, which does not bubble and is not cancelable, and which uses the&nbsp;<code><a href="http://www.w3.org/TR/webstorage/#storageevent">StorageEvent</a></code>&nbsp;interface, at each&nbsp;<code>Window</code>&nbsp;object whose&nbsp;<code>Document</code>&nbsp;object has a&nbsp;<code><a href="http://www.w3.org/TR/webstorage/#storage-0">Storage</a></code>&nbsp;object that is affected.</p>
+
+<p>This includes&nbsp;<code>Document</code>&nbsp;objects that are not&nbsp;fully active, but events fired on those are ignored by the&nbsp;event loopuntil the&nbsp;<code>Document</code>&nbsp;becomes&nbsp;fully active&nbsp;again.</p>
+
+<p>The&nbsp;task source&nbsp;for this task is the&nbsp;DOM manipulation task source.</p>
+
+<p>If the event is being fired due to an invocation of the&nbsp;<code><a href="http://www.w3.org/TR/webstorage/#dom-storage-setitem">setItem()</a></code>&nbsp;or&nbsp;<code><a href="http://www.w3.org/TR/webstorage/#dom-storage-removeitem">removeItem()</a></code>&nbsp;methods, the event must have its&nbsp;<code><a href="http://www.w3.org/TR/webstorage/#dom-storageevent-key">key</a></code>&nbsp;attribute initialized to the name of the key in question, its&nbsp;<code><a href="http://www.w3.org/TR/webstorage/#dom-storageevent-oldvalue">oldValue</a></code>&nbsp;attribute initialized to the old value of the key in question, or null if the key is newly added, and its&nbsp;<code><a href="http://www.w3.org/TR/webstorage/#dom-storageevent-newvalue">newValue</a></code>&nbsp;attribute initialized to the new value of the key in question, or null if the key was removed.</p>
+
+<p>Otherwise, if the event is being fired due to an invocation of the&nbsp;<code><a href="http://www.w3.org/TR/webstorage/#dom-storage-clear">clear()</a></code>&nbsp;method, the event must have its&nbsp;<code><a href="http://www.w3.org/TR/webstorage/#dom-storageevent-key">key</a></code>,&nbsp;<code><a href="http://www.w3.org/TR/webstorage/#dom-storageevent-oldvalue">oldValue</a></code>, and<code><a href="http://www.w3.org/TR/webstorage/#dom-storageevent-newvalue">newValue</a></code>&nbsp;attributes initialized to null.</p>
+
+<p>In addition, the event must have its&nbsp;<code><a href="http://www.w3.org/TR/webstorage/#dom-storageevent-url">url</a></code>&nbsp;attribute initialized to&nbsp;the address of the document&nbsp;whose&nbsp;<code><a href="http://www.w3.org/TR/webstorage/#storage-0">Storage</a></code>&nbsp;object was affected; and its&nbsp;<code><a href="http://www.w3.org/TR/webstorage/#dom-storageevent-storagearea">storageArea</a></code>&nbsp;attribute initialized to the&nbsp;<code><a href="http://www.w3.org/TR/webstorage/#storage-0">Storage</a></code>&nbsp;object from the&nbsp;<code>Window</code>&nbsp;object of the target&nbsp;<code>Document</code>&nbsp;that represents the same kind of&nbsp;<code><a href="http://www.w3.org/TR/webstorage/#storage-0">Storage</a></code>&nbsp;area as was affected (i.e. session or local).</p>
+
+<h4>4.4.1&nbsp;Event definition</h4>
+
+<pre>
+[Constructor(DOMString type, optional <a href="http://www.w3.org/TR/webstorage/#storageeventinit">StorageEventInit</a> eventInitDict)]
+interface StorageEvent : Event {
+  readonly attribute DOMString <a href="http://www.w3.org/TR/webstorage/#dom-storageevent-key">key</a>;
+  readonly attribute DOMString? <a href="http://www.w3.org/TR/webstorage/#dom-storageevent-oldvalue">oldValue</a>;
+  readonly attribute DOMString? <a href="http://www.w3.org/TR/webstorage/#dom-storageevent-newvalue">newValue</a>;
+  readonly attribute DOMString <a href="http://www.w3.org/TR/webstorage/#dom-storageevent-url">url</a>;
+  readonly attribute <a href="http://www.w3.org/TR/webstorage/#storage-0">Storage</a>? <a href="http://www.w3.org/TR/webstorage/#dom-storageevent-storagearea">storageArea</a>;
+};
+
+dictionary StorageEventInit : EventInit {
+  DOMString key;
+  DOMString? oldValue;
+  DOMString? newValue;
+  DOMString url;
+  <a href="http://www.w3.org/TR/webstorage/#storage-0">Storage</a>? storageArea;
+};</pre>
+
+<p>The&nbsp;<code>key</code>&nbsp;attribute must return the value it was initialized to. When the object is created, this attribute must be initialized to the empty string. It represents the key being changed.</p>
+
+<p>The&nbsp;<code>oldValue</code>&nbsp;attribute must return the value it was initialized to. When the object is created, this attribute must be initialized to null. It represents the old value of the key being changed.</p>
+
+<p>The&nbsp;<code>newValue</code>&nbsp;attribute must return the value it was initialized to. When the object is created, this attribute must be initialized to null. It represents the new value of the key being changed.</p>
+
+<p>The&nbsp;<code>url</code>&nbsp;attribute must return the value it was initialized to. When the object is created, this attribute must be initialized to the empty string. It represents the address of the document whose key changed.</p>
+
+<p>The&nbsp;<code>storageArea</code>&nbsp;attribute must return the value it was initialized to. When the object is created, this attribute must be initialized to null. It represents the&nbsp;<code><a href="http://www.w3.org/TR/webstorage/#storage-0">Storage</a></code>&nbsp;object that was affected.</p>
+
+<h3>4.5&nbsp;Threads</h3>
+
+<p>Because of&nbsp;<a href="http://www.w3.org/TR/webstorage/#localStorageMutex">the use</a>&nbsp;of the&nbsp;storage mutex, multiple browsing contexts will be able to access the local storage areas simultaneously in such a manner that scripts cannot detect any concurrent script execution.</p>
+
+<p>Thus, the&nbsp;<code><a href="http://www.w3.org/TR/webstorage/#dom-storage-length">length</a></code>&nbsp;attribute of a&nbsp;<code><a href="http://www.w3.org/TR/webstorage/#storage-0">Storage</a></code>&nbsp;object, and the value of the various properties of that object, cannot change while a script is executing, other than in a way that is predictable by the script itself.</p>
+
+<h2>5&nbsp;Disk space</h2>
+
+<p>User agents should limit the total amount of space allowed for storage areas.</p>
+
+<p>User agents should guard against sites storing data under the origins other affiliated sites, e.g. storing up to the limit in a1.example.com, a2.example.com, a3.example.com, etc, circumventing the main example.com storage limit.</p>
+
+<p>User agents may prompt the user when quotas are reached, allowing the user to grant a site more space. This enables sites to store many user-created documents on the user&#39;s computer, for instance.</p>
+
+<p>User agents should allow users to see how much space each domain is using.</p>
+
+<p>A mostly arbitrary limit of five megabytes per&nbsp;origin&nbsp;is recommended. Implementation feedback is welcome and will be used to update this suggestion in the future.</p>
