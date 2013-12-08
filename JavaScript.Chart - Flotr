@@ -2,6 +2,38 @@
 
 <p>2013-12-08 18:16 Sunday</p>
 
+<p><a href="http://solutoire.com/flotr/" target="_blank">http://solutoire.com/flotr/</a>|<a href="https://code.google.com/p/flotr/" target="_blank">https://code.google.com/p/flotr/</a></p>
+
+<ul>
+	<li>
+	<p>2013-12-08 18:53 Sunday&nbsp;4 年了，这个项目没有更新。</p>
+
+	<table border="1" cellpadding="2" cellspacing="1">
+		<thead>
+		</thead>
+		<tbody>
+			<tr>
+				<td><a href="https://code.google.com/p/flotr/downloads/detail?name=prototype.flotr-0.2.0-alpha.zip&amp;can=2&amp;q=">prototype.flotr-0.2.0-alpha.zip</a></td>
+				<td>Flotr 0.2.0 alpha (for PrototypeJS)&nbsp;&nbsp;&nbsp;Featured</td>
+				<td>Jan 2009</td>
+				<td>111 KB</td>
+				<td>13783</td>
+			</tr>
+			<tr>
+				<td><a href="https://code.google.com/p/flotr/downloads/detail?name=prototype.flotr-0.1.0alpha.zip&amp;can=2&amp;q=">prototype.flotr-0.1.0alpha.zip</a></td>
+				<td>Flotr 0.1.0alpha (for PrototypeJS)</td>
+				<td>Feb 2008</td>
+				<td>67.4 KB</td>
+				<td>4140</td>
+			</tr>
+		</tbody>
+	</table>
+	</li>
+	<li>
+	<p>Flot 项目有了新网站 <a href="http://www.flotcharts.org/" target="_blank">http://www.flotcharts.org/</a></p>
+	</li>
+</ul>
+
 <h2>起源</h2>
 
 <ol>
@@ -13,7 +45,9 @@
 	</ol>
 	</li>
 	<li>Flotr，a javascript plotting library，一个 JavaScript 做图库，也基于 Prototype.js，从 Flot 获得灵感</li>
-	<li>Flot，<a href="http://code.google.com/p/flot/">Attractive Javascript plotting for jQuery</a>，是扩展&nbsp;jQuery 的。项目地址&nbsp;http://code.google.com/p/flot/，代码库&nbsp;http://flot.googlecode.com/svn/trunk/</li>
+	<li>
+	<p>Flot，<a href="http://code.google.com/p/flot/">Attractive Javascript plotting for jQuery</a>，是扩展&nbsp;jQuery 的。项目地址&nbsp;http://code.google.com/p/flot/，代码库&nbsp;http://flot.googlecode.com/svn/trunk/</p>
+	</li>
 </ol>
 
 <h2>Canvas 的一些知识</h2>
