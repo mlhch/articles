@@ -1,0 +1,365 @@
+<h1>Linux vi, vim</h1>
+
+<p>2012-11-17 18:48:18 +08:00 Saturday</p>
+
+<p>http://www.vim.org/，可惜打开很慢，只显示了页头。</p>
+
+<p>不过 man vi 给出的帮助已经足够了。最有价值的是在编辑文本的同时使用 :help 命令即时查看帮助。</p>
+
+<p>下面是一些总结，随用随记</p>
+
+<ol>
+	<li>光标移到开头：按两下｀或&nbsp;g</li>
+	<li>光标移到结尾：大写的&nbsp;G</li>
+	<li>vi 可以直接用键盘上的光标来上下左右移动，但正规的 vi 是用小写英文字母&nbsp;hjkl，分别控制光标左下上右移一格。&nbsp;</li>
+	<li>ctrl&nbsp;+&nbsp;b：文章内容往后移动一页</li>
+	<li>ctrl&nbsp;+&nbsp;f：文章内容往前移动一页</li>
+	<li>ctrl&nbsp;+&nbsp;u：光标位置往前移动半屏幕</li>
+	<li>ctrl&nbsp;+&nbsp;d：光标位置往后移动半屏幕</li>
+	<li>0：移到文章的开头</li>
+	<li>G：移动到文章的最后</li>
+	<li>$：移动到光标所在行的&ldquo;行尾&rdquo;</li>
+	<li>^：移动到光标所在行的&ldquo;行首&rdquo;</li>
+	<li>w：光标跳到下个字的开头</li>
+	<li>e：光标跳到下个字的字尾</li>
+	<li>b：光标回到上个字的开头</li>
+	<li>#l：光标移到该行的第#个位置，如：5l,56l</li>
+</ol>
+
+<p>2013-11-15 13:20 Friday 今天上午洗澡，好多泥啊</p>
+
+<ul>
+	<li>vi 如何剪切和粘贴​
+	<ul>
+		<li>小写 v 命令设置选择起点，然后用光标进行选择</li>
+		<li>大写 V 命令选择一行</li>
+		<li>用 d 命令删除当前行</li>
+		<li>在指定光标处，用 P 命令粘贴即可</li>
+	</ul>
+	</li>
+</ul>
+
+<p>2013-12-09 19:18 Monday</p>
+
+<ul>
+	<li>更改
+	<ul>
+		<li>cw 更改光标所在处的字到字尾处</li>
+		<li>c3w 表示更改3个字</li>
+	</ul>
+	</li>
+</ul>
+
+<pre>
+...
+ON-LINE HELP
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Type&nbsp; &quot;:help&quot;&nbsp; in Vim to get started.&nbsp; Type &quot;:help subject&quot; to get help
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; on a specific subject.&nbsp; For example: &quot;:help ZZ&quot; to&nbsp; get&nbsp; help&nbsp; for&nbsp; the
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &quot;ZZ&quot;&nbsp; command.&nbsp;&nbsp; Use &lt;Tab&gt; and CTRL-D to complete subjects (&quot;:help cmd-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; line-completion&quot;).&nbsp; Tags are present to jump from one place to&nbsp; another
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (sort of hypertext links, see &quot;:help&quot;).&nbsp; All documentation files can be
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; viewed in this way, for example &quot;:help syntax.txt&quot;.
+
+FILES
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /usr/local/lib/vim/doc/*.txt
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The Vim documentation files.&nbsp; Use &quot;:help&nbsp; doc-file-list&quot;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; to get the complete list.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /usr/local/lib/vim/doc/tags
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The&nbsp; tags file used for finding information in the docu-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mentation files.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /usr/local/lib/vim/syntax/syntax.vim
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System wide syntax initializations.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /usr/local/lib/vim/syntax/*.vim
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Syntax files for various languages.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /usr/local/lib/vim/vimrc
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System wide Vim initializations.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ~/.vimrc&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Your personal Vim initializations.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /usr/local/lib/vim/gvimrc
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System wide gvim initializations.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ~/.gvimrc&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Your personal gvim initializations.
+
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /usr/local/lib/vim/optwin.vim
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Script used for the &quot;:options&quot; command, a&nbsp; nice&nbsp; way&nbsp; to
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; view and set options.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /usr/local/lib/vim/menu.vim
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System wide menu initializations for gvim.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /usr/local/lib/vim/bugreport.vim
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Script to generate a bug report.&nbsp; See &quot;:help bugs&quot;.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /usr/local/lib/vim/filetype.vim
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Script&nbsp; to&nbsp; detect&nbsp; the type of a file by its name.&nbsp; See
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &quot;:help &#39;filetype&#39;&quot;.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /usr/local/lib/vim/scripts.vim
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Script to detect the type of a&nbsp; file&nbsp; by&nbsp; its&nbsp; contents.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; See &quot;:help &#39;filetype&#39;&quot;.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /usr/local/lib/vim/print/*.ps
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Files used for PostScript printing.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; For recent info read the VIM home page:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;URL:http://www.vim.org/&gt;</pre>
+
+<ol>
+	<li>
+	<p>vi 的基本概念</p>
+
+	<p>基本上vi可以分为三种状态，分别是命令模式（command mode）、插入模式（Insert mode）和底行模式（last line mode），各模式的功能区分如下：&nbsp;</p>
+
+	<ol>
+		<li>
+		<p>命令行模式（command mode）</p>
+
+		<p>控制屏幕光标的移动，字符、字或行的删除，移动复制某区段及进入Insert mode下，或者到 last line mode。&nbsp;</p>
+		</li>
+		<li>
+		<p>插入模式（Insert mode）&nbsp;</p>
+
+		<p>只有在Insert mode下，才可以做文字输入，按「ESC」键可回到命令行模式。&nbsp;</p>
+		</li>
+		<li>
+		<p>底行模式（last line mode）&nbsp;</p>
+
+		<p>将文件保存或退出vi，也可以设置编辑环境，如寻找字符串、列出行号&hellip;&hellip;等。&nbsp;</p>
+		</li>
+	</ol>
+	</li>
+</ol>
+
+<p><br />
+不过一般我们在使用时把vi简化成两个模式，就是将底行模式（last line mode）也算入命令行模式command mode）。&nbsp;<br />
+<br />
+2、vi的基本操作&nbsp;<br />
+a) 进入vi&nbsp;<br />
+<br />
+　　在系统提示符号输入vi及文件名称后，就进入vi全屏幕编辑画面：&nbsp;<br />
+<br />
+　　　$ vi myfile&nbsp;<br />
+<br />
+<br />
+　　不过有一点要特别注意，就是您进入vi之后，是处于「命令行模式（command mode）」，您要切换到「插入模式（Insert mode）」才能够输入文字。初次使用vi的人都会想先用上下左右键移动光标，结果电脑一直哔哔叫，把自己气个半死，所以进入vi后，先不要乱动，转换到「插入模式（Insert mode）」再说吧！&nbsp;<br />
+<br />
+b) 切换至插入模式（Insert mode）编辑文件&nbsp;<br />
+<br />
+　　在「命令行模式（command mode）」下按一下字母「i」就可以进入「插入模式（Insert mode）」，这时候你就可以开始输入文字了。&nbsp;<br />
+<br />
+c) Insert 的切换&nbsp;<br />
+<br />
+　　您目前处于「插入模式（Insert mode）」，您就只能一直输入文字，如果您发现输错了字！想用光标键往回移动，将该字删除，就要先按一下「ESC」键转到「命令行模式（command mode）」再删除文字。&nbsp;<br />
+<br />
+d) 退出vi及保存文件&nbsp;<br />
+<br />
+　　在「命令行模式（command mode）」下，按一下「：」冒号键进入「Last line mode」，例如：&nbsp;<br />
+<br />
+: w filename （输入 「w filename」将文章以指定的文件名filename保存）&nbsp;<br />
+<br />
+: wq (输入「wq」，存盘并退出vi)&nbsp;<br />
+<br />
+: q! (输入q!， 不存盘强制退出vi)&nbsp;<br />
+<br />
+<br />
+3、命令行模式（command mode）功能键&nbsp;<br />
+1）. 插入模式&nbsp;<br />
+<br />
+　　按「i」切换进入插入模式「insert mode」，按&ldquo;i&rdquo;进入插入模式后是从光标当前位置开始输入文件；&nbsp;<br />
+<br />
+　　按「a」进入插入模式后，是从目前光标所在位置的下一个位置开始输入文字；&nbsp;<br />
+<br />
+　　按「o」进入插入模式后，是插入新的一行，从行首开始输入文字。&nbsp;<br />
+<br />
+2）. 从插入模式切换为命令行模式&nbsp;<br />
+<br />
+　　按「ESC」键。&nbsp;<br />
+<br />
+4）. 删除文字&nbsp;<br />
+<br />
+　　「x」：每按一次，删除光标所在位置的&ldquo;后面&rdquo;一个字符。&nbsp;<br />
+<br />
+　　「#x」：例如，「6x」表示删除光标所在位置的&ldquo;后面&rdquo;6个字符。&nbsp;<br />
+<br />
+　　「X」：大写的X，每按一次，删除光标所在位置的&ldquo;前面&rdquo;一个字符。&nbsp;<br />
+<br />
+　　「#X」：例如，「20X」表示删除光标所在位置的&ldquo;前面&rdquo;20个字符。&nbsp;<br />
+<br />
+　　「dd」：删除光标所在行。&nbsp;<br />
+<br />
+　　「#dd」：从光标所在行开始删除#行&nbsp;<br />
+<br />
+5）. 复制&nbsp;<br />
+<br />
+　　「yw」：将光标所在之处到字尾的字符复制到缓冲区中。&nbsp;<br />
+<br />
+　　「#yw」：复制#个字到缓冲区&nbsp;<br />
+<br />
+　　「yy」：复制光标所在行到缓冲区。&nbsp;<br />
+<br />
+　　「#yy」：例如，「6yy」表示拷贝从光标所在的该行&ldquo;往下数&rdquo;6行文字。&nbsp;<br />
+<br />
+　　「p」：将缓冲区内的字符贴到光标所在位置。注意：所有与&ldquo;y&rdquo;有关的复制命令都必须与&ldquo;p&rdquo;配合才能完成复制与粘贴功能。&nbsp;<br />
+<br />
+6）. 替换&nbsp;<br />
+<br />
+　　「r」：替换光标所在处的字符。&nbsp;<br />
+<br />
+　　「R」：替换光标所到之处的字符，直到按下「ESC」键为止。&nbsp;<br />
+<br />
+7）. 回复上一次操作&nbsp;<br />
+<br />
+　　「u」：如果您误执行一个命令，可以马上按下「u」，回到上一个操作。按多次&ldquo;u&rdquo;可以执行多次回复。&nbsp;<br />
+<br />
+<br />
+9）. 跳至指定的行&nbsp;<br />
+<br />
+　　「ctrl」+「g」列出光标所在行的行号。&nbsp;<br />
+<br />
+　　「#G」：例如，「15G」，表示移动光标至文章的第15行行首。&nbsp;<br />
+<br />
+4、Last line mode下命令简介&nbsp;<br />
+　　在使用「last line mode」之前，请记住先按「ESC」键确定您已经处于「command mode」下后，再按「：」冒号即可进入「last line mode」。&nbsp;<br />
+<br />
+A) 列出行号&nbsp;<br />
+<br />
+　「set nu」：输入「set nu」后，会在文件中的每一行前面列出行号。&nbsp;<br />
+<br />
+B) 跳到文件中的某一行&nbsp;<br />
+<br />
+　「#」：「#」号表示一个数字，在冒号后输入一个数字，再按回车键就会跳到该行了，如输入数字15，再回车，就会跳到文章的第15行。&nbsp;<br />
+<br />
+C) 查找字符&nbsp;<br />
+<br />
+　「/关键字」：先按「/」键，再输入您想寻找的字符，如果第一次找的关键字不是您想要的，可以一直按「n」会往后寻找到您要的关键字为止。&nbsp;<br />
+<br />
+　「?关键字」：先按「?」键，再输入您想寻找的字符，如果第一次找的关键字不是您想要的，可以一直按「n」会往前寻找到您要的关键字为止。&nbsp;<br />
+<br />
+D) 保存文件&nbsp;<br />
+<br />
+　「w」：在冒号输入字母「w」就可以将文件保存起来。&nbsp;<br />
+<br />
+E) 离开vi&nbsp;<br />
+<br />
+　「q」：按「q」就是退出，如果无法离开vi，可以在「q」后跟一个「!」强制离开vi。&nbsp;<br />
+<br />
+　「qw」：一般建议离开时，搭配「w」一起使用，这样在退出的时候还可以保存文件。&nbsp;<br />
+<br />
+5、vi命令列表&nbsp;<br />
+<br />
+1、下表列出命令模式下的一些键的功能：&nbsp;<br />
+<br />
+h&nbsp;<br />
+左移光标一个字符&nbsp;<br />
+<br />
+l&nbsp;<br />
+右移光标一个字符&nbsp;<br />
+<br />
+k&nbsp;<br />
+光标上移一行&nbsp;<br />
+<br />
+j&nbsp;<br />
+光标下移一行&nbsp;<br />
+<br />
+^&nbsp;<br />
+光标移动至行首&nbsp;<br />
+<br />
+0&nbsp;<br />
+数字&ldquo;0&rdquo;，光标移至文章的开头&nbsp;<br />
+<br />
+G&nbsp;<br />
+光标移至文章的最后&nbsp;<br />
+<br />
+$&nbsp;<br />
+光标移动至行尾&nbsp;<br />
+<br />
+Ctrl+f&nbsp;<br />
+向前翻屏&nbsp;<br />
+<br />
+Ctrl+b&nbsp;<br />
+向后翻屏&nbsp;<br />
+<br />
+Ctrl+d&nbsp;<br />
+向前翻半屏&nbsp;<br />
+<br />
+Ctrl+u&nbsp;<br />
+向后翻半屏&nbsp;<br />
+<br />
+i&nbsp;<br />
+在光标位置前插入字符&nbsp;<br />
+<br />
+a&nbsp;<br />
+在光标所在位置的后一个字符开始增加&nbsp;<br />
+<br />
+o&nbsp;<br />
+插入新的一行，从行首开始输入&nbsp;<br />
+<br />
+ESC&nbsp;<br />
+从输入状态退至命令状态&nbsp;<br />
+<br />
+x&nbsp;<br />
+删除光标后面的字符&nbsp;<br />
+<br />
+#x&nbsp;<br />
+删除光标后的＃个字符&nbsp;<br />
+<br />
+X&nbsp;<br />
+(大写X)，删除光标前面的字符&nbsp;<br />
+<br />
+#X&nbsp;<br />
+删除光标前面的#个字符&nbsp;<br />
+<br />
+dd&nbsp;<br />
+删除光标所在的行&nbsp;<br />
+<br />
+#dd&nbsp;<br />
+删除从光标所在行数的#行&nbsp;<br />
+<br />
+yw&nbsp;<br />
+复制光标所在位置的一个字&nbsp;<br />
+<br />
+#yw&nbsp;<br />
+复制光标所在位置的#个字&nbsp;<br />
+<br />
+yy&nbsp;<br />
+复制光标所在位置的一行&nbsp;<br />
+<br />
+#yy&nbsp;<br />
+复制从光标所在行数的#行&nbsp;<br />
+<br />
+p&nbsp;<br />
+粘贴&nbsp;<br />
+<br />
+u&nbsp;<br />
+取消操作&nbsp;<br />
+<br />
+cw&nbsp;<br />
+更改光标所在位置的一个字&nbsp;<br />
+<br />
+#cw&nbsp;<br />
+更改光标所在位置的#个字&nbsp;<br />
+<br />
+<br />
+2、下表列出行命令模式下的一些指令&nbsp;<br />
+w filename&nbsp;<br />
+储存正在编辑的文件为filename&nbsp;<br />
+<br />
+wq filename&nbsp;<br />
+储存正在编辑的文件为filename，并退出vi&nbsp;<br />
+<br />
+q!&nbsp;<br />
+放弃所有修改，退出vi&nbsp;<br />
+<br />
+set nu&nbsp;<br />
+显示行号&nbsp;<br />
+<br />
+/或?&nbsp;<br />
+查找，在/后输入要查找的内容&nbsp;<br />
+<br />
+n&nbsp;<br />
+与/或?一起使用，如果查找的内容不是想要找的关键字，按n或向后（与/联用）或向前（与?联用）继续查找，直到找到为止。</p>
