@@ -1,0 +1,39 @@
+<h1>JavaScript - JS Bin</h1>
+
+<p>2013-12-14 18:11 Saturday</p>
+
+<p><a href="http://jsbin.com/" target="_blank">http://jsbin.com/</a></p>
+
+<h1>How to install JS Bin in your own environment</h1>
+
+<p><a href="https://github.com/remy/jsbin/wiki/How-to-install-JS-Bin-in-your-own-environment" target="_blank">https://github.com/remy/jsbin/wiki/How-to-install-JS-Bin-in-your-own-environment</a></p>
+
+<p>For setting up JS Bin, see&nbsp;<a href="https://github.com/remy/jsbin/blob/master/docs/running-your-own-jsbin.md">Running your own jsbin</a></p>
+
+<h1>Running a local copy of JS Bin</h1>
+
+<p><a href="https://github.com/remy/jsbin/blob/master/docs/running-your-own-jsbin.md" target="_blank">https://github.com/remy/jsbin/blob/master/docs/running-your-own-jsbin.md</a></p>
+
+<h2>Installing</h2>
+
+<h3>Node</h3>
+
+<pre>
+$ npm install -g jsbin
+</pre>
+
+<p>This will automatically install all the dependancies.</p>
+
+<p>If you&#39;re installing JS Bin for development (and hopefully contribution), clone the project from github:</p>
+
+<pre>
+$ git clone git@github.com:remy/jsbin.git
+$ cd jsbin
+$ npm install
+</pre>
+
+<h2>Running</h2>
+
+<pre>
+$ jsbin 
+JS Bin v3.2.17 is up and running on port 3000. Now point your browser at http://localhost:3000</pre>
