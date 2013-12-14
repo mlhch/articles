@@ -11,6 +11,8 @@
 	<li>store.clearFilter 清除所有过滤器后会导致实际执行过滤</li>
 </ul>
 
+<p>http://localhost:3000/onixuy/1/edit</p>
+
 <pre>
 // Set up a model to use in our Store
 Ext.define(&#39;User&#39;, {
