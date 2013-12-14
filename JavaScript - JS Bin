@@ -37,3 +37,25 @@ $ npm install
 <pre>
 $ jsbin 
 JS Bin v3.2.17 is up and running on port 3000. Now point your browser at http://localhost:3000</pre>
+
+<h2>Configure Libraries</h2>
+
+<p>编辑文件 /usr/local/share/npm/lib/node_modules/jsbin/public/js/editors/libraries.js 即可。</p>
+
+<pre>
+&nbsp; &nbsp; {
+&nbsp; &nbsp; &nbsp; &nbsp; &quot;url&quot;: [
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &quot;http://cdn.sencha.io/touch/1.1.0/resources/css/sencha-touch.css&quot;,
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &quot;http://cdn.sencha.io/touch/1.1.0/sencha-touch.js&quot;
+&nbsp; &nbsp; &nbsp; &nbsp; ],
+&nbsp; &nbsp; &nbsp; &nbsp; &quot;label&quot;: &quot;Sencha Touch 1.1.0&quot;,
+&nbsp; &nbsp; &nbsp; &nbsp; &quot;group&quot;: &quot;Sencha Touch&quot;
+&nbsp; &nbsp; },
+&nbsp; &nbsp; {
+&nbsp; &nbsp; &nbsp; &nbsp; &quot;url&quot;: [
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &quot;http://cdn.sencha.io/touch/sencha-touch-2.3.0/resources/css/sencha-touch.css&quot;,
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &quot;http://cdn.sencha.io/touch/sencha-touch-2.3.0/sencha-touch-all.js&quot;
+&nbsp; &nbsp; &nbsp; &nbsp; ],
+&nbsp; &nbsp; &nbsp; &nbsp; &quot;label&quot;: &quot;Sencha Touch 2.3.0&quot;,
+&nbsp; &nbsp; &nbsp; &nbsp; &quot;group&quot;: &quot;Sencha Touch&quot;
+&nbsp; &nbsp; },</pre>
