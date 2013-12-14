@@ -1,0 +1,68 @@
+<h1>Sencha Touch 2 - Ext.util.Filter</h1>
+
+<p>2013-12-14 18:01 Saturday</p>
+
+<p><a href="http://docs.sencha.com/touch/2.3.0/#!/api/Ext.util.Filter" target="_blank">http://docs.sencha.com/touch/2.3.0/#!/api/Ext.util.Filter</a></p>
+
+<ul>
+	<li>store.filter(filters) 的效果为叠加</li>
+	<li>store.setFilters(filters) 的效果为无视原有 filters</li>
+	<li>store.在当前过滤结果为空的情况下 setFilters 不会实际执行过滤</li>
+	<li>store.clearFilter 清除所有过滤器后会导致实际执行过滤</li>
+</ul>
+
+<pre>
+// Set up a model to use in our Store
+Ext.define(&#39;User&#39;, {
+    extend: &#39;Ext.data.Model&#39;,
+    config: {
+        fields: [
+            {name: &#39;firstName&#39;, type: &#39;string&#39;},
+            {name: &#39;lastName&#39;,  type: &#39;string&#39;},
+            {name: &#39;age&#39;,       type: &#39;int&#39;},
+            {name: &#39;eyeColor&#39;,  type: &#39;string&#39;}
+        ]
+    }
+});
+
+var store = Ext.create(&quot;Ext.data.Store&quot;, {
+    storeId: &quot;usersStore&quot;,
+    model: &quot;User&quot;,
+    data : [
+        {firstName: &quot;Ed&quot;,    lastName: &quot;Spencer&quot;},
+        {firstName: &quot;Tommy&quot;, lastName: &quot;Maintz&quot;},
+        {firstName: &quot;Aaron&quot;, lastName: &quot;Conran&quot;},
+        {firstName: &quot;Jamie&quot;, lastName: &quot;Avins&quot;}
+    ]
+});
+
+store.filter(function(record){
+  return record.get(&#39;firstName&#39;).length &gt; 2;
+});
+console.log(store.data.items.length, store.getFilters().length);
+// 3, 1 说明过滤后符合条件的记录有3条，过滤器现有1个
+
+store.filter(function(record){
+  return record.get(&#39;firstName&#39;)[0].match(/[TAE]/);
+});
+console.log(store.data.items.length, store.getFilters().length);
+// 2, 2 说明 filter 方法的效果是叠加，结果记录为2条，过滤器现有2个
+
+store.setFilters(function(record){
+  return record.get(&#39;firstName&#39;)[0].match(/[TAE]/);
+});
+console.log(store.data.items.length, store.getFilters().length);
+// 3, 1 说明 setFilters 方法的效果会清除原有过滤器，结果记录为3条，过滤器现有1个
+
+store.setFilters(function(record){
+  return false;
+});
+store.setFilters(function(record){
+  return record.get(&#39;firstName&#39;)[0].match(/[TAE]/);
+});
+console.log(store.data.items.length, store.getFilters().length);
+// 0, 1 为什么结果为1条，因为上一次过滤结果为0，所以默认只设置了新的过滤器，而没有实际执行过滤
+
+store.filter();
+console.log(store.data.items.length, store.getFilters().length);
+// 3, 1 手动调用 filter 方法并且无参数的情况下，实际执行了过滤，得到了正确结果</pre>
