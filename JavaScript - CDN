@@ -1,0 +1,28 @@
+<h1>JavaScript - CDN</h1>
+
+<p>2013-12-14 19:55 Saturday</p>
+
+<p><a href="http://baike.baidu.com/view/8689800.htm" target="_blank">http://baike.baidu.com/view/8689800.htm</a></p>
+
+<p>CDN的全称是Content Delivery Network，即内容分发网络。其基本思路是尽可能避开互联网上有可能影响数据传输速度和稳定性的瓶颈和环节，使内容传输的更快、更稳定。通过在网络各处放置<a href="http://baike.baidu.com/view/3787429.htm" target="_blank">节点服务器</a>所构成的在现有的互联网基础之上的一层智能<a href="http://baike.baidu.com/view/747782.htm" target="_blank">虚拟网络</a>，CDN系统能够实时地根据<a href="http://baike.baidu.com/view/411702.htm" target="_blank">网络流量</a>和各节点的连接、负载状况以及到用户的距离和响应时间等综合信息将用户的请求重新导向离用户最近的服务节点上。其目的是使用户可就近取得所需内容，解决 Internet<a href="http://baike.baidu.com/view/2774663.htm" target="_blank">网络拥挤</a>的状况，提高用户访问网站的响应速度。</p>
+
+<p><a href="http://cdnjs.com/" target="_blank">http://cdnjs.com/</a></p>
+
+<p>Everyone loves the&nbsp;<a href="http://code.google.com/apis/libraries/devguide.html" target="_blank">Google CDN</a>&nbsp;right? Even&nbsp;<a href="http://www.asp.net/ajaxlibrary/cdn.ashx" target="_blank">Microsoft runs their own CDN</a>.<br />
+The problem is, they only host the most popular libraries.<br />
+We host it all - JavaScript, CSS, SWF, images, etc!</p>
+
+<p>Supports http/https/spdy, we encourage leaving the protocol&nbsp;<a href="http://paulirish.com/2010/the-protocol-relative-url/">off</a>!<br />
+Track when libraries are added and updated with our&nbsp;<a href="http://cdnjs.com/rss.xml">RSS feed</a>.</p>
+
+<p><a href="http://cdn.sencha.io/" target="_blank">http://cdn.sencha.io/</a></p>
+
+<p>该页面无额外有用信息。</p>
+
+<p><a href="http://senchaexamples.com/sencha-cdn/" target="_blank">http://senchaexamples.com/sencha-cdn/</a></p>
+
+<p>列表中列出的最新版本只到 2.1.0，但经试验，2.2.0，2.3.0 目前也有效。</p>
+
+<pre>
+&lt;link href=&quot;http://cdn.sencha.io/touch/sencha-touch-2.1.0/resources/css/sencha-touch.css&quot; rel=&quot;stylesheet&quot; /&gt;
+&lt;script src=&quot;http://cdn.sencha.io/touch/sencha-touch-2.1.0/sencha-touch-all.js&quot;&gt;&lt;/script&gt;</pre>
