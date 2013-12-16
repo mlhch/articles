@@ -10,6 +10,51 @@
 
 	<p>近日 git rebase WEHUB Flowchart 项目，重拾 prototpye.js 1.6 版本破坏本地函数&nbsp;JSON.stringify 的原因是其覆盖了 Array.prototype.toJSON 方法</p>
 	</li>
+	<li>
+	<p>2013-12-16 21:29 Monday</p>
+
+	<p>今日发现 prototype.js 的一个 bug，在如下代码中，除了生成正常的 style=&quot;width: 100%; height: 50px;&quot; 外，还会生成&nbsp;undefined=&quot;width: 100%; height: 50px;&quot;</p>
+
+	<pre>
+this.containers.price = new Element(&#39;div&#39;, {
+&nbsp; id: &#39;priceGraph&#39;,
+&nbsp; style: &#39;width: 100%; height: &#39; + this.options.priceHeight + &#39;;&#39;
+});</pre>
+
+	<p>究其原因，是因为如下函数中有逻辑上的问题。其中 style 对应的函数&nbsp;table.values[attr] 在逻辑上正确设置 element.style.cssText = value 后，并无返回值，此时逻辑应该直接结束就对了。</p>
+
+	<pre>
+  function writeAttribute(element, name, value) {
+    element = $(element);
+    var attributes = {}, table = ATTRIBUTE_TRANSLATIONS.write;
+
+    if (typeof name === &#39;object&#39;) {
+      attributes = name;
+    } else {
+      attributes[name] = Object.isUndefined(value) ? true : value;
+    }
+
+    for (var attr in attributes) {
+      name = table.names[attr] || attr;
+      value = attributes[attr];
+      if (table.values[attr])
+        <span class="marker">name = table.values[attr](element, value);</span>
+      if (value === false || value === null)
+        element.removeAttribute(name);
+      else if (value === true)
+        element.setAttribute(name, name);
+      else element.setAttribute(name, value);
+    }
+
+    return element;
+  }</pre>
+
+	<pre>
+      style: function(element, value) {
+        element.style.cssText = value ? value : &#39;&#39;;
+      }
+</pre>
+	</li>
 </ul>
 
 <h4><a href="http://prototypejs.org/2012/08/08/prototype-1-7-1">Prototype 1.7.1</a></h4>
@@ -95,4 +140,8 @@ git clone git://github.com/sstephenson/prototype.git
 	<li><a href="http://prototypejs.org/assets/2007/6/20/prototype.js">Download Prototype 1.5.1.1 (June 19, 2007)</a></li>
 	<li><a href="http://prototypejs.org/assets/2007/5/1/prototype.js">Download Prototype 1.5.1 (May 1, 2007)</a></li>
 	<li><a href="http://prototypejs.org/assets/2007/1/18/prototype.js">Download Prototype 1.5.0 (January 18, 2007)</a></li>
+</ul>
+
+<ul>
+	<li>&nbsp;</li>
 </ul>
