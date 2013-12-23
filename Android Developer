@@ -77,6 +77,10 @@
 
 <p><a href="http://dl.google.com/android/android-sdk_r21.1-macosx.zip">Download the SDK Tools for Mac</a>&nbsp;-&gt; http://dl.google.com/android/android-sdk_r21.1-macosx.zip</p>
 
+<p>2013-12-22 22:34 Sunday</p>
+
+<p><a href="http://dl.google.com/android/android-sdk_r22.3-macosx.zip">Download the SDK Tools for Mac</a>&nbsp;-&gt;&nbsp;https://dl.google.com/android/android-sdk_r22.3-macosx.zip(<span style="line-height:1.6em">74.9MB)</span></p>
+
 <h3>ADT Bundle</h3>
 
 <p>2012-12-11 14:28 星期二</p>
@@ -116,6 +120,12 @@ ADT Bundle for Mac</a></p>
 <p><a href="https://dl.google.com/android/adt/adt-bundle-mac-x86_64-20130219.zip" target="_blank">https://dl.google.com/android/adt/adt-bundle-mac-x86_64-20130219.zip</a></p>
 
 <p>ADT Build: v21.1.0-569685，版本小有升级。</p>
+
+<p>2013-12-22 22:39 Sunday 老婆 19 号98分过了文明驾驶拿到证了</p>
+
+<p>adt-bundle-mac-x86_64-20131030.zip(470.4 MB)</p>
+
+<p>下载地址&nbsp;<a href="https://dl.google.com/android/adt/adt-bundle-mac-x86_64-20131030.zip" target="_blank">https://dl.google.com/android/adt/adt-bundle-mac-x86_64-20131030.zip</a></p>
 
 <p>使用新版本的 ADT 的办法，主要需要考虑的是已创建项目的移植。打开 Preferences，搜索 Workspaces，移除已配置的目录，勾选 Prompt for workspace on startup，然后重新启动即可选择先前用过的目录进行设置，这样之前的项目就可以在 ADT 中进行浏览了。</p>
 
