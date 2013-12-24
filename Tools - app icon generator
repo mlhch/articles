@@ -1,0 +1,25 @@
+<h1>Tools - app icon generator</h1>
+
+<p>2013-12-24 14:30 Tuesday</p>
+
+<p><a href="http://makeappicon.com/" target="_blank">http://makeappicon.com/</a></p>
+
+<p>缺点：不能自动调整图像的长宽比</p>
+
+<p>不过最终还是觉得自己用 Photoshop 调整好长宽比后，用这个地址好。完了无需填写 email，直接复制页面上的图片地址后，用 wget -O 直接指定下载后的文件名来进行命令行操作即可。</p>
+
+<p><a href="http://www.gieson.com/Library/projects/utilities/icon_slayer/" target="_blank">http://www.gieson.com/Library/projects/utilities/icon_slayer/</a></p>
+
+<p>缺点：同上</p>
+
+<p><a href="http://www.quirco.com/iPhoneIcon" target="_blank">http://www.quirco.com/iPhoneIcon</a></p>
+
+<p>优点：可自动调整长宽比，但只支持 iOS &lt;=6 的情况</p>
+
+<p><a href="http://lkmake.com/icons7" target="_blank">http://lkmake.com/icons7</a></p>
+
+<p>图像质量不行</p>
+
+<p><a href="http://iconogen.com/" target="_blank">http://iconogen.com/</a></p>
+
+<p>长宽比不行</p>
