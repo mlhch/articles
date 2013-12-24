@@ -12,6 +12,10 @@
 
 <p>不过最终还是觉得自己用 Photoshop 调整好长宽比后，用这个地址好。完了无需填写 email，直接复制页面上的图片地址后，用 wget -O 直接指定下载后的文件名来进行命令行操作即可。</p>
 
+<p><a href="http://www.iosres.com/" target="_blank">http://www.iosres.com/</a></p>
+
+<p>iOS 设备分辨率参考</p>
+
 <p><a href="http://www.gieson.com/Library/projects/utilities/icon_slayer/" target="_blank">http://www.gieson.com/Library/projects/utilities/icon_slayer/</a></p>
 
 <p>缺点：同上</p>
