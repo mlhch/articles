@@ -1,0 +1,99 @@
+<h1>Sencha Cmd - sencha cordova remove</h1>
+
+<p>2013-12-25 13:58 Wednesday</p>
+
+<p>从 sencha 中删除 corodva 后引起的变化中，大概能看出 sencha 是如何与&nbsp;cordova 协同工作的</p>
+
+<pre>
+$ git s
+# On branch cc
+# Changes not staged for commit:
+#   (use &quot;git add/rm ...&quot; to update what will be committed)
+#   (use &quot;git checkout -- ...&quot; to discard changes in working directory)
+#
+#	modified:   .sencha/app/build.properties
+#	deleted:    .sencha/app/cordova-impl.xml
+#	modified:   .sencha/app/native.properties
+#	modified:   app.json
+#	modified:   build.xml
+#	deleted:    config.xml
+#	deleted:    cordova.local.properties
+#	deleted:    cordova/.cordova/config.json
+#	deleted:    cordova/.cordova/hooks/after_prepare/icons_and_splashes.js
+#	deleted:    cordova/platforms/.gitkeep
+#	deleted:    cordova/plugins/android.json
+#	deleted:    cordova/plugins/ios.json</pre>
+
+<p>此处定义了 app.cordova.www.dir，想必其它地方必定会引用到它。</p>
+
+<pre>
+$ git df .sencha/app/build.properties 
+diff --git a/.sencha/app/build.properties b/.sencha/app/build.properties
+index 3b92b69..67ddbc8 100644
+--- a/.sencha/app/build.properties
++++ b/.sencha/app/build.properties
+@@ -20,4 +20,4 @@
+ # =============================================================================
+ 
+ app.cordova.dir=${app.dir}/cordova
+-app.cordova.www.dir=${app.cordova.dir}/www
++</pre>
+
+<p>&nbsp;</p>
+
+<pre>
+$ git df .sencha/app/native.properties 
+diff --git a/.sencha/app/native.properties b/.sencha/app/native.properties
+index ddab8ed..472549e 100644
+--- a/.sencha/app/native.properties
++++ b/.sencha/app/native.properties
+@@ -7,4 +7,4 @@
+ # only loaded for &quot;native&quot; builds.
+ # =============================================================================
+ 
+-build.dir=${app.cordova.www.dir}
++</pre>
+
+<p>&nbsp;</p>
+
+<pre>
+$ git df app.json 
+diff --git a/app.json b/app.json
+index 77b83b5..69a4062 100644
+--- a/app.json
++++ b/app.json
+@@ -39,10 +39,6 @@
+      *      }
+      */
+     &quot;js&quot;: [
+-               {
+-                       &quot;path&quot;: &quot;cordova.js&quot;,
+-                       &quot;remote&quot;: true
+-               },
+         {
+             &quot;path&quot;: &quot;touch/sencha-touch-debug.js&quot;,
+             &quot;x-bootstrap&quot;: true
+@@ -123,7 +119,6 @@
+      * Extra resources to be copied along when build
+      */
+     &quot;resources&quot;: [
+-               &quot;config.xml&quot;,
+         &quot;resources/images&quot;,
+         &quot;resources/icons&quot;,
+         &quot;resources/startup&quot;,</pre>
+
+<p>哈哈，看到没有，cordova-impl.xml 替换了 build-impl.xml，从而启动了 cordova 的编译过程</p>
+
+<pre>
+$ git df build.xml 
+diff --git a/build.xml b/build.xml
+index 5f035ca..8f51229 100644
+--- a/build.xml
++++ b/build.xml
+@@ -5,8 +5,7 @@
+     a great idea to read that file to understand how the process works, but it is best to
+     limit your changes to this file.
+     --&gt;
+-    &lt;import file=&quot;${basedir}/.sencha/app/cordova-impl.xml&quot;/&gt;
+-
++    &lt;import file=&quot;${basedir}/.sencha/app/build-impl.xml&quot;/&gt;</pre>
