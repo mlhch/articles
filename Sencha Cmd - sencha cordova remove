@@ -5,6 +5,19 @@
 <p>从 sencha 中删除 corodva 后引起的变化中，大概能看出 sencha 是如何与&nbsp;cordova 协同工作的</p>
 
 <pre>
+bogon:Flowchart.Android mlhch$ sencha cordova remove
+Sencha Cmd v4.0.1.45
+[INF] 
+[INF] sencha-cordova-remove:
+[INF] 
+[INF] remove-cordova:
+[INF]      [echo] Removing Cordova from Application
+[INF]    [delete] Deleting directory /Users/mlhch/www_cdv/Flowchart.Android/cordova
+[INF]    [delete] Deleting: /Users/mlhch/www_cdv/Flowchart.Android/config.xml
+[INF]    [delete] Deleting: /Users/mlhch/www_cdv/Flowchart.Android/cordova.local.properties
+[INF]    [delete] Deleting: /Users/mlhch/www_cdv/Flowchart.Android/.sencha/app/cordova-impl.xml</pre>
+
+<pre>
 $ git s
 # On branch cc
 # Changes not staged for commit:
