@@ -5,7 +5,27 @@
 <p>从 sencha 中删除 corodva 后引起的变化中，大概能看出 sencha 是如何与&nbsp;cordova 协同工作的</p>
 
 <pre>
-bogon:Flowchart.Android mlhch$ sencha cordova remove
+$ sencha cordova init com.malian.CordovaHello HelloCordova
+Sencha Cmd v4.0.1.45
+[INF] 
+[INF] sencha-cordova-init:
+[INF] 
+[INF] init-cordova:
+[INF]      [echo] Adding Cordova to Application
+[INF]      [echo] Adding Cordova template files
+[INF]      [echo] Adding Native properties
+[INF] [x-property-file] Updating property file: /Users/mlhch/www_cdv/Flowchart.Android/.sencha/app/native.properties
+[INF] [x-property-file] Updating property file: /Users/mlhch/www_cdv/Flowchart.Android/.sencha/app/build.properties
+[INF]      [echo] Patching build.xml for Cordova Support
+[INF]      [echo] Building Cordova App
+[INF] [shellscript] Creating a new cordova project with name &quot;HelloCordova&quot; and id &quot;com.malian.CordovaHello&quot; at location &quot;/Users/mlhch/www_cdv/Flowchart.Android/cordova&quot;
+[INF]      [echo] Adding Cordova config.xml to App
+[INF]      [copy] Copying 1 file to /Users/mlhch/www_cdv/Flowchart.Android
+[INF]      [echo] Adding cordova.js to app.json
+[INF]      [echo] Adding config.xml to Resources in app.json</pre>
+
+<pre>
+$ sencha cordova remove
 Sencha Cmd v4.0.1.45
 [INF] 
 [INF] sencha-cordova-remove:
