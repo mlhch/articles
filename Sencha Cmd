@@ -247,6 +247,10 @@ Error: Target id is not valid. Use &#39;android list targets&#39; to get the tar
 Error: Package name &#39;SenchatouchHello&#39; contains invalid characters.
 A package name must be constitued of two Java identifiers.
 Each identifier allowed characters are: a-z A-Z 0-9 _</pre>
+
+<p>2013-12-26y 00:51 Thursday</p>
+
+<p>今日反复尝试，所有配置正确的情况下 sencha app build native 仍然出错，网友有相同情况，暂时作罢。</p>
 </blockquote>
 
 <p>为真机调试 build app。</p>
