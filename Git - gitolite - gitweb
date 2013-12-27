@@ -1,0 +1,640 @@
+<h1>Git - gitolite - gitweb</h1>
+
+<p>2012-09-15 21:07:19 +08:00 Saturday</p>
+
+<h4>Compare between tags</h4>
+
+<p>2013-03-05 12:53 星期二</p>
+
+<p>http://stackoverflow.com/questions/6303530/tag-diff-in-gitweb-is-it-possible</p>
+
+<p>简言之就是类似如下的 url 会显示出 tag1 和 tag2 的差别，反之亦然。</p>
+
+<p>http://localhost/gitweb/?p=fork/html5-bp.git;a=commitdiff;hp=2013-02-14_for-bfjw;h=2013-03-05_gmail-forks-h5bp_created</p>
+
+<p>结果显示 h5bp 这两个标签的差别，没有实质的改动，仅仅是 typo。</p>
+
+<pre>
+css/main.css
+
+diff --git a/css/main.css b/css/main.css
+index b6e2f1c..00a3e30 100644 (file)
+--- a/css/main.css
++++ b/css/main.css
+@@ -25,7 +25,7 @@ body {
+
+/*
+&nbsp; * Remove text-shadow in selection highlight: h5bp.com/i
+- * These selection declarations have to be separate.
++ * These selection rule sets have to be separate.
+&nbsp; * Customize the background color to match your design.
+&nbsp; */
+
+@@ -212,7 +212,7 @@ textarea {
+
+/* ==========================================================================
+&nbsp;&nbsp;&nbsp; EXAMPLE Media Queries for Responsive Design.
+-&nbsp;&nbsp; Theses examples override the primary (&#39;mobile first&#39;) styles.
++&nbsp;&nbsp; These examples override the primary (&#39;mobile first&#39;) styles.
+&nbsp;&nbsp;&nbsp; Modify as content requires.
+&nbsp;&nbsp;&nbsp; ========================================================================== */</pre>
+
+<h2>git 仓库管理，gitosis or gitolite？</h2>
+
+<ul>
+	<li>
+	<p>http://stackoverflow.com/questions/10888300/gitosis-vs-gitolite</p>
+
+	<p>The main difference is that gitosis is now obsolete, and not actively maintained anymore.</p>
+
+	<p>Gitolite is much&nbsp;<a href="http://sitaramc.github.com/gitolite/g2/morefeatures_.html">more feature complete</a>, and just released its&nbsp;<a href="http://sitaramc.github.com/gitolite/why.html">third version</a>.</p>
+
+	<p>answered&nbsp;Jun 4 at 21:06</p>
+	</li>
+	<li>
+	<p>http://saito.im/note/How-to-Clone-Github-in-24-Hours/</p>
+
+	<p>由于 gitosis 已经年久失修，建议选择到 gitolite。gitolite 主要做的事情就是可以让你在一个用户下管理所有的 repo。并且每个repo都可以做细粒度的操作授权。</p>
+
+	<p>使用惯例（比如 github）是建立一个名为 git 的用户，然后为每个用户建立单独的目录，避免不同用户的repo名冲突。</p>
+
+	<p>这样你就深度 clone 了 github 的 repo 地址：git clone git@github.com:SaitoWu/rules-engine.git</p>
+
+	<p>做到这一步，即使没有 github 的页面，你已经可以声称自己可以host代码了。</p>
+	</li>
+	<li>
+	<p>小历史</p>
+
+	<p>Gitolite 作者受 Gitosis 的影响，用 perl 实作了一个 lite 版的 Gitosis。</p>
+
+	<p>但是后来发现功能越来越多，现在已经比 Gitosis 还要强大了，也早已不lite了。</p>
+
+	<p>Gitosis 现在也已经不再维护，或者说没有动静了。但是他们的原理其实是一样的。</p>
+	</li>
+</ul>
+
+<h2>官方网站</h2>
+
+<p>http://sitaramc.github.com/gitolite/</p>
+
+<p>官方 git 库：https://github.com/sitaramc/gitolite</p>
+
+<p>如果有兴趣，可以看一下此网站的最上层有什么东西：http://sitaramc.github.com/</p>
+
+<h2>安装</h2>
+
+<p>参照 git 库中的 README.txt</p>
+
+<pre>
+INSTALLATION AND SETUP
+----------------------
+
+    Server requirements:
+
+      * any unix system
+      * sh
+      * git 1.6.6+
+      * perl 5.8.8+
+      * openssh 5.0+
+      * a dedicated userid to host the repos (in this document, we assume it
+        is &#39;git&#39;), with shell access ONLY by &#39;su - git&#39; from some other userid
+        on the same server.
+
+    Steps to install:
+
+      * login as &#39;git&#39; as described above
+
+      * make sure ~/.ssh/authorized_keys is empty or non-existent
+
+      * make sure your ssh public key from your workstation is available at
+        $HOME/YourName.pub
+
+      * run the following commands:
+
+            git clone git://github.com/sitaramc/gitolite
+            mkdir -p $HOME/bin
+            gitolite/install -to $HOME/bin
+            gitolite setup -pk YourName.pub
+
+        If the last command doesn&#39;t run perhaps &#39;bin&#39; in not in your &#39;PATH&#39;.
+        You can either add it, or just run:
+
+            $HOME/bin/gitolite setup -pk YourName.pub
+
+ADDING USERS AND REPOS
+----------------------
+
+&nbsp;&nbsp;&nbsp; Do NOT add new repos or users manually on the server.&nbsp; Gitolite users,
+&nbsp;&nbsp;&nbsp; repos, and access rules are maintained by making changes to a special repo
+&nbsp;&nbsp;&nbsp; called &#39;gitolite-admin&#39; and pushing those changes to the server.
+
+&nbsp;&nbsp;&nbsp; ----
+
+&nbsp;&nbsp;&nbsp; To administer your gitolite installation, start by doing this on your
+&nbsp;&nbsp;&nbsp; workstation (if you have not already done so):
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; git clone git@host:gitolite-admin
+
+&nbsp;&nbsp;&nbsp; **NOTE**: if you are asked for a password, something has gone wrong.
+
+&nbsp;&nbsp;&nbsp; Now if you &#39;cd gitolite-admin&#39;, you will see two subdirectories in it:
+&nbsp;&nbsp;&nbsp; &#39;conf&#39; and &#39;keydir&#39;.
+
+&nbsp;&nbsp;&nbsp; To add new users alice, bob, and carol, obtain their public keys and add
+&nbsp;&nbsp;&nbsp; them to &#39;keydir&#39; as alice.pub, bob.pub, and carol.pub respectively.
+
+&nbsp;&nbsp;&nbsp; To add a new repo &#39;foo&#39; and give different levels of access to these
+&nbsp;&nbsp;&nbsp; users, edit the file &#39;conf/gitolite.conf&#39; and add lines like this:
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; repo foo
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RW+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; =&nbsp;&nbsp; alice
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RW&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; =&nbsp;&nbsp; bob
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; R&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; =&nbsp;&nbsp; carol
+
+&nbsp;&nbsp;&nbsp; See the &#39;ACCESS RULES&#39; section later for more details.
+
+&nbsp;&nbsp;&nbsp; Once you have made these changes, do something like this:
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; git add conf
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; git add keydir
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; git commit -m &#39;added foo, gave access to alice, bob, carol&#39;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; git push
+
+&nbsp;&nbsp;&nbsp; When the push completes, gitolite will add the new users to
+&nbsp;&nbsp;&nbsp; ~/.ssh/authorized_keys on the server, as well as create a new, empty, repo
+&nbsp;&nbsp;&nbsp; called &#39;foo&#39;.
+
+
+HELP FOR YOUR USERS
+-------------------
+
+&nbsp;&nbsp;&nbsp; Once a user has sent you their public key and you have added them as
+&nbsp;&nbsp;&nbsp; specified above and given them access, you have to tell them what URL to
+&nbsp;&nbsp;&nbsp; access their repos at.&nbsp; This is usually &#39;git clone git@host:reponame&#39;; see
+&nbsp;&nbsp;&nbsp; man git-clone for other forms.
+
+&nbsp;&nbsp;&nbsp; **NOTE**: again, if they are asked for a password, something is wrong.
+
+&nbsp;&nbsp;&nbsp; If they need to know what repos they have access to, they just have to run
+&nbsp;&nbsp;&nbsp; &#39;ssh git@host info&#39;; see &#39;COMMANDS&#39; section later for more on this.</pre>
+
+<h3>服务器端创建专用帐号，实际用自己当前帐号更方便</h3>
+
+<p>安装 Gitolite，首先要在服务器端创建专用帐号，所有用户都通过此帐号访问 Git 库。一般为方便易记，选择 git 作为专用帐号名称。</p>
+
+<pre>
+CentOS
+# groupadd --system git
+# useradd --system --shell /bin/bash -g git -m git</pre>
+
+<p>先创建组 git，然后再创建用户 git，并设置用户的 shell 为可登录的 shell，如 /bin/bash，同时添加到同名的用户组，-m 是创建默认的 /home/somesuer 家目录，此时无需设置 git 用户的密码。</p>
+
+<p>有的系统，只允许特定的用户组（如 ssh 用户组）的用户才可以通过 SSH 协议登录，这就需要将新建的 git 用户添加到 ssh 用户组中。</p>
+
+<pre>
+$ sudo adduser git ssh</pre>
+
+<p>管理员在客户端使用下面的命令，建立无口令登录：</p>
+
+<pre>
+$ ssh-copy-id git@server</pre>
+
+<p>至此，我们已经完成了安装 git 服务的准备工作，可以开始安装 Gitolite 服务软件了。</p>
+
+<h3>用 git 下载 gitolite 并进行安装</h3>
+
+<p>确定 $HOME，也就是 ~ 是 /Users/git，如果这个目录不存在则用 root 创建好后，执行 chown 和 chgrp 设置好权限。</p>
+
+<p>在 git 家目录下执行&nbsp;git clone git://github.com/sitaramc/gitolite，得到 gitolite 安装文件</p>
+
+<p>如果已经有过安装，那么扫行 git pull 即可更新到最新状态。</p>
+
+<p>更新前的 20 次提交</p>
+
+<pre>
+$ git l
+* 724c741 - 8 weeks ago - Sitaram Chamarty - prevent barfage when presetting the rc file
+* e59c3ba - 8 weeks ago - Sitaram Chamarty - (minor docfix) add info on using Easy.pm from els
+| * 41aee2a - 3 months ago - Sitaram Chamarty - add package quals
+| * 8cae257 - 3 months ago - Sitaram Chamarty - EXPERIMENTAL: git-annex support migrated
+|/&nbsp;
+* aec8c71 - 3 months ago - Sitaram Chamarty - &#39;help&#39; command barfage fix
+* ed4862f - 3 months ago - Sitaram Chamarty - minor changes to README
+* cc9727c - 3 months ago - Sitaram Chamarty - minor bug in include file handing...
+* 7409635 - 3 months ago - Sitaram Chamarty - (minor) add a &#39;dd&#39; function to quickly dump stuf
+| * 38f0622 - 3 months ago - Sitaram Chamarty - timing in g2
+* | ba67f6f - 3 months ago - Olof Johansson - Bailout tests unless envvar $GITOLITE_TEST is &#39;y
+* | 31166e1 - 4 months ago - Nate Jones - find symlinked commands when generating help list
+* | b2a3509 - 4 months ago - Sitaram Chamarty - point people to mailing list for general quest
+* | 57bea39 - 5 months ago - Patrick Westerhoff - Add special %GL_CREATOR variable for git-con
+* | f4eb6dc - 4 months ago - Sitaram Chamarty - &#39;rsync&#39; command to create and send bundles (ma
+* | 8ad1eee - 4 months ago - Sitaram Chamarty - migrated &#39;who-pushed&#39; command (manual smoke te
+* | d3279e4 - 4 months ago - Dave Abrahams - Fix a typo
+* | fd0778e - 4 months ago - Sitaram Chamarty - (minor) don&#39;t keep adding the same thing to $P
+* | f35db87 - 4 months ago - Sitaram Chamarty - (minor) new mailing list
+* | f545bc0 - 5 months ago - Sitaram Chamarty - minor fixups
+* | db2cf23 - 5 months ago - Sitaram Chamarty - logical expressions on refexes :-)</pre>
+
+<pre>
+$ git pull
+Updating 724c741..5f9789e
+Fast-forward
+CHANGELOG&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp; 25 +++++++++++++++
+README.txt&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp; 18 +++++------
+src/VREF/COUNT&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp;&nbsp; 5 ++-
+src/VREF/FILETYPE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp;&nbsp; 3 +-
+src/VREF/VOTES&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp;&nbsp; 2 +-
+src/VREF/refex-expr&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp;&nbsp; 2 ++
+src/commands/D&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp;&nbsp; 3 +-
+src/commands/fork&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp;&nbsp; 1 +
+src/gitolite-shell&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp;&nbsp; 2 +-
+src/lib/Gitolite/Common.pm&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp; 17 ++++++++++
+src/lib/Gitolite/Conf/Load.pm&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp; 49 +++++++++++++++++++++++------
+src/lib/Gitolite/Conf/Store.pm&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp; 44 +++++++++++++++++---------
+src/lib/Gitolite/Rc.pm&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp;&nbsp; 4 +--
+src/syntactic-sugar/keysubdirs-as-groups&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp;&nbsp; 2 +-
+src/triggers/bg&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp; 17 ++++++++++
+src/triggers/post-compile/ssh-authkeys-split&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp; 59 +++++++++++++++++++++++++++++++++++
+src/triggers/post-compile/update-description-file |&nbsp;&nbsp; 17 ++++++++++
+src/triggers/post-compile/update-git-configs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp;&nbsp; 2 --
+src/triggers/upstream&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp; 30 ++++++++++++++++--
+t/0-me-first.t&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp; 24 +++++++++++---
+t/basic.t&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp;&nbsp; 4 +--
+t/fork.t&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp;&nbsp; 3 +-
+t/merge-check.t&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp;&nbsp; 6 ++--
+t/sequence.t&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp;&nbsp; 2 +-
+t/vrefs-1.t&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp;&nbsp; 6 ++--
+t/vrefs-2.t&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp;&nbsp; 6 ++--
+26 files changed, 286 insertions(+), 67 deletions(-)
+create mode 100755 src/triggers/bg
+create mode 100755 src/triggers/post-compile/ssh-authkeys-split
+create mode 100755 src/triggers/post-compile/update-description-file</pre>
+
+<p>更新后的最新 20 次提交</p>
+
+<pre>
+$ git l
+* 351da70 - 3 months ago - Sitaram Chamarty - add package quals
+* a1afd46 - 3 months ago - Sitaram Chamarty - EXPERIMENTAL: git-annex support migrated
+| * be3c1a5 - 8 days ago - Sitaram Chamarty - use a redis cache.&nbsp; (no sausage making!)
+|/&nbsp;
+* 5f9789e - 2 days ago - Sitaram Chamarty - v3.2
+* d3d9396 - 2 days ago - Sitaram Chamarty - Uggh; horrible inner loop screwing up all performance :-(
+* 1f96180 - 3 days ago - Sitaram Chamarty - allow multi-line pubkeys; see code for doc
+* 57760d7 - 4 days ago - gitolite tester - refex-expr: die when admin forgets to add the required line to th
+* 16f2d9b - 3 days ago - gitolite tester - gl-conf must be created even if the repo para has only config lin
+* c03d107 - 6 days ago - Sitaram Chamarty - help run some trigger programs in the background
+* d491b53 - 7 days ago - Sitaram Chamarty - (minor) add quick and dirty timer code to Common.pm
+* 8a9564f - 8 days ago - Sitaram Chamarty - some minor rearrangements of code...
+* a509b20 - 2 weeks ago - Sitaram Chamarty - move %GL_REPO and %GL_CREATOR substitution into core
+* be61cd2 - 10 days ago - Sitaram Chamarty - make sure gl-perms exists, even if it is empty...
+* 70ad045 - 6 weeks ago - Sitaram Chamarty - (minor fixups to some non-code parts)
+* 2aa129b - 3 weeks ago - Andrew Page - fix for keysubdirs-as-groups sugar script to support &quot;old style mult
+* a802071 - 3 weeks ago - Sitaram Chamarty - (test suite) stop using &#39;ls&#39; to test for presence/absence of fi
+* 4eb8cd4 - 3 weeks ago - Sitaram Chamarty - (minor) bash -&gt; sh changes in some non-core code
+* 3eefc06 - 5 weeks ago - Sitaram Chamarty - (minor) clarify that D only works on wild repos
+* 896ada5 - 5 weeks ago - Eugene E. Kashpureff Jr - Fix spurious error in triggers/upstream
+* 51ab768 - 6 weeks ago - Sitaram Chamarty - v3.1</pre>
+
+<p>执行 gitolite/install -to /path/to/bin/ 进行安装</p>
+
+<pre>
+$ mkdir -p bin
+$ gitolite/install -to /Users/git/bin
+$ ssh-keygen -t rsa
+$ mv .ssh/id_rsa.pub git.pub
+$ bin/gitolite setup -pk git.pub
+Initialized empty Git repository in /Users/git/repositories/gitolite-admin.git/
+Initialized empty Git repository in /Users/git/repositories/testing.git/
+WARNING: /Users/git/.ssh/authorized_keys missing; creating a new one</pre>
+
+<p>查看生成的 .ssh/authorized_keys 可发现比正常情况多了 command=&quot;...gitolite-shell git&quot;</p>
+
+<pre>
+$ cat .ssh/authorized_keys
+# gitolite start
+command=&quot;/Users/git/bin/gitolite-shell git&quot;,no-port-forwarding,no-X11-forwarding,no-agent-forwarding,no-pty ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCqWcrwiaCYcJ08Z8puVWcpAVtQc7gv1lwEz557O+6JxVzdlHba1OKgzRdud3eaCuy8F87eKrOAFIqDAvtpKoH7kwRswj61YGCO7K10P/v4YW7JV5WgHgYW/JM4QvJXLse/uuvqPXMfOKLEeQYp9cEPLJRVakMNgoStjgtFbeHKhhAJGWfQl6T9wZKNQppVuBI2TC7Lyq5kSJr0hITHV3RJHtATAI5jOp+oomGwnPmVU1ht5E8v0UYnnuoQVwWGv5OJffnhgwJqAwymSDpjBkFCGisIBGjqSIvC+k5yD9a6Mh9ofWThp5qDVCmTloEk5DFSKgfsmLEJb7iXvWwglPzl git@mac
+# gitolite end</pre>
+
+<h3>gitolite-admin 库的管理和使用</h3>
+
+<p>做为 gitolite-admin 这个库的管理者，需要用到的是 bin/gitolite setup -k git.pub 这个步骤中所对应的 id_rsa，将其从服务端（或其他位置）下载到本地 .ssh 目录下，为了方便管理，可重命名为 git.id_rsa，与上文中的 git.pub 对应。以下是简捷的一个测试，看 gitolite-admin 是否已经正常工作。</p>
+
+<pre>
+$ ssh -i id_rsa git@localhost
+hello git, this is git@mac running gitolite3 v3.04-15-gaec8c71 on git 1.7.5.4
+
+R W gitolite-admin
+R W testing
+Connection to localhost closed.</pre>
+
+<p>2012-11-16 19:15 使用当前用户时的命令</p>
+
+<pre>
+$ ssh mlhch@gitolite.git
+PTY allocation request failed on channel 0
+hello gitolite.git, this is mlhch@mlac running gitolite3 v3.2-0-g5f9789e on git 1.7.10.2 (Apple Git-33)
+
+R W gitolite-admin
+R W testing
+Connection to gitolite.git closed.</pre>
+
+<p>可是在 git clone git@host:gitolite-admin 步骤中并不适合使用 -i 参数，所以办法是配置 .ssh/config 文件。</p>
+
+<pre>
+$ git clone git@localhost:gitolite-admin
+Cloning into gitolite-admin...
+remote: Counting objects: 17, done.
+remote: Compressing objects: 100% (13/13), done.
+remote: Total 17 (delta 3), reused 0 (delta 0)
+Receiving objects: 100% (17/17), done.
+Resolving deltas: 100% (3/3), done.</pre>
+
+<p>接下来运行 ssh-keygen 生成新的 id_rsa 和 id_rsa.pub 并重命名 id_rsa.pub 为 &lt;username&gt;.pub，当然，使用并重命名已有的公钥和私钥也可，放到 gitolite-admin/keydir 目录下，编辑 gitolite-admin/conf/gitolite.conf，最后提交更改并 push 到服务器。</p>
+
+<p>接下来进行测试。此步成功的关键在于如果本机既是 gitolite-admin 库的使用者，又是测试库 ml 的使用者，那么需要修改 .ssh/config 文件，使得连接服务器（比如 localhost）时，使用各自的 *.pub 文件。</p>
+
+<pre>
+$ git clone git@localhost:ml
+Cloning into ml...
+warning: You appear to have cloned an empty repository.</pre>
+
+<h2>移动 gitolite repositories</h2>
+
+<p>2011-11-17 06:06 感冒了，鼻子不舒服，还好头不疼了</p>
+
+<p>http://sitaramc.github.com/gitolite/special.html#elsewhere</p>
+
+<p>文档中明确指出，gitolite 坚持把 repositories 放在 $HOME 目录下，如果确实希望改变这个目录，那么请使用链接</p>
+
+<h2>gitolite 的卸载</h2>
+
+<pre>
+~/.gitolite
+~/.gitolite.rc</pre>
+
+<p>这个目录和这个文件是关键</p>
+
+<h2>GitWeb</h2>
+
+<p>打开 git 安装源文件，即可发现根目录下有 gitweb 目录，其中 INSTALL 文件给出了安装方法。</p>
+
+<ol>
+	<li>
+	<p>在 git-1.7.12.1 根目录下执行 make gitweb，生成 gitweb.cgi 和 static/gitweb.js</p>
+
+	<pre>
+$ which git
+/usr/bin/git</pre>
+
+	<pre>
+$ make prefix=/usr/bin gitweb
+&nbsp;&nbsp;&nbsp; SUBDIR gitweb
+&nbsp;&nbsp;&nbsp; SUBDIR ../
+make[2]: `GIT-VERSION-FILE&#39; is up to date.
+&nbsp;&nbsp;&nbsp; GEN gitweb.cgi
+&nbsp;&nbsp;&nbsp; GEN static/gitweb.js</pre>
+
+	<p>2013-02-14 22:51 星期四（初五）&nbsp;原来这里可以显示 GIT_VERSION</p>
+
+	<pre>
+$ make prefix=/usr/bin gitweb
+GIT_VERSION = 1.8.1.3.568.g5bf72ed
+&nbsp;&nbsp;&nbsp; SUBDIR gitweb
+&nbsp;&nbsp;&nbsp; SUBDIR ../
+make[2]: `GIT-VERSION-FILE&#39; is up to date.
+&nbsp;&nbsp;&nbsp; GEN gitweb.cgi
+&nbsp;&nbsp;&nbsp; GEN static/gitweb.js</pre>
+	</li>
+	<li>
+	<p>执行 make&nbsp;install-gitweb</p>
+
+	<pre>
+$ sudo mkdir /var/www/cgi-bin
+$ sudo make gitwebdir=/var/www/cgi-bin/ install-gitweb
+make -C gitweb install
+&nbsp;&nbsp;&nbsp; SUBDIR ../
+make[2]: `GIT-VERSION-FILE&#39; is up to date.
+&nbsp;&nbsp;&nbsp; GEN gitweb.cgi
+install -d -m 755 &#39;/var/www/cgi-bin/&#39;
+install -m 755 gitweb.cgi &#39;/var/www/cgi-bin/&#39;
+install -d -m 755 &#39;/var/www/cgi-bin//static&#39;
+install -m 644 static/gitweb.js static/gitweb.css static/git-logo.png static/git-favicon.png &#39;/var/www/cgi-bin//static&#39;</pre>
+
+	<p>2013-02-14 23:02 项目根目录现在是&nbsp;/Users/mlhch/gitolite/repositories</p>
+
+	<pre>
+$ make gitwebdir=/Users/mlhch/gitolite/gitweb install-gitweb</pre>
+	</li>
+	<li>
+	<p>实际上，无需使用专门的 /var/www/cgi-bin/ 目录 和 ScriptAlias 指令，为了执行 gitweb.cgi，使用 SetHandler perl-script 即可，不过使用 Alias 和 Directory 局部限制 cgi-script 会更安全。</p>
+
+	<pre>
+Alias /gitweb &quot;/var/www/gitweb&quot;
+&lt;Directory &quot;/var/www/gitweb&quot;&gt;
+&nbsp;&nbsp;&nbsp;&nbsp; AddHandler cgi-script .cgi
+&nbsp;&nbsp;&nbsp;&nbsp; Options Indexes FollowSymlinks ExecCGI
+&nbsp;&nbsp;&nbsp;&nbsp; AllowOverride None
+&nbsp;&nbsp;&nbsp;&nbsp; Order allow,deny
+&nbsp;&nbsp;&nbsp;&nbsp; Allow from all
+&lt;/Directory&gt;</pre>
+	</li>
+	<li>
+	<p>配置 gitweb.cgi，修改如下正确的 $GIT 路径和 $projectroot 路径</p>
+
+	<pre>
+# core git executable to use
+# this can just be &quot;git&quot; if your webserver has a sensible PATH
+our $GIT = &quot;/usr/bin/git&quot;;
+
+# absolute fs-path which will be prepended to the project path
+#our $projectroot = &quot;/pub/scm&quot;;
+our $projectroot = &quot;/Users/mlhch/repositories&quot;;</pre>
+	</li>
+</ol>
+
+<h2>Public Repositories In Gitolite With Umasks</h2>
+
+<p>http://www.giocc.com/public-repositories-in-gitolite-with-umasks.html</p>
+
+<p>2012-09-23 01:17 星期日</p>
+
+<p>At ZeroZaku, we use Git and Gitolite to easily push updates from our local computers to the server; however, the problem is that a fresh installation of Gitolite would prevent apache from reading the working tree because of its default permissions.</p>
+
+<h3>Apache, Permissions, and umasks</h3>
+
+<p>In short,&nbsp;umasks determine the file and directory permissions for newly created files and directories. Because Git checkouts consistently create and destroy files, they constantly change permissions.</p>
+
+<p>Apache, however, must have permissions to read the file in order to serve it to users. Apache likes the&nbsp;0022&nbsp;umask, so let&rsquo;s change the Gitolite configuration for umasks.</p>
+
+<h3>The umask Configuration in Gitolite</h3>
+
+<p>The default UMASK that gitolite uses makes all the repos and their contents have&nbsp;rwx------&nbsp;permissions. People who want to run gitweb realise that this will not do.</p>
+
+<p>By default, Gitolite has a&nbsp;umask&nbsp;of&nbsp;0077&nbsp;which is equivalent to:</p>
+
+<ul>
+	<li>600 (rw-------)&nbsp;for files</li>
+	<li>700 (rwx------)&nbsp;for directories</li>
+</ul>
+
+<p>Apache cannot read these permissions (unless apache is coincidentally the gitolite user and web user which I highly do not recommend). Fortunately, the Gitolite developers have foreseen this issue for Gitweb users:</p>
+
+<p>The correct way to deal with this is to change this variable to&nbsp;0027&nbsp;(which gets you&nbsp;rwxr-x---), then add the apache or httpd user running the webserver as a member of the &lsquo;gitolite&rsquo; group.</p>
+
+<h3>Changing the umask Configuration</h3>
+
+<p>Please note that all of these commands should be executed within a linux shell (command line)</p>
+
+<p>First, switch to your Gitolite user and open your&nbsp;.gitolite.rc&nbsp;file in your favorite editor of choice.</p>
+
+<p>Next, find&nbsp;$REPO_UMASK = 0077&nbsp;and replace with&nbsp;$REPO_UMASK = 0022&nbsp;which is equivalent to:</p>
+
+<ul>
+	<li>644 (rw-r--r--)&nbsp;for files.</li>
+	<li>755 (rwxr-xr-x)&nbsp;for directories.</li>
+</ul>
+
+<p>Apache can now read the repositories and their working trees. Any project that you are hosting on Gitolite will now be publicly readable by any linux user that is added to the Gitolite group but what if we don&rsquo;t want all of our projects to be so exposed?</p>
+
+<h3>Repository-Specific umasks</h3>
+
+<p>Fortunately for us again, Sitaram shows us how to&nbsp;<a href="http://sitaramc.github.com/gitolite/doc/gitolite.conf.html">individually configure permissions for each repository</a>. This is especially useful if we have many projects that require different configurations so here&rsquo;s my interpretation of his instructions:</p>
+
+<ol>
+	<li>
+	<p>Open&nbsp;.gitolite.rc&nbsp;and set&nbsp;GL_GITCONFIG_KEYS&nbsp;to&nbsp;core.sharedRepository.</p>
+	</li>
+	<li>
+	<p>In your&nbsp;gitolite-admin.git&nbsp;repository, open the configuration found inconf/gitolite.conf.</p>
+	</li>
+	<li>
+	<p>For each repository configuration that you want to make public, add&nbsp;config core.sharedRepository = 0022&nbsp;under the project name (where user permissions are).</p>
+	</li>
+	<li>
+	<p>Push the&nbsp;gitolite-admin.git&nbsp;repository updates to your server.</p>
+	</li>
+	<li>
+	<p>Fix the permissions manually on the server for the projects that have been changed:</p>
+
+	<ul>
+		<li>find /path/to/repo -type f -exec chmod 664 {} \;&nbsp;for files.</li>
+		<li>find /path/to/repo -type d -exec chmod 775 {} \;&nbsp;for directories.</li>
+	</ul>
+	</li>
+</ol>
+
+<p>Individual repositories should now be available to the public for either Gitweb or Apache. If you need any more help, you could always join the&nbsp;<a href="http://groups.google.com/group/gitolite">Gitolite Google Group</a>&nbsp;or leave a comment below and I&#39;ll help any way I can.</p>
+
+<h2>Git change log</h2>
+
+<p>2013-02-14 20:13 查看 git 库下 gitweb 目录的变动情况</p>
+
+<p><a href="http://localhost/gitweb/?p=fork/git.git;a=tree;hb=HEAD">[fork/git.git]</a>&nbsp;/&nbsp;<a href="http://localhost/gitweb/?p=fork/git.git;a=tree;f=gitweb;hb=HEAD">gitweb</a>&nbsp;/&nbsp;<a href="http://localhost/gitweb/?p=fork/git.git;a=blob_plain;f=gitweb/gitweb.perl;hb=HEAD">gitweb.perl</a></p>
+
+<table>
+	<tbody>
+		<tr>
+			<td>2012-10-12</td>
+			<td><a href="http://localhost/gitweb/?p=fork/git.git;a=search;h=10ed9e51a5880430f7f109ff83f950a768a7c530;s=Dylan+Alex+Simon;st=author">Dylan Alex Simon</a></td>
+			<td><a href="http://localhost/gitweb/?p=fork/git.git;a=commit;h=debf29dc2921e12c4fa8205d894741a694f0c4fc">gitweb.cgi: fix &quot;comitter_tz&quot; typo in feed</a></td>
+			<td><a href="http://localhost/gitweb/?p=fork/git.git;a=blob;f=gitweb/gitweb.perl;hb=debf29dc2921e12c4fa8205d894741a694f0c4fc">blob</a>&nbsp;|&nbsp;<a href="http://localhost/gitweb/?p=fork/git.git;a=commitdiff;h=debf29dc2921e12c4fa8205d894741a694f0c4fc">commitdiff</a></td>
+		</tr>
+	</tbody>
+</table>
+
+<p><a href="http://localhost/gitweb/?p=fork/git.git;a=commit;h=HEAD">Merge branch &#39;maint&#39;</a></p>
+
+<p><a href="http://localhost/gitweb/?p=fork/git.git;a=tree;hb=HEAD">[fork/git.git]</a>&nbsp;/&nbsp;<a href="http://localhost/gitweb/?p=fork/git.git;a=tree;f=gitweb;hb=HEAD">gitweb</a>&nbsp;/&nbsp;</p>
+
+<table>
+	<tbody>
+		<tr>
+			<td>2013-01-29</td>
+			<td><a href="http://localhost/gitweb/?p=fork/git.git;a=search;s=Andrej+E+Baranov;st=author">Andrej E Baranov</a></td>
+			<td><a href="http://localhost/gitweb/?p=fork/git.git;a=commit;h=574855814f97bf0dc37133574fa3fa2a5a44555d">gitweb: refer to picon/gravatar images over the same...</a></td>
+			<td><a href="http://localhost/gitweb/?p=fork/git.git;a=tree;f=gitweb;hb=574855814f97bf0dc37133574fa3fa2a5a44555d">tree</a>&nbsp;|&nbsp;<a href="http://localhost/gitweb/?p=fork/git.git;a=commitdiff;h=574855814f97bf0dc37133574fa3fa2a5a44555d">commitdiff</a></td>
+		</tr>
+	</tbody>
+</table>
+
+<hr />
+<p>当使用 git push --all ml 命令成功推送本地的分支后，gitweb 上就可以进行查看了。</p>
+
+<p><a href="http://localhost/gitweb/?p=fork/git.git;a=heads">heads</a></p>
+
+<table>
+	<tbody>
+		<tr>
+			<td>39 hours ago</td>
+			<td><a href="http://localhost/gitweb/?p=fork/git.git;a=shortlog;h=refs/heads/pu">pu</a></td>
+			<td><a href="http://localhost/gitweb/?p=fork/git.git;a=shortlog;h=refs/heads/pu">shortlog</a>&nbsp;|&nbsp;<a href="http://localhost/gitweb/?p=fork/git.git;a=log;h=refs/heads/pu">log</a>&nbsp;|&nbsp;<a href="http://localhost/gitweb/?p=fork/git.git;a=tree;h=refs/heads/pu;hb=refs/heads/pu">tree</a></td>
+		</tr>
+		<tr>
+			<td>39 hours ago</td>
+			<td><a href="http://localhost/gitweb/?p=fork/git.git;a=shortlog;h=refs/heads/next">next</a></td>
+			<td><a href="http://localhost/gitweb/?p=fork/git.git;a=shortlog;h=refs/heads/next">shortlog</a>&nbsp;|&nbsp;<a href="http://localhost/gitweb/?p=fork/git.git;a=log;h=refs/heads/next">log</a>&nbsp;|&nbsp;<a href="http://localhost/gitweb/?p=fork/git.git;a=tree;h=refs/heads/next;hb=refs/heads/next">tree</a></td>
+		</tr>
+		<tr>
+			<td>41 hours ago</td>
+			<td><a href="http://localhost/gitweb/?p=fork/git.git;a=shortlog;h=refs/heads/master">master</a></td>
+			<td><a href="http://localhost/gitweb/?p=fork/git.git;a=shortlog;h=refs/heads/master">shortlog</a>&nbsp;|&nbsp;<a href="http://localhost/gitweb/?p=fork/git.git;a=log;h=refs/heads/master">log</a>&nbsp;|&nbsp;<a href="http://localhost/gitweb/?p=fork/git.git;a=tree;h=refs/heads/master;hb=refs/heads/master">tree</a></td>
+		</tr>
+		<tr>
+			<td>44 hours ago</td>
+			<td><a href="http://localhost/gitweb/?p=fork/git.git;a=shortlog;h=refs/heads/maint">maint</a></td>
+			<td><a href="http://localhost/gitweb/?p=fork/git.git;a=shortlog;h=refs/heads/maint">shortlog</a>&nbsp;|&nbsp;<a href="http://localhost/gitweb/?p=fork/git.git;a=log;h=refs/heads/maint">log</a>&nbsp;|&nbsp;<a href="http://localhost/gitweb/?p=fork/git.git;a=tree;h=refs/heads/maint;hb=refs/heads/maint">tree</a></td>
+		</tr>
+		<tr>
+			<td>4 days ago</td>
+			<td><a href="http://localhost/gitweb/?p=fork/git.git;a=shortlog;h=refs/heads/todo">todo</a></td>
+			<td><a href="http://localhost/gitweb/?p=fork/git.git;a=shortlog;h=refs/heads/todo">shortlog</a>&nbsp;|&nbsp;<a href="http://localhost/gitweb/?p=fork/git.git;a=log;h=refs/heads/todo">log</a>&nbsp;|&nbsp;<a href="http://localhost/gitweb/?p=fork/git.git;a=tree;h=refs/heads/todo;hb=refs/heads/todo">tree</a></td>
+		</tr>
+	</tbody>
+</table>
+
+<hr />
+<p>使用 git push ml 2013-02-14_for-bfjw 成功分享了标签到服务器上</p>
+
+<table>
+	<tbody>
+		<tr>
+			<td>3 days ago</td>
+			<td><a href="http://localhost/gitweb/?p=fork/html5-bp.git;a=search;s=Noah+Bass;st=author">Noah Bass</a></td>
+			<td><a href="http://localhost/gitweb/?p=fork/html5-bp.git;a=commit;h=b4587434f807115d54912e068b4627974531c701">Fix link to Pull Request help in CONTRIBUTING.md</a>&nbsp;<a href="http://localhost/gitweb/?p=fork/html5-bp.git;a=shortlog;h=refs/heads/master">master</a>&nbsp;<a href="http://localhost/gitweb/?p=fork/html5-bp.git;a=shortlog;h=refs/tags/2013-02-14_for-bfjw">2013-02-14_for-bfjw</a></td>
+			<td><a href="http://localhost/gitweb/?p=fork/html5-bp.git;a=commit;h=b4587434f807115d54912e068b4627974531c701">commit</a>&nbsp;|&nbsp;<a href="http://localhost/gitweb/?p=fork/html5-bp.git;a=commitdiff;h=b4587434f807115d54912e068b4627974531c701">commitdiff</a>&nbsp;|&nbsp;<a href="http://localhost/gitweb/?p=fork/html5-bp.git;a=tree;h=b4587434f807115d54912e068b4627974531c701;hb=b4587434f807115d54912e068b4627974531c701">tree</a>&nbsp;|&nbsp;<a href="http://localhost/gitweb/?p=fork/html5-bp.git;a=snapshot;h=b4587434f807115d54912e068b4627974531c701;sf=tgz">snapshot</a></td>
+		</tr>
+	</tbody>
+</table>
+
+<p><a href="http://localhost/gitweb/?p=fork/html5-bp.git;a=tags">tags</a></p>
+
+<table>
+	<tbody>
+		<tr>
+			<td>3 days ago</td>
+			<td><a href="http://localhost/gitweb/?p=fork/html5-bp.git;a=commit;h=b4587434f807115d54912e068b4627974531c701">2013-02-14_for-bfjw</a></td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>|&nbsp;<a href="http://localhost/gitweb/?p=fork/html5-bp.git;a=commit;h=b4587434f807115d54912e068b4627974531c701">commit</a>&nbsp;|&nbsp;<a href="http://localhost/gitweb/?p=fork/html5-bp.git;a=shortlog;h=refs/tags/2013-02-14_for-bfjw">shortlog</a>&nbsp;|&nbsp;<a href="http://localhost/gitweb/?p=fork/html5-bp.git;a=log;h=refs/tags/2013-02-14_for-bfjw">log</a></td>
+		</tr>
+	</tbody>
+</table>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
