@@ -1,0 +1,29 @@
+<h1>PhoneGap - WebView alert and confirm</h1>
+
+<p>2013-12-28 03:13 Saturday</p>
+
+<p>WebView 已经自己实现了 alert 和 confirm 等函数的功能，Android 版本见如下位置</p>
+
+<pre>
+.../CordovaLib/src/org/apache/cordova</pre>
+
+<p>onJsAlert(WebView view, String url, String message, final JsResult result) 的部分代码：</p>
+
+<pre>
+        dlg.setTitle(&quot;Alert&quot;);
+        //Don&#39;t let alerts break the back button
+        dlg.setCancelable(true);</pre>
+
+<p>onJsConfirm(WebView view, String url, String message, final JsResult result) 的部分代码</p>
+
+<pre>
+        dlg.setTitle(&quot;Confirm&quot;);
+        dlg.setCancelable(true);
+</pre>
+
+<p>由此可总结 2 点：</p>
+
+<ul>
+	<li>alert 出的对话框标题为 &quot;Alert&quot;，confirm 出的对话框标题为 &quot;Confirm&quot;，而 navigator.notofication.alert 和 confirm 的标题是可指定的。</li>
+	<li>为什么 Android 版本的 alert 和 confirm 在触摸对话框之外的地方就自动取消了，原因就是 dlg.setCancelable(true)</li>
+</ul>
