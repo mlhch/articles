@@ -2,7 +2,23 @@
 
 <p>2012-09-15 21:07:19 +08:00 Saturday</p>
 
-<h4>Compare between tags</h4>
+<h2>官方网站</h2>
+
+<p><a href="http://sitaramc.github.com/gitolite/" target="_blank">http://sitaramc.github.com/gitolite/</a></p>
+
+<p>官方 git 库：https://github.com/sitaramc/gitolite</p>
+
+<p>如果有兴趣，可以看一下此网站的最上层有什么东西：http://sitaramc.github.com/</p>
+
+<ul>
+	<li>
+	<p>2013-12-28 15:04 Saturday</p>
+
+	<p>今天迷惑了好一会才发现，之所以 git clone ml.git:{$repo} 不成功，是因为 .ssh/authorized_keys 中 ml.git 对应的 rsa 的内容在 gitolite start/end 之外还有一份，这样导致 ssh ml.git 会直接登录，而不是列出相应的库和权限</p>
+	</li>
+</ul>
+
+<h2>Compare between tags</h2>
 
 <p>2013-03-05 12:53 星期二</p>
 
@@ -72,14 +88,6 @@ index b6e2f1c..00a3e30 100644 (file)
 	<p>Gitosis 现在也已经不再维护，或者说没有动静了。但是他们的原理其实是一样的。</p>
 	</li>
 </ul>
-
-<h2>官方网站</h2>
-
-<p>http://sitaramc.github.com/gitolite/</p>
-
-<p>官方 git 库：https://github.com/sitaramc/gitolite</p>
-
-<p>如果有兴趣，可以看一下此网站的最上层有什么东西：http://sitaramc.github.com/</p>
 
 <h2>安装</h2>
 
