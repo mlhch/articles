@@ -1,0 +1,71 @@
+<h1>OS - CentOS</h1>
+
+<p>2012-03-28 06:15:53 +08:00 Wednesday</p>
+
+<p><a href="http://www.centos.org/" target="_blank">http://www.centos.org/</a></p>
+
+<table cellpadding="3" cellspacing="2">
+	<tbody>
+		<tr>
+			<td>
+			<p>CentOS Overview</p>
+
+			<p>CentOS is an Enterprise-class Linux Distribution derived from sources freely provided to the public by a prominent North American Enterprise Linux vendor.&nbsp; CentOS conforms fully with the upstream vendor&#39;s redistribution policy and aims to be 100% binary compatible. (CentOS mainly changes packages to remove upstream vendor branding and artwork.)&nbsp; CentOS is free.<br />
+			<br />
+			CentOS is developed by a small but growing team of core developers.&nbsp; In turn the core developers are supported by an active user community including system administrators, network administrators, enterprise users, managers, core Linux contributors and Linux enthusiasts from around the world.<br />
+			<br />
+			CentOS has numerous advantages over some of the other clone projects including:&nbsp; an active and growing user community, quickly rebuilt, tested, and QA&#39;ed errata packages, an extensive&nbsp;<a href="http://www.centos.org/modules/tinycontent/index.php?id=15">mirror network</a>, developers who are contactable and responsive, multiple free support avenues including<a href="http://www.centos.org/modules/tinycontent/index.php?id=8">IRC Chat</a>,&nbsp;<a href="http://www.centos.org/modules/tinycontent/index.php?id=16">Mailing Lists</a>,&nbsp;<a href="http://www.centos.org/modules/newbb/">Forums</a>, a dynamic&nbsp;<a href="http://www.centos.org/modules/smartfaq/">FAQ</a>.<br />
+			<br />
+			This site makes use of Javascript.&nbsp; If your browser doesn&#39;t work with Javascript we recommend you use&nbsp;<a href="http://www.mozilla.org/products/firefox/" target="_blank">FireFox</a>.</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<table cellpadding="3" cellspacing="2">
+	<tbody>
+		<tr>
+			<td>
+			<p>CentOS 6 Releases</p>
+
+			<p>March 12th 2013<br />
+			<br />
+			The CentOS team is pleased to&nbsp;<a href="http://lists.centos.org/pipermail/centos-announce/2013-March/019276.html" target="_blank">announce</a>&nbsp;the immediate availability of CentOS 6.4 for i386 and x86_64 architectures.<br />
+			<br />
+			CentOS 6.4 is based on the upstream release EL 6.4 and includes<br />
+			packages from all variants. All upstream repositories have been combined into one, to make it easier for end users to work with.<br />
+			<br />
+			There are some very important changes to this release compared with the previous versions of CentOS and we highly recommend reading this announcement along with the&nbsp;<a href="http://wiki.centos.org/Manuals/ReleaseNotes/CentOS6.4" target="_blank">Release Notes</a>. Especially take a look at the &quot;Known Issues&quot; section.&nbsp;<br />
+			<br />
+			There is also a minimal install CD that will get you a very small base install that you can add to.<br />
+			<br />
+			And now: Have fun.<br />
+			<br />
+			Release Notes:&nbsp;<a href="http://wiki.centos.org/Manuals/ReleaseNotes/CentOS6.4" target="_blank">CentOS</a>&nbsp;<br />
+			Download:&nbsp;<a href="http://mirror.centos.org/centos/6/isos/i386/" target="_blank">i386</a>&nbsp;|&nbsp;<a href="http://mirror.centos.org/centos/6/isos/x86_64/" target="_blank">x86_64</a></p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<h3>CentOS 6.0 网络配置</h3>
+
+<p>在填写 Hostname 这一步，左下角有 &ldquo;Configure Network&quot; 按钮，选中 &quot;System eth0&quot; 进行编辑，勾选 &rdquo;Connect automatically&quot;，点击 &quot;Apply&quot;，保存设置，继续安装。</p>
+
+<h3>系统升级</h3>
+
+<p>终于不用每次都下载好几 G 的光盘源文件了。</p>
+
+<pre>
+# cat /etc/redhat-release 
+CentOS release 6.4 (Final)</pre>
+
+<pre>
+# yum update
+...
+</pre>
+
+<pre>
+# cat /etc/redhat-release 
+CentOS release 6.5 (Final)
+</pre>
