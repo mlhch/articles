@@ -296,6 +296,57 @@ $ git l
 * 896ada5 - 5 weeks ago - Eugene E. Kashpureff Jr - Fix spurious error in triggers/upstream
 * 51ab768 - 6 weeks ago - Sitaram Chamarty - v3.1</pre>
 
+<blockquote>
+<p>2013-12-28 12:51 Flowchart 用 sencha cordova 重构告一段落，要用 gitolite 存储起来</p>
+
+<pre>
+$ git pull
+remote: Counting objects: 474, done.
+remote: Compressing objects: 100% (210/210), done.
+remote: Total 474 (delta 265), reused 394 (delta 233)
+Receiving objects: 100% (474/474), 166.39 KiB | 85.00 KiB/s, done.
+Resolving deltas: 100% (265/265), done.
+From git://github.com/sitaramc/gitolite
+   f1c69a3..f8776f5  master     -&gt; origin/master
+ + bd54c56...b1d3c05 git-annex  -&gt; origin/git-annex  (forced update)
+ + 6276d15...d9714ed namespaces -&gt; origin/namespaces  (forced update)
+ + 8e801ac...0895c7b redis      -&gt; origin/redis  (forced update)
+From git://github.com/sitaramc/gitolite
+ * [new tag]         v3.3       -&gt; v3.3
+ * [new tag]         v3.4       -&gt; v3.4
+ * [new tag]         v3.5       -&gt; v3.5
+ * [new tag]         v3.5.1     -&gt; v3.5.1
+ * [new tag]         v3.5.2     -&gt; v3.5.2
+ * [new tag]         v3.5.3     -&gt; v3.5.3
+ * [new tag]         v3.5.3.1   -&gt; v3.5.3.1
+Updating f1c69a3..f8776f5
+Fast-forward</pre>
+
+<pre>
+$ git l f1c69a3
+* f1c69a3 - 1 year, 1 month ago - Sitaram Chamarty - (ml/master)- bugfix: don&#39;t delete description file when running perms
+* 2741fad - 1 year, 1 month ago - Sitaram Chamarty -- a few minor changes
+* b6d6260 - 1 year, 1 month ago - Sitaram Chamarty -- prevent empty %groups being created in compiled conf
+* 72e36f3 - 1 year, 1 month ago - Sitaram Chamarty -- oops; hashes were getting printed twice in certain cases...
+* d2214b0 - 1 year, 1 month ago - Stephen Palmer -- Fixed bug in lock script
+* 96cc2ea - 1 year, 1 month ago - Sitaram Chamarty -- new features relating to creating wild repos:
+* 96be950 - 1 year, 1 month ago - Sebastian Koslowski -- sudo command: CLI fix: 2 non-empty args required
+* 7cec71b - 1 year, 1 month ago - Sitaram Chamarty -- minor fixups to some non-core programs
+* cd83841 - 1 year, 1 month ago - Sitaram Chamarty -- &#39;gitolite mirror&#39; needs to set exit code on push failure
+* 2018267 - 1 year, 1 month ago - Sitaram Chamarty -- (minor) fixes to lint program, mainly usage message
+* a26532d - 1 year, 1 month ago - Sitaram Chamarty -- allow simple macros in conf file
+* 5f9789e - 1 year, 1 month ago - Sitaram Chamarty - (tag: v3.2)- v3.2</pre>
+
+<pre>
+bogon:gitolite mlhch$ git l
+* f8776f5 - 9 weeks ago - Sitaram Chamarty - (HEAD, origin/master, origin/HEAD, master)- allow repos to be created when only config entries present
+* 3dad4f8 - 10 weeks ago - Sitaram Chamarty - (tag: v3.5.3.1)- oops; fa06a34 had a nasty bug for fresh installs
+* aae4162 - 3 months ago - Sitaram Chamarty - (tag: v3.5.3)- v3.5.3
+* 5c137a5 - 3 months ago - Sitaram Chamarty -- catch undefined groupnames (when possible)
+* e4ee123 - 3 months ago - Sitaram Chamarty -- mirroring: async push to slaves...
+* b3dd62b - 3 months ago - Sitaram Chamarty -- emulate &#39;mktemp -u&#39; because that&#39;s not portable (uggh!)</pre>
+</blockquote>
+
 <p>执行 gitolite/install -to /path/to/bin/ 进行安装</p>
 
 <pre>
@@ -620,21 +671,3 @@ our $projectroot = &quot;/Users/mlhch/repositories&quot;;</pre>
 		</tr>
 	</tbody>
 </table>
-
-<p>&nbsp;</p>
-
-<p>&nbsp;</p>
-
-<p>&nbsp;</p>
-
-<p>&nbsp;</p>
-
-<p>&nbsp;</p>
-
-<p>&nbsp;</p>
-
-<p>&nbsp;</p>
-
-<p>&nbsp;</p>
-
-<p>&nbsp;</p>
