@@ -1,0 +1,43 @@
+<h1>VMWare</h1>
+
+<p>2013-03-20 14:16:36 +08:00 Wednesday</p>
+
+<p><a href="https://www.vmware.com/" target="_blank">https://www.vmware.com/</a></p>
+
+<p>今天根据提示升级到 5.0.3 版本，想知道升级包下载到哪里了。</p>
+
+<ol>
+	<li>
+	<p>2013-03-20 星期三&nbsp;</p>
+
+	<p>今天新安装了一个 xp，用来使用&nbsp;<a href="http://journal/article/Nexus%20Root%20Toolkit.html">Nexus Root Toolkit</a>。</p>
+	</li>
+	<li>
+	<p>2013-08-26 21:02 Monday</p>
+
+	<p>vmware 中给 server2003&nbsp;用什么网卡? 设备管理器中明确地显示出&ldquo;Intel(R) PRO/1000 MT Net Connection&rdquo;</p>
+	</li>
+	<li>
+	<p>2013-11-13&nbsp;12:43 Wednsday</p>
+
+	<p>提醒有新版本，决定下载并升级。查看现有版本为：专业版 5.0.3 (1040386)，升级后为&nbsp;专业版 6.0.2 (1398658)</p>
+
+	<p>官网的 Products 中列出了&nbsp;<a href="http://www.vmware.com/products/fusion/" target="_top">Fusion</a>&nbsp;和&nbsp;<a href="http://www.vmware.com/products/fusion-professional/" target="_top">Fusion Professional</a>，打开后的&nbsp;Download Free Trial 链接指向似乎是一样的，都是 6.0.2。</p>
+
+	<p>序列号随便搜了一个，可用：VZ15K-DKD85-M85EP-W4P79-XAAU4</p>
+	</li>
+</ol>
+
+<p>我的虚拟机列表</p>
+
+<ul>
+	<li>xp3
+	<ul>
+		<li>bank
+		<ul>
+			<li>2013-12-28 15:48 Saturday 升级虚拟机以匹配 vmware 6.0.2，工行网银助手</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+</ul>
