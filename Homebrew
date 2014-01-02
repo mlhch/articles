@@ -8,6 +8,18 @@
 
 <p>The missing package manager for OS X.</p>
 
+<h3>2014-01-02 18:37</h3>
+
+<pre>
+$ brew update
+Checking out files: 100% (600/600), done.
+Updated Homebrew from e167b210 to 8bc79618.
+</pre>
+
+<pre>
+$ brew -v
+Homebrew 0.9.5</pre>
+
 <h3>2013-11-29 14:47</h3>
 
 <p>版本升级了。而且就几分钟，又有一次小更新。</p>
