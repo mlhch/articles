@@ -14,6 +14,65 @@
 	<li><a href="http://docs.ruby-lang.org/ja/2.0.0/function/index.html">All C API</a>&nbsp;-&gt;&nbsp;<a href="http://docs.ruby-lang.org/ja/2.0.0/function/index.html" target="_blank">http://docs.ruby-lang.org/ja/2.0.0/function/index.html</a></li>
 </ul>
 
+<h3>ruby 2.1.0</h3>
+
+<p>2014-01-02 18:43 Thursday</p>
+
+<p><a href="http://www.ruby-lang.org/en/news/2013/12/25/ruby-2-1-0-is-released/">Ruby 2.1.0 is released</a></p>
+
+<p>We are pleased to announce the release of Ruby 2.1.0.</p>
+
+<p><a href="http://www.ruby-lang.org/en/news/2013/12/25/ruby-2-1-0-is-released/">Continue Reading...</a></p>
+
+<p>Posted by nurse on 25 Dec 2013</p>
+
+<pre>
+$ brew upgrade ruby
+==&gt; Upgrading 1 outdated package, with result:
+ruby 2.0.0-p353
+==&gt; Upgrading ruby
+==&gt; Downloading http://cache.ruby-lang.org/pub/ruby/2.0/ruby-2.0.0-p353.tar.bz2
+######################################################################## 100.0%
+==&gt; ./configure --prefix=/usr/local/Cellar/ruby/2.0.0-p353 --enable-shared --with-out-ext=tk --disable-install-doc --disable-dtrace --with-opt-dir=/usr/local/opt/ope
+==&gt; make
+==&gt; make install
+==&gt; Caveats
+By default, gem installed executables will be placed into:
+  /usr/local/opt/ruby/bin
+
+You may want to add this to your PATH. After upgrades, you can run
+  gem pristine --all --only-executables
+
+to restore binstubs for installed gems.
+==&gt; Summary
+🍺  /usr/local/Cellar/ruby/2.0.0-p353: 877 files, 18M, built in 4.7 minutes</pre>
+
+<pre>
+$ brew update
+Checking out files: 100% (600/600), done.
+Updated Homebrew from e167b210 to 8bc79618.</pre>
+
+<pre>
+$ brew upgrade ruby
+==&gt; Upgrading 1 outdated package, with result:
+ruby 2.1.0
+==&gt; Upgrading ruby
+==&gt; Downloading http://cache.ruby-lang.org/pub/ruby/2.1/ruby-2.1.0.tar.bz2
+######################################################################## 100.0%
+==&gt; ./configure --prefix=/usr/local/Cellar/ruby/2.1.0 --enable-shared --with-out-ext=tk --disable-install-doc --disable-dtrace --with-opt-dir=/usr/local/opt/openssl
+==&gt; make
+==&gt; make install
+==&gt; Caveats
+By default, gem installed executables will be placed into:
+  /usr/local/opt/ruby/bin
+
+You may want to add this to your PATH. After upgrades, you can run
+  gem pristine --all --only-executables
+
+to restore binstubs for installed gems.
+==&gt; Summary
+🍺  /usr/local/Cellar/ruby/2.1.0: 930 files, 19M, built in 3.6 minutes</pre>
+
 <h3>ruby 2.0.0</h3>
 
 <p>2013-08-31 01:23 Saturday</p>
