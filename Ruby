@@ -73,6 +73,10 @@ to restore binstubs for installed gems.
 ==&gt; Summary
 🍺  /usr/local/Cellar/ruby/2.1.0: 930 files, 19M, built in 3.6 minutes</pre>
 
+<pre>
+$ ruby -v
+ruby 2.1.0p0 (2013-12-25 revision 44422) [x86_64-darwin13.0]</pre>
+
 <h3>ruby 2.0.0</h3>
 
 <p>2013-08-31 01:23 Saturday</p>
