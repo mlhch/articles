@@ -1,0 +1,279 @@
+<h1>HTC ONE X 解锁，root</h1>
+
+<p>2012-08-28 09:44:10 +08:00 Tuesday</p>
+
+<p>2014-01-04 16:05 Saturday 兵哥哥好多，洗澡回来</p>
+
+<h2>imei 查询</h2>
+
+<ul>
+	<li>官网首页 -&gt;&nbsp;<a href="http://www.htc.com/cn/" target="_blank">http://www.htc.com/cn/</a></li>
+	<li>技术支持 -&gt;&nbsp;<a href="http://www.htc.com/cn/support/" target="_blank">http://www.htc.com/cn/support/</a></li>
+	<li><a href="http://219.80.249.25/IMEIQuery/IMEIQuery.aspx?ct=zh-CN">手機銷售地查詢&nbsp;</a>&nbsp;-&gt;&nbsp;http://219.80.249.25/IMEIQuery/IMEIQuery.aspx?ct=zh-CN</li>
+</ul>
+
+<p>根据您提供的IMEI号码查询到的信息是：<br />
+机型：HTC One X (S720e)<br />
+销售地：新加坡<br />
+出厂日期：2012/07/20</p>
+
+<h2>基本信息</h2>
+
+<p>IMEI：35342 60589 68934（自己加的空格，好辨认）</p>
+
+<p>设备序列号：SH27HW100452</p>
+
+<p>Android 版本：4.0.3</p>
+
+<p>HTC Sense 版本：4.0</p>
+
+<p>软件版本：1.29.707.11</p>
+
+<p>HTC SDK API 级别：4.12</p>
+
+<p>HTC 扩展版本：HTCExtension_403_1_GA_7</p>
+
+<p>Kernel 版本：2.6.39.4-g6b459dc<br />
+root@ABM032 #1<br />
+SMP PREEMPT</p>
+
+<p>Baseband 版本：1.1204.105.14</p>
+
+<p>内部版本号：1.29.707.11 CL63214 release-keys</p>
+
+<p>浏览器版本：WebKit/534.30</p>
+
+<h2>如何查看解锁状态</h2>
+
+<p>关机后，音量下键&nbsp;+ 开机键，按五秒，就会出现工程界面，最上面就会显示是否解锁。</p>
+
+<pre>
+*** UNLOCKED ***
+ENDEAVORU PVT SHIP S-ON RL
+HBOOT-0.96.0000
+...
+MAY 10 2012,01:32:07
+...</pre>
+
+<h3>HTC One &amp; HTC 渴望C 手机专用的 HTC Sync Manager(1.0.42)</h3>
+
+<p>http://www.htc.com/cn/</p>
+
+<p>让您的世界与流行同步。HTC Sync Manager 是一款免费的电脑应用程序，可让您轻松将来自或传输到电脑上的媒体与您的 HTC Android 手机同步。您还可同步您的所有联系人、日历事件、书签和文件等。一旦同步，您便可通过您电脑上的 HTC Sync Manager 轻松进行管理和组织。一切均安全备份，可随时更新至您的手机。</p>
+
+<p><a href="http://dl4.htc.com/download/htc-sync-manager/setup_1.0.42.0.exe" target="_self">下载</a>&nbsp;&nbsp;<a href="http://www.htc.com/cn/software/htc-sync-manager/" target="_self">深入了解</a></p>
+
+<h2>官方解锁</h2>
+
+<p>http://htcdev.com/</p>
+
+<h3>Unlock Bootloader</h3>
+
+<p>http://htcdev.com/bootloader/</p>
+
+<p>You asked for it, we delivered. Use this tool to install custom firmware on selected HTC Android devices.</p>
+
+<ol>
+	<li>
+	<h2>Step 1</h2>
+
+	<p>Remove and reinsert the battery then proceed to step 2. For devices without a removable battery, long press the power key then select restart. Hold down the volume down key while restarting to start the device in Bootloader mode.</p>
+	</li>
+	<li><img alt="" src="http://www.htcdev.com/images/uploads/bootloader/Unlock_2.png" />
+	<h2>Step 2</h2>
+
+	<p>Press&nbsp;Volume Down&nbsp;and&nbsp;Power&nbsp;to start the device into Bootloader mode.</p>
+	</li>
+	<li><img alt="" src="http://www.htcdev.com/images/uploads/bootloader/Unlock_3b.png" />
+	<h2>Step 3</h2>
+
+	<p>Use the&nbsp;Volume buttons&nbsp;to select up or down. Highlight&nbsp;Fastboot&nbsp;and press the&nbsp;Power button.</p>
+	</li>
+	<li><img alt="" src="http://www.htcdev.com/images/uploads/bootloader/Unlock_4.png" />
+	<h2>Step 4</h2>
+
+	<p>Connect the device to the computer via a usb cable</p>
+	</li>
+	<li>
+	<h2>Step 5</h2>
+
+	<p>On your computer create a new folder (For Example: C:\Android) where we will be putting the following 3 files in this new folder:</p>
+
+	<ul>
+		<li>adb.exe</li>
+		<li>AdbWinApi.dll</li>
+		<li>fastboot.exe</li>
+	</ul>
+	Note: for Mac OS X and Linux you will only need adb and fastboot.<br />
+	<img alt="" src="http://www.htcdev.com/images/uploads/bootloader/step5.png" />
+	<h2>To find these files:</h2>
+
+	<ol>
+		<li>a.
+		<p>Run the &ldquo;SDK Manager.exe&rdquo; which is found in \android-sdk-windows\</p>
+		<img alt="" src="http://www.htcdev.com/images/uploads/bootloader/step5a.png" /></li>
+		<li>b.
+		<p>Wait about 3 minutes. You will see there are many packages you can update. Please install&nbsp;Android SDK Platform&nbsp;Tools and&nbsp;Android SDK Tools&nbsp;(Please update it if your SDK version is r11).</p>
+		<img alt="" src="http://www.htcdev.com/images/uploads/bootloader/step5b2.png" /></li>
+		<li>c.
+		<p>After you have installed this, you will be able to find the files in the following locations.</p>
+
+		<table border="0" cellpadding="5" cellspacing="1">
+			<tbody>
+				<tr>
+					<td>Platform</td>
+					<td>Download</td>
+					<td>Size&nbsp;(bytes)</td>
+					<td>Checksum</td>
+				</tr>
+				<tr>
+					<td>Fastboot binary, OS X<br />
+					(Unzip the file before executing)</td>
+					<td><a href="http://www.htcdev.com/process/legal_fastboot_mac">fastboot-mac</a></td>
+					<td>59071</td>
+					<td>ed784e50cfcaba3c60380c5f448aa354</td>
+				</tr>
+				<tr>
+					<td>Fastboot binary, Linux<br />
+					(Unzip the file before executing)</td>
+					<td><a href="http://www.htcdev.com/process/legal_fastboot_linux">fastboot</a></td>
+					<td>61887</td>
+					<td>9851bb6ad29cd4b60c9ba9d011ba9efd</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<ol>
+			<li>1.
+			<p>To find&nbsp;adb.exe, AdbWinApi.dll, look in \android-sdk-windows\platform-tools</p>
+			</li>
+			<li>2.
+			<p>To find&nbsp;fastboot.exe&nbsp;look in \android-sdk-windows\tools</p>
+			<br />
+			Note: fastboot.exe may be unavailable in the latest Windows Android Tools release. You can extract it from a previous release available here:&nbsp;<a href="http://www.htcdev.com/?URL=http%3A%2F%2Fdl.google.com%2Fandroid%2Fandroid-sdk_r13-windows.zip">android-sdk_r13-windows.zip</a></li>
+			<li>3.
+			<p>Mac OS X or Linux users can download the fastboot binary using the following links:</p>
+			</li>
+		</ol>
+		</li>
+	</ol>
+	</li>
+	<li>
+	<h2>Step 6</h2>
+
+	<p>Open up command prompt. (&nbsp;Start&nbsp;&gt;&nbsp;Run&nbsp;&gt; Type&nbsp;CMD,). The window that appears is called&nbsp;Command Prompt.</p>
+	<img alt="" src="http://www.htcdev.com/images/uploads/bootloader/step6.png" /></li>
+	<li>
+	<h2>Step 7</h2>
+
+	<p>Navigate to where you unzipped the ZIP file and go to the folder you just created (For Example: If you created the folder in&nbsp;C:\Android, then you would type in&nbsp;Command Prompt: cd c:\Android).</p>
+	</li>
+	<li>
+	<h2>Step 8</h2>
+
+	<p>Type in Command Prompt:&nbsp;fastboot oem get_identifier_token.</p>
+	<img alt="" src="http://www.htcdev.com/images/uploads/bootloader/step8.png" /></li>
+	<li>
+	<h2>Step 9</h2>
+
+	<p>You will see a long block of text. Copy and paste this text into the the token field below (in the command prompt:&nbsp;Right Click &gt; Mark &gt; highlight the block of text &gt; Right click to copy).</p>
+
+	<p>You will see one of the following two screens:</p>
+
+	<p>Ref. 9a</p>
+	<img alt="" src="http://www.htcdev.com/images/uploads/bootloader/pict_6a.png" />
+	<p>Ref. 9b</p>
+	<img alt="" src="http://www.htcdev.com/images/uploads/bootloader/pict_6b.png" />
+	<p>When copying the token, start with this line:</p>
+
+	<p>&lt;&lt;&lt;&lt;&nbsp;Identifier&nbsp;Token&nbsp;Start&nbsp;&gt;&gt;&gt;&gt;&nbsp;</p>
+
+	<p>And end with this line:</p>
+
+	<p>&lt;&lt;&lt;&lt;&lt;&nbsp;Identifier&nbsp;Token&nbsp;End&nbsp;&gt;&gt;&gt;&gt;&gt;&nbsp;</p>
+
+	<p>(Note: Only copy the highlighted sections above. Do not copy the INFO or (bootloader) prefix)</p>
+	</li>
+	<li>
+	<h2>Step 10</h2>
+
+	<p>Paste this string of text into the token field and hit Submit in order to receive your unlock code binary file. You will receive this information in your email.</p>
+
+	<p>Example:</p>
+
+	<pre>
+$ ./fastboot-mac oem get_identifier_token
+... INFO&nbsp;&nbsp;
+INFO&lt; Please cut following message &gt;
+INFO&lt;&lt;&lt;&lt; Identifier Token Start &gt;&gt;&gt;&gt;
+INFO68A188CA8E2DF3DEAC38E714EE0BD364
+INFO5650EA5D11016E8B4A5A20334028B696
+INFOF3B5728366F8F3F7FF957A03187E81C8
+INFOFADF2E90411CE97FA5C209804A669475
+INFO4E9529429792A9B25763B2616332C507
+INFO6626227552773F19FC71D35609ACB1EC
+INFO27FA8FA26791F199A9793F6D98FDC076
+INFOBD886C5C91F86F94A65B7A04F5EA162C
+INFOBA67507103FA6EDFBAAEEACE26446383
+INFO466258EFF98AA964C3B64CF1CDAB2635
+INFOE62552A04691BBF1AE3DE40FDA6EE81E
+INFO9E5E8DD31F14DCB99FA43E70F0FD9579
+INFOB7FE8DE7FEDF472DDA10D4847777832B
+INFO7E313A6788B792C6257CB7CF33A35BA2
+INFOEBC2B1E8E30C6EE09E05BBF0F6F640C8
+INFOD2FCF05E7BD38978B0DBB5481E5F1DE1
+INFO&lt;&lt;&lt;&lt;&lt; Identifier Token End &gt;&gt;&gt;&gt;&gt;
+OKAY</pre>
+
+	<p>&nbsp;</p>
+
+	<h4>My Device Identifier Token:</h4>
+
+	<p>&nbsp;</p>
+
+	<p><a href="http://www.htcdev.com/bootloader/unlock-instructions/page-3#">Submit</a></p>
+	</li>
+	<li>
+	<h2>Step 11</h2>
+
+	<p>You will receive an email with the attachment:&nbsp;Unlock_code.bin. Save this file in the same folder as your fastboot files (For Example:&nbsp;C:\Android).</p>
+
+	<p>If, after a short period of time, you have not yet received the mail, or you have received an email from HTC, but does not contain an attached file, it is possible that more stringent spam filters and anti-virus programs will block this mail or attachment.</p>
+
+	<p>In order to ensure that you receive the email with the attachment, we suggest you consider using a non-corporate email server as corporate servers tend to have more stringent attachment policies. If you have not received the email at all, please check your spam folder in your email client to check if the email was filtered out.</p>
+	</li>
+	<li>
+	<h2>Step 12</h2>
+
+	<p>In the command prompt type:&nbsp;fastboot flash unlocktoken Unlock_code.bin. In the command prompt you will see the following message:</p>
+
+	<pre>
+$ ./fastboot-mac flash unlocktoken Unlock_code.bin
+sending &#39;unlocktoken&#39; (0 KB)... OKAY
+writing &#39;unlocktoken&#39;... INFOunlock token check successfully
+ERROR: usb_read failed with status e00002ed
+FAILED (status read failed (No such file or directory))
+</pre>
+
+	<p>首次运行，提示了有错误，但显示已成功 UNLOCKED 状态。再次运行，没有了错误信息，但也不出现提示确认的界面了。</p>
+
+	<pre>
+$ ./fastboot-mac flash unlocktoken Unlock_code.bin
+sending &#39;unlocktoken&#39; (0 KB)... OKAY
+writing &#39;unlocktoken&#39;... INFOunlock token check successfully
+OKAY
+</pre>
+	</li>
+	<li><img alt="" src="http://www.htcdev.com/images/uploads/bootloader/step13.jpg" />
+	<h2>Step 13</h2>
+
+	<p>On your phone you will now see the disclaimer. Please read this carefully as this action may void your warranty. Use the&nbsp;Volume buttons&nbsp;to highlight your choice, and the&nbsp;Power button&nbsp;to make your selection. If you select&nbsp;Yes, your phone will be reset to its&rsquo; factory default settings, and your bootloader will be unlocked. If you select&nbsp;No, your phone will reboot and no modifications will have been made.</p>
+	</li>
+	<li>
+	<h2>Step 14</h2>
+
+	<p>To re-lock your bootloader, in the command prompt, type:&nbsp;fastboot oem lock.</p>
+
+	<p>Note: This will not restore the factory default lock, but will simply re-lock the bootloader so no further changes can be made. Furthermore, if you want to unlock your bootloader again, simply repeat step 12 with your original unlock key file to unlock your phone again.</p>
+	</li>
+</ol>
