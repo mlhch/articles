@@ -1,0 +1,255 @@
+<h1>Device - HTC ONE X - rom.zip from RUU</h1>
+
+<p>2014-01-04 19:59 Saturday</p>
+
+<h2>RUU 列表</h2>
+
+<p><a href="http://bbs.dospy.com/thread-14575146-1-624-1.html" target="_blank">http://bbs.dospy.com/thread-14575146-1-624-1.html</a></p>
+
+<p>通过观察可知如下有用信息：</p>
+
+<ul>
+	<li>本人 HTC ONE X 经查询属新加坡地区，所以适用的是亚太版。</li>
+	<li>亚太版已经有 1.29 版本。</li>
+	<li>适用自己 HTC ONE X 的版本为：RUU-ENDEAVOR-U-ICS-40-hTC-Asia-WWE-1.28.707.10-Radio-1.1204.103.14-release-257076-signed.exe</li>
+	<li>下载地址自行搜索</li>
+</ul>
+
+<p>早期版本就不再收录了，主要收录从1.28以后的版本。所有RUU的统一下载密码均为：bbs.dospy.com。</p>
+
+<table border="1" cellpadding="3" cellspacing="1">
+	<tbody>
+		<tr>
+			<td>名称</td>
+			<td>销售地</td>
+		</tr>
+		<tr>
+			<td>RUU-ENDEAVOR-U-ICS-40-hTC-Asia-TW-1.29.709.7-<br />
+			Radio-1.1204.104.14-release-259284-signed.exe</td>
+			<td colspan="1" rowspan="2">
+			<p>台版</p>
+
+			<p>709?</p>
+
+			<p>921?</p>
+			</td>
+		</tr>
+		<tr>
+			<td>RUU_ENDEAVOR_U_ICS_40_TWM_TW_1.29.921.7_<br />
+			Radio_1.1204.104.14_release_259286_signed.exe</td>
+		</tr>
+		<tr>
+			<td>RUU-ENDEAVOR-U-ICS-40-hTC-Asia-HK-1.28.708.10-<br />
+			Radio-1.1204.103.14-release-257077-signed.exe</td>
+			<td colspan="1" rowspan="2">
+			<p>港版</p>
+
+			<p>708</p>
+			</td>
+		</tr>
+		<tr>
+			<td>RUU-ENDEAVOR-U-ICS-40-hTC-Asia-HK-1.29.708.9-<br />
+			Radio-1.1204.104.14-release-259897-signed.exe</td>
+		</tr>
+		<tr>
+			<td>RUU-ENDEAVOR-U-ICS-40-hTC-Asia-WWE-1.28.707.10-<br />
+			Radio-1.1204.103.14-release-257076-signed.exe</td>
+			<td colspan="1" rowspan="3">
+			<p>亚太</p>
+
+			<p>707</p>
+			</td>
+		</tr>
+		<tr>
+			<td>RUU_ENDEAVOR_hTC_Asia_WWE_1.29.707.11_<br />
+			Radio_1.1204.105.14_release_260743_signed.exe</td>
+		</tr>
+		<tr>
+			<td>RUU_ENDEAVOR_U_ICS_40_S_hTC_Asia_WWE_2.17.707.3_<br />
+			Radio_2.1204.135.20_release_278245_signed.exe</td>
+		</tr>
+		<tr>
+			<td>RUU-ENDEAVOR-U-ICS-40-HTC-Europe-1.28.401.9-<br />
+			Radio-1.1204.103.14-release-256469-signed.exe</td>
+			<td>
+			<p>欧版</p>
+			</td>
+		</tr>
+		<tr>
+			<td>RUU-ENDEAVOR-U-ICS-40-HTCCN-CHS-1.28.1400.9-<br />
+			Radio-1.1204.103.14L-release-255009-signed.rar</td>
+			<td colspan="1" rowspan="3">
+			<p>国行</p>
+
+			<p>1400</p>
+
+			<p>1405?</p>
+			</td>
+		</tr>
+		<tr>
+			<td>RUU_ENDEAVOR_U_ICS_40_HTCCN_CHS_1.29.1400.11_<br />
+			Radio_1.1204.105.14L_release_260741_signed.exe</td>
+		</tr>
+		<tr>
+			<td>RUU_ENDEAVOR_U_ICS_40_S_HTCCN_CHS_2_2.18.1405.6_<br />
+			Radio_2.1204.135.20L_release_280923_signed.exe</td>
+		</tr>
+	</tbody>
+</table>
+
+<h2>fastboot oem readcid</h2>
+
+<p><a href="http://www.androidayos.com/2012/09/03/how-to-return-back-htc-one-x-to-its-original-factory-stock-firmware/" target="_blank">http://www.androidayos.com/2012/09/03/how-to-return-back-htc-one-x-to-its-original-factory-stock-firmware/</a></p>
+
+<p>以下权做参考</p>
+
+<p>An example of CID versions:</p>
+
+<p>x.xx.61.x &ndash; Orange UK (United Kingdom)<br />
+x.xx.65.x &ndash; Orange CH (Switzerland)<br />
+x.xx.75.x &ndash; Orange ES (Spain)<br />
+x.xx.110.x &ndash; T-Mobile UK (United Kingdom)<br />
+x.xx.111.x &ndash; T-Mobile DE (Germany)<br />
+x.xx.112.x &ndash; T-Mobile AT (Austria)<br />
+x.xx.114.x &ndash; T-Mobile NL (Netherlands)<br />
+x.xx.118.x &ndash; T-Mobile PL (Poland)<br />
+x.xx.161.x &ndash; Vodafone UK (United Kingdom)<br />
+x.xx.166.x &ndash; Vodafone CH-DE (Switzerland &ndash; Germany)<br />
+x.xx.163.x &ndash; Vodafone FR (France)<br />
+x.xx.169.x &ndash; Vodafone AT (Austria)<br />
+x.xx.206.x &ndash; O2 UK (United Kingdom)<br />
+x.xx.207.x &ndash; O2 DE (Germany)<br />
+x.xx.401.x &ndash; World Wide English<br />
+x.xx.707.x &ndash; Asia WWE (World Wide English)<br />
+x.xx.720.x &ndash; Asia India<br />
+x.xx.771.x &ndash; Hutchison 3G UK (United Kingdom)<br />
+x.xx.862.x &ndash; Voda-Hutch AU (Australia)<br />
+x.xx.980.x &ndash; Optus AU (Australia)<br />
+x.xx.1400.x &ndash; HTC China</p>
+
+<h2>Extract rom.zip from RUU</h2>
+
+<p>Note: 双击启动 RUU 时，因为要把其中的 rom.zip 释放为临时文件，所以要耐心等候。</p>
+
+<p>搜索 C 盘 rom.zip，勾选隐藏文件，即可迅速找到 rom.zip，拷贝出来备用。同理，在 Mac 下可用 wine 将其打开。</p>
+
+<p>经试验发现，此 rom.zip 无法在 windows 下打开，但在 Mac 终端下用 unzip 命令可成功释放其中的文件。</p>
+
+<pre>
+$ unzip ../rom.zip 
+Archive:  ../rom.zip
+warning [../rom.zip]:  256 extra bytes at beginning or within zipfile
+...</pre>
+
+<pre>
+$ ll
+total 2097400
+drwxr-xr-x  17 mlhch  staff         578  1  4 21:27 .
+drwxr-xr-x  13 mlhch  staff         442  1  4 21:26 ..
+-rw-r--r--   1 mlhch  staff         134  4 17  2012 android-info.txt
+-rw-r--r--   1 mlhch  staff     2105344  4 17  2012 bct.img
+-rw-r--r--   1 mlhch  staff     4385024  4 17  2012 boot_signed.img
+-rw-r--r--   1 mlhch  staff     2097408  4 17  2012 hboot_0.94.0000.img
+-rw-r--r--   1 mlhch  staff     2146304  4 17  2012 pg3fs_spcustom.img
+-rw-r--r--   1 mlhch  staff      294465  4 17  2012 ramdisk.img
+-rwxr-xr-x   1 mlhch  staff     2097152  4 17  2012 rawpt_16g.img
+-rwxr-xr-x   1 mlhch  staff     2097152  4 17  2012 rawpt_32g.img
+-rw-r--r--   1 mlhch  staff          72  4 17  2012 rcdata.img
+-rw-r--r--   1 mlhch  staff     5929216  4 17  2012 recovery_signed.img
+-rw-r--r--   1 mlhch  staff     1966080  4 17  2012 splash1.nb0
+-rw-r--r--   1 mlhch  staff  1011611116  4 17  2012 system.img
+-rwxr-xr-x   1 mlhch  staff       46848  4 17  2012 tp.img
+-rw-r--r--   1 mlhch  staff    38785796  4 17  2012 userdata.img
+-rw-r--r--   1 mlhch  staff      280528  4 17  2012 wlan.img</pre>
+
+<h2><strong>HTC ONE X RUU辨认教程</strong></h2>
+
+<p>以RUU_ENDEAVOR_U_JB_45_S_hTC_Asia_TW_3.14.709.20_Radio_5.1204.162.29这个RUU为例：</p>
+
+<ol>
+	<li>首先ENDEAVOR_U_JB这个就是HTC ONE X官方的代号，看到这个名称就应该知道是HTC ONE X的RUU。</li>
+	<li>接着是hTC_Asia_TW，这里显示的版本信息是亚太台湾地区的RUU。其它的会显示为china(大陆)Europe(欧洲)等信息，所以在刷入RUU之前一定要确定你HTC ONE X的销售地区。</li>
+	<li>后面的3.14.709.20，其中3.14是当前版本的主版本号，也就是最新的android4.1.1系统+sense4+界面。后面的709则是代表销售地区代码，这里就不给大家详解了，最后的20是代表着小版本号。</li>
+	<li>接着radio后面的信息就是基带版本号，由于ROM和radio并不是同时刷入的，所以如果感觉信号不好的最好更换为实用地区的radio版本。</li>
+</ol>
+
+<h2>A factory restore image is your way back to stock when you need it the most, so be sure to grab it and keep it handy</h2>
+
+<p>http://www.androidcentral.com/htc-posts-factory-image-htc-one-developer-edition</p>
+
+<p>HTC has posted the 1.29.1540.3&nbsp;factory restore images for the unlocked&nbsp;<a href="http://www.androidcentral.com/htc-one-developer-edition-announced-unlocked-bootloader-and-sim-slot">Developer Edition HTC One</a>on the HTCdev site. Available in two flavors -- a zip file and a Windows RUU executable -- these files will allow anyone to restore their phone back to an out-of-the-box condition as long as there is access to the&nbsp;<a href="http://www.androidcentral.com/what-is-android-bootloader">bootloader</a>. That means no matter how bad you&#39;ve screwed the system firmware up from monkeying around with it, you have an easy path back to stock settings. Then you can do it all over again.&nbsp;</p>
+
+<p>Posting two different versions is pretty nice, too. The Windows only RUU is simple to use for folks running Windows (just plug in the phone and run the program), but not everyone uses Windows. For those folks who use a Mac or Linux computer, the zip file and&nbsp;<a href="http://www.androidcentral.com/android-z-what-fastboot">fastboot</a>&nbsp;makes it easy to go back without building a VM with Windows to do so.&nbsp;</p>
+
+<p>Be aware that these images are only for the unlocked Developer Edition, so don&#39;t try to just flash them to your carrier model. Your favorite ROM developer will have something for you instead. It&#39;s recommended that everyone with one of the Developer Edition&nbsp;models have these files in a safe place &quot;just in case&quot;, so grab the 980MB file at the link below.</p>
+
+<h2>HBOOT各种名词详解</h2>
+
+<p><a href="http://www.shoujids.com/baike/doc-view-406.htm" target="_blank">http://www.shoujids.com/baike/doc-view-406.htm</a></p>
+
+<p>UNLOCKED<br />
+ENDEAVORU&nbsp;&nbsp;PVT&nbsp;&nbsp;SHIP S-ON RH<br />
+HBOOT-1.12.0000&nbsp;<br />
+MICROP-None&nbsp;<br />
+RADIO-2.1204.135.20L&nbsp;</p>
+
+<p>注：以上信息可能会与你的手机内容所显示的略有差异，但不妨碍演示，大家只要了解它们所代表的内容就可以了。</p>
+
+<p>UNLOCKED/LOCKED：通过HTC官方的解锁方式被限制的bootloader部分功能，主要标志为粉红色locked，如果是已经官解的机型，则显示为粉红色unlocked，如果是重新上锁的机型，显示粉红色relocked。这种方法经过HTC认证，会限制刷写自定义内核。但是官解后也可以刷写第三方ROM。</p>
+
+<p>ENDEAVORU：这个是手机型号的内部开发代号。我们的ONE X的内部开发代号为ENDEAVORU，不同的机型有差异。</p>
+
+<p>PVT（或者是EVT，DVT，CVT）：是代表手机的版本类型。一台手机从研发到上市，可能会经历多次版本上的调试和改动，版本类型标志着机器是什么时候的产物，如下：</p>
+
+<p>EVT：工程机，研发阶段机器的型号。<br />
+DVT：开发机，特殊开发用途机器的型号。<br />
+CVT：商用机，交付运营商的机器的型号。<br />
+PVT：量产机，最终上市的零售版机器的型号。（PVT1表示第1批量产机）</p>
+
+<p>SHIP/ENG：手机HBOOT（SPL）的版本。</p>
+
+<p>SHIP：shipment的缩写，出货的意思，零售版的HBOOT版本。<br />
+ENG：Engineer的缩写，工程的意思，修改版的HBOOT版本。</p>
+
+<p>S-ON（或者是S-OFF）：S代表Security Lock，即安全锁。HTC在手机内部设置了一个安全锁，用来控制系统分区的读写状态。</p>
+
+<p>S-ON：安全锁开。<br />
+S-OFF：安全锁关。</p>
+
+<p>PS:所谓的软解/硬解便是通过软件或硬件的方法来关闭此安全锁。当安全锁打开时，如果在非官解机状态，则不能刷入任何第三方ROM，亦不能修改recovery和radio及root，只能升级固件及官方ROM，不可降级；如果是在官解状态，则可以刷入第三方recovery，可以root，刷第三方ROM、radio等，但固件版本只能升级不能降级，且刷完第三方ROM后需要在刷一遍BOOT.IMG才能正常使用。当安全锁关闭时，无论是否官解，都可以执行官解后的一切操作，并且可以刷入任意版本的固件和RUU，自由升降级，刷第三方ROM无须刷BOOT，且可以修改手机CID代码，刷任意区域的RUU。</p>
+
+<h2>HBOOT作用</h2>
+
+<p>hboot启动后，会检查安全锁的状态：</p>
+
+<p>如果检查后发现是S-ON，说明安全锁是打开的，那么hboot在完成引导启动的同时，会将system和recovery分区做写保护。</p>
+
+<p>如果检查后发现是S-OFF，说明安全锁是关闭的，那么hboot在完成引导启动的同时，会将system和recovery分区的写保护打开。</p>
+
+<p>通过软解的机型，机器状态为ENG S-OFF的朋友，当手机通过hboot启动，hboot在检查安全锁是什么状态的时候，无论检查结果是什么，这个修改过的hboot都会认为安全锁是关闭的，即让hboot自己欺骗自己，认为安全锁处于S-OFF状态。实际上此时的安全锁还是S-ON，只不过显示出来是S-OFF罢了。</p>
+
+<p>这也就为下面这种情况找到了合理的解释：</p>
+
+<p>机器状态为ENG S-OFF的机油刷了官方包，然后ENG变回SHIP，S-OFF变回S-ON。但机器状态为SHIP S-OFF的朋友进行同样的操作，却不会失去S-OFF。这是因为官方包是一个完整的刷机包，在更新过程中，会把hboot覆盖掉，那么，当这个被修改的hboot被替换成官方原版的hboot后，我们的机器也就恢复到了原始的SHIP状态。此时，因为ENG S-OFF是一种假象，所以，S-OFF就变回了S-ON，但是因为SHIP S-OFF是真的把安全锁关了，所以，S-OFF还是保持不变。因此，建议今后出现软解解锁的方法后，所有机油都确定就自己的HBOOT状态修改为ship s-off，才能永远保持s-off。</p>
+
+<h2>HBOOT使用方法</h2>
+
+<p><span style="line-height:1.6em">进入HBOOT的方法：</span></p>
+
+<p><span style="line-height:1.6em">方法一：在手机设置--&gt;电源中，取消勾选&ldquo;快速启动&rdquo;，然后关闭手机即进入完全关机状态，这时用手同时按下&ldquo;音量减&rdquo;键 +&ldquo;电源&rdquo;键，长按即可进入HBOOT工程模式的三色屏。（如上图所示）</span></p>
+
+<p><span style="line-height:1.6em">方法二：取消&ldquo;快速启动后&rdquo;，在任何开机状态下，用手按下&ldquo;电源&rdquo;键，长按不要松手，待屏幕下方的三颗电源灯闪烁后，屏幕会黑屏，这时用手同时按下&ldquo;音量减&rdquo;键 +&ldquo;电源&rdquo;键，也可以进入HBOOT工程模式的三色屏。</span></p>
+
+<p><span style="line-height:1.6em">在HBOOT中的操作：</span></p>
+
+<p><span style="line-height:1.6em">进入HBOOT界面后，屏幕不支持触控操作，此时只能用上、下音量键及电源键进行操作。按下音量键后，可以看到此时屏幕最底部的蓝色复选框随音量键上下移动，如果需要进入其中任何一种模式，将蓝色复选框移动至所需进去的栏目，点击电源键即可进入某一模式。</span></p>
+
+<p><span style="line-height:1.6em">一般情况下我们只用到fastboot模式和recovery模式，其他模式不做解释。</span></p>
+
+<p><span style="line-height:1.6em">fastboot模式为快速启动模式，在fastboot模式下连接手机数据线与电脑，即可进入fastboot USB模式，这时可以通过ADB命令来控制手机。同时，在fastboot模式下选中hboot/bootloader按下电源键即可返回HBOOT。</span></p>
+
+<p>recovery模式为回复模式，官方recovery可以用来进行RUU的OTA升级，第三方recovery可以用来刷机、备份系统、WIPE等操作</p>
+
+<p>退出及重启HBOOT的方法：</p>
+
+<p>如要退出或重启HBOOT，在进入FASBOOT模式后，用蓝色复选框选中POWER DOWN按电源键意为完全关机，选中REBOOT按电源键意为重启手机，选中REBOOT BOOTLOADER按电源键意为重启后进入FASTBOOT模式。</p>
