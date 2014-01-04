@@ -2,6 +2,8 @@
 
 <p>2014-01-04 19:59 Saturday</p>
 
+<p>经在 XP 虚拟机里运行 RUU 确认当前的映像版本是 1.29.707.11</p>
+
 <h2>RUU 列表</h2>
 
 <p><a href="http://bbs.dospy.com/thread-14575146-1-624-1.html" target="_blank">http://bbs.dospy.com/thread-14575146-1-624-1.html</a></p>
@@ -131,7 +133,7 @@ x.xx.1400.x &ndash; HTC China</p>
 
 <p>Note: 双击启动 RUU 时，因为要把其中的 rom.zip 释放为临时文件，所以要耐心等候。</p>
 
-<p>搜索 C 盘 rom.zip，勾选隐藏文件，即可迅速找到 rom.zip，拷贝出来备用。同理，在 Mac 下可用 wine 将其打开。</p>
+<p>搜索 C 盘 rom.zip，勾选隐藏文件，即可迅速找到 rom.zip，拷贝出来备用。同理，在 Mac 下可用 wine 将其打开。为了加快搜索，可直接定位到&nbsp;C:\Documents and Settings\{User}\Local Settings\Temp\。</p>
 
 <p>经试验发现，此 rom.zip 无法在 windows 下打开，但在 Mac 终端下用 unzip 命令可成功释放其中的文件。</p>
 
@@ -234,19 +236,19 @@ S-OFF：安全锁关。</p>
 
 <h2>HBOOT使用方法</h2>
 
-<p><span style="line-height:1.6em">进入HBOOT的方法：</span></p>
+<p>进入HBOOT的方法：</p>
 
-<p><span style="line-height:1.6em">方法一：在手机设置--&gt;电源中，取消勾选&ldquo;快速启动&rdquo;，然后关闭手机即进入完全关机状态，这时用手同时按下&ldquo;音量减&rdquo;键 +&ldquo;电源&rdquo;键，长按即可进入HBOOT工程模式的三色屏。（如上图所示）</span></p>
+<p>方法一：在手机设置--&gt;电源中，取消勾选&ldquo;快速启动&rdquo;，然后关闭手机即进入完全关机状态，这时用手同时按下&ldquo;音量减&rdquo;键 +&ldquo;电源&rdquo;键，长按即可进入HBOOT工程模式的三色屏。（如上图所示）</p>
 
-<p><span style="line-height:1.6em">方法二：取消&ldquo;快速启动后&rdquo;，在任何开机状态下，用手按下&ldquo;电源&rdquo;键，长按不要松手，待屏幕下方的三颗电源灯闪烁后，屏幕会黑屏，这时用手同时按下&ldquo;音量减&rdquo;键 +&ldquo;电源&rdquo;键，也可以进入HBOOT工程模式的三色屏。</span></p>
+<p>方法二：取消&ldquo;快速启动后&rdquo;，在任何开机状态下，用手按下&ldquo;电源&rdquo;键，长按不要松手，待屏幕下方的三颗电源灯闪烁后，屏幕会黑屏，这时用手同时按下&ldquo;音量减&rdquo;键 +&ldquo;电源&rdquo;键，也可以进入HBOOT工程模式的三色屏。</p>
 
-<p><span style="line-height:1.6em">在HBOOT中的操作：</span></p>
+<p>在HBOOT中的操作：</p>
 
-<p><span style="line-height:1.6em">进入HBOOT界面后，屏幕不支持触控操作，此时只能用上、下音量键及电源键进行操作。按下音量键后，可以看到此时屏幕最底部的蓝色复选框随音量键上下移动，如果需要进入其中任何一种模式，将蓝色复选框移动至所需进去的栏目，点击电源键即可进入某一模式。</span></p>
+<p>进入HBOOT界面后，屏幕不支持触控操作，此时只能用上、下音量键及电源键进行操作。按下音量键后，可以看到此时屏幕最底部的蓝色复选框随音量键上下移动，如果需要进入其中任何一种模式，将蓝色复选框移动至所需进去的栏目，点击电源键即可进入某一模式。</p>
 
-<p><span style="line-height:1.6em">一般情况下我们只用到fastboot模式和recovery模式，其他模式不做解释。</span></p>
+<p>一般情况下我们只用到fastboot模式和recovery模式，其他模式不做解释。</p>
 
-<p><span style="line-height:1.6em">fastboot模式为快速启动模式，在fastboot模式下连接手机数据线与电脑，即可进入fastboot USB模式，这时可以通过ADB命令来控制手机。同时，在fastboot模式下选中hboot/bootloader按下电源键即可返回HBOOT。</span></p>
+<p>fastboot模式为快速启动模式，在fastboot模式下连接手机数据线与电脑，即可进入fastboot USB模式，这时可以通过ADB命令来控制手机。同时，在fastboot模式下选中hboot/bootloader按下电源键即可返回HBOOT。</p>
 
 <p>recovery模式为回复模式，官方recovery可以用来进行RUU的OTA升级，第三方recovery可以用来刷机、备份系统、WIPE等操作</p>
 
