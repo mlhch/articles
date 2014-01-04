@@ -1,0 +1,269 @@
+<h1>Device - Nexus Root Toolkit</h1>
+
+<p>2013-03-13 20:07:43 +08:00 Wednesday</p>
+
+<p><a href="http://www.wugfresh.com/" target="_blank">http://www.wugfresh.com/</a></p>
+
+<p><a href="http://www.wugfresh.com/nrt/">Nexus Root Toolkit v1.6.3</a></p>
+
+<p><img alt="" src="../images/screen-2013.03.13T20.08.12-nexus-root-toolkit.png" style="height:436px; width:600px" /></p>
+
+<h2>Nexus Root Toolkit v1.6.3</h2>
+
+<p>Posted on&nbsp;<a href="http://www.wugfresh.com/nrt/">November 13, 2012</a>&nbsp;by&nbsp;<a href="http://www.wugfresh.com/author/admin/">WugFresh</a>&nbsp;&mdash;&nbsp;<a href="http://www.wugfresh.com/nrt/#comments">495 Comments &darr;</a></p>
+
+<p>Unlocking, rooting, relocking and unrooting simplified! (and much more!)</p>
+
+<p>VERSION 1.6.3&nbsp;&nbsp;-&nbsp;This program will automatically bring together all the files you need to unlock and root your device in a few clicks, or flash it back to stock and re-lock it. You can also use this program to backup/restore all your important data, flash zips, set file permissions, push and pull files, install apps, generate logcats/bugreports, and much more! With the included file association options, you can perform tasks like flashing zips, installing apps, restoring android backup files, and flashing/booting img files with just a double click! The program includes a full featured interface for automating tasks in TWRP, enhanced restore features, an in-built auto-updater/notification system, &lsquo;any build&rsquo; mode, and quick tools utilities. &nbsp;All the latest Android builds and Nexus devices are now officially supported with full 4.2.2 support. &nbsp;The program intelligently and selectively downloads the files it needs for your device and makes sure you are using the latest files available. &nbsp;The main changes in this release are some new features in the advanced utilities gui (like a logcat/bugreport generation interface, adb sideload button, and restore stock kernel script), dynamic informational tooltips throughout the entire program, major changes to the in-built updater system plus the option to check for multiple devices/builds on startup. &nbsp;Check out the updated&nbsp;<a href="http://www.wugfresh.com/nrt/changelog/">changelog</a>&nbsp;for a more comprehensive breakdown of the feature set in this release.</p>
+
+<p>~ my goal for this project is make the entire process as smooth and simple as possible ~</p>
+
+<p>Supported Nexus devices:<br />
+&middot; Galaxy Nexus: GSM Models (both yakju and non-yakju builds)<br />
+&middot; Galaxy Nexus: CDMA/LTE Verizon Models<br />
+&middot; Galaxy Nexus: CDMA/LTE Sprint Models<br />
+&middot; Nexus S: Worldwide, i9020t and i9023 Models<br />
+&middot; Nexus S: 850MHz, i9020a Models<br />
+&middot; Nexus S: Korea, m200 Models<br />
+&middot; Nexus S 4G: d720 Models<br />
+&middot; Nexus 7: Asus Tablet<br />
+&middot; Nexus 7 3G: Asus Tablet<br />
+&middot; Nexus 10: Samsung Tablet<br />
+&middot; Nexus 4: LG Phone</p>
+
+<p>Instructions:</p>
+
+<p>1. Select the correct device and build (what you are currently running)</p>
+
+<p>2. Configure your drivers if you haven&rsquo;t already using the driver guide (If you aren&rsquo;t sure use Step 3 of the driver guide to test your drivers).</p>
+
+<p>3. If you need to backup your important data.</p>
+
+<p>4. Unlock your device</p>
+
+<p>5. Root your device</p>
+
+<p>6. Enjoy! ^_^</p>
+
+<p>&nbsp;</p>
+
+<ul>
+	<li>Learn more about each option by mousing over the control, dynamic tooltips will provide you more information, also each button displays a message about what it does first.</li>
+	<li>So the best way to get&nbsp;familiar&nbsp;with the toolkit is simply to press the buttons and read what it says.</li>
+</ul>
+
+<p>Download:<br />
+<a href="http://goo.im/devs/WugFresh/NexusRootToolkit/NRT_v1.6.3.sfx.exe" target="_blank">NRT_v1.6.3.sfx.exe [Direct Download - Goo.im]</a><br />
+<a href="http://d-h.st/rJS" target="_blank">[Mirror #1: DevHost]</a>&nbsp; &nbsp;<a href="http://www.softpedia.com/dyn-postdownload.php?p=213077&amp;t=4&amp;i=1" target="_blank">[Mirror #2: Softpedia - US]</a>&nbsp; &nbsp;<a href="http://www.softpedia.com/dyn-postdownload.php?p=213077&amp;t=5&amp;i=1" target="_blank">[Mirror #3: Softpedia - UK]</a>&nbsp; &nbsp;<a href="http://www.mediafire.com/download.php?97g6e8a5870rp4y" target="_blank">[Mirror #4: MediaFire]</a><br />
+Checksums:<br />
+File size:&nbsp;50.07 MB<br />
+MD5:&nbsp;a6e8182d931d9a7a14333a1cee345cdf<br />
+Need a simple way to validate checksums? I recommend:&nbsp;<a href="http://code.kliu.org/hashcheck/" target="_blank">http://code.kliu.org/hashcheck/</a></p>
+
+<h2>驱动问题</h2>
+
+<p>拷贝到 xp 里解压，从设备管理器中进行驱动安装即可</p>
+
+<pre>
+$ ll -h sync/soft/Develop/android/Universal_Naked_Driver_0.7.zip
+-rw-r--r--@ 1 mlhch&nbsp; staff&nbsp;&nbsp; 8.3M Mar 23 12:27 sync/soft/Develop/android/Universal_Naked_Driver_0.7.zip
+</pre>
+
+<h2>Factory Images for Nexus 7</h2>
+
+<p>https://developers.google.com/android/nexus/images#nakasijdq39</p>
+
+<pre>
+$ ll -h sync/soft/Develop/android/nakasi-jdq39-factory-c317339e.tgz&nbsp;
+-rw-r--r--&nbsp; 1 mlhch&nbsp; staff&nbsp;&nbsp; 274M Mar 23 15:05 sync/soft/Develop/android/nakasi-jdq39-factory-c317339e.tgz</pre>
+
+<pre>
+$ ll -h sync/soft/Develop/android/nakasi-jdq39
+total 569704
+drwxr-x---&nbsp; 7 mlhch&nbsp; staff&nbsp;&nbsp; 238B Mar 23 17:01 .
+drwxr-xr-x&nbsp; 6 mlhch&nbsp; staff&nbsp;&nbsp; 204B Mar 23 16:59 ..
+-rw-r-----&nbsp; 1 mlhch&nbsp; staff&nbsp;&nbsp; 2.0M Feb 14 22:39 bootloader-grouper-4.18.img
+-rw-r-----&nbsp; 1 mlhch&nbsp; staff&nbsp;&nbsp; 983B Feb 14 22:39 flash-all.bat
+-rwxr-x--x&nbsp; 1 mlhch&nbsp; staff&nbsp;&nbsp; 871B Feb 14 22:39 flash-all.sh
+-rwxr-x--x&nbsp; 1 mlhch&nbsp; staff&nbsp;&nbsp; 698B Feb 14 22:39 flash-base.sh
+-rw-r-----&nbsp; 1 mlhch&nbsp; staff&nbsp;&nbsp; 276M Feb 14 22:39 image-nakasi-jdq39.zip</pre>
+
+<p>flash-all.sh 中主要调用 flashboot 命令，该文件无需在网上费力下载，在 android 的 sdk 包中就有</p>
+
+<pre>
+$ which fastboot
+/Users/mlhch/app/android-sdk-macosx/platform-tools/fastboot</pre>
+
+<pre>
+$ cat flash-all.sh
+#!/bin/sh
+
+fastboot oem unlock # 解锁, fastboot oem lock 就是加锁
+fastboot erase boot
+fastboot erase cache
+fastboot erase recovery
+fastboot erase system
+fastboot erase userdata
+fastboot flash bootloader bootloader-grouper-4.18.img
+fastboot reboot-bootloader
+sleep 10
+fastboot -w update image-nakasi-jdq39.zip</pre>
+
+<p>flash-base.sh 少了几个步骤，没有解锁。</p>
+
+<pre>
+$ cat flash-base.sh
+#!/bin/sh
+
+fastboot flash bootloader bootloader-grouper-4.18.img
+fastboot reboot-bootloader
+sleep 10</pre>
+
+<p>当出现 &lt; waiting for device &gt; 时，需要进入 FASTBOOT MODE，方法是关机后，同时按住音量+和音量-，然后再按住开机键等待。</p>
+
+<pre>
+$ ./flash-base.sh
+&lt; waiting for device &gt;
+sending &#39;bootloader&#39; (2096 KB)...
+OKAY [&nbsp; 0.266s]
+writing &#39;bootloader&#39;...
+OKAY [&nbsp; 1.296s]
+finished. total time: 1.563s
+rebooting into bootloader...
+OKAY [&nbsp; 0.020s]
+finished. total time: 0.020s</pre>
+
+<pre>
+$ ./flash-all.sh
+&lt; waiting for device &gt;
+...
+(bootloader) Bootloader is already unlocked
+OKAY [&nbsp; 0.020s]
+finished. total time: 0.020s
+erasing &#39;boot&#39;...
+OKAY [&nbsp; 0.076s]
+finished. total time: 0.076s
+******** Did you mean to fastboot format this partition?
+erasing &#39;cache&#39;...
+OKAY [&nbsp; 0.124s]
+finished. total time: 0.124s
+erasing &#39;recovery&#39;...
+OKAY [&nbsp; 0.025s]
+finished. total time: 0.025s
+******** Did you mean to fastboot format this partition?
+erasing &#39;system&#39;...
+OKAY [&nbsp; 0.281s]
+finished. total time: 0.281s
+******** Did you mean to fastboot format this partition?
+erasing &#39;userdata&#39;...
+OKAY [&nbsp; 3.700s]
+finished. total time: 3.700s
+sending &#39;bootloader&#39; (2096 KB)...
+OKAY [&nbsp; 0.278s]
+writing &#39;bootloader&#39;...
+OKAY [&nbsp; 1.266s]
+finished. total time: 1.544s
+rebooting into bootloader...
+OKAY [&nbsp; 0.020s]
+finished. total time: 0.020s
+archive does not contain &#39;boot.sig&#39;
+archive does not contain &#39;recovery.sig&#39;
+archive does not contain &#39;system.sig&#39;
+--------------------------------------------
+Bootloader Version...: 4.18
+Baseband Version.....: N/A
+Serial Number........: 0165c7182d17ec11
+--------------------------------------------
+checking product...
+OKAY [&nbsp; 0.030s]
+checking version-bootloader...
+OKAY [&nbsp; 0.020s]
+sending &#39;boot&#39; (4944 KB)...
+OKAY [&nbsp; 0.654s]
+writing &#39;boot&#39;...
+OKAY [&nbsp; 0.321s]
+sending &#39;recovery&#39; (5446 KB)...
+OKAY [&nbsp; 0.693s]
+writing &#39;recovery&#39;...
+OKAY [&nbsp; 0.368s]
+erasing &#39;system&#39;...
+OKAY [&nbsp; 0.111s]
+sending &#39;system&#39; (471804 KB)...
+OKAY [ 60.953s]
+writing &#39;system&#39;...
+OKAY [ 37.562s]
+erasing &#39;userdata&#39;...
+OKAY [&nbsp; 2.285s]
+formatting &#39;userdata&#39; partition...
+Creating filesystem with parameters:
+&nbsp;&nbsp;&nbsp; Size: 14569963520
+&nbsp;&nbsp;&nbsp; Block size: 4096
+&nbsp;&nbsp;&nbsp; Blocks per group: 32768
+&nbsp;&nbsp;&nbsp; Inodes per group: 8160
+&nbsp;&nbsp;&nbsp; Inode size: 256
+&nbsp;&nbsp;&nbsp; Journal blocks: 32768
+&nbsp;&nbsp;&nbsp; Label:
+&nbsp;&nbsp;&nbsp; Blocks: 3557120
+&nbsp;&nbsp;&nbsp; Block groups: 109
+&nbsp;&nbsp;&nbsp; Reserved block group size: 871
+Created filesystem with 11/889440 inodes and 97309/3557120 blocks
+sending &#39;userdata&#39; (137563 KB)...
+writing &#39;userdata&#39;...
+OKAY [ 34.128s]
+erasing &#39;cache&#39;...
+OKAY [&nbsp; 0.071s]
+formatting &#39;cache&#39; partition...
+Creating filesystem with parameters:
+&nbsp;&nbsp;&nbsp; Size: 464519168
+&nbsp;&nbsp;&nbsp; Block size: 4096
+&nbsp;&nbsp;&nbsp; Blocks per group: 32768
+&nbsp;&nbsp;&nbsp; Inodes per group: 7088
+&nbsp;&nbsp;&nbsp; Inode size: 256
+&nbsp;&nbsp;&nbsp; Journal blocks: 1772
+&nbsp;&nbsp;&nbsp; Label:
+&nbsp;&nbsp;&nbsp; Blocks: 113408
+&nbsp;&nbsp;&nbsp; Block groups: 4
+&nbsp;&nbsp;&nbsp; Reserved block group size: 31
+Created filesystem with 11/28352 inodes and 3654/113408 blocks
+sending &#39;cache&#39; (9052 KB)...
+writing &#39;cache&#39;...
+OKAY [&nbsp; 2.048s]
+rebooting...
+
+finished. total time: 139.351s</pre>
+
+<p>以上操作仅是刷回官方 ROM，之前已经解锁过的，不会重新上锁，但是 root 权限需要重新获取。</p>
+
+<h2>Root</h2>
+
+<p>几点注意事项</p>
+
+<ol>
+	<li>点击 7 下打开开发者模式</li>
+	<li>打开 USB 调式，这样 ADB device 就找到了。</li>
+	<li>出现 an adb device was found but it was listed as offline，根据提示重新关闭再打开&nbsp;USB 调试，然后接受安全提示。</li>
+	<li>接下来会自动重启几次，出现日志输出的画面。</li>
+	<li>最终出现 waiting for your device to finish booting back up...，可能死在此处，不过不影响系统 root 完成。</li>
+</ol>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
