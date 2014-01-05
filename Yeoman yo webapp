@@ -12,6 +12,11 @@
 
 	<p>今日发现 yo webapp 的 Gruntfile.js 中的 copy 任务，并不包含 bower_components，因此 grunt serve:dist 时需注意 requirejs 的 amd 方式对其的依赖。同时也发现 yo webapp 提示 grunt server 已过期，推荐使用 grunt serve:dist。而 yo angular 生成的 Gruntfile.js 中仍然使用 grunt server:dist</p>
 	</li>
+	<li>
+	<p>2014-01-05 23:15 Sunday</p>
+
+	<p>今日重新运行 grunt serve，结果提示安装 ruby 和 compass，安装后错误提示依旧，原来是因为默认安装后如果 $PATH 中没有相关的 ruby 的 bin 路径的话，compass 命令仍然不能被找到。解决办法可以是向 $PATH 中添加路径，或者使用 brew unlink ruby &amp;&amp; brew link ruby。</p>
+	</li>
 </ul>
 
 <pre>
