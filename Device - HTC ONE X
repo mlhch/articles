@@ -68,10 +68,51 @@ HTC Sense 版本：4.1<br />
 软件版本：2.17.707.3<br />
 HTC SDK API 级别：4.23<br />
 HTC 扩展版本：HTCExtension_403_1_GA_20<br />
-<span style="line-height:1.6em">Kernel 版本：</span><span style="line-height:1.6em">2.6.39.4-g12e12ac</span><br />
-<span style="line-height:1.6em">Baseband 版本：2.1204.135.20<br />
+Kernel 版本：2.6.39.4-g12e12ac<br />
+Baseband 版本：2.1204.135.20<br />
 内部版本号：2.17.707.3 CL100532 release-keys<br />
-浏览器版本：WebKit/534.30</span></p>
+浏览器版本：WebKit/534.30</p>
+
+<h3>继续更新官方 RUU 3.14.707.24</h3>
+
+<p>再次检查更新，收到提示：3.14.707.24(364.56MB)，更新完后：</p>
+
+<p>Android 版本：4.1.1<br />
+HTC Sense 版本：4+<br />
+软件版本：3.14.707.24<br />
+HTC SDK API 级别：4.63<br />
+HTC 扩展版本：HTCExtension_Sense45_1<br />
+Kernel 版本：3.1.10-g1a2ac1c/root@abm036 #1/SMP PREEMPT<br />
+Baseband 版本：5.1204.162.29<br />
+内部版本号：3.14.707.24 CL128187 release-keys<br />
+浏览器版本：WebKit/534.30</p>
+
+<p>更新完后明显的变化是左上角出现了&ldquo;节能程序&rdquo;</p>
+
+<h3>哇，还有 4.19.707.3(387.56MB)</h3>
+
+<p>这次发现更新时显示进度的画面中的图标变大了，进度条也变细了。</p>
+
+<ul>
+	<li>屏幕解锁变为&ldquo;拖动图标&rdquo;解锁，解锁后屏幕默认显示最左屏</li>
+	<li>应用列表屏幕变为竖屏滚动</li>
+	<li>所有图标有更新</li>
+	<li>等等</li>
+</ul>
+
+<p>系统软件版本变化如下：</p>
+
+<p>Android 版本：4.2.2<br />
+HTC Sense 版本：5.0<br />
+软件版本：4.19.707.3<br />
+HTC SDK API 级别：5.41<br />
+HTC 扩展版本：已无此项<br />
+Kernel 版本：3.1.10-g517147e | root@abm029 #1 | SMP PREEMPT<br />
+Baseband 版本：5.1204.167.31<br />
+内部版本号：4.19.707.3 CL244600 release-keys<br />
+浏览器版本：WebKit/534.30</p>
+
+<p>此时终于再无更新。</p>
 
 <h2>如何查看解锁状态</h2>
 
