@@ -55,6 +55,24 @@ SMP PREEMPT</p>
 
 <p>浏览器版本：WebKit/534.30</p>
 
+<h3>成功恢复官方 RUU 1.29.707</h3>
+
+<p>2014-01-05 12:33 Sunday</p>
+
+<p>昨晚尝试了降级更新到 1.28.707，不成功。也尝试了直接升级到 3.14.707，也不成功。今天早上尝试同级恢复到 1.29.707，成功了。随即尝试官方自动更新，提示有 2.17.707.3(140.74MB)。</p>
+
+<p>更新成功后，查看新的状态如下：</p>
+
+<p>Android 版本：4.0.4<br />
+HTC Sense 版本：4.1<br />
+软件版本：2.17.707.3<br />
+HTC SDK API 级别：4.23<br />
+HTC 扩展版本：HTCExtension_403_1_GA_20<br />
+<span style="line-height:1.6em">Kernel 版本：</span><span style="line-height:1.6em">2.6.39.4-g12e12ac</span><br />
+<span style="line-height:1.6em">Baseband 版本：2.1204.135.20<br />
+内部版本号：2.17.707.3 CL100532 release-keys<br />
+浏览器版本：WebKit/534.30</span></p>
+
 <h2>如何查看解锁状态</h2>
 
 <p>关机后，音量下键&nbsp;+ 开机键，按五秒，就会出现工程界面，最上面就会显示是否解锁。</p>
