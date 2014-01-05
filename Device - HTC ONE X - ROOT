@@ -1,0 +1,41 @@
+<h1>Device - HTC ONE X - ROOT</h1>
+
+<p>2014-01-05 17:25 Sunday</p>
+
+<p><a href="http://www.chainfire.eu/" target="_blank">http://www.chainfire.eu/</a></p>
+
+<ul>
+	<li>Projects:&nbsp;<a href="http://www.chainfire.eu/projects/52/SuperSU/">SuperSU</a>&nbsp;-&gt;&nbsp;http://www.chainfire.eu/projects/52/SuperSU/</li>
+</ul>
+
+<h2>SuperSU v1.00 has been released !</h2>
+
+<p><a href="http://www.chainfire.eu/articles/129/SuperSU_v1_00_has_been_released_/" target="_blank">http://www.chainfire.eu/articles/129/SuperSU_v1_00_has_been_released_/</a></p>
+
+<p>Posted by&nbsp;<a href="http://www.chainfire.eu/">Chainfire</a>&nbsp;on 28-01-2013 at 18:35:00</p>
+
+<h3>Notes on HTC devices</h3>
+
+<p>In recent HTC firmwares on S-ON devices, writing to the /system partition can cause the device to reboot. In the previous version of SuperSU this created a lot of installation trouble. Luckily, some custom firmwares have come out that will allow you to write the /system partition without issue.&nbsp;<br />
+<br />
+Aside from that, the 1.00 version of the&nbsp;<a href="http://download.chainfire.eu/306/SuperSU/UPDATE-SuperSU-v1.00.zip">flashable update ZIP</a>&nbsp;will setup your system so SuperSU will at least no longer attempt to write /system when you initially start it.</p>
+
+<h2>flashable update ZIP&nbsp;</h2>
+
+<p>http://download.chainfire.eu/306/SuperSU/UPDATE-SuperSU-v1.00.zip</p>
+
+<p>Download&nbsp;<a href="http://download.chainfire.eu/306/SuperSU/UPDATE-SuperSU-v1.00.zip?retrieve_file=1">UPDATE-SuperSU-v1.00.zip</a></p>
+
+<h2>但最新动态在这里</h2>
+
+<p><a href="http://forum.xda-developers.com/showthread.php?t=1538053">SuperSU thread on XDA</a>&nbsp;-&gt;&nbsp;http://forum.xda-developers.com/showthread.php?t=1538053</p>
+
+<p><strong>Download:</strong></p>
+
+<p>CWM / TWRP / MobileODIN installable ZIP:&nbsp;<a href="http://download.chainfire.eu/supersu" target="_blank">http://download.chainfire.eu/supersu</a></p>
+
+<p>http://download.chainfire.eu/372/SuperSU/UPDATE-SuperSU-v1.86.zip</p>
+
+<p><a href="http://download.chainfire.eu/372/SuperSU/UPDATE-SuperSU-v1.86.zip?retrieve_file=1">UPDATE-SuperSU-v1.86.zip</a></p>
+
+<p>剩下的就是用第三方 recovery 刷入它了。</p>
