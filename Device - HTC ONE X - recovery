@@ -68,6 +68,20 @@ Install from sdcard complete.
 
 <p>到此则可以说 ROOT 成功了。</p>
 
+<p>2014-01-06 01:46 Monday</p>
+
+<p>http://teamw.in/twrp_view_all_devices</p>
+
+<p>经反复测试，</p>
+
+<p><a href="file:///Users/mlhch/sync/soft/Mobile/ONE%20X/recovery-clockwork-touch-5.8.4.0-endeavoru.img">recovery-clockwork-touch-5.8.4.0-endeavoru.img</a>&nbsp;但给 ONE X 用无触摸功能。</p>
+
+<p><a href="file:///Users/mlhch/sync/soft/Mobile/ONE%20X/recovery-clockwork-touch-6.0.4.3-grouper.img">recovery-clockwork-touch-6.0.4.3-grouper.img</a>&nbsp;是 Nexus 7 所用的触摸版。</p>
+
+<p><a href="file:///Users/mlhch/sync/soft/Mobile/ONE%20X/openrecovery-twrp-2.6.3.1-grouper.img">openrecovery-twrp-2.6.3.1-grouper.img</a>&nbsp;给 Nexus 7 用很好。</p>
+
+<p><a href="file:///Users/mlhch/sync/soft/Mobile/ONE%20X/openrecovery-twrp-2.6.3.0-endeavoru.img">openrecovery-twrp-2.6.3.0-endeavoru.img</a>&nbsp;给 ONE X 用无触摸功能。</p>
+
 <h2>什么是Recovery</h2>
 
 <p>Recovery,中文意思为&ldquo;恢复&rdquo;，在android系统上存在着这样一个独特的分区-Recovery Partition (Recovery分区)，这个分区的主要功能类似与我们有些品牌笔记本电脑的还原分割区，可以将备份文件来恢复系统。android系统同样如此，可以通过还原模式(Recovery Mode)提供的工具进行备份、还原手机的ROM，甚至可以将非官方的ROM刷入手机中。我们这里和大家说的不是Recovery Partition，而是Recovery Mode所提供的Recovery这个刷机还原工具。</p>
