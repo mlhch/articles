@@ -1,0 +1,25 @@
+<h1>Google Goagent for Android</h1>
+
+<p>2014-01-05 21:35 Sunday</p>
+
+<p><a href="https://github.com/madeye/gaeproxy/wiki" target="_blank">https://github.com/madeye/gaeproxy/wiki</a></p>
+
+<h2>必要步骤</h2>
+
+<ol>
+	<li>导入 GAEProxy 根证书，对&nbsp;4.0 及以上系统：
+	<ol>
+		<li>下载&nbsp;<a href="http://code.google.com/p/gaeproxy/downloads/detail?name=CA.crt" target="_blank">原始根证书</a>&nbsp;置于 SD 卡根目录</li>
+		<li>进入设置-&gt;安全-&gt;从SD卡安装证书</li>
+	</ol>
+	</li>
+	<li>部属自己的 GoAgent Fetch Server ,详情请见：GoAgent&nbsp;<a href="http://code.google.com/p/goagent">http://code.google.com/p/goagent</a></li>
+	<li>下载并安装 GAEProxy 最新版
+	<ol>
+		<li>注意：从 Google Play 上安装会出现下载失败问题，所以需要手动下载 apk 文件并安装。</li>
+		<li>Google Play 上其已经明确给出了国内下载地址：<a href="https://www.google.com/url?q=http://www.coolapk.com/apk/org.gaeproxy&amp;sa=D&amp;usg=AFQjCNF0S_e0EasDcoYPPlx1eOvuIiVjyQ" target="_blank">http://www.coolapk.com/apk/org.gaeproxy</a></li>
+	</ol>
+	</li>
+	<li>填入你的 appspot 地址，形如：https://app-id.appspot.com/2</li>
+	<li>勾选 &ldquo;开启服务&rdquo;，浏览互联网。</li>
+</ol>
