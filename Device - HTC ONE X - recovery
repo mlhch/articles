@@ -1,0 +1,57 @@
+<h1>Device - HTC ONE X - recovery</h1>
+
+<p>2014-01-05 19:03 Sunday</p>
+
+<h2>什么是Recovery</h2>
+
+<p><span style="line-height:1.6em">Recovery,中文意思为&ldquo;恢复&rdquo;，在android系统上存在着这样一个独特的分区-Recovery Partition (Recovery分区)，这个分区的主要功能类似与我们有些品牌笔记本电脑的还原分割区，可以将备份文件来恢复系统。android系统同样如此，可以通过还原模式(Recovery Mode)提供的工具进行备份、还原手机的ROM，甚至可以将非官方的ROM刷入手机中。我们这里和大家说的不是Recovery Partition，而是Recovery Mode所提供的Recovery这个刷机还原工具。</span></p>
+
+<p>HTC原厂ROM不会提供给我们上述强大的功能，因此我们现在所刷入的Recovery都是将第三方所开发的软件文件(Recovery IMG)刷入Recovery Partition，这样我们才有了一个还原和备份的功能。同时HTC原厂升级OTA升级不在于手机是否ROOT，在于手机Recovery Partition是否为原厂，如果不是原厂Recovery Partition，升级将会失败。一般恢复原厂Recovery Partition可以通过刷入官方RUU后恢复。不过这个并无须担心，第三方ROM的实力很强大，官方的更新又太过缓慢，而且每个官方版本都会被Romer修改、优化和精简后发布。</p>
+
+<p>要获取这个第三方的Recovery，首先必须ROOT系统，就是获取系统修改权限，一般都在S-OFF后执行刷入Recovery，因为绝大多数使用Recovery是为了刷入第三方ROM，在未解锁状态是无法刷入第三方ROM的，此时Recovery就并无太大的意义。</p>
+
+<h2><span style="line-height:1.2em">刷入第三方Recovery的方式</span></h2>
+
+<p>一般我们常用的刷入Recovery有以下几种方式：</p>
+
+<p>升级包：所谓升级包就是利用HTC固有的识别机型代码，在HBOOT自动升级指定机型的升级包。Recovery升级包里面可以看到两个文件：android-info.txt和recovery.img文件。升级包名称为PD98IMG.zip;</p>
+
+<p>ROM包：像刷入ROM的方式一样刷入Recovery，这个刷入无需WIPE，自动刷入，刷入后10秒自动重启至Recovery界面;</p>
+
+<p>ADB电脑端刷入：在电脑端使用ADB命令方式刷入Recovery，比较方便，无需手动去刷入;</p>
+
+<p>一键刷机助手刷入：这个更简单了，有详细教程。</p>
+
+<p>除了升级包以外，ROM包、ADB电脑端以及一键刷机助手都需要获取ROOT权限，ROM包刷入更需要你已经刷入过Recovery，因此大家根据自己的需要使用不同的方式刷入。如果你系统未升级过Recovery(进入Recovery有个问号，无菜单)，或者系统未ROOT，我建议你使用升级包的形式刷入Recovery。</p>
+
+<h2>如何刷入Recovery、制作刷入包</h2>
+
+<p>1、升级包</p>
+
+<p>就是将ZIP格式的文件名称为PD98IMG.zip放入存储卡根目录，然后关机并进入HBOOT后自动升级。请注意，RADIO以及系统升级包也是这个名称，你要打开这个包详细看下你的包是否确定是Recovery文件。这个方式很常用。</p>
+
+<p>　　操作流程：</p>
+
+<p>　　1、将PD98IMG.zip格式Recovery升级包放入存储卡根目录;</p>
+
+<p>　　2、彻底关机，按住音量下键，点击电源键，进入HBOOT屏;</p>
+
+<p>　　3、手机自动检测是否有更新(如果没有反应，则进入Fastboot屏查看下;如还没有，检查文件和存储卡);</p>
+
+<p>　　4、系统检查有更新后，点击音量上键更新;</p>
+
+<p>　　5、更新完毕后，你确定是否重启还是留在HBOOT屏，然后进入Recovery界面查看更新。</p>
+
+<p>2、ADB电脑端刷入方式</p>
+
+<p>就是把Recovery.img文件直接放入下面的下载文件里，点击&quot;点击刷入.cmd&quot;运行即可刷入。这是最方便的一种方式。</p>
+
+<p>　　操作流程：</p>
+
+<p>　　1、将手机的USB调试模式打开，连接选择仅充电模式;</p>
+
+<p>　　2、将Recovery.img文件放入下载后解压的文件夹中，运行&quot;点击刷入.cmd&quot;;</p>
+
+<p>　　3、成功则关闭窗口，如果出现错误信息：找不到设备，那么你安装下豌豆荚或91等手机电脑端控制设备的手机驱动即可。</p>
+
+<p>　　这个无需制作，只需要将Recovery.img文件放入文件夹中即可。</p>
