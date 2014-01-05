@@ -2,15 +2,81 @@
 
 <p>2014-01-05 19:03 Sunday</p>
 
+<p><a href="http://www.clockworkmod.com/" target="_blank">http://www.clockworkmod.com/</a></p>
+
+<h2>ROM Manager</h2>
+
+<p>ROMs and Recovery Images</p>
+
+<p><a href="http://www.clockworkmod.com/rommanager" target="_blank">http://www.clockworkmod.com/rommanager</a></p>
+
+<table border="1" cellpadding="3" cellspacing="1">
+	<tbody>
+		<tr>
+			<td>HTC One X (GSM)</td>
+			<td><a href="http://www.clockworkmod.com/rommanager/developers/endeavoru?name=HTC%20One%20X%20(GSM)">Download ROMs</a></td>
+			<td><a href="http://download2.clockworkmod.com/recoveries/recovery-clockwork-5.8.4.0-endeavoru.img">5.8.4.0</a>（此为需要）</td>
+			<td><a href="http://download2.clockworkmod.com/recoveries/recovery-clockwork-touch-5.8.4.0-endeavoru.img">5.8.4.0</a></td>
+		</tr>
+	</tbody>
+</table>
+
+<p>下载后得到&nbsp;<a href="file:///Users/mlhch/sync/soft/Mobile/ONE%20X/recovery-clockwork-5.8.4.0-endeavoru.img">recovery-clockwork-5.8.4.0-endeavoru.img</a></p>
+
+<p>刷入的核心命令：</p>
+
+<pre>
+$ ~/app/adt-bundle-mac/sdk/platform-tools/fastboot flash recovery recovery-clockwork-5.8.4.0-endeavoru.img 
+sending &#39;recovery&#39; (5742 KB)...
+OKAY [  0.864s]
+writing &#39;recovery&#39;...
+(bootloader) Format partition SOS done
+OKAY [  0.553s]
+finished. total time: 1.418s</pre>
+
+<pre>
+$ ~/app/adt-bundle-mac/sdk/platform-tools/fastboot erase cache
+erasing &#39;cache&#39;...
+OKAY [  0.223s]
+finished. total time: 0.223s</pre>
+
+<p>重启后进入 recovery，然后就可以使用它来安装 sdcard 上的&nbsp;UPDATE-SuperSU-v1.86.zip 了。以下为安装时的输出：</p>
+
+<pre>
+ClockworkMod Recovery v5.8.4.0
+
+-- Installing: /sdcard/UPDATE-superSU-v1.86.zip
+Finding update package...
+Opening update package...
+Installing update...
+*********************
+SuperSU installer ZIP
+*********************
+- Mounting /system, /data and rootfs
+- Extracting files
+- Disabling OTA survival
+- Removing old files
+- Creating space
+- Placing files
+- Restoring files
+- Setting permissions
+- Unmounting /system and /data
+- Done !
+
+Install from sdcard complete.
+</pre>
+
+<p>到此则可以说 ROOT 成功了。</p>
+
 <h2>什么是Recovery</h2>
 
-<p><span style="line-height:1.6em">Recovery,中文意思为&ldquo;恢复&rdquo;，在android系统上存在着这样一个独特的分区-Recovery Partition (Recovery分区)，这个分区的主要功能类似与我们有些品牌笔记本电脑的还原分割区，可以将备份文件来恢复系统。android系统同样如此，可以通过还原模式(Recovery Mode)提供的工具进行备份、还原手机的ROM，甚至可以将非官方的ROM刷入手机中。我们这里和大家说的不是Recovery Partition，而是Recovery Mode所提供的Recovery这个刷机还原工具。</span></p>
+<p>Recovery,中文意思为&ldquo;恢复&rdquo;，在android系统上存在着这样一个独特的分区-Recovery Partition (Recovery分区)，这个分区的主要功能类似与我们有些品牌笔记本电脑的还原分割区，可以将备份文件来恢复系统。android系统同样如此，可以通过还原模式(Recovery Mode)提供的工具进行备份、还原手机的ROM，甚至可以将非官方的ROM刷入手机中。我们这里和大家说的不是Recovery Partition，而是Recovery Mode所提供的Recovery这个刷机还原工具。</p>
 
 <p>HTC原厂ROM不会提供给我们上述强大的功能，因此我们现在所刷入的Recovery都是将第三方所开发的软件文件(Recovery IMG)刷入Recovery Partition，这样我们才有了一个还原和备份的功能。同时HTC原厂升级OTA升级不在于手机是否ROOT，在于手机Recovery Partition是否为原厂，如果不是原厂Recovery Partition，升级将会失败。一般恢复原厂Recovery Partition可以通过刷入官方RUU后恢复。不过这个并无须担心，第三方ROM的实力很强大，官方的更新又太过缓慢，而且每个官方版本都会被Romer修改、优化和精简后发布。</p>
 
 <p>要获取这个第三方的Recovery，首先必须ROOT系统，就是获取系统修改权限，一般都在S-OFF后执行刷入Recovery，因为绝大多数使用Recovery是为了刷入第三方ROM，在未解锁状态是无法刷入第三方ROM的，此时Recovery就并无太大的意义。</p>
 
-<h2><span style="line-height:1.2em">刷入第三方Recovery的方式</span></h2>
+<h2>刷入第三方Recovery的方式</h2>
 
 <p>一般我们常用的刷入Recovery有以下几种方式：</p>
 
