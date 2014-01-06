@@ -1,0 +1,341 @@
+<h1>Nginx</h1>
+
+<p>2012-08-11 23:18:15 +08:00 Saturday</p>
+
+<p><a href="http://nginx.org/" target="_blank">http://nginx.org/</a></p>
+
+<ul>
+	<li>
+	<p>2014-01-06 20:07 Monday 早上去买菜，从兵营西边绕回</p>
+
+	<p>2013-12-17&nbsp;<a href="http://nginx.org/en/download.html">nginx-1.5.8</a>&nbsp;mainline version has been released.<br />
+	2013-11-19&nbsp;<a href="http://nginx.org/en/download.html">nginx-1.4.4</a>&nbsp;stable&nbsp;</p>
+	</li>
+	<li>
+	<p>2012-11-17 22:20 星期六</p>
+
+	<p><a href="http://nginx.org/en/download.html">nginx-1.2.5</a>&nbsp;stable version has been released.</p>
+	</li>
+</ul>
+
+<h2>Brew install nginx</h2>
+
+<p>2014-01-06 20:13 Monday</p>
+
+<pre>
+$ brew install nginx
+Error: nginx-1.2.4 already installed
+To install this version, first `brew unlink nginx&#39;
+</pre>
+
+<p>此步并未删除 /usr/local/etc/nginx/ 中的相关配置文件，所以原有配置可继续使用</p>
+
+<pre>
+$ brew uninstall nginx
+Uninstalling /usr/local/Cellar/nginx/1.2.4...
+</pre>
+
+<pre>
+$ brew install nginx
+==&gt; Installing nginx dependency: pcre
+==&gt; Downloading http://downloads.sourceforge.net/project/pcre/pcre/8.34/pcre-8.34.tar.bz2
+######################################################################## 100.0%
+==&gt; ./configure --prefix=/usr/local/Cellar/pcre/8.34 --enable-utf8 --enable-unicode-properties --enable-pcregrep-libz --enable-pcregrep-libbz2 --e
+==&gt; make
+==&gt; make test
+==&gt; make install
+🍺  /usr/local/Cellar/pcre/8.34: 140 files, 4.1M, built in 81 seconds
+==&gt; Installing nginx
+==&gt; Downloading http://nginx.org/download/nginx-1.4.4.tar.gz
+######################################################################## 100.0%
+==&gt; ./configure --prefix=/usr/local/Cellar/nginx/1.4.4 --with-http_ssl_module --with-pcre --with-ipv6 --sbin-path=/usr/local/Cellar/nginx/1.4.4/bi
+==&gt; make
+==&gt; make install
+==&gt; Caveats
+Docroot is: /usr/local/var/www
+
+The default port has been set in /usr/local/etc/nginx/nginx.conf to 8080 so that
+nginx can run without sudo.
+
+To have launchd start nginx at login:
+    ln -sfv /usr/local/opt/nginx/*.plist ~/Library/LaunchAgents
+Then to load nginx now:
+    launchctl load ~/Library/LaunchAgents/homebrew.mxcl.nginx.plist
+Or, if you don&#39;t want/need launchctl, you can just run:
+    nginx
+==&gt; Summary
+🍺  /usr/local/Cellar/nginx/1.4.4: 7 files, 876K, built in 42 seconds
+</pre>
+
+<p>直接运行 nginx 提示如下错误，不过不严重，手动创建 logs 文件夹后即可正常使用。</p>
+
+<pre>
+$ nginx
+nginx: [emerg] open() &quot;/usr/local/Cellar/nginx/1.4.4/logs/error.log&quot; failed (2: No such file or directory)
+</pre>
+
+<pre>
+$ mkdir /usr/local/Cellar/nginx/1.4.4/logs
+</pre>
+
+<pre>
+$ nginx
+$ ps aux|grep nginx
+mlhch           16489   0.0  0.0  2432784    596 s001  S+    8:15下午   0:00.00 grep nginx
+mlhch           16487   0.0  0.0  2445248    768   ??  S     8:15下午   0:00.00 nginx: worker process
+mlhch           16486   0.0  0.0  2445052    320   ??  Ss    8:15下午   0:00.00 nginx: master process nginx
+bogon:~ mlhch$ 
+</pre>
+
+<h2>Installation</h2>
+
+<p>http://nginx.org/en/docs/install.html, 这个不怎么详细</p>
+
+<p>http://wiki.nginx.org/Install, 这里更详细</p>
+
+<pre>
+$ ./configure
+checking for OS
++ Darwin 11.4.0 x86_64
+checking for C compiler ... found
++ using GNU C compiler
++ gcc version: 4.2.1 (Based on Apple Inc. build 5658) (LLVM build 2336.1.00)
+checking for gcc -pipe switch ... found
+checking for gcc builtin atomic operations ... found
+checking for C99 variadic macros ... found
+checking for gcc variadic macros ... found
+checking for unistd.h ... found
+...
+...
+
+./configure: error: the HTTP rewrite module requires the PCRE library.
+You can either disable the module by using --without-http_rewrite_module
+option, or install the PCRE library into the system, or build the PCRE library
+statically from the source with nginx by using --with-pcre=&lt;path&gt; option.
+</pre>
+
+<p>$ sudo port install pcre 之后再次 ./configure，顺利通过</p>
+
+<p>注意，CentOS 下除了 pcre 和 zlib 外，还需要 pcre-devel，zlib-devel，所以直接来一个完整的：$ yum install pcre pcre-devel zlib zlib-devel</p>
+
+<p>CentOS 6.3 已经内置了 pcre，但没有 pcre-devel，有 zlib，但没有 zlib-devel。</p>
+
+<pre>
+creating objs/Makefile
+
+Configuration summary
+&nbsp; + using system PCRE library
+&nbsp; + OpenSSL library is not used
+&nbsp; + md5: using system crypto library
+&nbsp; + sha1: using system crypto library
+&nbsp; + using system zlib library
+
+&nbsp; nginx path prefix: &quot;/usr/local/nginx&quot;
+&nbsp; nginx binary file: &quot;/usr/local/nginx/sbin/nginx&quot;
+&nbsp; nginx configuration prefix: &quot;/usr/local/nginx/conf&quot;
+&nbsp; nginx configuration file: &quot;/usr/local/nginx/conf/nginx.conf&quot;
+&nbsp; nginx pid file: &quot;/usr/local/nginx/logs/nginx.pid&quot;
+&nbsp; nginx error log file: &quot;/usr/local/nginx/logs/error.log&quot;
+&nbsp; nginx http access log file: &quot;/usr/local/nginx/logs/access.log&quot;
+&nbsp; nginx http client request body temporary files: &quot;client_body_temp&quot;
+&nbsp; nginx http proxy temporary files: &quot;proxy_temp&quot;
+&nbsp; nginx http fastcgi temporary files: &quot;fastcgi_temp&quot;
+&nbsp; nginx http uwsgi temporary files: &quot;uwsgi_temp&quot;
+&nbsp; nginx http scgi temporary files: &quot;scgi_temp&quot;</pre>
+
+<p>接着 make, sudo make install，sudo 是需要的，因为要在 /usr/local/nginx 写入。</p>
+
+<p>2012-11-17 22:33</p>
+
+<p>用 brew install nginx 比较省事，完了 nginx.conf 的位置在 /usr/local/etc/nginx/nginx.conf</p>
+
+<pre>
+$ brew install nginx
+==&gt; Installing nginx dependency: pcre
+==&gt; Downloading ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.31.tar.bz2
+Already downloaded: /Library/Caches/Homebrew/pcre-8.31.tar.bz2
+==&gt; ./configure --prefix=/usr/local/Cellar/pcre/8.31 --enable-utf8 --enable-unicode-properties --e
+==&gt; make test
+==&gt; make install
+/usr/local/Cellar/pcre/8.31: 130 files, 3.2M, built in 40 seconds
+==&gt; Installing nginx
+==&gt; Downloading http://nginx.org/download/nginx-1.2.4.tar.gz
+######################################################################## 100.0%
+==&gt; Patching
+patching file conf/nginx.conf
+==&gt; ./configure --prefix=/usr/local/Cellar/nginx/1.2.4 --with-http_ssl_module --with-pcre --with-i
+==&gt; make
+==&gt; make install
+==&gt; Caveats
+In the interest of allowing you to run `nginx` without `sudo`, the default
+port is set to localhost:8080.
+
+If you want to host pages on your local machine to the public, you should
+change that to localhost:80, and run `sudo nginx`. You&#39;ll need to turn off
+any other web servers running port 80, of course.
+
+You can start nginx automatically on login running as your user with:
+&nbsp; mkdir -p ~/Library/LaunchAgents
+&nbsp; cp /usr/local/Cellar/nginx/1.2.4/homebrew.mxcl.nginx.plist ~/Library/LaunchAgents/
+&nbsp; launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.nginx.plist
+
+Though note that if running as your user, the launch agent will fail if you
+try to use a port below 1024 (such as http&#39;s default of 80.)
+Warning: /usr/local/sbin is not in your PATH
+You can amend this by altering your ~/.bashrc file
+==&gt; Summary
+/usr/local/Cellar/nginx/1.2.4: 9 files, 884K, built in 58 seconds</pre>
+
+<p>如输出所示，nginx 被安装到了 /usr/local/sbin，但 $PATH 中没有这个目录，所以需要手动编辑 ~/.bashrc 文件</p>
+
+<p>查看 nginx help 文档</p>
+
+<pre>
+$ ./sbin/nginx -h
+nginx version: nginx/1.2.3
+Usage: nginx [-?hvVtq] [-s signal] [-c filename] [-p prefix] [-g directives]
+
+Options:
+&nbsp; -?,-h&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : this help
+&nbsp; -v&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : show version and exit
+&nbsp; -V&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : show version and configure options then exit
+&nbsp; -t&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : test configuration and exit
+&nbsp; -q&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : suppress non-error messages during configuration testing
+&nbsp; -s signal&nbsp;&nbsp;&nbsp;&nbsp; : send signal to a master process: stop, quit, reopen, reload
+&nbsp; -p prefix&nbsp;&nbsp;&nbsp;&nbsp; : set prefix path (default: /usr/local/nginx/)
+&nbsp; -c filename&nbsp;&nbsp; : set configuration file (default: conf/nginx.conf)
+&nbsp; -g directives : set global directives out of configuration file</pre>
+
+<h2>Configuration</h2>
+
+<p>启动：</p>
+
+<pre>
+$ cd /usr/local/nginx/
+$ sudo ./sbin/nginx</pre>
+
+<p>停止</p>
+
+<pre>
+$ sudo ./sbin/nginx -s stop
+</pre>
+
+<p>本地 80 端口被占用的情况下，需要更改 /usr/local/nginx/conf/nginx.conf 中 http.server.listen 的值为其他值，然后才可以启动成功并从浏览器得到验证。启动成功时页面输出为</p>
+
+<pre>
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Welcome to nginx!&lt;/title&gt;
+&lt;/head&gt;
+&lt;body bgcolor=&quot;white&quot; text=&quot;black&quot;&gt;
+&lt;center&gt;&lt;h1&gt;Welcome to nginx!&lt;/h1&gt;&lt;/center&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<p>此内容来自于 /usr/local/nginx/html/index.html</p>
+
+<p>以下步骤用于配置支持 php</p>
+
+<p>首先取消如下行的注释：</p>
+
+<pre>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; #location ~ \.php$ {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; #&nbsp;&nbsp;&nbsp; root&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; html;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; #&nbsp;&nbsp;&nbsp; fastcgi_pass&nbsp;&nbsp; 127.0.0.1:9000;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; #&nbsp;&nbsp;&nbsp; fastcgi_index&nbsp; index.php;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; #&nbsp;&nbsp;&nbsp; fastcgi_param&nbsp; SCRIPT_FILENAME&nbsp; /scripts$fastcgi_script_name;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; #&nbsp;&nbsp;&nbsp; include&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fastcgi_params;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; #}</pre>
+
+<p>同时替换 /scripts 为 $document_root。完整结果为</p>
+
+<pre>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; location ~ \.php$ {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; root&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; html;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fastcgi_pass&nbsp;&nbsp; 127.0.0.1:9000;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fastcgi_index&nbsp; index.php;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fastcgi_param&nbsp; SCRIPT_FILENAME&nbsp; $document_root$fastcgi_script_name;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; include&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fastcgi_params;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</pre>
+
+<p>2013-02-17 19:30 今日去看三个姑姑</p>
+
+<p>$document_root 的值就是 root 的值，如果本段没有设置 root，那么就是上一级 server 的 root 值</p>
+
+<hr />
+<p>创建文件 /usr/local/nginx/html/info.php，输入内容 &lt;?php phpinfo()?&gt; 后保存。</p>
+
+<p>此时执行 sudo /usr/local/nginx/sbin/nginx -s reload 后，查看 http://localhost:81/info.php，输出为&nbsp;</p>
+
+<pre>
+The page you are looking for is temporarily unavailable.
+Please try again later.</pre>
+
+<p>原因就是 127.0.0.1:9000 即本地端口 9000 并没有 php-cgi 在侦听。</p>
+
+<h2>php-cgi</h2>
+
+<p>在 Mac OS X Lion 上，似乎默认没有 php-cgi，所以需要自己编译或其他途径安装。</p>
+
+<p>注意要指定 --prefix=/usr/local/php-5.4.5，来与系统默认安装的 php 区分。</p>
+
+<pre>
+$ tar xf php-5.4.5.tar.gz
+$ cd php-5.4.5
+$ ./configure --prefix=/usr/local/php-5.4.5
+$ make
+$ sudo make install</pre>
+
+<p>安装好以后看看 php-cgi 在哪</p>
+
+<pre>
+$ find .|grep php-cgi
+./bin/php-cgi
+</pre>
+
+<p>查看一下 php-cgi 的帮助文档</p>
+
+<pre>
+$ /usr/local/php-5.4.5/bin/php-cgi -h
+Usage: php-cgi [-q] [-h] [-s] [-v] [-i] [-f &lt;file&gt;]
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; php-cgi &lt;file&gt; [args...]
+&nbsp; -a&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Run interactively
+&nbsp; -b &lt;address:port&gt;|&lt;port&gt; Bind Path for external FASTCGI Server mode
+&nbsp; -C&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Do not chdir to the script&#39;s directory
+&nbsp; -c &lt;path&gt;|&lt;file&gt; Look for php.ini file in this directory
+&nbsp; -n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; No php.ini file will be used
+&nbsp; -d foo[=bar]&nbsp;&nbsp;&nbsp;&nbsp; Define INI entry foo with value &#39;bar&#39;
+&nbsp; -e&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Generate extended information for debugger/profiler
+&nbsp; -f &lt;file&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Parse &lt;file&gt;.&nbsp; Implies `-q&#39;
+&nbsp; -h&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; This help
+&nbsp; -i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; PHP information
+&nbsp; -l&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Syntax check only (lint)
+&nbsp; -m&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Show compiled in modules
+&nbsp; -q&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Quiet-mode.&nbsp; Suppress HTTP Header output.
+&nbsp; -s&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Display colour syntax highlighted source.
+&nbsp; -v&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Version number
+&nbsp; -w&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Display source with stripped comments and whitespace.
+&nbsp; -z &lt;file&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Load Zend extension &lt;file&gt;.
+&nbsp; -T &lt;count&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Measure execution time of script repeated &lt;count&gt; times.</pre>
+
+<p>运行它来侦听 9000 端口</p>
+
+<pre>
+$ /usr/local/php-5.4.5/bin/php-cgi -b 9000 &amp;
+[1] 60580
+</pre>
+
+<p>再次通过浏览器查看 http://localhost:81/info.php，可见 phpinfo() 正确输出了。</p>
+
+<h2>进一步配置</h2>
+
+<p>添加 http.server.location.autoindex 为 on，打开自动列表功能。</p>
+
+<p>调整 http.server.location.index 的值 index.html index.php 的顺序实现特定目的。</p>
+
+<p>修改 http.server 的每个 location.root 的值来定义自己的 Web 根目录。</p>
+
+<p>如果报 php 缺少某个扩展，那么解决办法是重新编译 php，并在 ./configure 时加上相关参数，比如 --enable-mbstring 等等。</p>
+
+<p>&nbsp;</p>
