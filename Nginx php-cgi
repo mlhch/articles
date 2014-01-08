@@ -1,0 +1,150 @@
+<h1>Nginx php-cgi</h1>
+
+<p>2014-01-09 00:08 Thursday</p>
+
+<p>首先取消如下行的注释：</p>
+
+<pre>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; #location ~ \.php$ {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; #&nbsp;&nbsp;&nbsp; root&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; html;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; #&nbsp;&nbsp;&nbsp; fastcgi_pass&nbsp;&nbsp; 127.0.0.1:9000;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; #&nbsp;&nbsp;&nbsp; fastcgi_index&nbsp; index.php;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; #&nbsp;&nbsp;&nbsp; fastcgi_param&nbsp; SCRIPT_FILENAME&nbsp; /scripts$fastcgi_script_name;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; #&nbsp;&nbsp;&nbsp; include&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fastcgi_params;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; #}</pre>
+
+<p>同时替换 /scripts 为 $document_root。完整结果为</p>
+
+<pre>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; location ~ \.php$ {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; root&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; html;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fastcgi_pass&nbsp;&nbsp; 127.0.0.1:9000;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fastcgi_index&nbsp; index.php;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fastcgi_param&nbsp; SCRIPT_FILENAME&nbsp; $document_root$fastcgi_script_name;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; include&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fastcgi_params;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</pre>
+
+<blockquote>
+<p>2013-02-17 19:30 今日去看三个姑姑</p>
+
+<p>$document_root 的值就是 root 的值，如果本段没有设置 root，那么就是上一级 server 的 root 值</p>
+</blockquote>
+
+<p>创建文件 /usr/local/nginx/html/info.php，输入内容 &lt;?php phpinfo()?&gt; 后保存。</p>
+
+<p>此时执行 sudo /usr/local/nginx/sbin/nginx -s reload 后，查看 http://localhost:81/info.php，输出为&nbsp;</p>
+
+<pre>
+The page you are looking for is temporarily unavailable.
+Please try again later.</pre>
+
+<p>原因就是 127.0.0.1:9000 即本地端口 9000 并没有 php-cgi 在侦听。</p>
+
+<h2>php-cgi</h2>
+
+<p>在 Mac OS X Lion 上，似乎默认没有 php-cgi，所以需要自己编译或其他途径安装。</p>
+
+<p>注意要指定 --prefix=/usr/local/php-5.4.5，来与系统默认安装的 php 区分。</p>
+
+<pre>
+$ tar xf php-5.4.5.tar.gz
+$ cd php-5.4.5
+$ ./configure --prefix=/usr/local/php-5.4.5
+$ make
+$ sudo make install</pre>
+
+<p>安装好以后看看 php-cgi 在哪</p>
+
+<pre>
+$ find .|grep php-cgi
+./bin/php-cgi
+</pre>
+
+<p>查看一下 php-cgi 的帮助文档</p>
+
+<pre>
+$ /usr/local/php-5.4.5/bin/php-cgi -h
+Usage: php-cgi [-q] [-h] [-s] [-v] [-i] [-f &lt;file&gt;]
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; php-cgi &lt;file&gt; [args...]
+&nbsp; -a&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Run interactively
+&nbsp; -b &lt;address:port&gt;|&lt;port&gt; Bind Path for external FASTCGI Server mode
+&nbsp; -C&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Do not chdir to the script&#39;s directory
+&nbsp; -c &lt;path&gt;|&lt;file&gt; Look for php.ini file in this directory
+&nbsp; -n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; No php.ini file will be used
+&nbsp; -d foo[=bar]&nbsp;&nbsp;&nbsp;&nbsp; Define INI entry foo with value &#39;bar&#39;
+&nbsp; -e&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Generate extended information for debugger/profiler
+&nbsp; -f &lt;file&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Parse &lt;file&gt;.&nbsp; Implies `-q&#39;
+&nbsp; -h&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; This help
+&nbsp; -i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; PHP information
+&nbsp; -l&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Syntax check only (lint)
+&nbsp; -m&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Show compiled in modules
+&nbsp; -q&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Quiet-mode.&nbsp; Suppress HTTP Header output.
+&nbsp; -s&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Display colour syntax highlighted source.
+&nbsp; -v&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Version number
+&nbsp; -w&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Display source with stripped comments and whitespace.
+&nbsp; -z &lt;file&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Load Zend extension &lt;file&gt;.
+&nbsp; -T &lt;count&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Measure execution time of script repeated &lt;count&gt; times.</pre>
+
+<p>运行它来侦听 9000 端口</p>
+
+<pre>
+$ /usr/local/php-5.4.5/bin/php-cgi -b 9000 &amp;
+[1] 60580
+</pre>
+
+<p>再次通过浏览器查看 http://localhost:81/info.php，可见 phpinfo() 正确输出了。</p>
+
+<h2>Nginx 的 rewrite</h2>
+
+<p>2014-01-09 00:10 Thursday 近日全面转战 Nginx 以支持 yeoman 项目的静态输出和 express</p>
+
+<p>以下文件为 ~/www_apache/api/.htaccess 的内容</p>
+
+<pre>
+###
+### For Apache
+###
+#RewriteEngine On
+#RewriteRule ^(.*)$ index.php [L];
+
+###
+### For Nginx
+###
+if (!-f $request_filename) {
+	rewrite ^/(.*)$ /api/index.php last;
+}</pre>
+
+<h2>Location 的匹配顺序</h2>
+
+<p>这个需要额外注意，不然会被某些错误搞得莫名其妙。</p>
+
+<pre>
+    server {
+        listen      80;
+        server_name journal;
+
+        ### 使用 ^~ 从而提高优先级别超过 ~ \.php$
+        location ^~ /api/ {
+            root            /Users/mlhch/www_apache/journal;
+            fastcgi_pass    127.0.0.1:9000;
+            fastcgi_index   index.php;
+            fastcgi_param   SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+            include         fastcgi_params;
+            include         /Users/mlhch/www_apache/journal/api/.htaccess;
+        }
+
+        location / {
+            root            /Users/mlhch/www_apache;
+            index           index.html;
+        }
+
+        # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
+        #
+        location ~ \.php$ {
+            root            /Users/mlhch/www_apache;
+            fastcgi_pass    127.0.0.1:9000;
+            fastcgi_index   index.php;
+            fastcgi_param   SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+            include         fastcgi_params;
+        }
+    }</pre>
