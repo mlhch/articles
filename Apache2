@@ -1,0 +1,58 @@
+<h1>Apache2</h1>
+
+<p>2013-05-29 23:35 Wednesday</p>
+
+<p>列出已编译模块</p>
+
+<pre>
+$ apache2 -l
+Compiled in modules:
+&nbsp; core.c
+&nbsp; mod_log_config.c
+&nbsp; mod_logio.c
+&nbsp; prefork.c
+&nbsp; http_core.c
+&nbsp; mod_so.c</pre>
+
+<p>列出已加载模块，-M 或 -t -D DUMP_MODULES</p>
+
+<pre>
+$ apachectl -t -D DUMP_MODULES
+/usr/sbin/apachectl: 87: ulimit: error setting limit (Operation not permitted)
+Loaded Modules:
+&nbsp;core_module (static)
+&nbsp;log_config_module (static)
+...
+&nbsp;setenvif_module (shared)
+&nbsp;status_module (shared)
+Syntax OK</pre>
+
+<p>查看所有可加载模块</p>
+
+<pre>
+$ ll /usr/lib/apache2/modules/
+total 10180
+drwxr-xr-x 2 root root &nbsp; &nbsp;4096 Feb 27 11:40 ./
+drwxr-xr-x 7 root root &nbsp; &nbsp;4096 Feb &nbsp;7 21:18 ../
+-rw-r--r-- 1 root root &nbsp; &nbsp;9084 Nov &nbsp;8 &nbsp;2012 httpd.exp
+-rw-r--r-- 1 root root 8644728 Jan 18 23:53 libphp5.so
+-rw-r--r-- 1 root root &nbsp; 10240 Nov &nbsp;8 &nbsp;2012 mod_actions.so
+-rw-r--r-- 1 root root &nbsp; 14336 Nov &nbsp;8 &nbsp;2012 mod_alias.so
+...
+-rw-r--r-- 1 root root &nbsp; 10240 Nov &nbsp;8 &nbsp;2012 mod_version.so
+-rw-r--r-- 1 root root &nbsp; 10248 Nov &nbsp;8 &nbsp;2012 mod_vhost_alias.so</pre>
+
+<p>使用命令 a2enmod，意思就是 apache2 enable module</p>
+
+<pre>
+$ sudo a2enmod
+Your choices are: actions alias asis auth_basic auth_digest authn_alias authn_anon authn_dbd authn_dbm authn_default authn_file authnz_ldap authz_dbm authz_default authz_groupfile authz_host authz_owner authz_user autoindex cache cern_meta cgi cgid charset_lite dav dav_fs dav_lock dbd deflate dir disk_cache dump_io env expires ext_filter file_cache filter headers ident imagemap include info ldap log_forensic mem_cache mime mime_magic negotiation php5 proxy proxy_ajp proxy_balancer proxy_connect proxy_ftp proxy_http proxy_scgi reqtimeout rewrite setenvif speling ssl status substitute suexec unique_id userdir usertrack version vhost_alias
+Which module(s) do you want to enable (wildcards ok)?
+proxy
+Enabling module proxy.
+To activate the new configuration, you need to run:
+&nbsp; service apache2 restart</pre>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
