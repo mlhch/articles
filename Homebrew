@@ -8,6 +8,27 @@
 
 <p>The missing package manager for OS X.</p>
 
+<h3>2014-01-16 12:26 Thursday</h3>
+
+<pre>
+$ brew update
+Updated Homebrew from 8bc79618 to 6aa59e53.</pre>
+
+<pre>
+$ brew search phantom
+phantomjs
+homebrew/versions/phantomjs17
+$ brew install phantomjs
+Error: phantomjs-1.8.1 already installed
+To install this version, first `brew unlink phantomjs&#39;
+$ brew unlink phantomjs
+Unlinking /usr/local/Cellar/phantomjs/1.8.1... 1 links removed
+$ brew install phantomjs
+==&gt; Downloading https://downloads.sf.net/project/machomebrew/Bottles/phantomjs-1.9.2.mavericks.bottle.3.tar.gz
+######################################################################## 100.0%
+==&gt; Pouring phantomjs-1.9.2.mavericks.bottle.3.tar.gz
+🍺  /usr/local/Cellar/phantomjs/1.9.2: 104 files, 34M</pre>
+
 <h3>2014-01-02 18:37</h3>
 
 <pre>
