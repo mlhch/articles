@@ -1,0 +1,281 @@
+<h1>PhantomJS</h1>
+
+<p>2013-03-05 02:59:25 +08:00 Tuesday</p>
+
+<p><a href="http://phantomjs.org/" target="_blank">http://phantomjs.org/</a></p>
+
+<p>Full web stack<br />
+No browser required</p>
+
+<p>PhantomJS is a headless WebKit with JavaScript API. It has&nbsp;fast&nbsp;and&nbsp;native&nbsp;support for various web standards: DOM handling, CSS selector, JSON, Canvas, and SVG.<br />
+PhantomJS is created by&nbsp;<a href="http://twitter.com/AriyaHidayat">Ariya Hidayat</a>.</p>
+
+<p><a href="http://phantomjs.org/download.html">Download&nbsp;v1.8</a>&nbsp;<a href="https://github.com/ariya/phantomjs/wiki/Quick-Start">Get started</a></p>
+
+<blockquote>
+<p>2014-01-16 12:15 Thursday</p>
+
+<p>PhantomJS is a headless WebKit(没有显示界面的浏览器)&nbsp;<span class="marker">scriptable</span> with <span class="marker">a</span> JavaScript API. It has&nbsp;fast&nbsp;and&nbsp;native&nbsp;support for various web standards: DOM handling, CSS selector, JSON, Canvas, and SVG.</p>
+
+<p><a href="http://phantomjs.org/download.html">Download&nbsp;v1.9</a>&nbsp;<a href="http://phantomjs.org/quick-start.html">Get started</a></p>
+</blockquote>
+
+<pre>
+Simple Javascript example
+
+console.log(&#39;Loading a web page&#39;);
+var page = require(&#39;webpage&#39;).create();
+var url = &#39;http://www.phantomjs.org/&#39;;
+page.open(url, function (status) {
+    //Page is loaded!
+    phantom.exit();
+});</pre>
+
+<p><img alt="" src="../images/screen-phantomjs.org-2013.03.05T03:00.13.png" style="width:600px" /></p>
+
+<h2>Download</h2>
+
+<p><a href="http://phantomjs.org/download.html" target="_blank">http://phantomjs.org/download.html</a></p>
+
+<p>Note&nbsp;Binary packages are made available on a volunteer basis. There is no need to ask when a binary package for a given platform will be ready. The packagers are fully aware of every source release and they give their best effort to make the binaries available.</p>
+
+<p>Download service is kindly provided by&nbsp;<a href="http://code.google.com/p/phantomjs/downloads/">Google Code Project Hosting</a>.</p>
+
+<h3>Windows</h3>
+
+<p>Download&nbsp;<a href="https://phantomjs.googlecode.com/files/phantomjs-1.9.2-windows.zip">phantomjs-1.9.2-windows.zip</a>&nbsp;(6.8 MB) and extract (unzip) the content.</p>
+
+<p>The executable&nbsp;phantomjs.exe&nbsp;is ready to use.</p>
+
+<p>Note: For this static build, the binary is self-contained with no external dependency. It will run on a fresh install of Windows XP or later versions. There is no requirement to install Qt, WebKit, or any other libraries.</p>
+
+<h3>Mac OS X</h3>
+
+<p>Download&nbsp;<a href="https://phantomjs.googlecode.com/files/phantomjs-1.9.2-macosx.zip">phantomjs-1.9.2-macosx.zip</a>&nbsp;(9.1 MB) and extract (unzip) the content.</p>
+
+<p>The binary&nbsp;bin/phantomjs&nbsp;is ready to use.</p>
+
+<p>Note: For this static build, the binary is self-contained with no external dependency. It will run on a fresh install of Snow Leopard or later versions. There is no requirement to install Qt or any other libraries.</p>
+
+<p>Alternative&nbsp;installation using Homebrew:</p>
+
+<pre>
+brew update &amp;&amp; brew install phantomjs</pre>
+
+<p>Warning: MacPorts does not have updated PhantomJS build yet. Installing via MacPorts is not recommended.</p>
+
+<h3>Linux</h3>
+
+<p>For 64-bit system, download&nbsp;<a href="https://phantomjs.googlecode.com/files/phantomjs-1.9.2-linux-x86_64.tar.bz2">phantomjs-1.9.2-linux-x86_64.tar.bz2</a>&nbsp;(12.7 MB).</p>
+
+<p>For 32-bit system, download&nbsp;<a href="https://phantomjs.googlecode.com/files/phantomjs-1.9.2-linux-i686.tar.bz2">phantomjs-1.9.2-linux-i686.tar.bz2</a>&nbsp;(13.0 MB).</p>
+
+<p>This package is built on CentOS 5.8. It should run successfully on Lucid or more modern systems (including other distributions). There is no requirement to install Qt, WebKit, or any other libraries. It is however expected that some base libraries necessary for rendering (<a href="http://www.freetype.org/">FreeType</a>,&nbsp;<a href="http://www.freedesktop.org/wiki/Software/fontconfig">Fontconfig</a>) and the basic font files are available in the system.</p>
+
+<p>Alternatively, install the distribution-specific package using the native package manager (apt-getfor Ubuntu and Debian,&nbsp;pacman&nbsp;for Arch Linux, etc).&nbsp;Warning: The distribution-specific package may not always be on the latest stable version.</p>
+
+<p>For older systems, please compile PhantomJS from source (see below).</p>
+
+<h2>Command Line Interface</h2>
+
+<p><a href="http://phantomjs.org/api/command-line.html" target="_blank">http://phantomjs.org/api/command-line.html</a></p>
+
+<p>As the codebase is updated, we hope to keep these documents updated as well. Unless otherwise stated, this documentation currently applies to the latest PhantomJS release:PhantomJS 1.8.0</p>
+
+<p>Assuming PhantomJS is&nbsp;<a href="http://phantomjs.org/build.html">built</a>&nbsp;and its executable is place somewhere in the PATH, it can be invoked as follows:</p>
+
+<pre>
+phantomjs [options] somescript.js [arg1 [arg2 [...]]]
+</pre>
+
+<p>The script code will be executed as if it running in a web browser with an empty page. Since PhantomJS is headless, there will not be anything visible shown up on the screen.</p>
+
+<p>If PhantomJS is invoked without any argument, it will enter the interactive mode (REPL).</p>
+
+<h3>Command-line Options</h3>
+
+<p>Supported command-line options are:</p>
+
+<ul>
+	<li>--help&nbsp;or&nbsp;-h&nbsp;lists all possible command-line options.&nbsp;Halts immediately, will not run a script passed as argument.</li>
+	<li>--version&nbsp;or&nbsp;-v&nbsp;prints out the version of PhantomJS.&nbsp;Halts immediately, will not run a script passed as argument.</li>
+	<li>--cookies-file=/path/to/cookies.txt&nbsp;specifies the file name to store the persistent Cookies.</li>
+	<li>--disk-cache=[true|false]&nbsp;enables disk cache (at desktop services cache storage location, default is&nbsp;false). Also accepted:&nbsp;[yes|no].</li>
+	<li>--ignore-ssl-errors=[true|false]&nbsp;ignores SSL errors, such as expired or self-signed certificate errors (default is&nbsp;false). Also accepted:&nbsp;[yes|no].</li>
+	<li>--load-images=[true|false]&nbsp;load all inlined images (default is&nbsp;true). Also accepted:&nbsp;[yes|no].</li>
+	<li>--local-storage-path=/some/path&nbsp;path to save LocalStorage content and WebSQL content.</li>
+	<li>--local-storage-quota=number&nbsp;maximum size to allow for data.</li>
+	<li>--local-to-remote-url-access=[true|false]&nbsp;allows local content to access remote URL (default is&nbsp;false). Also accepted:&nbsp;[yes|no].</li>
+	<li>--max-disk-cache-size=size&nbsp;limits the size of disk cache (in KB).</li>
+	<li>--output-encoding=encoding&nbsp;sets the encoding used for terminal output (default isutf8).</li>
+	<li>--remote-debugger-port&nbsp;starts the script in a debug harness and listens on the specified port</li>
+	<li>--remote-debugger-autorun&nbsp;runs the script in the debugger immediately: &#39;yes&#39; or &#39;no&#39; (default)</li>
+	<li>--proxy=address:port&nbsp;specifies the proxy server to use (e.g.&nbsp;--proxy=192.168.1.42:8080).</li>
+	<li>--proxy-type=[http|socks5|none]&nbsp;specifies the type of the proxy server (default is&nbsp;http).</li>
+	<li>--proxy-auth&nbsp;specifies the authentication information for the proxy, e.g.&nbsp;--proxy-auth=username:password).</li>
+	<li>--script-encoding=encoding&nbsp;sets the encoding used for the starting script (default is&nbsp;utf8).</li>
+	<li>--ssl-protocol=[sslv3|sslv2|tlsv1|any&#39;]&nbsp;sets the SSL protocol for secure connections (default is&nbsp;SSLv3).</li>
+	<li>--ssl-certificates-path=&lt;val&gt;&nbsp;Sets the location for custom CA certificates (if none set, uses system default).</li>
+	<li>--web-security=[true|false]&nbsp;enables web security and forbids cross-domain XHR (default is&nbsp;true). Also accepted:&nbsp;[yes|no].</li>
+	<li>--webdriver&nbsp;starts in &#39;Remote WebDriver mode&#39; (embedded GhostDriver): &#39;[[:]]&#39; (default &#39;127.0.0.1:8910&#39;)</li>
+	<li>--webdriver-selenium-grid-hub&nbsp;URL to the Selenium Grid HUB: &#39;URLTOHUB&#39; (default &#39;none&#39;) (NOTE: works only together with &#39;--webdriver&#39;)</li>
+</ul>
+
+<p>Alternatively, since PhantomJS 1.3, you can also utilize a JavaScript Object Notation (JSON) configuration file instead of passing in multiple command-line options:</p>
+
+<pre>
+--config=/path/to/config.json
+</pre>
+
+<p>The contents of&nbsp;config.json&nbsp;should be a standalone JavaScript object. Keys are de-dashed, camel-cased equivalents of the other supported command-line options (excluding&nbsp;--version/-v&nbsp;and&nbsp;--help/-h). Values are their JavaScript equivalents: &#39;true&#39;/&#39;false&#39; (or &#39;yes&#39;/&#39;no&#39;) values translate into&nbsp;true/false&nbsp;Boolean values, numbers remain numbers, strings remain strings. For example:</p>
+
+<pre>
+{
+  /* Same as: --ignore-ssl-errors=true */
+  &quot;ignoreSslErrors&quot;: true,
+
+  /* Same as: --max-disk-cache-size=1000 */
+  &quot;maxDiskCacheSize&quot;: 1000,
+
+  /* Same as: --output-encoding=utf8 */
+  &quot;outputEncoding&quot;: &quot;utf8&quot;
+
+  /* etc. */
+}</pre>
+
+<h2>Quick Start</h2>
+
+<p>This instruction assumes that PhantomJS is installed and its executable is placed somewhere in the PATH.</p>
+
+<p>The code shown here is also available in&nbsp;<a href="http://phantomjs.org/examples/">various examples</a>&nbsp;included with PhantomJS. You are also recommended to explore the use of PhantomJS for&nbsp;<a href="http://phantomjs.org/page-automation.html">page automation</a>,&nbsp;<a href="http://phantomjs.org/network-monitoring.html">network monitoring</a>,&nbsp;<a href="http://phantomjs.org/screen-capture.html">screen capture</a>, and&nbsp;<a href="http://phantomjs.org/headless-testing.html">headless testing</a>.</p>
+
+<h3>Hello, World!</h3>
+
+<p>Create a new text file that contains the following two lines:</p>
+
+<pre>
+console.log(&#39;Hello, world!&#39;);
+phantom.exit();
+</pre>
+
+<p>Save it as&nbsp;hello.js&nbsp;and then run it from the command line, not the REPL.</p>
+
+<p>REPL is a simple, interactive computer programming environment. Read about REPL in the docs<a href="https://github.com/ariya/phantomjs/wiki/REPL">Here</a>. Again, REPL is the executable phantomjs.exe not the command line.</p>
+
+<p>From the command prompt type:</p>
+
+<pre>
+phantomjs hello.js
+</pre>
+
+<p>The output is:</p>
+
+<blockquote>
+<p>Hello, world!</p>
+</blockquote>
+
+<p>In the first line,&nbsp;console.log&nbsp;will print the passed string to the terminal. In the second line,phantom.exit&nbsp;terminates the execution.</p>
+
+<p>It is&nbsp;very important&nbsp;to call&nbsp;phantom.exit&nbsp;at some point in the script, otherwise PhantomJS will not be terminated at all.</p>
+
+<h3>Page Loading</h3>
+
+<p>A web page can be loaded, analyzed, and rendered by creating a web page object.</p>
+
+<p>The following script demonstrates the simplest use of page object. It loads example.com and then saves it as an image,&nbsp;example.png.</p>
+
+<pre>
+var page = require(&#39;webpage&#39;).create();
+page.open(&#39;http://example.com&#39;, function() {
+  page.render(&#39;example.png&#39;);
+  phantom.exit();
+});
+</pre>
+
+<p>Because of its rendering features, PhantomJS can be used to&nbsp;<a href="http://phantomjs.org/screen-capture.html">capture web pages</a>, essentially taking a screenshot of the contents.</p>
+
+<p>The following&nbsp;loadspeed.js&nbsp;script loads a specified URL (do not forget the http protocol) and measures the time it takes to load it.</p>
+
+<pre>
+var page = require(&#39;webpage&#39;).create(),
+  system = require(&#39;system&#39;),
+  t, address;
+
+if (system.args.length === 1) {
+  console.log(&#39;Usage: loadspeed.js &lt;some URL&gt;&#39;);
+  phantom.exit();
+}
+
+t = Date.now();
+address = system.args[1];
+page.open(address, function(status) {
+  if (status !== &#39;success&#39;) {
+    console.log(&#39;FAIL to load the address&#39;);
+  } else {
+    t = Date.now() - t;
+    console.log(&#39;Loading time &#39; + t + &#39; msec&#39;);
+  }
+  phantom.exit();
+});
+</pre>
+
+<p>Run the script with the command:</p>
+
+<pre>
+phantomjs loadspeed.js http://www.google.com
+</pre>
+
+<p>It outputs something like:</p>
+
+<blockquote>
+<p>Loading http://www.google.com Loading time 719 msec</p>
+</blockquote>
+
+<h3>Code Evaluation</h3>
+
+<p>To evaluate JavaScript or CoffeeScript code in the context of the web page, use&nbsp;evaluate()function. The execution is &quot;sandboxed&quot;, there is no way for the code to access any JavaScript objects and variables outside its own page context. An object can be returned from&nbsp;evaluate(), however it is limited to simple objects and can&#39;t contain functions or closures.</p>
+
+<p>Here is an example to show the title of a web page:</p>
+
+<pre>
+var page = require(&#39;webpage&#39;).create();
+page.open(url, function(status) {
+  var title = page.evaluate(function() {
+    return document.title;
+  });
+  console.log(&#39;Page title is &#39; + title);
+});
+</pre>
+
+<p>Any console message from a web page, including from the code inside&nbsp;evaluate(), will not be displayed by default. To override this behavior, use the&nbsp;onConsoleMessage&nbsp;callback. The previous example can be rewritten to:</p>
+
+<pre>
+var page = require(&#39;webpage&#39;).create();
+page.onConsoleMessage = function(msg) {
+  console.log(&#39;Page title is &#39; + msg);
+};
+page.open(url, function(status) {
+  page.evaluate(function() {
+    console.log(document.title);
+  });
+});
+</pre>
+
+<p>Since the script is executed as if it is running on a web browser, standard DOM scripting and CSS selectors work just fine. It makes PhantomJS suitable to carry out various&nbsp;<a href="http://phantomjs.org/page-automation.html">page automation tasks</a>.</p>
+
+<h3>Network Requests and Responses</h3>
+
+<p>When a page requests a resource from a remote server, both the request and the response can be tracked via&nbsp;onResourceRequested&nbsp;and&nbsp;onResourceReceived&nbsp;callback. This is demonstrated in the example&nbsp;<a href="https://github.com/ariya/phantomjs/blob/master/examples/netlog.js">netlog.js</a>:</p>
+
+<pre>
+var page = require(&#39;webpage&#39;).create();
+page.onResourceRequested = function(request) {
+  console.log(&#39;Request &#39; + JSON.stringify(request, undefined, 4));
+};
+page.onResourceReceived = function(response) {
+  console.log(&#39;Receive &#39; + JSON.stringify(response, undefined, 4));
+};
+page.open(url);
+</pre>
+
+<p>For more info on how to utilize this features for HAR export as well as YSlow-based performance analysis, see the page on&nbsp;<a href="http://phantomjs.org/network-monitoring.html">network monitoring</a>.</p>
