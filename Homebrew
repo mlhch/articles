@@ -8,6 +8,17 @@
 
 <p>The missing package manager for OS X.</p>
 
+<h3>2014-01-24 23:22 Friday 今日去临淇镇上买氧气</h3>
+
+<p>试图安装 php55 未果</p>
+
+<pre>
+$ brew update
+Updated Homebrew from 6aa59e53 to 942fa3e4.
+==&gt; New Formulae
+android-platform-tools     gringo              nsq               rig
+bear             kqwait              objc-run           t1lib</pre>
+
 <h3>2014-01-16 12:26 Thursday</h3>
 
 <pre>
