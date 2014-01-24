@@ -1,3 +1,9 @@
 <h1>PHP</h1>
 
 <p>2013-11-27 10:10 Wednesday</p>
+
+<p><a href="http://www.php.net/" target="_blank">http://www.php.net/</a></p>
+
+<p>PHP is a popular general-purpose scripting language that is especially suited to web development.</p>
+
+<p>Fast, flexible and pragmatic, PHP powers everything from your blog to the most popular websites in the world.</p>
