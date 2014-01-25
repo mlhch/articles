@@ -1,0 +1,130 @@
+<h1>PHP - mysqlnd</h1>
+
+<p>2014-01-25 14:32 Saturday</p>
+
+<p><a href="http://www.php.net/manual/zh/book.mysqlnd.php" target="_blank">http://www.php.net/manual/zh/book.mysqlnd.php</a></p>
+
+<h2>Installation</h2>
+
+<table border="1">
+	<caption>更新日志</caption>
+	<thead>
+		<tr>
+			<th>版本</th>
+			<th>说明</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>5.3.0</td>
+			<td>The MySQL Native Driver was added, with support for all MySQL extensions (i.e., mysql, mysqli and PDO_MYSQL). Passing in&nbsp;mysqlnd&nbsp;to the appropriate configure switch enables this support.</td>
+		</tr>
+		<tr>
+			<td>5.4.0</td>
+			<td>The MySQL Native Driver is now the default for all MySQL extensions (i.e., mysql, mysqli and PDO_MYSQL). Passing in&nbsp;mysqlnd&nbsp;to configure is now optional.</td>
+		</tr>
+		<tr>
+			<td>5.5.0</td>
+			<td>SHA-256 Authentication Plugin support was added</td>
+		</tr>
+	</tbody>
+</table>
+
+<p>Installation on Unix</p>
+
+<p>The MySQL database extensions must be configured to use the MySQL Client Library. In order to use the MySQL Native Driver, PHP needs to be built specifying that the MySQL database extensions are compiled with MySQL Native Driver support. This is done through configuration options prior to building the PHP source code.</p>
+
+<p>For example, to build the MySQL extension,&nbsp;mysqli&nbsp;and PDO MYSQL using the MySQL Native Driver, the following command would be given:</p>
+
+<pre>
+./configure --with-mysql=mysqlnd \
+--with-mysqli=mysqlnd \
+--with-pdo-mysql=mysqlnd \
+[other options]</pre>
+
+<p>Installation on Windows</p>
+
+<p>In the official PHP Windows distributions from 5.3 onwards, MySQL Native Driver is enabled by default, so no additional configuration is required to use it. All MySQL database extensions will use MySQL Native Driver in this case.</p>
+
+<p>SHA-256 Authentication Plugin support</p>
+
+<p>The MySQL Native Driver requires the OpenSSL functionality of PHP to be loaded and enabled to connect to MySQL through accounts that use the MySQL SHA-256 Authentication Plugin. For example, PHP could be configured using:</p>
+
+<pre>
+./configure --with-mysql=mysqlnd \
+--with-mysqli=mysqlnd \
+--with-pdo-mysql=mysqlnd \
+--with-openssl
+[other options]</pre>
+
+<h2>MySQL native driver for PHP - mysqlnd</h2>
+
+<p><a href="http://dev.mysql.com/downloads/connector/php-mysqlnd/" target="_blank">http://dev.mysql.com/downloads/connector/php-mysqlnd/</a></p>
+
+<p>The MySQL native driver for PHP&nbsp;<a href="http://dev.mysql.com/doc/en/apis-php-mysqlnd.html">(mysqlnd)</a>&nbsp;is a drop-in replacement for the MySQL Client Library&nbsp;<a href="http://dev.mysql.com/doc/en/c.html">(libmysql)</a>&nbsp;for the PHP script language.</p>
+
+<h3>PHP MySQL extensions</h3>
+
+<p>The PHP MySQL extensions are lightweight wrappers on top of a C client library. There are 3 PHP MySQL extensions:</p>
+
+<ul>
+	<li><a href="http://dev.mysql.com/doc/refman/5.5/en/apis-php-mysql.html">ext/mysql</a>&nbsp;(not recommended)</li>
+	<li><a href="http://dev.mysql.com/doc/refman/5.5/en/apis-php-mysqli.html">ext/mysqli</a></li>
+	<li><a href="http://dev.mysql.com/doc/refman/5.5/en/apis-php-pdo-mysql.html">PDO_MySQL</a></li>
+</ul>
+
+<p><a href="http://dev.mysql.com/doc/refman/5.5/en/apis-php-mysqlinfo.api.choosing.html">Extension Feature Comparison&nbsp;&raquo;</a></p>
+
+<p>It is recommended to use either the mysqli or PDO_MySQL extensions. It is not recommended to use the old mysql extension for new development.</p>
+
+<h3>Choosing a Library</h3>
+
+<p>The extensions can either use the mysqlnd or libmysql library to connect from PHP to MySQL. Choosing one or the other library is a compile time decision. Both libraries are supported and constantly being improved.</p>
+
+<p><a href="http://dev.mysql.com/doc/refman/5.5/en/apis-php-mysqlinfo.library.choosing.html">Library Feature Comparison&nbsp;&raquo;</a></p>
+
+<p>MySQL recommends using the MySQL native driver for PHP (mysqlnd) together with ext/mysqli or PDO_MySQL.</p>
+
+<h3>Download Source Code &amp; Binaries</h3>
+
+<p>All 3 PHP MySQL extensions and the mysqlnd library are part of the source code of PHP. The source code and binaries are available from:&nbsp;<a href="http://php.net/downloads.php">http://php.net/downloads.php</a></p>
+
+<h3>PHP 5.4 has mysqlnd as default</h3>
+
+<p>As of PHP 5.4, the mysqlnd library is a php.net compile time default to all PHP MySQL extensions. Also, the php.net Windows team is using mysqlnd for the official PHP Windows distribution since mysqlnd became available in PHP 5.3.</p>
+
+<h3>Advantages of using mysqlnd</h3>
+
+<p>The mysqlnd library is highly optimized for and tightly integrated into PHP. The MySQL Client Library cannot offer the same optimizations because it is a general-purpose client library.</p>
+
+<p>The mysqlnd library is using PHP internal C infrastructure for seamless integration into PHP. In addition, it is using PHP memory management, PHP Streams (I/O abstraction) and PHP string handling routines. The use of PHP memory management by mysqlnd allows, for example, memory savings by using read-only variables (copy on write) and makes mysqlnd apply to PHP memory limits. Additional advantages include:</p>
+
+<ul>
+	<li><a href="http://dev.mysql.com/doc/en/apis-php-mysqlnd.plugin.html">Powerful plugin API to extend feature set</a></li>
+	<li><a href="http://dev.mysql.com/doc/en/apis-php-class.mysqli.html#apis-php-mysqli.poll">Asynchronous, non-blocking queries</a></li>
+	<li><a href="http://dev.mysql.com/doc/en/apis-php-mysqlnd.stats.html">150+ performance statistics</a></li>
+	<li>Ships together with the PHP 5.3, and later, source</li>
+	<li>No need to install MySQL Client Library</li>
+	<li>Powerful plugins. See Below.</li>
+</ul>
+
+<h3>Mysqlnd Plugins</h3>
+
+<p>A wide range of mysqlnd plugins, providing additional features are available from&nbsp;<a href="http://pecl.php.net/">PECL</a>. Popular mysqlnd plugins include:</p>
+
+<ul>
+	<li><a href="http://dev.mysql.com/doc/en/apis-php-book.mysqlnd-ms.html">Replication and Load Balancing plugin - mysqlnd_ms</a></li>
+	<li><a href="http://dev.mysql.com/doc/en/apis-php-book.mysqlnd-qc.html">Query result cache plugin - mysqlnd_qc</a></li>
+	<li><a href="http://dev.mysql.com/doc/en/apis-php-book.mysqlnd-uh.html">User handler plugin (write plugins with PHP not C) - mysqlnd_uh</a></li>
+	<li><a href="https://wiki.php.net/pecl/mysqlnd_poc_plugins">Multi Connect plugin - mysqlnd_mc</a></li>
+	<li><a href="https://wiki.php.net/pecl/mysqlnd_poc_plugins">Prepared Statement Handle Cache plugin - PECL/mysqlnd_pscache</a></li>
+	<li><a href="https://wiki.php.net/pecl/mysqlnd_poc_plugins">SQL Injection Protection plugin - PECL/mysqlnd_sip</a></li>
+</ul>
+
+<h3>Additional Resources</h3>
+
+<ul>
+	<li><a href="http://dev.mysql.com/doc/en/apis-php.html">MySQL Reference Manual: MySQL PHP API</a></li>
+	<li><a href="http://dev.mysql.com/doc/en/apis-php-mysqlnd.html">MySQL Reference Manual: MySQL Native Driver (Mysqlnd)</a></li>
+	<li><a href="http://www.php.net/manual/en/set.mysqlinfo.php">PHP Manual: MySQL Drivers &amp; Plugins</a></li>
+</ul>
