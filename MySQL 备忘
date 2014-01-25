@@ -1,4 +1,4 @@
-<h1>MySQL 备忘 - dscl</h1>
+<h1>MySQL 备忘</h1>
 
 <p>2013-10-31 12:43 Thursday</p>
 
@@ -6,7 +6,7 @@
 
 <p>在表的&ldquo;操作&rdquo;选项卡上有一项&ldquo;更改表的排序，根据...&rdquo;，不要轻易修改此项，会影响到 GROUP BY 的取值</p>
 
-<p><span style="line-height:1.6em">2014-01-24 20:38 Friday</span></p>
+<p>2014-01-24 20:38 Friday</p>
 
 <p>关于 phpMyAdmin 登录页面上的&nbsp;2002 错误，还需要注意的是&nbsp;config.inc.php 文件中的如下行</p>
 
@@ -34,7 +34,7 @@ $ mysql_config --socket
 	</tbody>
 </table>
 
-<p><span style="line-height:1.6em">2011-12-20 星期二</span></p>
+<p>2011-12-20 星期二</p>
 
 <p>如果出现如下错误，可以尝试修改 phpMyAdmin/config.inc.php 中 host 的配置，由 localhost 改为 127.0.0.1</p>
 
@@ -48,7 +48,7 @@ $ mysql_config --socket
 
 <p>而&nbsp;$cfg[&#39;Servers&#39;][$i][&#39;auth_type&#39;] = &#39;cookie&#39; 情况下 $cfg[&#39;Servers&#39;][$i][&#39;password&#39;] = &#39;&#39; 就可以了，然后在页面中输入密码进行登录。</p>
 
-<h2><span style="line-height:1.2em">MySQL 下载</span></h2>
+<h2>MySQL 下载</h2>
 
 <p>2011-12-20 星期二</p>
 
