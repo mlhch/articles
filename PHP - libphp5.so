@@ -1,0 +1,48 @@
+<h1>PHP - libphp5.so</h1>
+
+<p>2014-01-25 14:48 Saturday</p>
+
+<p>Mac 系统默认的 apache2 的位置信息：</p>
+
+<pre>
+$ httpd -V
+Server version: Apache/2.2.24 (Unix)
+Server built:   Aug 24 2013 21:10:43
+Server&#39;s Module Magic Number: 20051115:31
+Server loaded:  APR 1.4.5, APR-Util 1.3.12
+Compiled using: APR 1.4.5, APR-Util 1.3.12
+Architecture:   64-bit
+Server MPM:     Prefork
+  threaded:     no
+    forked:     yes (variable process count)
+Server compiled with....
+ -D APACHE_MPM_DIR=&quot;server/mpm/prefork&quot;
+ -D APR_HAS_SENDFILE
+ -D APR_HAS_MMAP
+ -D APR_HAVE_IPV6 (IPv4-mapped addresses enabled)
+ -D APR_USE_FLOCK_SERIALIZE
+ -D APR_USE_PTHREAD_SERIALIZE
+ -D SINGLE_LISTEN_UNSERIALIZED_ACCEPT
+ -D APR_HAS_OTHER_CHILD
+ -D AP_HAVE_RELIABLE_PIPED_LOGS
+ -D DYNAMIC_MODULE_LIMIT=128
+<span class="marker"> -D HTTPD_ROOT=&quot;/usr&quot;</span>
+ -D SUEXEC_BIN=&quot;/usr/bin/suexec&quot;
+ -D DEFAULT_PIDLOG=&quot;/private/var/run/httpd.pid&quot;
+ -D DEFAULT_SCOREBOARD=&quot;logs/apache_runtime_status&quot;
+ -D DEFAULT_LOCKFILE=&quot;/private/var/run/accept.lock&quot;
+ -D DEFAULT_ERRORLOG=&quot;logs/error_log&quot;
+ -D AP_TYPES_CONFIG_FILE=&quot;/private/etc/apache2/mime.types&quot;
+ -D SERVER_CONFIG_FILE=&quot;/private/etc/apache2/httpd.conf&quot;</pre>
+
+<p>apache2 默认使用的 libphp5.so 的位置：</p>
+
+<pre>
+$ ll /usr/libexec/apache2/libphp5.so
+-rwxr-xr-x  1 root  wheel  10619600 10 23 22:47 /usr/libexec/apache2/libphp5.so</pre>
+
+<p>Mac 默认的 php 安装位置在</p>
+
+<pre>
+$ ll /usr/include/php/ext/mysql
+mysqli/  mysqlnd/</pre>
