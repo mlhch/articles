@@ -1,0 +1,259 @@
+<h1>MySQL 备忘 - dscl</h1>
+
+<p>2013-10-31 12:43 Thursday</p>
+
+<h2>phpMyAdmin</h2>
+
+<p>在表的&ldquo;操作&rdquo;选项卡上有一项&ldquo;更改表的排序，根据...&rdquo;，不要轻易修改此项，会影响到 GROUP BY 的取值</p>
+
+<p><span style="line-height:1.6em">2014-01-24 20:38 Friday</span></p>
+
+<p>关于 phpMyAdmin 登录页面上的&nbsp;2002 错误，还需要注意的是&nbsp;config.inc.php 文件中的如下行</p>
+
+<pre>
+$cfg[&#39;Servers&#39;][$i][&#39;extension&#39;] = &#39;mysql&#39;;</pre>
+
+<p>今天发现它的配置居然是 mysqli，所以解决办法是，要么由 mysqli 改为 mysql，要么配置 php.ini 中 mysqli 的 default_socket 文件位置。</p>
+
+<p>2013-10-31 12:43 Thursday</p>
+
+<p>实际上，出现 2002&nbsp;错误的真正原因是 MySQL 启动时默认生成的 mysql.sock 的路径与 php.ini 中配置的 mysql.sock 的路径不一致。最简单的办法就是用 ln 在 php.ini 需要的路径做一个硬链接就可以了。</p>
+
+<pre>
+$ mysql_config --socket
+/tmp/mysql.sock</pre>
+
+<p>php.ini 中路径如下</p>
+
+<table border="1" cellpadding="3">
+	<tbody>
+		<tr>
+			<td>mysql.default_socket</td>
+			<td>/tmp/mysql.sock</td>
+		</tr>
+	</tbody>
+</table>
+
+<p><span style="line-height:1.6em">2011-12-20 星期二</span></p>
+
+<p>如果出现如下错误，可以尝试修改 phpMyAdmin/config.inc.php 中 host 的配置，由 localhost 改为 127.0.0.1</p>
+
+<blockquote>
+<p><cite>#2002 &ndash; 服务器没有响应 (或者本地 MySQL 服务器的套接字没有正确配置)</cite></p>
+</blockquote>
+
+<p>$cfg[&#39;Servers&#39;][$i][&#39;host&#39;] = &#39;127.0.0.1&#39;;</p>
+
+<p>另外需要加深印象的是 $cfg[&#39;Servers&#39;][$i][&#39;auth_type&#39;] = &#39;config&#39; 情况下需要正确配置&nbsp;$cfg[&#39;Servers&#39;][$i][&#39;password&#39;] = &#39;******&#39; 才能成功登录。</p>
+
+<p>而&nbsp;$cfg[&#39;Servers&#39;][$i][&#39;auth_type&#39;] = &#39;cookie&#39; 情况下 $cfg[&#39;Servers&#39;][$i][&#39;password&#39;] = &#39;&#39; 就可以了，然后在页面中输入密码进行登录。</p>
+
+<h2><span style="line-height:1.2em">MySQL 下载</span></h2>
+
+<p>2011-12-20 星期二</p>
+
+<p>http://www.mysql.com/downloads/mysql/</p>
+
+<p>Mac OS X ver. 10.6 (x86, 64-bit), Compressed TAR Archive&nbsp; 5.5.19 112.6M</p>
+
+<h2>What is dscl?</h2>
+
+<p>http://developer.apple.com/library/mac/#documentation/Darwin/Reference/ManPages/man1/dscl.1.html</p>
+
+<p>dscl -- Directory Service command line utility</p>
+
+<p>dscl is a general-purpose utility for operating on Directory Service directory nodes.&nbsp; Its commands<br />
+&nbsp;&nbsp;&nbsp;&nbsp; allow one to create, read, and manage Directory Service data.&nbsp; If invoked without any commands, dscl<br />
+&nbsp;&nbsp;&nbsp;&nbsp; runs in an interactive mode, reading commands from standard input.&nbsp; Interactive processing is termi-<br />
+&nbsp;&nbsp;&nbsp;&nbsp; nated by the quit command.&nbsp; Leading dashes (&quot;-&quot;) are optional for all commands.</p>
+
+<p>Here we can use dscl to create mysql user and mysql group. (To be continued)</p>
+
+<h2>Install commands</h2>
+
+<pre>
+shell&gt; groupadd mysql # for Mac, there is already a mysql user
+shell&gt; useradd -r -g mysql mysql # for Mac, user mysql group directly
+shell&gt; cd /usr/local
+shell&gt; tar zxvf /path/to/mysql-VERSION-OS.tar.gz
+shell&gt; ln -s full-path-to-mysql-VERSION-OS mysql
+shell&gt; cd mysql
+shell&gt; chown -R mysql . # sudo
+shell&gt; chgrp -R mysql . # sudo
+shell&gt; sudo scripts/mysql_install_db --user=mysql # for Mac, make sure to use &quot;sudo&quot; to void error like
+                                             # &quot;Can&#39;t create test file /usr/local/mysql-5.5.15-osx10.6-x86_64/data/t1.lower-test&quot;
+shell&gt; chown -R root .
+shell&gt; chown -R mysql data
+# Next command is optional
+shell&gt; cp support-files/my-medium.cnf /etc/my.cnf
+shell&gt; bin/mysqld_safe --user=mysql &amp;
+# Next command is optional
+shell&gt; cp support-files/mysql.server /etc/init.d/mysql.server
+
+
+$ sudo ./scripts/mysql_install_db --user=mysql
+Password:
+Installing MySQL system tables...
+OK
+Filling help tables...
+OK
+
+To start mysqld at boot time you have to copy
+support-files/mysql.server to the right place for your system
+# for Mac, not sure where to place it, just leave it there, then use commands below:
+# $ sudo ln -s /Users/mlhch/mysql-5.5.19-osx10.6-x86_64/ /usr/local/mysql
+# $ ./support-files/mysql.server start
+
+PLEASE REMEMBER TO SET A PASSWORD FOR THE MySQL root USER !
+To do so, start the server, then issue the following commands:
+
+./bin/mysqladmin -u root password &#39;new-password&#39;
+./bin/mysqladmin -u root -h hn.kd.ny.adsl password &#39;new-password&#39;
+
+Alternatively you can run:
+./bin/mysql_secure_installation
+# this is good
+
+which will also give you the option of removing the test
+databases and anonymous user created by default.&nbsp; This is
+strongly recommended for production servers.
+
+See the manual for more instructions.
+
+You can start the MySQL daemon with:
+cd . ; ./bin/mysqld_safe &amp;
+
+You can test the MySQL daemon with mysql-test-run.pl
+cd ./mysql-test ; perl mysql-test-run.pl
+
+Please report any problems with the ./bin/mysqlbug script!</pre>
+
+<h3>yum install mysql-server</h3>
+
+<p>2013-05-06 12:18 Monday</p>
+
+<pre>
+$ sudo yum install mysql-server
+...
+==========================================================================================================================
+Package&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Arch&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Version&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Repository&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Size
+==========================================================================================================================
+Installing:
+mysql-server&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; x86_64&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 5.1.69-1.el6_4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; updates&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 8.7 M
+Installing for dependencies:
+perl-DBD-MySQL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; x86_64&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4.013-3.el6&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; base&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 134 k
+perl-DBI&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; x86_64&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1.609-4.el6&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; base&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 705 k
+
+Transaction Summary
+==========================================================================================================================
+Install&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3 Package(s)</pre>
+
+<p>第一次启动服务会自动创建系统表</p>
+
+<pre>
+$ sudo service mysqld start
+Initializing MySQL database:&nbsp; Installing MySQL system tables...
+OK
+Filling help tables...
+OK
+
+To start mysqld at boot time you have to copy
+support-files/mysql.server to the right place for your system
+
+PLEASE REMEMBER TO SET A PASSWORD FOR THE MySQL root USER !
+To do so, start the server, then issue the following commands:
+
+/usr/bin/mysqladmin -u root password &#39;new-password&#39;
+/usr/bin/mysqladmin -u root -h ip-10-244-49-143 password &#39;new-password&#39;
+
+Alternatively you can run:
+/usr/bin/mysql_secure_installation
+
+which will also give you the option of removing the test
+databases and anonymous user created by default.&nbsp; This is
+strongly recommended for production servers.
+
+See the manual for more instructions.
+
+You can start the MySQL daemon with:
+cd /usr ; /usr/bin/mysqld_safe &amp;
+
+You can test the MySQL daemon with mysql-test-run.pl
+cd /usr/mysql-test ; perl mysql-test-run.pl
+
+Please report any problems with the /usr/bin/mysqlbug script!
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [&nbsp; OK&nbsp; ]
+Starting mysqld:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [&nbsp; OK&nbsp; ]</pre>
+
+<p>mysql_secure_installation 不错，很贴心</p>
+
+<pre>
+$ mysql_secure_installation
+
+
+
+
+NOTE: RUNNING ALL PARTS OF THIS SCRIPT IS RECOMMENDED FOR ALL MySQL
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SERVERS IN PRODUCTION USE!&nbsp; PLEASE READ EACH STEP CAREFULLY!
+
+
+In order to log into MySQL to secure it, we&#39;ll need the current
+password for the root user.&nbsp; If you&#39;ve just installed MySQL, and
+you haven&#39;t set the root password yet, the password will be blank,
+so you should just press enter here.
+
+Enter current password for root (enter for none):
+OK, successfully used password, moving on...
+
+Setting the root password ensures that nobody can log into the MySQL
+root user without the proper authorisation.
+
+You already have a root password set, so you can safely answer &#39;n&#39;.
+
+Change the root password? [Y/n] n
+... skipping.
+
+By default, a MySQL installation has an anonymous user, allowing anyone
+to log into MySQL without having to have a user account created for
+them.&nbsp; This is intended only for testing, and to make the installation
+go a bit smoother.&nbsp; You should remove them before moving into a
+production environment.
+
+Remove anonymous users? [Y/n] Y
+... Success!
+
+Normally, root should only be allowed to connect from &#39;localhost&#39;.&nbsp; This
+ensures that someone cannot guess at the root password from the network.
+
+Disallow root login remotely? [Y/n] Y
+... Success!
+
+By default, MySQL comes with a database named &#39;test&#39; that anyone can
+access.&nbsp; This is also intended only for testing, and should be removed
+before moving into a production environment.
+
+Remove test database and access to it? [Y/n] Y
+- Dropping test database...
+... Success!
+- Removing privileges on test database...
+... Success!
+
+Reloading the privilege tables will ensure that all changes made so far
+will take effect immediately.
+
+Reload privilege tables now? [Y/n] Y
+... Success!
+
+Cleaning up...
+
+
+
+All done!&nbsp; If you&#39;ve completed all of the above steps, your MySQL
+installation should now be secure.
+
+Thanks for using MySQL!</pre>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
