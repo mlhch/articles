@@ -1,0 +1,58 @@
+<h1>Nginx rewrite</h1>
+
+<p>2014-01-26 00:47 Sunday</p>
+
+<p><a href="http://nginx.org/en/docs/http/ngx_http_rewrite_module.html" target="_blank">http://nginx.org/en/docs/http/ngx_http_rewrite_module.html</a></p>
+
+<p><a href="http://nginx.org/en/docs/http/ngx_http_rewrite_module.html" target="_blank">http://nginx.org/en/docs/http/converting_rewrite_rules.html</a></p>
+
+<p>2014-01-09 00:10 Thursday 近日全面转战 Nginx 以支持 yeoman 项目的静态输出和 express</p>
+
+<p>以下文件为 ~/www_apache/api/.htaccess 的内容</p>
+
+<pre>
+###
+### For Apache
+###
+#RewriteEngine On
+#RewriteRule ^(.*)$ index.php [L];
+
+###
+### For Nginx
+###
+if (!-f $request_filename) {
+	rewrite ^/(.*)$ /api/index.php last;
+}</pre>
+
+<h2>WordPress&#39; .htaccess</h2>
+
+<p>2014-01-26 01:02 Sunday 去淑芬家上网</p>
+
+<pre>
+    server {
+        listen      80;
+        server_name wordpress;
+        root            /Users/mlhch/www_apache/wordpress/;
+        include         /Users/mlhch/www_apache/wordpress/.htaccess;
+
+        location / {
+            index           index.html;
+        }
+
+        # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
+        #
+        location ~ \.php$ {
+            root            /Users/mlhch/www_apache/wordpress/;
+            fastcgi_pass    127.0.0.1:50000;
+            fastcgi_index   index.php;
+            fastcgi_param   SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+            include         fastcgi_params;
+        }
+    }</pre>
+
+<p>.htaccess</p>
+
+<pre>
+if (!-e $request_filename) {
+    rewrite ^/(.*)$ /index.php last;
+}</pre>
