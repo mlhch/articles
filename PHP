@@ -7,3 +7,201 @@
 <p>PHP is a popular general-purpose scripting language that is especially suited to web development.</p>
 
 <p>Fast, flexible and pragmatic, PHP powers everything from your blog to the most popular websites in the world.</p>
+
+<p><a href="http://www.php.net/downloads.php#v5.5.8">5.5.8</a>&nbsp;<a href="http://www.php.net/ChangeLog-5.php#5.5.8">Release Notes</a>&nbsp;|&nbsp;<a href="http://www.php.net/downloads.php#v5.4.24">5.4.24</a>&nbsp;<a href="http://www.php.net/ChangeLog-5.php#5.4.24">Release Notes</a>&nbsp;|&nbsp;<a href="http://www.php.net/downloads.php#v5.3.28">5.3.28</a>&nbsp;<a href="http://www.php.net/ChangeLog-5.php#5.3.28">Release Notes</a></p>
+
+<h2>Homebrew-PHP</h2>
+
+<p><a href="https://github.com/josegonzalez/homebrew-php" target="_blank">https://github.com/josegonzalez/homebrew-php</a></p>
+
+<p>2014-01-25 17:04 Saturday</p>
+
+<p>注意，如果不成功，可尝试先 brew untap 然后再 brew tap。</p>
+
+<h3>Installation</h3>
+
+<p>[Brew Tap]</p>
+
+<p>Setup the&nbsp;homebrew/dupes&nbsp;tap which has dependencies we need:</p>
+
+<pre>
+brew tap homebrew/dupes
+</pre>
+
+<p>Then, run the following in your commandline:</p>
+
+<pre>
+brew tap josegonzalez/homebrew-php</pre>
+
+<h2>PHP 5.5.8 has been released</h2>
+
+<p>The PHP development team announces the immediate availability of PHP 5.5.8. This release fixes about 20 bugs against PHP 5.5.7 components.</p>
+
+<p>For source downloads of PHP 5.5.8 please visit our&nbsp;<a href="http://www.php.net/downloads.php">downloads page</a>, Windows binaries are located on<a href="http://windows.php.net/download/">windows.php.net/download/</a>. The list of changes can be found in the&nbsp;<a href="http://www.php.net/ChangeLog-5.php#5.5.8">ChangeLog</a>.</p>
+
+<h2>PHP 5.4.24 Released!</h2>
+
+<p>The PHP development team announces the immediate availability of PHP 5.4.24. About 14 bugs were fixed. All PHP 5.4 users are encouraged to upgrade to this version.</p>
+
+<p>For source downloads of PHP 5.4.24 please visit our&nbsp;<a href="http://www.php.net/downloads.php">downloads page</a>, Windows binaries can be found on<a href="http://windows.php.net/download/">windows.php.net/download/</a>. The list of changes is recorded in the&nbsp;<a href="http://www.php.net/ChangeLog-5.php#5.4.24">ChangeLog</a>.</p>
+
+<p>&nbsp;</p>
+
+<pre>
+$ brew install php55
+==&gt; Installing dependencies for php55: unixodbc, homebrew/dupes/zlib
+==&gt; Installing php55 dependency: unixodbc
+==&gt; Downloading http://www.unixodbc.org/unixODBC-2.3.2.tar.gz
+######################################################################## 100.0%
+==&gt; ./configure --prefix=/usr/local/Cellar/unixodbc/2.3.2 --enable-gui=no
+==&gt; make install
+🍺  /usr/local/Cellar/unixodbc/2.3.2: 31 files, 948K, built in 2.2 minutes
+==&gt; Installing php55 dependency: zlib
+==&gt; Downloading http://zlib.net/zlib-1.2.8.tar.gz
+######################################################################## 100.0%
+==&gt; Patching
+patching file configure
+==&gt; ./configure --prefix=/usr/local/Cellar/zlib/1.2.8
+==&gt; make install
+==&gt; Caveats
+This formula is keg-only, so it was not symlinked into /usr/local.
+
+Mac OS X already provides this software and installing another version in
+parallel can cause all kinds of trouble.
+
+Generally there are no consequences of this for you. If you build your
+own software and it requires this formula, you&#39;ll need to add to your
+build variables:
+
+    LDFLAGS:  -L/usr/local/opt/zlib/lib
+    CPPFLAGS: -I/usr/local/opt/zlib/include
+
+==&gt; Summary
+🍺  /usr/local/Cellar/zlib/1.2.8: 9 files, 384K, built in 23 seconds
+==&gt; Installing php55
+==&gt; Downloading http://www.php.net/get/php-5.5.8.tar.bz2/from/this/mirror
+######################################################################## 100.0%
+Warning: Backing up all known pear.conf and .pearrc files
+Warning: If you have a pre-existing pear install outside
+         of homebrew-php, or you are using a non-standard
+         pear.conf location, installation may fail.
+==&gt; ./configure --prefix=/usr/local/Cellar/php55/5.5.8 --localstatedir=/usr/local/var --sysconfdir=/usr/local/etc/php/
+==&gt; make
+==&gt; make install
+==&gt; /usr/local/Cellar/php55/5.5.8/bin/pear config-set php_ini /usr/local/etc/php/5.5/php.ini
+==&gt; Caveats
+To enable PHP in Apache add the following to httpd.conf and restart Apache:
+    LoadModule php5_module    /usr/local/opt/php55/libexec/apache2/libphp5.so
+
+The php.ini file can be found in:
+    /usr/local/etc/php/5.5/php.ini
+
+✩✩✩✩ PEAR ✩✩✩✩
+
+If PEAR complains about permissions, &#39;fix&#39; the default PEAR permissions and config:
+    chmod -R ug+w /usr/local/Cellar/php55/5.5.8/lib/php
+    pear config-set php_ini /usr/local/etc/php/5.5/php.ini
+
+✩✩✩✩ Extensions ✩✩✩✩
+
+If you are having issues with custom extension compiling, ensure that
+you are using the brew version, by placing /usr/local/bin before /usr/sbin in your PATH:
+
+      PATH=&quot;/usr/local/bin:$PATH&quot;
+
+PHP55 Extensions will always be compiled against this PHP. Please install them
+using --without-homebrew-php to enable compiling against system PHP.
+
+✩✩✩✩ PHP CLI ✩✩✩✩
+
+If you wish to swap the PHP you use on the command line, you should add the following to ~/.bashrc, 
+~/.zshrc, ~/.profile or your shell&#39;s equivalent configuration file:
+
+      export PATH=&quot;$(brew --prefix josegonzalez/php/php55)/bin:$PATH&quot;
+Warning: Could not link php55. Unlinking...
+Error: The `brew link` step did not complete successfully
+The formula built, but is not symlinked into /usr/local
+You can try again using `brew link php55&#39;
+
+Possible conflicting files are:
+/usr/local/bin/* -&gt; /usr/local/Cellar/php54/5.4.7/bin/*
+/usr/local/include/php/Zend/* -&gt; /usr/local/Cellar/php54/5.4.7/include/php/Zend/*
+/usr/local/include/php/TSRM/* -&gt; /usr/local/Cellar/php54/5.4.7/include/php/TSRM/*
+/usr/local/include/php/sapi/cli/cli.h -&gt; /usr/local/Cellar/php54/5.4.7/include/php/sapi/cli/cli.h
+/usr/local/include/php/main/* -&gt; /usr/local/Cellar/php54/5.4.7/include/php/main/*
+/usr/local/include/php/ext/* -&gt; /usr/local/Cellar/php54/5.4.7/include/php/ext/*
+/usr/local/share/* -&gt; /usr/local/Cellar/php54/5.4.7/share/*
+/usr/local/lib/php/* -&gt; /usr/local/Cellar/php54/5.4.7/lib/php/*
+==&gt; Summary
+🍺  /usr/local/Cellar/php55/5.5.8: 492 files, 38M, built in 19.2 minutes</pre>
+
+<p>&nbsp;</p>
+
+<pre>
+$ brew install php54-mysqlnd_ms
+==&gt; Installing php54-mysqlnd_ms dependency: php54
+==&gt; Downloading http://www.php.net/get/php-5.4.24.tar.bz2/from/this/mirror
+######################################################################## 100.0%
+Warning: Backing up all known pear.conf and .pearrc files
+Warning: If you have a pre-existing pear install outside
+         of homebrew-php, or you are using a non-standard
+         pear.conf location, installation may fail.
+==&gt; ./configure --prefix=/usr/local/Cellar/php54/5.4.24 --localstatedir=/usr/local/var --sysconfdir=/usr/local/etc/php/5.4 --with-config-file-path=/usr/local/etc/php/5.4 --with-co
+==&gt; make
+==&gt; make install
+==&gt; /usr/local/Cellar/php54/5.4.24/bin/pear config-set php_ini /usr/local/etc/php/5.4/php.ini
+==&gt; Caveats
+To enable PHP in Apache add the following to httpd.conf and restart Apache:
+    LoadModule php5_module    /usr/local/opt/php54/libexec/apache2/libphp5.so
+
+The php.ini file can be found in:
+    /usr/local/etc/php/5.4/php.ini
+
+✩✩✩✩ PEAR ✩✩✩✩
+
+If PEAR complains about permissions, &#39;fix&#39; the default PEAR permissions and config:
+    chmod -R ug+w /usr/local/Cellar/php54/5.4.24/lib/php
+    pear config-set php_ini /usr/local/etc/php/5.4/php.ini
+
+✩✩✩✩ Extensions ✩✩✩✩
+
+If you are having issues with custom extension compiling, ensure that
+you are using the brew version, by placing /usr/local/bin before /usr/sbin in your PATH:
+
+      PATH=&quot;/usr/local/bin:$PATH&quot;
+
+PHP54 Extensions will always be compiled against this PHP. Please install them
+using --without-homebrew-php to enable compiling against system PHP.
+
+✩✩✩✩ PHP CLI ✩✩✩✩
+
+If you wish to swap the PHP you use on the command line, you should add the following to ~/.bashrc, 
+~/.zshrc, ~/.profile or your shell&#39;s equivalent configuration file:
+
+      export PATH=&quot;$(brew --prefix josegonzalez/php/php54)/bin:$PATH&quot;
+==&gt; Summary
+🍺  /usr/local/Cellar/php54/5.4.24: 488 files, 37M, built in 23.1 minutes
+==&gt; Installing php54-mysqlnd_ms
+==&gt; Downloading http://pecl.php.net/get/mysqlnd_ms-1.4.2.tgz
+######################################################################## 100.0%
+==&gt; PHP_AUTOCONF=&quot;/usr/local/opt/autoconf/bin/autoconf&quot; PHP_AUTOHEADER=&quot;/usr/local/opt/autoconf/bin/autoheader&quot; /usr/local/Cellar/php54/5.4.24/bin/phpize
+==&gt; ./configure --prefix=/usr/local/Cellar/php54-mysqlnd_ms/1.4.2 --with-php-config=/usr/local/Cellar/php54/5.4.24/bin/php-config --enable-mysqlnd-ms
+==&gt; make
+==&gt; Caveats
+To finish installing mysqlnd_ms for PHP 5.4:
+  * /usr/local/etc/php/5.4/conf.d/ext-mysqlnd_ms.ini was created,
+    do not forget to remove it upon extension removal.
+  * Validate installation via one of the following methods:
+  *
+  * Using PHP from a webserver:
+  * - Restart your webserver.
+  * - Write a PHP page that calls &quot;phpinfo();&quot;
+  * - Load it in a browser and look for the info on the mysqlnd_ms module.
+  * - If you see it, you have been successful!
+  *
+  * Using PHP from the command line:
+  * - Run &quot;php -i&quot; (command-line &quot;phpinfo()&quot;)
+  * - Look for the info on the mysqlnd_ms module.
+  * - If you see it, you have been successful!
+==&gt; Summary
+🍺  /usr/local/Cellar/php54-mysqlnd_ms/1.4.2: 5 files, 220K, built in 33 seconds</pre>
