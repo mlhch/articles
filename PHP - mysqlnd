@@ -128,3 +128,74 @@
 	<li><a href="http://dev.mysql.com/doc/en/apis-php-mysqlnd.html">MySQL Reference Manual: MySQL Native Driver (Mysqlnd)</a></li>
 	<li><a href="http://www.php.net/manual/en/set.mysqlinfo.php">PHP Manual: MySQL Drivers &amp; Plugins</a></li>
 </ul>
+
+<p>brew install php54-mysqlnd_ms 的结果是单独安装了 php54-mysqlnd_ms，见&nbsp;<span style="line-height:1.6em">--prefix=/usr/local/Cellar/php54-mysqlnd_ms/1.4.2。但更新的 brew install php54 默认会创建 mysqlnd 到&nbsp;</span>/usr/local/Cellar/php54/5.4.24/include/php/ext/mysqlnd/</p>
+
+<pre>
+$ brew install php54-mysqlnd_ms
+==&gt; Installing php54-mysqlnd_ms dependency: php54
+==&gt; Downloading http://www.php.net/get/php-5.4.24.tar.bz2/from/this/mirror
+######################################################################## 100.0%
+Warning: Backing up all known pear.conf and .pearrc files
+Warning: If you have a pre-existing pear install outside
+         of homebrew-php, or you are using a non-standard
+         pear.conf location, installation may fail.
+==&gt; ./configure --prefix=/usr/local/Cellar/php54/5.4.24 --localstatedir=/usr/local/var --sysconfdir=/usr/local/etc/php/5.4 --with-config-file-path=/usr/local/etc/php/5.4 --with-co...
+==&gt; make
+==&gt; make install
+==&gt; /usr/local/Cellar/php54/5.4.24/bin/pear config-set php_ini /usr/local/etc/php/5.4/php.ini
+==&gt; Caveats
+To enable PHP in Apache add the following to httpd.conf and restart Apache:
+    LoadModule php5_module    /usr/local/opt/php54/libexec/apache2/libphp5.so
+
+The php.ini file can be found in:
+    /usr/local/etc/php/5.4/php.ini
+
+✩✩✩✩ PEAR ✩✩✩✩
+
+If PEAR complains about permissions, &#39;fix&#39; the default PEAR permissions and config:
+    chmod -R ug+w /usr/local/Cellar/php54/5.4.24/lib/php
+    pear config-set php_ini /usr/local/etc/php/5.4/php.ini
+
+✩✩✩✩ Extensions ✩✩✩✩
+
+If you are having issues with custom extension compiling, ensure that
+you are using the brew version, by placing /usr/local/bin before /usr/sbin in your PATH:
+
+      PATH=&quot;/usr/local/bin:$PATH&quot;
+
+PHP54 Extensions will always be compiled against this PHP. Please install them
+using --without-homebrew-php to enable compiling against system PHP.
+
+✩✩✩✩ PHP CLI ✩✩✩✩
+
+If you wish to swap the PHP you use on the command line, you should add the following to ~/.bashrc, 
+~/.zshrc, ~/.profile or your shell&#39;s equivalent configuration file:
+
+      export PATH=&quot;$(brew --prefix josegonzalez/php/php54)/bin:$PATH&quot;
+==&gt; Summary
+🍺  /usr/local/Cellar/php54/5.4.24: 488 files, 37M, built in 23.1 minutes
+==&gt; Installing php54-mysqlnd_ms
+==&gt; Downloading http://pecl.php.net/get/mysqlnd_ms-1.4.2.tgz
+######################################################################## 100.0%
+==&gt; PHP_AUTOCONF=&quot;/usr/local/opt/autoconf/bin/autoconf&quot; PHP_AUTOHEADER=&quot;/usr/local/opt/autoconf/bin/autoheader&quot; /usr/local/Cellar/php54/5.4.24/bin/phpize
+==&gt; ./configure <span class="marker">--prefix=/usr/local/Cellar/php54-mysqlnd_ms/1.4.2</span> --with-php-config=/usr/local/Cellar/php54/5.4.24/bin/php-config --enable-mysqlnd-ms
+==&gt; make
+==&gt; Caveats
+To finish installing mysqlnd_ms for PHP 5.4:
+  * /usr/local/etc/php/5.4/conf.d/ext-mysqlnd_ms.ini was created,
+    do not forget to remove it upon extension removal.
+  * Validate installation via one of the following methods:
+  *
+  * Using PHP from a webserver:
+  * - Restart your webserver.
+  * - Write a PHP page that calls &quot;phpinfo();&quot;
+  * - Load it in a browser and look for the info on the mysqlnd_ms module.
+  * - If you see it, you have been successful!
+  *
+  * Using PHP from the command line:
+  * - Run &quot;php -i&quot; (command-line &quot;phpinfo()&quot;)
+  * - Look for the info on the mysqlnd_ms module.
+  * - If you see it, you have been successful!
+==&gt; Summary
+🍺  /usr/local/Cellar/php54-mysqlnd_ms/1.4.2: 5 files, 220K, built in 33 seconds</pre>
