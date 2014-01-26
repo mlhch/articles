@@ -6,6 +6,11 @@
 
 <ul>
 	<li>
+	<p>2014-01-26 20:42 Sunday</p>
+
+	<p>重新安装以添加 --with-debug 参数，brew options nginx 可查看所有可用参数。</p>
+	</li>
+	<li>
 	<p>2014-01-06 20:07 Monday 早上去买菜，从兵营西边绕回</p>
 
 	<p>2013-12-17&nbsp;<a href="http://nginx.org/en/download.html">nginx-1.5.8</a>&nbsp;mainline version has been released.<br />
