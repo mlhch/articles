@@ -1,0 +1,85 @@
+<h1>Nginx - debugging configuration</h1>
+
+<p><span style="line-height:1.6em">2014-01-27 02:43 Monday</span></p>
+
+<p><a href="https://rtcamp.com/tutorials/nginx/debugging/" target="_blank">https://rtcamp.com/tutorials/nginx/debugging/</a></p>
+
+<p>By default, Nginx logs only standard errors to default Nginx error log file or a file specified by&nbsp;error_log&nbsp;directive in site-specific server configuration.</p>
+
+<p>We can control many aspects about error logging which will help us debug our Nginx configuration.</p>
+
+<p>Important:&nbsp;After any change to any Nginx configuration file, you must test and reload Nginx configuration for changes to take effect. On Ubuntu, you can simply run&nbsp;nginx -t &amp;&amp; service nginx reload&nbsp;command.</p>
+
+<h3>Before we proceed&hellip;</h3>
+
+<p>I believe, we never break something that we never code! So before you copy-paste any Nginx config, make sure you remove unwanted codes. Also,&nbsp;every time&nbsp;you upgrade Nginx, update your config files also to use latest Nginx offering.</p>
+
+<p>And before we proceed, please read these official articles:&nbsp;<a href="http://wiki.nginx.org/Pitfalls">common Nginx Pitfalls</a>,&nbsp;<a href="http://wiki.nginx.org/IfIsEvil">if-is-evil</a>,&nbsp;<a href="http://wiki.nginx.org/NginxHttpCoreModule#location">location-directive</a>&nbsp;&amp;&nbsp;<a href="http://nginx.org/en/docs/http/request_processing.html">Nginx&rsquo;s request processing</a>. You might end up fixing your problem using them alone.</p>
+
+<p>Alright&hellip; looks like you need some serious debugging&hellip; Lets go ahead!</p>
+
+<h3>Set Nginx log-level to debug</h3>
+
+<p>Following example adds&nbsp;debug&nbsp;log-level which logs most to&nbsp;specified&nbsp;path:</p>
+
+<pre>
+server {
+        #other config
+        error_log    /var/logs/nginx/example.com.error.log debug;
+        #other config
+}</pre>
+
+<p>debug&nbsp;will log maximum messages.&nbsp;You can find&nbsp;<a href="http://wiki.nginx.org/CoreModule#error_log">other possible values here</a>.</p>
+
+<p>Note:&nbsp;Do NOT forget to revert debug-level for error_log on a *very* high traffic site. error_log may end up eating all your available disk space and cause your server to crash!</p>
+
+<h3>Set Nginx to log errors from your IP only</h3>
+
+<p>When you will set log-level to&nbsp;debug,&nbsp;your error log will log so many messages for every request that it will become meaningless if you are debugging a high-traffic site on a live-server.</p>
+
+<p>To force Nginx to log errors from only your IP, add the following line to&nbsp;events{..}&nbsp;block inside/etc/nginx/nginx.conf</p>
+
+<p>Make sure you replace&nbsp;1.2.3.4&nbsp;with your own public IP. You can&nbsp;<a href="http://www.google.com/search?q=what+is+my+ip">find your public IP here</a>.</p>
+
+<pre>
+events {
+        debug_connection 1.2.3.4;
+}</pre>
+
+<p>You can find&nbsp;<a href="http://wiki.nginx.org/EventsModule#debug_connection">more details on this here</a>.</p>
+
+<h3>Nginx Location Specific Error logs</h3>
+
+<p>In Nginx, we use&nbsp;location{..}&nbsp;block all over.</p>
+
+<p>To debug parts of an application, you can specify&nbsp;error_log&nbsp;directive inside one or more&nbsp;location{..}&nbsp;block.</p>
+
+<pre>
+server {
+        #other config
+        error_log    /var/logs/nginx/example.com.error.log;
+        location /admin/ { 
+		error_log /var/logs/nginx/admin-error.log debug; 
+	}         
+	#other config
+}</pre>
+
+<p>Above will debug only&nbsp;/admin/&nbsp;part of you application and error logs will be recorded to a different file.</p>
+
+<p>You can combine location-specific&nbsp;error_log&nbsp;with&nbsp;debug_connection&nbsp;to gain more control over debug logs.</p>
+
+<h3>Debug using Nginx&rsquo;s&nbsp;HttpEchoModule</h3>
+
+<p><a href="http://wiki.nginx.org/HttpEchoModule">HttpEchoModule</a>&nbsp;is a separate Nginx module which can help you debug in altogether different way. This module doesn&rsquo;t come bundled with Nginx.</p>
+
+<p>You need to recompile Nginx to use this. For Ubuntu users, there is a&nbsp;<a href="https://launchpad.net/~brianmercer/+archive/nginx">launchpad repo</a>.</p>
+
+<p>I recently came across this and I am yet to use it for debugging on a project. When I will do it, I will post details about it.</p>
+
+<h3>Using Perl/Lua Language for Nginx config</h3>
+
+<p>If you are still having a tough time&nbsp;and you config Nginx regularly, should consider using other languages for Nginx&nbsp;configuration.</p>
+
+<p>There is a Nginx module for&nbsp;<a href="http://wiki.nginx.org/HttpPerlModule">Perl language</a>&nbsp;and one for&nbsp;<a href="https://github.com/chaoslawful/lua-nginx-module">Lua language</a>.</p>
+
+<p>As I am very bad at learning new languages, chances are less that I will ever write more on this. But it might be fun if you already know or can easily learn Perl/Lua.</p>
