@@ -8,7 +8,19 @@
 	<li>
 	<p>2014-01-26 20:42 Sunday</p>
 
-	<p>重新安装以添加 --with-debug 参数，brew options nginx 可查看所有可用参数。安装完成后使用 nginx -V 可查看是否已经有 --with-debug。</p>
+	<p>重新安装以添加 --with-debug 参数，brew options nginx 可查看所有可用参数。安装完成后使用 nginx -V 可查看是否已经有 --with-debug。此时运行 nginx 会有如下警告：</p>
+
+	<pre>
+$ sudo nginx
+nginx: [warn] 1024 worker_connections exceed open file resource limit: 256</pre>
+
+	<p>解决办法是在配置文件中的 events 之前添加如下行</p>
+
+	<pre>
+workder_rlimit_nofile    1024;
+events {
+    worker_connections  1024;
+}</pre>
 	</li>
 	<li>
 	<p>2014-01-06 20:07 Monday 早上去买菜，从兵营西边绕回</p>
