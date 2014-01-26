@@ -56,3 +56,7 @@ if (!-f $request_filename) {
 if (!-e $request_filename) {
     rewrite ^/(.*)$ /index.php last;
 }</pre>
+
+<h3>另一篇参考文章</h3>
+
+<p><a href="http://blog.cafeneko.info/2010/10/nginx_rewrite_note/" target="_blank">http://blog.cafeneko.info/2010/10/nginx_rewrite_note/</a></p>
