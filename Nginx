@@ -8,7 +8,7 @@
 	<li>
 	<p>2014-01-26 20:42 Sunday</p>
 
-	<p>重新安装以添加 --with-debug 参数，brew options nginx 可查看所有可用参数。</p>
+	<p>重新安装以添加 --with-debug 参数，brew options nginx 可查看所有可用参数。安装完成后使用 nginx -V 可查看是否已经有 --with-debug。</p>
 	</li>
 	<li>
 	<p>2014-01-06 20:07 Monday 早上去买菜，从兵营西边绕回</p>
