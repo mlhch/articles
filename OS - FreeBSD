@@ -1,0 +1,31 @@
+<h1>OS - FreeBSD</h1>
+
+<p>2014-01-28 15:49 Tuesday</p>
+
+<p><a href="http://www.freebsd.org/" target="_blank">http://www.freebsd.org/</a></p>
+
+<p>FreeBSD is an advanced computer operating system used to power modern servers, desktops and embedded<a href="http://www.freebsd.org/platforms/">platforms</a>. A large&nbsp;<a href="http://www.freebsd.org/doc/en_US.ISO8859-1/articles/contributors/staff-committers.html">community</a>&nbsp;has continually developed it for more than thirty years. Its advanced networking, security and storage features have made FreeBSD the platform of choice for many of the&nbsp;<a href="http://www.freebsd.org/doc/en_US.ISO8859-1/books/handbook/nutshell.html#introduction-nutshell-users">busiest web sites</a>&nbsp;and most pervasive embedded networking and storage devices.</p>
+
+<p>&raquo;<a href="http://www.freebsd.org/about.html">Learn More</a></p>
+
+<h2>Download FreeBSD</h2>
+
+<p><a href="http://www.freebsd.org/releases/">LATEST RELEASES</a></p>
+
+<ul>
+	<li>Production:&nbsp;<a href="http://www.freebsd.org/releases/10.0R/announce.html">10.0</a></li>
+	<li>Legacy:&nbsp;<a href="http://www.freebsd.org/releases/9.2R/announce.html">9.2</a>,&nbsp;<a href="http://www.freebsd.org/releases/8.4R/announce.html">8.4</a></li>
+</ul>
+
+<table border="1">
+	<tbody>
+		<tr>
+			<td colspan="2" rowspan="1">FreeBSD 10.0-RELEASE</td>
+		</tr>
+		<tr>
+			<td colspan="1" rowspan="1">amd64<br />
+			(x86-64, x64)</td>
+			<td colspan="1" rowspan="1"><a href="ftp://ftp.freebsd.org/pub/FreeBSD/releases/amd64/amd64/ISO-IMAGES/10.0/">[ISO]</a></td>
+		</tr>
+	</tbody>
+</table>
