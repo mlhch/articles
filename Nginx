@@ -35,6 +35,45 @@ events {
 	</li>
 </ul>
 
+<h2>Yum install nginx</h2>
+
+<p><a href="http://nginx.org/en/docs/install.html" target="_blank">http://nginx.org/en/docs/install.html</a></p>
+
+<p>Currently, nginx packages are available for the following distributions and versions:</p>
+
+<p>RHEL/CentOS:&nbsp;Version 5.x 6.x</p>
+
+<h3>Pre-Built Packages for Stable version</h3>
+
+<p>To set up the yum repository for RHEL/CentOS, choose the corresponding&nbsp;nginx-release&nbsp;package from the list:</p>
+
+<ul>
+	<li><a href="http://nginx.org/packages/rhel/5/noarch/RPMS/nginx-release-rhel-5-0.el5.ngx.noarch.rpm">RHEL 5</a></li>
+	<li><a href="http://nginx.org/packages/rhel/6/noarch/RPMS/nginx-release-rhel-6-0.el6.ngx.noarch.rpm">RHEL 6</a></li>
+	<li><a href="http://nginx.org/packages/centos/5/noarch/RPMS/nginx-release-centos-5-0.el5.ngx.noarch.rpm">CentOS 5</a></li>
+	<li><a href="http://nginx.org/packages/centos/6/noarch/RPMS/nginx-release-centos-6-0.el6.ngx.noarch.rpm">CentOS 6</a></li>
+</ul>
+
+<p>This package contains yum configuration file and a public PGP key necessary to authenticate signed RPMs. Download and install it, then run the following:</p>
+
+<blockquote>
+<p>yum install nginx</p>
+</blockquote>
+
+<p>Alternatively, a repository configuration can be added manually without installing the&nbsp;nginx-release&nbsp;package. Create the file named&nbsp;/etc/yum.repos.d/nginx.repo&nbsp;with the following contents:</p>
+
+<blockquote>
+<pre>
+[nginx]
+name=nginx repo
+baseurl=http://nginx.org/packages/OS/OSRELEASE/$basearch/
+gpgcheck=0
+enabled=1
+</pre>
+</blockquote>
+
+<p>Replace &ldquo;OS&rdquo; with &ldquo;rhel&rdquo; or &ldquo;centos&rdquo;, depending on the distribution used, and &ldquo;OSRELEASE&rdquo; with &ldquo;5&rdquo; or &ldquo;6&rdquo;, for 5.x or 6.x versions, respectively.</p>
+
 <h2>Brew install nginx</h2>
 
 <p>2014-01-06 20:13 Monday</p>
