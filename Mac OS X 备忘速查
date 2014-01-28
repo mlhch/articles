@@ -1,0 +1,643 @@
+<h1>Mac OS X 备忘速查</h1>
+
+<p>2013-10-25 01:28 Friday</p>
+
+<p>http://www.apple.com/support/</p>
+
+<h2>scp error &quot;bash: scp: command not found&quot;</h2>
+
+<p>2014-01-28 22:26 Tuesday</p>
+
+<p>在 Mac OS 上 scp 命令的确是存在的，在 /usr/bin/scp，是没有问题的。出现此错误信息的原因是目标机器上没有 scp 命令。所以如果目标机器是 CentOS，那么需要执行 yum install openssh-clients 即可。</p>
+
+<h2>Google Chrome 的手势前进与后退</h2>
+
+<p>2013-11-11 22:58 Monday Google Chrome 的手势前进与后退烦死人了</p>
+
+<table cellpadding="0" cellspacing="0">
+	<tbody>
+		<tr>
+			<td>
+			<p>Disable swipe gesture to go back and forward in Chrome&nbsp;<br />
+			May 14, &#39;13 07:30:00AM &bull; Contributed by:&nbsp;<a href="http://hints.macworld.com/users.php?mode=profile&amp;uid=56334">kirkmc</a></p>
+			A&nbsp;<a href="http://apple.stackexchange.com/questions/21236/how-do-i-disable-chromes-two-finger-back-forward-navigation">Stack Exchange user</a>&nbsp;asked a question a while back: is it possible to turn off the swipe gesture in Chrome that goes back or forward a page? If you&#39;re not familiar with this gesture - which works in most browsers on OS X - you use a two-finger swipe to the right to go back to the previous page you&#39;ve viewed, and a swipe in the opposite direction to go forward again. But this use found it got in the way.&nbsp;<br />
+			<br />
+			Fortunately, another user found a Terminal command that turns this feature off. Run this in Terminal, then relaunch Chrome for it to take effect:
+			<pre>
+defaults write com.google.Chrome.plist AppleEnableSwipeNavigateWithScrolls -bool FALSE</pre>
+			If you wish to reactivate it, run this command:
+
+			<pre>
+defaults write com.google.Chrome.plist AppleEnableSwipeNavigateWithScrolls -bool TRUE</pre>
+			Apparently you can issue this command for other apps, replacing the&nbsp;com.google.Chrome.plist&nbsp;with the appropriate file name. I&#39;ve only tested this with Chrome, but if you feel like testing with other apps, post in the comments to say which ones work and which don&#39;t.</td>
+		</tr>
+	</tbody>
+</table>
+
+<h2>给终端着色</h2>
+
+<p>Customizing LSCOLORS Manually</p>
+
+<p>Here&#39;s the manual page on LSCOLORS if you want to give it a shot. The default is &quot;exfxcxdxbxegedabagacad&quot; but clearing out the .bash_profile color entry will remove any hideous color combinations too.</p>
+
+<p>LSCOLORS The value of this variable describes what color to use&nbsp;for which attribute when colors are enabled with<br />
+CLICOLOR. This string is a concatenation of pairs of the&nbsp;format fb, where f is the foreground color and b is the&nbsp;background color.</p>
+
+<p>The color designators are as follows:</p>
+
+<blockquote>
+<p>a black<br />
+b red<br />
+c green<br />
+d brown<br />
+e blue<br />
+f magenta<br />
+g cyan<br />
+h light grey<br />
+A bold black, usually shows up as dark grey<br />
+B bold red<br />
+C bold green<br />
+D bold brown, usually shows up as yellow<br />
+E bold blue<br />
+F bold magenta<br />
+G bold cyan<br />
+H bold light grey; looks like bright white<br />
+x default foreground or background</p>
+</blockquote>
+
+<p>Note that the above are standard ANSI colors. The actual<br />
+display may differ depending on the color capabilities of<br />
+the terminal in use.</p>
+
+<p>The order of the attributes are as follows:</p>
+
+<blockquote>
+<p>1. directory<br />
+2. symbolic link<br />
+3. socket<br />
+4. pipe<br />
+5. executable<br />
+6. block special<br />
+7. character special<br />
+8. executable with setuid bit set<br />
+9. executable with setgid bit set<br />
+10. directory writable to others, with sticky bit<br />
+11. directory writable to others, without sticky&nbsp;bit</p>
+</blockquote>
+
+<p>The default is &quot;exfxcxdxbxegedabagacad&quot;, i.e. blue fore-<br />
+ground and default background for regular directories,<br />
+black foreground and red background for setuid executa-<br />
+bles, etc.</p>
+
+<h2>Mac OS X 输出目录树形结构</h2>
+
+<p>2012-09-22 23:29 星期六</p>
+
+<pre>
+find . -print | sed -e &#39;s;[^/]*/;|____;g;s;____|; |;g&#39;</pre>
+
+<h2>添加用户</h2>
+
+<ul>
+	<li>Pull down to &ldquo;System Preferences&rdquo; from the Apple Menu Bar and click to open the window. Alternately, you can click on the Mac &ldquo;System Preferences&rdquo; icon if it resides in the Dock of your computer.</li>
+	<li>Locate the &ldquo;System&rdquo; pane, and click on the &ldquo;Accounts&rdquo; icon to open it.</li>
+	<li>Unlock the padlock icon at the bottom left corner of the window to make changes. When the &ldquo;Authenticating&rdquo; window opens, enter your original administrator&rsquo;s password. You will now have access to the User Accounts&rsquo; preferences.</li>
+	<li>4 Locate the + (plus) icon above the padlock icon and click on it. A new account window will open.</li>
+	<li>Enter the particulars of the new user account: name, short name, password for this new user, and verify. Entering a recommended password hint will remind the user of the password if he forgets it.</li>
+	<li>Check off the &quot;Administrator&quot; box if you do not wish the new user access to make changes to the system settings or administrator account.</li>
+	<li>Click on the &ldquo;Create Account&rdquo; button.</li>
+	<li>Click the red button on the upper left hand corner of the window to quit. The new user can now log in.</li>
+</ul>
+
+<h2>查看所有用户属性列表</h2>
+
+<p>$ dscl . -list /Users UniqueID</p>
+
+<p>把 UniqueID 换成 RealName 等其他创建用户时的属性，即可查看所有用户的其他属性列表</p>
+
+<h2>命令行添加用户</h2>
+
+<p>http://wiki.freegeek.org/index.php/Mac_OSX_adduser_script</p>
+
+<p>Typically, it is rather annoying to add a user to OSX through the command line as it requires the administrator to specify each piece of user info one by one, as shown in the&nbsp;<a href="http://wiki.freegeek.org/index.php/Mac_Commandline_Tools">Mac Commandline Tools</a>&nbsp;page. As a result, we&#39;ve worked up an OSX specific script to easily add users through the command line.</p>
+
+<ul>
+	<li>Simply download this file:&nbsp;<a href="http://wiki.freegeek.org/images/4/4d/OSX-adduser.sh">adduser</a></li>
+	<li>Make any necessary execution and permissions changes.</li>
+	<li>It is preferred to save it in&nbsp;/usr/sbin&nbsp;with other administrator tools.</li>
+</ul>
+
+<p>If you&#39;re curious to see how it works, here are the contents of the script:</p>
+
+<pre>
+#!/bin/bash
+# =========================
+# Add User OSX Command Line
+# =========================
+
+# An easy add user script for Max OSX.
+# Although I wrote this for 10.7 Lion Server, these commands have been the same since 10.5 Leopard.
+# It&#39;s pretty simple as it uses and strings together the (rustic and ancient) commands that OSX 
+# already uses to add users.
+
+# === Typically, this is all the info you need to enter ===
+
+echo &quot;Enter your desired user name: &quot;
+read USERNAME
+
+echo &quot;Enter a full name for this user: &quot;
+read FULLNAME
+
+echo &quot;Enter a password for this user: &quot;
+read -s PASSWORD
+
+# ====
+
+# A list of (secondary) groups the user should belong to
+# This makes the difference between admin and non-admin users.
+
+echo &quot;Is this an administrative user? (y/n)&quot;
+read GROUP_ADD
+
+if [ &quot;$GROUP_ADD&quot; = n ]&nbsp;; then
+    SECONDARY_GROUPS=&quot;staff&quot;  # for a non-admin user
+elif [ &quot;$GROUP_ADD&quot; = y ]&nbsp;; then
+    SECONDARY_GROUPS=&quot;admin _lpadmin _appserveradm _appserverusr&quot; # for an admin user
+else
+    echo &quot;You did not make a valid selection!&quot;
+fi
+
+# ====
+
+# Create a UID that is not currently in use
+echo &quot;Creating an unused UID for new user...&quot;
+
+if  $UID -ne 0 ; then echo &quot;Please run $0 as root.&quot; &amp;&amp; exit 1; fi
+
+# Find out the next available user ID
+MAXID=$(dscl . -list /Users UniqueID | awk &#39;{print $2}&#39; | sort -ug | tail -1)
+USERID=$((MAXID+1))
+
+
+# Create the user account by running dscl (normally you would have to do each of these commands one
+# by one in an obnoxious and time consuming way.
+echo &quot;Creating necessary files...&quot;
+
+dscl . -create /Users/$USERNAME
+dscl . -create /Users/$USERNAME UserShell /bin/bash
+dscl . -create /Users/$USERNAME RealName &quot;$FULLNAME&quot;
+dscl . -create /Users/$USERNAME UniqueID &quot;$USERID&quot;
+dscl . -create /Users/$USERNAME PrimaryGroupID 20
+dscl . -create /Users/$USERNAME NFSHomeDirectory /Users/$USERNAME 此步不成功，google 到很多人类似的遭遇，暂无解。可尝试通过&ldquo;系统偏好设置-用户与群组&rdquo;中解锁后右键点击左侧用户打开高级选项中进行设置。
+dscl . -passwd /Users/$USERNAME $PASSWORD
+
+
+# Add user to any specified groups
+echo &quot;Adding user to specified groups...&quot;
+
+for GROUP in $SECONDARY_GROUPS&nbsp;; do
+    dseditgroup -o edit -t user -a $USERNAME $GROUP
+done
+
+# Create the home directory
+echo &quot;Creating home directory...&quot;
+createhomedir -c 2&gt;&amp;1 | grep -v &quot;shell-init&quot;
+
+echo &quot;Created user #$USERID: $USERNAME ($FULLNAME)&quot;</pre>
+
+<p>Create a new entry in the local (/) domain under the category /users.<br />
+dscl / -create /Users/toddharris</p>
+
+<p>Create and set the shell property to bash.<br />
+dscl / -create /Users/toddharris UserShell /bin/bash</p>
+
+<p>Create and set the user&rsquo;s full name.<br />
+dscl / -create /Users/toddharris RealName &quot;Dr. Todd Harris&quot;</p>
+
+<p>Create and set the user&rsquo;s ID.<br />
+dscl / -create /Users/toddharris UniqueID 503</p>
+
+<p>Create and set the user&rsquo;s group ID property.<br />
+dscl / -create /Users/toddharris PrimaryGroupID 1000</p>
+
+<p>Create and set the user home directory.<br />
+dscl / -create /Users/toddharris NFSHomeDirectory /Local/Users/toddharris</p>
+
+<p>Set the password.<br />
+dscl / -passwd /Users/toddharris PASSWORD</p>
+
+<p>or</p>
+
+<p>passwd toddharris</p>
+
+<p>If you would like Dr. Harris to be able to perform administrative functions:<br />
+dscl / -append /Groups/admin GroupMembership toddharris</p>
+
+<h2>开启和关闭 root 用户</h2>
+
+<pre>
+$ dsenableroot
+username = mlhch
+user password:
+root password:
+verify root password:
+
+dsenableroot:: ***Successfully enabled root user.</pre>
+
+<pre>
+$ dsenableroot -d
+username = mlhch
+user password:
+
+dsenableroot:: ***Successfully disabled root user.</pre>
+
+<h2>命令行管理 httpd 服务</h2>
+
+<p>Mac 系统下和 httpd 有关的命令有两个：</p>
+
+<pre>
+$ which httpd
+/usr/sbin/httpd
+$ which apachectl
+/usr/sbin/apachectl
+</pre>
+
+<p>实际上，/usr/sbin/httpd 才是真正的可执行文件，/usr/sbin/apachectl 只是个 bash 脚本，其中调用了前者。</p>
+
+<pre>
+$ httpd -h
+Usage: httpd [-D name] [-d directory] [-f file]
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [-C &quot;directive&quot;] [-c &quot;directive&quot;]
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [-k start|restart|graceful|graceful-stop|stop]
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [-v] [-V] [-h] [-l] [-L] [-t] [-T] [-S]
+Options:
+&nbsp; -D name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : define a name for use in &lt;IfDefine name&gt; directives
+&nbsp; -d directory&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : specify an alternate initial ServerRoot
+&nbsp; -f file&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : specify an alternate ServerConfigFile
+&nbsp; -C &quot;directive&quot;&nbsp;&nbsp;&nbsp;&nbsp; : process directive before reading config files
+&nbsp; -c &quot;directive&quot;&nbsp;&nbsp;&nbsp;&nbsp; : process directive after reading config files
+&nbsp; -e level&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : show startup errors of level (see LogLevel)
+&nbsp; -E file&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : log startup errors to file
+&nbsp; -v&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : show version number
+&nbsp; -V&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : show compile settings
+&nbsp; -h&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : list available command line options (this page)
+&nbsp; -l&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : list compiled in modules
+&nbsp; -L&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : list available configuration directives
+&nbsp; -t -D DUMP_VHOSTS&nbsp; : show parsed settings (currently only vhost settings)
+&nbsp; -S&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : a synonym for -t -D DUMP_VHOSTS
+&nbsp; -t -D DUMP_MODULES : show all loaded modules
+&nbsp; -M&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : a synonym for -t -D DUMP_MODULES
+&nbsp; -t&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : run syntax check for config files
+&nbsp; -T&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : start without DocumentRoot(s) check</pre>
+
+<p>如果直接执行 sudo httpd -k start，会有如下错误信息输出，同时浏览 http://localhost 可知启动成功。同时 sudo httpd -k stop 可停止服务。</p>
+
+<pre>
+$ sudo httpd -k start
+Password:
+httpd: Could not reliably determine the server&#39;s fully qualified domain name, using 192.168.1.8 for ServerName</pre>
+
+<pre>
+$ sudo httpd -k stop
+Password:
+httpd: Could not reliably determine the server&#39;s fully qualified domain name, using 192.168.1.8 for ServerName</pre>
+
+<p>值得注意的是，如果使用 apachectl start|stop 可避免输出上述错误信息。注意此时无需 -k 参数。</p>
+
+<p>关注一下 apachectl，部分代码如下：</p>
+
+<p>看它如何测试一个变量为空</p>
+
+<pre>
+if [ &quot;x$ARGV&quot; = &quot;x&quot; ] ; then
+&nbsp;&nbsp;&nbsp; ARGV=&quot;-h&quot;
+fi</pre>
+
+<p>看它如何接收变量</p>
+
+<pre>
+ARGV=&quot;$@&quot;
+
+HTTPD=&#39;/usr/sbin/httpd&#39;</pre>
+
+<p>看它如何调用 httpd</p>
+
+<pre>
+case $ARGV in
+start)
+&nbsp;&nbsp;&nbsp; run_launchctl load -w $LAUNCHD_JOB
+&nbsp;&nbsp;&nbsp; ERROR=$?
+&nbsp;&nbsp;&nbsp; ;;
+stop|graceful-stop)
+&nbsp;&nbsp;&nbsp; run_launchctl unload -w $LAUNCHD_JOB</pre>
+
+<p>实际调用命令等价为</p>
+
+<pre>
+$ sudo apachectl start
+/bin/launchctl load -w /System/Library/LaunchDaemons/org.apache.httpd.plist
+$ sudo apachectl stop
+/bin/launchctl unload -w /System/Library/LaunchDaemons/org.apache.httpd.plist</pre>
+
+<h2>打开 Safari 开发调试菜单</h2>
+
+<p>终端执行如下命令，然后重启 Safari</p>
+
+<pre>
+defaults write com.apple.Safari IncludeDebugMenu 1</pre>
+
+<h2>find -print0, xargs -0</h2>
+
+<p>xargs 默认是以空白字符 (空格, TAB, 换行符) 来分割记录的, 因此有空格的文件名会被解释成两个记录，导致 xargs 不能正确识别此类文件名。使用 -print0 参数让 find 在打印出一个文件名之后接着输出一个 NULL 字符 (&#39;\0&#39;) 而不是换行符, 然后再告诉 xargs 也用 NULL 字符来作为记录的分隔符. 这就是 find 的&nbsp;-print0&nbsp;和 xargs 的&nbsp;-0&nbsp;的用处。</p>
+
+<pre>
+man find
+&nbsp;&nbsp;&nbsp;&nbsp; -print  This primary always evaluates to true.&nbsp; It prints the pathname of
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; the current file to standard output.&nbsp; If none of -exec, -ls,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -print, -print0, or -ok is specified, the given expression shall
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; be effectively replaced by ( given expression ) -print.
+
+&nbsp;&nbsp;&nbsp;&nbsp; -print0 This primary always evaluates to true.&nbsp; It prints the pathname of
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; the current file to standard output, followed by an ASCII NUL
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; character (character code 0).
+
+man xargs
+&nbsp;&nbsp;&nbsp;&nbsp; -0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Change xargs to expect NUL (``\0&#39;&#39;) characters as separators,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; instead of spaces and newlines.&nbsp; This is expected to be used in
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; concert with the -print0 function in find(1).</pre>
+
+<h2>com.apple.quarantine</h2>
+
+<p>I&#39;ve downloaded some .jar files from the internet and want to use them under Mac OS X. But the OS seems to have tagged them with the extended attribute com.apple.quarantine (no indication of this until I noticed the &quot;@&quot; in the ls -l and figured out how to use ls -l@) -- apparently because they have been downloaded from the internet. What&#39;s the right way to deal with this?</p>
+
+<p>This attribute is added so that it can ask for user confirmation the first time the downloaded program is run, to help stop malware. Upon confirmation the attribute should be removed and then the program will run normally.</p>
+
+<p>You don&#39;t&nbsp;have&nbsp;to deal with it. Open it and OS X will ask for your permission. Or like richard suggested, delete it using something like:</p>
+
+<pre>
+xattr -d com.apple.quarantine my_jar.jar
+find myfolder -print0 | xargs -0 xattr -d com.apple.quarantine
+sudo find SQLiteManager-1.2.4/ -print0 | sudo xargs -0 xattr -d com.apple.quarantine</pre>
+
+<h2>Mac OS文件权限中的@＋T t符号</h2>
+
+<p>当在Terminal（终端）应用程序中执行 ls -l 后会看到有的文件权限的末尾带有@、+、T、t这些字符</p>
+
+<p>@，指文件属性带有扩展属性，例如将文件名加个红色标签，红色标签就是扩展属性；<br />
++，指带有安全扩展属性，就是文件系统的访问控制列表－ACL；<br />
+T，sticky位，同时文件项目无执行和查询权限；<br />
+t，ticky位，同时文件项目带有执行和查询权限。</p>
+
+<p>ls -l@ 可查看扩展属性的内容</p>
+
+<p>Some variants of UNIX offer a &#39;color&#39; option on the&nbsp;ls&nbsp;(directory list)command; OS X doesn&#39;t by default.</p>
+
+<p>2013-02-13 19:21</p>
+
+<p>Remove the &quot;+&quot; by executing</p>
+
+<pre>
+chmod -RN /path/to/directory</pre>
+
+<h2>清除 DNS 缓存</h2>
+
+<p>2012-04-18 17:20 星期三</p>
+
+<p>dscacheutil -flushcache</p>
+
+<h2>Mac OS X 截屏</h2>
+
+<p>2012-03-29 21:30:26 +08:00 Thursday</p>
+
+<ul>
+	<li>
+	<p>截取全屏</p>
+
+	<p>花键 + Shift + 3，默认在桌面上生成 PNG 格式的图片文件</p>
+	</li>
+	<li>
+	<p>框选截屏</p>
+
+	<p>花键 + Shift + 4，鼠标框选后在桌面上生成 PNG 格式的图片文件</p>
+	</li>
+	<li>
+	<p>窗口截屏</p>
+
+	<p>花键 + Shift + 4，然后按空格，鼠标选取窗口后在桌面上生成 PNG 格式的图片文件</p>
+	</li>
+	<li>
+	<p>截屏去阴影，有了第二行才会立即生效</p>
+
+	<pre>
+$ defaults write com.apple.screencapture disable-shadow -bool true
+$ killall SystemUIServer</pre>
+	</li>
+</ul>
+
+<h2>终端</h2>
+
+<p>被乱码问题困扰了好久，偶然发现新建标签时，选择绿色的 Grass 风格可以正常显示中文，经过一翻探索，发现在&ldquo;终端 - 偏好设置 - 设置&rdquo;面板下，针对每种风格都有不同的&ldquo;文本，窗口，Shell，键盘，高级&rdquo;设置，其中在&ldquo;高级&rdquo;选项卡下有字符编码选项，果然 Grass 风格的编码是 UTF-8，而普通默认风格的编码是 ASCII。</p>
+
+<h2>快速移动光标</h2>
+
+<table border="1" cellpadding="1" cellspacing="1" style="width:500px">
+	<tbody>
+		<tr>
+			<td>&nbsp;</td>
+			<td>快速移至行首</td>
+		</tr>
+		<tr>
+			<td>在 Mac OS X 系统的终端中</td>
+			<td>fn + shift + 向左</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<h2>打开隐藏目录</h2>
+
+<p>2011-12-31 21:52 星期六</p>
+
+<p>打开菜单&ldquo;前往&rdquo; - &ldquo;前往文件夹&rdquo;，输入隐藏目录的路径即可。</p>
+
+<h2>MacPorts 安装和使用</h2>
+
+<p>2012-01-01 14:18 星期日</p>
+
+<p>Mac 下面除了用 dmg、pkg 来安装软件外，比较方便的还有用 MacPorts 来帮助你安装其他应用程序，跟BSD中的ports道理一样。MacPorts就像 apt-get、yum 一样，可以快速安装些软件。</p>
+
+<p>访问官方网站 http://www.macports.org/install.php，这里提供有 dmg 安装和源码安装两种方式，dmg 就不用多说了，下载 MacPorts-2.0.3-10.7-Lion.dmg，下一步下一步安装即可。</p>
+
+<p>更新 MacPorts 版本：<br />
+sudo /opt/local/bin/port -v selfupdate</p>
+
+<p>搜索索引中的软件<br />
+port search name</p>
+
+<p>安装新软件<br />
+sudo port install name</p>
+
+<p>卸载软件<br />
+sudo port uninstall name</p>
+
+<p>查看有更新的软件以及版本<br />
+port outdated</p>
+
+<p>升级可以更新的软件<br />
+sudo port upgrade outdated</p>
+
+<h2>launchd &amp; launchctl</h2>
+
+<p>http://en.wikipedia.org/wiki/Launchd</p>
+
+<p>launchd&nbsp;is a unified,&nbsp;open-source&nbsp;service management&nbsp;framework&nbsp;for starting, stopping and managing&nbsp;daemons,&nbsp;applications,&nbsp;processes, and&nbsp;scripts. Written and designed by Dave Zarzycki at Apple, it was introduced with&nbsp;Mac OS X Tiger&nbsp;and is licensed under the&nbsp;Apache License.</p>
+
+<p>&nbsp;</p>
+
+<p>There are two main programs in the launchd system: launchd and launchctl.</p>
+
+<p>launchd&nbsp;manages the daemons at both a system and user level. Similar to xinetd, launchd can start daemons on demand. Similar to watchdogd, launchd can monitor daemons to make sure that they keep running. launchd also has replaced init as&nbsp;PID&nbsp;1 on Mac OS X and as a result it is responsible for starting the system at boot time.</p>
+
+<p>Configuration files define the parameters of services run by launchd. Stored in the LaunchAgents and LaunchDaemons subdirectories of the Library folders, the&nbsp;property list-based files have approximately thirty different keys that can be set.</p>
+
+<p>launchctl&nbsp;is a command line application used to load and unload daemons, start and stop launchd controlled jobs, get system utilization statistics for launchd and its child processes, and set environment settings.</p>
+
+<h3>launchd</h3>
+
+<p>launchd has two main tasks. The first is to&nbsp;boot&nbsp;the system, and the second is to load and maintain services.</p>
+
+<p>Here is a simplified view of the Mac OS X Tiger system startup on a&nbsp;<a href="http://en.wikipedia.org/wiki/PowerPC">PowerPC</a>&nbsp;Mac (on an&nbsp;<a href="http://en.wikipedia.org/wiki/Intel">Intel</a>&nbsp;Mac,&nbsp;<a href="http://en.wikipedia.org/wiki/Extensible_Firmware_Interface">EFI</a>&nbsp;replaces&nbsp;<a href="http://en.wikipedia.org/wiki/Open_Firmware">Open Firmware</a>&nbsp;and&nbsp;boot.efi&nbsp;replaces&nbsp;<a href="http://en.wikipedia.org/wiki/BootX_(Apple)">BootX</a>):</p>
+
+<ol>
+	<li><a href="http://en.wikipedia.org/wiki/Open_Firmware">Open Firmware</a>&nbsp;activates, initializes the hardware, and then loads BootX.</li>
+	<li><a href="http://en.wikipedia.org/wiki/BootX_(Apple)">BootX</a>&nbsp;loads the kernel, spins the pinwheel cursor, and loads any needed&nbsp;<a href="http://en.wikipedia.org/wiki/Loadable_kernel_module">kernel extensions</a>&nbsp;(kexts).</li>
+	<li>The kernel loads launchd.</li>
+	<li>launchd runs&nbsp;/etc/rc, scans through&nbsp;/System/Library/LaunchAgents&nbsp;and&nbsp;/Library/LaunchDaemons&nbsp;and acts on the plists as needed, and starts the login window.</li>
+</ol>
+
+<p>In step 4, launchd scans through a few different directories for jobs to run. There are two different folders that are scanned. The LaunchDaemons folders contain items that will run as root, generally background processes. The LaunchAgents folders contain jobs, called agent applications, that will run as a user or in the context of userland. These may be scripts or other foreground items, and they can even include a user interface. These directories are all kept in the typical Library folders of Mac OS X.</p>
+
+<h3>launchctl</h3>
+
+<p>One of the major complaints with the other facilities for service control is that they are strewn across the OS with no central way to manage them. Apple fixes this with launchctl.</p>
+
+<p>On its own, launchctl can take commands from the command line, from standard in, or operate in interactive mode. A set of commands can be made permanent when stored in&nbsp;~/.launchd.conf&nbsp;or&nbsp;/etc/launchd.conf. With&nbsp;<a href="http://en.wikipedia.org/wiki/Superuser">superuser</a>&nbsp;privileges, launchctl can be used to make changes on a global scale.</p>
+
+<p>&nbsp;</p>
+
+<pre>
+Syntax
+      launchctl [subcommand [arguments ...]]
+
+SUBCOMMANDS
+
+     load [-wF] [-S sessiontype] [-D domain] paths ...
+              Load the specified configuration files or directories of config-
+              uration files.  Jobs that are not on-demand will be started as
+              soon as possible.  All specified jobs will be loaded before any
+              of them are allowed to start.
+
+              -w       Remove the disabled key and write the configuration
+                       files back out to disk.
+
+              -F       Force the loading of the plist. Ignore the Disabled
+                       key.
+
+              -S sessiontype
+                       Some jobs only make sense in certain contexts. This
+                       flag instructs launchctl to look for jobs in a differ-
+                       ent location when using the -D flag, and allows
+                       launchctl to restrict which jobs are loaded into which
+                       session types. Currently known session types include:
+                       Aqua, LoginWindow, Background, StandardIO and System.
+
+              -D domain
+                       Look for plist(5) files ending in *.plist in the domain
+                       given. Valid domains include &quot;system,&quot; &quot;local,&quot; &quot;net-
+                       work&quot; and &quot;all.&quot; When providing a session type, an
+                       additional domain is available for use called &quot;user.&quot;
+                       For example, without a session type given, &quot;-D system&quot;
+                       would load from property list files from /Sys-
+                       tem/Library/LaunchDaemons.  With a session type passed,
+                       it would load from /System/Library/LaunchAgents.
+
+     unload [-w] [-S sessiontype] [-D domain] paths ...
+              Unload the specified configuration files or directories of con-
+              figuration files.  This will also stop the job if it is running.
+
+              -w       Add the disabled key and write the configuration files
+                       back out to disk.
+
+              -S sessiontype
+                       Some jobs only make sense in certain contexts. This
+                       flag instructs launchctl to look for jobs in a differ-
+                       ent location when using the -D flag, and allows
+                       launchctl to restrict which jobs are loaded into which
+                       session types. Currently known session types include:
+                       Aqua, LoginWindow, Background, StandardIO and System.
+
+              -D domain
+                       Look for plist(5) files ending in *.plist in the domain
+                       given. Valid domains include &quot;system,&quot; &quot;local,&quot; &quot;net-
+                       work&quot; and &quot;all.&quot; When providing a session type, an
+                       additional domain is available for use called &quot;user.&quot;
+                       For example, without a session type given, &quot;-D system&quot;
+                       would load from property list files from /Sys-
+                       tem/Library/LaunchDaemons.  With a session type passed,
+                       it would load from /System/Library/LaunchAgents.
+
+     submit -l label [-p executable] [-o path] [-e path] -- command [args]
+              A simple way of submitting a program to run without a configura-
+              tion file. This mechanism also tells launchd to keep the program
+              alive in the event of failure.
+
+              -l label
+                       What unique label to assign this job to launchd.
+
+              -p program
+                       What program to really execute, regardless of what fol-
+                       lows the -- in the submit sub-command.
+
+              -o path  Where to send the stdout of the program.
+
+              -e path  Where to send the stderr of the program.
+
+     remove job_label
+              Remove the job from launchd by label.
+
+     start job_label
+              Start the specified job by label. The expected use of this sub-
+              command is for debugging and testing so that one can manually
+              kick-start an on-demand server.
+
+     stop job_label
+              Stop the specified job by label. If a job is on-demand, launchd
+              may immediately restart the job if launchd finds any criteria
+              that is satisfied.  Non-demand based jobs will always be
+              restarted. Use of this subcommand is discouraged.  Jobs should
+              ideally idle timeout by themselves.
+
+     list     List all of the jobs loaded into launchd.
+
+     setenv key value
+              Set an environmental variable inside of launchd.
+
+     unsetenv key
+              Unset an environmental variable inside of launchd.
+
+     getenv key
+              Get an environmental variable inside of launchd.
+
+     export   Export all of the environmental variables of launchd for use in
+              a shell eval statement.
+
+     getrusage self | children
+              Get the resource utilization statistics for launchd or the chil-
+              dren of launchd.
+
+     log [level loglevel] [only | mask loglevels...]
+              Get and set the syslog(3) log level mask</pre>
