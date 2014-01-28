@@ -1,0 +1,109 @@
+<h1>SSH</h1>
+
+<p>2012-08-17 21:47:34 +08:00 Friday</p>
+
+<p>http://www.openssh.com/</p>
+
+<p>现在这东西已经是系统必备了，几乎不用考虑从官网下载了。</p>
+
+<ul>
+	<li>
+	<p>2014-01-29 02:07 Wednsday</p>
+	编辑&nbsp;/etc/ssh/sshd_config 配置 PubkeyAuthentication yes 后 service sshd restart，否则无法用密钥登录。</li>
+	<li>
+	<p>CentOS</p>
+
+	<pre>
+# service sshd start/stop/restart</pre>
+	</li>
+	<li>
+	<p>Ubuntu</p>
+
+	<pre>
+$ sudo service ssh start/stop/restart</pre>
+	</li>
+</ul>
+
+<p>CentOS 6.0 默认最小安装居然没有 scp 命令？（CentOS 6.3 有）解决办法 yum install openssh-clients</p>
+
+<pre>
+(CentOS 6.0)
+# rpm -aq | grep ssh
+libssh2-1.2.2-7.e16.x86_64
+openssh-5.3p1-20.e16.x86_64
+openssh-server-5.3p1-20.e16.x86_64
+
+(after yum install openssh-clients)
+# rpm -aq | grep ssh
+libssh2-1.2.2-7.e16.x86_64
+openssh-5.3p1-81.e16.x86_64
+openssh-clients-5.3p1-81.e16.x86_64
+openssh-server-5.3p1-81.e16.x86_64
+
+# rpm -qf /usr/bin/scp
+openssh-clients-5.3p1-81.e16.x86_64</pre>
+
+<p>CentOS 6.3 =&gt; &lt;= CentOS 6.3</p>
+
+<p>CentOS 6.3 =&gt; &lt;= Mac</p>
+
+<p>CentOS 6.0 =&gt; &lt;=! Mac</p>
+
+<p>CentOS 6.0 =&gt; &lt;=! CentOS 6.3</p>
+
+<h2>郁闷已久的问题看来要从这里得到解决了！</h2>
+
+<p>2012-08-18 16:30 星期六</p>
+
+<p>http://help.directadmin.com/item.php?id=382</p>
+
+<table cellpadding="5" cellspacing="1">
+	<tbody>
+		<tr>
+			<td>/root/.ssh/authorized keys is not working - CentOS 6 Last Modified: Jul 19, 2011, 2:21 am</td>
+		</tr>
+		<tr>
+			<td>
+			<p>We had issues on CentOS 6 getting the ssh keys working (/root/.ssh/id_rsa.pub copied to /root/.ssh/authorized_keys on remote box).&nbsp;<br />
+			The keys worked fine for non-root users, but did not work for root.</p>
+
+			<p>The solution was found to run:</p>
+
+			<p>restorecon -R -v /root/.ssh</p>
+
+			<p>on the remote box.</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p>restorecon 命令确实管用，现在 CentOS 6.0 可以顺利通过 ssh 无密码登录了。</p>
+
+<h3>再次测试</h3>
+
+<ol>
+	<li>直接关闭 SELinux 也可。方法是设置&nbsp;/etc/selinux/config 为 disabled。</li>
+	<li>
+	<p>不更改 SELinux 设置，使用 chcon -u -r -t 修改 SELinux&nbsp;权限</p>
+
+	<pre>
+# ls -a -Z . | grep ssh
+drwx------. root root unconfined_u:object_r:admin_home_t:s0 .ssh
+# ls -Z .ssh
+-rw-r--r--. root root unconfined_u:object_r:admin_home_t:s0 authorized_keys
+-rw-------. root root unconfined_u:object_r:admin_home_t:s0 id_rsa</pre>
+
+	<pre>
+# ls -Z .ssh
+-rw-r--r--. root root unconfined_u:object_r:ssh_home_t:s0 authorized_keys
+-rw-------. root root unconfined_u:object_r:admin_home_t:s0 id_rsa</pre>
+
+	<p>测试后发现，起关键因素的只有&nbsp;authorized_keys 的 ssh_home_t。其上级目录 .ssh 的 SELinux 权限并不重要。当然，也可使用 restorecon -R -v .ssh 命令直接把 .ssh 目录及下面的文件全部更改。</p>
+	</li>
+</ol>
+
+<p>2012-08-18 02:57 星期六</p>
+
+<p>郁闷透了，ssh 怎么就不能顺顺利利地无密码登录了呢？</p>
+
+<p>&nbsp;</p>
