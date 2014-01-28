@@ -9,7 +9,9 @@
 <ul>
 	<li>
 	<p>2014-01-29 02:07 Wednsday</p>
-	编辑&nbsp;/etc/ssh/sshd_config 配置 PubkeyAuthentication yes 后 service sshd restart，否则无法用密钥登录。</li>
+
+	<p>编辑&nbsp;/etc/ssh/sshd_config 配置 PubkeyAuthentication yes 后 service sshd restart，否则无法用密钥登录。</p>
+	到目前，仍需要执行&nbsp;restorecon -R -v /root/.ssh</li>
 	<li>
 	<p>CentOS</p>
 
