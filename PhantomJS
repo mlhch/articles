@@ -13,6 +13,32 @@ PhantomJS is created by&nbsp;<a href="http://twitter.com/AriyaHidayat">Ariya Hid
 <p><a href="http://phantomjs.org/download.html">Download&nbsp;v1.8</a>&nbsp;<a href="https://github.com/ariya/phantomjs/wiki/Quick-Start">Get started</a></p>
 
 <blockquote>
+<p>2014-01-30 03:21 Thursday</p>
+
+<p>官方版本已经更新到 1.9.7 了，本地还是 1.9.2。下载由于连不上而出错，wget 用不上 goagent，解决办法是 brew update &amp;&amp; brew upgrade phantomjs</p>
+
+<pre>
+$ npm install phantomjs --save
+...
+
+&gt; phantomjs@1.9.7-1 install /Users/mlhch/www_nodejs/api.malian.io/node_modules/phantomjs
+&gt; node install.js
+
+PhantomJS detected, but wrong version 1.9.2 @ /usr/local/bin/phantomjs.
+Downloading http://cdn.bitbucket.org/ariya/phantomjs/downloads/phantomjs-1.9.7-macosx.zip
+...</pre>
+
+<pre>
+$ brew update
+Updated Homebrew from 25a31179 to 4d16d317.</pre>
+
+<pre>
+$ brew upgrade phantomjs
+==&gt; Upgrading 1 outdated package, with result:
+phantomjs 1.9.7
+​...
+</pre>
+
 <p>2014-01-16 12:15 Thursday</p>
 
 <p>PhantomJS is a headless WebKit(没有显示界面的浏览器)&nbsp;<span class="marker">scriptable</span> with <span class="marker">a</span> JavaScript API. It has&nbsp;fast&nbsp;and&nbsp;native&nbsp;support for various web standards: DOM handling, CSS selector, JSON, Canvas, and SVG.</p>
