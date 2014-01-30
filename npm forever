@@ -1,0 +1,29 @@
+<h1>npm forever</h1>
+
+<p>2014-01-31 03:59 Friday</p>
+
+<p><a href="https://npmjs.org/package/forever" target="_blank">https://npmjs.org/package/forever</a>&nbsp;|&nbsp;<a href="https://github.com/nodejitsu/forever" target="_blank">https://github.com/nodejitsu/forever</a></p>
+
+<p>A simple CLI tool for ensuring that a given node script runs continuously (i.e. forever)</p>
+
+<pre>
+npm install forever</pre>
+
+<table>
+</table>
+
+<table>
+	<tbody>
+		<tr>
+			<th>Version</th>
+			<td>0.10.11&nbsp;last updated 2 months agoforever</td>
+		</tr>
+	</tbody>
+</table>
+
+<p>A simple CLI tool for ensuring that a given script runs continuously (i.e. forever).</p>
+
+<h2>Installation</h2>
+
+<pre>
+  $ [sudo] npm install forever -g</pre>
