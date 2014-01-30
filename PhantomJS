@@ -13,6 +13,10 @@ PhantomJS is created by&nbsp;<a href="http://twitter.com/AriyaHidayat">Ariya Hid
 <p><a href="http://phantomjs.org/download.html">Download&nbsp;v1.8</a>&nbsp;<a href="https://github.com/ariya/phantomjs/wiki/Quick-Start">Get started</a></p>
 
 <blockquote>
+<p>2014-01-30 17:41 Thursday</p>
+
+<p>今日尝试在 CentOS 上从源码编译安装&nbsp;phantomjs，遇到&nbsp;/usr/bin/ld: cannot find -lQtWebKit 的错误提示。原因是没有按照官方要求先 yum install&nbsp;fontconfig-devel。事实证明，从源码编译实在是太耗时。不如预编译好的 Linux 版本直接可用。</p>
+
 <p>2014-01-30 03:21 Thursday</p>
 
 <p>官方版本已经更新到 1.9.7 了，本地还是 1.9.2。下载由于连不上而出错，wget 用不上 goagent，解决办法是 brew update &amp;&amp; brew upgrade phantomjs</p>
