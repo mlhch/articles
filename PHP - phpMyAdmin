@@ -19,6 +19,10 @@
 
 <p>经反复尝试，发现 yum install phpmyadmin 装上的&nbsp;phpMyAdmin-3.5.8.2-1.el6.noarch 可正常使用，使用 remi 库装上的最新稳定版&nbsp;4.1.6-1.el6.remi 反而无法登录，而且无任何错误信息。</p>
 
+<p>可是，紧接着又发现，3.5.8.2 版本也是问题多多，比如空数据库无法通过粘贴执行 SQL 语句来导入数据库。</p>
+
+<p>所以，还是手动下载并解压吧。</p>
+
 <p>2011-11-12 在 win7 上安装 xampp 后</p>
 
 <p>下载当前版本 phpMyAdmin-3.4.7.1-all-languages.7z，随后意识到 xampp 已经包含了 phpmyadmin</p>
