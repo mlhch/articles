@@ -44,3 +44,30 @@ rpm -ivh&nbsp;http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noa
 <p>(See&nbsp;<a href="http://rpms.famillecollet.com/">http://rpms.famillecollet.com/</a>) has been recommended on the mailing list and forum. Remi Collet maintains latest version of MySQL and PHP (backports of fedora RPM). Repo configs for&nbsp;<a href="http://rpms.famillecollet.com/enterprise/6/remi/i386/repoview/remi-release.html">EL6 i386</a>&nbsp;<a href="http://rpms.famillecollet.com/enterprise/6/remi/x86_64/repoview/remi-release.html">EL6 x86_64</a>,&nbsp;<a href="http://rpms.famillecollet.com/enterprise/5/remi/i386/repoview/remi-release.html">EL5 i386</a>, and&nbsp;<a href="http://rpms.famillecollet.com/enterprise/5/remi/x86_64/repoview/remi-release.html">EL5 x86_64</a>&nbsp;as well as EL4 are available. Suggest caution if using this repo due to replacement of core packages.</p>
 
 <p>Remi 维护着最新版本的 MySQL 和 PHP。</p>
+
+<p><a href="http://rpms.famillecollet.com/enterprise/6/remi/x86_64/repoview/remi-release.html">EL6 x86_64</a>:</p>
+
+<table border="1" cellpadding="3" cellspacing="1">
+	<tbody>
+		<tr>
+			<td><a href="http://rpms.famillecollet.com/enterprise/6/remi/x86_64/remi-release-6.4-1.el6.remi.noarch.rpm">remi-release-6.4-1.el6.remi.noarch</a></td>
+			<td>[5 KiB]</td>
+			<td>Changelog&nbsp;by&nbsp;Remi Collet (2013-10-03):
+			<p>- add php55 repository</p>
+			</td>
+		</tr>
+		<tr>
+			<td><a href="http://rpms.famillecollet.com/enterprise/6/remi/x86_64/remi-release-6-2.el6.remi.noarch.rpm">remi-release-6-2.el6.remi.noarch</a></td>
+			<td>[5 KiB]</td>
+			<td>Changelog&nbsp;by&nbsp;Remi Collet (2013-02-12):
+			<p>- add debuginfo repo<br />
+			- drop failovermethod option (switch to roundrobin)</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p>使用方法：</p>
+
+<pre>
+# yum install --enablerepo=remi php </pre>
