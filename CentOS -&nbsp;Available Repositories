@@ -1,0 +1,27 @@
+<h1>CentOS -&nbsp;Available Repositories</h1>
+
+<p>2014-01-31 17:15 Friday</p>
+
+<p>2011-11-25 星期五</p>
+
+<p>http://wiki.centos.org/AdditionalResources/Repositories</p>
+
+<p>There are several repositories provided by CentOS and other 3rd party developers that offer software packages that are not included in the default base and updates repositories. While no list can be 100% complete, as anyone may announce an archive, it represents some major efforts and provides a summary of what each repository offers. These repositories have varying levels of stability, support and cooperation within the CentOS community.</p>
+
+<p>CentOS 和其他提供软件开发包的第三方开发者们提供了一些库，但这些库不被包含在基础库和更新库中。没有一个100%的列表，因为任何人都可以宣布档案列表。这些库有不同程度的稳定性。</p>
+
+<h2>3rd Party Repositories</h2>
+
+<h3>RPMForge</h3>
+
+<p>This repository is a collaboration of Dag (who also maintains an individual archive) and other packagers. The archive provides over 10,000 packages for CentOS, including mplayer, xmms-mp3 and other popular media tools. You can read the installation instructions at Installing RPMForge. This repository is considered by many in the community to be stable and safe.</p>
+
+<p>This repository sometimes is referred to as DAG repository or similar.</p>
+
+<p>这个库是 Dag 和其他包共同努力的结果。这个档案给 CentOS 提供了越过 10000 个包，包括 mplayer, xmms-mp3 和其它流行的媒体工具。你可以在安装 RPMForge 时阅读安装指令。这个库被社区的许多成员认为是稳定和安全的。</p>
+
+<p>这个库有时也被认为是 DAG 库。</p>
+
+<p>Mike strongly recommends using the supplied unversioned repos release rpm for auto-configuring this repository:</p>
+
+<p>root@localhost:~# rpm -Uvh http://mhrepo.co.cc/pub/el/mhrepo-release.noarch.rpm</p>
