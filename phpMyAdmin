@@ -1,0 +1,38 @@
+<h1>phpMyAdmin</h1>
+
+<p>2013-06-20 10:49 Thursday</p>
+
+<p><a href="http://www.phpmyadmin.net" target="_blank">http://www.phpmyadmin.net</a></p>
+
+<p>2014-01-31 18:52 Friday 昨天去奶奶那吃的饺子</p>
+
+<p>如今可以这样安装 phpMyAdmin 了：</p>
+
+<pre>
+# yum install --enablerepo=remi phpmyadmin</pre>
+
+<p>默认是和 apache 配合的，所以配置文件在 /etc/httpd/conf.d/phpMyAdmin.conf。</p>
+
+<p>脚本文件在 /usr/share/phpMyAdmin，对于 nginx，自行配置相关路径和 alias 即可。</p>
+
+<p>2011-11-12 在 win7 上安装 xampp 后</p>
+
+<p>下载当前版本 phpMyAdmin-3.4.7.1-all-languages.7z，随后意识到 xampp 已经包含了 phpmyadmin</p>
+
+<p>2012-11-03 12:02 星期六</p>
+
+<p>目前版本&nbsp;phpMyAdmin-3.5.3-all-languages.tar.gz</p>
+
+<p>2013-06-20 10:58 Thursday</p>
+
+<p>http://jaist.dl.sourceforge.net/project/phpmyadmin/phpMyAdmin/4.0.4/phpMyAdmin-4.0.4-all-languages.zip</p>
+
+<h2>错误及解决</h2>
+
+<ul>
+	<li>
+	<p>#2002 无法登录 MySQL 服务器</p>
+
+	<p>原因是 /etc/php.ini 中的 mysql.default_socket = /var/mysql/mysql.sock&nbsp;路径和实际 mysql 运行时生成的 /tmp/mysql.sock 不同，所以 php 连接不到 MySQL 服务器。解决办法就是配置 mysql 或者修改 php.ini，两者相同就可以了。</p>
+	</li>
+</ul>
