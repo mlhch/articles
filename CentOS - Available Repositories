@@ -70,4 +70,4 @@ rpm -ivh&nbsp;http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noa
 <p>使用方法：</p>
 
 <pre>
-# yum install --enablerepo=remi php </pre>
+# yum install --enablerepo=remi php php-mysqlnd mysql</pre>
