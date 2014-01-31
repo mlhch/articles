@@ -27,6 +27,27 @@
 
 <p>http://jaist.dl.sourceforge.net/project/phpmyadmin/phpMyAdmin/4.0.4/phpMyAdmin-4.0.4-all-languages.zip</p>
 
+<h2>Docs</h2>
+
+<p>2014-01-31 20:59 Friday 刚看完《警察故事2013》</p>
+
+<p><a href="http://www.phpmyadmin.net/home_page/docs.php" target="_blank">http://www.phpmyadmin.net/home_page/docs.php</a></p>
+
+<ul>
+	<li><strong><a href="http://docs.phpmyadmin.net/">Main documentation</a></strong>&nbsp;(from the development version)</li>
+	<li><a href="http://docs.phpmyadmin.net/en/latest/setup.html">Installation</a>&nbsp;-&gt;&nbsp;<a href="http://docs.phpmyadmin.net/en/latest/setup.html#quick-install">Quick Install</a>&nbsp;-&gt;&nbsp;http://docs.phpmyadmin.net/en/latest/setup.html#quick-install</li>
+</ul>
+
+<p>Once the file has been saved, it must be <span class="marker">moved out of the&nbsp;config/&nbsp;directory</span> and the permissions must be reset, again as a security measure:</p>
+
+<pre>
+mv <span class="marker">config/</span>config.inc.php .         # move file to current directory
+chmod o-rw config.inc.php          # remove world read and write permissions
+rm -rf config                      # remove not needed directory
+</pre>
+
+<p>Now the file is ready to be used.</p>
+
 <h2>错误及解决</h2>
 
 <ul>
