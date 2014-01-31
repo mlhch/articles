@@ -4,7 +4,7 @@
 
 <p>2011-11-25 星期五</p>
 
-<p>http://wiki.centos.org/AdditionalResources/Repositories</p>
+<p><a href="http://wiki.centos.org/AdditionalResources/Repositories" target="_blank">http://wiki.centos.org/AdditionalResources/Repositories</a></p>
 
 <p>There are several repositories provided by CentOS and other 3rd party developers that offer software packages that are not included in the default base and updates repositories. While no list can be 100% complete, as anyone may announce an archive, it represents some major efforts and provides a summary of what each repository offers. These repositories have varying levels of stability, support and cooperation within the CentOS community.</p>
 
