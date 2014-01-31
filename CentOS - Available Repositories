@@ -29,3 +29,18 @@
 <p><strong>2014-01-31 17:20 Friday</strong></p>
 
 <p>This repository (See&nbsp;<a href="http://fedoraproject.org/wiki/EPEL">http://fedoraproject.org/wiki/EPEL</a>) provides rebuilds of Fedora packages for EL5 and EL6. Install the appropriate epel-release package for&nbsp;<a href="http://dl.fedoraproject.org/pub/epel/5/i386/epel-release-5-4.noarch.rpm">EL5</a>&nbsp;or&nbsp;<a href="http://dl.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm">EL6</a>&nbsp;to configure.&nbsp;This repo has made efforts not to replace system packages. In some cases it has endeavored to directly address CentOS compatibility but has expressly denied inter-repository compatibility as a goal. It may not mix well with other 3rd party repos. So, make SURE you are using the&nbsp;<a href="http://wiki.centos.org/PackageManagement/Yum/Priorities">Priorities</a>&nbsp;yum plugin if you are using EPEL ... especially if you mix its packages with those from other 3rd party repos. It should also be noted that, while EPEL may not overwrite distro packages, it may have conflicts with the CentOS extras repo which is enabled by default.</p>
+
+<p>用浏览器打开此页 https://dl.fedoraproject.org/pub/epel/6/x86_64/，即可看到所有可用软件包的列表，包括&nbsp;<a href="https://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm">epel-release-6-8.noarch.rpm</a>。安装方法：</p>
+
+<pre>
+rpm -ivh&nbsp;http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm</pre>
+
+<p>可惜这里面仍然没有 php5.5</p>
+
+<h3><strong>Les RPM de Remi repository</strong></h3>
+
+<p><strong>2014-01-31 17:44 Friday</strong></p>
+
+<p>(See&nbsp;<a href="http://rpms.famillecollet.com/">http://rpms.famillecollet.com/</a>) has been recommended on the mailing list and forum. Remi Collet maintains latest version of MySQL and PHP (backports of fedora RPM). Repo configs for&nbsp;<a href="http://rpms.famillecollet.com/enterprise/6/remi/i386/repoview/remi-release.html">EL6 i386</a>&nbsp;<a href="http://rpms.famillecollet.com/enterprise/6/remi/x86_64/repoview/remi-release.html">EL6 x86_64</a>,&nbsp;<a href="http://rpms.famillecollet.com/enterprise/5/remi/i386/repoview/remi-release.html">EL5 i386</a>, and&nbsp;<a href="http://rpms.famillecollet.com/enterprise/5/remi/x86_64/repoview/remi-release.html">EL5 x86_64</a>&nbsp;as well as EL4 are available. Suggest caution if using this repo due to replacement of core packages.</p>
+
+<p>Remi 维护着最新版本的 MySQL 和 PHP。</p>
