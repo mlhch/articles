@@ -1,6 +1,6 @@
 <h1>CentOS - Available Repositories</h1>
 
-<p><span style="line-height:1.6em">2011-11-25 00:00 星期五</span></p>
+<p>2011-11-25 00:00 星期五</p>
 
 <p><a href="http://wiki.centos.org/AdditionalResources/Repositories" target="_blank">http://wiki.centos.org/AdditionalResources/Repositories</a></p>
 
@@ -23,3 +23,9 @@
 <p>Mike strongly recommends using the supplied unversioned repos release rpm for auto-configuring this repository:</p>
 
 <p>root@localhost:~# rpm -Uvh http://mhrepo.co.cc/pub/el/mhrepo-release.noarch.rpm</p>
+
+<h3><strong>Extra Packages for Enterprise Linux (EPEL)</strong></h3>
+
+<p><strong>2014-01-31 17:20 Friday</strong></p>
+
+<p>This repository (See&nbsp;<a href="http://fedoraproject.org/wiki/EPEL">http://fedoraproject.org/wiki/EPEL</a>) provides rebuilds of Fedora packages for EL5 and EL6. Install the appropriate epel-release package for&nbsp;<a href="http://dl.fedoraproject.org/pub/epel/5/i386/epel-release-5-4.noarch.rpm">EL5</a>&nbsp;or&nbsp;<a href="http://dl.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm">EL6</a>&nbsp;to configure.&nbsp;This repo has made efforts not to replace system packages. In some cases it has endeavored to directly address CentOS compatibility but has expressly denied inter-repository compatibility as a goal. It may not mix well with other 3rd party repos. So, make SURE you are using the&nbsp;<a href="http://wiki.centos.org/PackageManagement/Yum/Priorities">Priorities</a>&nbsp;yum plugin if you are using EPEL ... especially if you mix its packages with those from other 3rd party repos. It should also be noted that, while EPEL may not overwrite distro packages, it may have conflicts with the CentOS extras repo which is enabled by default.</p>
