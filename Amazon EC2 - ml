@@ -1,0 +1,34 @@
+<h1>Amazon EC2 - ml</h1>
+
+<p>2014-02-02 22:13 Sunday ml-setup 脚本基本通了，开始琢磨 ec2</p>
+
+<h2>基本信息</h2>
+
+<table border="1" cellpadding="3" cellspacing="1">
+	<tbody>
+		<tr>
+			<td>ml</td>
+			<td>i-51f4b82d</td>
+			<td>m1.small</td>
+			<td>us-east-1b</td>
+		</tr>
+	</tbody>
+</table>
+
+<pre>
+$ ssh -i .ssh/bfjw.pem root@54.197.164.194
+Last login: Fri Nov  2 00:09:41 2012 from 115.54.73.60
+</pre>
+
+<pre>
+-bash-4.1# history
+    1  df -h
+    2  wget
+    3  wget http://adcdownload.apple.com/Developer_Tools/xcode_4.5.2/xcode4520418508a.dmg
+    4  exit
+    5  history
+</pre>
+
+<pre>
+-bash-4.1# cat /etc/redhat-release 
+CentOS release 6.3 (Final)</pre>
