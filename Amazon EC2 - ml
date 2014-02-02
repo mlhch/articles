@@ -32,3 +32,18 @@ Last login: Fri Nov  2 00:09:41 2012 from 115.54.73.60
 <pre>
 -bash-4.1# cat /etc/redhat-release 
 CentOS release 6.3 (Final)</pre>
+
+<pre>
+-bash-4.1# yum update
+...
+Transaction Summary
+==========================
+Install      21 Package(s)
+Upgrade     273 Package(s)
+
+Total download size: 313 M
+Is this ok [y/N]: y</pre>
+
+<pre>
+-bash-4.1# cat /etc/redhat-release 
+CentOS release 6.5 (Final)</pre>
