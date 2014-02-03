@@ -1,0 +1,13 @@
+<h1>GNU sed</h1>
+
+<p>2014-02-03 20:51 Monday</p>
+
+<p><a href="http://www.gnu.org/software/sed/" target="_blank">http://www.gnu.org/software/sed/</a></p>
+
+<h2>GNU sed</h2>
+
+<p>sed (stream editor) isn&#39;t an interactive text editor. Instead, it is used to filter text, i.e., it takes text input, performs some operation (or set of operations) on it, and outputs the modified text. sed is typically used for extracting part of a file using pattern matching or substituting multiple occurrences of a string within a file.</p>
+
+<p><a href="http://www.gnu.org/software/sed/manual/">Online documentation</a>&nbsp;is available.</p>
+
+<p>&nbsp;</p>
