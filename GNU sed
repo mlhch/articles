@@ -10,4 +10,30 @@
 
 <p><a href="http://www.gnu.org/software/sed/manual/">Online documentation</a>&nbsp;is available.</p>
 
-<p>&nbsp;</p>
+<h2>sed -n 1p</h2>
+
+<pre>
+$ echo -e &quot;aa\nbb\ncc&quot; | sed 1p
+aa
+aa
+bb
+cc
+</pre>
+
+<pre>
+$ echo -e &quot;aa\nbb\ncc&quot; | sed -n 1p
+aa
+</pre>
+
+<h2>sed &#39;N;...&#39;</h2>
+
+<pre>
+$ echo -e &quot;aa\nbb\ncc&quot; | sed &#39;N;1&#39;p
+aa
+bb
+</pre>
+
+<pre>
+$ echo -e &quot;aa\nbb\ncc&quot; | sed &#39;N;s/\n.*//g&#39;
+aa
+</pre>
