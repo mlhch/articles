@@ -28,6 +28,11 @@ $ ./ml.sh aabb cc eee
 4
 </pre>
 
+<h2>:!./% 在 vi 状态下执行本脚本</h2>
+
+<pre>
+:!./%          &lt;-- runs current script as external command </pre>
+
 <h2>configure 脚本</h2>
 
 <ol>
