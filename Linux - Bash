@@ -1,0 +1,953 @@
+<h1>Linux - Bash</h1>
+
+<p>2012-05-18 10:57:47 +08:00 Friday</p>
+
+<p><a href="http://www.gnu.org/software/bash/" target="_blank">http://www.gnu.org/software/bash/</a>&nbsp;|&nbsp;<a href="http://www.gnu.org/software/bash/manual/bash.html" target="_blank">http://www.gnu.org/software/bash/manual/bash.html</a></p>
+
+<p>Shell 和 Bash 是什么关系？简单说，Bash 是 Shell 的一种。如下是搜索到的网友的英文解释，个人觉得说的还不错。</p>
+
+<p>Bash is just one of a number of available&nbsp;shells&nbsp;or Linux, Unix and other Unix-like operating systems. It tends to be the most popular&nbsp;shell&nbsp;for Linux users, but other shells are also popular, e.g. csh, tcsh, ksh, zsh. To claim proficiency at shell scripting you should probably know more than one shell, although bash is a good start.</p>
+
+<h3>Downloading Bash</h3>
+
+<p>Bash can be found on the main GNU ftp server:&nbsp;<a href="http://ftp.gnu.org/gnu/bash/">http://ftp.gnu.org/gnu/bash/</a>&nbsp;(via HTTP) and&nbsp;<a href="ftp://ftp.gnu.org/gnu/bash/">ftp://ftp.gnu.org/gnu/bash/</a>&nbsp;(via FTP). It can also be found on the&nbsp;<a href="http://www.gnu.org/prep/ftp.html">GNU mirrors</a>; please&nbsp;<a href="http://ftpmirror.gnu.org/bash/">use a mirror</a>&nbsp;if possible.</p>
+
+<h3>Documentation</h3>
+
+<p><a href="http://www.gnu.org/software/bash/manual/">Documentation for Bash</a>&nbsp;is available online, as is&nbsp;<a href="http://www.gnu.org/manual/">documentation for most GNU software</a>. You may also find more information about Bash by running&nbsp;info&nbsp;bashor&nbsp;man&nbsp;bash, or by looking at&nbsp;/usr/doc/bash/,&nbsp;/usr/local/doc/bash/, or similar directories on your system. A brief summary is available by running&nbsp;bash&nbsp;--help.</p>
+
+<h2>${#0}, ${#1}...</h2>
+
+<p>没有找到官方参考，经自己推测并证实：${#0} 表示参数0，即脚本名的长度，${#1}表示参数1的长度。</p>
+
+<p>举例输出结果如下：</p>
+
+<pre>
+$ ./ml.sh aabb cc eee
+7
+4
+</pre>
+
+<h2>configure 脚本</h2>
+
+<ol>
+	<li>as_lineno=${as_lineno-&quot;$1&quot;} 的意思是如果 as_lineno 无定义则把行号赋值给它</li>
+	<li>as_lineno_stack=as_lineno_stack=$as_lineno_stack 的意思是给 as_lineno_stack 赋值为 &quot;as_lineno_stack=...&quot;，至于等号后是什么，就看 as_lineno_stack 的原来的值了</li>
+	<li>{ { 并没有什么特殊的意义，不过是 { 的嵌套而已</li>
+	<li>$as_me，求解的最后是 configure，就当作是当前文件名吧。</li>
+	<li>&gt;&amp;5，把这个删除，运行 ./configure 时就可以在终端上看到实际要运行的&nbsp;&quot;$ac_link&quot; 命令内容是什么。因此，此 {} 内唯一的作用是输出调试信息到 &amp;5，估计也就是 config.log</li>
+	<li>$as_echo 实际就是一个为了适应多种环境的 echo 的包装而已</li>
+	<li>eval var1=&quot;\&quot;$var2\&quot;&quot; 的意思其实就是对一个包含$开头的变量名的 $var2 字符串进行展开，得到 $var1</li>
+	<li>eval &quot;$ac_link&quot;，到这里就是实际运行&nbsp;ac_link=&#39;$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS &gt;&amp;5&#39; 这个展开后的命令了。并且可以看到，其运行结果也定向到了 &amp;5，也就是 config.log</li>
+	<li>命令例子：configure:17693: gcc -o conftest -g -O2 -I../sqlite-amalgamation-3071500 -I../proj-4.8.0/src -I../geos-3.3.6/ -L../sqlite-amalgamation-3071500 -L../proj-4.8.0/src/.libs conftest.c -lgeos_c &nbsp;-L/usr/local/lib &gt;&amp;5，所以搜索行号 17693 是个快速定位的好办法。</li>
+</ol>
+
+<pre>
+# ac_fn_c_try_link LINENO
+# -----------------------
+# Try to link conftest.$ac_ext, and return whether this succeeded.
+ac_fn_c_try_link ()
+{
+  <span class="marker">as_lineno=${as_lineno-&quot;$1&quot;}</span> <span class="marker">as_lineno_stack=as_lineno_stack=$as_lineno_stack</span>
+  rm -f conftest.$ac_objext conftest$ac_exeext
+  if <span class="marker">{ {</span> ac_try=&quot;$ac_link&quot;
+case &quot;(($ac_try&quot; in
+  *\&quot;* | *\`* | *\\*) ac_try_echo=\$ac_try;;
+  *) ac_try_echo=$ac_try;;
+esac
+eval ac_try_echo=&quot;\&quot;\<span class="marker">$as_me</span>:${as_lineno-$LINENO}: $ac_try_echo\&quot;&quot;
+<span class="marker">$as_echo</span> &quot;$ac_try_echo&quot;; } <span class="marker">&gt;&amp;5</span>
+  (<span class="marker">eval &quot;$ac_link&quot;</span>) 2&gt;conftest.err
+  ac_status=$?
+  if test -s conftest.err; then
+    grep -v &#39;^ *+&#39; conftest.err &gt;conftest.er1
+    cat conftest.er1 &gt;&amp;5
+    mv -f conftest.er1 conftest.err
+  fi
+  $as_echo &quot;$as_me:${as_lineno-$LINENO}: \$? = $ac_status&quot; &gt;&amp;5
+  test $ac_status = 0; } &amp;&amp; {
+         test -z &quot;$ac_c_werror_flag&quot; ||
+         test ! -s conftest.err
+       } &amp;&amp; test -s conftest$ac_exeext &amp;&amp; {
+         test &quot;$cross_compiling&quot; = yes ||
+         $as_test_x conftest$ac_exeext
+       }; then :
+  ac_retval=0
+else
+  $as_echo &quot;$as_me: failed program was:&quot; &gt;&amp;5
+sed &#39;s/^/| /&#39; conftest.$ac_ext &gt;&amp;5
+
+        ac_retval=1
+fi
+  # Delete the IPA/IPO (Inter Procedural Analysis/Optimization) information
+  # created by the PGI compiler (conftest_ipa8_conftest.oo), as it would
+  # interfere with the next link command; also delete a directory that is
+  # left behind by Apple&#39;s compiler.  We do this before executing the actions.
+  rm -rf conftest.dSYM conftest_ipa8_conftest.oo
+  eval $as_lineno_stack; ${as_lineno_stack:+:} unset as_lineno
+  as_fn_set_status $ac_retval
+
+} # ac_fn_c_try_link</pre>
+
+<pre>
+ac_ext=c
+ac_cpp=&#39;$CPP $CPPFLAGS&#39;
+ac_compile=&#39;$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext &gt;&amp;5&#39;
+ac_link=&#39;$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS &gt;&amp;5&#39;
+ac_compiler_gnu=$ac_cv_c_compiler_gnu
+</pre>
+
+<pre>
+as_me=`$as_basename -- &quot;$0&quot; ||
+$as_expr X/&quot;$0&quot; : &#39;.*/\([^/][^/]*\)/*$&#39; \| \
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;X&quot;$0&quot; : &#39;X\(//\)$&#39; \| \
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;X&quot;$0&quot; : &#39;X\(/\)&#39; \| . 2&gt;/dev/null ||
+$as_echo X/&quot;$0&quot; |
+&nbsp; &nbsp; sed &#39;/^.*\/\([^/][^/]*\)\/*$/{
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; s//\1/
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; q
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; /^X\/\(\/\/\)$/{
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; s//\1/
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; q
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; /^X\/\(\/\).*/{
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; s//\1/
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; q
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; s/.*/./; q&#39;`
+</pre>
+
+<pre>
+# Printing a long string crashes Solaris 7 /usr/bin/printf.
+as_echo=&#39;\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\&#39;
+as_echo=$as_echo$as_echo$as_echo$as_echo$as_echo
+as_echo=$as_echo$as_echo$as_echo$as_echo$as_echo$as_echo
+# Prefer a ksh shell builtin over an external printf program on Solaris,
+# but without wasting forks for bash or zsh.
+if test -z &quot;$BASH_VERSION$ZSH_VERSION&quot; \
+&nbsp; &nbsp; &amp;&amp; (test &quot;X`print -r -- $as_echo`&quot; = &quot;X$as_echo&quot;) 2&gt;/dev/null; then
+&nbsp; as_echo=&#39;print -r --&#39;
+&nbsp; as_echo_n=&#39;print -rn --&#39;
+elif (test &quot;X`printf %s $as_echo`&quot; = &quot;X$as_echo&quot;) 2&gt;/dev/null; then
+&nbsp; as_echo=&#39;printf %s\n&#39;
+&nbsp; as_echo_n=&#39;printf %s&#39;
+else
+&nbsp; if test &quot;X`(/usr/ucb/echo -n -n $as_echo) 2&gt;/dev/null`&quot; = &quot;X-n $as_echo&quot;; then
+&nbsp; &nbsp; as_echo_body=&#39;eval /usr/ucb/echo -n &quot;$1$as_nl&quot;&#39;
+&nbsp; &nbsp; as_echo_n=&#39;/usr/ucb/echo -n&#39;
+&nbsp; else
+&nbsp; &nbsp; as_echo_body=&#39;eval expr &quot;X$1&quot; : &quot;X\\(.*\\)&quot;&#39;
+&nbsp; &nbsp; as_echo_n_body=&#39;eval
+&nbsp; &nbsp; &nbsp; arg=$1;
+&nbsp; &nbsp; &nbsp; case $arg in #(
+&nbsp; &nbsp; &nbsp; *&quot;$as_nl&quot;*)
+&nbsp; &nbsp; &nbsp; &nbsp; expr &quot;X$arg&quot; : &quot;X\\(.*\\)$as_nl&quot;;
+&nbsp; &nbsp; &nbsp; &nbsp; arg=`expr &quot;X$arg&quot; : &quot;.*$as_nl\\(.*\\)&quot;`;;
+&nbsp; &nbsp; &nbsp; esac;
+&nbsp; &nbsp; &nbsp; expr &quot;X$arg&quot; : &quot;X\\(.*\\)&quot; | tr -d &quot;$as_nl&quot;
+&nbsp; &nbsp; &#39;
+&nbsp; &nbsp; export as_echo_n_body
+&nbsp; &nbsp; as_echo_n=&#39;sh -c $as_echo_n_body as_echo&#39;
+&nbsp; fi
+&nbsp; export as_echo_body
+&nbsp; as_echo=&#39;sh -c $as_echo_body as_echo&#39;
+fi</pre>
+
+<h2>/usr/local/bin/brew</h2>
+
+<pre>
+#!/bin/sh
+BREW_FILE_DIRECTORY=$(dirname &quot;$0&quot;)
+BREW_FILE_DIRECTORY=$(cd &quot;$BREW_FILE_DIRECTORY&quot; &amp;&amp; pwd -P)
+
+BREW_FILENAME=$(basename &quot;$0&quot;)
+export HOMEBREW_BREW_FILE=&quot;$BREW_FILE_DIRECTORY/$BREW_FILENAME&quot;
+
+BREW_SYMLINK=$(readlink $0)
+if [ -n &quot;$BREW_SYMLINK&quot; ]
+then
+	BREW_SYMLINK_DIRECTORY=$(dirname &quot;$BREW_SYMLINK&quot;)
+	BREW_FILE_DIRECTORY=$(cd &quot;$BREW_FILE_DIRECTORY&quot; &amp;&amp;
+	                      cd &quot;$BREW_SYMLINK_DIRECTORY&quot; &amp;&amp; pwd -P)
+fi
+
+BREW_LIBRARY_DIRECTORY=$(cd &quot;$BREW_FILE_DIRECTORY&quot;/../Library &amp;&amp; pwd -P)
+
+BREW_SYSTEM=$(uname -s | tr &quot;[:upper:]&quot; &quot;[:lower:]&quot;)
+if [ &quot;$BREW_SYSTEM&quot; = &quot;darwin&quot; ]
+then
+	exec &quot;$BREW_LIBRARY_DIRECTORY/brew.rb&quot; &quot;$@&quot;
+else
+	exec ruby -W0 &quot;$BREW_LIBRARY_DIRECTORY/brew.rb&quot; &quot;$@&quot;
+fi</pre>
+
+<h2>./phonegap-2.9.0/lib/android/bin/create</h2>
+
+<p>2013-08-16 10:42 Friday</p>
+
+<p>从 if [ -d &quot;$BUILD_PATH&quot;/framework ] 这行可见，其针对的是 phonegap 和 cordova 两种情况</p>
+
+<pre>
+#! /bin/bash
+#       Licensed to the Apache Software Foundation (ASF) under one
+#       or more contributor license agreements.  See the NOTICE file
+#       distributed with this work for additional information
+#       regarding copyright ownership.  The ASF licenses this file
+#       to you under the Apache License, Version 2.0 (the
+#       &quot;License&quot;); you may not use this file except in compliance
+#       with the License.  You may obtain a copy of the License at
+#
+#         http://www.apache.org/licenses/LICENSE-2.0
+#
+#       Unless required by applicable law or agreed to in writing,
+#       software distributed under the License is distributed on an
+#       &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#       KIND, either express or implied.  See the License for the
+#       specific language governing permissions and limitations
+#       under the License.
+#
+# create a cordova/android project
+# 
+# USAGE
+#   ./create [path package activity]
+#
+set -e
+
+if [ -z &quot;$1&quot; ] || [ &quot;$1&quot; == &quot;-h&quot; ]
+then
+    echo &quot;Usage: $0   &quot;
+    echo &quot;Make sure the Android SDK tools folder is in your PATH!&quot;
+    echo &quot;    : Path to your new Cordova iOS project&quot;
+    echo &quot;    : Package name, following reverse-domain style convention&quot;
+    echo &quot;    : Project name&quot;
+    exit 0
+fi
+
+BUILD_PATH=&quot;$( cd &quot;$( dirname &quot;$0&quot; )/..&quot; &amp;&amp; pwd )&quot;
+VERSION=$(cat &quot;$BUILD_PATH&quot;/VERSION)
+
+PROJECT_PATH=&quot;${1:-&#39;./example&#39;}&quot;
+PACKAGE=${2:-&quot;org.apache.cordova.example&quot;}
+ACTIVITY=${3:-&quot;cordovaExample&quot;}
+
+# clobber any existing example
+if [ -d &quot;$PROJECT_PATH&quot; ]
+then
+    echo &quot;Project already exists! Delete and recreate&quot;
+    exit 1
+fi
+
+function createAppInfoJar {
+    pushd &quot;$BUILD_PATH&quot;/bin/templates/cordova/ApplicationInfo &gt; /dev/null
+    javac ApplicationInfo.java
+    jar -cfe ../appinfo.jar ApplicationInfo ApplicationInfo.class
+    popd &gt; /dev/null
+}
+
+function on_error {
+    echo &quot;An unexpected error occurred: $previous_command exited with $?&quot;
+    echo &quot;Deleting project...&quot;
+    [ -d &quot;$PROJECT_PATH&quot; ] &amp;&amp; rm -rf &quot;$PROJECT_PATH&quot;
+    exit 1
+}
+
+function replace {
+    local pattern=$1
+    local filename=$2
+    # Mac OS X requires -i argument
+    if [[ &quot;$OSTYPE&quot; =~ &quot;darwin&quot; ]]
+    then
+        /usr/bin/sed -i &#39;&#39; -e $pattern &quot;$filename&quot;
+    elif [[ &quot;$OSTYPE&quot; =~ &quot;linux&quot; ]]
+    then
+        /bin/sed -i -e $pattern &quot;$filename&quot;
+    fi
+}
+
+# we do not want the script to silently fail
+trap &#39;previous_command=$this_command; this_command=$BASH_COMMAND&#39; DEBUG
+trap on_error ERR
+
+ANDROID_BIN=&quot;${ANDROID_BIN:=$( which android )}&quot;
+PACKAGE_AS_PATH=$(echo $PACKAGE | sed &#39;s/\./\//g&#39;)
+ACTIVITY_PATH=&quot;$PROJECT_PATH&quot;/src/$PACKAGE_AS_PATH/$ACTIVITY.java
+MANIFEST_PATH=&quot;$PROJECT_PATH&quot;/AndroidManifest.xml
+
+TARGET=$(&quot;$ANDROID_BIN&quot; list targets | grep id: | tail -1 | cut -f 2 -d &#39; &#39; )
+API_LEVEL=$(&quot;$ANDROID_BIN&quot; list target | grep &quot;API level:&quot; | tail -n 1 | cut -f 2 -d &#39;:&#39; | tr -d &#39; &#39;)
+
+# check that build targets exist
+if [ -z &quot;$TARGET&quot; ] || [ -z &quot;$API_LEVEL&quot; ]
+then
+    echo &quot;No Android Targets are installed. Please install at least one via the android SDK&quot;
+    exit 1
+fi
+
+# if this a distribution release no need to build a jar
+if [ ! -e &quot;$BUILD_PATH&quot;/cordova-$VERSION.jar ] &amp;&amp; [ -d &quot;$BUILD_PATH&quot;/framework ]
+then
+    # update the cordova-android framework for the desired target
+    &quot;$ANDROID_BIN&quot; update project --target $TARGET --path &quot;$BUILD_PATH&quot;/framework &amp;&gt; /dev/null
+
+    # compile cordova.js and cordova.jar
+    pushd &quot;$BUILD_PATH&quot;/framework &gt; /dev/null
+    ant jar &gt; /dev/null
+    popd &gt; /dev/null
+fi
+
+# create new android project
+&quot;$ANDROID_BIN&quot; create project --target $TARGET --path &quot;$PROJECT_PATH&quot; --package $PACKAGE --activity $ACTIVITY &amp;&gt; /dev/null
+
+# copy project template
+cp -r &quot;$BUILD_PATH&quot;/bin/templates/project/assets &quot;$PROJECT_PATH&quot;
+cp -r &quot;$BUILD_PATH&quot;/bin/templates/project/res &quot;$PROJECT_PATH&quot;
+
+# copy cordova.js, cordova.jar and res/xml
+if [ -d &quot;$BUILD_PATH&quot;/framework ]
+then
+    cp -r &quot;$BUILD_PATH&quot;/framework/res/xml &quot;$PROJECT_PATH&quot;/res
+    cp &quot;$BUILD_PATH&quot;/framework/assets/www/cordova.js &quot;$PROJECT_PATH&quot;/assets/www/cordova.js
+    cp &quot;$BUILD_PATH&quot;/framework/cordova-$VERSION.jar &quot;$PROJECT_PATH&quot;/libs/cordova-$VERSION.jar
+else
+    cp -r &quot;$BUILD_PATH&quot;/xml &quot;$PROJECT_PATH&quot;/res/xml
+    cp &quot;$BUILD_PATH&quot;/cordova.js &quot;$PROJECT_PATH&quot;/assets/www/cordova.js
+    cp &quot;$BUILD_PATH&quot;/cordova-$VERSION.jar &quot;$PROJECT_PATH&quot;/libs/cordova-$VERSION.jar
+fi
+
+# interpolate the activity name and package
+cp &quot;$BUILD_PATH&quot;/bin/templates/project/Activity.java &quot;$ACTIVITY_PATH&quot;
+replace &quot;s/__ACTIVITY__/${ACTIVITY}/g&quot; &quot;$ACTIVITY_PATH&quot;
+replace &quot;s/__ID__/${PACKAGE}/g&quot; &quot;$ACTIVITY_PATH&quot;
+
+cp &quot;$BUILD_PATH&quot;/bin/templates/project/AndroidManifest.xml &quot;$MANIFEST_PATH&quot;
+replace &quot;s/__ACTIVITY__/${ACTIVITY}/g&quot; &quot;$MANIFEST_PATH&quot;
+replace &quot;s/__PACKAGE__/${PACKAGE}/g&quot; &quot;$MANIFEST_PATH&quot;
+replace &quot;s/__APILEVEL__/${API_LEVEL}/g&quot; &quot;$MANIFEST_PATH&quot;
+
+# creating cordova folder and copying run/build/log/launch scripts
+mkdir &quot;$PROJECT_PATH&quot;/cordova
+mkdir &quot;$PROJECT_PATH&quot;/cordova/lib
+createAppInfoJar
+cp &quot;$BUILD_PATH&quot;/bin/templates/cordova/appinfo.jar &quot;$PROJECT_PATH&quot;/cordova/appinfo.jar
+cp &quot;$BUILD_PATH&quot;/bin/templates/cordova/build &quot;$PROJECT_PATH&quot;/cordova/build
+cp &quot;$BUILD_PATH&quot;/bin/templates/cordova/clean &quot;$PROJECT_PATH&quot;/cordova/clean
+cp &quot;$BUILD_PATH&quot;/bin/templates/cordova/log &quot;$PROJECT_PATH&quot;/cordova/log
+cp &quot;$BUILD_PATH&quot;/bin/templates/cordova/run &quot;$PROJECT_PATH&quot;/cordova/run
+cp &quot;$BUILD_PATH&quot;/bin/templates/cordova/version &quot;$PROJECT_PATH&quot;/cordova/version
+cp &quot;$BUILD_PATH&quot;/bin/templates/cordova/lib/install-device &quot;$PROJECT_PATH&quot;/cordova/lib/install-device
+cp &quot;$BUILD_PATH&quot;/bin/templates/cordova/lib/install-emulator &quot;$PROJECT_PATH&quot;/cordova/lib/install-emulator
+cp &quot;$BUILD_PATH&quot;/bin/templates/cordova/lib/list-devices &quot;$PROJECT_PATH&quot;/cordova/lib/list-devices
+cp &quot;$BUILD_PATH&quot;/bin/templates/cordova/lib/list-emulator-images &quot;$PROJECT_PATH&quot;/cordova/lib/list-emulator-images
+cp &quot;$BUILD_PATH&quot;/bin/templates/cordova/lib/list-started-emulators &quot;$PROJECT_PATH&quot;/cordova/lib/list-started-emulators
+cp &quot;$BUILD_PATH&quot;/bin/templates/cordova/lib/start-emulator &quot;$PROJECT_PATH&quot;/cordova/lib/start-emulator
+
+</pre>
+
+<p>&nbsp;</p>
+
+<h2>几种特殊的替换结构</h2>
+
+<p>http://www.cnblogs.com/chengmo/archive/2010/10/02/1841355.html</p>
+
+<table border="1" cellpadding="4" cellspacing="1">
+	<tbody>
+		<tr>
+			<td>${var}</td>
+			<td>变量var的值, 与$var相同</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td><span class="marker">${var-DEFAULT}</span></td>
+			<td>如果var没有被声明, 那么就以$DEFAULT作为其值 *</td>
+			<td><span class="marker">此种形式官方文档似乎没有，能在网上找到也算不容易</span></td>
+		</tr>
+		<tr>
+			<td>${var:-DEFAULT}</td>
+			<td>如果var没有被声明, 或者其值为空, 那么就以$DEFAULT作为其值 *</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>${var=DEFAULT}</td>
+			<td>如果var没有被声明, 那么就以$DEFAULT作为其值 *</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>${var:=DEFAULT}</td>
+			<td>如果var没有被声明, 或者其值为空, 那么就以$DEFAULT作为其值 *</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>${var+OTHER}</td>
+			<td>如果var声明了, 那么其值就是$OTHER, 否则就为null字符串</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>${var:+OTHER}</td>
+			<td>如果var被设置了, 那么其值就是$OTHER, 否则就为null字符串</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>${var?ERR_MSG}</td>
+			<td>如果var没被声明, 那么就打印$ERR_MSG *</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>${var:?ERR_MSG}</td>
+			<td>如果var没被设置, 那么就打印$ERR_MSG *</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>${!varprefix*}</td>
+			<td>匹配之前所有以varprefix开头进行声明的变量</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>${!varprefix@}</td>
+			<td>匹配之前所有以varprefix开头进行声明的变量</td>
+			<td>&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p>${var:-string},${var:+string},${var:=string},${var:?string}</p>
+
+<ul>
+	<li>
+	<p>${var:-string}和${var:=string}</p>
+
+	<p>若变量var为空，则用在命令行中用string来替换${var:-string}，否则变量var不为空时，则用变量var的值来替换${var:-string}</p>
+	</li>
+	<li>
+	<p>对于${var:=string}的替换规则和${var:-string}是一样的，所不同之处是${var:=string}若var为空时，用string替换${var:=string}的同时，把string赋给变量var：</p>
+	</li>
+	<li>
+	<p>${var:=string}很常用的一种用法是，判断某个变量是否赋值，没有的话则给它赋上一个默认值。</p>
+	</li>
+	<li>
+	<p>${var:+string}</p>
+
+	<p>${var:+string}的替换规则和上面的相反，即只有当var不是空的时候才替换成string，若var为空时则不替换或者说是替换成变量 var的值，即空值。(因为变量var此时为空，所以这两种说法是等价的)&nbsp;</p>
+	</li>
+	<li>
+	<p>${var:?string}</p>
+
+	<p>替换规则为：若变量var不为空，则用变量var的值来替换${var:?string}；若变量var为空，则把string输出到标准错误中，并从脚本中退出。我们可利用此特性来检查是否设置了变量的值。&nbsp;</p>
+	</li>
+	<li>
+	<p>补充扩展：在上面这五种替换结构中string不一定是常值的，可用另外一个变量的值或是一种命令的输出。&nbsp;</p>
+	</li>
+</ul>
+
+<h2>输出定向</h2>
+
+<p>2013-03-27 15:19</p>
+
+<p>如下瞎操作了几步后的结果</p>
+
+<pre>
+$ ll /proc/self/fd
+total 0
+dr-x------ 2 mlhch mlhch&nbsp; 0 Mar 27 12:05 ./
+dr-xr-xr-x 9 mlhch mlhch&nbsp; 0 Mar 27 12:05 ../
+lrwx------ 1 mlhch mlhch 64 Mar 27 12:05 0 -&gt; /dev/pts/0
+l-wx------ 1 mlhch mlhch 64 Mar 27 12:05 1 -&gt; /dev/tty
+l-wx------ 1 mlhch mlhch 64 Mar 27 12:05 2 -&gt; /dev/tty
+lr-x------ 1 mlhch mlhch 64 Mar 27 12:05 3 -&gt; /proc/16955/fd/
+lrwx------ 1 mlhch mlhch 64 Mar 27 12:05 5 -&gt; /home/mlhch/spatialite-android/spatialite-android-library/jni/proj-4.8.0/aa.txt (deleted)
+lrwx------ 1 mlhch mlhch 64 Mar 27 12:05 6 -&gt; /home/mlhch/spatialite-android/spatialite-android-library/jni/proj-4.8.0/aa.txt (deleted)
+</pre>
+
+<p>关闭 fd5 和 fd6</p>
+
+<pre>
+$ exec 5&gt;&amp;-
+$ exec 6&gt;&amp;-
+
+$ ll /proc/self/fd
+total 0
+dr-x------ 2 mlhch mlhch&nbsp; 0 Mar 27 12:06 ./
+dr-xr-xr-x 9 mlhch mlhch&nbsp; 0 Mar 27 12:06 ../
+lrwx------ 1 mlhch mlhch 64 Mar 27 12:06 0 -&gt; /dev/pts/0
+l-wx------ 1 mlhch mlhch 64 Mar 27 12:06 1 -&gt; /dev/tty
+l-wx------ 1 mlhch mlhch 64 Mar 27 12:06 2 -&gt; /dev/tty
+lr-x------ 1 mlhch mlhch 64 Mar 27 12:06 3 -&gt; /proc/16956/fd/
+</pre>
+
+<p>恢复 fd1 的方法就是</p>
+
+<pre>
+exec 1&gt;/dev/tty</pre>
+
+<h3>cmd &gt;a 2&gt;a 和 cmd &gt;a 2&gt;&amp;1 有什么不同？</h3>
+
+<p>cmd &gt;a 2&gt;a ：stdout 和 stderr都直接送往文件 a ，a 文件会被打开两遍，由此导致stdout和stderr互相覆盖。</p>
+
+<p>cmd &gt;a 2&gt;&amp;1 ：stdout 直接送往文件 a ，stderr 被送往 stdout 管道之后，再被送往文件 a。</p>
+
+<h2>() 和 {} 的用法</h2>
+
+<p>() 和 {} 都是对一串的命令进行执行，但有所区别：</p>
+
+<ol>
+	<li>() 只是对一串命令重新开一个子shell进行执行</li>
+	<li>{} 对一串命令在当前shell执行</li>
+	<li>() 和 {} 都是把一串的命令放在括号里面，并且命令之间用;号隔开</li>
+	<li>() 最后一个命令可以不用分号</li>
+	<li>{} 最后一个命令要用分号</li>
+	<li>{} 的第一个命令和左括号之间必须要有一个空格</li>
+	<li>() 里的各命令不必和括号有空格</li>
+	<li>() 和 {} 中括号里面的某个命令的重定向只影响该命令，但括号外的重定向则影响到括号里的所有命令</li>
+</ol>
+
+<p>几个例子：&nbsp;</p>
+
+<pre>
+$ var=test 
+$ (var=notest; echo $var) ### 变量 var 值为 notest，此时在子 shell 中有效 
+notest 
+$ echo $var ### 父 shell 中值仍为 test 
+test 
+
+$ { var=notest; echo $var;} ### 注意左括号和var之间要有一个空格 
+notest 
+$ echo $var ### 父 shell 中的 var 变量的值变为了 notest 
+notest
+
+$ { var1=test1;var2=test2;echo $var1&gt;a;echo $var2;} ### 输出 test1 被重定向到文件 a 中， 
+test2 ### 而test2 输出则仍输出到标准输出中。 
+$ cat a 
+test1 
+$ { var1=test1;var2=test2;echo $var1;echo $var2;}&gt;a ### 括号内命令的标准输出全部被重定向到文件 a 中 
+$ cat a 
+test1 
+test2</pre>
+
+<p>另一个脚本例子：</p>
+
+<pre>
+(
+    echo &quot;1&quot;
+    echo &quot;2&quot;
+) | awk &#39;{print NR,$0}&#39;</pre>
+
+<ul>
+</ul>
+
+<h2>break [n]</h2>
+
+<h2>if 中的测试语句</h2>
+
+<p>比较两个字符串是否相等的办法是：</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;if [ &quot;$test&quot;x = &quot;test&quot;x ]; then</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;这里的关键有几点：</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;1 使用单个等号</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;2 注意到等号两边各有一个空格：这是unix shell的要求</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;3 注意到&quot;$test&quot;x最后的x，这是特意安排的，因为当$test为空的时候，上面的表达式就变成了x = testx，显然是不相等的。而如果没有这个x，表达式就会报错：[: =: unary operator expected</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;二元比较操作符,比较变量或者比较数字.注意数字与字符串的区别.</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;整数比较</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;-eq 等于,如:if [ &quot;$a&quot; -eq &quot;$b&quot; ]</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;-ne 不等于,如:if [ &quot;$a&quot; -ne &quot;$b&quot; ]</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;-gt 大于,如:if [ &quot;$a&quot; -gt &quot;$b&quot; ]</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;-ge 大于等于,如:if [ &quot;$a&quot; -ge &quot;$b&quot; ]</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;-lt 小于,如:if [ &quot;$a&quot; -lt &quot;$b&quot; ]</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;-le 小于等于,如:if [ &quot;$a&quot; -le &quot;$b&quot; ]</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp; 大于(需要双括号),如:((&quot;$a&quot; &gt; &quot;$b&quot;))</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&gt;= 大于等于(需要双括号),如:((&quot;$a&quot; &gt;= &quot;$b&quot;))</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;小数据比较可使用AWK</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;字符串比较</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;= 等于,如:if [ &quot;$a&quot; = &quot;$b&quot; ]</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;== 等于,如:if [ &quot;$a&quot; == &quot;$b&quot; ],与=等价</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp; 注意:==的功能在[[]]和[]中的行为是不同的,如下:</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp; 1 [[ $a == z* ]] # 如果$a以&quot;z&quot;开头(模式匹配)那么将为true</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp; 2 [[ $a == &quot;z*&quot; ]] # 如果$a等于z*(字符匹配),那么结果为true</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp; 3</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp; 4 [ $a == z* ] # File globbing 和word splitting将会发生</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp; 5 [ &quot;$a&quot; == &quot;z*&quot; ] # 如果$a等于z*(字符匹配),那么结果为true</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp; 一点解释,关于File globbing是一种关于文件的速记法,比如&quot;*.c&quot;就是,再如~也是.</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp; 但是file globbing并不是严格的正则表达式,虽然绝大多数情况下结构比较像.</p>
+
+<ul>
+	<li>!= 不等于,如:if [ &quot;$a&quot; != &quot;$b&quot; ]</li>
+</ul>
+
+<p>&nbsp; &nbsp; &nbsp;这个操作符将在[[]]结构中使用模式匹配.</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp; 大于,在ASCII字母顺序下.如:</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp; if [[ &quot;$a&quot; &gt; &quot;$b&quot; ]]</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp; if [ &quot;$a&quot; \&gt; &quot;$b&quot; ]</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp; 注意:在[]结构中&quot;&gt;&quot;需要被转义.</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp; 具体参考Example 26-11来查看这个操作符应用的例子.</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;-z 字符串为&quot;null&quot;.就是长度为0.</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;-n 字符串不为&quot;null&quot;</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注意:</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp; 使用-n在[]结构中测试必须要用&quot;&quot;把变量引起来.使用一个未被&quot;&quot;的字符串来使用! -z</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp; 或者就是未用&quot;&quot;引用的字符串本身,放到[]结构中。虽然一般情况下可</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp; 以工作,但这是不安全的.习惯于使用&quot;&quot;来测试字符串是一种好习惯.</p>
+
+<p>if判断式<br />
+if [ 条件判断一 ] &amp;&amp; (||) [ 条件判断二 ]; then<br />
+elif [ 条件判断三 ] &amp;&amp; (||) [ 条件判断四 ]; then<br />
+else<br />
+&nbsp; &nbsp;执行第三段內容程式<br />
+fi</p>
+
+<p>例如：</p>
+
+<pre>
+root@Bizbox:~# a=0
+root@Bizbox:~# b=0
+root@Bizbox:~# c=5         
+root@Bizbox:~# if [ $a = 0 -a $b = 0 ]&amp;&amp;[ $c != 0 ]; then
+&gt; echo success
+&gt; fi
+success</pre>
+
+<p>if 使用的表达式</p>
+
+<p>Primary 意义<br />
+[ -a 文件 ] 如果文件存在为真。<br />
+[ -b 文件 ] 如果 文件 存在 而且 是一个 块-特殊 文件为真。<br />
+[ -c 文件 ] 为真 如果 文件 存在 而且 是一个 字-特殊 文件。</p>
+
+<p>&nbsp;</p>
+
+<p>[ -d 文件 ] 为真 如果 文件 存在 而且 是一个 目录。<br />
+[ -e 文件 ] 为真 如果 文件 存在。<br />
+[ -f 文件 ] 为真 如果 文件 存在 而且 是一个 普通 文件。<br />
+[ -g 文件 ] 为真 如果 文件 存在 而且 已经设置了他的 SGID 位。<br />
+[ -h 文件 ] 为真 如果 文件 存在 而且 是一个 符号连接。<br />
+[ -k 文件 ] 为真 如果 文件 存在 而且 他的粘住位已经设置。<br />
+[ -p 文件 ] 为真 如果 文件 存在 而且 是一个 已经命名的管道 (F 如果O)。<br />
+[ -r 文件 ] 为真 如果 文件 存在 而且 是可读的。<br />
+[ -s 文件 ] 为真 如果 文件 存在 而且 比零字节大。<br />
+[ -t FD ] 为真 如果 文件 文件描述符已经打开 而且 指向一个终端。<br />
+[ -u 文件 ] 为真 如果 文件 存在 而且 已经设置了他的 SUID (set user ID)位。<br />
+[ -w 文件 ] 为真 如果 文件 为真 如果 文件 存在 而且 是可写的。<br />
+[ -x 文件 ] 为真 如果 文件 存在 而且 是可执行的。<br />
+[ -O 文件 ] 为真 如果 文件 存在 而且 属于有效用户ID。<br />
+[ -G 文件 ] 为真 如果 文件 存在 而且 属于有效组ID。<br />
+[ -L 文件 ] 为真 如果 文件 存在 而且 是一个 符号连接。<br />
+[ -N 文件 ] 为真 如果 文件 存在 而且 has been mod 如果ied since it was last read。<br />
+[ -S 文件 ] 为真 如果 文件 存在 而且 是一个 socket。<br />
+[ 文件1 -nt 文件2 ] 为真 如果 文件1 has been changed more recently than 文件2, or 如果<br />
+文件1 存在 而且<br />
+文件2 does not。<br />
+[ 文件1 -ot 文件2 ] 为真 如果 文件1 比 文件2 旧, 或者 文件2 存在而且 文件1 不存在。<br />
+[ 文件1 -ef 文件2 ] 为真 如果 文件1 而且 文件2 refer to the same device 而且 inode<br />
+numbers。<br />
+[ -o 选项名 ] 为真 如果 shell 选项 &quot;选项名&quot; 开启。<br />
+[ -z STRING ] 为真 如果 &quot;STRING&quot;的长度是零。<br />
+[ -n STRING ] 或者 [ STRING ] 为真 &quot;STRING&quot;的长度是非零值。<br />
+[ STRING1 == STRING2 ] 如果两个字符串相等为真。 &quot;=&quot; may be used instead of &quot;==&quot; for<br />
+strict POSIX compliance。<br />
+[ STRING1 != STRING2 ] 为真 如果 两两个字符串不相等。<br />
+[ STRING1 &lt; STRING2 ] 为真 如果 &quot;STRING1&quot; sorts before &quot;STRING2&quot; lexicographically in the<br />
+current locale。<br />
+[ STRING1 &gt; STRING2 ] 为真 如果 &quot;STRING1&quot; sorts after &quot;STRING2&quot; lexicographically in the<br />
+current locale。<br />
+[ ARG1 OP ARG2 ]<br />
+&quot;OP&quot; 是 -eq, -ne, -lt, -le, -gt or -ge 其中一个。 These arithmetic binary operators<br />
+return 为真 如果 &quot;ARG1&quot; is equal to, not equal to, less than, less than or equal to, greater<br />
+than, or greater than or equal to &quot;ARG2&quot;, respectively。 &quot;ARG1&quot; 而且 &quot;ARG2&quot; are<br />
+integers。</p>
+
+<h3>表达式组合</h3>
+
+<p>[ ! EXPR ] 如果EXPR 为假则为真。<br />
+[ ( EXPR ) ] 返回EXPR 的值。 这样可以用来忽略正常的操作符优先级。</p>
+
+<p>[ 表达式1 -a 表达式2 ] 如果表达式1 而且表达式2 同时为真则为真 。<br />
+[ 表达式1 -o 表达式2 ] 如果表达式1 或者表达式2 其中之一为真则为真。</p>
+
+<h3>Debug bash script</h3>
+
+<p>调试全部脚本</p>
+
+<p>当一些事情不能按照计划进行，你需要确定到底是什么导致了脚本运行失败。Bash提供了大量的调试特性。最通常的做法是使用&nbsp;-x&nbsp;选项来启动子shell，这将让整个脚本在调试模式下进行。每个命令和他附加参数的信息会在执行之前被展开并且送到标准输出打印。</p>
+
+<pre>
+$ bash -x script1.sh</pre>
+
+<p>调试部分脚本</p>
+
+<p>使用bash内建命令&nbsp;set&nbsp;可以让那些确定没有错误的部分以正常模式运行，而只对有错误的部分显示其debug信息。比如我们不确定在&nbsp;commented-script1.sh&nbsp;里面&nbsp;w&nbsp;命令会做些什么，那么我们可以把它象这样包含起来：</p>
+
+<pre>
+set -x			# activate debugging from here
+w
+set +x			# stop debugging from here</pre>
+
+<h3>The Set Builtin</h3>
+
+<p>2013-08-16 08:30 Friday</p>
+
+<p>http://docs.phonegap.com/en/edge/guide_cli_index.md.html#The%20Command-line%20Interface</p>
+
+<p>This builtin is so complicated that it deserves its own section.&nbsp;<code>set</code>&nbsp;allows you to change the values of shell options and set the positional parameters, or to display the names and values of shell variables.</p>
+
+<p><code>set</code></p>
+
+<pre>
+set [--abefhkmnptuvxBCEHPT] [-o <var>option-name</var>] [<var>argument</var> &hellip;]
+set [+abefhkmnptuvxBCEHPT] [+o <var>option-name</var>] [<var>argument</var> &hellip;]
+</pre>
+
+<p>If no options or arguments are supplied,&nbsp;<code>set</code>&nbsp;displays the names and values of all shell variables and functions, sorted according to the current locale, in a format that may be reused as input for setting or resetting the currently-set variables. Read-only variables cannot be reset. In&nbsp;<small>POSIX</small>&nbsp;mode, only shell variables are listed.</p>
+
+<p>When options are supplied, they set or unset shell attributes. Options, if specified, have the following meanings:</p>
+
+<p><code>-a</code></p>
+
+<p>Mark variables and function which are modified or created for export to the environment of subsequent commands.</p>
+
+<p><code>-b</code></p>
+
+<p>Cause the status of terminated background jobs to be reported immediately, rather than before printing the next primary prompt.</p>
+
+<p><code>-e</code></p>
+
+<p>Exit immediately if a pipeline (see&nbsp;<a href="http://www.gnu.org/software/bash/manual/bash.html#Pipelines">Pipelines</a>), which may consist of a single simple command (see&nbsp;<a href="http://www.gnu.org/software/bash/manual/bash.html#Simple-Commands">Simple Commands</a>), a subshell command enclosed in parentheses (see&nbsp;<a href="http://www.gnu.org/software/bash/manual/bash.html#Command-Grouping">Command Grouping</a>), or one of the commands executed as part of a command list enclosed by braces (see&nbsp;<a href="http://www.gnu.org/software/bash/manual/bash.html#Command-Grouping">Command Grouping</a>) returns a non-zero status. The shell does not exit if the command that fails is part of the command list immediately following a&nbsp;<code>while</code>&nbsp;or&nbsp;<code>until</code>&nbsp;keyword, part of the test in an&nbsp;<code>if</code>statement, part of any command executed in a&nbsp;<code>&amp;&amp;</code>&nbsp;or&nbsp;<code>||</code>&nbsp;list except the command following the final&nbsp;<code>&amp;&amp;</code>&nbsp;or&nbsp;<code>||</code>, any command in a pipeline but the last, or if the command&rsquo;s return status is being inverted with&nbsp;<code>!</code>. A trap on&nbsp;<code>ERR</code>, if set, is executed before the shell exits.</p>
+
+<p>This option applies to the shell environment and each subshell environment separately (see&nbsp;<a href="http://www.gnu.org/software/bash/manual/bash.html#Command-Execution-Environment">Command Execution Environment</a>), and may cause subshells to exit before executing all the commands in the subshell.</p>
+
+<p><code>-f</code></p>
+
+<p>Disable filename expansion (globbing).</p>
+
+<p><code>-h</code></p>
+
+<p>Locate and remember (hash) commands as they are looked up for execution. This option is enabled by default.</p>
+
+<p><code>-k</code></p>
+
+<p>All arguments in the form of assignment statements are placed in the environment for a command, not just those that precede the command name.</p>
+
+<p><code>-m</code></p>
+
+<p>Job control is enabled (see&nbsp;<a href="http://www.gnu.org/software/bash/manual/bash.html#Job-Control">Job Control</a>).</p>
+
+<p><code>-n</code></p>
+
+<p>Read commands but do not execute them; this may be used to check a script for syntax errors. This option is ignored by interactive shells.</p>
+
+<p><code>-o&nbsp;<var>option-name</var></code></p>
+
+<p>Set the option corresponding to&nbsp;<var>option-name</var>:</p>
+
+<p><code>allexport</code></p>
+
+<p>Same as&nbsp;<code>-a</code>.</p>
+
+<p><code>braceexpand</code></p>
+
+<p>Same as&nbsp;<code>-B</code>.</p>
+
+<p><code>emacs</code></p>
+
+<p>Use an&nbsp;<code>emacs</code>-style line editing interface (see&nbsp;<a href="http://www.gnu.org/software/bash/manual/bash.html#Command-Line-Editing">Command Line Editing</a>). This also affects the editing interface used for&nbsp;<code>read -e</code>.</p>
+
+<p><code>errexit</code></p>
+
+<p>Same as&nbsp;<code>-e</code>.</p>
+
+<p><code>errtrace</code></p>
+
+<p>Same as&nbsp;<code>-E</code>.</p>
+
+<p><code>functrace</code></p>
+
+<p>Same as&nbsp;<code>-T</code>.</p>
+
+<p><code>hashall</code></p>
+
+<p>Same as&nbsp;<code>-h</code>.</p>
+
+<p><code>histexpand</code></p>
+
+<p>Same as&nbsp;<code>-H</code>.</p>
+
+<p><code>history</code></p>
+
+<p>Enable command history, as described in&nbsp;<a href="http://www.gnu.org/software/bash/manual/bash.html#Bash-History-Facilities">Bash History Facilities</a>. This option is on by default in interactive shells.</p>
+
+<p><code>ignoreeof</code></p>
+
+<p>An interactive shell will not exit upon reading EOF.</p>
+
+<p><code>keyword</code></p>
+
+<p>Same as&nbsp;<code>-k</code>.</p>
+
+<p><code>monitor</code></p>
+
+<p>Same as&nbsp;<code>-m</code>.</p>
+
+<p><code>noclobber</code></p>
+
+<p>Same as&nbsp;<code>-C</code>.</p>
+
+<p><code>noexec</code></p>
+
+<p>Same as&nbsp;<code>-n</code>.</p>
+
+<p><code>noglob</code></p>
+
+<p>Same as&nbsp;<code>-f</code>.</p>
+
+<p><code>nolog</code></p>
+
+<p>Currently ignored.</p>
+
+<p><code>notify</code></p>
+
+<p>Same as&nbsp;<code>-b</code>.</p>
+
+<p><code>nounset</code></p>
+
+<p>Same as&nbsp;<code>-u</code>.</p>
+
+<p><code>onecmd</code></p>
+
+<p>Same as&nbsp;<code>-t</code>.</p>
+
+<p><code>physical</code></p>
+
+<p>Same as&nbsp;<code>-P</code>.</p>
+
+<p><code>pipefail</code></p>
+
+<p>If set, the return value of a pipeline is the value of the last (rightmost) command to exit with a non-zero status, or zero if all commands in the pipeline exit successfully. This option is disabled by default.</p>
+
+<p><code>posix</code></p>
+
+<p>Change the behavior of Bash where the default operation differs from the&nbsp;<small>POSIX</small>&nbsp;standard to match the standard (see&nbsp;<a href="http://www.gnu.org/software/bash/manual/bash.html#Bash-POSIX-Mode">Bash POSIX Mode</a>). This is intended to make Bash behave as a strict superset of that standard.</p>
+
+<p><code>privileged</code></p>
+
+<p>Same as&nbsp;<code>-p</code>.</p>
+
+<p><code>verbose</code></p>
+
+<p>Same as&nbsp;<code>-v</code>.</p>
+
+<p><code>vi</code></p>
+
+<p>Use a&nbsp;<code>vi</code>-style line editing interface. This also affects the editing interface used for&nbsp;<code>read -e</code>.</p>
+
+<p><code>xtrace</code></p>
+
+<p>Same as&nbsp;<code>-x</code>.</p>
+
+<p><code>-p</code></p>
+
+<p>Turn on privileged mode. In this mode, the&nbsp;<code>$BASH_ENV</code>&nbsp;and&nbsp;<code>$ENV</code>&nbsp;files are not processed, shell functions are not inherited from the environment, and the&nbsp;<code>SHELLOPTS</code>,<code>BASHOPTS</code>,&nbsp;<code>CDPATH</code>&nbsp;and&nbsp;<code>GLOBIGNORE</code>&nbsp;variables, if they appear in the environment, are ignored. If the shell is started with the effective user (group) id not equal to the real user (group) id, and the&nbsp;<code>-p</code>&nbsp;option is not supplied, these actions are taken and the effective user id is set to the real user id. If the&nbsp;<code>-p</code>&nbsp;option is supplied at startup, the effective user id is not reset. Turning this option off causes the effective user and group ids to be set to the real user and group ids.</p>
+
+<p><code>-t</code></p>
+
+<p>Exit after reading and executing one command.</p>
+
+<p><code>-u</code></p>
+
+<p>Treat unset variables and parameters other than the special parameters &lsquo;<samp>@</samp>&rsquo; or &lsquo;<samp>*</samp>&rsquo; as an error when performing parameter expansion. An error message will be written to the standard error, and a non-interactive shell will exit.</p>
+
+<p><code>-v</code></p>
+
+<p>Print shell input lines as they are read.</p>
+
+<p><code>-x</code></p>
+
+<p>Print a trace of simple commands,&nbsp;<code>for</code>&nbsp;commands,&nbsp;<code>case</code>&nbsp;commands,&nbsp;<code>select</code>&nbsp;commands, and arithmetic&nbsp;<code>for</code>&nbsp;commands and their arguments or associated word lists after they are expanded and before they are executed. The value of the&nbsp;<code>PS4</code>&nbsp;variable is expanded and the resultant value is printed before the command and its expanded arguments.</p>
+
+<p><code>-B</code></p>
+
+<p>The shell will perform brace expansion (see&nbsp;<a href="http://www.gnu.org/software/bash/manual/bash.html#Brace-Expansion">Brace Expansion</a>). This option is on by default.</p>
+
+<p><code>-C</code></p>
+
+<p>Prevent output redirection using &lsquo;<samp>&gt;</samp>&rsquo;, &lsquo;<samp>&gt;&amp;</samp>&rsquo;, and &lsquo;<samp>&lt;&gt;</samp>&rsquo; from overwriting existing files.</p>
+
+<p><code>-E</code></p>
+
+<p>If set, any trap on&nbsp;<code>ERR</code>&nbsp;is inherited by shell functions, command substitutions, and commands executed in a subshell environment. The&nbsp;<code>ERR</code>&nbsp;trap is normally not inherited in such cases.</p>
+
+<p><code>-H</code></p>
+
+<p>Enable &lsquo;<samp>!</samp>&rsquo; style history substitution (see&nbsp;<a href="http://www.gnu.org/software/bash/manual/bash.html#History-Interaction">History Interaction</a>). This option is on by default for interactive shells.</p>
+
+<p><code>-P</code></p>
+
+<p>If set, do not follow symbolic links when performing commands such as&nbsp;<code>cd</code>&nbsp;which change the current directory. The physical directory is used instead. By default, Bash follows the logical chain of directories when performing commands which change the current directory.</p>
+
+<p>For example, if&nbsp;<samp>/usr/sys</samp>&nbsp;is a symbolic link to&nbsp;<samp>/usr/local/sys</samp>&nbsp;then:</p>
+
+<pre>
+$ cd /usr/sys; echo $PWD
+/usr/sys
+$ cd ..; pwd
+/usr
+</pre>
+
+<p>If&nbsp;<code>set -P</code>&nbsp;is on, then:</p>
+
+<pre>
+$ cd /usr/sys; echo $PWD
+/usr/local/sys
+$ cd ..; pwd
+/usr/local
+</pre>
+
+<p><code>-T</code></p>
+
+<p>If set, any trap on&nbsp;<code>DEBUG</code>&nbsp;and&nbsp;<code>RETURN</code>&nbsp;are inherited by shell functions, command substitutions, and commands executed in a subshell environment. The&nbsp;<code>DEBUG</code>&nbsp;and<code>RETURN</code>&nbsp;traps are normally not inherited in such cases.</p>
+
+<p><code>--</code></p>
+
+<p>If no arguments follow this option, then the positional parameters are unset. Otherwise, the positional parameters are set to the&nbsp;<var>arguments</var>, even if some of them begin with a &lsquo;<samp>-</samp>&rsquo;.</p>
+
+<p><code>-</code></p>
+
+<p>Signal the end of options, cause all remaining&nbsp;<var>arguments</var>&nbsp;to be assigned to the positional parameters. The&nbsp;<samp>-x</samp>&nbsp;and&nbsp;<samp>-v</samp>&nbsp;options are turned off. If there are no arguments, the positional parameters remain unchanged.</p>
+
+<p>Using &lsquo;<samp>+</samp>&rsquo; rather than &lsquo;<samp>-</samp>&rsquo; causes these options to be turned off. The options can also be used upon invocation of the shell. The current set of options may be found in&nbsp;<code>$-</code>.</p>
+
+<p>The remaining N&nbsp;<var>arguments</var>&nbsp;are positional parameters and are assigned, in order, to&nbsp;<code>$1</code>,&nbsp;<code>$2</code>, &hellip;&nbsp;<code>$N</code>. The special parameter&nbsp;<code>#</code>&nbsp;is set to N.</p>
+
+<p>The return status is always zero unless an invalid option is supplied.</p>
