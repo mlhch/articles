@@ -1,0 +1,56 @@
+<h1>GNU Netcat</h1>
+
+<p>2014-02-04 23:02 Tuesday</p>
+
+<p><a href="http://netcat.sourceforge.net/" target="_blank">http://netcat.sourceforge.net/</a></p>
+
+<p>Releases Status</p>
+
+<p><span style="line-height:1.6em">Current Version:&nbsp;</span><a href="http://sourceforge.net/project/showfiles.php?group_id=52204&amp;release_id=209191" style="line-height: 1.6em;">Netcat 0.7.1</a><br />
+<span style="line-height:1.6em">Released on:&nbsp;</span><span style="line-height:1.6em">11 Jan 2004</span></p>
+
+<h2>What is Netcat?</h2>
+
+<p>Netcat is a featured networking utility which reads and writes data across network connections, using the TCP/IP protocol.</p>
+
+<p>It is designed to be a reliable &quot;back-end&quot; tool that can be used directly or easily driven by other programs and scripts. At the same time, it is a feature-rich network debugging and exploration tool, since it can create almost any kind of connection you would need and has several interesting built-in capabilities.</p>
+
+<p>It provides access to the following main features:</p>
+
+<ul>
+	<li>Outbound and inbound connections, TCP or UDP, to or from any ports.</li>
+	<li>Featured&nbsp;tunneling mode&nbsp;which allows also special tunneling such as UDP to TCP, with the possibility of specifying all network parameters (source port/interface, listening port/interface, and the remote host allowed to connect to the tunnel.</li>
+	<li>Built-in port-scanning capabilities, with randomizer.</li>
+	<li>Advanced usage options, such as buffered send-mode (one line every N seconds), and hexdump (to stderr or to a specified file) of trasmitted and received data.</li>
+	<li>Optional RFC854 telnet codes parser and responder.</li>
+</ul>
+
+<p>The GNU Netcat is distributed freely under the GNU General Public License (GPL).&nbsp; &nbsp;</p>
+
+<h2>Project Goals</h2>
+
+<p>Although the project development is marked as beta, GNU Netcat is already enough stable for everyday use.</p>
+
+<p>Goals of this project are&nbsp;full compatibility&nbsp;with the original nc 1.10 that is widely used, and&nbsp;portability. GNU Netcat should compile and work without changes on the following hosts:</p>
+
+<ul>
+	<li>Linux (test host: alphaev67-unknown-linux-gnu)</li>
+	<li>FreeBSD (test host: i386-unknown-freebsd4.9)</li>
+	<li>NetBSD (test host: i386-unknown-netbsdelf1.6.1)</li>
+	<li>SunOS/Solaris (test host: sparc-sun-solaris2.9)</li>
+	<li>MacOS X (test host: powerpc-apple-darwin6.8)</li>
+</ul>
+
+<p>Other operating systems could be supported with minor source modifications, since the code has been written following the GNU coding standard conventions.<br />
+If you find a bug or you want to report a successfull build on another OS, use the&nbsp;<a href="http://sourceforge.net/tracker/?atid=466046&amp;group_id=52204&amp;func=browse">bug tracking system</a>.</p>
+
+<p>Soon the project will split releases between &quot;stable&quot; releases and &quot;development&quot; releases to improve development speed and the introduction of new features without requiring too much testing.</p>
+
+<p>For further information, see the README and ChangeLog files in the package.&nbsp;<br />
+If you are courageous enough to try the newest development version or you want to contribute patches, you may want to check out the version in the&nbsp;<a href="http://netcat.sourceforge.net/download.php#cvs">CVS repository</a>.</p>
+
+<h2>参考文章</h2>
+
+<p>http://mylinuxbook.com/linux-netcat-command/</p>
+
+<p>http://www.oschina.net/translate/linux-netcat-command</p>
