@@ -67,6 +67,32 @@ These features include:</p>
 	<li>--with-fpm-group&nbsp;- 设置 FPM 运行时的用户组（默认 - nobody）</li>
 </ul>
 
+<h2>php-fpm on Mac OS</h2>
+
+<p>2014-02-03 21;46 Monday</p>
+
+<p>brew install php54 or php55 后, php-fpm 就可用了，但不像 CentOS 上有 service php-fpm start/stop/restart 等可用。尝试直接运行 php-fpm 后提示没有 /etc/php-fpm.conf：</p>
+
+<pre>
+$ php-fpm
+[03-Feb-2014 21:50:07] ERROR: failed to open configuration file &#39;/private/etc/php-fpm.conf&#39;: No such file or directory</pre>
+
+<p>看到文件 /etc/php-fpm.conf.default 存在，所以直接拷贝并重命名为 /etc/php-fpm.conf 即可。</p>
+
+<p>接着又提示日志文件不存在，不可写，所以手动创建如下文件并设置可写权限。</p>
+
+<pre>
+/usr/var/log/php-fpm.log</pre>
+
+<p>加 sudo 执行后，如下通知就不会再提示：</p>
+
+<pre>
+$ php-fpm
+[03-Feb-2014 21:54:01] NOTICE: [pool www] &#39;user&#39; directive is ignored when FPM is not running as root
+[03-Feb-2014 21:54:01] NOTICE: [pool www] &#39;group&#39; directive is ignored when FPM is not running as root</pre>
+
+<p>这就好了。</p>
+
 <h2>yum install php-fpm</h2>
 
 <p>编辑文件 /etc/php-fpm.d/www.conf 可进行端口配置等等。</p>
@@ -133,7 +159,7 @@ group = nginx</pre>
 
 	<p>因为是多进程，所以比CGI多线程消耗更多的服务器内存，PHP-CGI解释器每进程消耗7至25兆内存，将这个数字乘以50或100就是很大的内存数。</p>
 
-	<p><span style="line-height:1.6em">Nginx 0.8.46+PHP 5.2.14(FastCGI)服务器在3万并发连接下，开启的10个Nginx进程消耗150M内存（15M*10=150M），开启的64个php-cgi进程消耗1280M内存（20M*64=1280M），加上系统自身消耗的内存，总共消耗不到2GB内存。如果服务器内存较小，完全可以只开启25个php-cgi进程，这样php-cgi消耗的总内存数才500M。</span></p>
+	<p>Nginx 0.8.46+PHP 5.2.14(FastCGI)服务器在3万并发连接下，开启的10个Nginx进程消耗150M内存（15M*10=150M），开启的64个php-cgi进程消耗1280M内存（20M*64=1280M），加上系统自身消耗的内存，总共消耗不到2GB内存。如果服务器内存较小，完全可以只开启25个php-cgi进程，这样php-cgi消耗的总内存数才500M。</p>
 	</li>
 	<li>
 	<p>什么是PHP-CGI</p>
@@ -152,15 +178,15 @@ php-cgi -b 127.0.0.1:9000</pre>
 	<li>
 	<p>什么是PHP-FPM</p>
 
-	<p><span style="line-height:1.6em">PHP-FPM是一个PHP FastCGI管理器，是只用于PHP的,可以在 http://php-fpm.org/download下载得到.</span></p>
+	<p>PHP-FPM是一个PHP FastCGI管理器，是只用于PHP的,可以在 http://php-fpm.org/download下载得到.</p>
 
-	<p><span style="line-height:1.6em">PHP-FPM其实是PHP源代码的一个补丁，旨在将FastCGI进程管理整合进PHP包中。必须将它patch到你的PHP源代码中，在编译安装PHP后才可以使用。</span></p>
+	<p>PHP-FPM其实是PHP源代码的一个补丁，旨在将FastCGI进程管理整合进PHP包中。必须将它patch到你的PHP源代码中，在编译安装PHP后才可以使用。</p>
 
-	<p><span style="line-height:1.6em">现在我们可以在最新的PHP 5.3.2的源码树里下载得到直接整合了PHP-FPM的分支，据说下个版本会融合进PHP的主分支去。相对Spawn-FCGI，PHP-FPM在CPU和内存方面的控制都更胜一筹，而且前者很容易崩溃，必须用crontab进行监控，而PHP-FPM则没有这种烦恼。</span></p>
+	<p>现在我们可以在最新的PHP 5.3.2的源码树里下载得到直接整合了PHP-FPM的分支，据说下个版本会融合进PHP的主分支去。相对Spawn-FCGI，PHP-FPM在CPU和内存方面的控制都更胜一筹，而且前者很容易崩溃，必须用crontab进行监控，而PHP-FPM则没有这种烦恼。</p>
 
-	<p><span style="line-height:1.6em">PHP5.3.3已经集成php-fpm了，不再是第三方的包了。PHP-FPM提供了更好的PHP进程管理方式，可以有效控制内存和进程、可以平滑重载PHP配置，比spawn-fcgi具有更多有点，所以被PHP官方收录了。在./configure的时候带 &ndash;enable-fpm参数即可开启PHP-FPM。</span></p>
+	<p>PHP5.3.3已经集成php-fpm了，不再是第三方的包了。PHP-FPM提供了更好的PHP进程管理方式，可以有效控制内存和进程、可以平滑重载PHP配置，比spawn-fcgi具有更多有点，所以被PHP官方收录了。在./configure的时候带 &ndash;enable-fpm参数即可开启PHP-FPM。</p>
 
-	<p><span style="line-height:1.6em">使用PHP-FPM来控制PHP-CGI的FastCGI进程</span></p>
+	<p>使用PHP-FPM来控制PHP-CGI的FastCGI进程</p>
 
 	<pre>
 /usr/local/php/sbin/php-fpm{start|stop|quit|restart|reload|logrotate}
@@ -173,46 +199,46 @@ php-cgi -b 127.0.0.1:9000</pre>
 --logrotate 重新启用log文件</pre>
 	</li>
 	<li>
-	<p><span style="background-color:rgb(255, 255, 255); font-family:sans-serif,arial,verdana,trebuchet ms; line-height:1.6em">什么是Spawn-FCGI</span></p>
+	<p>什么是Spawn-FCGI</p>
 
-	<p><span style="background-color:rgb(255, 255, 255); font-family:sans-serif,arial,verdana,trebuchet ms; line-height:1.6em">Spawn-FCGI是一个通用的FastCGI管理服务器，它是lighttpd中的一部份，很多人都用Lighttpd的Spawn-FCGI进行FastCGI模式下的管理工作，不过有不少缺点。而PHP-FPM的出现多少缓解了一些问题，但PHP-FPM有个缺点就是要重新编译，这对于一些已经运行的环境可能有不小的风险(refer)，在php 5.3.3中可以直接使用PHP-FPM了。</span></p>
+	<p>Spawn-FCGI是一个通用的FastCGI管理服务器，它是lighttpd中的一部份，很多人都用Lighttpd的Spawn-FCGI进行FastCGI模式下的管理工作，不过有不少缺点。而PHP-FPM的出现多少缓解了一些问题，但PHP-FPM有个缺点就是要重新编译，这对于一些已经运行的环境可能有不小的风险(refer)，在php 5.3.3中可以直接使用PHP-FPM了。</p>
 
-	<p><span style="background-color:rgb(255, 255, 255); font-family:sans-serif,arial,verdana,trebuchet ms; line-height:1.6em">Spawn-FCGI目前已经独成为一个项目，更加稳定一些，也给很多Web 站点的配置带来便利。已经有不少站点将它与nginx搭配来解决动态网页。</span></p>
+	<p>Spawn-FCGI目前已经独成为一个项目，更加稳定一些，也给很多Web 站点的配置带来便利。已经有不少站点将它与nginx搭配来解决动态网页。</p>
 
-	<p><span style="background-color:rgb(255, 255, 255); font-family:sans-serif,arial,verdana,trebuchet ms; line-height:1.6em">最新的lighttpd也没有包含这一块了(http://www.lighttpd.net/search?q=Spawn-FCGI)，但可以在以前版本中找到它。在lighttpd-1.4.15版本中就包含了(http://www.lighttpd.net/download/lighttpd-1.4.15.tar.gz)</span></p>
+	<p>最新的lighttpd也没有包含这一块了(http://www.lighttpd.net/search?q=Spawn-FCGI)，但可以在以前版本中找到它。在lighttpd-1.4.15版本中就包含了(http://www.lighttpd.net/download/lighttpd-1.4.15.tar.gz)</p>
 
-	<p><span style="background-color:rgb(255, 255, 255); font-family:sans-serif,arial,verdana,trebuchet ms; line-height:1.6em">目前Spawn-FCGI的下载地址是http://redmine.lighttpd.net/projects/spawn-fcgi，最新版本是http://www.lighttpd.net/download/spawn-fcgi-1.6.3.tar.gz</span></p>
+	<p>目前Spawn-FCGI的下载地址是http://redmine.lighttpd.net/projects/spawn-fcgi，最新版本是http://www.lighttpd.net/download/spawn-fcgi-1.6.3.tar.gz</p>
 
-	<p><span style="background-color:rgb(255, 255, 255); font-family:sans-serif,arial,verdana,trebuchet ms; line-height:1.6em">注：最新的Spawn-FCGI可以到lighttpd.net网站搜索&ldquo;Spawn-FCGI&rdquo;找到它的最新版本发布地址。下面我们就可以使用Spawn-FCGI来控制php-CGI的FastCGI进程了</span></p>
+	<p>注：最新的Spawn-FCGI可以到lighttpd.net网站搜索&ldquo;Spawn-FCGI&rdquo;找到它的最新版本发布地址。下面我们就可以使用Spawn-FCGI来控制php-CGI的FastCGI进程了</p>
 
 	<pre>
 /usr/local/bin/spawn-fcgi -a 127.0.0.1 -p 9000 -C 5 -u www-data -g www-data -f /usr/bin/php-CGI
 </pre>
 
-	<p><span style="background-color:rgb(255, 255, 255); font-family:sans-serif,arial,verdana,trebuchet ms; line-height:1.6em">参数含义如下:</span></p>
+	<p>参数含义如下:</p>
 
-	<p><span style="background-color:rgb(255, 255, 255); font-family:sans-serif,arial,verdana,trebuchet ms; line-height:1.6em">-f&nbsp;指定调用FastCGI的进程的执行程序位置，根据系统上所装的PHP的情况具体设置<br />
+	<p>-f&nbsp;指定调用FastCGI的进程的执行程序位置，根据系统上所装的PHP的情况具体设置<br />
 	-a&nbsp;绑定到地址addr<br />
 	-p&nbsp;绑定到端口port<br />
 	-s&nbsp;绑定到unix socket的路径path<br />
 	-C&nbsp;指定产生的FastCGI的进程数，默认为5(仅用于PHP)<br />
 	-P&nbsp;指定产生的进程的PID文件路径<br />
-	-u和-g FastCGI使用什么身份(-u 用户 -g 用户组)运行，Ubuntu下可以使用www-data，其他的根据情况配置，如nobody、apache等</span></p>
+	-u和-g FastCGI使用什么身份(-u 用户 -g 用户组)运行，Ubuntu下可以使用www-data，其他的根据情况配置，如nobody、apache等</p>
 	</li>
 	<li>
-	<p><span style="background-color:rgb(255, 255, 255); font-family:sans-serif,arial,verdana,trebuchet ms; line-height:1.6em">PHP-FPM与spawn-CGI对比测试</span></p>
+	<p>PHP-FPM与spawn-CGI对比测试</p>
 
-	<p><span style="background-color:rgb(255, 255, 255); font-family:sans-serif,arial,verdana,trebuchet ms; line-height:1.6em">PHP-FPM的使用非常方便,配置都是在PHP-FPM.ini的文件内，而启动、重启都可以从php/sbin/PHP-FPM中进行。更方便的是修改php.ini后可以直接使用PHP-FPM reload进行加载，无需杀掉进程就可以完成php.ini的修改加载</span></p>
+	<p>PHP-FPM的使用非常方便,配置都是在PHP-FPM.ini的文件内，而启动、重启都可以从php/sbin/PHP-FPM中进行。更方便的是修改php.ini后可以直接使用PHP-FPM reload进行加载，无需杀掉进程就可以完成php.ini的修改加载</p>
 
-	<p><span style="background-color:rgb(255, 255, 255); font-family:sans-serif,arial,verdana,trebuchet ms; line-height:1.6em">结果显示使用PHP-FPM可以使php有不小的性能提升。PHP-FPM控制的进程cpu回收的速度比较慢,内存分配的很均匀。</span></p>
+	<p>结果显示使用PHP-FPM可以使php有不小的性能提升。PHP-FPM控制的进程cpu回收的速度比较慢,内存分配的很均匀。</p>
 
-	<p><span style="background-color:rgb(255, 255, 255); font-family:sans-serif,arial,verdana,trebuchet ms; line-height:1.6em">Spawn-FCGI控制的进程CPU下降的很快,而内存分配的比较不均匀。有很多进程似乎未分配到,而另外一些却占用很高。可能是由于进程任务分配的不均匀导致的.而这也导致了总体响应速度的下降。而PHP-FPM合理的分配，导致总体响应的提到以及任务的平均。</span></p>
+	<p>Spawn-FCGI控制的进程CPU下降的很快,而内存分配的比较不均匀。有很多进程似乎未分配到,而另外一些却占用很高。可能是由于进程任务分配的不均匀导致的.而这也导致了总体响应速度的下降。而PHP-FPM合理的分配，导致总体响应的提到以及任务的平均。</p>
 	</li>
 	<li>
-	<p><span style="background-color:rgb(255, 255, 255); font-family:sans-serif,arial,verdana,trebuchet ms; line-height:1.6em">PHP-FPM与Spawn-FCGI功能比较</span></p>
+	<p>PHP-FPM与Spawn-FCGI功能比较</p>
 
-	<p><span style="background-color:rgb(255, 255, 255); font-family:sans-serif,arial,verdana,trebuchet ms; line-height:1.6em">http://php-fpm.org/about/</span></p>
+	<p>http://php-fpm.org/about/</p>
 
-	<p><span style="background-color:rgb(255, 255, 255); font-family:sans-serif,arial,verdana,trebuchet ms; line-height:1.6em">PHP-FPM、Spawn-FCGI都是守护php-cgi的进程管理器。</span></p>
+	<p>PHP-FPM、Spawn-FCGI都是守护php-cgi的进程管理器。</p>
 	</li>
 </ul>
