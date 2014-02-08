@@ -1,0 +1,128 @@
+<h1>Mac and Java 7</h1>
+
+<p>2013-10-09 16:54 Wednesday</p>
+
+<p>想来想去，还是需要在 Mac 上安装 Java 7。Chrome 不能跑 Java 7 就让它不能跑吧，反正用的也不多。网上银行要用？实在不行就再改回来</p>
+
+<h2>在 Mac 上安装 Java 7</h2>
+
+<p>要在 Mac 上安装 Java，请按照以下步骤操作：</p>
+
+<p>http://www.java.com/zh_CN/download/help/mac_install.xml</p>
+
+<ol>
+	<li>下载&nbsp;jre-7u6-macosx-x64.dmg&nbsp;文件。<br />
+	在下载文件前，需查看并同意许可证协议的条款。</li>
+	<li>双击 .dmg 文件以启动它</li>
+	<li>双击程序包图标以启动安装向导</li>
+	<li>安装向导将显示 &quot;Welcome to Java 7&quot;（欢迎使用 Java 7）安装屏幕。单击&nbsp;Continue（继续）</li>
+	<li>在 &quot;Standard Install on Macintosh HD&quot;（Macintosh HD 上的标准安装）上，单击&nbsp;Install（安装）按钮</li>
+	<li>安装完成后，将显示确认屏幕。单击&nbsp;Close（关闭）完成安装过程。</li>
+</ol>
+
+<table border="1" cellspacing="1">
+	<tbody>
+		<tr>
+			<td>&nbsp;Mac OS X x64</td>
+			<td>183.35 MB&nbsp;&nbsp;</td>
+			<td><a href="http://download.oracle.com/otn-pub/java/jdk/7u40-b43/jdk-7u40-macosx-x64.dmg">&nbsp;jdk-7u40-macosx-x64.dmg</a></td>
+		</tr>
+	</tbody>
+</table>
+
+<p>安装前</p>
+
+<pre>
+$ java -version
+java version &quot;1.6.0_51&quot;
+Java(TM) SE Runtime Environment (build 1.6.0_51-b11-457-11M4509)
+Java HotSpot(TM) 64-Bit Server VM (build 20.51-b01-457, mixed mode)</pre>
+
+<pre>
+$ which java
+/usr/bin/java</pre>
+
+<pre>
+$ ll /usr/bin/java
+lrwxr-xr-x  1 root  wheel  74  8 11 14:19 /usr/bin/java -&gt; /System/Library/Frameworks/JavaVM.framework/Versions/Current/Commands/java</pre>
+
+<p>安装后</p>
+
+<pre>
+$ java -version
+java version &quot;1.7.0_40&quot;
+Java(TM) SE Runtime Environment (build 1.7.0_40-b43)
+Java HotSpot(TM) 64-Bit Server VM (build 24.0-b56, mixed mode)</pre>
+
+<pre>
+$ which java
+/usr/bin/java</pre>
+
+<pre>
+$ ll /usr/bin/java
+lrwxr-xr-x &nbsp;1 root &nbsp;wheel &nbsp;74 &nbsp;8 11 14:19 /usr/bin/java -&gt; /System/Library/Frameworks/JavaVM.framework/Versions/Current/Commands/java
+</pre>
+
+<p>2014-02-08 19:29 Saturday 今日去安钢找找姑奶和二姑</p>
+
+<p>电脑自动提醒 Java 有新版本:</p>
+
+<blockquote>
+<p>Java 7 Update 51 is now available--you have Java 7 Update 45.</p>
+</blockquote>
+
+<p>确认后开始下载，进度条显示要下载 50.8 MB。下载完后提示&ldquo;Install and Relaunch&rdquo;。</p>
+
+<p>安装后 java -version 的输出未变？</p>
+
+<h2>Verify Java Version</h2>
+
+<p>http://www.java.com/en/download/installed.jsp</p>
+
+<p>Chrome does not support Java 7. Java 7 runs only on 64-bit browsers and Chrome is a 32-bit browser.</p>
+
+<p>If you download Java 7, you will not be able to run Java content in Chrome and will need to use a 64-bit browser (such as Safari or Firefox) to run Java content within a browser. Additionally, installing Java 7 will disable the ability to use Apple Java 6 on your system.</p>
+
+<p>Chrome 不支持 Java 7。Java 7 只能在 64 位的浏览器中运行，但是 Chrome 是一个 32 位的浏览器。</p>
+
+<p>如果你下载了 Java 7，你将不能够在 Chrome 中运行 Java 的内容。你需要使用一个 64 位的浏览器，比如 Safari 或者 Firefox，来运行 Java 内容。另外，安装 Java 7 将会关闭系统上的 Apple Java 6。</p>
+
+<blockquote>
+<p>为什么在 64 位浏览器上谷歌迟迟不见行动？有网友说是因为：</p>
+
+<p>主要限制因素是，V8引擎（JavaScript引擎）仅是32位。 引用自 ：&nbsp;<a href="http://www.google.com/support/forum/p/Chrome/thread?tid=22ede708db81e6da&amp;hl=en" target="_blank">http://www.google.com/support/forum/p/Chrome/thread?tid=22ede708db81e6da&amp;hl=en</a></p>
+</blockquote>
+
+<h1>Java Preferences missing after latest OS X Java update</h1>
+
+<p><a href="http://reviews.cnet.com/8301-13727_7-57533880-263/java-preferences-missing-after-latest-os-x-java-update/" target="_blank">http://reviews.cnet.com/8301-13727_7-57533880-263/java-preferences-missing-after-latest-os-x-java-update/</a></p>
+
+<p>While the Preferences utility is missing, this may be a simple oversight on Apple&#39;s part.</p>
+
+<p>by&nbsp;<a href="http://www.cnet.com/profile/tkessler/">Topher Kessler</a>&nbsp;October 17, 2012 10:25 AM PDT</p>
+
+<p>Apple has recently released a couple of Java updates for OS X 10.6, 10.7, and 10.8 that bring its in-house supported Java runtime (Java SE 6) up to the latest version issued by Oracle. The update tackles a couple of security bugs in the runtime, but those who have installed the updates have noticed that in addition Apple has apparently removed the Java Preferences utility, which was used to configure how the Java runtime is managed in OS X.</p>
+
+<p>Apple 最近发布了一些 OS X 10.6，10.7 和 10.8 的&nbsp;Java 更新。这些更新修补了一些 Java runtime 的安全漏洞，但那些安装了更新的人明显发现 Apple 移除了 Java Preferences utility，它过去在 OS X 中被用来配置和管理 Java runtime。</p>
+
+<p>While Java Preferences is missing for those using OS X 10.7 or later, the utility is still present for those who update Java in OS X 10.6. This may seem to suggest that Apple simply overlooked including Java Preferences in the updater for OS X 10.7 and later; however, this is not the case. In fact, leaving out Java Preferences is a part of Apple&#39;s progressive move away from in-house support for Java.</p>
+
+<p>Oracle&#39;s Java System Preferences contains similar options for enabling, disabling, and otherwise configuring the installed Java runtimes.</p>
+
+<p>Oracle&#39;s Java 系统首选项含有相似的选项，用来启用，关闭和配置已安装的 Java runtimes。</p>
+
+<p>With this latest update, Apple has made some significant changes to the Java runtime. One of the first is that while the Java 2012-006 updater will install the latest version of Java SE 6, it will configure the Web plug-in to download the latest Java 7 runtime from Oracle when applets are run. This step will hopefully migrate more users to the latest developments from Oracle instead of relying on Apple for Java support.</p>
+
+<p>In addition, the various Java tools Apple includes (such as command-line tools) are configured with reference to the Java runtime with the highest version number, ensuring that Java 7 or later will be used once it is installed, regardless of any other runtimes that may be present. Since Java from Oracle has its own configuration tools and does not use Apple&#39;s Java Preferences utility, Apple has removed this utility in favor of Oracle&#39;s tools.</p>
+
+<h3>Related stories</h3>
+
+<ul>
+	<li><a href="http://reviews.cnet.com/8301-1023_3-57600156-93/googles-schmidt-calls-out-oracle-chief-over-android/">Google&#39;s Schmidt calls out Oracle chief over Android</a></li>
+	<li><a href="http://reviews.cnet.com/8301-13727_7-57583870-263/q-a-macfixit-answers/">Q&amp;A: MacFixIt Answers</a></li>
+	<li><a href="http://reviews.cnet.com/8301-1001_3-57582743-92/mozilla-look-ma-no-plug-in-for-video-apps/">Mozilla: Look ma, no plug-in for video, apps</a></li>
+</ul>
+
+<p>Unfortunately Oracle will only be supporting OS X 10.7 and later with Java 7, so Apple has left these changes to the runtime out of Java for&nbsp;<a href="http://www.cnet.com/mac-os-x-snow-leopard/">Snow Leopard</a>. Therefore, these users will have Apple&#39;s Java Preferences utility available for this and future updates to Java SE 6.</p>
+
+<p>While Apple&#39;s Java Preferences utility can be restored from a Time Machine backup and used to configure any installed runtimes, this shouldn&#39;t be necessary. In short, if you have OS X 10.7 or later and wish to configure Java after applying this update, then you&#39;ll be using Oracle&#39;s Java system preferences pane.</p>
