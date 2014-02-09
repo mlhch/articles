@@ -1,0 +1,65 @@
+<h1>jQuery Mobile Calendar</h1>
+
+<p>2012-06-11 07:51 Monday</p>
+
+<p><a href="http://dev.jtsage.com/jQM-DateBox/" target="_blank">http://dev.jtsage.com/jQM-DateBox/</a>,&nbsp;<a href="https://github.com/jtsage/jquery-mobile-datebox" target="_blank">https://github.com/jtsage/jquery-mobile-datebox</a></p>
+
+<p>2013-05-21 19:03 晚上可能轮到要浇地</p>
+
+<pre>
+$ git t
+* 2012-06-28 20:30:32 -0400 8702a83 &nbsp;(jQM-1.1.1, origin/datebox2)
+* 2012-06-23 10:31:36 -0400 983847e &nbsp;(jQM-1.1.0)
+* 2011-12-01 20:19:54 -0500 6b7a1fa &nbsp;(jQM-1.0.0)
+* 2011-11-14 19:44:46 -0500 07499b0 &nbsp;(jQM-1.0rc3)
+* 2011-11-04 19:42:31 -0400 56a4aa0 &nbsp;(jQM-1.0rc2)
+* 2011-10-14 16:40:31 -0400 14b51a9 &nbsp;(jQM-1.0rc1)
+* 2011-07-02 12:08:21 -0400 984c077 &nbsp;(origin/oldRegExpMethod)
+* 2011-07-02 11:57:12 -0400 674f535 &nbsp;(jQM-1.0b1)
+* 2011-06-11 14:30:34 -0400 137af80 &nbsp;(jQM-1.0a4.1)
+* 2011-04-07 16:02:54 -0400 de2f2f8 &nbsp;(jQM-1.0a4, jQM-1.0a3)
+* 2011-02-26 18:45:01 -0500 77fadea&nbsp;</pre>
+
+<h2>下载</h2>
+
+<ol>
+	<li>Download &amp; Use -&gt;&nbsp;http://dev.jtsage.com/jQM-DateBox/demos/install.html</li>
+	<li>Download Links - &quot;Stable&quot; Version</li>
+	<li><a href="http://dev.jtsage.com/cdn/datebox/1.1.0/jqm-datebox-1.1.0.core.js">Core Methods - Required</a>&nbsp;[Uncompressed, 36k] -&gt;&nbsp;http://dev.jtsage.com/cdn/datebox/1.1.0/jqm-datebox-1.1.0.core.js</li>
+	<li><a href="http://dev.jtsage.com/cdn/datebox/1.1.0/jqm-datebox-1.1.0.mode.calbox.js">CalBox Mode</a>&nbsp;[Uncompressed, 11k] -&gt;&nbsp;http://dev.jtsage.com/cdn/datebox/1.1.0/jqm-datebox-1.1.0.mode.calbox.js</li>
+	<li><a href="http://dev.jtsage.com/cdn/datebox/1.1.0/jqm-datebox-1.1.0.css">CSS - Required</a>&nbsp;[Uncompressed, 6.1k] -&gt;&nbsp;http://dev.jtsage.com/cdn/datebox/1.1.0/jqm-datebox-1.1.0.css</li>
+</ol>
+
+<h2>安装使用</h2>
+
+<pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&nbsp; &lt;title&gt;My Page&lt;/title&gt;
+&nbsp; &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+&nbsp;
+&nbsp; &lt;link rel=&quot;stylesheet&quot; href=&quot;jquery.mobile-1.1.0.css&quot; /&gt;
+&nbsp; &lt;script src=&quot;jquery-1.7.2.js&quot;&gt;&lt;/script&gt;
+&nbsp; &lt;script src=&quot;jquery.mobile-1.1.0.js&quot;&gt;&lt;/script&gt;
+
+&nbsp; &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;http://dev.jtsage.com/cdn/datebox/latest/jqm-datebox.min.css&quot; /&gt;
+
+&nbsp; &lt;!-- Optional Mousewheel support: http://brandonaaron.net/code/mousewheel/docs -- &gt;
+&nbsp; &lt;script type=&quot;text/javascript&quot; src=&quot;PATH/TO/YOUR/COPY/OF/jquery.mousewheel.min.js&quot;&gt;&lt;/script&gt;
+&nbsp; &lt;!-- --&gt;
+&nbsp; &lt;script type=&quot;text/javascript&quot; src=&quot;jqm-datebox-1.1.0.core.js&quot;&gt;&lt;/script&gt;
+&nbsp; &lt;script type=&quot;text/javascript&quot; src=&quot;jqm-datebox-1.1.0.mode.calbox.js&quot;&gt;&lt;/script&gt;
+
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;label for=&quot;mode1&quot;&gt;CalBox&lt;/label&gt;
+&lt;input name=&quot;mode1&quot; id=&quot;mode1&quot; type=&quot;text&quot; data-role=&quot;datebox&quot; data-options=&#39;{&quot;mode&quot;:&quot;calbox&quot;}&#39; /&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+
+<h2>&nbsp;</h2>
+
+<p>&nbsp;</p>
