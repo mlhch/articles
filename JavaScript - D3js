@@ -1,0 +1,524 @@
+<h1>JavaScript - D3js</h1>
+
+<p>2012-10-18 08:00:25 +08:00 Thursday</p>
+
+<p><a href="http://d3js.org/" target="_blank">http://d3js.org/</a> | <a href="https://github.com/mbostock/d3" target="_blank">https://github.com/mbostock/d3</a></p>
+
+<p>Data-Driven Documents</p>
+
+<p>D3.js&nbsp;is a JavaScript library for manipulating documents based on data.&nbsp;D3&nbsp;helps you bring data to life using HTML, SVG and CSS. D3&rsquo;s emphasis on web standards gives you the full capabilities of modern browsers without tying yourself to a proprietary framework, combining powerful visualization components and a data-driven approach to DOM manipulation.</p>
+
+<p>Download the latest version here:</p>
+
+<ul>
+	<li><a href="http://d3js.org/d3.v3.zip">d3.v3.zip</a></li>
+</ul>
+
+<p>Or, to link directly to the latest release, copy this snippet:</p>
+
+<pre>
+&lt;script src=&quot;http://d3js.org/d3.v3.min.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;</pre>
+
+<p>The&nbsp;<a href="https://github.com/mbostock/d3">full source and tests</a>&nbsp;are also available&nbsp;<a href="https://github.com/mbostock/d3/zipball/master">for download</a>&nbsp;on GitHub.</p>
+
+<p>2012-10-26 10:51 星期五</p>
+
+<p>D3.js&nbsp;is a JavaScript library for manipulating documents based on data.&nbsp;D3&nbsp;helps you bring data to life using HTML, SVG and CSS. D3&rsquo;s emphasis on web standards gives you the full capabilities of modern browsers without tying yourself to a proprietary framework, combining powerful visualization components and a data-driven approach to DOM manipulation.</p>
+
+<p>2013-11-04 18:00 Monday</p>
+
+<p>今日确定之前的 d3.layout.js 和 d3.geom.js 似乎没什么用，直接用 d3.js 就可以了。</p>
+
+<h2>enter, update, exit 之概念</h2>
+
+<p>http://mbostock.github.com/d3/tutorial/circle.html，这个有关圆的概念实例非常不错，配合动画，通俗易懂</p>
+
+<pre>
+&nbsp; d3.json = function(url, callback) {
+&nbsp; &nbsp; return d3_xhr(url, &quot;application/json&quot;, d3_json, callback);
+&nbsp; };</pre>
+
+<pre>
+&nbsp; function d3_xhr(url, mimeType, response, callback) {
+&nbsp; &nbsp; var xhr = {}, dispatch = d3.dispatch(&quot;beforesend&quot;, &quot;progress&quot;, &quot;load&quot;, &quot;error&quot;), headers = {}, request = new XMLHttpRequest(), responseType = null;
+&nbsp; &nbsp; if (d3_window.XDomainRequest &amp;&amp; !(&quot;withCredentials&quot; in request) &amp;&amp; /^(http(s)?:)?\/\//.test(url)) request = new XDomainRequest();
+&nbsp; &nbsp; &quot;onload&quot; in request ? request.onload = request.onerror = respond : request.onreadystatechange = function() {
+&nbsp; &nbsp; &nbsp; request.readyState &gt; 3 &amp;&amp; respond();
+&nbsp; &nbsp; };
+&nbsp; &nbsp; function respond() {
+&nbsp; &nbsp; &nbsp; var status = request.status, result;
+&nbsp; &nbsp; &nbsp; if (!status &amp;&amp; request.responseText || status &gt;= 200 &amp;&amp; status &lt; 300 || status === 304) {
+&nbsp; &nbsp; &nbsp; &nbsp; try {
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; result = response.call(xhr, request);
+&nbsp; &nbsp; &nbsp; &nbsp; } catch (e) {
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; dispatch.error.call(xhr, e);
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return;
+&nbsp; &nbsp; &nbsp; &nbsp; }
+&nbsp; &nbsp; &nbsp; &nbsp; dispatch.load.call(xhr, result);
+&nbsp; &nbsp; &nbsp; } else {
+&nbsp; &nbsp; &nbsp; &nbsp; dispatch.error.call(xhr, request);
+&nbsp; &nbsp; &nbsp; }
+&nbsp; &nbsp; }
+&nbsp; &nbsp; request.onprogress = function(event) {
+&nbsp; &nbsp; &nbsp; var o = d3.event;
+&nbsp; &nbsp; &nbsp; d3.event = event;
+&nbsp; &nbsp; &nbsp; try {
+&nbsp; &nbsp; &nbsp; &nbsp; dispatch.progress.call(xhr, request);
+&nbsp; &nbsp; &nbsp; } finally {
+&nbsp; &nbsp; &nbsp; &nbsp; d3.event = o;
+&nbsp; &nbsp; &nbsp; }
+&nbsp; &nbsp; };
+&nbsp; &nbsp; xhr.header = function(name, value) {
+&nbsp; &nbsp; &nbsp; name = (name + &quot;&quot;).toLowerCase();
+&nbsp; &nbsp; &nbsp; if (arguments.length &lt; 2) return headers[name];
+&nbsp; &nbsp; &nbsp; if (value == null) delete headers[name]; else headers[name] = value + &quot;&quot;;
+&nbsp; &nbsp; &nbsp; return xhr;
+&nbsp; &nbsp; };
+&nbsp; &nbsp; xhr.mimeType = function(value) {
+&nbsp; &nbsp; &nbsp; if (!arguments.length) return mimeType;
+&nbsp; &nbsp; &nbsp; mimeType = value == null ? null : value + &quot;&quot;;
+&nbsp; &nbsp; &nbsp; return xhr;
+&nbsp; &nbsp; };
+&nbsp; &nbsp; xhr.responseType = function(value) {
+&nbsp; &nbsp; &nbsp; if (!arguments.length) return responseType;
+&nbsp; &nbsp; &nbsp; responseType = value;
+&nbsp; &nbsp; &nbsp; return xhr;
+&nbsp; &nbsp; };
+&nbsp; &nbsp; xhr.response = function(value) {
+&nbsp; &nbsp; &nbsp; response = value;
+&nbsp; &nbsp; &nbsp; return xhr;
+&nbsp; &nbsp; };
+&nbsp; &nbsp; [ &quot;get&quot;, &quot;post&quot; ].forEach(function(method) {
+&nbsp; &nbsp; &nbsp; xhr[method] = function() {
+&nbsp; &nbsp; &nbsp; &nbsp; return xhr.send.apply(xhr, [ method ].concat(d3_array(arguments)));
+&nbsp; &nbsp; &nbsp; };
+&nbsp; &nbsp; });
+&nbsp; &nbsp; xhr.send = function(method, data, callback) {
+&nbsp; &nbsp; &nbsp; if (arguments.length === 2 &amp;&amp; typeof data === &quot;function&quot;) callback = data, data = null;
+&nbsp; &nbsp; &nbsp; request.open(method, url, true);
+&nbsp; &nbsp; &nbsp; if (mimeType != null &amp;&amp; !(&quot;accept&quot; in headers)) headers[&quot;accept&quot;] = mimeType + &quot;,*/*&quot;;
+&nbsp; &nbsp; &nbsp; if (request.setRequestHeader) for (var name in headers) request.setRequestHeader(name, headers[name]);
+&nbsp; &nbsp; &nbsp; if (mimeType != null &amp;&amp; request.overrideMimeType) request.overrideMimeType(mimeType);
+&nbsp; &nbsp; &nbsp; if (responseType != null) request.responseType = responseType;
+&nbsp; &nbsp; &nbsp; if (callback != null) xhr.on(&quot;error&quot;, callback).on(&quot;load&quot;, function(request) {
+&nbsp; &nbsp; &nbsp; &nbsp; callback(null, request);
+&nbsp; &nbsp; &nbsp; });
+&nbsp; &nbsp; &nbsp; dispatch.beforesend.call(xhr, request);
+&nbsp; &nbsp; &nbsp; request.send(data == null ? null : data);
+&nbsp; &nbsp; &nbsp; return xhr;
+&nbsp; &nbsp; };
+&nbsp; &nbsp; xhr.abort = function() {
+&nbsp; &nbsp; &nbsp; request.abort();
+&nbsp; &nbsp; &nbsp; return xhr;
+&nbsp; &nbsp; };
+&nbsp; &nbsp; d3.rebind(xhr, dispatch, &quot;on&quot;);
+&nbsp; &nbsp; return callback == null ? xhr : xhr.get(d3_xhr_fixCallback(callback));
+&nbsp; }
+</pre>
+
+<h3>force 中的 event</h3>
+
+<p>2013-11-04 17:07 Monday</p>
+
+<p>event = d3.dispatch(&quot;start&quot;, &quot;tick&quot;, &quot;end&quot;) 返回的&nbsp;event 是 new&nbsp;d3_dispatch(){...}，每个事件的值由 d3_dispatch_event(){...} 返回，返回的是其内部的一个名为 event 的函数，该函数被附加了一个 on 方法。</p>
+
+<pre>
+d3_dispatch {
+  end: function event() {
+    on: function (name, listener) {}
+&nbsp; },
+  start: function event() {...},
+  tick: function event() {...},
+  __proto__: d3_dispatch {
+    <span class="marker">on:</span> function (type, listener) {...}
+&nbsp; }
+}
+</pre>
+
+<p>d3.layout.force().on(&#39;tick&#39;, animate) 这里把 animate 注册到 &#39;tick&#39; 上是因为之后&nbsp;d3.timer(force.tick) 定时触发的是 tick 这个事件。</p>
+
+<p>此 on 方法并非上述 event.on，而是下面的&nbsp;d3_dispatch.prototype.on，不过基本上，此 on 是彼 on 的代理。推理如下：</p>
+
+<p>=&gt;&nbsp;d3.rebind(force, event, &quot;on&quot;) =&gt; event.__proto__.on(&#39;tick&#39;, animate) =&gt; d3_dispatch.prototype.on(&#39;tick&#39;, animate)<br />
+=&gt; event.tick.on(&#39;&#39;, animate) =&gt; listeners.push(listenerByName.set(name, {&nbsp;on: listener&nbsp;}));</p>
+
+<pre>
+&nbsp; d3.dispatch = function() {
+&nbsp; &nbsp; var dispatch = new <span class="marker">d3_dispatch</span>(), i = -1, n = arguments.length;
+&nbsp; &nbsp; while (++i &lt; n) dispatch[arguments[i]] = d3_dispatch_event(dispatch);
+&nbsp; &nbsp; return dispatch;
+&nbsp; };
+&nbsp; function d3_dispatch() {}
+&nbsp; <span class="marker">d3_dispatch</span>.prototype<span class="marker">.on</span> = <span class="marker">function(type, listener)</span> { ==&gt; on 方法
+&nbsp; &nbsp; var i = type.indexOf(&quot;.&quot;), name = &quot;&quot;;
+&nbsp; &nbsp; if (i &gt;= 0) {
+&nbsp; &nbsp; &nbsp; name = type.substring(i + 1);
+&nbsp; &nbsp; &nbsp; type = type.substring(0, i);
+&nbsp; &nbsp; }
+&nbsp; &nbsp; if (type) return arguments.length &lt; 2 ? this[type].on(name) : <span class="marker">this[type].on(name, listener)</span>;
+&nbsp; &nbsp; if (arguments.length === 2) {
+&nbsp; &nbsp; &nbsp; if (listener == null) for (type in this) {
+&nbsp; &nbsp; &nbsp; &nbsp; if (this.hasOwnProperty(type)) this[type].on(name, null);
+&nbsp; &nbsp; &nbsp; }
+&nbsp; &nbsp; &nbsp; return this;
+&nbsp; &nbsp; }
+&nbsp; };</pre>
+
+<pre>
+&nbsp; function d3_dispatch_event(dispatch) {
+&nbsp; &nbsp; var listeners = [], listenerByName = new d3_Map();
+&nbsp; &nbsp; function event() {
+&nbsp; &nbsp; &nbsp; var z = listeners, i = -1, n = z.length, l;
+&nbsp; &nbsp; &nbsp; while (++i &lt; n) if (l = z[i].on) l.apply(this, arguments);
+&nbsp; &nbsp; &nbsp; return dispatch;
+&nbsp; &nbsp; }
+&nbsp; &nbsp;<span class="marker"> event.on = function(name, listener)</span> {
+&nbsp; &nbsp; &nbsp; var l = listenerByName.get(name), i;
+&nbsp; &nbsp; &nbsp; if (arguments.length &lt; 2) return l &amp;&amp; l.on;
+&nbsp; &nbsp; &nbsp; if (l) {
+&nbsp; &nbsp; &nbsp; &nbsp; l.on = null;
+&nbsp; &nbsp; &nbsp; &nbsp; listeners = listeners.slice(0, i = listeners.indexOf(l)).concat(listeners.slice(i + 1));
+&nbsp; &nbsp; &nbsp; &nbsp; listenerByName.remove(name);
+&nbsp; &nbsp; &nbsp; }
+&nbsp; &nbsp; &nbsp; if (listener) listeners.push(listenerByName.set(name, {
+&nbsp; &nbsp; &nbsp; &nbsp; on: listener
+&nbsp; &nbsp; &nbsp; }));
+&nbsp; &nbsp; &nbsp; return dispatch;
+&nbsp; &nbsp; };
+&nbsp; &nbsp; return event;
+&nbsp; }
+</pre>
+
+<p>d3.layout.force() 函数最后执行的是 return d3.rebind(force, event, &quot;on&quot;); 该方法的作用是创建并使得&nbsp;force.on 在执行时 this 指向的是&nbsp;event，返回&nbsp;this 时替换为 target。</p>
+
+<pre>
+&nbsp; d3.rebind = function(target, source) {
+&nbsp; &nbsp; var i = 1, n = arguments.length, method;
+&nbsp; &nbsp; while (++i &lt; n) target[method = arguments[i]] = d3_rebind(target, source, source[method]);
+&nbsp; &nbsp; return target;
+&nbsp; };
+&nbsp; function d3_rebind(target, source, method) {
+&nbsp; &nbsp; return function() {
+&nbsp; &nbsp; &nbsp; var value = method.apply(source, arguments);
+&nbsp; &nbsp; &nbsp; return value === source ? target : value;
+&nbsp; &nbsp; };
+&nbsp; }</pre>
+
+<h3><a href="https://github.com/mbostock/d3/wiki/Force-Layout">Force</a></h3>
+
+<ul>
+	<li><a href="https://github.com/mbostock/d3/wiki/Force-Layout#wiki-force">d3.layout.force</a>&nbsp;- position linked nodes using physical simulation.</li>
+	<li><a href="https://github.com/mbostock/d3/wiki/Force-Layout#wiki-on">force.on</a>&nbsp;- listen to updates in the computed layout positions.</li>
+	<li><a href="https://github.com/mbostock/d3/wiki/Force-Layout#wiki-nodes">force.nodes</a>&nbsp;- get or set the array of nodes to layout.</li>
+	<li><a href="https://github.com/mbostock/d3/wiki/Force-Layout#wiki-links">force.links</a>&nbsp;- get or set the array of links between nodes.</li>
+	<li><a href="https://github.com/mbostock/d3/wiki/Force-Layout#wiki-size">force.size</a>&nbsp;- get or set the layout size in&nbsp;x&nbsp;and&nbsp;y.</li>
+	<li><a href="https://github.com/mbostock/d3/wiki/Force-Layout#wiki-linkDistance">force.linkDistance</a>&nbsp;- get or set the link distance. 又名 force.distance</li>
+	<li><a href="https://github.com/mbostock/d3/wiki/Force-Layout#wiki-linkStrength">force.linkStrength</a>&nbsp;- get or set the link strength.</li>
+	<li><a href="https://github.com/mbostock/d3/wiki/Force-Layout#wiki-friction">force.friction</a>&nbsp;- get or set the friction coefficient.</li>
+	<li><a href="https://github.com/mbostock/d3/wiki/Force-Layout#wiki-charge">force.charge</a>&nbsp;- get or set the charge strength.</li>
+	<li><a href="https://github.com/mbostock/d3/wiki/Force-Layout#wiki-gravity">force.gravity</a>&nbsp;- get or set the gravity strength.</li>
+	<li><a href="https://github.com/mbostock/d3/wiki/Force-Layout#wiki-theta">force.theta</a>&nbsp;- get or set the accuracy of the charge interaction.</li>
+	<li><a href="https://github.com/mbostock/d3/wiki/Force-Layout#wiki-start">force.start</a>&nbsp;- start or restart the simulation when the nodes change.</li>
+	<li><a href="https://github.com/mbostock/d3/wiki/Force-Layout#wiki-resume">force.resume</a>&nbsp;- reheat the cooling parameter and restart simulation.</li>
+	<li><a href="https://github.com/mbostock/d3/wiki/Force-Layout#wiki-stop">force.stop</a>&nbsp;- immediately terminate the simulation.</li>
+	<li><a href="https://github.com/mbostock/d3/wiki/Force-Layout#wiki-alpha">force.alpha</a>&nbsp;- get or set the layout&#39;s cooling parameter.</li>
+	<li><a href="https://github.com/mbostock/d3/wiki/Force-Layout#wiki-tick">force.tick</a>&nbsp;- run the layout simulation one step.</li>
+	<li><a href="https://github.com/mbostock/d3/wiki/Force-Layout#wiki-drag">force.drag</a>&nbsp;- bind a behavior to nodes to allow interactive dragging.</li>
+</ul>
+
+<pre>
+  d3.layout.force = function() {
+    var force = {}, <span class="marker">event = d3.dispatch(&quot;start&quot;, &quot;tick&quot;, &quot;end&quot;)</span>, size = [ 1, 1 ], drag, alpha, friction = .9, linkDistance = d3_layout_forceLinkDistance, linkStrength = d3_layout_forceLinkStrength, charge = -30, gravity = .1, theta = .8, nodes = [], links = [], distances, strengths, charges;
+&nbsp;   ...
+&nbsp; &nbsp; force.nodes = function(x) {
+&nbsp; &nbsp; &nbsp; if (!arguments.length) return nodes;
+&nbsp; &nbsp; &nbsp; nodes = x;
+&nbsp; &nbsp; &nbsp; return force;
+&nbsp; &nbsp; };
+&nbsp; &nbsp; force.links = function(x) {
+&nbsp; &nbsp; &nbsp; if (!arguments.length) return links;
+&nbsp; &nbsp; &nbsp; links = x;
+&nbsp; &nbsp; &nbsp; return force;
+&nbsp; &nbsp; };
+&nbsp; &nbsp; force.size = function(x) {
+&nbsp; &nbsp; &nbsp; if (!arguments.length) return size;
+&nbsp; &nbsp; &nbsp; size = x;
+&nbsp; &nbsp; &nbsp; return force;
+&nbsp; &nbsp; };
+&nbsp; &nbsp; force.linkDistance = function(x) {
+&nbsp; &nbsp; &nbsp; if (!arguments.length) return linkDistance;
+&nbsp; &nbsp; &nbsp; linkDistance = typeof x === &quot;function&quot; ? x : +x;
+&nbsp; &nbsp; &nbsp; return force;
+&nbsp; &nbsp; };
+&nbsp; &nbsp; force.distance = force.linkDistance;
+&nbsp;   ...
+&nbsp; &nbsp; force.charge = function(x) {
+&nbsp; &nbsp; &nbsp; if (!arguments.length) return charge;
+&nbsp; &nbsp; &nbsp; charge = typeof x === &quot;function&quot; ? x : +x;
+&nbsp; &nbsp; &nbsp; return force;
+&nbsp; &nbsp; };
+&nbsp; &nbsp; force.gravity = function(x) {
+&nbsp; &nbsp; &nbsp; if (!arguments.length) return gravity;
+&nbsp; &nbsp; &nbsp; gravity = +x;
+&nbsp; &nbsp; &nbsp; return force;
+&nbsp; &nbsp; };
+&nbsp;   ...
+&nbsp;   return d3.rebind(force, event, &quot;on&quot;); ==&gt; force.on = event.on，同时保证方法内部的 this 指向 event 
+&nbsp; };
+</pre>
+
+<p>force.start() 方法中，根据相互联系的多少，计算权重的大小，随机分配位置，等等，然后开始 force.resume()</p>
+
+<pre>
+&nbsp; &nbsp; force.start = function() {
+&nbsp; &nbsp; &nbsp; var i, j, n = nodes.length, m = links.length, w = size[0], h = size[1], neighbors, o;
+&nbsp; &nbsp; &nbsp; for (i = 0; i &lt; n; ++i) {
+&nbsp; &nbsp; &nbsp; &nbsp; (o = nodes[i]).index = i;
+&nbsp; &nbsp; &nbsp; &nbsp; o.weight = 0;
+&nbsp; &nbsp; &nbsp; }
+&nbsp; &nbsp; &nbsp; for (i = 0; i &lt; m; ++i) {
+&nbsp; &nbsp; &nbsp; &nbsp; o = links[i];
+&nbsp; &nbsp; &nbsp; &nbsp; if (typeof o.source == &quot;number&quot;) o.source = nodes[o.source];
+&nbsp; &nbsp; &nbsp; &nbsp; if (typeof o.target == &quot;number&quot;) o.target = nodes[o.target];
+&nbsp; &nbsp; &nbsp; &nbsp; ++o.source.weight;
+&nbsp; &nbsp; &nbsp; &nbsp; ++o.target.weight;
+&nbsp; &nbsp; &nbsp; }
+&nbsp; &nbsp; &nbsp; for (i = 0; i &lt; n; ++i) {
+&nbsp; &nbsp; &nbsp; &nbsp; o = nodes[i];
+&nbsp; &nbsp; &nbsp; &nbsp; if (isNaN(o.x)) o.x = position(&quot;x&quot;, w);
+&nbsp; &nbsp; &nbsp; &nbsp; if (isNaN(o.y)) o.y = position(&quot;y&quot;, h);
+&nbsp; &nbsp; &nbsp; &nbsp; if (isNaN(o.px)) o.px = o.x;
+&nbsp; &nbsp; &nbsp; &nbsp; if (isNaN(o.py)) o.py = o.y;
+&nbsp; &nbsp; &nbsp; }
+&nbsp; &nbsp; &nbsp; distances = [];
+&nbsp; &nbsp; &nbsp; if (typeof linkDistance === &quot;function&quot;) for (i = 0; i &lt; m; ++i) distances[i] = +linkDistance.call(this, links[i], i); else for (i = 0; i &lt; m; ++i) distances[i] = linkDistance;
+&nbsp; &nbsp; &nbsp; strengths = [];
+&nbsp; &nbsp; &nbsp; if (typeof linkStrength === &quot;function&quot;) for (i = 0; i &lt; m; ++i) strengths[i] = +linkStrength.call(this, links[i], i); else for (i = 0; i &lt; m; ++i) strengths[i] = linkStrength;
+&nbsp; &nbsp; &nbsp; charges = [];
+&nbsp; &nbsp; &nbsp; if (typeof charge === &quot;function&quot;) for (i = 0; i &lt; n; ++i) charges[i] = +charge.call(this, nodes[i], i); else for (i = 0; i &lt; n; ++i) charges[i] = charge;
+&nbsp; &nbsp; &nbsp; function position(dimension, size) {
+&nbsp; &nbsp; &nbsp; &nbsp; var neighbors = neighbor(i), j = -1, m = neighbors.length, x;
+&nbsp; &nbsp; &nbsp; &nbsp; while (++j &lt; m) if (!isNaN(x = neighbors[j][dimension])) return x;
+&nbsp; &nbsp; &nbsp; &nbsp; return Math.random() * size;
+&nbsp; &nbsp; &nbsp; }
+&nbsp; &nbsp; &nbsp; function neighbor() {
+&nbsp; &nbsp; &nbsp; &nbsp; if (!neighbors) {
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; neighbors = [];
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; for (j = 0; j &lt; n; ++j) {
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; neighbors[j] = [];
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; for (j = 0; j &lt; m; ++j) {
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; var o = links[j];
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; neighbors[o.source.index].push(o.target);
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; neighbors[o.target.index].push(o.source);
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }
+&nbsp; &nbsp; &nbsp; &nbsp; }
+&nbsp; &nbsp; &nbsp; &nbsp; return neighbors[i];
+&nbsp; &nbsp; &nbsp; }
+&nbsp; &nbsp; &nbsp; return force.resume();
+&nbsp; &nbsp; };
+&nbsp; &nbsp; force.resume = function() {
+&nbsp; &nbsp; &nbsp; return force.alpha(.1);
+&nbsp; &nbsp; };
+&nbsp; &nbsp; force.stop = function() {
+&nbsp; &nbsp; &nbsp; return force.alpha(0);
+&nbsp; &nbsp; };
+&nbsp; &nbsp; force.drag = function() {
+&nbsp; &nbsp; &nbsp; if (!drag) drag = d3.behavior.drag().origin(d3_identity).on(&quot;dragstart.force&quot;, d3_layout_forceDragstart).on(&quot;drag.force&quot;, dragmove).on(&quot;dragend.force&quot;, d3_layout_forceDragend);
+&nbsp; &nbsp; &nbsp; if (!arguments.length) return drag;
+&nbsp; &nbsp; &nbsp; this.on(&quot;mouseover.force&quot;, d3_layout_forceMouseover).on(&quot;mouseout.force&quot;, d3_layout_forceMouseout).call(drag);
+&nbsp; &nbsp; };
+&nbsp; &nbsp; function dragmove(d) {
+&nbsp; &nbsp; &nbsp; d.px = d3.event.x, d.py = d3.event.y;
+&nbsp; &nbsp; &nbsp; force.resume();
+&nbsp; &nbsp; }
+&nbsp; &nbsp; return <span class="marker">d3.rebind(force, event, &quot;on&quot;);</span>
+&nbsp; };
+</pre>
+
+<pre>
+&nbsp; &nbsp; force.resume = function() {
+&nbsp; &nbsp; &nbsp; return force.alpha(.1);
+&nbsp; &nbsp; };
+</pre>
+
+<pre>
+&nbsp; &nbsp; force.alpha = function(x) {
+&nbsp; &nbsp; &nbsp; if (!arguments.length) return alpha;
+&nbsp; &nbsp; &nbsp; x = +x;
+&nbsp; &nbsp; &nbsp; if (alpha) {
+&nbsp; &nbsp; &nbsp; &nbsp; if (x &gt; 0) alpha = x; else alpha = 0;
+&nbsp; &nbsp; &nbsp; } else if (x &gt; 0) {
+&nbsp; &nbsp; &nbsp; &nbsp; event.start({
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; type: &quot;start&quot;,
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; alpha: alpha = x
+&nbsp; &nbsp; &nbsp; &nbsp; });
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="marker">d3.timer(force.tick);</span>
+&nbsp; &nbsp; &nbsp; }
+&nbsp; &nbsp; &nbsp; return force;
+&nbsp; &nbsp; };</pre>
+
+<p>下面看 timer 是如何使用 force.tick 的。</p>
+
+<h3>Timers and&nbsp;requestAnimationFrame</h3>
+
+<p>2013-09-11 15:09 Wednsday rmwb 暂时没任务了，想起来 tesera 网站上的 d3 效果</p>
+
+<p><a href="https://github.com/mbostock/d3/wiki/Transitions#wiki-d3_timer" target="_blank">https://github.com/mbostock/d3/wiki/Transitions#wiki-d3_timer</a></p>
+
+<p>D3 internally maintains an efficient timer queue so that thousands of timers can be processed concurrently with minimal overhead; in addition, this timer queue guarantees consistent timing of animations when concurrent or staged transitions are scheduled. If your browser supports it, the timer queue will use&nbsp;<a href="http://paulirish.com/2011/requestanimationframe-for-smart-animating/">requestAnimationFrame</a>&nbsp;for fluid and efficient animation. The timer queue is also smart about using setTimeout when there is a long delay before the next scheduled event.</p>
+
+<p><a href="https://github.com/mbostock/d3/wiki/Transitions#wiki-d3_timer" name="wiki-d3_timer">#</a>&nbsp;d3.<strong>timer</strong>(<em>function</em>, [<em>delay</em>, [<em>time</em>]])</p>
+
+<p>Start a custom animation timer, invoking the specified&nbsp;<em>function</em>&nbsp;repeatedly until it returns true. There is no way to cancel the timer after it starts, so make sure your timer function returns true when done!</p>
+
+<p>An optional numeric&nbsp;<em>delay</em>&nbsp;in milliseconds may be specified when the given&nbsp;<em>function</em>&nbsp;should only be invoked after a delay. The delay is relative to the specified&nbsp;<em>time</em>&nbsp;in milliseconds since UNIX epoch; if&nbsp;<em>time</em>&nbsp;is not specified, it defaults to&nbsp;<a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Date/now">Date.now</a>.</p>
+
+<p>You may use&nbsp;<em>delay</em>&nbsp;and&nbsp;<em>time</em>&nbsp;to specify relative and absolute moments in time when the&nbsp;<em>function</em>&nbsp;should start being invoked. For example, a calendar notification might be coded as:</p>
+
+<pre>
+d3.timer(notify, <strong>-</strong>4 <strong>*</strong> 1000 <strong>*</strong> 60 <strong>*</strong> 60, <strong>+</strong><strong>new</strong> Date(2012, 09, 29)); <em>// four hours before midnight Oct. 29</em>
+</pre>
+
+<p><a href="https://github.com/mbostock/d3/wiki/Transitions#wiki-d3_timer_flush" name="wiki-d3_timer_flush">#</a>&nbsp;d3.timer.<strong>flush</strong>()</p>
+
+<p>Immediately execute (invoke once) any active timers. Normally, zero-delay transitions are executed after an instantaneous delay (&lt;10ms). This can cause a brief flicker if the browser renders the page twice: once at the end of the first event loop, then again immediately on the first timer callback. By flushing the timer queue at the end of the first event loop, you can run any zero-delay transitions immediately and avoid the flicker.</p>
+
+<p>源代码</p>
+
+<pre>
+&nbsp; d3.timer = function(callback, delay, then) {
+&nbsp; &nbsp; var n = arguments.length;
+&nbsp; &nbsp; if (n &lt; 2) delay = 0;
+&nbsp; &nbsp; if (n &lt; 3) then = Date.now();
+&nbsp; &nbsp; var time = then + delay, timer = {
+&nbsp; &nbsp; &nbsp; callback: callback,
+&nbsp; &nbsp; &nbsp; time: time,
+&nbsp; &nbsp; &nbsp; next: null
+&nbsp; &nbsp; };
+&nbsp; &nbsp; if (d3_timer_queueTail) d3_timer_queueTail.next = timer; else d3_timer_queueHead = timer;
+&nbsp; &nbsp; d3_timer_queueTail = timer;
+&nbsp; &nbsp; if (!d3_timer_interval) {
+&nbsp; &nbsp; &nbsp; d3_timer_timeout = clearTimeout(d3_timer_timeout);
+&nbsp; &nbsp; &nbsp; d3_timer_interval = 1;
+&nbsp; &nbsp; &nbsp; <span class="marker">d3_timer_frame(d3_timer_step);</span>
+&nbsp; &nbsp; }
+&nbsp; };</pre>
+
+<p>d3_timer_frame 实际上就是 requestAnimationFrame</p>
+
+<pre>
+  d3_timer_frame = d3_window[d3_vendorSymbol(d3_window, &quot;requestAnimationFrame&quot;)] || function(callback) {
+&nbsp; &nbsp; setTimeout(callback, 17);
+&nbsp; };
+</pre>
+
+<p>d3_vendorSymbol 是兼容各浏览器的逻辑</p>
+
+<pre>
+&nbsp; function d3_vendorSymbol(object, name) {
+&nbsp; &nbsp; if (name in object) return name;
+&nbsp; &nbsp; name = name.charAt(0).toUpperCase() + name.substring(1);
+&nbsp; &nbsp; for (var i = 0, n = d3_vendorPrefixes.length; i &lt; n; ++i) {
+&nbsp; &nbsp; &nbsp; var prefixName = d3_vendorPrefixes[i] + name;
+&nbsp; &nbsp; &nbsp; if (prefixName in object) return prefixName;
+&nbsp; &nbsp; }
+&nbsp; }
+&nbsp; var d3_vendorPrefixes = [ &quot;webkit&quot;, &quot;ms&quot;, &quot;moz&quot;, &quot;Moz&quot;, &quot;o&quot;, &quot;O&quot; ];
+</pre>
+
+<p>最终还是要看 d3_timer_step 中如何调用了 force.tick</p>
+
+<pre>
+&nbsp; function d3_timer_step() {
+&nbsp; &nbsp; var now = d3_timer_mark(), delay = d3_timer_sweep() - now;
+&nbsp; &nbsp; if (delay &gt; 24) {
+&nbsp; &nbsp; &nbsp; if (isFinite(delay)) {
+&nbsp; &nbsp; &nbsp; &nbsp; clearTimeout(d3_timer_timeout);
+&nbsp; &nbsp; &nbsp; &nbsp; d3_timer_timeout = setTimeout(d3_timer_step, delay);
+&nbsp; &nbsp; &nbsp; }
+&nbsp; &nbsp; &nbsp; d3_timer_interval = 0;
+&nbsp; &nbsp; } else {
+&nbsp; &nbsp; &nbsp; d3_timer_interval = 1;
+&nbsp; &nbsp; &nbsp; d3_timer_frame(d3_timer_step);
+&nbsp; &nbsp; }
+&nbsp; }</pre>
+
+<p>这里的&nbsp;d3_timer_active.callback 即是 force.tick</p>
+
+<pre>
+&nbsp; function d3_timer_mark() {
+&nbsp; &nbsp; var now = Date.now();
+&nbsp; &nbsp; d3_timer_active = d3_timer_queueHead;
+&nbsp; &nbsp; while (d3_timer_active) {
+&nbsp; &nbsp; &nbsp; if (now &gt;= d3_timer_active.time) d3_timer_active.flush = d3_timer_active.callback(now - d3_timer_active.time);
+&nbsp; &nbsp; &nbsp; d3_timer_active = d3_timer_active.next;
+&nbsp; &nbsp; }
+&nbsp; &nbsp; return now;
+&nbsp; }
+</pre>
+
+<p>force.tick 执行到最后，终于要触发注册在其上的 animate 函数。</p>
+
+<pre>
+&nbsp; &nbsp; force.tick = function() {
+&nbsp; &nbsp; &nbsp; if ((alpha *= .99) &lt; .005) {
+&nbsp; &nbsp; &nbsp; &nbsp; event.end({
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; type: &quot;end&quot;,
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; alpha: alpha = 0
+&nbsp; &nbsp; &nbsp; &nbsp; });
+&nbsp; &nbsp; &nbsp; &nbsp; return true;
+&nbsp; &nbsp; &nbsp; }
+&nbsp; &nbsp; &nbsp; var n = nodes.length, m = links.length, q, i, o, s, t, l, k, x, y;
+&nbsp; &nbsp; &nbsp; for (i = 0; i &lt; m; ++i) {
+&nbsp; &nbsp; &nbsp; &nbsp; o = links[i];
+&nbsp; &nbsp; &nbsp; &nbsp; s = o.source;
+&nbsp; &nbsp; &nbsp; &nbsp; t = o.target;
+&nbsp; &nbsp; &nbsp; &nbsp; x = t.x - s.x;
+&nbsp; &nbsp; &nbsp; &nbsp; y = t.y - s.y;
+&nbsp; &nbsp; &nbsp; &nbsp; if (l = x * x + y * y) {
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; l = alpha * strengths[i] * ((l = Math.sqrt(l)) - distances[i]) / l;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; x *= l;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; y *= l;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; t.x -= x * (k = s.weight / (t.weight + s.weight));
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; t.y -= y * k;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; s.x += x * (k = 1 - k);
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; s.y += y * k;
+&nbsp; &nbsp; &nbsp; &nbsp; }
+&nbsp; &nbsp; &nbsp; }
+&nbsp; &nbsp; &nbsp; if (k = alpha * gravity) {
+&nbsp; &nbsp; &nbsp; &nbsp; x = size[0] / 2;
+&nbsp; &nbsp; &nbsp; &nbsp; y = size[1] / 2;
+&nbsp; &nbsp; &nbsp; &nbsp; i = -1;
+&nbsp; &nbsp; &nbsp; &nbsp; if (k) while (++i &lt; n) {
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; o = nodes[i];
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; o.x += (x - o.x) * k;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; o.y += (y - o.y) * k;
+&nbsp; &nbsp; &nbsp; &nbsp; }
+&nbsp; &nbsp; &nbsp; }
+&nbsp; &nbsp; &nbsp; if (charge) {
+&nbsp; &nbsp; &nbsp; &nbsp; d3_layout_forceAccumulate(q = d3.geom.quadtree(nodes), alpha, charges);
+&nbsp; &nbsp; &nbsp; &nbsp; i = -1;
+&nbsp; &nbsp; &nbsp; &nbsp; while (++i &lt; n) {
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (!(o = nodes[i]).fixed) {
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; q.visit(repulse(o));
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }
+&nbsp; &nbsp; &nbsp; &nbsp; }
+&nbsp; &nbsp; &nbsp; }
+&nbsp; &nbsp; &nbsp; i = -1;
+&nbsp; &nbsp; &nbsp; while (++i &lt; n) {
+&nbsp; &nbsp; &nbsp; &nbsp; o = nodes[i];
+&nbsp; &nbsp; &nbsp; &nbsp; if (o.fixed) {
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; o.x = o.px;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; o.y = o.py;
+&nbsp; &nbsp; &nbsp; &nbsp; } else {
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; o.x -= (o.px - (o.px = o.x)) * friction;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; o.y -= (o.py - (o.py = o.y)) * friction;
+&nbsp; &nbsp; &nbsp; &nbsp; }
+&nbsp; &nbsp; &nbsp; }
+&nbsp; &nbsp; &nbsp; event.tick({ // 这里是要触发注册在其上的 animate 函数
+&nbsp; &nbsp; &nbsp; &nbsp; type: &quot;tick&quot;,
+&nbsp; &nbsp; &nbsp; &nbsp; alpha: alpha
+&nbsp; &nbsp; &nbsp; });
+&nbsp; &nbsp; };
+</pre>
