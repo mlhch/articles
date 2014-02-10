@@ -1,0 +1,404 @@
+<h1>npm express</h1>
+
+<p>2013-09-12 11:38 Thursday</p>
+
+<p><a href="http://expressjs.com/" target="_blank">http://expressjs.com/</a>|<a href="https://npmjs.org/package/express" target="_blank">https://npmjs.org/package/express</a>|<a href="https://github.com/visionmedia/express" target="_blank">https://github.com/visionmedia/express</a></p>
+
+<p>2013-09-13 09:58</p>
+
+<p>今天 Yves 说 express 是最流行的服务端 JavaScript 框架，所以得好好学学。</p>
+
+<p>2013-11-17 22:49 Sunday</p>
+
+<p>可以看到，更新 express 后，其他包依赖的 express 版本并未有变化。</p>
+
+<pre>
+$ npm ls -g express
+/usr/local/share/npm/lib
+├─┬ cordova@3.1.0-0.1.0
+│ ├── express@3.0.0 
+│ └─┬ ripple-emulator@0.9.18
+│   └── express@3.1.0 
+├── <span class="marker">express@3.4.0</span> 
+├─┬ node-inspector@0.4.0
+│ └── express@3.3.8 
+├─┬ phonegap@3.1.0-0.15.0
+│ └─┬ cordova@3.1.0-0.1.0
+│   ├── express@3.0.0 
+│   └─┬ ripple-emulator@0.9.18
+│     └── express@3.1.0 
+└─┬ weinre@2.0.0-pre-HH0SN197
+  └── express@2.5.11</pre>
+
+<pre>
+$ npm update -g express</pre>
+
+<pre>
+$ npm ls -g express
+/usr/local/share/npm/lib
+├─┬ cordova@3.1.0-0.1.0
+│ ├── express@3.0.0 
+│ └─┬ ripple-emulator@0.9.18
+│   └── express@3.1.0 
+├── <span class="marker">express@3.4.4</span> 
+├─┬ node-inspector@0.4.0
+│ └── express@3.3.8 
+├─┬ phonegap@3.1.0-0.15.0
+│ └─┬ cordova@3.1.0-0.1.0
+│   ├── express@3.0.0 
+│   └─┬ ripple-emulator@0.9.18
+│     └── express@3.1.0 
+└─┬ weinre@2.0.0-pre-HH0SN197
+  └── express@2.5.11 </pre>
+
+<p><span class="marker">Sinatra inspired</span>&nbsp;web development framework</p>
+
+<pre>
+npm install express</pre>
+
+<table>
+	<tbody>
+		<tr>
+			<td>6 280</td>
+			<td>downloads in the last day</td>
+		</tr>
+		<tr>
+			<td>191 485</td>
+			<td>downloads in the last week</td>
+		</tr>
+		<tr>
+			<td>727 247</td>
+			<td>downloads in the last month</td>
+		</tr>
+	</tbody>
+</table>
+
+<table border="1">
+	<tbody>
+		<tr>
+			<th>Maintainers</th>
+			<td><a href="https://npmjs.org/~tjholowaychuk">&nbsp;tjholowaychuk</a></td>
+		</tr>
+		<tr>
+			<th>Version</th>
+			<td>3.4.0&nbsp;last updated 4 days ago</td>
+		</tr>
+	</tbody>
+</table>
+
+<p>Fast, unopinionated, minimalist web framework for&nbsp;<a href="http://nodejs.org/">node</a>.&nbsp;</p>
+
+<pre>
+var express = require(&#39;express&#39;);
+var app = express();
+
+app.get(&#39;/&#39;, function(req, res){
+  res.send(&#39;Hello World&#39;);
+});
+
+app.listen(3000);</pre>
+
+<h2>Installation</h2>
+
+<pre>
+$ npm install -g express</pre>
+
+<h2>Quick Start</h2>
+
+<p>The quickest way to get started with express is to utilize the executable&nbsp;<code>express(1)</code>&nbsp;to generate an application as shown below:</p>
+
+<p>Create the app:</p>
+
+<pre>
+<code>$ npm install -g express
+$ express /tmp/foo &amp;&amp; cd /tmp/foo</code></pre>
+
+<p>2013-09-13 11:29 yeoman angular + express 通了，赶紧记下来</p>
+
+<pre>
+$ express test_express &amp;&amp; cd test_express
+
+   create : test_express
+   create : test_express/package.json
+   create : test_express/app.js
+   create : test_express/public
+   create : test_express/public/javascripts
+   create : test_express/public/images
+   create : test_express/public/stylesheets
+   create : test_express/public/stylesheets/style.css
+   create : test_express/routes
+   create : test_express/routes/index.js
+   create : test_express/routes/user.js
+   create : test_express/views
+   create : test_express/views/layout.jade
+   create : test_express/views/index.jade
+
+   install dependencies:
+     $ cd test_express &amp;&amp; npm install
+
+   run the app:
+     $ node app
+
+bogon:test_express mlhch$ </pre>
+
+<p>Install dependencies:</p>
+
+<pre>
+<code>$ npm install</code></pre>
+
+<p>Start the server:</p>
+
+<pre>
+<code>$ node app</code></pre>
+
+<h2>Features</h2>
+
+<ul>
+	<li>Built on&nbsp;<a href="http://github.com/senchalabs/connect">Connect</a></li>
+	<li>Robust routing</li>
+	<li>HTTP helpers (redirection, caching, etc)</li>
+	<li>View system supporting 14+ template engines</li>
+	<li>Content negotiation</li>
+	<li>Focus on high performance</li>
+	<li>Environment based configuration</li>
+	<li>Executable for generating applications quickly</li>
+	<li>High test coverage</li>
+</ul>
+
+<h2>Philosophy</h2>
+
+<p>The Express philosophy is to provide small, robust tooling for HTTP servers. Making it a great solution for single page applications, web sites, hybrids, or public HTTP APIs.</p>
+
+<p>Built on Connect you can use&nbsp;<em>only</em>&nbsp;what you need, and nothing more, applications can be as big or as small as you like, even a single file. Express does not force you to use any specific ORM or template engine. With support for over 14 template engines via&nbsp;<a href="http://github.com/visionmedia/consolidate.js">Consolidate.js</a>&nbsp;you can quickly craft your perfect framework.</p>
+
+<h2>More Information</h2>
+
+<ul>
+	<li>Join #express on freenode</li>
+	<li><a href="http://groups.google.com/group/express-js">Google Group</a>&nbsp;for discussion</li>
+	<li>Follow&nbsp;<a href="http://twitter.com/tjholowaychuk">tjholowaychuk</a>&nbsp;on twitter for updates</li>
+	<li>Visit the&nbsp;<a href="http://github.com/visionmedia/express/wiki">Wiki</a></li>
+	<li><a href="http://jsman.ru/express/">Русскоязычная документация</a></li>
+	<li>Run express examples&nbsp;<a href="https://runnable.com/express">online</a></li>
+</ul>
+
+<h2>Viewing Examples</h2>
+
+<p>Clone the Express repo, then install the dev dependencies to install all the example / test suite deps:</p>
+
+<pre>
+<code>$ git clone git:<em>//github.com/visionmedia/express.git --depth 1</em>
+$ cd express
+$ npm install</code></pre>
+
+<p>then run whichever tests you want:</p>
+
+<pre>
+<code>$ node examples/content-negotiation</code></pre>
+
+<h2>Running Tests</h2>
+
+<p>To run the test suite first invoke the following command within the repo, installing the development dependencies:</p>
+
+<pre>
+<code>$ npm install</code></pre>
+
+<p>then run the tests:</p>
+
+<pre>
+$ make test</pre>
+
+<h2>配置 HTTPS</h2>
+
+<p>2013-09-23 18:42 Monday 天冷了啊</p>
+
+<p><a href="http://expressjs.com/api.html#app.listen" target="_blank">http://expressjs.com/api.html#app.listen</a></p>
+
+<h3>app.listen()</h3>
+
+<p>Bind and listen for connections on the given host and port, this method is identical to node&#39;s&nbsp;<a href="http://nodejs.org/api/http.html#http_server_listen_port_hostname_backlog_callback">http.Server#listen()</a>.</p>
+
+<pre>
+<code>var express = require(&#39;express&#39;);
+var app = express();
+app.listen(3000);
+</code></pre>
+
+<p>The&nbsp;<code>app</code>&nbsp;returned by&nbsp;<code>express()</code>&nbsp;is in fact a JavaScript&nbsp;<code>Function</code>, designed to be passed to node&#39;s http servers as a callback to handle requests. This allows you to provide both HTTP and HTTPS versions of your app with the same codebase easily, as the app does not inherit from these, it is simply a callback:</p>
+
+<pre>
+<code>var express = require(&#39;express&#39;);
+var https = require(&#39;https&#39;);
+var http = require(&#39;http&#39;);
+var app = express();
+
+http.createServer(app).listen(80);
+https.createServer(options, app).listen(443);
+</code></pre>
+
+<p><code>注：此处 options 不可少，其应是如下结构，其中 server.key 和 server.crt 的生成方法可另行参考。</code></p>
+
+<pre>
+{
+&nbsp; key: fs.readFileSync(&#39;server.key&#39;),
+&nbsp; cert: fs.readFileSync(&#39;server.crt&#39;)
+}
+</pre>
+
+<p>另外需要注意的是 443 端口的启动需要加 sudo 来执行 sudo node app 才能有足够的权限，避免提示如下错误</p>
+
+<pre>
+$ node app
+
+events.js:72
+        throw er; // Unhandled &#39;error&#39; event
+              ^
+Error: listen EACCES
+    at errnoException (net.js:901:11)
+    at Server._listen2 (net.js:1020:19)
+    at listen (net.js:1061:10)
+    at Server.listen (net.js:1127:5)
+    at Object. (/Users/mlhch/www_ios/hello/app.js:46:9)
+    at Module._compile (module.js:456:26)
+    at Object.Module._extensions..js (module.js:474:10)
+    at Module.load (module.js:356:32)
+    at Function.Module._load (module.js:312:12)
+    at Function.Module.runMain (module.js:497:10)</pre>
+
+<p>The&nbsp;<code>app.listen()</code>&nbsp;method is simply a convenience method defined as, if you wish to use HTTPS or provide both, use the technique above.</p>
+
+<pre>
+<code>app.listen = function(){
+  var server = http.createServer(this);
+  return server.listen.apply(server, arguments);
+};</code></pre>
+
+<p>&nbsp;</p>
+
+<pre>
+{
+&nbsp; &nbsp; _readableState: {...},
+&nbsp; &nbsp; readable: false,
+&nbsp; &nbsp; domain: null,
+&nbsp; &nbsp; _events: {
+&nbsp; &nbsp; &nbsp; &nbsp; data: [
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [Function],
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [Function]
+&nbsp; &nbsp; &nbsp; &nbsp; ],
+&nbsp; &nbsp; &nbsp; &nbsp; readable: [Function],
+&nbsp; &nbsp; &nbsp; &nbsp; end: [Function]
+&nbsp; &nbsp; },
+&nbsp; &nbsp; _maxListeners: 10,
+&nbsp; &nbsp; socket: {...},
+&nbsp; &nbsp; connection: {...},
+&nbsp; &nbsp; httpVersion: &#39;1.1&#39;,
+&nbsp; &nbsp; complete: true,
+&nbsp; &nbsp; headers: {
+&nbsp; &nbsp; &nbsp; &nbsp; host: &#39;localhost:9000&#39;,
+&nbsp; &nbsp; &nbsp; &nbsp; connection: &#39;keep-alive&#39;,
+&nbsp; &nbsp; &nbsp; &nbsp; &#39;content-length&#39;: &#39;1149&#39;,
+&nbsp; &nbsp; &nbsp; &nbsp; accept: &#39;application/json, text/plain, */*&#39;,
+&nbsp; &nbsp; &nbsp; &nbsp; origin: &#39;http://journal&#39;,
+&nbsp; &nbsp; &nbsp; &nbsp; &#39;x-requested-with&#39;: &#39;XMLHttpRequest&#39;,
+&nbsp; &nbsp; &nbsp; &nbsp; &#39;user-agent&#39;: &#39;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36&#39;,
+&nbsp; &nbsp; &nbsp; &nbsp; &#39;content-type&#39;: &#39;application/json;charset=UTF-8&#39;,
+&nbsp; &nbsp; &nbsp; &nbsp; referer: &#39;http://journal/a/app/&#39;,
+&nbsp; &nbsp; &nbsp; &nbsp; &#39;accept-encoding&#39;: &#39;gzip,deflate,sdch&#39;,
+&nbsp; &nbsp; &nbsp; &nbsp; &#39;accept-language&#39;: &#39;zh-CN,zh;q=0.8&#39;
+&nbsp; &nbsp; },
+&nbsp; &nbsp; trailers: {},
+&nbsp; &nbsp; _pendings: [],
+&nbsp; &nbsp; _pendingIndex: 0,
+&nbsp; &nbsp; url: &#39;/api/article/Markdown%20-%20GitHub%20Flavored%20Markdown&#39;,
+&nbsp; &nbsp; method: &#39;POST&#39;,
+&nbsp; &nbsp; statusCode: null,
+&nbsp; &nbsp; client: {...},
+&nbsp; &nbsp; _consuming: true,
+&nbsp; &nbsp; _dumped: false,
+&nbsp; &nbsp; httpVersionMajor: 1,
+&nbsp; &nbsp; httpVersionMinor: 1,
+&nbsp; &nbsp; upgrade: false,
+&nbsp; &nbsp; originalUrl: &#39;/api/article/Markdown%20-%20GitHub%20Flavored%20Markdown&#39;,
+&nbsp; &nbsp; _parsedUrl: {
+&nbsp; &nbsp; &nbsp; &nbsp; protocol: null,
+&nbsp; &nbsp; &nbsp; &nbsp; slashes: null,
+&nbsp; &nbsp; &nbsp; &nbsp; auth: null,
+&nbsp; &nbsp; &nbsp; &nbsp; host: null,
+&nbsp; &nbsp; &nbsp; &nbsp; port: null,
+&nbsp; &nbsp; &nbsp; &nbsp; hostname: null,
+&nbsp; &nbsp; &nbsp; &nbsp; hash: null,
+&nbsp; &nbsp; &nbsp; &nbsp; search: null,
+&nbsp; &nbsp; &nbsp; &nbsp; query: null,
+&nbsp; &nbsp; &nbsp; &nbsp; pathname: &#39;/api/article/Markdown%20-%20GitHub%20Flavored%20Markdown&#39;,
+&nbsp; &nbsp; &nbsp; &nbsp; path: &#39;/api/article/Markdown%20-%20GitHub%20Flavored%20Markdown&#39;,
+&nbsp; &nbsp; &nbsp; &nbsp; href: &#39;/api/article/Markdown%20-%20GitHub%20Flavored%20Markdown&#39;
+&nbsp; &nbsp; },
+&nbsp; &nbsp; query: {},
+&nbsp; &nbsp; res: {
+&nbsp; &nbsp; &nbsp; &nbsp; domain: null,
+&nbsp; &nbsp; &nbsp; &nbsp; _events: {
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; finish: [Function]
+&nbsp; &nbsp; &nbsp; &nbsp; },
+&nbsp; &nbsp; &nbsp; &nbsp; _maxListeners: 10,
+&nbsp; &nbsp; &nbsp; &nbsp; output: [],
+&nbsp; &nbsp; &nbsp; &nbsp; outputEncodings: [],
+&nbsp; &nbsp; &nbsp; &nbsp; writable: true,
+&nbsp; &nbsp; &nbsp; &nbsp; _last: false,
+&nbsp; &nbsp; &nbsp; &nbsp; chunkedEncoding: false,
+&nbsp; &nbsp; &nbsp; &nbsp; shouldKeepAlive: true,
+&nbsp; &nbsp; &nbsp; &nbsp; useChunkedEncodingByDefault: true,
+&nbsp; &nbsp; &nbsp; &nbsp; sendDate: true,
+&nbsp; &nbsp; &nbsp; &nbsp; _headerSent: false,
+&nbsp; &nbsp; &nbsp; &nbsp; _header: &#39;&#39;,
+&nbsp; &nbsp; &nbsp; &nbsp; _hasBody: true,
+&nbsp; &nbsp; &nbsp; &nbsp; _trailer: &#39;&#39;,
+&nbsp; &nbsp; &nbsp; &nbsp; finished: false,
+&nbsp; &nbsp; &nbsp; &nbsp; _hangupClose: false,
+&nbsp; &nbsp; &nbsp; &nbsp; socket: {...},
+&nbsp; &nbsp; &nbsp; &nbsp; connection: {...},
+&nbsp; &nbsp; &nbsp; &nbsp; _headers: {
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &#39;x-powered-by&#39;: &#39;Express&#39;,
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &#39;access-control-allow-origin&#39;: &#39;*&#39;,
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &#39;access-control-allow-headers&#39;: &#39;X-Requested-With, Content-Type&#39;
+&nbsp; &nbsp; &nbsp; &nbsp; },
+&nbsp; &nbsp; &nbsp; &nbsp; _headerNames: {
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &#39;x-powered-by&#39;: &#39;X-Powered-By&#39;,
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &#39;access-control-allow-origin&#39;: &#39;Access-Control-Allow-Origin&#39;,
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &#39;access-control-allow-headers&#39;: &#39;Access-Control-Allow-Headers&#39;
+&nbsp; &nbsp; &nbsp; &nbsp; },
+&nbsp; &nbsp; &nbsp; &nbsp; req: [Circular],
+&nbsp; &nbsp; &nbsp; &nbsp; locals: [Function: locals],
+&nbsp; &nbsp; &nbsp; &nbsp; end: [Function]
+&nbsp; &nbsp; },
+&nbsp; &nbsp; next: [Function: next],
+&nbsp; &nbsp; _startTime: Thu Sep 26 2013 15: 18: 57 GMT + 0800(CST),
+&nbsp; &nbsp; body: {
+&nbsp; &nbsp; &nbsp; &nbsp; title: &#39;Markdown - GitHub Flavored Markdown&#39;,
+&nbsp; &nbsp; &nbsp; &nbsp; content: &#39;&lt;h1&gt;Markdown - GitHub Flavored Markdown&lt;/h1&gt;\n\n&lt;p&gt;2013-06-29 14:38 Saturday&lt;/p&gt;\n\n&lt;p&gt;&lt;a href=&quot;https://help.github.com/articles/github-flavored-markdown&quot;&gt;https://help.github.com/articles/github-flavored-markdown&lt;/a&gt;&amp;nbsp;|&amp;nbsp;&lt;a href=&quot;http://developer.github.com/v3/markdown/&quot;&gt;http://developer.github.com/v3/markdown/&lt;/a&gt;&lt;/p&gt;\n\n&lt;p&gt;GitHub uses what we&amp;#39;re calling &amp;quot;GitHub Flavored Markdown&amp;quot; (GFM) for messages, issues, and comments. It differs from standard Markdown (SM) in a few significant ways and adds some additional functionality.&lt;/p&gt;\n\n&lt;p&gt;If you&amp;#39;re not already familiar with Markdown, you should spend 15 minutes and go over the excellent &lt;a href=&quot;http://daringfireball.net/projects/markdown/syntax&quot;&gt;Markdown Syntax Guide&lt;/a&gt;&amp;nbsp;at Daring Fireball.&lt;/p&gt;\n\n&lt;p&gt;If you prefer to learn by example, see the following source and result:&lt;/p&gt;\n\n&lt;ul&gt;\n\t&lt;li&gt;&lt;a href=&quot;http://github.github.com/github-flavored-markdown/sample_content.html&quot;&gt;Source&lt;/a&gt;&lt;/li&gt;\n\t&lt;li&gt;&lt;a href=&quot;https://github.com/mojombo/github-flavored-markdown/issues/1&quot;&gt;Result&lt;/a&gt;&lt;/li&gt;\n&lt;/ul&gt;\n&#39;
+&nbsp; &nbsp; },
+&nbsp; &nbsp; _body: true,
+&nbsp; &nbsp; _limit: true,
+&nbsp; &nbsp; pipe: [Function],
+&nbsp; &nbsp; addListener: [Function],
+&nbsp; &nbsp; on: [Function],
+&nbsp; &nbsp; pause: [Function],
+&nbsp; &nbsp; resume: [Function],
+&nbsp; &nbsp; read: [Function],
+&nbsp; &nbsp; originalMethod: &#39;POST&#39;,
+&nbsp; &nbsp; _route_index: 1,
+&nbsp; &nbsp; route: {
+&nbsp; &nbsp; &nbsp; &nbsp; path: &#39;/api/article/:title&#39;,
+&nbsp; &nbsp; &nbsp; &nbsp; method: &#39;post&#39;,
+&nbsp; &nbsp; &nbsp; &nbsp; callbacks: [
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [Function]
+&nbsp; &nbsp; &nbsp; &nbsp; ],
+&nbsp; &nbsp; &nbsp; &nbsp; keys: [
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [Object]
+&nbsp; &nbsp; &nbsp; &nbsp; ],
+&nbsp; &nbsp; &nbsp; &nbsp; regexp: /^\/api\/article\/(?:([^\/]+?))\/?$/i,
+&nbsp; &nbsp; &nbsp; &nbsp; params: [title: &#39;Markdown - GitHub Flavored Markdown&#39;]
+&nbsp; &nbsp; },
+&nbsp; &nbsp; params: [title: &#39;Markdown - GitHub Flavored Markdown&#39;]
+}</pre>
+
+<p>&nbsp;</p>
