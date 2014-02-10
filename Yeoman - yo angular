@@ -1,0 +1,309 @@
+<h1>Yeoman - yo angular</h1>
+
+<p>2013-09-08 17:20 Sunday</p>
+
+<p><a href="https://npmjs.org/package/generator-angular" target="_blank">https://npmjs.org/package/generator-angular</a></p>
+
+<ul>
+	<li>
+	<p>2013-10-20 11:49 Sunday</p>
+
+	<table border="1">
+		<tbody>
+			<tr>
+				<th>Version</th>
+				<td>0.5.0&nbsp;last updated 3 days ago</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<pre>
+$ npm update generator-angular -g
+...
+generator-angular@0.5.0 /usr/local/share/npm/lib/node_modules/generator-angular
+└── yeoman-generator@0.13.4 (dargs@0.1.0, diff@1.0.7, debug@0.7.2, text-table@0.1.1, mime@1.2.11, async@0.2.9, mkdirp@0.3.5, isbinaryfile@0.1.9, shelljs@0.1.4, underscore.string@2.3.3, chalk@0.2.1, iconv-lite@0.2.11, rimraf@2.2.2, lodash@1.3.1, tar@0.1.18, findup-sync@0.1.2, glob@3.2.6, cheerio@0.12.3, inquirer@0.3.4, request@2.25.0)</pre>
+
+	<pre>
+$ npm ls generator-angular -g
+/usr/local/share/npm/lib
+└── generator-angular@0.5.0 </pre>
+	</li>
+	<li>
+	<p>2013-10-04 22:23 Friday</p>
+
+	<pre>
+$ npm ls generator-angular -g
+/usr/local/share/npm/lib
+└── generator-angular@0.4.0</pre>
+
+	<pre>
+$ npm update generator-angular -g
+​...
+generator-angular@0.4.0 /usr/local/share/npm/lib/node_modules/generator-angular
+└── yeoman-generator@0.13.4 (dargs@0.1.0, diff@1.0.7, debug@0.7.2, text-table@0.1.1, mime@1.2.11, async@0.2.9, mkdirp@0.3.5, isbinaryfile@0.1.9, shelljs@0.1.4, underscore.string@2.3.3, iconv-lite@0.2.11, lodash@1.3.1, chalk@0.2.1, rimraf@2.2.2, tar@0.1.18, glob@3.2.6, findup-sync@0.1.2, cheerio@0.12.2, inquirer@0.3.4, request@2.25.0)
+</pre>
+	</li>
+</ul>
+
+<p>Yeoman generator for AngularJS</p>
+
+<pre>
+npm install generator-angular</pre>
+
+<table>
+	<tbody>
+		<tr>
+			<td>548</td>
+			<td>downloads in the last day</td>
+		</tr>
+		<tr>
+			<td>3 572</td>
+			<td>downloads in the last week</td>
+		</tr>
+		<tr>
+			<td>14 413</td>
+			<td>downloads in the last month</td>
+		</tr>
+	</tbody>
+</table>
+
+<table>
+	<tbody>
+		<tr>
+			<th>Maintainers</th>
+			<td><a href="https://npmjs.org/~sindresorhus">sindresorhus</a><br />
+			<a href="https://npmjs.org/~addyosmani">addyosmani</a><br />
+			<a href="https://npmjs.org/~paulirish">paulirish</a><br />
+			<a href="https://npmjs.org/~btford">btford</a><br />
+			<a href="https://npmjs.org/~passy">passy</a></td>
+		</tr>
+		<tr>
+			<th>Version</th>
+			<td>0.4.0&nbsp;last updated a month ago</td>
+		</tr>
+	</tbody>
+</table>
+
+<pre>
+$ yo angular
+[?] Would you like to include Twitter Bootstrap? No
+[?] Which modules would you like to include? 
+   create app/styles/main.css
+   create app/index.html
+   create bower.json
+   create package.json
+   create Gruntfile.js
+   invoke   angular:common:/usr/local/share/npm/lib/node_modules/generator-angular/app/index.js
+   create     .bowerrc
+   create     .editorconfig
+   create     .gitattributes
+   create     .jshintrc
+   create     app/.buildignore
+   create     app/.htaccess
+   create     app/404.html
+   create     app/favicon.ico
+   create     app/robots.txt
+   create     app/views/main.html
+   create     test/.jshintrc
+   create     test/runner.html
+   create     .gitignore
+   invoke   angular:main:/usr/local/share/npm/lib/node_modules/generator-angular/app/index.js
+   create     app/scripts/app.js
+   invoke   angular:controller:/usr/local/share/npm/lib/node_modules/generator-angular/app/index.js
+   create     app/scripts/controllers/main.js
+   create     test/spec/controllers/main.js
+   invoke   karma:app
+   create     karma.conf.js
+   create     karma-e2e.conf.js
+   create     .travis.yml
+
+
+I&#39;m all done. Running bower install &amp; npm install for you to install the required dependencies. If this fails, try running the command yourself.
+...</pre>
+
+<h2>changelog</h2>
+
+<p>2013-10-20 14:00 Sunday</p>
+
+<pre>
+$ git l
+* adcfc94 - 22 minutes ago - Ma Lian - &nbsp;(HEAD, master) - yo@1.0.4, generator-angular@0.5.0
+* 4b2fa48 - 2 hours ago - Ma Lian - &nbsp;- yo@1.0.4, generator-angular@0.4.0</pre>
+
+<pre>
+$ git df HEAD^|cat
+diff --git a/Gruntfile.js b/Gruntfile.js
+index b9b37ec..7bff26a 100644
+--- a/Gruntfile.js
++++ b/Gruntfile.js
+@@ -1,10 +1,5 @@
+-// Generated on 2013-10-20 using generator-angular 0.4.0
++// Generated on 2013-10-20 using generator-angular 0.5.0
+&nbsp;&#39;use strict&#39;;
+-var LIVERELOAD_PORT = 35729;
+-var lrSnippet = require(&#39;connect-livereload&#39;)({ port: LIVERELOAD_PORT });
+-var mountFolder = function (connect, dir) {
+- &nbsp;return connect.static(require(&#39;path&#39;).resolve(dir));
+-};
+&nbsp;
+&nbsp;// # Globbing
+&nbsp;// for performance reasons we&#39;re only matching one level down:
+@@ -16,18 +11,12 @@ module.exports = function (grunt) {
+&nbsp; &nbsp;require(&#39;load-grunt-tasks&#39;)(grunt);
+&nbsp; &nbsp;require(&#39;time-grunt&#39;)(grunt);
+&nbsp;
+- &nbsp;// configurable paths
+- &nbsp;var yeomanConfig = {
+- &nbsp; &nbsp;app: &#39;app&#39;,
+- &nbsp; &nbsp;dist: &#39;dist&#39;
+- &nbsp;};
+-
+- &nbsp;try {
+- &nbsp; &nbsp;yeomanConfig.app = require(&#39;./bower.json&#39;).appPath || yeomanConfig.app;
+- &nbsp;} catch (e) {}
+-
+&nbsp; &nbsp;grunt.initConfig({
+- &nbsp; &nbsp;yeoman: yeomanConfig,
++ &nbsp; &nbsp;yeoman: {
++ &nbsp; &nbsp; &nbsp;// configurable paths
++ &nbsp; &nbsp; &nbsp;app: require(&#39;./bower.json&#39;).appPath || &#39;app&#39;,
++ &nbsp; &nbsp; &nbsp;dist: &#39;dist&#39;
++ &nbsp; &nbsp;},
+&nbsp; &nbsp; &nbsp;watch: {
+&nbsp; &nbsp; &nbsp; &nbsp;coffee: {
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;files: [&#39;&lt;%= yeoman.app %&gt;/scripts/{,*/}*.coffee&#39;],
+@@ -43,7 +32,7 @@ module.exports = function (grunt) {
+&nbsp; &nbsp; &nbsp; &nbsp;},
+&nbsp; &nbsp; &nbsp; &nbsp;livereload: {
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;options: {
+- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;livereload: LIVERELOAD_PORT
++ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;livereload: &#39;&lt;%= connect.options.livereload %&gt;&#39;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;},
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;files: [
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&#39;&lt;%= yeoman.app %&gt;/{,*/}*.html&#39;,
+@@ -68,44 +57,34 @@ module.exports = function (grunt) {
+&nbsp; &nbsp; &nbsp; &nbsp;options: {
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;port: 9000,
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;// Change this to &#39;0.0.0.0&#39; to access the server from outside.
+- &nbsp; &nbsp; &nbsp; &nbsp;hostname: &#39;localhost&#39;
++ &nbsp; &nbsp; &nbsp; &nbsp;hostname: &#39;localhost&#39;,
++ &nbsp; &nbsp; &nbsp; &nbsp;livereload: 35729
+&nbsp; &nbsp; &nbsp; &nbsp;},
+&nbsp; &nbsp; &nbsp; &nbsp;livereload: {
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;options: {
+- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;middleware: function (connect) {
+- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return [
+- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;lrSnippet,
+- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;mountFolder(connect, &#39;.tmp&#39;),
+- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;mountFolder(connect, yeomanConfig.app)
+- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;];
+- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}
++ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;open: true,
++ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;base: [
++ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&#39;.tmp&#39;,
++ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&#39;&lt;%= yeoman.app %&gt;&#39;
++ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;]
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}
+&nbsp; &nbsp; &nbsp; &nbsp;},
+&nbsp; &nbsp; &nbsp; &nbsp;test: {
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;options: {
+- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;middleware: function (connect) {
+- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return [
+- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;mountFolder(connect, &#39;.tmp&#39;),
+- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;mountFolder(connect, &#39;test&#39;)
+- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;];
+- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}
++ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;port: 9001,
++ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;base: [
++ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&#39;.tmp&#39;,
++ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&#39;test&#39;,
++ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&#39;&lt;%= yeoman.app %&gt;&#39;
++ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;]
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}
+&nbsp; &nbsp; &nbsp; &nbsp;},
+&nbsp; &nbsp; &nbsp; &nbsp;dist: {
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;options: {
+- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;middleware: function (connect) {
+- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return [
+- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;mountFolder(connect, yeomanConfig.dist)
+- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;];
+- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}
++ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;base: &#39;&lt;%= yeoman.dist %&gt;&#39;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}
+&nbsp; &nbsp; &nbsp; &nbsp;}
+&nbsp; &nbsp; &nbsp;},
+- &nbsp; &nbsp;open: {
+- &nbsp; &nbsp; &nbsp;server: {
+- &nbsp; &nbsp; &nbsp; &nbsp;url: &#39;http://localhost:&lt;%= connect.options.port %&gt;&#39;
+- &nbsp; &nbsp; &nbsp;}
+- &nbsp; &nbsp;},
+&nbsp; &nbsp; &nbsp;clean: {
+&nbsp; &nbsp; &nbsp; &nbsp;dist: {
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;files: [{
+@@ -318,7 +297,7 @@ module.exports = function (grunt) {
+&nbsp;
+&nbsp; &nbsp;grunt.registerTask(&#39;server&#39;, function (target) {
+&nbsp; &nbsp; &nbsp;if (target === &#39;dist&#39;) {
+- &nbsp; &nbsp; &nbsp;return grunt.task.run([&#39;build&#39;, &#39;open&#39;, &#39;connect:dist:keepalive&#39;]);
++ &nbsp; &nbsp; &nbsp;return grunt.task.run([&#39;build&#39;, &#39;connect:dist:keepalive&#39;]);
+&nbsp; &nbsp; &nbsp;}
+&nbsp;
+&nbsp; &nbsp; &nbsp;grunt.task.run([
+@@ -326,7 +305,6 @@ module.exports = function (grunt) {
+&nbsp; &nbsp; &nbsp; &nbsp;&#39;concurrent:server&#39;,
+&nbsp; &nbsp; &nbsp; &nbsp;&#39;autoprefixer&#39;,
+&nbsp; &nbsp; &nbsp; &nbsp;&#39;connect:livereload&#39;,
+- &nbsp; &nbsp; &nbsp;&#39;open&#39;,
+&nbsp; &nbsp; &nbsp; &nbsp;&#39;watch&#39;
+&nbsp; &nbsp; &nbsp;]);
+&nbsp; &nbsp;});
+diff --git a/app/index.html b/app/index.html
+index 2975aca..7663124 100644
+--- a/app/index.html
++++ b/app/index.html
+@@ -39,7 +39,7 @@
+&nbsp; &nbsp; &nbsp; &nbsp; ga(&#39;send&#39;, &#39;pageview&#39;);
+&nbsp; &nbsp; &nbsp;&lt;/script&gt;
+&nbsp;
+- &nbsp; &nbsp;&lt;script src=&quot;bower_components/jquery/jquery.js&quot;&gt;&lt;/script&gt;
++
+&nbsp; &nbsp; &nbsp;&lt;script src=&quot;bower_components/angular/angular.js&quot;&gt;&lt;/script&gt;
+&nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;!-- build:js({.tmp,app}) scripts/scripts.js --&gt;
+diff --git a/package.json b/package.json
+index 41fd42b..2004e77 100644
+--- a/package.json
++++ b/package.json
+@@ -11,7 +11,7 @@
+&nbsp; &nbsp; &nbsp;&quot;grunt-contrib-compass&quot;: &quot;~0.5.0&quot;,
+&nbsp; &nbsp; &nbsp;&quot;grunt-contrib-jshint&quot;: &quot;~0.6.0&quot;,
+&nbsp; &nbsp; &nbsp;&quot;grunt-contrib-cssmin&quot;: &quot;~0.6.0&quot;,
+- &nbsp; &nbsp;&quot;grunt-contrib-connect&quot;: &quot;~0.3.0&quot;,
++ &nbsp; &nbsp;&quot;grunt-contrib-connect&quot;: &quot;~0.5.0&quot;,
+&nbsp; &nbsp; &nbsp;&quot;grunt-contrib-clean&quot;: &quot;~0.5.0&quot;,
+&nbsp; &nbsp; &nbsp;&quot;grunt-contrib-htmlmin&quot;: &quot;~0.1.3&quot;,
+&nbsp; &nbsp; &nbsp;&quot;grunt-contrib-imagemin&quot;: &quot;~0.2.0&quot;,
+@@ -20,21 +20,19 @@
+&nbsp; &nbsp; &nbsp;&quot;grunt-usemin&quot;: &quot;~0.1.11&quot;,
+&nbsp; &nbsp; &nbsp;&quot;grunt-svgmin&quot;: &quot;~0.2.0&quot;,
+&nbsp; &nbsp; &nbsp;&quot;grunt-rev&quot;: &quot;~0.1.0&quot;,
+- &nbsp; &nbsp;&quot;grunt-open&quot;: &quot;~0.2.0&quot;,
+&nbsp; &nbsp; &nbsp;&quot;grunt-concurrent&quot;: &quot;~0.3.0&quot;,
+&nbsp; &nbsp; &nbsp;&quot;load-grunt-tasks&quot;: &quot;~0.1.0&quot;,
+- &nbsp; &nbsp;&quot;connect-livereload&quot;: &quot;~0.2.0&quot;,
+&nbsp; &nbsp; &nbsp;&quot;grunt-google-cdn&quot;: &quot;~0.2.0&quot;,
+&nbsp; &nbsp; &nbsp;&quot;grunt-ngmin&quot;: &quot;~0.0.2&quot;,
+&nbsp; &nbsp; &nbsp;&quot;time-grunt&quot;: &quot;~0.1.0&quot;,
+&nbsp; &nbsp; &nbsp;&quot;karma-ng-scenario&quot;: &quot;~0.1.0&quot;,
+&nbsp; &nbsp; &nbsp;&quot;grunt-karma&quot;: &quot;~0.6.2&quot;,
++ &nbsp; &nbsp;&quot;karma-script-launcher&quot;: &quot;~0.1.0&quot;,
+&nbsp; &nbsp; &nbsp;&quot;karma-firefox-launcher&quot;: &quot;~0.1.0&quot;,
+&nbsp; &nbsp; &nbsp;&quot;karma-chrome-launcher&quot;: &quot;~0.1.0&quot;,
+- &nbsp; &nbsp;&quot;karma-script-launcher&quot;: &quot;~0.1.0&quot;,
+&nbsp; &nbsp; &nbsp;&quot;karma-html2js-preprocessor&quot;: &quot;~0.1.0&quot;,
+- &nbsp; &nbsp;&quot;karma-requirejs&quot;: &quot;~0.1.0&quot;,
+&nbsp; &nbsp; &nbsp;&quot;karma-jasmine&quot;: &quot;~0.1.3&quot;,
++ &nbsp; &nbsp;&quot;karma-requirejs&quot;: &quot;~0.1.0&quot;,
+&nbsp; &nbsp; &nbsp;&quot;karma-coffee-preprocessor&quot;: &quot;~0.1.0&quot;,
+&nbsp; &nbsp; &nbsp;&quot;karma-phantomjs-launcher&quot;: &quot;~0.1.0&quot;,
+&nbsp; &nbsp; &nbsp;&quot;karma&quot;: &quot;~0.10.2&quot;,</pre>
