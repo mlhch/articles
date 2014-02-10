@@ -1,0 +1,340 @@
+<h1>jQuery Validation</h1>
+
+<p>2012-08-30 19:11:13 +08:00 Thursday</p>
+
+<p><a href="http://jqueryvalidation.org/" target="_blank">http://jqueryvalidation.org/</a></p>
+
+<p>2013-08-31 19:36</p>
+
+<p>今天又要用到它了，还是 1.11.1 版本。</p>
+
+<h3>Legacy</h3>
+
+<p>Documentation:&nbsp;<a href="http://docs.jquery.com/Plugins/Validation" target="_blank">http://docs.jquery.com/Plugins/Validation</a></p>
+
+<p>the jQuery Validation Plugin page:&nbsp;<a href="http://bassistance.de/jquery-plugins/jquery-plugin-validation/" target="_blank">http://bassistance.de/jquery-plugins/jquery-plugin-validation/</a></p>
+
+<p>2013-06-29 09:29 今天发现上述两个链接都直接强制跳转到了&nbsp;<a href="http://jqueryvalidation.org/" target="_blank">http://jqueryvalidation.org/</a>，而这是一个刚刚用 WordPress 3.5.1 搭建的博客。</p>
+
+<p>2013-05-22 21:30 Wednsday 当时做项目时所用版本为 1.9.0，如今已经是 1.11.1 了</p>
+
+<p>This jQuery plugin makes simple clientside form validation trivial, while offering lots of option for customization. That makes a good choice if you&rsquo;re building something new from scratch, but also when you&rsquo;re trying to integrate it into an existing application with lots of existing markup. The plugin comes bundled with a useful set of validation methods, including URL and email validation, while providing an API to write your own methods. All bundled methods come with default error messages in english and translations into 37 locales.</p>
+
+<p><strong>Current version:</strong>&nbsp;1.11.1</p>
+
+<p>GitHub Repository:&nbsp;<a href="http://github.com/jzaefferer/jquery-validation" target="_blank">github.com/jzaefferer/jquery-validation</a>&nbsp;$ git clone&nbsp;git@github.com:jzaefferer/jquery-validation.git</p>
+
+<h3>jquery-validation-php-plugin</h3>
+
+<p><a href="http://code.google.com/p/jquery-validation-php-plugin/" target="_blank">http://code.google.com/p/jquery-validation-php-plugin/</a></p>
+
+<p>2013-06-29 09:46</p>
+
+<p>代理打开后，版本未变。</p>
+
+<table border="0" cellpadding="2" cellspacing="0" style="width:100%">
+	<tbody>
+		<tr>
+			<td style="vertical-align:top"><a href="https://code.google.com/p/jquery-validation-php-plugin/downloads/detail?name=jquery-validation-php-plugin-0.4.zip&amp;can=2&amp;q=">jquery-validation-php-plugin-0.4</a></td>
+			<td style="vertical-align:top"><a href="https://code.google.com/p/jquery-validation-php-plugin/downloads/detail?name=jquery-validation-php-plugin-0.4.zip&amp;can=2&amp;q=">Jun 2010</a></td>
+			<td style="vertical-align:top">&nbsp;</td>
+			<td style="vertical-align:top"><a href="https://code.google.com/p/jquery-validation-php-plugin/downloads/detail?name=jquery-validation-php-plugin-0.4.zip&amp;can=2&amp;q=">6.5 KB</a></td>
+			<td style="vertical-align:top"><a href="https://code.google.com/p/jquery-validation-php-plugin/downloads/detail?name=jquery-validation-php-plugin-0.4.zip&amp;can=2&amp;q=">848</a></td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top"><a href="https://code.google.com/p/jquery-validation-php-plugin/downloads/detail?name=jquery-validation-php-plugin-0.3.zip&amp;can=2&amp;q=">jquery-validation-php-plugin-0.3</a></td>
+			<td style="vertical-align:top"><a href="https://code.google.com/p/jquery-validation-php-plugin/downloads/detail?name=jquery-validation-php-plugin-0.3.zip&amp;can=2&amp;q=">Jan 2010</a></td>
+			<td style="vertical-align:top">&nbsp;</td>
+			<td style="vertical-align:top"><a href="https://code.google.com/p/jquery-validation-php-plugin/downloads/detail?name=jquery-validation-php-plugin-0.3.zip&amp;can=2&amp;q=">6.4 KB</a></td>
+			<td style="vertical-align:top"><a href="https://code.google.com/p/jquery-validation-php-plugin/downloads/detail?name=jquery-validation-php-plugin-0.3.zip&amp;can=2&amp;q=">145</a></td>
+			<td>&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p>2012-09-20 07:18 星期四 要做 curah2o/m/water-quality 服务端验证，所以好好看下这个东西</p>
+
+<h2>示例</h2>
+
+<p>2012-10-12 20:59 星期五 早上拿到驾照了，下午回门</p>
+
+<p>更多示例可参看文档中的 demo 目录。</p>
+
+<pre>
+$(&quot;#commentForm&quot;).validate();</pre>
+
+<pre>
+$(&quot;#signupForm&quot;).validate({
+&nbsp; rules: {
+&nbsp;&nbsp; firstname: &quot;required&quot;,
+&nbsp;&nbsp; confirm_password: {
+&nbsp;&nbsp;&nbsp; required: true,
+&nbsp;&nbsp;&nbsp; minlength: 5,
+&nbsp;&nbsp;&nbsp; equalTo: &quot;#password&quot;
+&nbsp;&nbsp; },
+&nbsp;&nbsp; topic: {
+&nbsp;&nbsp;&nbsp; required: &quot;#newsletter:checked&quot;,
+&nbsp;&nbsp;&nbsp; minlength: 2
+&nbsp;&nbsp; }
+&nbsp; },
+&nbsp; messages: {
+&nbsp;&nbsp; firstname: &quot;Please enter your firstname&quot;,
+&nbsp;&nbsp; confirm_password: {
+&nbsp;&nbsp;&nbsp; required: &quot;Please provide a password&quot;,
+&nbsp;&nbsp;&nbsp; minlength: &quot;Your password must be at least 5 characters long&quot;,
+&nbsp;&nbsp;&nbsp; equalTo: &quot;Please enter the same password as above&quot;
+&nbsp;&nbsp; }
+&nbsp; }
+});</pre>
+
+<pre>
+$(&quot;#form1&quot;).validate({
+&nbsp; errorLabelContainer: $(&quot;#form1 div.error&quot;)
+});
+
+var container = $(&#39;div.container&#39;);
+// validate the form when it is submitted
+var validator = $(&quot;#form2&quot;).validate({
+&nbsp; errorContainer: container,
+&nbsp; errorLabelContainer: $(&quot;ol&quot;, container),
+&nbsp; wrapper: &#39;li&#39;,
+&nbsp; meta: &quot;validate&quot;
+});
+
+$(&quot;.cancel&quot;).click(function() {
+&nbsp; validator.resetForm();
+});</pre>
+
+<pre>
+if ($(form).validate().form()) {
+  ...
+}</pre>
+
+<p>清除错误信息，但不 reset 表单值</p>
+
+<pre>
+var validator = $(me.form).validate();
+&nbsp;&nbsp;&nbsp;&nbsp; validator.prepareForm(); // 这个很重要
+&nbsp;&nbsp;&nbsp;&nbsp; validator.hideErrors();
+&nbsp;&nbsp;&nbsp;&nbsp; validator.elements().removeClass( validator.settings.errorClass );</pre>
+
+<h2>代码摘要</h2>
+
+<p>$(form).validate() 调用了如下方法：</p>
+
+<pre>
+$.extend($.fn, {
+// http://docs.jquery.com/Plugins/Validation/validate
+validate: function( options ) {
+  ...
+  // check if a validator for this form was already created
+&nbsp; var validator = $.data(this[0], &#39;validator&#39;);
+&nbsp; if ( validator ) {
+&nbsp;&nbsp; return validator;
+&nbsp; }
+
+&nbsp; // Add novalidate tag if HTML5.
+&nbsp; this.attr(&#39;novalidate&#39;, &#39;novalidate&#39;);
+
+&nbsp; validator = new $.validator( options, this[0] );
+&nbsp; $.data(this[0], &#39;validator&#39;, validator);
+  ...
+}
+
+// http://docs.jquery.com/Plugins/Validation/valid
+valid: function() {},
+
+// attributes: space seperated list of attributes to retrieve and remove
+removeAttrs: function(attributes) {},
+
+// http://docs.jquery.com/Plugins/Validation/rules
+rules: function(command, argument) {});
+
+});
+</pre>
+
+<pre>
+// Custom selectors
+$.extend($.expr[&quot;:&quot;], {
+// http://docs.jquery.com/Plugins/Validation/blank
+blank: function(a) {return !$.trim(&quot;&quot; + a.value);},
+// http://docs.jquery.com/Plugins/Validation/filled
+filled: function(a) {return !!$.trim(&quot;&quot; + a.value);},
+// http://docs.jquery.com/Plugins/Validation/unchecked
+unchecked: function(a) {return !a.checked;}
+});</pre>
+
+<p>此是 $(form).validate() 返回的实例的构造函数</p>
+
+<pre>
+// constructor for validator
+$.validator = function( options, form ) {
+this.settings = $.extend( true, {}, $.validator.defaults, options );
+this.currentForm = form;
+this.init();
+};</pre>
+
+<p>defaults, messages 是静态属性，prototype.init 就是将来的实例方法了。$(form).validate().form() 方法进行验证并显示错误，checkForm() 方法只是进行验证，返回是否有错。</p>
+
+<pre>
+$.extend($.validator, {
+
+defaults: {}
+
+messages: {
+&nbsp; required: &quot;This field is required.&quot;,
+&nbsp; remote: &quot;Please fix this field.&quot;,
+&nbsp; email: &quot;Please enter a valid email address.&quot;,
+&nbsp; url: &quot;Please enter a valid URL.&quot;,
+&nbsp; date: &quot;Please enter a valid date.&quot;,
+&nbsp; dateISO: &quot;Please enter a valid date (ISO).&quot;,
+&nbsp; number: &quot;Please enter a valid number.&quot;,
+&nbsp; digits: &quot;Please enter only digits.&quot;,
+&nbsp; creditcard: &quot;Please enter a valid credit card number.&quot;,
+&nbsp; equalTo: &quot;Please enter the same value again.&quot;,
+&nbsp; accept: &quot;Please enter a value with a valid extension.&quot;,
+&nbsp; maxlength: $.validator.format(&quot;Please enter no more than {0} characters.&quot;),
+&nbsp; minlength: $.validator.format(&quot;Please enter at least {0} characters.&quot;),
+&nbsp; rangelength: $.validator.format(&quot;Please enter a value between {0} and {1} characters long.&quot;),
+&nbsp; range: $.validator.format(&quot;Please enter a value between {0} and {1}.&quot;),
+&nbsp; max: $.validator.format(&quot;Please enter a value less than or equal to {0}.&quot;),
+&nbsp; min: $.validator.format(&quot;Please enter a value greater than or equal to {0}.&quot;)
+},
+
+prototype: {
+
+&nbsp; init: function() {
+    ...
+  },
+  // http://docs.jquery.com/Plugins/Validation/Validator/form
+&nbsp; form: function() {
+    this.checkForm();
+    ...
+  },
+  checkForm: function() {
+&nbsp;&nbsp; this.prepareForm();
+&nbsp;&nbsp; for ( var i = 0, elements = (this.currentElements = this.elements()); elements[i]; i++ ) {
+&nbsp;&nbsp;&nbsp; this.check( elements[i] );
+&nbsp;&nbsp; }
+&nbsp;&nbsp; return this.valid();
+&nbsp; },
+  // http://docs.jquery.com/Plugins/Validation/Validator/element
+&nbsp; element: function( element ) {
+    ...
+  },
+&nbsp; // http://docs.jquery.com/Plugins/Validation/Validator/resetForm
+&nbsp; resetForm: function() {
+&nbsp;&nbsp; if ( $.fn.resetForm )
+&nbsp;&nbsp;&nbsp; $( this.currentForm ).resetForm();
+&nbsp;&nbsp; this.submitted = {};
+&nbsp;&nbsp; this.lastElement = null;
+&nbsp;&nbsp; this.prepareForm();
+&nbsp;&nbsp; this.hideErrors();
+&nbsp;&nbsp; this.elements().removeClass( this.settings.errorClass );
+&nbsp; },
+&nbsp; valid: function() {
+&nbsp;&nbsp; return this.size() == 0;
+&nbsp; },
+
+&nbsp; size: function() {
+&nbsp;&nbsp; return this.errorList.length;
+&nbsp; },
+...
+
+},
+
+methods: {
+
+&nbsp; // http://docs.jquery.com/Plugins/Validation/Methods/required
+&nbsp; required: function(value, element, param) {...},
+
+&nbsp; // http://docs.jquery.com/Plugins/Validation/Methods/remote
+&nbsp; remote: function(value, element, param) {...},
+
+&nbsp; // http://docs.jquery.com/Plugins/Validation/Methods/minlength
+&nbsp; minlength: function(value, element, param) {
+&nbsp;&nbsp; return this.optional(element) || this.getLength($.trim(value), element) &gt;= param;
+&nbsp; },
+
+&nbsp; // http://docs.jquery.com/Plugins/Validation/Methods/maxlength
+&nbsp; maxlength: function(value, element, param) {
+&nbsp;&nbsp; return this.optional(element) || this.getLength($.trim(value), element) &lt;= param;
+&nbsp; },
+
+&nbsp; // http://docs.jquery.com/Plugins/Validation/Methods/rangelength
+&nbsp; rangelength: function(value, element, param) {
+&nbsp;&nbsp; var length = this.getLength($.trim(value), element);
+&nbsp;&nbsp; return this.optional(element) || ( length &gt;= param[0] &amp;&amp; length &lt;= param[1] );
+&nbsp; },
+
+&nbsp; // http://docs.jquery.com/Plugins/Validation/Methods/min
+&nbsp; min: function( value, element, param ) {
+&nbsp;&nbsp; return this.optional(element) || value &gt;= param;
+&nbsp; },
+
+&nbsp; // http://docs.jquery.com/Plugins/Validation/Methods/max
+&nbsp; max: function( value, element, param ) {
+&nbsp;&nbsp; return this.optional(element) || value &lt;= param;
+&nbsp; },
+
+&nbsp; // http://docs.jquery.com/Plugins/Validation/Methods/range
+&nbsp; range: function( value, element, param ) {
+&nbsp;&nbsp; return this.optional(element) || ( value &gt;= param[0] &amp;&amp; value &lt;= param[1] );
+&nbsp; },
+
+&nbsp; // http://docs.jquery.com/Plugins/Validation/Methods/email
+&nbsp; email: function(value, element) {
+&nbsp;&nbsp; // contributed by Scott Gonzalez: http://projects.scottsplayground.com/email_address_validation/
+&nbsp;&nbsp; return this.optional(element) || /^((([a-z]|\d|[!#\$%&amp;&#39;\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&amp;&#39;\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))$/i.test(value);
+&nbsp; },
+
+&nbsp; // http://docs.jquery.com/Plugins/Validation/Methods/url
+&nbsp; url: function(value, element) {
+&nbsp;&nbsp; // contributed by Scott Gonzalez: http://projects.scottsplayground.com/iri/
+&nbsp;&nbsp; return this.optional(element) || /^(https?|ftp):\/\/(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&amp;&#39;\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&amp;&#39;\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&amp;&#39;\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&amp;&#39;\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(\#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&amp;&#39;\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i.test(value);
+&nbsp; },
+
+&nbsp; // http://docs.jquery.com/Plugins/Validation/Methods/date
+&nbsp; date: function(value, element) {
+&nbsp;&nbsp; return this.optional(element) || !/Invalid|NaN/.test(new Date(value));
+&nbsp; },
+
+&nbsp; // http://docs.jquery.com/Plugins/Validation/Methods/dateISO
+&nbsp; dateISO: function(value, element) {
+&nbsp;&nbsp; return this.optional(element) || /^\d{4}[\/-]\d{1,2}[\/-]\d{1,2}$/.test(value);
+&nbsp; },
+
+&nbsp; // http://docs.jquery.com/Plugins/Validation/Methods/number
+&nbsp; number: function(value, element) {
+&nbsp;&nbsp; return this.optional(element) || /^-?(?:\d+|\d{1,3}(?:,\d{3})+)(?:\.\d+)?$/.test(value);
+&nbsp; },
+
+&nbsp; // http://docs.jquery.com/Plugins/Validation/Methods/digits
+&nbsp; digits: function(value, element) {
+&nbsp;&nbsp; return this.optional(element) || /^\d+$/.test(value);
+&nbsp; },
+
+&nbsp; // http://docs.jquery.com/Plugins/Validation/Methods/creditcard
+&nbsp; // based on http://en.wikipedia.org/wiki/Luhn
+&nbsp; creditcard: function(value, element) {...},
+
+&nbsp; // http://docs.jquery.com/Plugins/Validation/Methods/accept
+&nbsp; accept: function(value, element, param) {
+&nbsp;&nbsp; param = typeof param == &quot;string&quot; ? param.replace(/,/g, &#39;|&#39;) : &quot;png|jpe?g|gif&quot;;
+&nbsp;&nbsp; return this.optional(element) || value.match(new RegExp(&quot;.(&quot; + param + &quot;)$&quot;, &quot;i&quot;));
+&nbsp; },
+
+&nbsp; // http://docs.jquery.com/Plugins/Validation/Methods/equalTo
+&nbsp; equalTo: function(value, element, param) {
+&nbsp;&nbsp; // bind to the blur event of the target in order to revalidate whenever the target field is updated
+&nbsp;&nbsp; // TODO find a way to bind the event just once, avoiding the unbind-rebind overhead
+&nbsp;&nbsp; var target = $(param).unbind(&quot;.validate-equalTo&quot;).bind(&quot;blur.validate-equalTo&quot;, function() {
+&nbsp;&nbsp;&nbsp; $(element).valid();
+&nbsp;&nbsp; });
+&nbsp;&nbsp; return value == target.val();
+&nbsp; }
+
+}
+
+});</pre>
