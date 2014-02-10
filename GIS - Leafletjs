@@ -1,0 +1,119 @@
+<h1>GIS - Leafletjs</h1>
+
+<p>2013-08-19 23:17 Monday</p>
+
+<p><a href="http://leafletjs.com/" target="_blank">http://leafletjs.com/</a></p>
+
+<blockquote>
+<p>An Open-Source JavaScript Library for Mobile-Friendly Interactive Maps</p>
+</blockquote>
+
+<p>June 26, 2013 &mdash; Leaflet 0.6 Released, Code Sprint in DC with MapBox &mdash;&nbsp;<a href="http://leafletjs.com/2013/06/26/leaflet-0-6-released-dc-code-sprint-mapbox.html">Read More in the Blog</a></p>
+
+<p>Leaflet is a modern open-source JavaScript library for mobile-friendly interactive maps. It is developed by&nbsp;<a href="http://agafonkin.com/en">Vladimir Agafonkin</a>&nbsp;with a&nbsp;team of dedicated&nbsp;<a href="https://github.com/Leaflet/Leaflet/graphs/contributors">contributors</a>. Weighing just about&nbsp;31 KB of JS, it has all the&nbsp;<a href="http://leafletjs.com/features.html">features</a>&nbsp;most developers ever need for online maps.</p>
+
+<p>Leaflet is designed with&nbsp;simplicity,&nbsp;performance&nbsp;and&nbsp;usability&nbsp;in mind. It works efficiently across all major desktop and mobile platforms out of the box, taking advantage of HTML5 and CSS3 on modern browsers while still being accessible on older ones. It can be extended with many&nbsp;<a href="http://leafletjs.com/plugins.html">plugins</a>, has a beautiful, easy to use and&nbsp;<a href="http://leafletjs.com/reference.html">well-documented API</a>&nbsp;and a simple, readable&nbsp;<a href="https://github.com/Leaflet/Leaflet">source code</a>&nbsp;that is a&nbsp;joy to&nbsp;<a href="https://github.com/Leaflet/Leaflet/blob/master/CONTRIBUTING.md">contribute</a>&nbsp;to.</p>
+
+<p>&nbsp;</p>
+
+<ol>
+	<li>
+	<pre>
+L.Map.include({
+​setView: function (center, zoom, forceReset) {</pre>
+
+	<pre>
+this._resetView(center, zoom);
+</pre>
+	</li>
+	<li>
+	<pre>
+L.Map = L.Class.extend({
+_resetView: function (center, zoom, preserveMapOffset, afterZoomAnim) {</pre>
+
+	<pre>
+--&gt; center: {lat:&nbsp;55.28537238249355,&nbsp;lng:&nbsp;-119.278564453125
+this._initialTopLeftPoint = this._getNewTopLeftPoint(center);</pre>
+	</li>
+	<li>
+	<pre>
+L.Map = L.Class.extend({
+_getNewTopLeftPoint: function (center, zoom) {</pre>
+
+	<ol>
+		<li>
+		<pre>
+var viewHalf = this.getSize()._divideBy(2);
+</pre>
+
+		<pre>
+L.Map = L.Class.extend({
+	getSize: function () {
+		if (!this._size || this._sizeChanged) {
+			this._size = new L.Point(
+				this._container.clientWidth,
+				this._container.clientHeight);
+
+			this._sizeChanged = false;
+		}
+		return this._size.clone();
+	},</pre>
+		</li>
+		<li>
+		<pre>
+// TODO round on display, not calculation to increase precision?
+return this.project(center, zoom)._subtract(viewHalf)._round();</pre>
+
+		<pre>
+project: function (latlng, zoom) { // (LatLng[, Number]) -&gt; Point
+  zoom = zoom === undefined ? this._zoom : zoom;
+  return this.options.crs.latLngToPoint(L.latLng(latlng), zoom);
+},</pre>
+
+		<ol>
+			<li>
+			<pre>
+L.CRS = {
+&nbsp; latLngToPoint: function (latlng, zoom) { // (LatLng, Number) -&gt; Point
+&nbsp;   var projectedPoint = this.projection.project(latlng),
+&nbsp;   scale = this.scale(zoom);
+    return this.transformation._transform(projectedPoint, scale);
+  },</pre>
+			</li>
+			<li>
+			<pre>
+L.Projection.SphericalMercator = {
+	MAX_LATITUDE: 85.0511287798,
+
+	project: function (latlng) { // (LatLng) -&gt; Point -&gt; <em>{</em><em>lat</em><em>:&nbsp;</em><em>55.28537238249355</em><em>,&nbsp;</em><em>lng</em><em>:&nbsp;</em><em>-119.278564453125}</em>
+		var d = L.LatLng.DEG_TO_RAD, -&gt; 0.017453292519943295
+		    max = this.MAX_LATITUDE, -&gt; 85.0511287798
+		    lat = Math.max(Math.min(max, latlng.lat), -max),
+		    x = latlng.lng * d, -&gt; 转换成弧度 -2.081803676759301
+		    y = lat * d; -&gt; 转换成弧度 0.9649117762656543
+
+		y = Math.log(Math.tan((Math.PI / 4) + (y / 2)));
+
+		return new L.Point(x, y);
+	},</pre>
+			</li>
+			<li>
+			<pre>
+scale: function (zoom) {
+&nbsp; return 256 * Math.pow(2, zoom);
+}</pre>
+			</li>
+		</ol>
+		</li>
+		<li>
+		<pre>
+L.Point.prototype = {
+  _subtract: function (point) {
+&nbsp;   this.x -= point.x;
+&nbsp;   this.y -= point.y;
+    return this;
+&nbsp; },</pre>
+		</li>
+	</ol>
+	</li>
+</ol>
