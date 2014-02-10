@@ -1,0 +1,788 @@
+<h1>Editor - CKeditor</h1>
+
+<p>2012-12-05 13:01:50 +08:00 Wednesday</p>
+
+<p><a href="http://ckeditor.com/" target="_blank">http://ckeditor.com/</a></p>
+
+<h3>2013-09-16 06:30 Monday</h3>
+
+<p>http://ckeditor.com/forums/CKEditor/Install-CKEditor-via-Bower</p>
+
+<p>现在想用 bower install ckeditor 还只是个提议</p>
+
+<p>所以只能去研究&nbsp;https://github.com/ckeditor/ckeditor-dev 了。</p>
+
+<h3>2013-09-15 20:52 Sunday</h3>
+
+<p><a href="http://download.cksource.com/CKEditor/CKEditor/CKEditor%204.2.1/ckeditor_4.2.1_standard.zip">Download&nbsp;CKEditor</a></p>
+
+<p>Version 4.2.1 &bull; 10 Sep 2013</p>
+
+<h3>2013-05-20 08:05 Monday drive wife to LinQi to see her parents, with 20 jiji</h3>
+
+<p>今天在 AngularJS 架构下使用了目前最新版本 4.1.1</p>
+
+<h3>2011-12-05 21:17 今天更新到了 4.0 版本</h3>
+
+<p><a href="http://ckeditor.com/downloads/ckeditor_4.0_basic.zip">Download&nbsp;CKEditor 4.0</a></p>
+
+<p>Released 27 Nov 2012 &bull;&nbsp;<a href="http://ckeditor.com/whatsnew">Changelog</a></p>
+
+<h3>2011-11-12</h3>
+
+<p>今天忽然有一段时间 articles/ckeditor/ckeditor/ckeditor.js 从浏览器无法访问，稍后又好了，奇怪的事情。</p>
+
+<h2>Installation</h2>
+
+<p>http://docs.ckeditor.com/#!/guide/dev_installation</p>
+
+<p>Installing CKEditor is easy. Choose the appropriate procedure (fresh install or upgrade) and follow the steps described below.</p>
+
+<h3>Fresh Installation</h3>
+
+<p>To install CKEditor for the first time, proceed in the following way:</p>
+
+<ol>
+	<li><strong>Download</strong>&nbsp;the latest version from the CKEditor website:&nbsp;<a href="http://ckeditor.com/download">http://ckeditor.com/download</a></li>
+	<li><strong>Extract</strong>&nbsp;(decompress) the downloaded archive to a directory called&nbsp;<code>ckeditor</code>&nbsp;in the root of your website.</li>
+</ol>
+
+<p>You can place the files in any path of your website. The&nbsp;<code>ckeditor</code>&nbsp;directory is the default one.</p>
+
+<h3>Upgrade</h3>
+
+<p>To upgrade an existing CKEditor installation, proceed in the following way:</p>
+
+<ol>
+	<li><strong>Rename</strong>&nbsp;your old editor folder to a backup folder, for example&nbsp;<code>ckeditor_old</code>.</li>
+	<li><strong>Download</strong>&nbsp;the latest version from the CKEditor website:&nbsp;<a href="http://ckeditor.com/download">http://ckeditor.com/download</a></li>
+	<li><strong>Extract</strong>&nbsp;(decompress) the downloaded archive to the original editor directory, for example&nbsp;<code>ckeditor</code>.</li>
+	<li><strong>Copy</strong>&nbsp;all configuration files that you have changed from the backup directory to their corresponding positions in the new directory. These could include (but are not limited to) the following files:
+	<ul>
+		<li><code>config.js</code></li>
+		<li><code>contents.css</code></li>
+		<li><code>styles.js</code></li>
+	</ul>
+	</li>
+</ol>
+
+<h2>Plugins</h2>
+
+<p>http://docs.ckeditor.com/#!/guide/dev_plugins</p>
+
+<p>CKEditor is based on plugins. In fact, the editor core is initially an empty box, which is then filled with features provided by plugins. Even the editor interface, like toolbars, buttons, and the editing area, are plugins, too!</p>
+
+<p>The default installation of CKEditor (that you are probably using now) comes with a set of plugins already included. At any moment you can enrich your editor with additional plugins and as a result, bring new useful features for your users.</p>
+
+<h3>Where to Look for Plugins?</h3>
+
+<p>The&nbsp;<a href="http://ckeditor.com/addons/plugins">CKEditor Add-ons Repository</a>&nbsp;is an online service designed to find and share editor plugins. Its structure, with plugin categories, comprehensive descriptions, and screenshots, makes it easy to understand the plugin features and the comment system lets you socialize with the CKEditor community and provide instant feedback. If you are a plugin developer, the repository is also the best place to showcase your skills and reach a large user base.</p>
+
+<h3>Creating a Custom Editor with CKBuilder</h3>
+
+<p><a href="http://ckeditor.com/builder">CKBuilder</a>&nbsp;is the sister service of the CKEditor Add-ons Repository. It makes it possible to create a customized editor build by selecting the plugins that best fit your needs.</p>
+
+<p>Throughout the navigation of the add-ons repository you will be able to use the &quot;Add to my editor&quot; button to include plugins of your choice in your custom editor. When you are happy with your custom build, you can simply download it an enjoy an editing experience that is perfectly suited for your needs.</p>
+
+<h3>Installing Plugins Manually</h3>
+
+<p>If you prefer not to use CKBuilder, if you have plugins developed by yourself of by third parties, or if you just want to test plugins before going through the CKBuilder process, you can also add plugins to your local installation manually by following the steps described below:</p>
+
+<ol>
+	<li>
+	<p><strong>Extracting the zip file.</strong>&nbsp;Plugins are usually available as&nbsp;<code>zip</code>&nbsp;files. Start with extracting the&nbsp;<code>zip</code>&nbsp;archive into a folder.</p>
+	</li>
+	<li>
+	<p><strong>Copying the files to CKEditor.</strong>&nbsp;The easiest way to install the files is by copying them into the&nbsp;<code>plugins</code>&nbsp;folder of your CKEditor installation. Each plugin must be placed in a sub-folder that matches its &quot;technical&quot; name. For example, the&nbsp;<a href="http://ckeditor.com/addon/magicline">Magic Line plugin</a>&nbsp;would be installed into this folder:&nbsp;<code>&lt;CKEditor folder&gt;/plugins/magicline</code>.</p>
+	</li>
+	<li>
+	<p><strong>Enabling the plugin.</strong>&nbsp;Finally you need to tell CKEditor that you have a new plugin for it. In order to do that, use the<a href="http://docs.ckeditor.com/#!/api/CKEDITOR.config-cfg-extraPlugins">extraPlugins</a>&nbsp;configuration setting:</p>
+
+	<pre>
+<code>config.extraPlugins = &#39;magicline&#39;;</code></pre>
+	</li>
+</ol>
+
+<p>That&#39;s all. Your plugin will now be enabled in CKEditor.</p>
+
+<h2>Loading CKEditor</h2>
+
+<p>http://docs.ckeditor.com/#!/guide/dev_ckeditor_js_load</p>
+
+<p>CKEditor is a JavaScript application. To load it, you need to include a single file reference in your page. If you&nbsp;<a href="http://docs.ckeditor.com/#!/guide/dev_installation">installed</a>CKEditor in the&nbsp;<code>ckeditor</code>&nbsp;directory in the root of your website, you need to insert the following code fragment into the<code>&lt;head&gt;</code>&nbsp;section of your page:</p>
+
+<pre>
+<code>&lt;head&gt;
+    ...
+    &lt;script src=&quot;/ckeditor/ckeditor.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;</code></pre>
+
+<p>When the above file is loaded, the&nbsp;<a href="http://docs.ckeditor.com/#!/api">CKEditor JavaScript API</a>&nbsp;is ready to be used.</p>
+
+<p>When adding CKEditor to your web pages, use the original file name (<code>ckeditor.js</code>). If you want to use a different file name, or even merge the CKEditor script into another JavaScript file, refer to the&nbsp;<a href="http://docs.cksource.com/CKEditor_3.x/Developers_Guide/Specifying_the_Editor_Path">Specifying the Editor Path</a>&nbsp;section of the Developer&#39;s Guide first.</p>
+
+<h3>Creating Editors</h3>
+
+<p>Now that the&nbsp;<a href="http://docs.ckeditor.com/#!/api">CKEditor JavaScript API</a>&nbsp;is available on the page, you can use it to create editor instances. There are two different options available in order to achieve this:</p>
+
+<ul>
+	<li>
+	<p><a href="http://docs.ckeditor.com/#!/guide/dev_framed">Framed Editing</a>&nbsp;&ndash; the most common way to use CKEditor, when the editor is usually represented by a toolbar and an editing area placed in a specific position on the page.</p>
+	</li>
+	<li>
+	<p><a href="http://docs.ckeditor.com/#!/guide/dev_inline">Inline Editing</a>&nbsp;&ndash; used on pages that need to look like the final page. Editing is enabled directly on HTML elements through the HTML5&nbsp;<code>contenteditable</code>&nbsp;attribute. The editor toolbar appears automatically for these elements, floating on the page.</p>
+	</li>
+</ul>
+
+<p>In order to examine both usage scenarios, choose the preferred option above to get more information. See also the<a href="http://ckeditor.com/demo#standard">Framed Editing</a>&nbsp;and&nbsp;<a href="http://ckeditor.com/demo#inline">Inline Editing</a>&nbsp;demos on our website.</p>
+
+<h2>Framed Editing</h2>
+
+<p>http://docs.ckeditor.com/#!/guide/dev_framed</p>
+
+<p>Framed Editing is the most common way to use CKEditor. In this usage scenario the editor is usually represented by a toolbar and an editing area placed in a specific position on the page.</p>
+
+<p>After&nbsp;<a href="http://docs.ckeditor.com/#!/guide/dev_ckeditor_js_load">loading the CKEditor script</a>&nbsp;you will be ready to create your editor instances.</p>
+
+<h3>Creating a Framed Editor</h3>
+
+<p>In Framed Editing, CKEditor works just like a&nbsp;<code>&lt;textarea&gt;</code>&nbsp;element on your page. The editor offers a user interface to write, format, and work with rich text in a hassle-free manner, but the same content could be added (though not that easily) through a&nbsp;<code>&lt;textarea&gt;</code>&nbsp;element, requiring the user to type HTML code inside.</p>
+
+<p>As a matter of fact, CKEditor uses the&nbsp;<code>&lt;textarea&gt;</code>&nbsp;element to transfer its data to the server. The&nbsp;<code>&lt;textarea&gt;</code>&nbsp;element is invisible to the end user. In order to create an editor instance, you must first add a&nbsp;<code>&lt;textarea&gt;</code>&nbsp;element to the source code of your HTML page:</p>
+
+<pre>
+<code>&lt;textarea name=&quot;editor1&quot;&gt;&amp;lt;p&amp;gt;Initial value.&amp;lt;/p&amp;gt;&lt;/textarea&gt;</code></pre>
+
+<p>Note that if you want to load data into the editor, for example from a database, you need to put that data inside the<code>&lt;textarea&gt;</code>&nbsp;element, just like the HTML-encoded&nbsp;<code>&lt;p&gt;</code>&nbsp;element in the example above. In this case the&nbsp;<code>&lt;textarea&gt;</code>element was named&nbsp;<code>editor1</code>. This name can be used in the server-side code later, when receiving the posted data.</p>
+
+<p>After the&nbsp;<code>&lt;textarea&gt;</code>&nbsp;element is inserted, you can use the&nbsp;<a href="http://docs.ckeditor.com/#!/api">CKEditor JavaScript API</a>&nbsp;to replace this HTML element with an editor instance. A simple&nbsp;<a href="http://docs.ckeditor.com/#!/api/CKEDITOR-method-replace">CKEDITOR.replace</a>&nbsp;method call will be enough to achieve that:</p>
+
+<pre>
+<code>&lt;script&gt;
+    <a href="http://docs.ckeditor.com/#!/api/CKEDITOR-method-replace">CKEDITOR.replace</a>( &#39;editor1&#39; );
+&lt;/script&gt;</code></pre>
+
+<p>This script block must be included at any point after the&nbsp;<code>&lt;textarea&gt;</code>&nbsp;tag in the source code of the page. You can also call the&nbsp;<a href="http://docs.ckeditor.com/#!/api/CKEDITOR-method-replace">CKEDITOR.replace</a>&nbsp;method inside the&nbsp;<code>&lt;head&gt;</code>&nbsp;section, but in this case you will need to listen for the<code>window.onload</code>&nbsp;event:</p>
+
+<pre>
+<code>&lt;script&gt;
+    window.onload = function() {
+        <a href="http://docs.ckeditor.com/#!/api/CKEDITOR-method-replace">CKEDITOR.replace</a>( &#39;editor1&#39; );
+    };
+&lt;/script&gt;</code></pre>
+
+<h3>Saving the Editor Data</h3>
+
+<p>As stated above, the editor works just like a&nbsp;<code>&lt;textarea&gt;</code>&nbsp;field. This means that when submitting a form containing an editor instance, its data will simply be posted, using the&nbsp;<code>&lt;textarea&gt;</code>&nbsp;element name as the key to retrieve it.</p>
+
+<p>For example, following the above example, you could create the following PHP code:</p>
+
+<pre>
+<code>&lt;?php
+    $editor_data = $_POST[ &#39;editor1&#39; ];
+?&gt;</code></pre>
+
+<h3>Client-Side Data Handling</h3>
+
+<p>Some applications (like those based on Ajax) need to handle all data on the client side, sending it to the server using their specific methods. If this is the case, it is enough to use the&nbsp;<a href="http://docs.ckeditor.com/#!/api">CKEditor JavaScript API</a>&nbsp;to easily retrieve the editor instance data. In order to do this, you can use the&nbsp;<a href="http://docs.ckeditor.com/#!/api/CKEDITOR.editor-method-getData">getData</a>&nbsp;method:</p>
+
+<pre>
+<code>&lt;script&gt;
+    var editor_data = CKEDITOR.instances.editor1.getData();
+&lt;/script&gt;</code></pre>
+
+<h3>Complete Sample</h3>
+
+<p>To insert a CKEditor instance, you can use the following sample that creates a basic page containing a form with a<code>&lt;textarea&gt;</code>&nbsp;element that is replaced with CKEditor.</p>
+
+<pre>
+<code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;CKEditor Sample&lt;/title&gt;
+    &lt;script src=&quot;/ckeditor/ckeditor.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;form method=&quot;post&quot;&gt;
+        &lt;p&gt;
+            My Editor:&lt;br&gt;
+            &lt;textarea name=&quot;editor1&quot;&gt;&amp;lt;p&amp;gt;Initial value.&amp;lt;/p&amp;gt;&lt;/textarea&gt;
+            &lt;script&gt;
+                <a href="http://docs.ckeditor.com/#!/api/CKEDITOR-method-replace">CKEDITOR.replace</a>( &#39;editor1&#39; );
+            &lt;/script&gt;
+        &lt;/p&gt;
+        &lt;p&gt;
+            &lt;input type=&quot;submit&quot;&gt;
+        &lt;/p&gt;
+    &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+<h2>Toolbar Customization</h2>
+
+<p>http://docs.ckeditor.com/#!/guide/dev_toolbar</p>
+
+<p>While CKEditor is a full-featured WYSIWYG editor, not all of its options may be needed in all cases. Because of this, toolbar customization is one of the most common requirements.</p>
+
+<p>There are two ways to configure the toolbar to match your needs:</p>
+
+<ul>
+	<li><a href="http://docs.ckeditor.com/#!/guide/dev_toolbar-section-1">Toolbar Groups Configuration</a></li>
+	<li><a href="http://docs.ckeditor.com/#!/guide/dev_toolbar-section-2">&quot;Item by Item&quot; Configuration</a></li>
+</ul>
+
+<h3>Toolbar Groups Configuration</h3>
+
+<p>CKEditor 4 introduced a new concept for toolbar organization which is based on &quot;grouping&quot; instead of the traditional &quot;item by item positioning&quot; way.</p>
+
+<p>Grouping configuration is defined by the&nbsp;<a href="http://docs.ckeditor.com/#!/api/CKEDITOR.config-cfg-toolbarGroups">toolbarGroups</a>&nbsp;setting. The following the the configuration used by the &quot;standard&quot; distribution of CKEditor:</p>
+
+<pre>
+<code>config.toolbarGroups = [
+    { name: &#39;clipboard&#39;,   groups: [ &#39;clipboard&#39;, &#39;undo&#39; ] },
+    { name: &#39;editing&#39;,     groups: [ &#39;find&#39;, &#39;selection&#39;, &#39;spellchecker&#39; ] },
+    { name: &#39;links&#39; },
+    { name: &#39;insert&#39; },
+    { name: &#39;forms&#39; },
+    { name: &#39;tools&#39; },
+    { name: &#39;document&#39;,    groups: [ &#39;mode&#39;, &#39;document&#39;, &#39;doctools&#39; ] },
+    { name: &#39;others&#39; },
+    &#39;/&#39;,
+    { name: &#39;basicstyles&#39;, groups: [ &#39;basicstyles&#39;, &#39;cleanup&#39; ] },
+    { name: &#39;paragraph&#39;,   groups: [ &#39;list&#39;, &#39;indent&#39;, &#39;blocks&#39;, &#39;align&#39; ] },
+    { name: &#39;styles&#39; },
+    { name: &#39;colors&#39; },
+    { name: &#39;about&#39; }
+];</code></pre>
+
+<p>It is a list (Array) of objects, each one with a &quot;name&quot; (e.g &quot;clipboard&quot; or &quot;links&quot;) and a optional &quot;sub-groups&quot; list.</p>
+
+<h3>Changing the Groups Order</h3>
+
+<p>You can easily customize the groups ordering and position by simply changing the above configuration.</p>
+
+<p>You can force row-breaks in the toolbar by adding&nbsp;<code>&#39;/&#39;</code>&nbsp;into the list, just like you could see above.</p>
+
+<p>Note that there are unused groups in the above configuration. This is &quot;by design&quot; (see &quot;The Benefits of Group Configuration&quot;).</p>
+
+<h3>The Benefits of Group Configuration</h3>
+
+<p>The most important benefit of toolbar grouping configuration over the &quot;item by item&quot; configuration is:&nbsp;<strong>automation</strong>.</p>
+
+<p>It is now possible for plugin developers to define into which group their plugins should add buttons in the toolbar. For example, the &quot;image&quot; plugin, includes its button into the &quot;insert&quot; group, while the undo and redo buttons go into the &quot;undo&quot; sub-group.</p>
+
+<p>While not mandatory, having all groups and sub-groups configured (including not used ones) is recommended because at any moment in the future, when a new plugin gets installed, its button will automatically appear in the toolbar without further configuration requirements.</p>
+
+<h3>The Drawbacks of Group Configuration</h3>
+
+<p>The most evident problem with grouping configuration its that it is not possible to control precisely where each item is placed in the toolbar. It is the plugin itself to decide it.</p>
+
+<h2>&quot;Item by Item&quot; Configuration</h2>
+
+<p>Other than the grouping configuration, it is also possible to have more control over every single element in the toolbar by defining their precise position. That is done by configuring a &quot;toolbar definition&quot;.</p>
+
+<p>A toolbar definition is a JavaScript array that contains the elements to be displayed in all&nbsp;<strong>toolbar rows</strong>&nbsp;available in the editor. The following is an example:</p>
+
+<pre>
+<code>config.toolbar = [
+    { name: &#39;document&#39;, items: [ &#39;Source&#39;, &#39;-&#39;, &#39;NewPage&#39;, &#39;Preview&#39;, &#39;-&#39;, &#39;Templates&#39; ] },
+    { name: &#39;clipboard&#39;, items: [ &#39;Cut&#39;, &#39;Copy&#39;, &#39;Paste&#39;, &#39;PasteText&#39;, &#39;PasteFromWord&#39;, &#39;-&#39;, &#39;Undo&#39;, &#39;Redo&#39; ] },
+    &#39;/&#39;,
+    { name: &#39;basicstyles&#39;, items: [ &#39;Bold&#39;, &#39;Italic&#39; ] }
+];</code></pre>
+
+<p>Here every toolbar group is given a name and their precise list of items is defined.</p>
+
+<p>The above can also be achieved with a simpler syntax (see &quot;Accessibility Concerns&quot; later on):</p>
+
+<pre>
+<code>config.toolbar = [
+    [ &#39;Source&#39;, &#39;-&#39;, &#39;NewPage&#39;, &#39;Preview&#39;, &#39;-&#39;, &#39;Templates&#39; ],
+    [ &#39;Cut&#39;, &#39;Copy&#39;, &#39;Paste&#39;, &#39;PasteText&#39;, &#39;PasteFromWord&#39;, &#39;-&#39;, &#39;Undo&#39;, &#39;Redo&#39; ],
+    &#39;/&#39;,
+    [ &#39;Bold&#39;, &#39;Italic&#39; ]
+];</code></pre>
+
+<p>Items separator can be included by adding&nbsp;<code>&#39;-&#39;</code>&nbsp;(dash) to the list of items, as seen above.</p>
+
+<p>You can force row-breaks in the toolbar by adding&nbsp;<code>&#39;/&#39;</code>&nbsp;between groups. They can be used to force a break at the point where they were placed, rendering the next toolbar group in a new row.</p>
+
+<h3>The Benefits of &quot;Item by Item&quot; configuration</h3>
+
+<p>The most evident benefit of this kind of configuration is that the position of every single item in the toolbar is under control.</p>
+
+<h3>The drawbacks of &quot;Item by Item&quot; configuration</h3>
+
+<p>The biggest problem it that there will be no automation when new plugins get installed. This means that, if any new plugin get into your editor, you&#39;ll have to manually change your configurations, to include the plugin buttons at any desired position.</p>
+
+<h2>Accessibility Concerns</h2>
+
+<p>The &quot;name&quot; used on every toolbar group will be used by assistive technology such as screen readers. That name will be used by CKEditor too lookup for the &quot;readable&quot; name of each toolbar group in the editor language files (the&nbsp;<code>toolbarGroups</code>&nbsp;entries).</p>
+
+<p>Screen readers will announce each of the toolbar groups by using either their readable name, if available, or their defined&nbsp;<code>name</code>attribute.</p>
+
+<h2>学习代码</h2>
+
+<ul>
+	<li>
+	<p>ckeditor-dev/core/creators/themedui.js:38，顺便加深对三种调用方式的印象</p>
+
+	<pre>
+CKEDITOR.replaceClass = &#39;ckeditor&#39;;
+</pre>
+
+	<pre>
+    CKEDITOR.replace = function( element, config ) {
+        return createInstance( element, config, null, CKEDITOR.ELEMENT_MODE_REPLACE );
+    };</pre>
+
+	<pre>
+&nbsp;&nbsp; &nbsp;CKEDITOR.appendTo = function( element, config, data )
+&nbsp;&nbsp; &nbsp;{
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;return createInstance( element, config, data, CKEDITOR.ELEMENT_MODE_APPENDTO );
+&nbsp;&nbsp; &nbsp;};</pre>
+
+	<pre>
+&nbsp;&nbsp; &nbsp;CKEDITOR.replaceAll = function() {
+</pre>
+	</li>
+	<li>
+	<p>ckeditor-dev/core/creators/themedui.js:243，跟踪了一会后发现，实际上 loadTheme( editor ) 这个动作触发了 toolbar 的添加。</p>
+
+	<pre>
+	function createInstance( element, config, data, mode ) {
+		element = CKEDITOR.dom.element.get( element );
+		// Create the editor instance.
+		<span class="marker">var editor = new CKEDITOR.editor( config, element, mode );</span>
+		// Once the editor is loaded, start the UI.
+		editor.on( &#39;loaded&#39;, function() {
+			<span class="marker">loadTheme( editor );</span>
+&nbsp;                       ...
+		});
+
+		editor.on( &#39;destroy&#39;, destroy );
+		return editor;
+	}
+</pre>
+	</li>
+	<li>
+	<p>ckeditor-dev/core/editor.js:28</p>
+
+	<p>CKEDITOR.config.customConfig 默认被定义为 &#39;config.js&#39;，原型拷贝后 editor.config 也就是&nbsp;this.config 的 customConfig 值从&nbsp;__proto__.customConfig 的值，成为&nbsp;&nbsp;&#39;config.js&#39;。</p>
+
+	<pre>
+    function Editor( instanceConfig, element, mode ) {</pre>
+
+	<pre>
+        // Make a clone of the config object, to avoid having it touched by our code. (#9636)
+        instanceConfig = instanceConfig &amp;&amp; CKEDITOR.tools.clone( instanceConfig );</pre>
+
+	<pre>
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;/**
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; * The configurations for this editor instance. <span class="marker">It inherits all
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; * settings defined in {@link CKEDITOR.config}, combined with settings
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; * loaded from custom configuration files and those defined inline in
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; * the page when creating the editor.</span>
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; *
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; *&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;var editor = CKEDITOR.instances.editor1;
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; *&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;alert( editor.config.skin ); // e.g. &#39;moono&#39;
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; *
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; * @readonly
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; * @property {CKEDITOR.config}
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; */
+&nbsp;       this.config = CKEDITOR.tools.prototypedCopy( CKEDITOR.config );</pre>
+
+	<pre>
+        // Return the editor instance immediately to enable early stage event registrations.
+        CKEDITOR.tools.setTimeout( function() {
+            initConfig( this, instanceConfig );
+        }, 0, this );
+    }</pre>
+	</li>
+	<li>
+	<p>ckeditor-dev/core/editor.js:278，从 customConfigLoaded 事件触发的动作可看出，instanceConfig.on 提供了事件上的配置，到此时 instanceConfig 中的数据才被正式使用。</p>
+
+	<pre>
+	function initConfig( editor, instanceConfig ) {
+		// Setup the lister for the &quot;customConfigLoaded&quot; event.
+		editor.on( &#39;customConfigLoaded&#39;, function() {
+			if ( instanceConfig ) {
+				// Register the events that may have been set at the instance
+				// configuration object.
+				<span class="marker">if ( instanceConfig.on ) {</span>
+					for ( var eventName in instanceConfig.on ) {
+						editor.on( eventName, instanceConfig.on[ eventName ] );
+					}
+				}
+
+				// Overwrite the settings from the in-page config.
+				<span class="marker">CKEDITOR.tools.extend( editor.config, instanceConfig, true );</span>
+
+				delete editor.config.on;
+			}
+
+			onConfigLoaded( editor );
+		});
+
+		// The instance config may override the customConfig setting to avoid
+		// loading the default ~/config.js file.
+		if ( instanceConfig &amp;&amp; instanceConfig.customConfig != undefined )
+			editor.config.customConfig = instanceConfig.customConfig;
+
+		// Load configs from the custom configuration files.
+		if ( !<span class="marker">loadConfig( editor )</span> ) ==&gt; 首次从此
+			editor.fireOnce( &#39;customConfigLoaded&#39; );
+	}</pre>
+	</li>
+	<li>
+	<p>ckeditor-dev/core/editor.js:236</p>
+
+	<p>loadConfig 第一次被调用时，editor.config.customeConfig 的值默认已经是&nbsp;&#39;config.js&#39;，对应的 url 即是&nbsp;ckeditor-dev/config.js</p>
+
+	<p>loadConfig 第二次被调用时，loadedConfig.fn 已经被赋值成了 CKEDITOR.editorConfig 函数，并且以 editor.config 为参数，以 editor 为 this 进行调用。</p>
+
+	<pre>
+	function loadConfig( editor ) {
+		var customConfig = editor.config.customConfig;
+
+		// Check if there is a custom config to load.
+		if ( !customConfig )
+			return false;
+
+		customConfig = CKEDITOR.getUrl( customConfig );
+
+		var loadedConfig = loadConfigLoaded[ customConfig ] || ( loadConfigLoaded[ customConfig ] = {} );
+
+		// If the custom config has already been downloaded, reuse it.
+		if ( loadedConfig.fn ) {
+			// Call the cached CKEDITOR.editorConfig defined in the custom
+			// config file for the editor instance depending on it.
+			<span class="marker">loadedConfig.fn.call( editor, editor.config );</span>
+
+			// If there is no other customConfig in the chain, fire the
+			// &quot;configLoaded&quot; event.
+			if ( CKEDITOR.getUrl( editor.config.customConfig ) == customConfig || !loadConfig( editor ) )
+				<span class="marker">editor.fireOnce( &#39;customConfigLoaded&#39; );</span>
+		} else {
+			// Load the custom configuration file.
+			// To resolve customConfig race conflicts, use scriptLoader#queue
+			// instead of scriptLoader#load (#6504).
+			CKEDITOR.scriptLoader.queue( customConfig, function() {
+				// If the CKEDITOR.editorConfig function has been properly
+				// defined in the custom configuration file, cache it.
+				if ( CKEDITOR.editorConfig )
+					loadedConfig.fn = CKEDITOR.editorConfig;
+				else
+					loadedConfig.fn = function() {};
+
+				// Call the load config again. This time the custom
+				// config is already cached and so it will get loaded.
+				<span class="marker">loadConfig( editor );</span>
+			});
+		}
+
+		return true;
+	}
+</pre>
+	</li>
+	<li>
+	<p>ckeditor-dev/core/creators/themedui.js:313</p>
+
+	<p>再跟踪下去没意思了，从&nbsp;&nbsp;loadTheme() 开始跟踪 toolbar 是如何被显示的，结果发现是 toolbar 这个 plugin 响应 uiSpace 事件生成的。</p>
+
+	<pre>
+	function loadTheme( editor ) {
+		var name = editor.name,
+			element = editor.element,
+			elementMode = editor.elementMode;
+
+		// Get the HTML for the predefined spaces.
+		var topHtml = editor.fire( &#39;uiSpace&#39;, { space: &#39;top&#39;, html: &#39;&#39; } ).html;
+		var bottomHtml = editor.fire( &#39;uiSpace&#39;, { space: &#39;bottom&#39;, html: &#39;&#39; } ).html;</pre>
+
+	<pre>
+		if ( elementMode == CKEDITOR.ELEMENT_MODE_REPLACE ) {
+			element.hide();
+			container.insertAfter( element );
+		} else
+			element.append( container );</pre>
+	</li>
+	<li>
+	<p>ckeditor-dev/plugins/toolbar/plugin.js:150</p>
+
+	<pre>
+			editor.on( &#39;uiSpace&#39;, function( event ) {
+				if ( event.data.space != editor.config.toolbarLocation )
+					return;
+
+				// Create toolbar only once.
+				event.removeListener();
+</pre>
+
+	<pre>
+				var toolbars = editor.toolbox.toolbars,
+					toolbar = getToolbarConfig( editor );</pre>
+	</li>
+	<li>
+	<p>从这里就可以完全看明白 toolbar 是如何配置的了，包括新式的按组配置。</p>
+
+	<pre>
+	function getToolbarConfig( editor ) {
+		function buildToolbarConfig() {
+
+			// Object containing all toolbar groups used by ui items.
+			var lookup = getItemDefinedGroups();
+
+			// Take the base for the new toolbar, which is basically a toolbar
+			// definition without items.
+			var toolbar = CKEDITOR.tools.clone( <span class="marker">editor.config.toolbarGroups</span> ) || getPrivateToolbarGroups( editor );
+
+			// Fill the toolbar groups with the available ui items.
+			for ( var i = 0; i &lt; toolbar.length; i++ ) {
+				var toolbarGroup = <span class="marker">toolbar[ i ]</span>;
+
+				// Skip toolbar break.
+				if ( toolbarGroup == &#39;/&#39; )
+					continue;
+				// Handle simply group name item.
+				else if ( typeof toolbarGroup == &#39;string&#39; )
+					toolbarGroup = toolbar[ i ] = { name: toolbarGroup };
+
+				var items, subGroups = <span class="marker">toolbarGroup.groups</span>;
+
+				// Look for items that match sub groups.
+				if ( subGroups ) {
+					for ( var j = 0, sub; j &lt; subGroups.length; j++ ) {
+						sub = subGroups[ j ];
+
+						// If any ui item is registered for this subgroup.
+						<span class="marker">items = lookup[ sub ]</span>;
+						items &amp;&amp; fillGroup( toolbarGroup, items );
+					}
+				}
+
+				// Add the main group items as well.
+				items = lookup[ toolbarGroup.name ];
+				items &amp;&amp; fillGroup( toolbarGroup, items );
+			}
+
+			return toolbar;
+		}
+
+		// Returns an object containing all toolbar groups used by ui items.
+		function getItemDefinedGroups() {
+			var groups = {},
+				itemName, item, itemToolbar, group, order;
+
+			for ( itemName in editor.ui.items ) {
+				item = editor.ui.items[ itemName ];
+				itemToolbar = item.toolbar || &#39;others&#39;;
+				if ( itemToolbar ) {
+					// Break the toolbar property into its parts: &quot;group_name[,order]&quot;.
+					itemToolbar = itemToolbar.split( &#39;,&#39; );
+					group = itemToolbar[ 0 ];
+					order = parseInt( itemToolbar[ 1 ] || -1, 10 );
+
+					// Initialize the group, if necessary.
+					groups[ group ] || ( groups[ group ] = [] );
+
+					// Push the data used to build the toolbar later.
+					groups[ group ].push( { name: itemName, order: order} );
+				}
+			}
+
+			// Put the items in the right order.
+			for ( group in groups ) {
+				groups[ group ] = groups[ group ].sort( function( a, b ) {
+					return a.order == b.order ? 0 :
+						b.order &lt; 0 ? -1 :
+						a.order &lt; 0 ? 1 :
+						a.order &lt; b.order ? -1 :
+						1;
+				});
+			}
+
+			return groups;
+		}
+
+		function fillGroup( toolbarGroup, uiItems ) {
+			if ( uiItems.length ) {
+				if ( toolbarGroup.items )
+					toolbarGroup.items.push( editor.ui.create( &#39;-&#39; ) );
+				else
+					toolbarGroup.items = [];
+
+				var item, name;
+				while ( ( item = uiItems.shift() ) ) {
+					name = typeof item == &#39;string&#39; ? item : item.name;
+
+					// Ignore items that are configured to be removed.
+					if ( !removeButtons || CKEDITOR.tools.indexOf( removeButtons, name ) == -1 ) {
+						item = editor.ui.create( name );
+
+						if ( !item )
+							continue;
+
+						if ( !editor.addFeature( item ) )
+							continue;
+
+						toolbarGroup.items.push( item );
+					}
+				}
+			}
+		}
+
+		function populateToolbarConfig( config ) {
+			var toolbar = [],
+				i, group, newGroup;
+
+			for ( i = 0; i &lt; config.length; ++i ) {
+				group = config[ i ];
+				newGroup = {};
+
+				if ( group == &#39;/&#39; )
+					toolbar.push( group );
+				else if ( CKEDITOR.tools.isArray( group) ) {
+					fillGroup( newGroup, CKEDITOR.tools.clone( group ) );
+					toolbar.push( newGroup );
+				}
+				else if ( group.items ) {
+					fillGroup( newGroup, CKEDITOR.tools.clone( group.items ) );
+					newGroup.name = group.name;
+					toolbar.push( newGroup);
+				}
+			}
+
+			return toolbar;
+		}
+
+		var toolbar = editor.config.toolbar;
+
+		// If it is a string, return the relative &quot;toolbar_name&quot; config.
+		if ( typeof toolbar == &#39;string&#39; )
+			toolbar = editor.config[ &#39;toolbar_&#39; + toolbar ];
+
+		return ( editor.toolbar = toolbar ? populateToolbarConfig( toolbar ) : buildToolbarConfig() );
+	}</pre>
+	</li>
+</ul>
+
+<h2>&nbsp;</h2>
+
+<p>&nbsp;</p>
+
+<pre>
+			editor.addCommand( pluginName, {
+				modes: { wysiwyg:1,markdown:1 },
+				editorFocus: false,
+				readOnly: 1,
+				exec: function( editor ) {
+					//if ( editor.mode == &#39;wysiwyg&#39; )
+					//	editor.fire( &#39;saveSnapshot&#39; );
+					//editor.getCommand( &#39;source&#39; ).setState( CKEDITOR.TRISTATE_DISABLED );
+					editor.setMode( editor.mode == &#39;markdown&#39; ? &#39;wysiwyg&#39; : &#39;markdown&#39; );
+				},
+
+				canUndo: false
+			});</pre>
+
+<pre>
+		addCommand: function( commandName, commandDefinition ) {
+			commandDefinition.name = commandName.toLowerCase();
+			var cmd = new CKEDITOR.command( this, commandDefinition );
+
+			// Update command when mode is set.
+			// This guarantees that commands added before first editor#mode
+			// aren&#39;t immediately updated, but waits for editor#mode and that
+			// commands added later are immediately refreshed, even when added
+			// before instanceReady. #10103, #10249
+			if ( this.mode )
+				updateCommand( this, cmd );
+
+			return this.commands[ commandName ] = cmd;
+		},</pre>
+
+<pre>
+&nbsp;&nbsp; &nbsp;function updateCommand( editor, cmd ) {
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;cmd[ cmd.startDisabled ? &#39;disable&#39; : editor.readOnly &amp;&amp; !cmd.readOnly ? &#39;disable&#39; : cmd.modes[ editor.mode ] ? &#39;enable&#39; : &#39;disable&#39; ]();
+&nbsp;&nbsp; &nbsp;}
+</pre>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<pre>
+CKEDITOR.dom.element = function( element, ownerDocument ) {
+	if ( typeof element == &#39;string&#39; )
+		element = ( ownerDocument ? ownerDocument.$ : document ).createElement( element );
+
+	// Call the base constructor (we must not call CKEDITOR.dom.node).
+	CKEDITOR.dom.domObject.call( this, element );
+};</pre>
+
+<pre>
+CKEDITOR.dom.domObject = function( nativeDomObject ) {
+&nbsp;&nbsp; &nbsp;if ( nativeDomObject ) {
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;/**
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; * The native DOM object represented by this class instance.
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; *
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; *&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;var element = new CKEDITOR.dom.element( &#39;span&#39; );
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; *&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;alert( element.$.nodeType ); // &#39;1&#39;
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; *
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; * @readonly
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; * @property {Object}
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; */
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;this.$ = nativeDomObject;
+&nbsp;&nbsp; &nbsp;}
+};
+</pre>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<pre>
+		/**
+		 * Gets the editor data. The data will be in raw format. It is the same
+		 * data that is posted by the editor.
+		 *
+		 *		if ( CKEDITOR.instances.editor1.getData() == &#39;&#39; )
+		 *			alert( &#39;There is no data available&#39; );
+		 *
+		 * @returns {String} The editor data.
+		 */
+		getData: function( noEvents ) {
+			!noEvents &amp;&amp; this.fire( &#39;beforeGetData&#39; );
+
+			var eventData = this._.data;
+
+			if ( typeof eventData != &#39;string&#39; ) {
+				var element = this.element;
+				if ( element &amp;&amp; this.elementMode == CKEDITOR.ELEMENT_MODE_REPLACE )
+					eventData = element.is( &#39;textarea&#39; ) ? element.getValue() : element.getHtml();
+				else
+					eventData = &#39;&#39;;
+			}
+
+			eventData = { dataValue: eventData };
+
+			// Fire &quot;getData&quot; so data manipulation may happen.
+			!noEvents &amp;&amp; this.fire( &#39;getData&#39;, eventData );
+
+			return eventData.dataValue;
+		},</pre>
