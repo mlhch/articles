@@ -1,0 +1,169 @@
+<h1>Front-end Bootstrap</h1>
+
+<p>2013-05-20 23:42 Monday</p>
+
+<p><a href="http://twitter.github.io/bootstrap/" target="_blank">http://twitter.github.io/bootstrap/</a></p>
+
+<p>Sleek, intuitive, and powerful front-end framework for faster and easier web development.</p>
+
+<p><a href="http://twitter.github.io/bootstrap/assets/bootstrap.zip">Download Bootstrap</a></p>
+
+<ul>
+	<li><a href="http://github.com/twitter/bootstrap">GitHub project</a>&nbsp;</li>
+	<li><a href="http://twitter.github.io/bootstrap/getting-started.html#examples">Examples</a>&nbsp;</li>
+	<li><a href="http://twitter.github.io/bootstrap/extend.html">Extend</a>&nbsp;</li>
+	<li>Version 2.3.2</li>
+</ul>
+
+<p>当前版本 2.3.2 下载后的文件清单：</p>
+
+<pre>
+$ unzip bootstrap.zip&nbsp;
+Archive: &nbsp;bootstrap.zip
+&nbsp; &nbsp;creating: bootstrap/
+&nbsp; &nbsp;creating: bootstrap/css/
+&nbsp; inflating: bootstrap/css/bootstrap-responsive.css &nbsp;
+&nbsp; inflating: bootstrap/css/bootstrap-responsive.min.css &nbsp;
+&nbsp; inflating: bootstrap/css/bootstrap.css &nbsp;
+&nbsp; inflating: bootstrap/css/bootstrap.min.css &nbsp;
+&nbsp; &nbsp;creating: bootstrap/img/
+&nbsp; inflating: bootstrap/img/glyphicons-halflings-white.png &nbsp;
+&nbsp; inflating: bootstrap/img/glyphicons-halflings.png &nbsp;
+&nbsp; &nbsp;creating: bootstrap/js/
+&nbsp; inflating: bootstrap/js/bootstrap.js &nbsp;
+&nbsp; inflating: bootstrap/js/bootstrap.min.js</pre>
+
+<h3>历史版本下载</h3>
+
+<p>https://github.com/twitter/bootstrap/tags</p>
+
+<h2>Navbar</h2>
+
+<p>http://twitter.github.io/bootstrap/components.html#navbar</p>
+
+<p>如果需要固定顶部，最外层另加&nbsp;navbar-fixed-top 即可，如果需要黑色样式，最外层再加 navbar-inverse 即可。</p>
+
+<pre>
+&lt;div class=&quot;navbar&quot;&gt;
+  &lt;div class=&quot;navbar-inner&quot;&gt;
+    &lt;a class=&quot;brand&quot; href=&quot;#&quot;&gt;Title&lt;/a&gt;
+    &lt;ul class=&quot;nav&quot;&gt;
+      &lt;li class=&quot;active&quot;&gt;&lt;a href=&quot;#&quot;&gt;Home&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Link&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Link&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+
+<h2>.controls .controls-row</h2>
+
+<pre>
+.row-fluid .controls-row [class*=&quot;span&quot;] + [class*=&quot;span&quot;] {
+&nbsp; margin-left: 2.127659574468085%;
+}
+
+.controls &gt; .radio:first-child,
+.controls &gt; .checkbox:first-child {
+&nbsp; padding-top: 5px;
+}
+
+.controls-row [class*=&quot;span&quot;] + [class*=&quot;span&quot;] {
+&nbsp; margin-left: 20px;
+}
+
+.controls-row {
+&nbsp; *zoom: 1;
+}
+
+.controls-row:before,
+.controls-row:after {
+  display: table;
+  line-height: 0;
+  content: &quot;&quot;;
+}
+
+.controls-row:after {
+  clear: both;
+}
+
+.controls-row [class*=&quot;span&quot;],
+.row-fluid .controls-row [class*=&quot;span&quot;] {
+  float: left;
+}
+
+.controls-row .checkbox[class*=&quot;span&quot;],
+.controls-row .radio[class*=&quot;span&quot;] {
+  padding-top: 5px;
+}
+
+.form-horizontal .controls {
+&nbsp; *display: inline-block;
+&nbsp; *padding-left: 20px;
+&nbsp; margin-left: 180px;
+&nbsp; *margin-left: 0;
+}
+
+.form-horizontal .controls:first-child {
+&nbsp; *padding-left: 180px;
+}
+</pre>
+
+<h2>.table-hover</h2>
+
+<pre>
+.table-hover tbody tr:hover &gt; td,
+.table-hover tbody tr:hover &gt; th {
+&nbsp; background-color: #f5f5f5;
+}
+
+.table-hover tbody tr.success:hover &gt; td {
+  background-color: #d0e9c6;
+}
+
+.table-hover tbody tr.error:hover &gt; td {
+  background-color: #ebcccc;
+}
+
+.table-hover tbody tr.warning:hover &gt; td {
+  background-color: #faf2cc;
+}
+
+.table-hover tbody tr.info:hover &gt; td {
+  background-color: #c4e3f3;
+}</pre>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
