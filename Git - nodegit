@@ -1,0 +1,391 @@
+<h1>Git - nodegit</h1>
+
+<p>2013-09-27 00:42 Friday</p>
+
+<p><a href="http://www.nodegit.org/" target="_blank">http://www.nodegit.org/</a>|<a href="https://github.com/nodegit/nodegit">https://github.com/nodegit/nodegit</a></p>
+
+<ul>
+	<li>不要借鉴首页上的使用例子，它是错误的，过时的，可借鉴 github 首页上的使用例子</li>
+	<li>全面的文档在这里 <a href="http://www.nodegit.org/nodegit/" target="_blank">http://www.nodegit.org/nodegit/</a>，不在首页上。</li>
+</ul>
+
+<p>Version&nbsp;0.0.79&nbsp;Node.js libgit2 asynchronous native bindings</p>
+
+<p>A collection of non-blocking Node.js libgit2 bindings, raw api, convenience api, unit tests, documentation and accomodations to make contributing easier.</p>
+
+<h4>require</h4>
+
+<ul>
+	<li><a href="http://nodejs.org/">Node.js &gt;=0.8</a></li>
+	<li><a href="http://npmjs.org/">npm</a>&nbsp;(if you want the premiere install experience)</li>
+	<li><a href="http://git-scm.com/">Git</a>&nbsp;(if you want to unit test )</li>
+</ul>
+
+<h4>install</h4>
+
+<pre>
+npm install nodegit</pre>
+
+<pre>
+<code>$ npm install nodegit -g
+npm http GET https://registry.npmjs.org/nodegit
+npm http 200 https://registry.npmjs.org/nodegit
+npm http GET https://registry.npmjs.org/nodegit/-/nodegit-0.1.0.tgz
+npm http 200 https://registry.npmjs.org/nodegit/-/nodegit-0.1.0.tgz
+npm http GET https://registry.npmjs.org/fs-extra/0.6.0
+npm http GET https://registry.npmjs.org/tar/0.1.17
+npm http GET https://registry.npmjs.org/node-gyp
+npm http GET https://registry.npmjs.org/async
+npm http GET https://registry.npmjs.org/request
+npm http 304 https://registry.npmjs.org/async
+npm http 304 https://registry.npmjs.org/request
+npm http 200 https://registry.npmjs.org/tar/0.1.17
+npm http GET https://registry.npmjs.org/tar/-/tar-0.1.17.tgz
+npm http 200 https://registry.npmjs.org/fs-extra/0.6.0
+npm http GET https://registry.npmjs.org/fs-extra/-/fs-extra-0.6.0.tgz
+npm http 200 https://registry.npmjs.org/node-gyp
+npm http GET https://registry.npmjs.org/node-gyp/-/node-gyp-0.8.5.tgz
+npm http 200 https://registry.npmjs.org/tar/-/tar-0.1.17.tgz
+npm http 200 https://registry.npmjs.org/fs-extra/-/fs-extra-0.6.0.tgz
+npm http 200 https://registry.npmjs.org/node-gyp/-/node-gyp-0.8.5.tgz
+npm http GET https://registry.npmjs.org/jsonfile
+npm http GET https://registry.npmjs.org/rimraf
+npm http GET https://registry.npmjs.org/mkdirp
+npm http GET https://registry.npmjs.org/ncp
+npm http GET https://registry.npmjs.org/inherits
+npm http GET https://registry.npmjs.org/fstream
+npm http GET https://registry.npmjs.org/block-stream
+npm http GET https://registry.npmjs.org/fstream
+npm http 304 https://registry.npmjs.org/rimraf
+npm http GET https://registry.npmjs.org/mkdirp
+npm http 304 https://registry.npmjs.org/ncp
+npm http GET https://registry.npmjs.org/rimraf
+npm http GET https://registry.npmjs.org/graceful-fs
+npm http GET https://registry.npmjs.org/which
+npm http GET https://registry.npmjs.org/nopt
+npm http GET https://registry.npmjs.org/osenv
+npm http GET https://registry.npmjs.org/minimatch
+npm http GET https://registry.npmjs.org/semver
+npm http 304 https://registry.npmjs.org/inherits
+npm http GET https://registry.npmjs.org/npmlog
+npm http GET https://registry.npmjs.org/glob
+npm http 200 https://registry.npmjs.org/jsonfile
+npm http GET https://registry.npmjs.org/jsonfile/-/jsonfile-0.0.1.tgz
+npm http 304 https://registry.npmjs.org/fstream
+npm http 200 https://registry.npmjs.org/mkdirp
+npm http 304 https://registry.npmjs.org/block-stream
+npm http 304 https://registry.npmjs.org/fstream
+npm http GET https://registry.npmjs.org/graceful-fs
+npm http 304 https://registry.npmjs.org/rimraf
+npm http 304 https://registry.npmjs.org/graceful-fs
+npm http 304 https://registry.npmjs.org/which
+npm http 200 https://registry.npmjs.org/mkdirp
+npm http 304 https://registry.npmjs.org/osenv
+npm http 304 https://registry.npmjs.org/minimatch
+npm http 304 https://registry.npmjs.org/semver
+npm http 304 https://registry.npmjs.org/npmlog
+npm http 304 https://registry.npmjs.org/glob
+npm http 304 https://registry.npmjs.org/graceful-fs
+npm http 200 https://registry.npmjs.org/nopt
+npm http GET https://registry.npmjs.org/ansi
+npm http GET https://registry.npmjs.org/abbrev
+npm http GET https://registry.npmjs.org/lru-cache
+npm http GET https://registry.npmjs.org/sigmund
+npm http 200 https://registry.npmjs.org/jsonfile/-/jsonfile-0.0.1.tgz
+npm http 304 https://registry.npmjs.org/abbrev
+npm http 304 https://registry.npmjs.org/lru-cache
+npm http 304 https://registry.npmjs.org/sigmund
+npm http 200 https://registry.npmjs.org/ansi
+
+&gt; nodegit@0.1.0 install /usr/local/share/npm/lib/node_modules/nodegit
+&gt; node install.js
+
+[nodegit] Downloading libgit2 dependency.
+[nodegit] Building libgit2 dependency.
+-- The C compiler identification is GNU 4.2.1
+-- Checking whether C compiler has -isysroot
+-- Checking whether C compiler has -isysroot - yes
+-- Checking whether C compiler supports OSX deployment target flag
+-- Checking whether C compiler supports OSX deployment target flag - yes
+-- Check for working C compiler: /usr/bin/gcc
+-- Check for working C compiler: /usr/bin/gcc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Found OpenSSL: /usr/lib/libssl.dylib;/usr/lib/libcrypto.dylib (found version &quot;0.9.8y&quot;) 
+-- Looking for include file pthread.h
+-- Looking for include file pthread.h - found
+-- Looking for pthread_create
+-- Looking for pthread_create - found
+-- Found Threads: TRUE  
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /usr/local/share/npm/lib/node_modules/nodegit/vendor/libgit2/build
+Scanning dependencies of target git2
+[  1%] Building C object CMakeFiles/git2.dir/src/attr.c.o
+...
+[ 98%] Building C object CMakeFiles/git2.dir/src/unix/realpath.c.o
+[100%] Building C object CMakeFiles/git2.dir/deps/http-parser/http_parser.c.o
+Linking C shared library libgit2.dylib
+[100%] Built target git2
+[nodegit] Building native module.
+  CXX(target) Release/obj.target/nodegit/src/base.o
+  CXX(target) Release/obj.target/nodegit/src/blob.o
+  CXX(target) Release/obj.target/nodegit/src/commit.o
+  CXX(target) Release/obj.target/nodegit/src/oid.o
+  CXX(target) Release/obj.target/nodegit/src/reference.o
+  CXX(target) Release/obj.target/nodegit/src/object.o
+  CXX(target) Release/obj.target/nodegit/src/repo.o
+  CXX(target) Release/obj.target/nodegit/src/index.o
+../src/index.cc:693:7: warning: unused variable &#39;result&#39; [-Wunused-variable]
+  int result = git_index_find(
+      ^
+1 warning generated.
+  CXX(target) Release/obj.target/nodegit/src/index_entry.o
+  CXX(target) Release/obj.target/nodegit/src/index_time.o
+  CXX(target) Release/obj.target/nodegit/src/tag.o
+  CXX(target) Release/obj.target/nodegit/src/revwalk.o
+  CXX(target) Release/obj.target/nodegit/src/signature.o
+  CXX(target) Release/obj.target/nodegit/src/time.o
+  CXX(target) Release/obj.target/nodegit/src/tree.o
+  CXX(target) Release/obj.target/nodegit/src/tree_builder.o
+  CXX(target) Release/obj.target/nodegit/src/tree_entry.o
+  CXX(target) Release/obj.target/nodegit/src/diff_find_options.o
+  CXX(target) Release/obj.target/nodegit/src/diff_options.o
+  CXX(target) Release/obj.target/nodegit/src/diff_list.o
+  CXX(target) Release/obj.target/nodegit/src/patch.o
+  CXX(target) Release/obj.target/nodegit/src/delta.o
+  CXX(target) Release/obj.target/nodegit/src/diff_file.o
+  CXX(target) Release/obj.target/nodegit/src/diff_range.o
+  CXX(target) Release/obj.target/nodegit/src/threads.o
+  CXX(target) Release/obj.target/nodegit/src/wrapper.o
+  CXX(target) Release/obj.target/nodegit/src/refdb.o
+  CXX(target) Release/obj.target/nodegit/src/odb_object.o
+  CXX(target) Release/obj.target/nodegit/src/odb.o
+  CXX(target) Release/obj.target/nodegit/src/submodule.o
+  CXX(target) Release/obj.target/nodegit/src/remote.o
+../src/remote.cc:280:11: warning: variable &#39;from_progress_cb&#39; is used uninitialized whenever &#39;if&#39; condition is true [-Wsometimes-uninitialized]
+      if (args[0]-&gt;IsFunction()) {
+          ^~~~~~~~~~~~~~~~~~~~~
+../src/remote.cc:285:28: note: uninitialized use occurs here
+      baton-&gt;progress_cb = from_progress_cb;
+                           ^~~~~~~~~~~~~~~~
+../src/remote.cc:280:7: note: remove the &#39;if&#39; if its condition is always false
+      if (args[0]-&gt;IsFunction()) {
+      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../src/remote.cc:279:52: note: initialize the variable &#39;from_progress_cb&#39; to silence this warning
+    git_transfer_progress_callback from_progress_cb;
+                                                   ^
+                                                    = NULL
+1 warning generated.
+  CXX(target) Release/obj.target/nodegit/src/clone_options.o
+  CXX(target) Release/obj.target/nodegit/src/functions/copy.o
+  SOLINK_MODULE(target) Release/nodegit.node
+  SOLINK_MODULE(target) Release/nodegit.node: Finished
+nodegit@0.1.0 /usr/local/share/npm/lib/node_modules/nodegit
+├── async@0.2.9
+├── request@2.9.203
+├── tar@0.1.17 (inherits@1.0.0, block-stream@0.0.7, fstream@0.1.24)
+├── fs-extra@0.6.0 (mkdirp@0.3.5, jsonfile@0.0.1, rimraf@2.1.4, ncp@0.4.2)
+└── node-gyp@0.8.5 (which@1.0.5, osenv@0.0.3, graceful-fs@1.2.3, semver@1.1.4, mkdirp@0.3.5, rimraf@2.2.2, fstream@0.1.24, glob@3.2.6, nopt@2.1.2, minimatch@0.2.12, npmlog@0.0.4)
+</code></pre>
+
+<h2>Node 跟踪尝试</h2>
+
+<p>2013-09-27 11:12 Friday</p>
+
+<ul>
+	<li>
+	<pre>
+var git = require(&#39;nodegit&#39;);</pre>
+	</li>
+	<li>
+	<pre>
+self.require(path);</pre>
+	</li>
+	<li>
+	<pre>
+return Module._load(path, this);</pre>
+
+	<ul>
+		<li>
+		<p>此时 filename 变成了&nbsp;/.../yo_angular/node_modules/nodegit/index.js</p>
+
+		<pre>
+var filename = Module._resolveFilename(request, parent);</pre>
+		</li>
+		<li>
+		<p>并且缓存中已经存在了，直接返回</p>
+
+		<pre>
+  var cachedModule = Module._cache[filename];
+  if (cachedModule) {
+    return cachedModule.exports;
+  }</pre>
+		</li>
+	</ul>
+	</li>
+</ul>
+
+<h2>小试牛刀</h2>
+
+<pre>
+repo.getMaster(function(error, commit) {
+			if (error) throw error;
+
+			function walk(rev, commit, callback) {
+				rev.push(commit.oid(), function(error) {
+					if (error) return callback(error);
+
+					function next() {
+						rev.next(function(error, oid) {
+							if (error) return callback(error);
+							if (!oid) return callback();
+
+							rev.repo.getCommit(oid, function(error, commit) {
+								if (error) return callback(error);
+
+								callback(null, commit, next);
+							});
+						});
+					}
+					next();
+				});
+			}
+
+			var limit = 4;
+			walk(repo.createRevWalk(), commit, function(error, commit, next) {
+				if (commit) {
+					var c = commit;
+					console.log(c.sha() + &#39; - &#39; + c.date() + &#39; - &#39; + c.author().name() + &#39; - &#39; + c.message());
+				}
+				if (limit-- &lt; 0) return;
+
+				commit.getDiff(function(error, diffList) {
+					if (error) throw error;
+
+					diffList.forEach(function(diff, didx) {
+						diff.patches().forEach(function(patch, pidx) {
+							patch.hunks().forEach(function(hunk, hidx) {
+								console.log(&#39;hunk - &#39; + didx + &#39; - &#39; + pidx + &#39; - &#39; + hidx);
+								console.log(hunk.size() + &#39; : &#39; + hunk.header());
+								hunk.lines().forEach(function(line) {
+									console.log(line.content.replace(/[\r\n]+$/, &#39;&#39;));
+								});
+							});
+						});
+					});
+					next();
+				});
+			});
+		});</pre>
+
+<p>&nbsp;</p>
+
+<pre>
+var tb = git.TreeBuilder.create(); //## native code</pre>
+
+<pre>
+tb.insertBlob(&#39;blob.test&#39;, blob, false);</pre>
+
+<p>可见 insertBlob 仅仅是把数据放到 tb.blobs 这个数组中</p>
+
+<pre>
+TreeBuilder.prototype.insertBlob = function(filename, blob, isExecutable) {
+  if (!this.blobs) this.blobs = [];
+
+  this.blobs.push([filename, blob, isExecutable ? TreeEntry.FileMode.Executable : TreeEntry.FileMode.Blob]);
+};</pre>
+
+<pre>
+TreeBuilder.prototype.write = function(callback) {
+  var self = this;
+  this.doInsertions(function(error) {
+    if (error) return callback(error);
+
+    if (self.builders &amp;&amp; self.builders.length) {
+      writeNextLevel(self.repo, self.builders, function(error, previousName, previousTreeId) {
+        if (previousName &amp;&amp; previousTreeId) {
+          oldInsert.call(self, previousName, previousTreeId, TreeEntry.FileMode.Tree);
+        }
+        oldWrite.call(self, self.repo, callback);
+      });
+    } else {
+      oldWrite.call(self, self.repo, callback);
+    }
+  })
+};</pre>
+
+<pre>
+TreeBuilder.prototype.doInsertions = function(callback) {
+  var self = this;
+
+  this.createBlobs(function(error) {
+    if (error) return callback(error);
+
+    self.doOidInsertions(callback);
+  })
+};</pre>
+
+<p>可见 TreeBuilder.write 最后调用的还是 repo.createBlobFromBuffer。从此也可看出 insertBlob 的第二个参数应该是 Buffer 而不是 Blob</p>
+
+<pre>
+TreeBuilder.prototype.createBlobs = function(callback) {
+  if (!this.blobs || !this.blobs.length) return callback();
+
+  var self = this,
+      data = this.blobs.pop(),
+      path = data[0], buffer = data[1], filemode = data[2];
+
+  this.repo.<span class="marker">createBlobFromBuffer</span>(buffer, function(error, blobId) {
+    if (error) return callback(error);
+
+    self.insert(path, blobId, filemode);
+    self.createBlobs(callback);
+  });
+}</pre>
+
+<p>&nbsp;</p>
+
+<pre>
+if (typeof oid === &#39;string&#39;) oid = git.Oid.fromString(oid);</pre>
+
+<p>&nbsp;</p>
+
+<pre>
+				repo.createCommit(null, author, commiter, &#39;message&#39;, tree, [], function fn(error, oid) {
+					repo.createReference(&#39;refs/heads/aa&#39;, oid, 1)
+					//ref.setTarget(oid);
+				});</pre>
+
+<p>可见 tree 是 Tree 或者 Tree 的 oid 都可。</p>
+
+<pre>
+Repo.prototype.createCommit = function(updateRef, author, committer, message, tree, parents, callback) {
+  if (tree instanceof Tree) {
+    oldCreateCommit.call(
+      this,
+      updateRef,
+      author,
+      committer,
+      null /* use default message encoding */,
+      message,
+      tree,
+      parents.length, parents,
+      callback);
+  } else {
+    var self = this;
+    this.getTree(tree, function(error, tree) {
+      if (error) return callback(error);
+      oldCreateCommit.call(
+        self,
+        updateRef,
+        author,
+        committer,
+        null /* use default message encoding */,
+        message,
+        tree,
+        parents.length, parents,
+        callback);
+    });
+  }
+};</pre>
