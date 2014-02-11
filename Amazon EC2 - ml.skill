@@ -1,0 +1,16 @@
+<h1>Amazon EC2 - ml.skill</h1>
+
+<p>2014-02-12 00:20 Wednesday</p>
+
+<p>今日创建如下 ec2</p>
+
+<table border="1" cellpadding="3" cellspacing="1">
+	<tbody>
+		<tr>
+			<td>ml.skill</td>
+			<td>i-5267157c</td>
+			<td>t1.micro</td>
+			<td>us-east-1b</td>
+		</tr>
+	</tbody>
+</table>
