@@ -1,0 +1,208 @@
+<h1>linux - init.d - daemon</h1>
+
+<p>2014-02-11 15:13 Tuesday</p>
+
+<h2>status</h2>
+
+<pre>
+rh_status() {
+    status -p ${pidfile} ${nginx}
+}</pre>
+
+<p>实例说明，当执行的命令等价为 status&nbsp;-p /var/run/nginx.pid /usr/sbin/nginx 时，各参数值如下：</p>
+
+<pre>
+status() {
+	local base pid lock_file= pid_file=
+
+	# Test syntax.
+	<span class="marker">if [ &quot;$#&quot; = 0 ] ; then
+		echo $&quot;Usage: status [-p pidfile] {program}&quot;
+		return 1
+	fi</span>
+	if [ &quot;$1&quot; = &quot;-p&quot; ]; then ###=== $1: -p
+		pid_file=$2 ###=== $pid_file: /var/run/nginx.pid
+		<span class="marker">shift 2</span>
+	fi
+	if [ &quot;$1&quot; = &quot;-l&quot; ]; then
+		lock_file=$2
+		shift 2
+	fi
+	<span class="marker">base=${1##*/} ###=== $1: /usr/sbin/nginx, $base: nginx</span>
+
+	# First try &quot;pidof&quot;
+	__pids_var_run &quot;$1&quot; &quot;$pid_file&quot;
+	RC=$? <span class="marker">###=== 返回 0 表示进程正常存在和运行</span>
+	if [ -z &quot;$pid_file&quot; -a -z &quot;$pid&quot; ]; then
+		pid=&quot;$(__pids_pidof &quot;$1&quot;)&quot;
+	fi
+	if [ -n &quot;$pid&quot; ]; then
+	        echo $&quot;${base} (pid $pid) is running...&quot;
+	        return 0
+	fi
+
+	case &quot;$RC&quot; in <span class="marker">###=== 其它状态</span>
+		0)
+			echo $&quot;${base} (pid $pid) is running...&quot;
+			return 0
+			;;
+		1)
+	                echo $&quot;${base} dead but pid file exists&quot;
+	                return 1
+			;;
+		4)
+			echo $&quot;${base} status unknown due to insufficient privileges.&quot;
+			return 4
+			;;
+	esac
+	if [ -z &quot;${lock_file}&quot; ]; then
+		lock_file=${base}
+	fi
+	# See if /var/lock/subsys/${lock_file} exists
+	if [ -f /var/lock/subsys/${lock_file} ]; then
+		echo $&quot;${base} dead but subsys locked&quot;
+		return 2
+	fi
+	echo $&quot;${base} is stopped&quot;
+	return 3
+}</pre>
+
+<p>__pids_var_run&nbsp;<span style="line-height:1.6em">/usr/sbin/ngin</span><span style="line-height:1.6em">x&nbsp;</span><span style="line-height:1.6em">/var/run/nginx.</span><span style="line-height:1.6em">pid</span></p>
+
+<pre>
+# __proc_pids {program} [pidfile]
+# Set $pid to pids from /var/run* for {program}.  $pid should be declared
+# local in the caller.
+# Returns LSB exit code for the &#39;status&#39; action.
+__pids_var_run() {
+	local base=${1##*/} <span class="marker">###=== $base: nginx</span>
+	local pid_file=${2:-/var/run/$base.pid}
+
+	pid=
+	if [ -f &quot;$pid_file&quot; ] ; then
+	        local line p
+
+		[ ! -r &quot;$pid_file&quot; ] &amp;&amp; return 4 # &quot;user had insufficient privilege&quot; <span class="marker">###=== 不可读则表示权限不足</span>
+		while : ; do
+			read line <span class="marker">###=== 逐行读取 /var/run/nginx.pid 中的内容</span>
+			[ -z &quot;$line&quot; ] &amp;&amp; break
+			for p in $line ; do
+				[ -z &quot;${p//[0-9]/}&quot; -a -d &quot;/proc/$p&quot; ] &amp;&amp; pid=&quot;$pid $p&quot; <span class="marker">###=== 如果 $p 全是数字，并且数字对应的进程存在，给全局变量 pid 赋值非空，下步返回 0。注意，全局变量可能是形如 12 35 78 这样的多个 pid 值。</span>
+			done
+		done &lt; &quot;$pid_file&quot; <span class="marker">###=== 读取文件内容当作输入</span>
+
+	        if [ -n &quot;$pid&quot; ]; then
+	                return 0
+	        fi
+		return 1 # &quot;Program is dead and /var/run pid file exists&quot;
+	fi
+	return 3 # &quot;Program is not running&quot;
+}</pre>
+
+<h2>daemon</h2>
+
+<pre>
+start() {
+    echo -n $&quot;Starting $prog: &quot;
+    daemon --pidfile=${pidfile} ${forever}
+&nbsp;   ...
+</pre>
+
+<p>执行：service forever start，得到 $@:&nbsp;--pidfile=/var/run/forever.pid /usr/sbin/forever</p>
+
+<p>最终 forever 命令得到执行是在 $* 处。注意，如果所执行的脚本中有错误，pid 文件并不会被生成。</p>
+
+<pre>
+# A function to start a program.
+daemon() {
+	# Test syntax.
+	local gotbase= force= nicelevel corelimit
+	local pid base= user= nice= bg= pid_file=
+	local cgroup=
+	nicelevel=0
+	while [ &quot;$1&quot; != &quot;${1##[-+]}&quot; ]; do
+	  case $1 in
+	    &#39;&#39;)    echo $&quot;$0: Usage: daemon [+/-nicelevel] {program}&quot;
+	           return 1;;
+	    --check)
+		   base=$2
+		   gotbase=&quot;yes&quot;
+		   shift 2
+		   ;;
+	    --check=?*)
+	    	   base=${1#--check=}
+		   gotbase=&quot;yes&quot;
+		   shift
+		   ;;
+	    --user)
+		   user=$2
+		   shift 2
+		   ;;
+	    --user=?*)
+	           user=${1#--user=}
+		   shift
+		   ;;
+	    --pidfile)
+		   <span class="marker">pid_file=$2</span>
+		   shift 2
+		   ;;
+	    --pidfile=?*)
+		   pid_file=${1#--pidfile=}
+		   shift
+		   ;;
+	    --force)
+	    	   force=&quot;force&quot;
+		   shift
+		   ;;
+	    [-+][0-9]*)
+	    	   nice=&quot;nice -n $1&quot;
+	           shift
+		   ;;
+	    *)     echo $&quot;$0: Usage: daemon [+/-nicelevel] {program}&quot;
+	           return 1;;
+	  esac
+	done
+
+        # Save basename.
+        [ -z &quot;$gotbase&quot; ] &amp;&amp; base=${1##*/}
+
+        # See if it&#39;s already running. Look *only* at the pid file.
+	__pids_var_run &quot;$base&quot; &quot;$pid_file&quot;
+
+	[ -n &quot;$pid&quot; -a -z &quot;$force&quot; ] &amp;&amp; return
+
+	# make sure it doesn&#39;t core dump anywhere unless requested
+	corelimit=&quot;ulimit -S -c ${DAEMON_COREFILE_LIMIT:-0}&quot;
+	
+	# if they set NICELEVEL in /etc/sysconfig/foo, honor it
+	[ -n &quot;${NICELEVEL:-}&quot; ] &amp;&amp; nice=&quot;nice -n $NICELEVEL&quot;
+	
+	# if they set CGROUP_DAEMON in /etc/sysconfig/foo, honor it
+	if [ -n &quot;${CGROUP_DAEMON}&quot; ]; then
+		if [ ! -x /bin/cgexec ]; then
+			echo -n &quot;Cgroups not installed&quot;; warning
+			echo
+		else
+			cgroup=&quot;/bin/cgexec&quot;;
+			for i in $CGROUP_DAEMON; do
+				cgroup=&quot;$cgroup -g $i&quot;;
+			done
+		fi
+	fi
+
+	# Echo daemon
+        [ &quot;${BOOTUP:-}&quot; = &quot;verbose&quot; -a -z &quot;${LSB:-}&quot; ] &amp;&amp; echo -n &quot; $base&quot;
+
+	# And start it up.
+	if [ -z &quot;$user&quot; ]; then <span class="marker">###=== 最终命令的执行在此</span>
+	   $cgroup $nice /bin/bash -c &quot;$corelimit &gt;/dev/null 2&gt;&amp;1 ; <span class="marker">$*</span>&quot;
+	else
+	   $cgroup $nice runuser -s /bin/bash $user -c &quot;$corelimit &gt;/dev/null 2&gt;&amp;1 ; $*&quot;
+	fi
+
+	[ &quot;$?&quot; -eq 0 ] &amp;&amp; success $&quot;$base startup&quot; || failure $&quot;$base startup&quot;
+}</pre>
+
+<h2>killproc</h2>
+
+<p>对于 forever，用这一套并不合适，kill 掉会马上重启进程。正确的做法是使用 forever 本身的 stop 子命令。</p>
