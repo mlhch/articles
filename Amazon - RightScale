@@ -18,4 +18,19 @@
 
 <p>https://www.rightscale.com/library/multi_cloud_images/RightImage_CentOS_6-5_x64_v13-/lineage/44146</p>
 
-<p>&nbsp;</p>
+<hr />
+<h3>RightImage_CentOS_6.5_x64_v13.5_LTS_EBS</h3>
+
+<p>2014-02-11 11:39 Tuesday</p>
+
+<p>Published by RightScale on Feb 07, 2014Revision: 3</p>
+
+<p>今日觉得这个好，似乎 _EBS 后缀的才可以创建 micro 实例？？</p>
+
+<p>https://www.rightscale.com/library/multi_cloud_images/RightImage_CentOS_6-5_x64_v13-/lineage/44147</p>
+
+<p>经搜索，这个最相似：</p>
+
+<pre>
+RightImage_CentOS_6.5_x64_v13.5.2.2_EBS - ami-05ebd06c
+</pre>
