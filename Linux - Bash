@@ -16,6 +16,16 @@
 
 <p><a href="http://www.gnu.org/software/bash/manual/">Documentation for Bash</a>&nbsp;is available online, as is&nbsp;<a href="http://www.gnu.org/manual/">documentation for most GNU software</a>. You may also find more information about Bash by running&nbsp;info&nbsp;bashor&nbsp;man&nbsp;bash, or by looking at&nbsp;/usr/doc/bash/,&nbsp;/usr/local/doc/bash/, or similar directories on your system. A brief summary is available by running&nbsp;bash&nbsp;--help.</p>
 
+<h2>表达式组合</h2>
+
+<p>2014-02-11 16:18 Tuesday 今天去检查，胎位居然顺过来了，高兴</p>
+
+<p>[ ! EXPR ] 如果EXPR 为假则为真。<br />
+[ ( EXPR ) ] 返回EXPR 的值。 这样可以用来忽略正常的操作符优先级。</p>
+
+<p>[ 表达式1 -a 表达式2 ] 如果表达式1 而且表达式2 同时为真则为真 。<br />
+[ 表达式1 -o 表达式2 ] 如果表达式1 或者表达式2 其中之一为真则为真。</p>
+
 <h2>${#0}, ${#1}...</h2>
 
 <p>没有找到官方参考，经自己推测并证实：${#0} 表示参数0，即脚本名的长度，${#1}表示参数1的长度。</p>
@@ -693,14 +703,6 @@ current locale。<br />
 return 为真 如果 &quot;ARG1&quot; is equal to, not equal to, less than, less than or equal to, greater<br />
 than, or greater than or equal to &quot;ARG2&quot;, respectively。 &quot;ARG1&quot; 而且 &quot;ARG2&quot; are<br />
 integers。</p>
-
-<h3>表达式组合</h3>
-
-<p>[ ! EXPR ] 如果EXPR 为假则为真。<br />
-[ ( EXPR ) ] 返回EXPR 的值。 这样可以用来忽略正常的操作符优先级。</p>
-
-<p>[ 表达式1 -a 表达式2 ] 如果表达式1 而且表达式2 同时为真则为真 。<br />
-[ 表达式1 -o 表达式2 ] 如果表达式1 或者表达式2 其中之一为真则为真。</p>
 
 <h3>Debug bash script</h3>
 
