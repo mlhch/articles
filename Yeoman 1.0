@@ -1,0 +1,568 @@
+<h1>Yeoman 1.0</h1>
+
+<p>2013-08-16 18:29 Friday</p>
+
+<p><a href="http://yeoman.io/" target="_blank">http://yeoman.io/</a>|<a href="https://github.com/yeoman/yo" target="_blank">https://github.com/yeoman/yo</a>|<a href="https://npmjs.org/package/yo" target="_blank">https://npmjs.org/package/yo</a></p>
+
+<p>CLI tool for scaffolding out Yeoman projects</p>
+
+<ul>
+	<li>
+	<p>2014-02-12 22:44 Wednsday</p>
+	​<strong>1.1.2&nbsp;</strong>last updated a month ago</li>
+	<li>
+	<p>2013-11-13 13:47 Wednsday</p>
+
+	<p>要使用 yo 创建 html5-boilerplate，发现官方仍然是 1.0.4 版本</p>
+	</li>
+</ul>
+
+<pre>
+npm install yo</pre>
+
+<table border="1">
+	<tbody>
+		<tr>
+			<th>Maintainers</th>
+			<td><a href="https://npmjs.org/~sindresorhus">sindresorhus</a><br />
+			<a href="https://npmjs.org/~paulirish">paulirish</a><br />
+			<a href="https://npmjs.org/~addyosmani">addyosmani</a><br />
+			<a href="https://npmjs.org/~passy">passy</a></td>
+		</tr>
+		<tr>
+			<th>Version</th>
+			<td>1.0.4&nbsp;last updated 2 months ago</td>
+		</tr>
+	</tbody>
+</table>
+
+<p>2013-10-04 22:12 Friday</p>
+
+<p>git pull 后</p>
+
+<pre>
+$ git t
+* 2013-08-27 19:57:02 +0200 8c4b8f5 &nbsp;(v1.0.4)
+* 2013-08-23 20:35:56 +0100 ca0fa97 &nbsp;(v1.0.3)
+* 2013-08-23 18:48:54 +0100 639b95d &nbsp;(v1.0.2)
+* 2013-08-23 18:52:06 +0200 f5e52f1 &nbsp;(v1.0.1)
+* 2013-08-22 12:49:20 +0100 80a92bb &nbsp;(v1.0.0)
+* 2013-08-03 03:56:53 +0200 c4e4b85 &nbsp;(v1.0.0-rc.1.4)
+* 2013-07-26 17:51:43 +0200 26aceaa &nbsp;(v1.0.0-rc.1.3)
+* 2013-07-24 16:17:35 +0200 7511d3c &nbsp;(v1.0.0-rc.1.2)
+* 2013-07-03 15:10:08 +0200 e49154a &nbsp;(v1.0.0-rc.1.1)
+* 2013-06-28 20:08:07 +0100 ccc30fa &nbsp;(v1.0.0-rc.1)
+* 2013-05-27 20:20:09 +0200 7c736a5 &nbsp;(v1.0.0-beta.6)
+* 2013-05-13 19:43:11 +0200 5ab41a2 &nbsp;(v1.0.0-beta.5)
+| * 2013-04-08 21:14:10 +0200 cda7b00 &nbsp;(v1.0.0-beta.4)
+|/ &nbsp;
+* 2013-02-11 14:33:06 +0100 32d75d2</pre>
+
+<pre>
+$ npm update -g yo
+​...
+yo@1.0.4 /usr/local/share/npm/lib/node_modules/yo
+├── open@0.0.4
+├── async@0.2.9
+├── lodash@1.3.1
+├── chalk@0.2.1 (ansi-styles@0.2.0, has-color@0.1.1)
+├── sudo-block@0.2.1 (chalk@0.1.1)
+├── nopt@2.1.2 (abbrev@1.0.4)
+├── insight@0.2.0 (configstore@0.1.5, inquirer@0.2.5, request@2.27.0)
+├── update-notifier@0.1.6 (chalk@0.1.1, semver@2.0.11, configstore@0.1.5, request@2.22.0)
+└── yeoman-generator@0.13.4 (dargs@0.1.0, diff@1.0.7, debug@0.7.2, text-table@0.1.1, mime@1.2.11, mkdirp@0.3.5, isbinaryfile@0.1.9, shelljs@0.1.4, underscore.string@2.3.3, iconv-lite@0.2.11, rimraf@2.2.2, tar@0.1.18, glob@3.2.6, findup-sync@0.1.2, inquirer@0.3.4, request@2.25.0, cheerio@0.12.2)
+</pre>
+
+<p>2013-09-04 19:07 Wednsday</p>
+
+<p>yo 命令提示 angular 有更新</p>
+
+<pre>
+$ npm update -g yo
+...
+npm http 200 https://registry.npmjs.org/yo
+npm http GET https://registry.npmjs.org/yo/-/yo-1.0.4.tgz
+npm http 200 https://registry.npmjs.org/yo/-/yo-1.0.4.tgz
+npm http GET https://registry.npmjs.org/yo/1.0.4
+npm http 200 https://registry.npmjs.org/yo/1.0.4
+npm http GET https://registry.npmjs.org/yo/-/yo-1.0.4.tgz
+npm http 200 https://registry.npmjs.org/yo/-/yo-1.0.4.tgz
+...
+npm http 200 https://registry.npmjs.org/yeoman-generator
+npm http GET https://registry.npmjs.org/yeoman-generator/-/yeoman-generator-0.13.4.tgz
+npm http 200 https://registry.npmjs.org/yeoman-generator/-/yeoman-generator-0.13.4.tgz
+...
+/usr/local/share/npm/bin/yo -&gt; /usr/local/share/npm/lib/node_modules/yo/bin/yo
+yo@1.0.4 /usr/local/share/npm/lib/node_modules/yo
+├── open@0.0.4
+├── async@0.2.9
+├── lodash@1.3.1
+├── chalk@0.2.1 (ansi-styles@0.2.0, has-color@0.1.1)
+├── sudo-block@0.2.1 (chalk@0.1.1)
+├── nopt@2.1.2 (abbrev@1.0.4)
+├── update-notifier@0.1.5 (semver@2.0.11, chalk@0.1.1, configstore@0.1.5, request@2.22.0)
+├── insight@0.2.0 (inquirer@0.2.5, configstore@0.1.5, request@2.27.0)
+└── yeoman-generator@0.13.4 (dargs@0.1.0, diff@1.0.6, debug@0.7.2, text-table@0.1.1, mime@1.2.11, mkdirp@0.3.5, isbinaryfile@0.1.9, shelljs@0.1.4, underscore.string@2.3.3, iconv-lite@0.2.11, rimraf@2.2.2, tar@0.1.18, glob@3.2.6, findup-sync@0.1.2, inquirer@0.3.2, cheerio@0.12.1, request@2.25.0)</pre>
+
+<pre>
+[?] What would you like to do?&nbsp;
+&nbsp; Run the Angular generator (0.2.2)&nbsp;
+&nbsp; Run the Karma generator (0.2.0)&nbsp;
+&nbsp; Run the Testacular generator (0.1.1)&nbsp;
+&nbsp; --------
+❯ Update your generators&nbsp;
+&nbsp; Install a generator&nbsp;
+&nbsp; Find some help&nbsp;
+&nbsp; Get me out of here!&nbsp;
+</pre>
+
+<pre>
+[?] What would you like to do? (Use arrow keys)
+❯ Run the Angular generator (0.4.0)&nbsp;
+&nbsp; Run the Testacular generator (0.1.1)&nbsp;
+&nbsp; --------
+&nbsp; Update your generators&nbsp;
+&nbsp; Install a generator&nbsp;
+&nbsp; Find some help&nbsp;
+&nbsp; Get me out of here!&nbsp;
+</pre>
+
+<pre>
+I&#39;ve just updated all of your generators. Remember, you can update
+a specific generator with npm by running:
+
+    npm update -g generator-_______</pre>
+
+<p>2013-08-27 05:22 Tuesday 又有新项目啦</p>
+
+<p>yo 终于正式发布了</p>
+
+<p>今天把 Yeoman 1.0 单独拿出来作为一篇，发现首页仍然写着：</p>
+
+<blockquote>
+<p>1.0 RELEASE CANDIDATE 1</p>
+</blockquote>
+
+<p>而在&nbsp;<a href="http://yeoman.io/gettingstarted.html">Getting Started (1.0)</a>&nbsp;页面也仍然写着这是一个测试版，有 BUG。</p>
+
+<p>查看版本库的最早一版，注释中说的明明白白，是从 yeoman/yeoman 而来</p>
+
+<p><a href="https://github.com/yeoman/yo/commit/32d75d2209766e3abaee1d0c1a278b1caf85750d">Init</a>&nbsp;<a href="https://github.com/yeoman/yo/commits/master?page=3#">&hellip;</a></p>
+
+<pre>
+Moved from <a href="https://github.com/yeoman/yeoman">https://github.com/yeoman/yeoman</a></pre>
+
+<p><a href="https://github.com/yeoman/yo/commit/32d75d2209766e3abaee1d0c1a278b1caf85750d">32d75d2209</a><a href="https://github.com/yeoman/yo/tree/32d75d2209766e3abaee1d0c1a278b1caf85750d">Browse code&nbsp;</a></p>
+
+<p><a href="https://github.com/sindresorhus">sindresorhus</a>&nbsp;authored&nbsp;6 months ago</p>
+
+<h2>1.0 BETA</h2>
+
+<p>Yeoman 1.0 is more than just a tool. It&#39;s a workflow; a collection of tools and best practices working in harmony to make developing for the web even better.</p>
+
+<p>Our workflow is comprised of three tools for improving your&nbsp;productivity&nbsp;and&nbsp;satisfaction&nbsp;when building a web app:&nbsp;yo&nbsp;(the scaffolding tool),&nbsp;grunt&nbsp;(the build tool) and&nbsp;bower&nbsp;(for package management).</p>
+
+<ul>
+	<li>
+	<p><a href="https://github.com/yeoman/yo">Yo</a>&nbsp;scaffolds out a new application, writing your Grunt configuration and pulling in relevant Grunt tasks that you might need for your build.</p>
+	</li>
+	<li>
+	<p><a href="http://twitter.github.com/bower">Bower</a>&nbsp;is used for dependency management, so that you no longer have to manually download and manage your scripts.</p>
+	</li>
+	<li>
+	<p><a href="http://gruntjs.com/">Grunt</a>&nbsp;is used to build, preview and test your project, thanks to help from tasks curated by the Yeoman team and grunt-contrib.</p>
+
+	<p>Grunt is a task-based command line build tool for JavaScript projects</p>
+	</li>
+</ul>
+
+<p>All three of these tools are developed and maintained separately, but work well together as part of our prescribed workflow for keeping you effective.</p>
+
+<h2>GETTING STARTED</h2>
+
+<h3>Installation</h3>
+
+<p>This beta does not yet work on Windows. We&#39;ll be working hard to fix this towards the final release.</p>
+
+<p>A complete&nbsp;<a href="https://github.com/yeoman/yeoman/wiki/Getting-started-with-1.0">getting started</a>&nbsp;guide is available but for those looking to get up and running quickly. Make sure you have&nbsp;<a href="http://nodejs.org/">Node.js</a>&nbsp;installed (plus&nbsp;<a href="http://ruby-lang.org/">Ruby</a>&nbsp;and&nbsp;<a href="http://compass-style.org/install">Compass</a>&nbsp;too if you plan to use it) then install the recommended tools by running: （安装好&nbsp;Node.js，npm 命令就可以用了）</p>
+
+<pre>
+npm install -g yo grunt-cli bower </pre>
+
+<pre>
+$ /usr/local/share/npm/bin/
+bower&nbsp; grunt&nbsp; yo&nbsp;</pre>
+
+<p>This will install the recommended tools globally. For scaffolding, our web app generator comes bundled withyo. You can install additional generators with npm. For exmaple to install the&nbsp;<a href="http://angularjs.org/">AngularJS</a>&nbsp;generator, you do&nbsp;npm install generator-angular. Run&nbsp;yo&nbsp;for more info.</p>
+
+<h3>Usage</h3>
+
+<p>Run&nbsp;yo&nbsp;in your Terminal to see some help and get familiar with the tool.</p>
+
+<p>Then you would want to scaffold out a new project. For this you use&nbsp;yo&nbsp;the scaffolder. It comes bundled with the webapp generator by default, which scaffolds out a skeleton front-end web app:</p>
+
+<pre>
+yo webapp</pre>
+
+<p>You may also want to install and use additional generators. This is done through npm. For example, to install the Angular generator with the required Testacular generator one would run:&nbsp;npm install generator-angular generator-testacular.</p>
+
+<p>A complete workflow might look like this:</p>
+
+<pre>
+yo webapp                      # scaffold out a skeleton web app project
+bower install underscore       # install a dependency for your project from Bower, &quot;underscore&quot; is just an example
+grunt test&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; # test your app
+grunt server&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; # preview your app
+grunt&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; # build the application for deployment
+</pre>
+
+<p>Or with the AngularJS generator:</p>
+
+<pre>
+npm install generator-angular generator-testacular  # install generators
+yo angular                     # scaffold out a AngularJS project
+npm install &amp;&amp; bower install   # install default dependencies
+bower install angular-ui       # install a dependency for your project from Bower, &quot;angular-ui&quot; is just an example
+grunt test                     # test your app
+grunt server                   # preview your app
+grunt                          # build the application for deployment
+</pre>
+
+<p>For the 1.0 beta, we support generators for webapp, angular, mocha and testacular. More will become available as they get ported over to the new version.</p>
+
+<hr />
+<h1>Getting started with 1.0</h1>
+
+<p><a href="http://yeoman.io/gettingstarted.html" target="_blank">http://yeoman.io/gettingstarted.html</a></p>
+
+<p>Keep in mind that this is a beta and will have bugs. Don&#39;t use in production.</p>
+
+<p>The Yeoman workflow is comprised of three core tools for improving your productivity and satisfaction when building a web app. These tools are:</p>
+
+<ul>
+	<li><a href="https://github.com/yeoman/yo">yo</a>&nbsp;- the scaffolding tool from Yeoman</li>
+	<li><a href="http://twitter.github.com/bower">bower</a>&nbsp;- the package management tool</li>
+	<li><a href="http://gruntjs.com/">grunt</a>&nbsp;- the build tool</li>
+</ul>
+
+<p>Each of these projects are independently maintained by their respective communities, but work well together as a part of a prescriptive workflow for keeping you effective. Let&rsquo;s walk through what these binaries can do.</p>
+
+<h2>yo</h2>
+
+<p>2013-09-04 21:40</p>
+
+<p>Yo is maintained by the Yeoman project and offers web application scaffolding, utilizing scaffolding templates we refer to as generators. You typically install yo and any generators you think you might use via npm.</p>
+
+<h3>Installing yo and some generators</h3>
+
+<p>First, you&#39;ll need to install&nbsp;yo&nbsp;and other required tools:</p>
+
+<pre>
+<span class="marker">npm install -g yo</span></pre>
+
+<p>If you are using npm 1.2.10 or above, this will also automatically install&nbsp;grunt&nbsp;and&nbsp;bower&nbsp;for you. If you&#39;re on an older version of npm, you will need to install them manually:</p>
+
+<pre>
+<span class="marker"># For npm versions &lt; 1.2.10.
+npm install -g grunt-cli bower</span></pre>
+
+<p>If you have installed Grunt globally in the past, you will need to remove it first:&nbsp;npm uninstall -g grunt</p>
+
+<p>On Windows, we suggest you use an improved command line tool such as Console2 or PowerShell to improve the experience.</p>
+
+<h2>yo</h2>
+
+<p>Yo is maintained by the Yeoman project and offers web application scaffolding, utilizing scaffolding templates we refer to as generators. You typically install yo and any generators you think you might use via npm.</p>
+
+<h3>Installing yo and some generators</h3>
+
+<p>This beta does not yet work on Windows. We&#39;ll be working hard to fix this towards the final release.</p>
+
+<p>First you&rsquo;ll need to install some tools (the webapp generator is bundled):</p>
+
+<pre>
+<span class="marker">npm install -g yo grunt-cli bower</span>
+</pre>
+
+<p>If you have installed Grunt globally in the past, you will need to remove it first:&nbsp;npm uninstall -g grunt</p>
+
+<p>Windows instructions at the bottom</p>
+
+<h3>Basic scaffolding</h3>
+
+<pre>
+yo webapp</pre>
+
+<pre>
+$ yo webapp
+==========================================================================
+We&#39;re constantly looking for ways to make yo better!
+May we anonymously report usage statistics to improve the tool over time?
+More info: yeoman.io/insight.html &amp; http://yeoman.io
+==========================================================================
+[?] [Y/n]:&nbsp; (Y) Y
+
+&nbsp;&nbsp;&nbsp;&nbsp; _-----_
+&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |
+&nbsp;&nbsp;&nbsp; |--(o)--|&nbsp;&nbsp; .--------------------------.
+&nbsp;&nbsp; `---------&acute;&nbsp; |&nbsp;&nbsp;&nbsp; Welcome to Yeoman,&nbsp;&nbsp;&nbsp; |
+&nbsp;&nbsp;&nbsp; ( _&acute;U`_ )&nbsp;&nbsp; |&nbsp;&nbsp; ladies and gentlemen!&nbsp; |
+&nbsp;&nbsp;&nbsp; /___A___\&nbsp;&nbsp; &#39;__________________________&#39;
+&nbsp;&nbsp;&nbsp;&nbsp; |&nbsp; ~&nbsp; |
+&nbsp;&nbsp; __&#39;.___.&#39;__
+&acute;&nbsp;&nbsp; `&nbsp; |&deg; &acute; Y `
+
+Out of the box I include HTML5 Boilerplate, jQuery and Modernizr.
+Would you like to include Twitter Bootstrap for Sass? (Y/n) Y
+Would you like to include RequireJS (for AMD support)? (Y/n) Y
+&nbsp;&nbsp; create Gruntfile.js
+&nbsp;&nbsp; create package.json
+&nbsp;&nbsp; create .gitignore
+&nbsp;&nbsp; create .gitattributes
+&nbsp;&nbsp; create .bowerrc
+&nbsp;&nbsp; create component.json
+&nbsp;&nbsp; create .jshintrc
+&nbsp;&nbsp; create .editorconfig
+&nbsp;&nbsp; create app/favicon.ico
+&nbsp;&nbsp; create app/404.html
+&nbsp;&nbsp; create app/robots.txt
+&nbsp;&nbsp; create app/.htaccess
+&nbsp;&nbsp; create app/scripts/vendor/bootstrap.js
+&nbsp;&nbsp; create app/styles/main.scss
+&nbsp;&nbsp; create app/scripts/app.js
+&nbsp;&nbsp; create app/index.html
+&nbsp;&nbsp; create app/scripts/main.js
+&nbsp;&nbsp; invoke&nbsp;&nbsp; mocha:app
+&nbsp;&nbsp; create&nbsp;&nbsp;&nbsp;&nbsp; test/index.html
+&nbsp;&nbsp; create&nbsp;&nbsp;&nbsp;&nbsp; test/lib/chai.js
+&nbsp;&nbsp; create&nbsp;&nbsp;&nbsp;&nbsp; test/lib/expect.js
+&nbsp;&nbsp; create&nbsp;&nbsp;&nbsp;&nbsp; test/lib/mocha/mocha.css
+&nbsp;&nbsp; create&nbsp;&nbsp;&nbsp;&nbsp; test/lib/mocha/mocha.js
+&nbsp;&nbsp; create&nbsp;&nbsp;&nbsp;&nbsp; test/spec/test.js
+
+I&#39;m all done. Just run npm install &amp;&amp; bower install to install the required dependencies.</pre>
+
+<p>This is the default generator and will scaffold out a project containing&nbsp;<a href="http://html5boilerplate.com/">HTML5 Boilerplate</a>,&nbsp;<a href="http://jquery.com/">jQuery</a>&nbsp;and&nbsp;<a href="http://modernizr.com/">Modernizr</a>.&nbsp;<a href="http://twitter.github.com/bootstrap">Twitter Bootstrap</a>&nbsp;can be optionally installed from the prompt you will be presented.</p>
+
+<p>Each project created with yo will also pull in relevant Grunt tasks which we feel are needed or useful for your workflow.</p>
+
+<p>The webapp generator is considered the simplest possible start for a webapp. We also provide some framework generators can be used to scaffold out a project and later views, models, controllers and so on.</p>
+
+<p>当依次执行完 yo webapp, npm install, bower install，才能正确执行 grunt server，之后会自动打开浏览器，对项目进行预览。</p>
+
+<pre>
+$ grunt server
+Running &quot;server&quot; task
+
+Running &quot;clean:server&quot; (clean) task
+
+Running &quot;coffee:dist&quot; (coffee) task
+&gt;&gt; Destination not written because compiled files were empty.
+
+Running &quot;compass:server&quot; (compass) task
+directory .tmp/styles/
+&nbsp;&nbsp; create .tmp/styles/main.css
+
+Running &quot;livereload-start&quot; task
+... Starting Livereload server on 35729 ...
+
+Running &quot;connect:livereload&quot; (connect) task
+Starting connect web server on localhost:9000.
+
+Running &quot;open:server&quot; (open) task
+
+Running &quot;watch&quot; task
+Watching app/scripts/*.coffee
+Watching test/spec/*.coffee
+Watching app/styles/*.{scss,sass}
+Watching app/*.html,{.tmp,app}/styles/*.css,{.tmp,app}/scripts/*.js,app/images/*.{png,jpg,jpeg}</pre>
+
+<h3>Scaffolding an AngularJS app</h3>
+
+<pre>
+yo angular
+</pre>
+
+<p>出现如下错误的原因是&nbsp;npm install generator-angular generator-testacular 命令中必须不加 -g 执行，从而将其安装到本地。</p>
+
+<pre>
+$ yo angular
+Error angular
+
+Invalid namespace: angular (or not yet registered).
+Registered: 4 namespace(s). Run with the `--help` option to list them.</pre>
+
+<pre>
+$ yo angular
+Would you like to include Twitter Bootstrap? (Y/n) Y
+If so, would you like to use Twitter Bootstrap for Compass (as opposed to vanilla CSS)? (Y/n) Y
+Would you like to include angular-resource.js? (Y/n) Y
+Would you like to include angular-cookies.js? (Y/n) Y
+Would you like to include angular-sanitize.js? (Y/n) Y
+
+&nbsp;&nbsp;&nbsp;&nbsp; info ... Fetching http://github.com/kristianmandrup/compass-twitter-bootstrap/archive/c3ccce2cca5ec52437925e8feaaa11fead51e132.tar.gz ...
+&nbsp;&nbsp;&nbsp;&nbsp; info This might take a few moments
+GET http://github.com/kristianmandrup/compass-twitter-bootstrap/archive/c3ccce2cca5ec52437925e8feaaa11fead51e132.tar.gz
+Redirect to [object Object]
+GET https://github.com/kristianmandrup/compass-twitter-bootstrap/archive/c3ccce2cca5ec52437925e8feaaa11fead51e132.tar.gz
+Redirect to [object Object]
+GET https://nodeload.github.com/kristianmandrup/compass-twitter-bootstrap/tar.gz/c3ccce2cca5ec52437925e8feaaa11fead51e132
+..............................
+✔ Done in 10.206s.
+✔ Done in /Users/mlhch/.yeoman/cache/kristianmandrup/compass-twitter-bootstrap/c3ccce2cca5ec52437925e8feaaa11fead51e132
+
+&nbsp;&nbsp; create app/styles/main.scss
+&nbsp;&nbsp; create app/styles/_compass_twitter_bootstrap.scss
+&nbsp;&nbsp; create app/styles/_compass_twitter_bootstrap_awesome.scss
+&nbsp;&nbsp; create app/styles/_compass_twitter_bootstrap_responsive.scss
+&nbsp;&nbsp; create app/styles/compass_twitter_bootstrap/_accordion.scss
+&nbsp;&nbsp; create app/styles/compass_twitter_bootstrap/_alerts.scss
+&nbsp;&nbsp; create app/styles/compass_twitter_bootstrap/_breadcrumbs.scss
+&nbsp;&nbsp; create app/styles/compass_twitter_bootstrap/_button-groups.scss
+&nbsp;&nbsp; create app/styles/compass_twitter_bootstrap/_buttons.scss
+&nbsp;&nbsp; create app/styles/compass_twitter_bootstrap/_carousel.scss
+&nbsp;&nbsp; create app/styles/compass_twitter_bootstrap/_close.scss
+&nbsp;&nbsp; create app/styles/compass_twitter_bootstrap/_code.scss
+&nbsp;&nbsp; create app/styles/compass_twitter_bootstrap/_component-animations.scss
+&nbsp;&nbsp; create app/styles/compass_twitter_bootstrap/_dropdowns.scss
+&nbsp;&nbsp; create app/styles/compass_twitter_bootstrap/_font-awesome.scss
+&nbsp;&nbsp; create app/styles/compass_twitter_bootstrap/_forms.scss
+&nbsp;&nbsp; create app/styles/compass_twitter_bootstrap/_grid.scss
+&nbsp;&nbsp; create app/styles/compass_twitter_bootstrap/_hero-unit.scss
+&nbsp;&nbsp; create app/styles/compass_twitter_bootstrap/_labels-badges.scss
+&nbsp;&nbsp; create app/styles/compass_twitter_bootstrap/_layouts.scss
+&nbsp;&nbsp; create app/styles/compass_twitter_bootstrap/_mixins.scss
+&nbsp;&nbsp; create app/styles/compass_twitter_bootstrap/_modals.scss
+&nbsp;&nbsp; create app/styles/compass_twitter_bootstrap/_navbar.scss
+&nbsp;&nbsp; create app/styles/compass_twitter_bootstrap/_navs.scss
+&nbsp;&nbsp; create app/styles/compass_twitter_bootstrap/_pager.scss
+&nbsp;&nbsp; create app/styles/compass_twitter_bootstrap/_pagination.scss
+&nbsp;&nbsp; create app/styles/compass_twitter_bootstrap/_popovers.scss
+&nbsp;&nbsp; create app/styles/compass_twitter_bootstrap/_progress-bars.scss
+&nbsp;&nbsp; create app/styles/compass_twitter_bootstrap/_reset.scss
+&nbsp;&nbsp; create app/styles/compass_twitter_bootstrap/_responsive-1200px-min.scss
+&nbsp;&nbsp; create app/styles/compass_twitter_bootstrap/_responsive-767px-max.scss
+&nbsp;&nbsp; create app/styles/compass_twitter_bootstrap/_responsive-768px-979px.scss
+&nbsp;&nbsp; create app/styles/compass_twitter_bootstrap/_responsive-navbar.scss
+&nbsp;&nbsp; create app/styles/compass_twitter_bootstrap/_responsive-utilities.scss
+&nbsp;&nbsp; create app/styles/compass_twitter_bootstrap/_responsive.scss
+&nbsp;&nbsp; create app/styles/compass_twitter_bootstrap/_scaffolding.scss
+&nbsp;&nbsp; create app/styles/compass_twitter_bootstrap/_sprites.scss
+&nbsp;&nbsp; create app/styles/compass_twitter_bootstrap/_tables.scss
+&nbsp;&nbsp; create app/styles/compass_twitter_bootstrap/_thumbnails.scss
+&nbsp;&nbsp; create app/styles/compass_twitter_bootstrap/_tooltip.scss
+&nbsp;&nbsp; create app/styles/compass_twitter_bootstrap/_type.scss
+&nbsp;&nbsp; create app/styles/compass_twitter_bootstrap/_utilities.scss
+&nbsp;&nbsp; create app/styles/compass_twitter_bootstrap/_variables.scss
+&nbsp;&nbsp; create app/styles/compass_twitter_bootstrap/_wells.scss
+&nbsp;&nbsp; create app/index.html
+&nbsp;&nbsp; create component.json
+&nbsp;&nbsp; create package.json
+&nbsp;&nbsp; create Gruntfile.js
+&nbsp;&nbsp; invoke&nbsp;&nbsp; angular:common:/Users/mlhch/www_nginx/angular/node_modules/generator-angular/app/index.js
+&nbsp;&nbsp; create&nbsp;&nbsp;&nbsp;&nbsp; .bowerrc
+&nbsp;&nbsp; create&nbsp;&nbsp;&nbsp;&nbsp; .editorconfig
+&nbsp;&nbsp; create&nbsp;&nbsp;&nbsp;&nbsp; .gitattributes
+&nbsp;&nbsp; create&nbsp;&nbsp;&nbsp;&nbsp; .jshintrc
+&nbsp;&nbsp; create&nbsp;&nbsp;&nbsp;&nbsp; .npmignore
+&nbsp;&nbsp; create&nbsp;&nbsp;&nbsp;&nbsp; app/.buildignore
+&nbsp;&nbsp; create&nbsp;&nbsp;&nbsp;&nbsp; app/.htaccess
+&nbsp;&nbsp; create&nbsp;&nbsp;&nbsp;&nbsp; app/404.html
+&nbsp;&nbsp; create&nbsp;&nbsp;&nbsp;&nbsp; app/favicon.ico
+&nbsp;&nbsp; create&nbsp;&nbsp;&nbsp;&nbsp; app/robots.txt
+&nbsp;&nbsp; create&nbsp;&nbsp;&nbsp;&nbsp; app/styles/main.css
+&nbsp;&nbsp; create&nbsp;&nbsp;&nbsp;&nbsp; app/views/main.html
+&nbsp;&nbsp; create&nbsp;&nbsp;&nbsp;&nbsp; test/runner.html
+&nbsp;&nbsp; create&nbsp;&nbsp;&nbsp;&nbsp; test/vendor/angular-mocks.js
+&nbsp;&nbsp; create&nbsp;&nbsp;&nbsp;&nbsp; test/vendor/angular-scenario.js
+&nbsp;&nbsp; invoke&nbsp;&nbsp; angular:main:/Users/mlhch/www_nginx/angular/node_modules/generator-angular/app/index.js
+&nbsp;&nbsp; create&nbsp;&nbsp;&nbsp;&nbsp; app/scripts/app.js
+&nbsp;&nbsp; invoke&nbsp;&nbsp; angular:controller:/Users/mlhch/www_nginx/angular/node_modules/generator-angular/app/index.js
+&nbsp;&nbsp; create&nbsp;&nbsp;&nbsp;&nbsp; app/scripts/controllers/main.js
+&nbsp;&nbsp; create&nbsp;&nbsp;&nbsp;&nbsp; test/spec/controllers/main.js
+&nbsp;&nbsp; invoke&nbsp;&nbsp; testacular:app:/Users/mlhch/www_nginx/angular/node_modules/generator-angular/app/index.js
+&nbsp;&nbsp; create&nbsp;&nbsp;&nbsp;&nbsp; testacular.conf.js
+
+I&#39;m all done. Just run npm install &amp;&amp; bower install to install the required dependencies.</pre>
+
+<p>Here, we are first generating the file structure for a basic web application and then writing a number of boilerplate files for a new AngularJS application on top of it. This includes boilerplate directives and controllers as well as scaffolded Testacular unit tests.</p>
+
+<h3>Scaffolding out Angular pieces</h3>
+
+<pre>
+yo angular:controller myController
+yo angular:directive myDirective
+yo angular:filter myFilter
+</pre>
+
+<p>Yo scaffolds can also be used to scaffold further pieces of your application - we call these sub-generators.</p>
+
+<p>In the AngularJS framework for example your application is made up of a number of pieces including controllers, directives and filters. You can actually scaffold out any of these pieces (and more) during your development workflow as shown above.</p>
+
+<p>Each framework generator has further documentation available noting what sub-generators it supports.</p>
+
+<h2>Bower</h2>
+
+<p>Bower is a package manager for the web which allows you to easily manage dependencies for your projects. This includes assets such as JavaScript, images and CSS. It is maintained by Twitter and the open-source community.</p>
+
+<p>Managing packages using Bower can be done using the following commands:</p>
+
+<pre>
+bower search &lt;dep&gt; - search for a dependency in the Bower registry
+bower install &lt;dep&gt;..&lt;depN&gt; - install one or more dependencies
+bower list - list out the dependencies you have installed for a project
+bower update &lt;dep&gt; - update a dependency to the latest version available
+</pre>
+
+<p>Bower can be used with a project scaffolded using yo.</p>
+
+<h3>Create a basic webapp, search for a jQuery plugin with Bower and install it</h3>
+
+<pre>
+yo webapp
+bower search jquery-bbq
+&gt; BBQ has been found. Let&rsquo;s install it!
+bower install jquery-bbq
+&gt; installs jquery, jquery-bbq
+</pre>
+
+<h3>Create an AngularJS app, install Angular UI from Bower and build it.</h3>
+
+<pre>
+yo angular
+bower install angular-ui
+grunt
+</pre>
+
+<pre>
+$ bower install angular-ui
+bower cloning git://github.com/angular-ui/angular-ui.git
+bower caching git://github.com/angular-ui/angular-ui.git
+bower fetching angular-ui
+bower checking out angular-ui#v0.4.0
+bower copying /Users/mlhch/.bower/cache/angular-ui/bd4cf7fc7bfe2a2118a7705a22201834
+bower installing angular-ui#0.4.0</pre>
+
+<p>It&rsquo;s as simple as that.</p>
+
+<h2>grunt</h2>
+
+<p>Grunt is a task-based command-line tool for JavaScript projects. It can be used to build projects, but also exposes several commands which you will want to use in your workflow. Many of these commands utilize Grunt tasks behind the hood which are maintained by the Yeoman team.</p>
+
+<h3>Grunt commands</h3>
+
+<pre>
+grunt - build an optimized, production-ready version of your app
+grunt server - preview an app you have generated (with Livereload)
+grunt test  - run the unit tests for an app
+</pre>
+
+<p>These commands can be used together with the yo binary for a seamless development workflow:</p>
+
+<p>Create a basic web app, preview it, test, build</p>
+
+<pre>
+yo webapp
+grunt server
+grunt test
+grunt</pre>
