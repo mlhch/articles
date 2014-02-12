@@ -1,0 +1,1302 @@
+<h1>jQuery-Mobile</h1>
+
+<p>2012-06-10 11:20:11 +08:00 Sunday</p>
+
+<p><a href="http://jquerymobile.com/" target="_blank">http://jquerymobile.com/</a>|<a href="http://api.jquerymobile.com/" target="_blank">http://api.jquerymobile.com/</a></p>
+
+<p>jQuery Mobile: Touch-Optimized Web Framework for Smartphones &amp; Tablets</p>
+
+<h3>1.4.0</h3>
+
+<p>2014-02-13 00:09 Thursday</p>
+
+<p><a href="http://jquerymobile.com/resources/download/jquery.mobile-1.4.0.zip">Latest stable</a>&nbsp;Version 1.4.0, jQuery 1.8 - 1.10 / 2.0</p>
+
+<h3>1.3.2</h3>
+
+<p>2013-10-19 Saturday 19:07</p>
+
+<p><a href="http://jquerymobile.com/blog/2013/07/19/announcing-jquery-mobile-1-3-2/">Latest stable version - 1.3.2</a></p>
+
+<h3>1.3.1</h3>
+
+<p>2013-07-09 Tuesday 昨天今天又下暴雨</p>
+
+<p><a href="http://jquerymobile.com/blog/2013/04/10/announcing-jquery-mobile-1-3-1/">JQUERY MOBILE 1.3.1 RELEASED!</a></p>
+
+<p>A unified, HTML5-based user interface system for all popular mobile device platforms, built on the rock-solid jQuery and jQuery UI foundation. Its lightweight code is built with progressive enhancement, and has a flexible, easily themeable design.</p>
+
+<p><a href="http://jquerymobile.com/blog/2013/04/10/announcing-jquery-mobile-1-3-1/">Latest stable version - 1.3.1</a><br />
+Legacy versions:&nbsp;<a href="http://jquerymobile.com/blog/2013/03/22/announcing-jquery-mobile-1-2-1/">1.2.1</a>&nbsp;-&nbsp;<a href="http://jquerymobile.com/blog/2013/03/19/announcing-jquery-mobile-1-1-2/">1.1.2</a>&nbsp;-&nbsp;<a href="http://jquerymobile.com/blog/2012/01/26/jquery-mobile-1-0-1-released/">1.0.1</a></p>
+
+<p>1.2.0 RC2</p>
+
+<p><a href="http://jquerymobile.com/?p=3220">JQUERY MOBILE 1.2.0 RC2 RELEASED!</a></p>
+
+<p>2012-09-24 18:54 星期一 今天试验成了 Google Calendar APIs</p>
+
+<p><a href="http://jquerymobile.com/?p=3220">Experimental version - 1.2.0 RC2</a></p>
+
+<p><a href="http://jquerymobile.com/blog/2012/07/12/jqm-1-1-1/">Latest stable version - 1.1.1</a></p>
+
+<p><a href="http://jquerymobile.com/blog/2012/01/26/jquery-mobile-1-0-1-released/">Legacy version - 1.0.1</a></p>
+
+<p>这次不妨尝试尝试 git 库版本：https://github.com/jquery/jquery-mobile，git://github.com/jquery/jquery-mobile.git</p>
+
+<pre>
+$&nbsp;du -sh jquery-mobile/
+124M jquery-mobile/
+</pre>
+
+<p>查看 README.MD 可知如何自己编译出最终使用文件，需要执行 npm install 解决依赖。grunt js, grunt css, grunt copy:images，图省事直接 grunt dist</p>
+
+<pre>
+$ grunt js
+Running &quot;custom_init&quot; task
+path.existsSync is now called `fs.existsSync`.
+
+Running &quot;config:async&quot; task
+
+Running &quot;js:compile&quot; task
+
+Running &quot;concat:js&quot; (concat) task
+File &quot;compiled/jquery.mobile.js&quot; created.
+
+Running &quot;min:compiled/jquery.mobile.min.js&quot; (min) task
+File &quot;compiled/jquery.mobile.min.js&quot; created.
+Uncompressed size: 293146 bytes.
+Compressed size: 33492 bytes gzipped (113156 bytes minified).
+
+Running &quot;js:cleanup&quot; task
+
+Done, without errors.</pre>
+
+<pre>
+$ grunt css
+Running &quot;custom_init&quot; task
+path.existsSync is now called `fs.existsSync`.
+
+Running &quot;config:async&quot; task
+
+Running &quot;css:compile&quot; task
+
+Running &quot;concat:regular&quot; (concat) task
+File &quot;compiled/jquery.mobile.css&quot; created.
+
+Running &quot;concat:structure&quot; (concat) task
+File &quot;compiled/jquery.mobile.structure.css&quot; created.
+
+Running &quot;concat:theme&quot; (concat) task
+File &quot;compiled/jquery.mobile.theme.css&quot; created.
+
+Running &quot;cssmin:compiled/jquery.mobile.min.css&quot; (cssmin) task
+File &#39;compiled/jquery.mobile.min.css&#39; created.
+Uncompressed size: 110180 bytes.
+Compressed size: 10826 bytes gzipped (73023 bytes minified).
+
+Running &quot;cssmin:compiled/jquery.mobile.structure.min.css&quot; (cssmin) task
+File &#39;compiled/jquery.mobile.structure.min.css&#39; created.
+Uncompressed size: 53705 bytes.
+Compressed size: 7607 bytes gzipped (47434 bytes minified).
+
+Running &quot;cssmin:compiled/jquery.mobile.theme.min.css&quot; (cssmin) task
+File &#39;compiled/jquery.mobile.theme.min.css&#39; created.
+Uncompressed size: 53376 bytes.
+Compressed size: 3570 bytes gzipped (25748 bytes minified).
+
+Running &quot;css:cleanup&quot; task
+
+Done, without errors.</pre>
+
+<p>2013-10-19 23:07 Saturday</p>
+
+<p>新版本编译时有问题，config:dev 任务找不到。查看 Gruntfile.js 可知 config:dev 确实没有提供，可忽略之，单独执行 grunt js:release 得到压缩版本和非压缩版本。grunt css:release 同理。</p>
+
+<pre>
+$ grunt js --force
+Warning: Task &quot;config:dev&quot; not found. Used --force, continuing.
+
+Done, but with warnings.</pre>
+
+<pre>
+$ grunt js:release
+Running &quot;requirejs:js&quot; (requirejs) task
+&gt;&gt; Tracing dependencies for:
+&gt;&gt; /Users/mlhch/www_cdv/hello-jqm/www/components/jquery-mobile/dist/jquery.mobil
+&gt;&gt; e.js
+&gt;&gt; Tracing dependencies for: jquery
+...
+&gt;&gt; /Users/mlhch/www_cdv/hello-jqm/www/components/jquery-mobile/js/jquery.mobile.
+&gt;&gt; init.js
+&gt;&gt; /Users/mlhch/www_cdv/hello-jqm/www/components/jquery-mobile/js/jquery.mobile.
+&gt;&gt; js
+
+Running &quot;concat:js&quot; (concat) task
+File &quot;dist/jquery.mobile.js&quot; created.
+
+Running &quot;uglify:all&quot; (uglify) task
+Source Map &quot;dist/jquery.mobile.min.map&quot; created.
+File &quot;dist/jquery.mobile.min.js&quot; created.
+
+Running &quot;copy:sourcemap&quot; (copy) task
+Copied 1 files
+
+Done, without errors.</pre>
+
+<hr />
+<h2>Announcing jQuery Mobile 1.1.1</h2>
+
+<p>Posted on&nbsp;<a href="http://jquerymobile.com/blog/2012/07/12/jqm-1-1-1/">July 12, 2012</a>&nbsp;by&nbsp;<a href="http://jquerymobile.com/blog/author/todd/">Todd Parker</a></p>
+
+<p>The jQuery Mobile team is excited to announce the release of version 1.1.1.</p>
+
+<p>This is our first maintenance release for version 1.1 and it&rsquo;s chock full of bug fixes and improvements based on community feedback and testing.</p>
+
+<p>The most notable changes in this release are speedier page transitions and tap responsiveness on longer pages, smoother transitions in Cordova, and more polished form elements.</p>
+
+<p>Alongside this release, the&nbsp;<a href="http://www.jquerymobile.com/themeroller">ThemeRoller Mobile</a>&nbsp;tool has been updated to make it easy to upgrade existing themes to 1.1.1. A new&nbsp;<a href="http://www.jquerymobile.com/download-builder">downloader builder tool</a>&nbsp;is now released as a public alpha and allows you to build custom versions of jQuery Mobile 1.1.1 that only include the modules you need.</p>
+
+<p>Query Mobile 1.1.1 Final<br />
+Requires jQuery core 1.6.4 or 1.7.1</p>
+
+<p><a href="http://jquerymobile.com/demos/1.1.1/">Demos &amp; Documentation</a><br />
+<a href="http://jquerymobile.com/demos/1.1.1/docs/about/getting-started.html">Quick Start Guide</a><br />
+<a href="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.zip">Download 1.1.1 Zip</a><br />
+<a href="https://github.com/jquery/jquery-mobile">Fork on GitHub</a></p>
+
+<hr />
+<p><a href="http://jquerymobile.com/blog/2012/04/13/announcing-jquery-mobile-1-1-0/">JQUERY MOBILE 1.1.0 FINAL RELEASED!</a></p>
+
+<p>A unified, HTML5-based user interface system for all popular mobile device platforms, built on the rock-solid jQuery and jQuery UI foundation. Its lightweight code is built with progressive enhancement, and has a flexible, easily themeable design.</p>
+
+<p><a href="http://jquerymobile.com/blog/2012/04/13/announcing-jquery-mobile-1-1-0/">Latest stable version - 1.1.0</a></p>
+
+<p><a href="http://jquerymobile.com/blog/2012/01/26/jquery-mobile-1-0-1-released/">Legacy version - 1.0.1</a></p>
+
+<h2>Announcing jQuery Mobile 1.1.0</h2>
+
+<p>http://jquerymobile.com/blog/2012/04/13/announcing-jquery-mobile-1-1-0/</p>
+
+<p>The jQuery Mobile team is excited to announce the release of version 1.1.0.</p>
+
+<p>This release has been a real labor of love, with hundreds of improvements, big and small, to make jQuery Mobile feel faster, smoother and more polished across the board.</p>
+
+<p>The most notable improvements in 1.1.0 are true fixed toolbars, completely re-vamped animated page transitions and AJAX loader, refined form element design and feature set, and improved documentation.</p>
+
+<p>To make the upgrade process from 1.0 to 1.1 smooth for our existing developers, we&rsquo;re also launching a new&nbsp;<a href="http://www.jquerymobile.com/themeroller">ThemeRoller Mobile</a>&nbsp;tool that supports both versions and makes it easy to import a 1.0 theme and migrate it to 1.1. A new downloader builder tool is almost ready and will be in limited alpha next week.</p>
+
+<p>jQuery Mobile 1.1.0 Final&nbsp;Requires jQuery core 1.6.4 or 1.7.1</p>
+
+<p><a href="http://jquerymobile.com/demos/1.1.0/">Demos &amp; Documentation</a><br />
+<a href="http://jquerymobile.com/demos/1.1.0/docs/about/getting-started.html">Quick Start Guide</a><br />
+<a href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.zip">Download 1.1.0 Zip</a><br />
+<a href="https://github.com/jquery/jquery-mobile">Fork on GitHub</a></p>
+
+<h2>Download</h2>
+
+<p>http://jquerymobile.com/download/</p>
+
+<ul>
+	<li><a href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.js">Uncompressed: jquery.mobile-1.1.0.js</a>&nbsp;(useful for debugging) -&gt;&nbsp;http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.js</li>
+	<li><a href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.css">Uncompressed with Default theme: jquery.mobile-1.1.0.css</a>&nbsp;(useful for debugging) -&gt;&nbsp;http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.css</li>
+</ul>
+
+<h2>Create a basic page template</h2>
+
+<p><a href="http://learn.jquery.com/jquery-mobile/getting-started/" target="_blank">http://learn.jquery.com/jquery-mobile/getting-started/</a></p>
+
+<p>2013-10-19 19:14 Saturday 此篇仍然不落伍</p>
+
+<pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;My Page&lt;/title&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css&quot; /&gt;
+&lt;script src=&quot;http://code.jquery.com/jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;div data-role=&quot;page&quot;&gt;
+
+&lt;div data-role=&quot;header&quot;&gt;
+&nbsp; &lt;h1&gt;My Title&lt;/h1&gt;
+&lt;/div&gt;&lt;!-- /header --&gt;
+
+&lt;div data-role=&quot;content&quot;&gt;
+&nbsp; &lt;p&gt;Hello world&lt;/p&gt;&nbsp;
+&lt;/div&gt;&lt;!-- /content --&gt;
+
+&lt;/div&gt;&lt;!-- /page --&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+
+<h2>jquery.mobile 代码库载入流程</h2>
+
+<ol>
+	<li>
+	<p>jquery.mobile-1.1.0.js 载入时</p>
+
+	<pre>
+(function ( root, doc, factory ) {
+if ( typeof define === &quot;function&quot; &amp;&amp; define.amd ) {
+&nbsp; // AMD. Register as an anonymous module.
+&nbsp; define( [ &quot;jquery&quot; ], function ( $ ) {
+&nbsp;&nbsp; factory( $, root, doc );
+&nbsp;&nbsp; return $.mobile;
+&nbsp; });
+} else {
+&nbsp; // Browser globals
+&nbsp; factory( root.jQuery, root, doc );
+}
+}( this, document, function ( $, window, document, undefined ) {
+  ...
+}))</pre>
+	</li>
+	<li>
+	<p>Browser globals</p>
+
+	<pre>
+&nbsp; factory( root.jQuery, root, doc );</pre>
+	</li>
+	<li>
+	<p>匿名函数</p>
+
+	<pre>
+(function( $, undefined ) {
+
+$.widget( &quot;mobile.widget&quot;, {
+    ...
+});
+
+})( jQuery );</pre>
+	</li>
+	<li>
+	<p>定义&nbsp;$.widget 函数，943 行。此函数把 base/$.Widget&nbsp;变为新实例的 __proto__，然后把 prototype 复制到新实例上来，期间加上 widgetName 等相关参数。</p>
+
+	<pre>
+$.widget = function( name, base, prototype ) {
+var namespace = name.split( &quot;.&quot; )[ 0 ],
+&nbsp; fullName;
+name = name.split( &quot;.&quot; )[ 1 ];
+fullName = namespace + &quot;-&quot; + name; /// 注：此时 fullName 为 mobile-widget
+
+if ( !prototype ) {
+&nbsp; prototype = base;
+&nbsp; base = $.Widget;
+}
+
+// create selector for plugin
+$.expr[ &quot;:&quot; ][ fullName ] = function( elem ) {
+&nbsp; return !!$.data( elem, name );
+};
+
+$[ namespace ] = $[ namespace ] || {};
+$[ namespace ][ name ] = function( options, element ) {
+&nbsp; // allow instantiation without initializing for simple inheritance
+&nbsp; if ( arguments.length ) {
+&nbsp;&nbsp; this._createWidget( options, element );
+&nbsp; }
+};
+
+var basePrototype = new base();
+// we need to make the options hash a property directly on the new instance
+// otherwise we&#39;ll modify the options hash on the prototype that we&#39;re
+// inheriting from
+// $.each( basePrototype, function( key, val ) {
+//&nbsp; if ( $.isPlainObject(val) ) {
+//&nbsp;&nbsp; basePrototype[ key ] = $.extend( {}, val );
+//&nbsp; }
+// });
+basePrototype.options = $.extend( true, {}, basePrototype.options );
+$[ namespace ][ name ].prototype = $.extend( true, basePrototype, {
+&nbsp; namespace: namespace,
+&nbsp; widgetName: name,
+&nbsp; widgetEventPrefix: $[ namespace ][ name ].prototype.widgetEventPrefix || name,
+&nbsp; widgetBaseClass: fullName
+}, prototype );
+
+$.widget.bridge( name, $[ namespace ][ name ] );
+};</pre>
+	</li>
+	<li>
+	<p>定义 $.widget.bridge 函数。$.fn 就是 jQuery.prototype，这个函数就是往 jQuery.prototype 里面添加新的方法。</p>
+
+	<pre>
+$.widget.bridge = function( name, object ) {
+$.fn[ name ] = function( options ) {
+&nbsp; var isMethodCall = typeof options === &quot;string&quot;,
+&nbsp;&nbsp; args = Array.prototype.slice.call( arguments, 1 ),
+&nbsp;&nbsp; returnValue = this;
+
+&nbsp; // allow multiple hashes to be passed on init
+&nbsp; options = !isMethodCall &amp;&amp; args.length ?
+&nbsp;&nbsp; $.extend.apply( null, [ true, options ].concat(args) ) :
+&nbsp;&nbsp; options;
+
+&nbsp; // prevent calls to internal methods
+&nbsp; if ( isMethodCall &amp;&amp; options.charAt( 0 ) === &quot;_&quot; ) {
+&nbsp;&nbsp; return returnValue;
+&nbsp; }
+
+&nbsp; if ( isMethodCall ) {
+&nbsp;&nbsp; this.each(function() {
+&nbsp;&nbsp;&nbsp; var instance = $.data( this, name );
+&nbsp;&nbsp;&nbsp; if ( !instance ) {
+&nbsp;&nbsp;&nbsp;&nbsp; throw &quot;cannot call methods on &quot; + name + &quot; prior to initialization; &quot; +
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &quot;attempted to call method &#39;&quot; + options + &quot;&#39;&quot;;
+&nbsp;&nbsp;&nbsp; }
+&nbsp;&nbsp;&nbsp; if ( !$.isFunction( instance[options] ) ) {
+&nbsp;&nbsp;&nbsp;&nbsp; throw &quot;no such method &#39;&quot; + options + &quot;&#39; for &quot; + name + &quot; widget instance&quot;;
+&nbsp;&nbsp;&nbsp; }
+&nbsp;&nbsp;&nbsp; var methodValue = instance[ options ].apply( instance, args );
+&nbsp;&nbsp;&nbsp; if ( methodValue !== instance &amp;&amp; methodValue !== undefined ) {
+&nbsp;&nbsp;&nbsp;&nbsp; returnValue = methodValue;
+&nbsp;&nbsp;&nbsp;&nbsp; return false;
+&nbsp;&nbsp;&nbsp; }
+&nbsp;&nbsp; });
+&nbsp; } else {
+&nbsp;&nbsp; this.each(function() {
+&nbsp;&nbsp;&nbsp; var instance = $.data( this, name );
+&nbsp;&nbsp;&nbsp; if ( instance ) {
+&nbsp;&nbsp;&nbsp;&nbsp; instance.option( options || {} )._init();
+&nbsp;&nbsp;&nbsp; } else {
+&nbsp;&nbsp;&nbsp;&nbsp; $.data( this, name, new object( options, this ) );
+&nbsp;&nbsp;&nbsp; }
+&nbsp;&nbsp; });
+&nbsp; }
+
+&nbsp; return returnValue;
+};
+};</pre>
+	</li>
+	<li>
+	<p>定义&nbsp;$.Widget&nbsp;类，1034 行。</p>
+
+	<pre>
+$.Widget = function( options, element ) {
+// allow instantiation without initializing for simple inheritance
+if ( arguments.length ) {
+&nbsp; this._createWidget( options, element );
+}
+};
+
+$.Widget.prototype = {
+widgetName: &quot;widget&quot;,
+widgetEventPrefix: &quot;&quot;,
+options: {
+&nbsp; disabled: false
+},
+_createWidget: function( options, element ) {
+  ...
+}
+}</pre>
+	</li>
+	<li>
+	<p>用 $.widget 定义 $.widget( &quot;mobile.widget&quot;, { ... } ) 类，1172 行。此类从 $.Widget 继承。</p>
+
+	<pre>
+&nbsp;</pre>
+	</li>
+	<li>
+	<p>用 $.widget 定义 $.widget( &quot;mobile.selectmenu&quot;, $.mobile.widget, { ... } )，6298 行。</p>
+
+	<pre>
+$.widget( &quot;mobile.selectmenu&quot;, $.mobile.widget, {
+options: {
+&nbsp; theme: null,
+&nbsp; disabled: false,
+&nbsp; icon: &quot;arrow-d&quot;,
+&nbsp; iconpos: &quot;right&quot;,
+&nbsp; inline: false,
+&nbsp; corners: true,
+&nbsp; shadow: true,
+&nbsp; iconshadow: true,
+&nbsp; overlayTheme: &quot;a&quot;,
+&nbsp; hidePlaceholderMenuItems: true,
+&nbsp; closeText: &quot;Close&quot;,
+&nbsp; nativeMenu: true,
+&nbsp; // This option defaults to true on iOS devices.
+&nbsp; preventFocusZoom: /iPhone|iPad|iPod/.test( navigator.platform ) &amp;&amp; navigator.userAgent.indexOf( &quot;AppleWebKit&quot; ) &gt; -1,
+&nbsp; initSelector: &quot;select:not(:jqmData(role=&#39;slider&#39;))&quot;,
+&nbsp; mini: false
+},
+...
+} )</pre>
+	</li>
+	<li>
+	<p>绑定页面载入完成后的函数入口。</p>
+
+	<pre>
+//auto self-init widgets
+$( document ).bind( &quot;pagecreate create&quot;, function( e ){
+$.mobile.selectmenu.prototype.enhanceWithin( e.target, true );
+});</pre>
+
+	<ol>
+		<li>
+		<p>jQuery.fn.extend({</p>
+
+		<pre>
+on: function( types, selector, data, fn, /*INTERNAL*/ one ) {
+&nbsp; ...
+&nbsp; return this.each( function() {
+&nbsp;&nbsp; jQuery.event.add( this, types, fn, data, selector );
+&nbsp; });
+},
+
+bind: function( types, data, fn ) {
+&nbsp; return this.on( types, null, data, fn );
+},</pre>
+		</li>
+		<li>
+		<p>&nbsp;</p>
+
+		<pre>
+/*
+* Helper functions for managing events -- not part of the public interface.
+* Props to Dean Edwards&#39; addEvent library for many of the ideas.
+*/
+jQuery.event = {
+
+add: function( elem, types, handler, data, selector ) {
+  ...
+  // Init the element&#39;s event structure and main handler, if this is the first
+&nbsp; events = elemData.events;
+&nbsp; if ( !events ) {
+&nbsp;&nbsp; elemData.events = events = {};
+&nbsp; }
+&nbsp; eventHandle = elemData.handle;
+&nbsp; if ( !eventHandle ) {
+&nbsp;&nbsp; elemData.handle = eventHandle = function( e ) {
+&nbsp;&nbsp;&nbsp; // Discard the second event of a jQuery.event.trigger() and
+&nbsp;&nbsp;&nbsp; // when an event is called after a page has unloaded
+&nbsp;&nbsp;&nbsp; return typeof jQuery !== &quot;undefined&quot; &amp;&amp; (!e || jQuery.event.triggered !== e.type) ?
+&nbsp;&nbsp;&nbsp;&nbsp; jQuery.event.dispatch.apply( eventHandle.elem, arguments ) :
+&nbsp;&nbsp;&nbsp;&nbsp; undefined;
+&nbsp;&nbsp; };
+&nbsp;&nbsp; // Add elem as a property of the handle fn to prevent a memory leak with IE non-native events
+&nbsp;&nbsp; eventHandle.elem = elem;
+&nbsp; }
+  ...
+  // Handle multiple events separated by a space
+  // jQuery(...).bind(&quot;mouseover mouseout&quot;, fn);
+&nbsp; types = jQuery.trim( hoverHack(types) ).split( &quot; &quot; );</pre>
+		&nbsp;&nbsp;</li>
+	</ol>
+	</li>
+	<li>
+	<p>最后绑定页面初始化的函数入口。</p>
+
+	<pre>
+( function( $, window, undefined ) {
+var $html = $( &quot;html&quot; ),
+&nbsp;&nbsp; $head = $( &quot;head&quot; ),
+&nbsp;&nbsp; $window = $( window );
+
+&nbsp; // trigger mobileinit event - useful hook for configuring $.mobile settings before they&#39;re used
+$( window.document ).trigger( &quot;mobileinit&quot; );
+
+// support conditions
+// if device support condition(s) aren&#39;t met, leave things as they are -&gt; a basic, usable experience,
+// otherwise, proceed with the enhancements
+if ( !$.mobile.gradeA() ) {
+&nbsp; return;
+}
+
+// override ajaxEnabled on platforms that have known conflicts with hash history updates
+// or generally work better browsing in regular http for full page refreshes (BB5, Opera Mini)
+if ( $.mobile.ajaxBlacklist ) {
+&nbsp; $.mobile.ajaxEnabled = false;
+}
+
+// Add mobile, initial load &quot;rendering&quot; classes to docEl
+$html.addClass( &quot;ui-mobile ui-mobile-rendering&quot; );
+
+// This is a fallback. If anything goes wrong (JS errors, etc), or events don&#39;t fire,
+// this ensures the rendering class is removed after 5 seconds, so content is visible and accessible
+setTimeout( hideRenderingClass, 5000 );
+
+// loading div which appears during Ajax requests
+// will not appear if $.mobile.loadingMessage is false
+var loaderClass = &quot;ui-loader&quot;,
+&nbsp; $loader = $( &quot;&lt;div class=&#39;&quot; + loaderClass + &quot;&#39;&gt;&lt;span class=&#39;ui-icon ui-icon-loading&#39;&gt;&lt;/span&gt;&lt;h1&gt;&lt;/h1&gt;&lt;/div&gt;&quot; );
+
+// For non-fixed supportin browsers. Position at y center (if scrollTop supported), above the activeBtn (if defined), or just 100px from top
+function fakeFixLoader(){
+&nbsp; var activeBtn = $( &quot;.&quot; + $.mobile.activeBtnClass ).first();
+
+&nbsp; $loader
+&nbsp;&nbsp; .css({
+&nbsp;&nbsp;&nbsp; top: $.support.scrollTop &amp;&amp; $window.scrollTop() + $window.height() / 2 ||
+&nbsp;&nbsp;&nbsp; activeBtn.length &amp;&amp; activeBtn.offset().top || 100
+&nbsp;&nbsp; });
+}
+
+// check position of loader to see if it appears to be &quot;fixed&quot; to center
+// if not, use abs positioning
+function checkLoaderPosition(){
+&nbsp; var offset = $loader.offset(),
+&nbsp;&nbsp; scrollTop = $window.scrollTop(),
+&nbsp;&nbsp; screenHeight = $.mobile.getScreenHeight();
+
+&nbsp; if( offset.top &lt; scrollTop || (offset.top - scrollTop) &gt; screenHeight ) {
+&nbsp;&nbsp; $loader.addClass( &quot;ui-loader-fakefix&quot; );
+&nbsp;&nbsp; fakeFixLoader();
+&nbsp;&nbsp; $window
+&nbsp;&nbsp;&nbsp; .unbind( &quot;scroll&quot;, checkLoaderPosition )
+&nbsp;&nbsp;&nbsp; .bind( &quot;scroll&quot;, fakeFixLoader );
+&nbsp; }
+}
+
+//remove initial build class (only present on first pageshow)
+function hideRenderingClass(){
+&nbsp; $html.removeClass( &quot;ui-mobile-rendering&quot; );
+}
+
+$.extend($.mobile, {
+&nbsp; // turn on/off page loading message.
+&nbsp; showPageLoadingMsg: function( theme, msgText, textonly ) {
+&nbsp;&nbsp; $html.addClass( &quot;ui-loading&quot; );
+
+&nbsp;&nbsp; if ( $.mobile.loadingMessage ) {
+&nbsp;&nbsp;&nbsp; // text visibility from argument takes priority
+&nbsp;&nbsp;&nbsp; var textVisible = textonly || $.mobile.loadingMessageTextVisible;
+
+&nbsp;&nbsp;&nbsp; theme = theme || $.mobile.loadingMessageTheme,
+
+&nbsp;&nbsp;&nbsp; $loader
+&nbsp;&nbsp;&nbsp;&nbsp; .attr( &quot;class&quot;, loaderClass + &quot; ui-corner-all ui-body-&quot; + ( theme || &quot;a&quot; ) + &quot; ui-loader-&quot; + ( textVisible ? &quot;verbose&quot; : &quot;default&quot; ) + ( textonly ? &quot; ui-loader-textonly&quot; : &quot;&quot; ) )
+&nbsp;&nbsp;&nbsp;&nbsp; .find( &quot;h1&quot; )
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .text( msgText || $.mobile.loadingMessage )
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .end()
+&nbsp;&nbsp;&nbsp;&nbsp; .appendTo( $.mobile.pageContainer );
+
+&nbsp;&nbsp;&nbsp; checkLoaderPosition();
+&nbsp;&nbsp;&nbsp; $window.bind( &quot;scroll&quot;, checkLoaderPosition );
+&nbsp;&nbsp; }
+&nbsp; },
+
+&nbsp; hidePageLoadingMsg: function() {
+&nbsp;&nbsp; $html.removeClass( &quot;ui-loading&quot; );
+
+&nbsp;&nbsp; if( $.mobile.loadingMessage ){
+&nbsp;&nbsp;&nbsp; $loader.removeClass( &quot;ui-loader-fakefix&quot; );
+&nbsp;&nbsp; }
+
+&nbsp;&nbsp; $( window ).unbind( &quot;scroll&quot;, fakeFixLoader );
+&nbsp;&nbsp; $( window ).unbind( &quot;scroll&quot;, checkLoaderPosition );
+&nbsp; },
+
+&nbsp; // find and enhance the pages in the dom and transition to the first page.
+&nbsp; initializePage: function() {
+&nbsp;&nbsp; // find present pages
+&nbsp;&nbsp; var $pages = $( &quot;:jqmData(role=&#39;page&#39;), :jqmData(role=&#39;dialog&#39;)&quot; );
+
+&nbsp;&nbsp; // if no pages are found, create one with body&#39;s inner html
+&nbsp;&nbsp; if ( !$pages.length ) {
+&nbsp;&nbsp;&nbsp; $pages = $( &quot;body&quot; ).wrapInner( &quot;&lt;div data-&quot; + $.mobile.ns + &quot;role=&#39;page&#39;&gt;&lt;/div&gt;&quot; ).children( 0 );
+&nbsp;&nbsp; }
+
+&nbsp;&nbsp; // add dialogs, set data-url attrs
+&nbsp;&nbsp; $pages.each(function() {
+&nbsp;&nbsp;&nbsp; var $this = $(this);
+
+&nbsp;&nbsp;&nbsp; // unless the data url is already set set it to the pathname
+&nbsp;&nbsp;&nbsp; if ( !$this.jqmData(&quot;url&quot;) ) {
+&nbsp;&nbsp;&nbsp;&nbsp; $this.attr( &quot;data-&quot; + $.mobile.ns + &quot;url&quot;, $this.attr( &quot;id&quot; ) || location.pathname + location.search );
+&nbsp;&nbsp;&nbsp; }
+&nbsp;&nbsp; });
+
+&nbsp;&nbsp; // define first page in dom case one backs out to the directory root (not always the first page visited, but defined as fallback)
+&nbsp;&nbsp; $.mobile.firstPage = $pages.first();
+
+&nbsp;&nbsp; // define page container
+&nbsp;&nbsp; $.mobile.pageContainer = $pages.first().parent().addClass( &quot;ui-mobile-viewport&quot; );
+
+&nbsp;&nbsp; // alert listeners that the pagecontainer has been determined for binding
+&nbsp;&nbsp; // to events triggered on it
+&nbsp;&nbsp; $window.trigger( &quot;pagecontainercreate&quot; );
+
+&nbsp;&nbsp; // cue page loading message
+&nbsp;&nbsp; $.mobile.showPageLoadingMsg();
+
+&nbsp;&nbsp; //remove initial build class (only present on first pageshow)
+&nbsp;&nbsp; hideRenderingClass();
+
+&nbsp;&nbsp; // if hashchange listening is disabled or there&#39;s no hash deeplink, change to the first page in the DOM
+&nbsp;&nbsp; if ( !$.mobile.hashListeningEnabled || !$.mobile.path.stripHash( location.hash ) ) {
+&nbsp;&nbsp;&nbsp; $.mobile.changePage( $.mobile.firstPage, { transition: &quot;none&quot;, reverse: true, changeHash: false, fromHashChange: true } );
+&nbsp;&nbsp; }
+&nbsp;&nbsp; // otherwise, trigger a hashchange to load a deeplink
+&nbsp;&nbsp; else {
+&nbsp;&nbsp;&nbsp; $window.trigger( &quot;hashchange&quot;, [ true ] );
+&nbsp;&nbsp; }
+&nbsp; }
+});
+
+// initialize events now, after mobileinit has occurred
+$.mobile._registerInternalEvents();
+
+// check which scrollTop value should be used by scrolling to 1 immediately at domready
+// then check what the scroll top is. Android will report 0... others 1
+// note that this initial scroll won&#39;t hide the address bar. It&#39;s just for the check.
+$(function() {
+&nbsp; window.scrollTo( 0, 1 );
+
+&nbsp; // if defaultHomeScroll hasn&#39;t been set yet, see if scrollTop is 1
+&nbsp; // it should be 1 in most browsers, but android treats 1 as 0 (for hiding addr bar)
+&nbsp; // so if it&#39;s 1, use 0 from now on
+&nbsp; $.mobile.defaultHomeScroll = ( !$.support.scrollTop || $(window).scrollTop() === 1 ) ? 0 : 1;
+
+
+&nbsp; // TODO: Implement a proper registration mechanism with dependency handling in order to not have exceptions like the one below
+&nbsp; //auto self-init widgets for those widgets that have a soft dependency on others
+&nbsp; if ( $.fn.controlgroup ) {
+&nbsp;&nbsp; $( document ).bind( &quot;pagecreate create&quot;, function( e ){
+&nbsp;&nbsp;&nbsp; $( &quot;:jqmData(role=&#39;controlgroup&#39;)&quot;, e.target )
+&nbsp;&nbsp;&nbsp;&nbsp; .jqmEnhanceable()
+&nbsp;&nbsp;&nbsp;&nbsp; .controlgroup({ excludeInvisible: false });
+&nbsp;&nbsp; });
+&nbsp; }
+
+&nbsp; //dom-ready inits
+&nbsp; if( $.mobile.autoInitializePage ){
+&nbsp;&nbsp; $.mobile.initializePage();
+&nbsp; }
+
+&nbsp; // window load event
+&nbsp; // hide iOS browser chrome on load
+&nbsp; $window.load( $.mobile.silentScroll );
+});
+}( jQuery, this ));</pre>
+	</li>
+</ol>
+
+<h2>widget 摘要</h2>
+
+<ol>
+	<li>4042 -&nbsp;$.widget( &quot;mobile.dialog&quot;, $.mobile.widget, {</li>
+	<li>4527 -&nbsp;$.widget( &quot;mobile.collapsible&quot;, $.mobile.widget, {</li>
+	<li>4652 -&nbsp;$.widget( &quot;mobile.collapsibleset&quot;, $.mobile.widget, {</li>
+	<li>4744 -&nbsp;$.widget( &quot;mobile.navbar&quot;, $.mobile.widget, {</li>
+	<li>4803 -&nbsp;$.widget( &quot;mobile.listview&quot;, $.mobile.widget, {</li>
+	<li>5206 -&nbsp;$.widget( &quot;mobile.checkboxradio&quot;, $.mobile.widget, {</li>
+	<li>5401 -&nbsp;$.widget( &quot;mobile.button&quot;, $.mobile.widget, {</li>
+	<li>5637 -&nbsp;$.widget( &quot;mobile.textinput&quot;, $.mobile.widget, {</li>
+	<li>5890 -&nbsp;$.widget( &quot;mobile.slider&quot;, $.mobile.widget, {</li>
+	<li>6298 -&nbsp;$.widget( &quot;mobile.selectmenu&quot;, $.mobile.widget, {</li>
+	<li>7061 -&nbsp;$.widget( &quot;mobile.fixedtoolbar&quot;, $.mobile.widget, {</li>
+</ol>
+
+<h2>页面载入后的代码流程</h2>
+
+<ol>
+	<li>jQuery 相关
+	<ol>
+		<li>DOMContentLoaded</li>
+		<li>jQuery.ready();</li>
+		<li>readyList.fireWith( document, [ jQuery ] ); --&nbsp;fireWith: function( context, args ) {</li>
+		<li>fire( context, args ); --&nbsp;fire = function( context, args ) {</li>
+		<li>if ( list[ firingIndex ].apply( context, args ) === false &amp;&amp; flags.stopOnFalse ) {</li>
+	</ol>
+	</li>
+	<li>
+	<p>$.mobile.initializePage();</p>
+
+	<pre>
+// check which scrollTop value should be used by scrolling to 1 immediately at domready
+// then check what the scroll top is. Android will report 0... others 1
+// note that this initial scroll won&#39;t hide the address bar. It&#39;s just for the check.
+$(function() {
+&nbsp; window.scrollTo( 0, 1 );
+
+&nbsp; // if defaultHomeScroll hasn&#39;t been set yet, see if scrollTop is 1
+&nbsp; // it should be 1 in most browsers, but android treats 1 as 0 (for hiding addr bar)
+&nbsp; // so if it&#39;s 1, use 0 from now on
+&nbsp; $.mobile.defaultHomeScroll = ( !$.support.scrollTop || $(window).scrollTop() === 1 ) ? 0 : 1;
+
+
+&nbsp; // TODO: Implement a proper registration mechanism with dependency handling in order to not have exceptions like the one below
+&nbsp; //auto self-init widgets for those widgets that have a soft dependency on others
+&nbsp; if ( $.fn.controlgroup ) {
+&nbsp;&nbsp; $( document ).bind( &quot;pagecreate create&quot;, function( e ){
+&nbsp;&nbsp;&nbsp; $( &quot;:jqmData(role=&#39;controlgroup&#39;)&quot;, e.target )
+&nbsp;&nbsp;&nbsp;&nbsp; .jqmEnhanceable()
+&nbsp;&nbsp;&nbsp;&nbsp; .controlgroup({ excludeInvisible: false });
+&nbsp;&nbsp; });
+&nbsp; }
+
+&nbsp; //dom-ready inits
+&nbsp; if( $.mobile.autoInitializePage ){
+&nbsp;&nbsp; $.mobile.initializePage();
+&nbsp; }
+
+&nbsp; // window load event
+&nbsp; // hide iOS browser chrome on load
+&nbsp; $window.load( $.mobile.silentScroll );
+});</pre>
+	</li>
+	<li>
+	<p>$.mobile.changePage( $.mobile.firstPage, { transition: &quot;none&quot;, reverse: true, changeHash: false, fromHashChange: true } );</p>
+
+	<pre>
+&nbsp; // find and enhance the pages in the dom and transition to the first page.
+&nbsp; initializePage: function() {
+&nbsp;&nbsp; // find present pages
+&nbsp;&nbsp; var $pages = $( &quot;:jqmData(role=&#39;page&#39;), :jqmData(role=&#39;dialog&#39;)&quot; );
+
+&nbsp;&nbsp; // if no pages are found, create one with body&#39;s inner html
+&nbsp;&nbsp; if ( !$pages.length ) {
+&nbsp;&nbsp;&nbsp; $pages = $( &quot;body&quot; ).wrapInner( &quot;&lt;div data-&quot; + $.mobile.ns + &quot;role=&#39;page&#39;&gt;&lt;/div&gt;&quot; ).children( 0 );
+&nbsp;&nbsp; }
+
+&nbsp;&nbsp; // add dialogs, set data-url attrs
+&nbsp;&nbsp; $pages.each(function() {
+&nbsp;&nbsp;&nbsp; var $this = $(this);
+
+&nbsp;&nbsp;&nbsp; // unless the data url is already set set it to the pathname
+&nbsp;&nbsp;&nbsp; if ( !$this.jqmData(&quot;url&quot;) ) {
+&nbsp;&nbsp;&nbsp;&nbsp; $this.attr( &quot;data-&quot; + $.mobile.ns + &quot;url&quot;, $this.attr( &quot;id&quot; ) || location.pathname + location.search );
+&nbsp;&nbsp;&nbsp; }
+&nbsp;&nbsp; });
+
+&nbsp;&nbsp; // define first page in dom case one backs out to the directory root (not always the first page visited, but defined as fallback)
+&nbsp;&nbsp; $.mobile.firstPage = $pages.first();
+
+&nbsp;&nbsp; // define page container
+&nbsp;&nbsp; $.mobile.pageContainer = $pages.first().parent().addClass( &quot;ui-mobile-viewport&quot; );
+
+&nbsp;&nbsp; // alert listeners that the pagecontainer has been determined for binding
+&nbsp;&nbsp; // to events triggered on it
+&nbsp;&nbsp; $window.trigger( &quot;pagecontainercreate&quot; );
+
+&nbsp;&nbsp; // cue page loading message
+&nbsp;&nbsp; $.mobile.showPageLoadingMsg();
+
+&nbsp;&nbsp; //remove initial build class (only present on first pageshow)
+&nbsp;&nbsp; hideRenderingClass();
+
+&nbsp;&nbsp; // if hashchange listening is disabled or there&#39;s no hash deeplink, change to the first page in the DOM
+&nbsp;&nbsp; if ( !$.mobile.hashListeningEnabled || !$.mobile.path.stripHash( location.hash ) ) {
+&nbsp;&nbsp;&nbsp; $.mobile.changePage( $.mobile.firstPage, { transition: &quot;none&quot;, reverse: true, changeHash: false, fromHashChange: true } );
+&nbsp;&nbsp; }
+&nbsp;&nbsp; // otherwise, trigger a hashchange to load a deeplink
+&nbsp;&nbsp; else {
+&nbsp;&nbsp;&nbsp; $window.trigger( &quot;hashchange&quot;, [ true ] );
+&nbsp;&nbsp; }
+&nbsp; }</pre>
+	</li>
+	<li>
+	<p>enhancePage( toPage, settings.role ); 3213 行。</p>
+
+	<pre>
+// Show a specific page in the page container.
+$.mobile.changePage = function( toPage, options ) {
+    ...
+    // We need to make sure the page we are given has already been enhanced.
+    enhancePage( toPage, settings.role );
+    ...
+}</pre>
+	</li>
+	<li>
+	<p>$.mobile.firstPage.page() 实际调用的是&nbsp;</p>
+
+	<pre>
+//shared page enhancements
+function enhancePage( $page, role ) {
+&nbsp; // If a role was specified, make sure the data-role attribute
+&nbsp; // on the page element is in sync.
+&nbsp; if( role ) {
+&nbsp;&nbsp; $page.attr( &quot;data-&quot; + $.mobile.ns + &quot;role&quot;, role );
+&nbsp; }
+
+&nbsp; //run page plugin
+&nbsp; $page.page();
+}</pre>
+
+	<ol>
+		<li>
+		<p>$page.page() 就是 $.widget 执行到最后时调用&nbsp;$.widget.bridge( name, $[ namespace ][ name ] ); 生成的。</p>
+
+		<pre>
+# 2125 行
+$.widget( &quot;mobile.page&quot;, $.mobile.widget, {
+options: {
+&nbsp; theme: &quot;c&quot;,
+&nbsp; domCache: false,
+&nbsp; keepNativeDefault: &quot;:jqmData(role=&#39;none&#39;), :jqmData(role=&#39;nojs&#39;)&quot;
+},
+...
+})
+
+# 987 行
+$.widget.bridge = function( name, object ) {
+ $.fn[ name ] = function( options ) {
+  ...
+&nbsp;};
+};</pre>
+		</li>
+	</ol>
+	</li>
+	<li>
+	<p>else 是重点，没有就创建。</p>
+
+	<pre>
+$.widget.bridge = function( name, object ) {
+ $.fn[ name ] = function( options ) {
+   ...
+&nbsp;&nbsp; this.each(function() {
+&nbsp;&nbsp;&nbsp; var instance = $.data( this, name );
+&nbsp;&nbsp;&nbsp; if ( instance ) {
+&nbsp;&nbsp;&nbsp;&nbsp; instance.option( options || {} )._init();
+&nbsp;&nbsp;&nbsp; } else {
+&nbsp;&nbsp;&nbsp;&nbsp; $.data( this, name, new object( options, this ) );
+&nbsp;&nbsp;&nbsp; }
+&nbsp;&nbsp; });
+ };
+}</pre>
+	</li>
+	<li>
+	<p>new object( options, this )，object 是之前闭包中的内容。因为传入的参数不为零，所以 this._createWidget 被执行。</p>
+
+	<pre>
+&nbsp;$[ namespace ][ name ] = function( options, element ) {
+&nbsp; // allow instantiation without initializing for simple inheritance
+&nbsp; if ( arguments.length ) {
+&nbsp;&nbsp; this._createWidget( options, element );
+&nbsp; }
+};</pre>
+	</li>
+	<li>
+	<p>以下开始 $.widget.page 的实例化</p>
+
+	<ol>
+		<li>
+		<p>父类&nbsp;mobile.widget 方法</p>
+
+		<pre>
+// decorate the parent _createWidget to trigger `widgetinit` for users
+// who wish to do post post `widgetcreate` alterations/additions
+//
+// TODO create a pull request for jquery ui to trigger this event
+// in the original _createWidget
+_createWidget: function() {
+&nbsp; $.Widget.prototype._createWidget.apply( this, arguments );
+&nbsp; this._trigger( &#39;init&#39; );
+},</pre>
+		</li>
+		<li>
+		<p>$.Widget.prototype._createWidget</p>
+
+		<pre>
+_createWidget: function( options, element ) {
+&nbsp; // $.widget.bridge stores the plugin instance, but we do it anyway
+&nbsp; // so that it&#39;s stored even before the _create function runs
+&nbsp; $.data( element, this.widgetName, this );
+&nbsp; this.element = $( element );
+&nbsp; this.options = $.extend( true, {},
+&nbsp;&nbsp; this.options,
+&nbsp;&nbsp; this._getCreateOptions(),
+&nbsp;&nbsp; options );
+
+&nbsp; var self = this;
+&nbsp; this.element.bind( &quot;remove.&quot; + this.widgetName, function() {
+&nbsp;&nbsp; self.destroy();
+&nbsp; });
+
+&nbsp; this._create();
+&nbsp; this._trigger( &quot;create&quot; );
+&nbsp; this._init();
+},</pre>
+		</li>
+		<li>
+		<p>$.widget( &quot;mobile.page&quot;, $.mobile.widget, { ... } )</p>
+
+		<pre>
+&nbsp;_create: function() {
+&nbsp;
+&nbsp; var self = this;
+&nbsp;
+&nbsp; // if false is returned by the callbacks do not create the page
+&nbsp; if( self._trigger( &quot;beforecreate&quot; ) === false ){
+&nbsp;&nbsp; return false;
+&nbsp; }
+
+&nbsp; self.element
+&nbsp;&nbsp; .attr( &quot;tabindex&quot;, &quot;0&quot; )
+&nbsp;&nbsp; .addClass( &quot;ui-page ui-body-&quot; + self.options.theme )
+&nbsp;&nbsp; .bind( &quot;pagebeforehide&quot;, function(){
+&nbsp;&nbsp;&nbsp; self.removeContainerBackground();
+&nbsp;&nbsp; } )
+&nbsp;&nbsp; .bind( &quot;pagebeforeshow&quot;, function(){
+&nbsp;&nbsp;&nbsp; self.setContainerBackground();
+&nbsp;&nbsp; } );
+
+},</pre>
+		</li>
+		<li>
+		<p>$.Widget.prototype._trigger</p>
+
+		<pre>
+&nbsp;_trigger: function( type, event, data ) {
+&nbsp; var callback = this.options[ type ];
+
+&nbsp; event = $.Event( event );
+&nbsp; event.type = ( type === this.widgetEventPrefix ?
+&nbsp;&nbsp; type :
+&nbsp;&nbsp; this.widgetEventPrefix + type ).toLowerCase();
+&nbsp; data = data || {};
+
+&nbsp; // copy original event properties over to the new event
+&nbsp; // this would happen if we could call $.event.fix instead of $.Event
+&nbsp; // but we don&#39;t have a way to force an event to be fixed multiple times
+&nbsp; if ( event.originalEvent ) {
+&nbsp;&nbsp; for ( var i = $.event.props.length, prop; i; ) {
+&nbsp;&nbsp;&nbsp; prop = $.event.props[ --i ];
+&nbsp;&nbsp;&nbsp; event[ prop ] = event.originalEvent[ prop ];
+&nbsp;&nbsp; }
+&nbsp; }
+
+&nbsp; this.element.trigger( event, data );
+
+&nbsp; return !( $.isFunction(callback) &amp;&amp;
+&nbsp;&nbsp; callback.call( this.element[0], event, data ) === false ||
+&nbsp;&nbsp; event.isDefaultPrevented() );
+}</pre>
+		</li>
+		<li>
+		<p>jQuery.fn.extend({</p>
+
+		<pre>
+trigger: function( type, data ) {
+&nbsp; return this.each(function() {
+&nbsp;&nbsp; jQuery.event.trigger( type, data, this );
+&nbsp; });
+},</pre>
+		</li>
+		<li>
+		<p>jQuery.event.trigger</p>
+
+		<pre>
+/*
+* Helper functions for managing events -- not part of the public interface.
+* Props to Dean Edwards&#39; addEvent library for many of the ideas.
+*/
+jQuery.event = {
+  trigger: function( event, data, elem, onlyHandlers ) {
+    ...
+  // Fire handlers on the event path
+&nbsp; for ( i = 0; i &lt; eventPath.length &amp;&amp; !event.isPropagationStopped(); i++ ) {
+
+&nbsp;&nbsp; cur = eventPath[i][0];
+&nbsp;&nbsp; event.type = eventPath[i][1];
+
+&nbsp;&nbsp; handle = ( jQuery._data( cur, &quot;events&quot; ) || {} )[ event.type ] &amp;&amp; jQuery._data( cur, &quot;handle&quot; );
+&nbsp;&nbsp; if ( handle ) {
+&nbsp;&nbsp;&nbsp; handle.apply( cur, data );
+&nbsp;&nbsp; }
+&nbsp;&nbsp; // Note that this is a bare JS function and not a jQuery handler
+&nbsp;&nbsp; handle = ontype &amp;&amp; cur[ ontype ];
+&nbsp;&nbsp; if ( handle &amp;&amp; jQuery.acceptData( cur ) &amp;&amp; handle.apply( cur, data ) === false ) {
+&nbsp;&nbsp;&nbsp; event.preventDefault();
+&nbsp;&nbsp; }
+&nbsp; }
+    ...
+  }
+  dispatch: function( event ) {
+    ...
+  }</pre>
+		</li>
+		<li>
+		<p>jQuery.event.add</p>
+
+		<pre>
+&nbsp; // Init the element&#39;s event structure and main handler, if this is the first
+&nbsp; events = elemData.events;
+&nbsp; if ( !events ) {
+&nbsp;&nbsp; elemData.events = events = {};
+&nbsp; }
+&nbsp; eventHandle = elemData.handle;
+&nbsp; if ( !eventHandle ) {
+&nbsp;&nbsp; elemData.handle = eventHandle = function( e ) {
+&nbsp;&nbsp;&nbsp; // Discard the second event of a jQuery.event.trigger() and
+&nbsp;&nbsp;&nbsp; // when an event is called after a page has unloaded
+&nbsp;&nbsp;&nbsp; return typeof jQuery !== &quot;undefined&quot; &amp;&amp; (!e || jQuery.event.triggered !== e.type) ?
+&nbsp;&nbsp;&nbsp;&nbsp; jQuery.event.dispatch.apply( eventHandle.elem, arguments ) :
+&nbsp;&nbsp;&nbsp;&nbsp; undefined;
+&nbsp;&nbsp; };
+&nbsp;&nbsp; // Add elem as a property of the handle fn to prevent a memory leak with IE non-native events
+&nbsp;&nbsp; eventHandle.elem = elem;
+&nbsp; }</pre>
+		</li>
+		<li>
+		<p>jQuery.event.dispatch</p>
+
+		<pre>
+dispatch: function( event ) {
+  ...
+  // Add the remaining (directly-bound) handlers
+&nbsp; if ( handlers.length &gt; delegateCount ) {
+&nbsp;&nbsp; handlerQueue.push({ elem: this, matches: handlers.slice( delegateCount ) });
+&nbsp; }
+
+&nbsp; // Run delegates first; they may want to stop propagation beneath us
+&nbsp; for ( i = 0; i &lt; handlerQueue.length &amp;&amp; !event.isPropagationStopped(); i++ ) {
+&nbsp;&nbsp; matched = handlerQueue[ i ];
+&nbsp;&nbsp; event.currentTarget = matched.elem;
+
+&nbsp;&nbsp; for ( j = 0; j &lt; matched.matches.length &amp;&amp; !event.isImmediatePropagationStopped(); j++ ) {
+&nbsp;&nbsp;&nbsp; handleObj = matched.matches[ j ];
+
+&nbsp;&nbsp;&nbsp; // Triggered event must either 1) be non-exclusive and have no namespace, or
+&nbsp;&nbsp;&nbsp; // 2) have namespace(s) a subset or equal to those in the bound event (both can have no namespace).
+&nbsp;&nbsp;&nbsp; if ( run_all || (!event.namespace &amp;&amp; !handleObj.namespace) || event.namespace_re &amp;&amp; event.namespace_re.test( handleObj.namespace ) ) {
+
+&nbsp;&nbsp;&nbsp;&nbsp; event.data = handleObj.data;
+&nbsp;&nbsp;&nbsp;&nbsp; event.handleObj = handleObj;
+
+&nbsp;&nbsp;&nbsp;&nbsp; ret = ( (jQuery.event.special[ handleObj.origType ] || {}).handle || handleObj.handler )
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .apply( matched.elem, args );
+
+&nbsp;&nbsp;&nbsp;&nbsp; if ( ret !== undefined ) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; event.result = ret;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if ( ret === false ) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; event.preventDefault();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; event.stopPropagation();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }
+&nbsp;&nbsp;&nbsp;&nbsp; }
+&nbsp;&nbsp;&nbsp; }
+&nbsp;&nbsp; }
+&nbsp; }
+
+&nbsp; // Call the postDispatch hook for the mapped type
+&nbsp; if ( special.postDispatch ) {
+&nbsp;&nbsp; special.postDispatch.call( this, event );
+&nbsp; }
+
+&nbsp; return event.result;
+}</pre>
+		</li>
+		<li>
+		<p>终于轮到 selectmenu 了。</p>
+
+		<pre>
+//auto self-init widgets
+$( document ).bind( &quot;pagecreate create&quot;, function( e ){
+$.mobile.selectmenu.prototype.enhanceWithin( e.target, true );
+});
+})( jQuery );</pre>
+		</li>
+	</ol>
+	</li>
+</ol>
+
+<p>&nbsp;</p>
+
+<h2>selectmenu</h2>
+
+<ol>
+	<li>
+	<p>$.widget( &quot;mobile.widget&quot;, {，从父类开始</p>
+
+	<pre>
+&nbsp;enhanceWithin: function( target, useKeepNative ) {
+&nbsp; this.enhance( $( this.options.initSelector, $( target )), useKeepNative );
+},
+&nbsp;enhance: function( targets, useKeepNative ) {
+&nbsp; var page, keepNative, $widgetElements = $( targets ), self = this;
+
+&nbsp; // if ignoreContentEnabled is set to true the framework should
+&nbsp; // only enhance the selected elements when they do NOT have a
+&nbsp; // parent with the data-namespace-ignore attribute
+&nbsp; $widgetElements = $.mobile.enhanceable( $widgetElements );
+
+&nbsp; if ( useKeepNative &amp;&amp; $widgetElements.length ) {
+&nbsp;&nbsp; // TODO remove dependency on the page widget for the keepNative.
+&nbsp;&nbsp; // Currently the keepNative value is defined on the page prototype so
+&nbsp;&nbsp; // the method is as well
+&nbsp;&nbsp; page = $.mobile.closestPageData( $widgetElements );
+&nbsp;&nbsp; keepNative = (page &amp;&amp; page.keepNativeSelector()) || &quot;&quot;;
+
+&nbsp;&nbsp; $widgetElements = $widgetElements.not( keepNative );
+&nbsp; }
+
+&nbsp; $widgetElements[ this.widgetName ]();
+},</pre>
+	</li>
+	<li>
+	<p>selectmenu 的 $.widget.bridge 上场</p>
+
+	<pre>
+$.widget.bridge = function( name, object ) {
+ ...
+&nbsp;&nbsp; this.each(function() {
+&nbsp;&nbsp;&nbsp; var instance = $.data( this, name );
+&nbsp;&nbsp;&nbsp; if ( instance ) {
+&nbsp;&nbsp;&nbsp;&nbsp; instance.option( options || {} )._init();
+&nbsp;&nbsp;&nbsp; } else {
+&nbsp;&nbsp;&nbsp;&nbsp; $.data( this, name, new object( options, this ) );
+&nbsp;&nbsp;&nbsp; }
+&nbsp;&nbsp; });
+
+&nbsp;$[ namespace ][ name ] = function( options, element ) {
+&nbsp; // allow instantiation without initializing for simple inheritance
+&nbsp; if ( arguments.length ) {
+&nbsp;&nbsp; this._createWidget( options, element );
+&nbsp; }
+};</pre>
+	</li>
+	<li>
+	<p>$.widget( &quot;mobile.widget&quot;, {</p>
+
+	<pre>
+$.widget( &quot;mobile.widget&quot;, {
+// decorate the parent _createWidget to trigger `widgetinit` for users
+// who wish to do post post `widgetcreate` alterations/additions
+//
+// TODO create a pull request for jquery ui to trigger this event
+// in the original _createWidget
+_createWidget: function() {
+&nbsp; $.Widget.prototype._createWidget.apply( this, arguments );
+&nbsp; this._trigger( &#39;init&#39; );
+},</pre>
+	</li>
+	<li>
+	<p>$.Widget.prototype._createWidget</p>
+
+	<pre>
+$.Widget.prototype = {
+widgetName: &quot;widget&quot;,
+widgetEventPrefix: &quot;&quot;,
+options: {
+&nbsp; disabled: false
+},
+_createWidget: function( options, element ) {
+&nbsp; // $.widget.bridge stores the plugin instance, but we do it anyway
+&nbsp; // so that it&#39;s stored even before the _create function runs
+&nbsp; $.data( element, this.widgetName, this );
+&nbsp; this.element = $( element );
+&nbsp; this.options = $.extend( true, {},
+&nbsp;&nbsp; this.options,
+&nbsp;&nbsp; this._getCreateOptions(),
+&nbsp;&nbsp; options );
+
+&nbsp; var self = this;
+&nbsp; this.element.bind( &quot;remove.&quot; + this.widgetName, function() {
+&nbsp;&nbsp; self.destroy();
+&nbsp; });
+
+&nbsp; this._create();
+&nbsp; this._trigger( &quot;create&quot; );
+&nbsp; this._init();
+},</pre>
+	</li>
+	<li>
+	<p>mobile.selectmenu.prototype._create</p>
+
+	<pre>
+$.widget( &quot;mobile.selectmenu&quot;, $.mobile.widget, {
+ ...
+&nbsp;_create: function() {
+&nbsp; this._preExtension();
+
+&nbsp;&nbsp; // Allows for extension of the native select for custom selects and other plugins
+&nbsp; // see select.custom for example extension
+&nbsp; // TODO explore plugin registration
+&nbsp; this._trigger( &quot;beforeCreate&quot; );
+
+&nbsp; this.button = this._button();
+
+&nbsp; var self = this,
+
+&nbsp;&nbsp; options = this.options,
+
+&nbsp;&nbsp; // IE throws an exception at options.item() function when
+&nbsp;&nbsp; // there is no selected item
+&nbsp;&nbsp; // select first in this case
+&nbsp;&nbsp; selectedIndex = this.select[ 0 ].selectedIndex == -1 ? 0 : this.select[ 0 ].selectedIndex,
+
+&nbsp;&nbsp; // TODO values buttonId and menuId are undefined here
+&nbsp;&nbsp; button = this.button
+&nbsp;&nbsp;&nbsp; .text( $( this.select[ 0 ].options.item( selectedIndex ) ).text() )
+&nbsp;&nbsp;&nbsp; .insertBefore( this.select )
+&nbsp;&nbsp;&nbsp; .buttonMarkup( {
+&nbsp;&nbsp;&nbsp;&nbsp; theme: options.theme,
+&nbsp;&nbsp;&nbsp;&nbsp; icon: options.icon,
+&nbsp;&nbsp;&nbsp;&nbsp; iconpos: options.iconpos,
+&nbsp;&nbsp;&nbsp;&nbsp; inline: options.inline,
+&nbsp;&nbsp;&nbsp;&nbsp; corners: options.corners,
+&nbsp;&nbsp;&nbsp;&nbsp; shadow: options.shadow,
+&nbsp;&nbsp;&nbsp;&nbsp; iconshadow: options.iconshadow,
+&nbsp;&nbsp;&nbsp;&nbsp; mini: options.mini
+&nbsp;&nbsp;&nbsp; });
+
+&nbsp; // Opera does not properly support opacity on select elements
+&nbsp; // In Mini, it hides the element, but not its text
+&nbsp; // On the desktop,it seems to do the opposite
+&nbsp; // for these reasons, using the nativeMenu option results in a full native select in Opera
+&nbsp; if ( options.nativeMenu &amp;&amp; window.opera &amp;&amp; window.opera.version ) {
+&nbsp;&nbsp; this.select.addClass( &quot;ui-select-nativeonly&quot; );
+&nbsp; }
+
+&nbsp; // Add counter for multi selects
+&nbsp; if ( this.isMultiple ) {
+&nbsp;&nbsp; this.buttonCount = $( &quot;&lt;span&gt;&quot; )
+&nbsp;&nbsp;&nbsp; .addClass( &quot;ui-li-count ui-btn-up-c ui-btn-corner-all&quot; )
+&nbsp;&nbsp;&nbsp; .hide()
+&nbsp;&nbsp;&nbsp; .appendTo( button.addClass(&#39;ui-li-has-count&#39;) );
+&nbsp; }
+
+&nbsp; // Disable if specified
+&nbsp; if ( options.disabled || this.element.attr(&#39;disabled&#39;)) {
+&nbsp;&nbsp; this.disable();
+&nbsp; }
+
+&nbsp; // Events on native select
+&nbsp; this.select.change( function() {
+&nbsp;&nbsp; self.refresh();
+&nbsp; });
+
+&nbsp; this.build();
+},</pre>
+	</li>
+	<li>
+	<p>z</p>
+	</li>
+</ol>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
