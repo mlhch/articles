@@ -8,13 +8,25 @@
 <p>An Open-Source JavaScript Library for Mobile-Friendly Interactive Maps</p>
 </blockquote>
 
+<ul>
+	<li>
+	<p>2014-02-13 00:45 Thursday</p>
+
+	<p>November 18, 2013 &mdash;&nbsp;<a href="http://leafletjs.com/2013/11/18/leaflet-0-7-released-plans-for-future.html">Leaflet 0.7 Release, MapBox &amp; Plans for Future</a>&nbsp;(Blog Post)</p>
+
+	<blockquote>
+	<p>https://github.com/vperron/leaflet-dist</p>
+
+	<p>Distribution files for Leaflet.js as a bower package</p>
+	</blockquote>
+	</li>
+</ul>
+
 <p>June 26, 2013 &mdash; Leaflet 0.6 Released, Code Sprint in DC with MapBox &mdash;&nbsp;<a href="http://leafletjs.com/2013/06/26/leaflet-0-6-released-dc-code-sprint-mapbox.html">Read More in the Blog</a></p>
 
 <p>Leaflet is a modern open-source JavaScript library for mobile-friendly interactive maps. It is developed by&nbsp;<a href="http://agafonkin.com/en">Vladimir Agafonkin</a>&nbsp;with a&nbsp;team of dedicated&nbsp;<a href="https://github.com/Leaflet/Leaflet/graphs/contributors">contributors</a>. Weighing just about&nbsp;31 KB of JS, it has all the&nbsp;<a href="http://leafletjs.com/features.html">features</a>&nbsp;most developers ever need for online maps.</p>
 
 <p>Leaflet is designed with&nbsp;simplicity,&nbsp;performance&nbsp;and&nbsp;usability&nbsp;in mind. It works efficiently across all major desktop and mobile platforms out of the box, taking advantage of HTML5 and CSS3 on modern browsers while still being accessible on older ones. It can be extended with many&nbsp;<a href="http://leafletjs.com/plugins.html">plugins</a>, has a beautiful, easy to use and&nbsp;<a href="http://leafletjs.com/reference.html">well-documented API</a>&nbsp;and a simple, readable&nbsp;<a href="https://github.com/Leaflet/Leaflet">source code</a>&nbsp;that is a&nbsp;joy to&nbsp;<a href="https://github.com/Leaflet/Leaflet/blob/master/CONTRIBUTING.md">contribute</a>&nbsp;to.</p>
-
-<p>&nbsp;</p>
 
 <ol>
 	<li>
