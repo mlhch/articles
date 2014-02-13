@@ -4,7 +4,19 @@
 
 <p><a href="https://www.google.com/intl/zh-CN/chrome/browser/" target="_blank">https://www.google.com/intl/zh-CN/chrome/browser/</a></p>
 
-<p>版本 32.0.1700.107，<span style="line-height:1.6em">Google Chrome 已是最新版本。</span></p>
+<ul>
+	<li>
+	<p>2014-02-13 12:07 Thursday</p>
+
+	<p>版本 32.0.1700.107，Google Chrome 已是最新版本。</p>
+	今日发现 Chrome 有了新变化：
+
+	<ol>
+		<li>打开开发者工具时，鼠标变为圆点</li>
+		<li>原来在开发者工具底部的工具按钮移到了右上角</li>
+	</ol>
+	</li>
+</ul>
 
 <h2>自定义您的浏览器</h2>
 
