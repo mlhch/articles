@@ -1,0 +1,122 @@
+<h1>GIS - GeoWebCache</h1>
+
+<p>2012-02-23 19:07:44 +08:00 Thursday</p>
+
+<p><a href="http://geowebcache.org/" target="_blank">http://geowebcache.org/</a></p>
+
+<ul>
+	<li>
+	<p>2014-02-13 23:59 Thursday</p>
+	<strong>Jan 20, 2014:&nbsp;<a href="http://sourceforge.net/projects/geowebcache/files/geowebcache/1.5.1/">GeoWebCache 1.5.1</a>&nbsp;released!</strong></li>
+	<li>
+	<p>当前版本 1.2.6</p>
+	</li>
+</ul>
+
+<p>http://cdnetworks-kr-1.dl.sourceforge.net/project/geowebcache/geowebcache/1.2.6/geowebcache-1.2.6-war.zip</p>
+
+<h2>albertawater.com 上 geowebcache 配置文件的变动情况</h2>
+
+<table border="1" cellpadding="1" cellspacing="1" style="width:500px">
+	<tbody>
+		<tr>
+			<td colspan="2" style="vertical-align:top">复制&nbsp;gwcWMSConfig 并修改 id 为&nbsp;gwcWMSConfig2，然后修改新的 wms 地址</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top">&nbsp; &lt;bean id=&quot;gwcWMSConfig&quot; class=&quot;org.geowebcache.config.GetCapabilitiesConfiguration&quot;&gt;<br />
+			&nbsp;&nbsp; &lt;constructor-arg ref=&quot;gwcGridSetBroker&quot;/&gt;<br />
+			&nbsp;&nbsp;&nbsp; &lt;!-- The URL to the WMS GetCapabilities document, notice &amp;amp; , port is normally 8080--&gt;<br />
+			&nbsp;&nbsp;&nbsp; &lt;constructor-arg value=&quot;http://localhost:8282/geoserver/wms?request=getcapabilities&amp;amp;version=1.1.0&amp;amp;service=wms&quot;/&gt;<br />
+			&nbsp;&nbsp;&nbsp; &lt;!-- The formats to support for all layers read for the above document --&gt;&nbsp;&nbsp;&nbsp;<br />
+			&nbsp;&nbsp;&nbsp; &lt;constructor-arg value=&quot;image/png,image/jpeg&quot;/&gt;<br />
+			&nbsp;&nbsp;&nbsp; &lt;!-- Metatiling factors, 3x3 is usually a good compromise for vector data --&gt;<br />
+			&nbsp;&nbsp;&nbsp; &lt;constructor-arg value=&quot;3x3&quot;/&gt;<br />
+			&nbsp;&nbsp;&nbsp; &lt;!-- Vendor parameters, these are appended to every request sent to the backend.<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; If you use MapServer you probably want to set this to &quot;map=name&quot; --&gt;<br />
+			&nbsp;&nbsp;&nbsp; &lt;constructor-arg value=&quot;&quot;/&gt;<br />
+			&nbsp;&nbsp;&nbsp; &lt;!-- Whether to allow cached=false to specificed for certain requests --&gt;<br />
+			&nbsp;&nbsp;&nbsp; &lt;constructor-arg value=&quot;false&quot;/&gt;<br />
+			&nbsp; &lt;/bean&gt;</td>
+			<td style="vertical-align:top">
+			<p>&nbsp; &lt;bean id=&quot;gwcWMSConfig2&quot; class=&quot;org.geowebcache.config.GetCapabilitiesConfiguration&quot;&gt;</p>
+
+			<p>&nbsp; &lt;constructor-arg ref=&quot;gwcGridSetBroker&quot;/&gt;</p>
+
+			<p>&nbsp; &nbsp; &lt;!-- The URL to the WMS GetCapabilities document, notice &amp;amp; , port is normally 8080--&gt;</p>
+
+			<p>&nbsp; &nbsp; &lt;constructor-arg value=&quot;http://wms.ess-ws.nrcan.gc.ca/wms/toporama_en?service=wms&amp;amp;request=getcapabilities&amp;amp;version=1.1.0&quot;/&gt;</p>
+
+			<p>&nbsp; &nbsp; &lt;!-- The formats to support for all layers read for the above document --&gt; &nbsp; &nbsp;</p>
+
+			<p>&nbsp; &nbsp; &lt;constructor-arg value=&quot;image/png,image/jpeg&quot;/&gt;</p>
+
+			<p>&nbsp; &nbsp; &lt;!-- Metatiling factors, 3x3 is usually a good compromise for vector data --&gt;</p>
+
+			<p>&nbsp; &nbsp; &lt;constructor-arg value=&quot;3x3&quot;/&gt;</p>
+
+			<p>&nbsp; &nbsp; &lt;!-- Vendor parameters, these are appended to every request sent to the backend.</p>
+
+			<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;If you use MapServer you probably want to set this to &quot;map=name&quot; --&gt;</p>
+
+			<p>&nbsp; &nbsp; &lt;constructor-arg value=&quot;&quot;/&gt;</p>
+
+			<p>&nbsp; &nbsp; &lt;!-- Whether to allow cached=false to specificed for certain requests --&gt;</p>
+
+			<p>&nbsp; &nbsp; &lt;constructor-arg value=&quot;false&quot;/&gt;&nbsp;</p>
+
+			<p>&nbsp; &lt;/bean&gt;</p>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2" style="vertical-align:top">激活&nbsp;gwcWMSConfig2，此处保持&nbsp;gwcWMSConfig 为注释状态，因为 geowebcache 不能正常识别 localhost:8080/geoserver，所以必须在 ./classes/geowebcache.xml 中手动配置&nbsp;localhost:8080/geoserver&nbsp;的地图</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top">&nbsp; &lt;!-- For each configuration bean above, add them below to activate --&gt;<br />
+			&nbsp; &lt;bean id=&quot;gwcTLDispatcher&quot; class=&quot;org.geowebcache.layer.TileLayerDispatcher&quot;&gt;<br />
+			&nbsp;&nbsp;&nbsp; &lt;constructor-arg ref=&quot;gwcGridSetBroker&quot;/&gt;<br />
+			&nbsp;&nbsp;&nbsp; &lt;constructor-arg&gt;<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;list&gt;<br />
+			&nbsp;&nbsp;&nbsp;&nbsp; &lt;!-- ref bean=&quot;gwcWMSConfig&quot; / --&gt;<br />
+			&nbsp;&nbsp;&nbsp;&nbsp; &lt;ref bean=&quot;gwcXmlConfig&quot; /&gt;<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/list&gt;<br />
+			&nbsp;&nbsp;&nbsp; &lt;/constructor-arg&gt;<br />
+			&nbsp; &lt;/bean&gt;</td>
+			<td style="vertical-align:top">&nbsp; &lt;!-- For each configuration bean above, add them below to activate --&gt;<br />
+			&nbsp; &lt;bean id=&quot;gwcTLDispatcher&quot; class=&quot;org.geowebcache.layer.TileLayerDispatcher&quot;&gt;<br />
+			&nbsp;&nbsp;&nbsp; &lt;constructor-arg ref=&quot;gwcGridSetBroker&quot;/&gt;<br />
+			&nbsp;&nbsp;&nbsp; &lt;constructor-arg&gt;<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;list&gt;<br />
+			&nbsp;&nbsp;&nbsp;&nbsp; &lt;!-- ref bean=&quot;gwcWMSConfig&quot; / --&gt;<br />
+			&nbsp; &nbsp; &nbsp;&lt;ref bean=&quot;gwcWMSConfig2&quot; /&gt;<br />
+			&nbsp;&nbsp;&nbsp;&nbsp; &lt;ref bean=&quot;gwcXmlConfig&quot; /&gt;<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/list&gt;<br />
+			&nbsp;&nbsp;&nbsp; &lt;/constructor-arg&gt;<br />
+			&nbsp; &lt;/bean&gt;</td>
+		</tr>
+		<tr>
+			<td colspan="2" style="vertical-align:top">注释掉自动寻找存放缓存数据目录的 bean，打开直接指定缓存数据目录的 bean</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top">&nbsp; &lt;bean id=&quot;gwcBlobStore&quot; class=&quot;org.geowebcache.storage.blobstore.file.FileBlobStore&quot; destroy-method=&quot;destroy&quot;&gt;<br />
+			&nbsp;&nbsp;&nbsp; &lt;constructor-arg ref=&quot;gwcDefaultStorageFinder&quot; /&gt;<br />
+			&nbsp; &lt;/bean&gt;<br />
+			&nbsp;<br />
+			&nbsp; &lt;!-- Static definition of where to put the blobstore.<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Note that the directory MUST EXIST when GWC is started. --&gt;<br />
+			&nbsp; &lt;!-- bean id=&quot;gwcBlobStore&quot; class=&quot;org.geowebcache.storage.blobstore.file.FileBlobStore&quot; destroy-method=&quot;destroy&quot;&gt;<br />
+			&nbsp;&nbsp;&nbsp; &lt;constructor-arg value=&quot;/tmp/gwc_blobstore&quot; /&gt;<br />
+			&nbsp; &lt;/bean --&gt;</td>
+			<td style="vertical-align:top">&nbsp;&nbsp;&lt;!-- bean id=&quot;gwcBlobStore&quot; class=&quot;org.geowebcache.storage.blobstore.file.FileBlobStore&quot; destroy-method=&quot;destroy&quot;&gt;<br />
+			&nbsp;&nbsp;&nbsp; &lt;constructor-arg ref=&quot;gwcDefaultStorageFinder&quot; /&gt;<br />
+			&nbsp; &lt;/bean --&gt;<br />
+			&nbsp;<br />
+			&nbsp; &lt;!-- Static definition of where to put the blobstore.<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Note that the directory MUST EXIST when GWC is started. --&gt;<br />
+			&nbsp; &lt;bean id=&quot;gwcBlobStore&quot; class=&quot;org.geowebcache.storage.blobstore.file.FileBlobStore&quot; destroy-method=&quot;destroy&quot;&gt;<br />
+			&nbsp;&nbsp;&nbsp; &lt;constructor-arg value=&quot;/var/www/gwc_blobstore&quot; /&gt;<br />
+			&nbsp; &lt;/bean&gt;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p>&nbsp;</p>
