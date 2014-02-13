@@ -21,4 +21,23 @@
 
 <p>GeoServer is the reference implementation of the Open Geospatial Consortium (OGC) Web Feature Service (WFS) and Web Coverage Service (WCS) standards, as well as a high performance certified compliant Web Map Service (WMS). GeoServer forms a core component of the Geospatial Web.</p>
 
-<p>&nbsp;</p>
+<h2>brew install geoserver</h2>
+
+<p>2014-02-14 00:09 Friday</p>
+
+<p>今日尝试用 brew 安装 geoserver</p>
+
+<pre>
+$ brew install geoserver
+==&gt; Downloading http://downloads.sourceforge.net/project/geoserver/GeoServer/2.4.1/geoserver-2.4.1-bin.zip
+######################################################################## 100.0%
+==&gt; Caveats
+To start geoserver:
+  geoserver path/to/data/dir
+
+See the Geoserver homepage for more setup information:
+  brew home geoserver
+==&gt; Summary
+🍺  /usr/local/Cellar/geoserver/2.4.1: 702 files, 67M, built in 8.6 minutes</pre>
+
+<p>于是按提示所说&nbsp;$ geoserver /usr/local/Cellar/geoserver/2.4.1/libexec/data_dir/ 即成功启动，8080 端口开始工作。</p>
