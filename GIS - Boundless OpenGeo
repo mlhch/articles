@@ -155,9 +155,7 @@ yum install opengeo</pre>
 		<p>On Red Hat based distributions the&nbsp;service&nbsp;command is used to control the services.</p>
 		</li>
 		<li>
-		<h3>&nbsp;</h3>
-
-		<p>Controlling the Tomcat service</p>
+		<h3><span style="font-size:13px; line-height:1.6em">Controlling the Tomcat service</span></h3>
 
 		<p>To start/stop/restart the Tomcat service:</p>
 
