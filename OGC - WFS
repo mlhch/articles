@@ -20,3 +20,72 @@
 		</tr>
 	</tbody>
 </table>
+
+<h2>Documentation</h2>
+
+<p>http://docs.geoserver.org/</p>
+
+<h3>Stable (2.4.x)</h3>
+
+<p>Nightly updated documentation for the stable branch of GeoServer.</p>
+
+<ul>
+	<li><a href="http://docs.geoserver.org/stable/en/user/">User Manual</a></li>
+	<li><a href="http://docs.geoserver.org/stable/en/developer/">Developer Manual</a></li>
+</ul>
+
+<table border="1">
+	<tbody>
+		<tr>
+			<td><a href="http://geoserver.org/display/GEOS/GeoServer%202.4.1">2.4.1</a></td>
+			<td><a href="http://docs.geoserver.org/2.4.1/user/">User Manual</a></td>
+			<td><a href="http://docs.geoserver.org/2.4.1/developer/">Developer Manual</a></td>
+		</tr>
+	</tbody>
+</table>
+
+<h2>User Manual</h2>
+
+<h3>WFS Service Settings</h3>
+
+<p>There are two GeoServer WFS service settings that are strongly recommended for interoperable complex feature services. These can be enabled through the&nbsp;Services ‣ WFS&nbsp;page on the GeoServer web interface or by manually editing the&nbsp;wfs.xml&nbsp;file in the data directory,</p>
+
+<h3>Web Administration Interface&nbsp;&raquo;&nbsp;Services&nbsp;&raquo;&nbsp;WFS</h3>
+
+<p>The Web Feature Service (WFS) page supports the configuration of features, service levels, and <span class="marker">GML output.</span></p>
+
+<h2>WFS</h2>
+
+<h3>Features</h3>
+
+<p>The&nbsp;<a href="http://www.opengeospatial.org/">Open Geospatial Consortium</a>&nbsp;(OGC) Web Feature Service (WFS) is a protocol for serving geographic features across the Web. Feature information that is encoded and transported using WFS includes both feature geometry and feature attribute values. Basic Web Feature Service (WFS) supports feature query and retrieval. Feature limits and bounding can be configured on the WFS page.</p>
+
+<p>Maximum number of features&mdash;Maximum number of features sets the global feature limit that a WFS GetFeature operation should generate, regardless of the actual number of query hits. A WFS request can potentially contain a large dataset that is impractical to download to a client, and/or too large for a client&rsquo;s renderer. Maximum feature limits are also available for feature types. The default number is 1000000.</p>
+
+<p>Return bounding box&mdash;Includes in the GetFeature GML output, an auto-calculated bounds element on each feature type. Not typically enabled, as including bounding box takes up extra bandwidth.</p>
+
+<h2>Service Levels</h2>
+
+<p>GeoServer is compliant with the full &ldquo;Transactional Web Feature Server&rdquo; (WFS-T) level of service as defined by the OGC. Specifying the WFS service level limits the capabilities of Geoserver while still remaining compliant. The WFS Service Level is an integer bitmask that indicates what WFS operations are &ldquo;turned on.&rdquo; It defines the available operations and content at a service instance</p>
+
+<p>Basic&mdash;Basic service levels provides facilities for searching and retrieving feature data with the GetCapabilities, DescribeFeatureType and GetFeature operations. It is compliant with the OGC basic Web Feature Service. This is considered a READ-ONLY web feature service.</p>
+
+<p>Transactional&mdash;In addition to all basic WFS operations, transactional service level supports transaction requests. A transaction request facilities the creation, deletion, and updating of geographic features in conformance with the OGC Transactional Web Feature Service (WFS-T).</p>
+
+<p>Complete&mdash;Includes the LockFeature support to the suite of transactional level operations. LockFeature operations help resolve links between related resources by processing lock requests on one or more instances of a feature type.</p>
+
+<h2>GML</h2>
+
+<p>Geography Markup Language (GML) is the XML-based specification defined by the Open Geospatial Consortium (OGC) to express geographical features. GML serves as a modeling language for geographic systems as well as an open interchange format for geographic transactions on the Internet.</p>
+
+<p>The older GML standard,&nbsp;<a href="http://portal.opengeospatial.org/files/?artifact_id=11339">GML 2</a>&nbsp;encodes geographic information, including both spatial and non-spatial properties. GML3 extends GML2 support to 3D shapes (surfaces and solids) as well as other advanced facilities. GML3 is modular superset of GML2 that simplifies and minimizes the implementation size by allowing users to select out necessary parts. Additions in GML3 include support for complex geometries, spatial and temporal reference systems, topology, units of measure, metadata, gridded data, and default styles for feature and coverage visualization. GML3 is almost entirely backwards compatible with GML2.</p>
+
+<p>WFS 1.1.0 requests return GML3 as the default GML and style a Spatial Reference System (SRS) is in the URN format. Meanwhile WFS 1.0.0 requests return GML2 as default and specify SRS in the XML or normal format. These formats effect the longitude/latitude (x/y) order of the returned data and are further described below.</p>
+
+<p>Normal&mdash;Returns the typical EPSG number,&nbsp;EPSG:XXXX. This formats the geographic coordinates in longitude/latitude (x/y) order.</p>
+
+<p>XML&mdash;Returns a URL that identifies each EPSG code:&nbsp;http://www.opengis.net/gml/srs/epsg.xml#XXXX. This formats the geographic coordinates in longitude/latitude (x/y) order.</p>
+
+<p>URN&mdash;(WFS 1.1.1 only) Returns the colon delimited SRS formatting:&nbsp;urn:x-ogc:def:crs:EPSG:XXXX. This formats data in the traditional axis order for geographic and cartographic systems&mdash;latitude/longitude (y/x).</p>
+
+<h3>&nbsp;</h3>
