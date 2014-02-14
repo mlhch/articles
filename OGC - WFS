@@ -1,0 +1,22 @@
+<h1>OGC - WFS</h1>
+
+<p>2014-02-15 02:15 Saturday</p>
+
+<p><a href="http://www.opengeospatial.org/standards/wfs" target="_blank">http://www.opengeospatial.org/standards/wfs</a></p>
+
+<table border="1" cellpadding="3" cellspacing="1">
+	<tbody>
+		<tr>
+			<td>&nbsp;2.0</td>
+			<td><a href="http://portal.opengeospatial.org/files/?artifact_id=39967" target="_blank">OpenGIS Web Feature Service 2.0 Interface Standard (also ISO 19142)</a></td>
+			<td>&nbsp;09-025r1&nbsp;</td>
+			<td>IS</td>
+		</tr>
+		<tr>
+			<td>&nbsp;1.1.0</td>
+			<td><a href="http://portal.opengeospatial.org/files/?artifact_id=8339" target="_blank">OpenGIS Web Feature Service (WFS) Implementation Specification</a></td>
+			<td>&nbsp;04-094&nbsp;</td>
+			<td>IS</td>
+		</tr>
+	</tbody>
+</table>
