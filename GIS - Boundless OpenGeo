@@ -139,4 +139,40 @@ yum install opengeo</pre>
 		</li>
 	</ul>
 	</li>
+	<li>
+	<p>Working with OpenGeo Suite for Red Hat</p>
+
+	<ul>
+		<li>
+		<p>Starting and stopping OpenGeo services</p>
+
+		<p>OpenGeo Suite is comprised of two main services:</p>
+
+		<p>The&nbsp;<a href="http://tomcat.apache.org/">Tomcat</a>&nbsp;web server that contains all the OpenGeo web applications such as GeoServer, GeoWebCache, and GeoExplorer.</p>
+
+		<p>The&nbsp;<a href="http://www.postgresql.org/">PostgreSQL</a>&nbsp;database server with the PostGIS spatial extensions.</p>
+
+		<p>On Red Hat based distributions the&nbsp;service&nbsp;command is used to control the services.</p>
+		</li>
+		<li>
+		<h3>&nbsp;</h3>
+
+		<p>Controlling the Tomcat service</p>
+
+		<p>To start/stop/restart the Tomcat service:</p>
+
+		<blockquote>
+		<p>service tomcat start|stop|restart</p>
+		</blockquote>
+
+		<p>NOTE</p>
+
+		<p>Depending on the distribution and version the service name may be one of &ldquo;tomcat&rdquo;, &ldquo;tomcat5&rdquo;, or &ldquo;tomcat6&rdquo;. Use the&nbsp;service&nbsp;command to determine which one is installed:</p>
+
+		<pre>
+service --status-all | grep tomcat</pre>
+		</li>
+	</ul>
+	</li>
+	<li>需要注意的是，启动 tomcat 后，并不会像单独安装&nbsp;GeoServer 时那样在根目录下列出所有已安装应用。此时 /geoserver 和 /dashboard 就可访问了。而且并没有单独的启动和停止&nbsp;GeoServer 的服务，而要靠 tomcat 的启动和停止。</li>
 </ul>
