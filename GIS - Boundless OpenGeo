@@ -1,0 +1,142 @@
+<h1>GIS - Boundless OpenGeo</h1>
+
+<p>2014-02-14 08:19 Friday</p>
+
+<p><a href="http://boundlessgeo.com/" target="_blank">http://boundlessgeo.com/</a>|<a href="http://suite.opengeo.org/dashboard/" target="_blank">http://suite.opengeo.org/dashboard/</a></p>
+
+<h2>Our world is open.</h2>
+
+<p>Boundless builds open source geospatial tools for managing data and building applications. OpenGeo Suite, our flagship product, powers solutions across the enterprise.</p>
+
+<p><a href="http://boundlessgeo.com/solutions/opengeo-suite/download/" target="_blank">Download</a> -&gt;&nbsp;http://boundlessgeo.com/solutions/opengeo-suite/download/</p>
+
+<h2>Download OpenGeo Suite</h2>
+
+<p><a href="http://boundlessgeo.com/opengeo-suite/" target="_blank">OpenGeo Suite</a>&nbsp;powers web, mobile, and desktop applications across the enterprise. Built on leading open source software &ndash; including PostGIS, GeoServer, GeoWebCache, OpenLayers, and QGIS &ndash; OpenGeo Suite optimizes standards-based technology for organizations large and small.</p>
+
+<p>While evaluating OpenGeo Suite you are eligible to&nbsp;15 days of trial commercial support. OpenGeo Suite also contains helpful documentation, demos, and code samples. You can learn more about OpenGeo Suite by reading the&nbsp;<a href="http://suite.opengeo.org/opengeo-docs/" target="_blank">user manual</a>.</p>
+
+<h3>Latest Release</h3>
+
+<p>OpenGeo Suite 4.0.2&nbsp;brings new features and improvements, including components: PostgreSQL 9.3.1 PostGIS 2.1.1, GeoTools 10, GeoServer 2.4.3, GeoWebCache 1.5 and support for OpenLayers 3 and QGIS.</p>
+
+<p>Read the&nbsp;<a href="http://boundlessgeo.com/solutions/release-notes/">release notes</a>&nbsp;to learn more.</p>
+
+<table border="1">
+	<tbody>
+		<tr>
+			<td><a href="http://boundlessgeo.com/windows-download/">Windows</a></td>
+			<td><a href="http://boundlessgeo.com/macintosh-os-download/">Mac OS X</a></td>
+		</tr>
+		<tr>
+			<td><a href="http://boundlessgeo.com/red-hat-download/">CentOS/Fedora</a></td>
+			<td><a href="http://boundlessgeo.com/ubuntu-download/">Ubuntu</a></td>
+			<td><a href="http://boundlessgeo.com/opengeo-suite-application-server-download/">Application Servers</a></td>
+		</tr>
+	</tbody>
+</table>
+
+<h3>System Requirements</h3>
+
+<ul>
+	<li>Windows 7+; Windows Server 2008+</li>
+	<li>Mac OS X (10.7+)</li>
+	<li>CentOS/RHEL 5.5-6</li>
+	<li>Fedora 18-19</li>
+	<li>Ubuntu 10.04, 12.04</li>
+</ul>
+
+<h2>OpenGeo Suite&nbsp;Dashboard</h2>
+
+<p><a href="http://suite.opengeo.org/dashboard/">http://suite.opengeo.org/dashboard/</a></p>
+
+<p>它居然把这些都列举到它这里，它想干什么？</p>
+
+<h3>PostGIS</h3>
+
+<ul>
+	<li><a href="http://suite.opengeo.org/opengeo-docs/postgis" target="_blank">Docs</a></li>
+</ul>
+
+<p>PostGIS provides spatial objects for the PostgreSQL object-relational database, allowing efficient storage, query, and analysis of location information.</p>
+
+<h3>GeoServer</h3>
+
+<ul>
+	<li><a href="http://suite.opengeo.org/geoserver" target="_blank">Configure</a></li>
+	<li><a href="http://mapmeter.com/getting-started.html" target="_blank">Mapmeter</a></li>
+	<li><a href="http://suite.opengeo.org/opengeo-docs/geoserver" target="_blank">Docs</a></li>
+</ul>
+
+<p>GeoServer is a powerful map and feature server for sharing, analyzing, and editing geospatial data from any major spatial data source using open standards.</p>
+
+<h3>GeoWebCache</h3>
+
+<ul>
+	<li><a href="http://suite.opengeo.org/geowebcache" target="_blank">Configure</a></li>
+	<li><a href="http://suite.opengeo.org/opengeo-docs/geowebcache" target="_blank">Docs</a></li>
+</ul>
+
+<p>GeoWebCache accelerates delivery of web maps by caching map tiles upfront or on-demand.</p>
+
+<h3>GeoExplorer</h3>
+
+<ul>
+	<li><a href="http://suite.opengeo.org/geoexplorer/" target="_blank">Launch</a></li>
+	<li><a href="http://suite.opengeo.org/opengeo-docs/geoexplorer" target="_blank">Docs</a></li>
+</ul>
+
+<p>GeoExplorer is an application for composing, styling, editing, and publishing maps from the browser.</p>
+
+<h2>OpenGeo Suite User Manual</h2>
+
+<p>http://suite.opengeo.org/opengeo-docs/</p>
+
+<p>This User Manual will help you get the most out of OpenGeo Suite.</p>
+
+<p><a href="http://suite.opengeo.org/opengeo-docs/installation/index.html#installation">Installation</a></p>
+
+<p>Install OpenGeo Suite for your platform.</p>
+
+<h3>OpenGeo Suite for Red Hat</h3>
+
+<ul>
+	<li>
+	<p>New installation</p>
+
+	<ul>
+		<li>
+		<p>&nbsp;Add the OpenGeo repository by creating the file&nbsp;/etc/yum.repos.d/OpenGeo.repo with the following contents:</p>
+
+		<pre>
+[opengeo]
+name=opengeo
+baseurl=http://yum.opengeo.org/suite/v4/&lt;OS&gt;/$releasever/$basearch
+enabled=1
+gpgcheck=0
+</pre>
+
+		<p>Replace&nbsp; with one of &ldquo;fedora&rdquo;, &ldquo;centos&rdquo;, or &ldquo;rhel&rdquo; based on the distribution.</p>
+		Me: or use below command to do the same thing:
+
+		<pre>
+curl -o /etc/yum.repos.d/OpenGeo.repo http://yum.opengeo.org/suite/v4/centos/6/x86_64/OpenGeo.repo</pre>
+		</li>
+		<li>
+		<p>Search for OpenGeo packages:</p>
+
+		<pre>
+yum search opengeo
+</pre>
+
+		<p>If the search command does not return any results, the repository was not added properly. Examine the output of the search command for any errors.</p>
+		</li>
+		<li>
+		<p>Install:</p>
+
+		<pre>
+yum install opengeo</pre>
+		</li>
+	</ul>
+	</li>
+</ul>
