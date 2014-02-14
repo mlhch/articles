@@ -21,6 +21,21 @@
 
 <p>GeoServer is the reference implementation of the Open Geospatial Consortium (OGC) Web Feature Service (WFS) and Web Coverage Service (WCS) standards, as well as a high performance certified compliant Web Map Service (WMS). GeoServer forms a core component of the Geospatial Web.</p>
 
+<h2>各种 install</h2>
+
+<ul>
+	<li>
+	<p>Mac OS X Installer, 打开 dmg 文件，拖拽到 Application 下即可。可惜运行时居然报错，说：</p>
+
+	<blockquote>
+	<p>&ldquo;GeoServer&rdquo;已损坏，打不开。 您应该将它移到废纸篓。</p>
+	</blockquote>
+	</li>
+	<li>
+	<p>yum install opengeo, 下载不给力</p>
+	</li>
+</ul>
+
 <h2>brew install geoserver</h2>
 
 <p>2014-02-14 00:09 Friday</p>
