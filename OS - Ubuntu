@@ -1,0 +1,436 @@
+<h1>OS - Ubuntu</h1>
+
+<p>2012-08-15 19:30:40 +08:00 Wednesday</p>
+
+<p><a href="http://www.ubuntu.com/" target="_blank">http://www.ubuntu.com/</a></p>
+
+<p>当前最新版本为&nbsp;Ubuntu Server 12.04 LTS</p>
+
+<p>如果要下载之前的版本，以下网址是个好去处，只是不知道官网把这个地址的入口放在了哪里。</p>
+
+<p>http://cdimage.ubuntu.com/releases/</p>
+
+<p>http://releases.ubuntu.com/</p>
+
+<h2>UpgradeNotes</h2>
+
+<p><a href="https://help.ubuntu.com/community/UpgradeNotes" target="_blank">https://help.ubuntu.com/community/UpgradeNotes</a></p>
+
+<p>An upgrade is the process of going from an earlier version of Ubuntu to a newer version of Ubuntu with an installed system. An example of this would be going from Ubuntu 11.10 to Ubuntu 12.04 LTS. To avoid damaging your running system, upgrading should only be done from one release to the next release (e.g. Ubuntu 12.04 to Ubuntu 12.10) or from one LTS release to the next (e.g. Ubuntu 10.04 LTS to Ubuntu 12.04 LTS). If you wish to &#39;skip&#39; a version, you can backup your data and do a fresh installation, or progressively upgrade to each successive version. For example, to upgrade from Ubuntu 11.10 to Ubuntu 12.10, first upgrade to 12.04, then upgrade 12.04 to 12.10.</p>
+
+<pre>
+$ lsb_release -a
+No LSB modules are available.
+Distributor ID: Ubuntu
+Description:    Ubuntu 12.04.2 LTS
+Release:        12.04
+Codename:       precise
+</pre>
+
+<h3>From 12.04 to 12.10</h3>
+
+<ul>
+	<li>Version: 12.10 (Quantal Quetzal)</li>
+	<li>See the&nbsp;<a href="https://help.ubuntu.com/community/QuantalUpgrades">QuantalUpgrades</a>&nbsp;page for upgrading information</li>
+</ul>
+
+<p>Ubuntu Servers (Recommended):&nbsp;https://help.ubuntu.com/community/QuantalUpgrades</p>
+
+<ol>
+	<li>
+	<p>Install&nbsp;update-manager-core&nbsp;if it is not already installed:</p>
+
+	<pre>
+sudo apt-get install update-manager-core</pre>
+	</li>
+	<li>
+	<p>If and only if upgrading from an LTS release, then edit&nbsp;/etc/update-manager/release-upgrades&nbsp;and set&nbsp;Prompt=normal</p>
+	</li>
+	<li>
+	<p>Launch the upgrade tool:</p>
+
+	<pre>
+do-release-upgrade</pre>
+	</li>
+	<li>Follow the on-screen instructions.</li>
+</ol>
+
+<p>以下为更新记录，目前最新版本为 13.10</p>
+
+<pre>
+$ lsb_release -a
+No LSB modules are available.
+Distributor ID: Ubuntu
+Description:    Ubuntu 12.10
+Release:        12.10
+Codename:       quantal</pre>
+
+<pre>
+$ lsb_release -a
+No LSB modules are available.
+Distributor ID: Ubuntu
+Description:    Ubuntu 13.10
+Release:        13.10
+Codename:       saucy</pre>
+
+<h2>Ubuntu 12.10</h2>
+
+<p>2012-11-07 18:51 星期三 和老婆一起看电锯惊魂1、7</p>
+
+<p>Your wish&nbsp;<br />
+is our command.</p>
+
+<p>The all-new Ubuntu 12.10 is out now.</p>
+
+<p>ubuntu-12.10-desktop-amd64.iso</p>
+
+<p>http://ubuntu.cnssuestc.org/ubuntu-releases//quantal/ubuntu-12.10-desktop-amd64.iso</p>
+
+<h2>SpatiaLite 安装记录</h2>
+
+<p>2013-03-26 11:40 星期二</p>
+
+<p>&nbsp;</p>
+
+<pre>
+$ apt-get
+apt 0.8.16~exp12ubuntu10.7 for amd64 compiled on Dec 12 2012 13:48:06
+
+$ sudo apt-get update
+
+$ sudo apt-get install git make gcc g++ libsqlite3-dev libproj-dev libfreexl-dev libtool?
+
+$ git clone https://code.google.com/p/spatialite-android/ &amp;&amp; cd spatialite-android/spatialite-android-library/jni/
+
+$ wget http://download.osgeo.org/proj/proj-4.8.0.tar.gz &amp;&amp; wget http://download.osgeo.org/geos/geos-3.3.6.tar.bz2 &amp;&amp; wget http://www.gaia-gis.it/gaia-sins/libspatialite-sources/libspatialite-4.0.0.tar.gz &amp;&amp; wget http://www.gaia-gis.it/gaia-sins/freexl-1.0.0e.tar.gz
+
+$ ./configure --build=x86_64-pc-linux-gnu --host=arm-linux-eabi
+$ ./configure --build=x86_64-pc-linux-gnu --host=arm-linux-eabi CC=arm-linux-gnueabi-gcc</pre>
+
+<p>&nbsp;</p>
+
+<ol>
+	<li>刚安装好时在 VM Fusion 中选择桥接，方便终端连接</li>
+	<li>最小安装没有 ssh，终端连接需要 sudo apt-get install ssh（新版本的 apt 中是 openssh-server？）</li>
+	<li>sudo apt-get install git make(make freexl need) g++(make geos need)</li>
+	<li>git clone https://code.google.com/p/spatialite-android/</li>
+	<li>cd spatialite-android/spatialite-android-library/jni/</li>
+	<li>wget http://download.osgeo.org/proj/proj-4.8.0.tar.gz, this is currently the latest.
+	<ol>
+		<li>​./configure</li>
+		<li>make</li>
+		<li>sudo make install</li>
+	</ol>
+	</li>
+	<li>wget http://download.osgeo.org/geos/geos-3.3.6.tar.bz2, currently geos-3.3.8 is the latest, but there is a geos-3.3.6.mk in /jni/
+	<ol>
+		<li>for compile way, add below line anywhere in file /include/geos/platform.h
+		<pre>
+#define HAVE_ISNAN 1</pre>
+
+		<p>./configure, sudo make, sudo make install</p>
+
+		<pre>
+libtool: link: unsupported hardcode properties
+libtool: link: See the libtool documentation for more information.
+libtool: link: Fatal configuration error.
+make[1]: *** [libgeos_c.la] Error 1
+make[1]: Leaving directory `/home/ubuntu/spatialite-android/spatialite-android-library/jni/geos-3.3.6/capi&#39;
+make: *** [all-recursive] Error 1</pre>
+		</li>
+		<li>
+		<p>there are libgeos-3.2.0 by apt, but not tried yet</p>
+
+		<pre>
+$ apt-cache search libgeos
+libgeos-3.2.0 - Geometry engine for Geographic Information Systems - C++ Library
+libgeos-c1 - Geometry engine for Geographic Information Systems - C Library
+libgeos-dev - Geometry engine for GIS - Development files
+libgeos-doc - Documentation for the GEOS GIS geometry engine library</pre>
+
+		<pre>
+$ cd libspatialite-4.0.0 &amp;&amp; ./configure
+configure: error: obsolete &#39;libgeos_c&#39; (&lt; v.3.3.0). please retry specifying: --disable-geosadvanced.</pre>
+		</li>
+	</ol>
+	</li>
+	<li>wget http://www.gaia-gis.it/gaia-sins/libspatialite-sources/libspatialite-4.0.0.tar.gz, this is currently&nbsp;the&nbsp;latest.
+	<ol>
+		<li>sudo ​apt-get install gcc</li>
+		<li>sudo apt-get install libsqlite3-dev</li>
+		<li>sudo apt-get install libproj-dev</li>
+		<li>apt-get 在如下版本找不到 libfreexl-dev<br />
+		apt 0.8.13.2ubuntu2 for amd64 compiled on Apr &nbsp;7 2011 11:10:02<br />
+		Amazon EC2 上的版本较新，找得到 libfreexl-dev<br />
+		apt 0.8.16~exp12ubuntu10.7 for amd64 compiled on Dec 12 2012 13:48:06<br />
+		不过官方页面给出了下载版本<br />
+		wget http://www.gaia-gis.it/gaia-sins/freexl-1.0.0e.tar.gz<br />
+		./configure, sudo make, sudo make install</li>
+	</ol>
+	</li>
+</ol>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<pre>
+#! /bin/bash
+f_sqlite3=&quot;http://www.sqlite.org/2013/sqlite-autoconf-3071600.tar.gz&quot;
+f_proj=&quot;http://download.osgeo.org/proj/proj-4.8.0.tar.gz&quot;
+f_geos=&quot;http://download.osgeo.org/geos/geos-3.3.8.tar.bz2&quot;
+f_freexl=&quot;http://www.gaia-gis.it/gaia-sins/freexl-1.0.0e.tar.gz&quot;
+f_spatialite=&quot;http://www.gaia-gis.it/gaia-sins/libspatialite-sources/libspatialite-4.0.0.tar.gz&quot;
+p_configure=&quot;--build=x86_64-pc-linux-gnu --host=arm-linux-gnueabi CC=arm-linux-gnueabi-gcc LDFLAGS=-L/usr/local/lib CPPFLAGS=-I/usr/local/include&quot;
+
+sudo apt-get install -y build-essential make gcc g++ gcc-arm-linux-gnueabi
+sudo apt-get install -y git
+
+
+if [ ! -d &quot;spatialite-android&quot; ]; then
+&nbsp; git clone https://code.google.com/p/spatialite-android/
+else
+&nbsp; echo &quot;spatialite-android/ is existing&quot;
+fi
+cd spatialite-android/spatialite-android-library/jni/
+
+
+
+s=`ls sqlite-autoconf-*.tar.*`
+echo $s
+if [ -z &quot;$s&quot; ]; then
+&nbsp; wget $f_sqlite3
+&nbsp; s=`ls sqlite-autoconf-*.tar.*`
+else
+&nbsp; echo &quot;$s is ok&quot;
+fi
+d=${s%.tar*}
+if [ -d $d ]; then
+&nbsp; echo $d
+else
+&nbsp; tar -xzf $s
+&nbsp; cd $d
+&nbsp; ./configure $p_configure &amp;&amp; make clean &amp;&amp; make &amp;&amp; sudo make install
+&nbsp; cd ..
+fi
+
+
+s=`ls proj-*.tar.*`
+echo $s
+if [ -z &quot;$s&quot; ]; then
+&nbsp; wget $f_proj
+&nbsp; s=`ls proj-*.tar.*`
+else
+&nbsp; echo &quot;$s is ok&quot;
+fi
+d=${s%.tar*}
+if [ -d $d ]; then
+&nbsp; echo $d
+else
+&nbsp; tar -xzf $s
+&nbsp; cd $d
+&nbsp; ./configure $p_configure &amp;&amp; make clean &amp;&amp; make &amp;&amp; sudo make install
+&nbsp; cd ..
+fi
+
+
+s=`ls geos-*.tar.*`
+echo $s
+if [ -z &quot;$s&quot; ]; then
+&nbsp; wget $f_geos
+&nbsp; s=`ls geos-*.tar.*`
+else
+&nbsp; echo &quot;$s is ok&quot;
+fi
+d=${s%.tar*}
+if [ -d $d ]; then
+&nbsp; echo $d
+else
+&nbsp; echo $s
+&nbsp; tar -xf $s
+&nbsp; cd $d
+&nbsp; #echo &quot;#define HAVE_ISNAN 1&quot; &gt;&gt; include/geos/platform.h
+&nbsp; ./configure $p_configure &amp;&amp; make clean &amp;&amp; make &amp;&amp; sudo make install
+&nbsp; cd ..
+fi
+
+
+s=`ls freexl-*.tar.*`
+echo $s
+if [ -z &quot;$s&quot; ]; then
+&nbsp; wget $f_freexl
+&nbsp; s=`ls freexl-*.tar.*`
+else
+&nbsp; echo &quot;$s is ok&quot;
+fi
+d=${s%.tar*}
+if [ -d $d ]; then
+&nbsp; echo $d
+else
+&nbsp; echo $s
+&nbsp; tar -xf $s
+&nbsp; cd $d
+&nbsp; ./configure $p_configure &amp;&amp; make clean &amp;&amp; make &amp;&amp; sudo make install
+&nbsp; cd ..
+fi
+
+
+s=`ls libspatialite-*.tar.*`
+echo $s
+if [ -z &quot;$s&quot; ]; then
+&nbsp; wget $f_spatialite
+&nbsp; s=`ls libspatialite-*.tar.*`
+else
+&nbsp; echo &quot;$s is ok&quot;
+fi
+d=${s%.tar*}
+if [ -d $d ]; then
+&nbsp; echo $d
+else
+&nbsp; tar -xzf $s
+&nbsp; cd $d
+&nbsp; ./configure $p_configure &amp;&amp; make clean &amp;&amp; make &amp;&amp; sudo make install
+&nbsp; cd ..
+fi
+</pre>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>10484</p>
+
+<pre>
+{ $as_echo &quot;$as_me:${as_lineno-$LINENO}: result: $dynamic_linker&quot; &gt;&amp;5
+$as_echo &quot;$dynamic_linker&quot; &gt;&amp;6; }
+test &quot;$dynamic_linker&quot; = no &amp;&amp; can_build_shared=no
+</pre>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<pre>
+checking for strerror... (cached) yes
+checking for sqlite3_prepare_v2 in -lsqlite3... yes
+checking proj_api.h usability... yes
+checking proj_api.h presence... yes
+checking for proj_api.h... yes
+checking for library containing pj_init_plus... -lproj
+checking iconv.h usability... yes
+checking iconv.h presence... yes
+checking for iconv.h... yes
+checking for library containing iconv... none required
+checking for library containing locale_charset... no
+checking for library containing nl_langinfo... none required
+checking freexl.h usability... yes
+checking freexl.h presence... yes
+checking for freexl.h... yes
+checking for library containing freexl_open... -lfreexl
+checking for geos-config... /usr/bin/geos-config
+checking geos_c.h usability... yes
+checking geos_c.h presence... yes
+checking for geos_c.h... yes
+checking for library containing GEOSTopologyPreserveSimplify... no
+configure: error: could not find libgeos_c - you may need to specify the directory of a geos-config file using --with-geosconfig</pre>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<pre>
+$ ./configure --build=x86_64-pc-linux-gnu --host=arm-linux-gnueabi CC=arm-linux-gnueabi-gcc LDFLAGS=&quot;-L/usr/local/lib&quot; CPPFLAGS=&quot;-I/usr/local/include&quot;</pre>
+
+<p>&nbsp;</p>
+
+<p>2013-03-28 10:10 星期四</p>
+
+<p>&nbsp;</p>
+
+<p>通过 nm 命令确认 GEOSTopologyPreserveSimplify&nbsp;函数在 libgeos_c.so 中定义</p>
+
+<p>&nbsp;</p>
+
+<pre>
+$ nm -D /usr/lib/libgeos_c.so |grep GEOSTopologyPreserveSimplify
+0000a43d T GEOSTopologyPreserveSimplify
+0000ead1 T GEOSTopologyPreserveSimplify_r
+
+$ nm -D /usr/lib/libgeos.so |grep GEOSTopologyPreserveSimplify
+</pre>
+
+<p>ldd 在这里失效了</p>
+
+<pre>
+$ ldd /usr/lib/libgeos_c.so
+not a dynamic executable
+$ ldd /usr/lib/libgeos.so
+not a dynamic executable
+</pre>
+
+<p>readelf 还能用</p>
+
+<pre>
+$ readelf -d /usr/lib/libgeos_c.so
+
+Dynamic section at offset 0x17ef4 contains 29 entries:
+&nbsp; Tag&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Type&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Name/Value
+0x00000001 (NEEDED)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Shared library: [libgeos-3.3.6.so]
+0x00000001 (NEEDED)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Shared library: [libstdc++.so.6]
+0x00000001 (NEEDED)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Shared library: [libc.so.6]
+0x00000001 (NEEDED)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Shared library: [ld-linux.so.3]
+0x00000001 (NEEDED)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Shared library: [libgcc_s.so.1]
+0x0000000e (SONAME)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Library soname: [libgeos_c.so.1]
+0x0000000c (INIT)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0x8735
+</pre>
+
+<pre>
+$ readelf -d /usr/lib/libgeos.so
+
+Dynamic section at offset 0xfdef8 contains 29 entries:
+&nbsp; Tag&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Type&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Name/Value
+0x00000001 (NEEDED)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Shared library: [libstdc++.so.6]
+0x00000001 (NEEDED)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Shared library: [libm.so.6]
+0x00000001 (NEEDED)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Shared library: [libc.so.6]
+0x00000001 (NEEDED)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Shared library: [ld-linux.so.3]
+0x00000001 (NEEDED)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Shared library: [libgcc_s.so.1]
+0x0000000e (SONAME)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Library soname: [libgeos-3.3.6.so]
+0x0000000c (INIT)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0x69731
+...</pre>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<pre>
+SharedLibrary&nbsp; : libgeos.so
+SharedLibrary&nbsp; : libproj.so
+SharedLibrary&nbsp; : libgeos.so
+/home/mlhch/android-ndk-r8e/toolchains/arm-linux-androideabi-4.6/prebuilt/linux-x86_64/bin/../lib/gcc/arm-linux-androideabi/4.6/../../../../arm-linux-androideabi/bin/ld: error: ./obj/local/armeabi/objs/proj/proj-4.8.0/src/geod.o: multiple definition of &#39;main&#39;
+/home/mlhch/android-ndk-r8e/toolchains/arm-linux-androideabi-4.6/prebuilt/linux-x86_64/bin/../lib/gcc/arm-linux-androideabi/4.6/../../../../arm-linux-androideabi/bin/ld: ./obj/local/armeabi/objs/proj/proj-4.8.0/src/cs2cs.o: previous definition here
+/home/mlhch/android-ndk-r8e/toolchains/arm-linux-androideabi-4.6/prebuilt/linux-x86_64/bin/../lib/gcc/arm-linux-androideabi/4.6/../../../../arm-linux-androideabi/bin/ld: error: ./obj/local/armeabi/objs/proj/proj-4.8.0/src/multistresstest.o: multiple definition of &#39;main&#39;
+/home/mlhch/android-ndk-r8e/toolchains/arm-linux-androideabi-4.6/prebuilt/linux-x86_64/bin/../lib/gcc/arm-linux-androideabi/4.6/../../../../arm-linux-androideabi/bin/ld: ./obj/local/armeabi/objs/proj/proj-4.8.0/src/cs2cs.o: previous definition here
+/home/mlhch/android-ndk-r8e/toolchains/arm-linux-androideabi-4.6/prebuilt/linux-x86_64/bin/../lib/gcc/arm-linux-androideabi/4.6/../../../../arm-linux-androideabi/bin/ld: error: ./obj/local/armeabi/objs/proj/proj-4.8.0/src/nad2bin.o: multiple definition of &#39;main&#39;
+/home/mlhch/android-ndk-r8e/toolchains/arm-linux-androideabi-4.6/prebuilt/linux-x86_64/bin/../lib/gcc/arm-linux-androideabi/4.6/../../../../arm-linux-androideabi/bin/ld: ./obj/local/armeabi/objs/proj/proj-4.8.0/src/cs2cs.o: previous definition here
+/home/mlhch/android-ndk-r8e/toolchains/arm-linux-androideabi-4.6/prebuilt/linux-x86_64/bin/../lib/gcc/arm-linux-androideabi/4.6/../../../../arm-linux-androideabi/bin/ld: error: ./obj/local/armeabi/objs/proj/proj-4.8.0/src/proj.o: multiple definition of &#39;main&#39;
+/home/mlhch/android-ndk-r8e/toolchains/arm-linux-androideabi-4.6/prebuilt/linux-x86_64/bin/../lib/gcc/arm-linux-androideabi/4.6/../../../../arm-linux-androideabi/bin/ld: ./obj/local/armeabi/objs/proj/proj-4.8.0/src/cs2cs.o: previous definition here
+collect2: ld returned 1 exit status
+make: *** [obj/local/armeabi/libproj.so] Error 1</pre>
+
+<pre>
+StaticLibrary&nbsp; : libsqlite.a
+StaticLibrary&nbsp; : libspatialite.a
+StaticLibrary&nbsp; : libproj.a
+StaticLibrary&nbsp; : libgeos.a
+StaticLibrary&nbsp; : libsqlite.a
+StaticLibrary&nbsp; : libspatialite.a
+StaticLibrary&nbsp; : libproj.a
+SharedLibrary&nbsp; : libjsqlite.so
+StaticLibrary&nbsp; : libgeos.a
+SharedLibrary&nbsp; : libjsqlite.so
+Install&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : libjsqlite.so =&gt; libs/armeabi/libjsqlite.so
+Install&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : libjsqlite.so =&gt; libs/armeabi-v7a/libjsqlite.so</pre>
