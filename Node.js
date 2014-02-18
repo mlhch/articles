@@ -2,7 +2,7 @@
 
 <p>2012-08-14 13:16:54 +08:00 Tuesday</p>
 
-<p><a href="http://nodejs.org/" target="_blank">http://nodejs.org/</a></p>
+<p><a href="http://nodejs.org/" target="_blank">http://nodejs.org/</a>|<a href="https://github.com/joyent/node" target="_blank">https://github.com/joyent/node</a></p>
 
 <p>Node.js is a platform built on&nbsp;<a href="http://code.google.com/p/v8/">Chrome&#39;s JavaScript runtime</a>&nbsp;for easily building fast, scalable network applications. Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient, perfect for data-intensive real-time applications that run across distributed devices.</p>
 
