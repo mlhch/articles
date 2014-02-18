@@ -22,7 +22,10 @@
 	<p>Ubuntu</p>
 
 	<pre>
-$ sudo service ssh start/stop/restart</pre>
+$ sudo apt-get install openssh-server</pre>
+
+	<pre>
+$ sudo service ssh {start|stop|restart|...}</pre>
 	</li>
 </ul>
 
@@ -107,5 +110,3 @@ drwx------. root root unconfined_u:object_r:admin_home_t:s0 .ssh
 <p>2012-08-18 02:57 星期六</p>
 
 <p>郁闷透了，ssh 怎么就不能顺顺利利地无密码登录了呢？</p>
-
-<p>&nbsp;</p>
