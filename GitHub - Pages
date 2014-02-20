@@ -1,0 +1,185 @@
+<h1>GitHub - Pages</h1>
+
+<p>2013-11-12 21:47 Tuesday</p>
+
+<p><a href="https://help.github.com/" target="_blank">https://help.github.com/</a></p>
+
+<ul>
+	<li>
+	<p>2014-02-20 15:50 Thursday</p>
+	http://mlhch.github.io/homepage/ 开始工作了，通过把 dist 目录加为 gh-pages 分支。</li>
+</ul>
+
+<p>初步走通了 d3git，回过头来弄弄主页</p>
+
+<p>2012-01-31 12:03:26 Tuesday</p>
+
+<p><a href="http://blog.leezhong.com/tech/2010/08/25/make-github-as-blog-engine.html" target="_blank">http://blog.leezhong.com/tech/2010/08/25/make-github-as-blog-engine.html</a></p>
+
+<p>成功了，http://mlhch.github.com/，注意是 http 不是 https，显示出了 index.html 里的 Hello World</p>
+
+<ul>
+	<li>
+	<p><a href="https://help.github.com/categories/20/articles">Pages</a></p>
+
+	<ul>
+		<li><a href="https://help.github.com/articles/what-are-github-pages">What are GitHub Pages?</a></li>
+		<li><a href="https://help.github.com/articles/user-organization-and-project-pages">User, Organization and Project Pages</a></li>
+		<li><a href="https://help.github.com/articles/creating-pages-with-the-automatic-generator">Creating Pages with the automatic generator</a></li>
+		<li><a href="https://help.github.com/articles/creating-project-pages-manually">Creating Project Pages manually</a></li>
+		<li><a href="https://help.github.com/articles/using-jekyll-with-pages">Using Jekyll with Pages</a></li>
+		<li><a href="https://help.github.com/articles/setting-up-a-custom-domain-with-pages">Setting up a custom domain with Pages</a></li>
+		<li><a href="https://help.github.com/articles/custom-404-pages">Custom 404 Pages</a></li>
+		<li><a href="https://help.github.com/articles/using-submodules-with-pages">Using submodules with Pages</a></li>
+		<li><a href="https://help.github.com/articles/my-custom-domain-isn-t-working">My custom domain isn&#39;t working</a></li>
+		<li><a href="https://help.github.com/articles/files-that-start-with-an-underscore-are-missing">Files that start with an underscore are missing</a></li>
+		<li><a href="https://help.github.com/articles/pages-don-t-build-unable-to-run-jekyll">Pages don&#39;t build: &quot;Unable to run Jekyll&quot;</a></li>
+		<li><a href="https://help.github.com/articles/unpublishing-a-project-page">Unpublishing a project page</a></li>
+		<li><a href="https://help.github.com/articles/should-i-rename-username-github-com-repositories-to-username-github-io">Should I rename &lt;username.github.com&gt; repositories to &lt;username.github.io&gt;?</a></li>
+	</ul>
+	</li>
+</ul>
+
+<h2>github pages</h2>
+
+<p>2012-10-18 13:51 星期四 很久很久以前</p>
+
+<p>http://pages.github.com/</p>
+
+<h3>What are GitHub Pages?</h3>
+
+<p>https://help.github.com/articles/what-are-github-pages</p>
+
+<p>GitHub Pages are public webpages freely hosted and easily published through our site. You can publish online using the Automatic Page Generator. If you prefer to work locally you can use the GitHub for Mac and Windows apps, or the command line.</p>
+
+<h3>Manual Pages and Jekyll</h3>
+
+<p>There are a few ways to create GitHub Pages, including manually pushing html or a Jekyll site. You can easily redirect your page to a custom url. To read more about creating Pages manually with Jekyll, read the&nbsp;<a href="http://help.github.com/pages/">documentation here</a>.</p>
+
+<p>https://help.github.com/categories/20/articles</p>
+
+<h3>Creating Pages with the automatic generator</h3>
+
+<p>https://help.github.com/articles/creating-pages-with-the-automatic-generator</p>
+
+<p>The Automatic Page Generator can be used on GitHub to quickly create a web page for a project, user or organization.</p>
+
+<p>...</p>
+
+<h3>The Automatic Page Generator</h3>
+
+<ol>
+	<li>
+	<p>Go to the repo&#39;s admin page</p>
+
+	<p><img alt="" src="https://github-images.s3.amazonaws.com/help/repo-actions-admin.png" /></p>
+	</li>
+	<li>
+	<p>Click the &quot;Automatic Page Generator&quot; button</p>
+
+	<p><img alt="" src="https://github-images.s3.amazonaws.com/help/pages-automatic-page-generator.png" /></p>
+	</li>
+	<li>Author your content in the Markdown editor</li>
+	<li>
+	<p>Click the &quot;Continue To Layouts&quot; button</p>
+	</li>
+	<li>
+	<p>Preview your content in our themes</p>
+
+	<p><img alt="" src="https://github-images.s3.amazonaws.com/blog/2012/page-generator-picker.png" /></p>
+	</li>
+	<li>
+	<p>When you find a theme that you like, click &quot;Publish&quot;</p>
+
+	<p><img alt="" src="https://github-images.s3.amazonaws.com/blog/2012/page-generator-publish.png" /></p>
+	</li>
+	<li>
+	<p>Publish 之后，页面转到&nbsp;https://github.com/mlhch/mlhch.github.com，可以自行查看实际上这个 Automatic Page Generator 对版本库&nbsp;git@github.com:mlhch/mlhch.github.com.git 做了什么更改。此处查看 Commit History 可以看到目前只有 2 次提交。</p>
+
+	<h3>Oct 17, 2012</h3>
+
+	<ol>
+		<li>
+		<p><a href="https://github.com/mlhch/mlhch.github.com/commit/aa08eb9507674712e1a1ad4cb84b4db8e508aa5f">Replace master branch with page content via GitHub</a></p>
+
+		<p><a href="https://github.com/mlhch/mlhch.github.com/commit/aa08eb9507674712e1a1ad4cb84b4db8e508aa5f">aa08eb9507</a><a href="https://github.com/mlhch/mlhch.github.com/tree/aa08eb9507674712e1a1ad4cb84b4db8e508aa5f">Browse code&nbsp;</a></p>
+
+		<p><a href="https://github.com/mlhch">mlhch</a>&nbsp;authored&nbsp; 9 minutes ago</p>
+		</li>
+	</ol>
+
+	<h3>Jan 30, 2012</h3>
+
+	<ol>
+		<li>
+		<p><a href="https://github.com/mlhch/mlhch.github.com/commit/bec646a8766df67be9d36e5dfc98b4e1834bd8eb">master: index.html for blog</a></p>
+
+		<p><a href="https://github.com/mlhch/mlhch.github.com/commit/bec646a8766df67be9d36e5dfc98b4e1834bd8eb">bec646a876</a><a href="https://github.com/mlhch/mlhch.github.com/tree/bec646a8766df67be9d36e5dfc98b4e1834bd8eb">Browse code&nbsp;</a></p>
+
+		<p><a href="https://github.com/mlhch">mlhch</a>&nbsp;authored&nbsp; 9 months ago</p>
+		</li>
+	</ol>
+	</li>
+</ol>
+
+<h2>What are GitHub Pages?</h2>
+
+<p><a href="https://help.github.com/articles/what-are-github-pages" target="_blank">https://help.github.com/articles/what-are-github-pages</a></p>
+
+<p>Article last updated on 20-Aug-13</p>
+
+<p>GitHub Pages are public webpages freely hosted and easily published through our site. You can publish online using the Automatic Page Generator. If you prefer to work locally you can use the GitHub for Mac and Windows apps, or the command line.</p>
+
+<p>Pages are served over HTTP, not HTTPS. That doesn&#39;t make them inherently less secure, but, it does mean that you shouldn&#39;t transact any sensitive information with them (like passwords or credit card numbers).</p>
+
+<p>For more information, check out the&nbsp;<a href="http://pages.github.com/">GitHub Pages</a>&nbsp;site, or the related documentation here on Help.</p>
+
+<h2>User, Organization and Project Pages</h2>
+
+<p><a href="https://help.github.com/articles/user-organization-and-project-pages" target="_blank">https://help.github.com/articles/user-organization-and-project-pages</a></p>
+
+<p>Article last updated on 07-Aug-13</p>
+
+<p>There are two basic types of Pages available,&nbsp;User/Organization Pages&nbsp;and&nbsp;Project Pages. The two types of pages are nearly identical, except for a few details.</p>
+
+<p>有两种基本类型的页面可用。两种页面几乎相同，稍有差别。</p>
+
+<p>Both types of Pages are served over HTTP, not HTTPS. That doesn&#39;t make them inherently less secure, but, it does mean that you shouldn&#39;t transact any sensitive information with them (like passwords or credit card numbers).</p>
+
+<h3>User &amp; Organization Pages</h3>
+
+<p>User &amp; Organization Pages&nbsp;live in a special repository dedicated to only the Pages files. This repository uses the account name, for example&nbsp;<a href="https://github.com/atmos/atmos.github.io">atmos/atmos.github.io</a></p>
+
+<p>用户和组织类型的页面，被存放在一个特殊专用的版本库中。这个版本库使用帐户名，比如 atmos/atmos.github.io。</p>
+
+<ul>
+	<li>This repository must use the&nbsp;username/username.github.io&nbsp;naming scheme.</li>
+	<li>Content from the&nbsp;master&nbsp;branch will be used to build and publish the Pages.</li>
+</ul>
+
+<p>Tip: You can only use your own account name for a User or Org Pages repository. A repository likejoe/bob.github.io&nbsp;will not build Pages.</p>
+
+<h3>Project Pages</h3>
+
+<p>Unlike User and Org Pages,&nbsp;Project Pages&nbsp;are kept in the same repository as the project they are for. These pages are similar to User and Org Pages, with a few slight differences:</p>
+
+<ul>
+	<li><span class="marker">The&nbsp;gh-pages&nbsp;branch is used to build and publish from.</span></li>
+	<li>A&nbsp;<a href="https://help.github.com/articles/setting-up-a-custom-domain-with-pages">custom domain</a>&nbsp;on user/org pages will apply the same domain redirect to all project pages hosted under that account, unless the project pages use their own custom domain.</li>
+	<li>If no&nbsp;<a href="https://help.github.com/articles/setting-up-a-custom-domain-with-pages">custom domain</a>&nbsp;is used, the project pages are served under a subpath of the user pages:username.github.io/projectname</li>
+	<li><a href="https://help.github.com/articles/custom-404-pages">Custom 404s</a>&nbsp;will only work if a custom domain is used, otherwise the User Pages 404 is used.</li>
+</ul>
+
+<h2>Should I rename &lt;username.github.com&gt; repositories to &lt;username.github.io&gt;?</h2>
+
+<p><a href="https://help.github.com/articles/should-i-rename-username-github-com-repositories-to-username-github-io" target="_blank">https://help.github.com/articles/should-i-rename-username-github-com-repositories-to-username-github-io</a></p>
+
+<p>Article last updated on 01-Jun-13</p>
+
+<p>Previously, repositories named&nbsp;username.github.com&nbsp;would become GitHub Pages, as outlined&nbsp;<a href="https://help.github.com/articles/user-organization-and-project-pages">in this article</a>.</p>
+
+<p>The new format, however, is to use the&nbsp;username.github.io&nbsp;format. You do not need to rename old repositories from the&nbsp;.com&nbsp;name to the&nbsp;.io&nbsp;name, as GitHub Pages will continue to automatically route you. Keep in mind that a&nbsp;.com&nbsp;name still sends you to a&nbsp;username.github.iowebsite.</p>
+
+<p>While both formats are supported, we highly suggest new repositories use theusername.github.io&nbsp;format. If both a&nbsp;username.github.io&nbsp;and a&nbsp;username.github.comrepository exists, the&nbsp;username.github.io&nbsp;version is used.</p>
+
+<p>&nbsp;</p>
