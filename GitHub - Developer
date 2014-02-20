@@ -1,0 +1,342 @@
+<h1>GitHub - Developer</h1>
+
+<p>2014-02-20 20:29 Thursday</p>
+
+<p><a href="http://developer.github.com/" target="_blank">http://developer.github.com/</a></p>
+
+<blockquote>
+<p>Leverage the power of&nbsp;GitHub in your app</p>
+</blockquote>
+
+<p>Get started with one of our guides, or jump straight into the API documentation.</p>
+
+<p><a href="http://developer.github.com/v3/">Browse the documentation</a></p>
+
+<ul>
+	<li>
+	<p><a href="http://developer.github.com/guides/">Get Started</a></p>
+
+	<p>New to the GitHub API? With these guides you&rsquo;ll be up and running in a snap.</p>
+	</li>
+	<li>
+	<p><a href="http://developer.github.com/libraries/">Libraries</a></p>
+
+	<p>We&#39;ve got you covered. Use the GitHub API in your favorite language.</p>
+	</li>
+	<li>
+	<p><a href="http://github.com/contact">Support</a></p>
+
+	<p>Are you stuck? Already tried our&nbsp;<a href="http://developer.github.com/v3/troubleshooting/">troubleshooting guide</a>? Talk to a supportocat.</p>
+	</li>
+</ul>
+
+<h2>Browse the documentation</h2>
+
+<p><a href="http://developer.github.com/v3/" target="_blank">http://developer.github.com/v3/</a></p>
+
+<h2>Getting Started</h2>
+
+<p><a href="http://developer.github.com/guides/getting-started/" target="_blank">http://developer.github.com/guides/getting-started/</a></p>
+
+<h3>Overview</h3>
+
+<p>Most applications will use an existing&nbsp;<a href="http://developer.github.com/libraries/">wrapper library</a>&nbsp;in the language of your choice, but it&rsquo;s important to familiarize yourself with the underlying API HTTP methods first.</p>
+
+<p>There&#39;s no easier way to kick the tires than through&nbsp;<a href="http://curl.haxx.se/">cURL</a>.</p>
+
+<h3>Hello World</h3>
+
+<p>Let&rsquo;s start by testing our setup. Open up a command prompt and enter the following command (without the&nbsp;$):</p>
+
+<pre>
+$ curl https://api.github.com/zen
+
+Keep it logically awesome.
+</pre>
+
+<p>The response will be a random selection from our design philosophies.</p>
+
+<p>Next, let&#39;s&nbsp;GET&nbsp;your&nbsp;<a href="http://developer.github.com/v3/users/#get-a-single-user">GitHub profile</a>:</p>
+
+<pre>
+# GET /users/mlhch
+$ curl https://api.github.com/users/mlhch
+{
+  &quot;login&quot;: &quot;mlhch&quot;,
+  &quot;id&quot;: 744164,
+  &quot;avatar_url&quot;: &quot;https://gravatar.com/avatar/cbe21c3c69d013ba9e76efd303d33782?d=https%3A%2F%2Fidenticons.github.com%2F5e41570e891a163463bf5f299fdf56c0.png&amp;r=x&quot;,
+  &quot;gravatar_id&quot;: &quot;cbe21c3c69d013ba9e76efd303d33782&quot;,
+  &quot;url&quot;: &quot;https://api.github.com/users/mlhch&quot;,
+  &quot;html_url&quot;: &quot;https://github.com/mlhch&quot;,
+  &quot;followers_url&quot;: &quot;https://api.github.com/users/mlhch/followers&quot;,
+  &quot;following_url&quot;: &quot;https://api.github.com/users/mlhch/following{/other_user}&quot;,
+  &quot;gists_url&quot;: &quot;https://api.github.com/users/mlhch/gists{/gist_id}&quot;,
+  &quot;starred_url&quot;: &quot;https://api.github.com/users/mlhch/starred{/owner}{/repo}&quot;,
+  &quot;subscriptions_url&quot;: &quot;https://api.github.com/users/mlhch/subscriptions&quot;,
+  &quot;organizations_url&quot;: &quot;https://api.github.com/users/mlhch/orgs&quot;,
+  &quot;repos_url&quot;: &quot;https://api.github.com/users/mlhch/repos&quot;,
+  &quot;events_url&quot;: &quot;https://api.github.com/users/mlhch/events{/privacy}&quot;,
+  &quot;received_events_url&quot;: &quot;https://api.github.com/users/mlhch/received_events&quot;,
+  &quot;type&quot;: &quot;User&quot;,
+  &quot;site_admin&quot;: false,
+  &quot;name&quot;: &quot;Ma Lian&quot;,
+  &quot;company&quot;: null,
+  &quot;blog&quot;: null,
+  &quot;location&quot;: null,
+  &quot;email&quot;: &quot;malhch@gmail.com&quot;,
+  &quot;hireable&quot;: false,
+  &quot;bio&quot;: null,
+  &quot;public_repos&quot;: 8,
+  &quot;public_gists&quot;: 0,
+  &quot;followers&quot;: 0,
+  &quot;following&quot;: 0,
+  &quot;created_at&quot;: &quot;2011-04-21T16:17:27Z&quot;,
+  &quot;updated_at&quot;: &quot;2014-02-20T07:44:12Z&quot;
+}</pre>
+
+<p>Mmmmm, tastes like&nbsp;<a href="http://en.wikipedia.org/wiki/JSON">JSON</a>. Let&#39;s add the&nbsp;-i&nbsp;flag to include headers:</p>
+
+<pre>
+$ curl -i https://api.github.com/users/mlhch
+HTTP/1.1 200 OK
+
+HTTP/1.1 200
+Status: 200 OK
+X-Ratelimit-Remaining: 55
+<span class="marker">X-Github-Media-Type: github.beta</span>
+X-Content-Type-Options: nosniff
+Access-Control-Expose-Headers: ETag, Link, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+X-Github-Request-Id: 0823C930:3A70:6B1E98:5305FA63
+Access-Control-Allow-Credentials: true
+Vary: Accept, Accept-Encoding
+Content-Length: 1328
+Server: GitHub.com
+Last-Modified: Thu, 20 Feb 2014 07:44:12 GMT
+Via: HTTP/1.1 GWA
+Etag: &quot;6355794f9fe9d96b25f19fa6f84fc8ce&quot;
+Cache-Control: public, max-age=60, s-maxage=60
+Date: Thu, 20 Feb 2014 12:51:47 GMT
+Access-Control-Allow-Origin: *
+Content-Type: application/json; charset=utf-8
+X-Ratelimit-Limit: 60
+X-Ratelimit-Reset: 1392902648
+
+{
+  &quot;login&quot;: &quot;mlhch&quot;,
+  &quot;id&quot;: 744164,
+&nbsp; ...
+}</pre>
+
+<p>There are a few interesting bits in the response headers. As expected, the&nbsp;Content-Type&nbsp;is&nbsp;application/json.</p>
+
+<p><span class="marker">Any headers beginning with&nbsp;X-&nbsp;are custom headers</span>, and are not included in the HTTP spec. Let&#39;s take a look at a few of them:</p>
+
+<ul>
+	<li>X-GitHub-Media-Type&nbsp;has a value of&nbsp;github.beta. This lets us know the&nbsp;<a href="http://developer.github.com/v3/media/">media type</a>&nbsp;for the response. Media types have helped us version our output in API v3. We&#39;ll talk more about that later.</li>
+	<li>Take note of the&nbsp;X-RateLimit-Limit&nbsp;and&nbsp;X-RateLimit-Remaining&nbsp;headers. This pair of headers indicate&nbsp;<a href="http://developer.github.com/v3/#rate-limiting">how many requests a client can make</a>&nbsp;in a rolling time period (typically an hour) and how many of those requests the client has already spent.</li>
+</ul>
+
+<h2>Authentication</h2>
+
+<p>Unauthenticated clients can make 60 requests per hour. To get more, we&rsquo;ll need to&nbsp;authenticate. In fact, doing anything interesting with the GitHub API requires&nbsp;<a href="http://developer.github.com/v3/#authentication">authentication</a>.</p>
+
+<h3>Basic</h3>
+
+<p>The easiest way to authenticate with the GitHub API is by simply using your GitHub username and password via Basic Authentication.</p>
+
+<pre>
+$ curl -i -u &lt;your_username&gt; https://api.github.com/users/defunkt
+
+Enter host password for user &#39;&lt;your_username&gt;&#39;:
+</pre>
+
+<p>The&nbsp;-u&nbsp;flag sets the username, and cURL will prompt you for the password. You can use&nbsp;-u &quot;username:password&quot;&nbsp;to avoid the prompt, but this leaves your password in shell history and isn&rsquo;t recommended. When authenticating, you should see your rate limit <span class="marker">bumped to 5,000 requests an hour</span>, as indicated in the&nbsp;X-RateLimit-Limit&nbsp;header.</p>
+
+<p>In addition to just getting more calls per hour, authentication is the key to reading and writing private information via the API.</p>
+
+<h3>Two-factor authentication</h3>
+
+<p>If you have&nbsp;<a href="https://help.github.com/articles/about-two-factor-authentication">two-factor authentication</a>&nbsp;enabled, the API will return a&nbsp;401 Unauthorized&nbsp;error code for the above request (and every other API request):</p>
+
+<pre>
+$ curl -i -u &lt;your_username&gt; https://api.github.com/users/defunkt
+
+Enter host password for user &#39;&lt;your_username&gt;&#39;:
+
+HTTP/1.1 401 Unauthorized
+X-GitHub-OTP: required; :2fa-type
+
+{
+  &quot;message&quot;: &quot;Must specify two-factor authentication OTP code.&quot;,
+  &quot;documentation_url&quot;: &quot;http://developer.github.com/v3/auth#working-with-two-factor-authentication&quot;
+}
+</pre>
+
+<p>The easiest way to get around that error is to create an OAuth token and use OAuth authentication instead of Basic Authentication. See the&nbsp;<a href="http://developer.github.com/guides/getting-started/#oauth">OAuth section</a>&nbsp;below for more information.</p>
+
+<h3>Get your own user profile</h3>
+
+<p>When properly authenticated, you can take advantage of the permissions associated with your GitHub account. For example, try getting&nbsp;<a href="http://developer.github.com/v3/users/#get-the-authenticated-user">your own user profile</a>:</p>
+
+<pre>
+$ curl -i -u &lt;your_username&gt; https://api.github.com/user
+
+{
+  ...
+  &quot;plan&quot;: {
+    &quot;space&quot;: 2516582,
+    &quot;collaborators&quot;: 10,
+    &quot;private_repos&quot;: 20,
+    &quot;name&quot;: &quot;medium&quot;
+  }
+  ...
+}
+</pre>
+
+<p>This time, in addition to the same set of public information we retrieved for&nbsp;<a href="https://github.com/defunkt">@defunkt</a>&nbsp;earlier, you should also see the non-public information for your user profile. For example, you&#39;ll see a&nbsp;planobject in the response which gives details about the GitHub plan for the account.</p>
+
+<h3>OAuth</h3>
+
+<p>While convenient, Basic Authentication isn&rsquo;t ideal because you shouldn&rsquo;t give your GitHub username and password to anyone. Applications that need to read or write private information using the API on behalf of another user should use&nbsp;<a href="http://developer.github.com/v3/oauth/">OAuth</a>.</p>
+
+<p>Instead of usernames and passwords, OAuth uses&nbsp;tokens. Tokens provide two big features:</p>
+
+<ul>
+	<li>Revokable access: users can revoke authorization to third party apps at any time</li>
+	<li>Limited access: users can review the specific access that a token will provide before authorizing a third party app</li>
+</ul>
+
+<p>Normally, tokens are created via a&nbsp;<a href="http://developer.github.com/v3/oauth/#web-application-flow">web flow</a>. An application sends users to GitHub to log in. GitHub then presents a dialog indicating the name of the app, as well as the level of access the app has once it&#39;s authorized by the user. After a user authorizes access, GitHub redirects the user back to the application:</p>
+
+<p>[<a href="http://developer.github.com/images/oauth_prompt.png" target="_blank">http://developer.github.com/images/oauth_prompt.png</a>]</p>
+
+<p>&nbsp;However, you don&#39;t need to set up the entire web flow to begin working with OAuth tokens. An easier way to get a token is to&nbsp;<a href="https://help.github.com/articles/creating-an-access-token-for-command-line-use">create a&nbsp;Personal token</a>&nbsp;via your&nbsp;<a href="https://github.com/settings/applications">Application settings page</a>:</p>
+
+<p>[<a href="http://developer.github.com/images/personal_token.png" target="_blank">http://developer.github.com/images/personal_token.png</a>]</p>
+
+<p>Also, the&nbsp;<a href="http://developer.github.com/v3/oauth_authorizations/#create-a-new-authorization">Authorizations API</a>&nbsp;makes it simple to use Basic Authentication to create an OAuth token. Try pasting and running the following command:</p>
+
+<pre>
+$ curl -i -u &lt;your_username&gt; -d &#39;{&quot;scopes&quot;: [&quot;repo&quot;]}&#39; \
+    https://api.github.com/authorizations
+
+HTTP/1.1 201 Created
+Location: https://api.github.com/authorizations/2
+Content-Length: 384
+
+{
+  &quot;scopes&quot;: [
+    &quot;repo&quot;
+  ],
+  &quot;token&quot;: &quot;5199831f4dd3b79e7c5b7e0ebe75d67aa66e79d4&quot;,
+  &quot;updated_at&quot;: &quot;2012-11-14T14:04:24Z&quot;,
+  &quot;url&quot;: &quot;https://api.github.com/authorizations/2&quot;,
+  &quot;app&quot;: {
+    &quot;url&quot;: &quot;http://developer.github.com/v3/oauth/#oauth-authorizations-api&quot;,
+    &quot;name&quot;: &quot;GitHub API&quot;
+  },
+  &quot;created_at&quot;: &quot;2012-11-14T14:04:24Z&quot;,
+  &quot;note_url&quot;: null,
+  &quot;id&quot;: 2,
+  &quot;note&quot;: null
+}
+</pre>
+
+<p>There&#39;s a lot going on in this one little call, so let&#39;s break it down. First,<span class="marker"> the&nbsp;-d&nbsp;flag indicates we&#39;re doing a&nbsp;POST</span>, using the&nbsp;application/x-www-form-urlencoded&nbsp;content type (as opposed to&nbsp;GET). All&nbsp;POST&nbsp;requests to the GitHub API should be in JSON.</p>
+
+<p>Next, let&#39;s look at the&nbsp;scopes&nbsp;we&#39;re sending over in this call. When creating a new token, we include an optional array of&nbsp;<a href="http://developer.github.com/v3/oauth/#scopes">scopes</a>, or access levels, that indicate what information this token can access. In this case, we&#39;re setting up the token with&nbsp;repo&nbsp;access, which grants access to read and write to private repositories. See&nbsp;<a href="http://developer.github.com/v3/oauth/#scopes">the scopes docs</a>&nbsp;for a full list of scopes. You should&nbsp;only&nbsp;request scopes that your application actually needs, in order to not frighten users with potentially invasive actions. The&nbsp;201&nbsp;status code tells us that the call was successful, and the JSON returned contains the details of our new OAuth token.</p>
+
+<p>If you have&nbsp;<a href="https://help.github.com/articles/about-two-factor-authentication">two-factor authentication</a>&nbsp;enabled, the API will return the&nbsp;<a href="http://developer.github.com/guides/getting-started/#two-factor-authentication">previously described&nbsp;401 Unauthorized&nbsp;error code</a>&nbsp;for the above request. You can get around that error by providing a 2FA OTP code in the&nbsp;<a href="http://developer.github.com/v3/auth/#working-with-two-factor-authentication">X-GitHub-OTP request header</a>:</p>
+
+<pre>
+$ curl -i -u &lt;your_username&gt; -H &quot;X-GitHub-OTP: &lt;your_2fa_OTP_code&gt;&quot; \
+    -d &#39;{&quot;scopes&quot;: [&quot;repo&quot;]}&#39; https://api.github.com/authorizations
+</pre>
+
+<p>If you enabled 2FA with a mobile application, go ahead and get an OTP code from your one-time password application on your phone. If you enabled 2FA with text messages, you&rsquo;ll receive an SMS with your OTP code after making a request to this endpoint.</p>
+
+<p>Now, we can use the forty character&nbsp;token&nbsp;instead of a username and password in the rest of our examples. Let&#39;s grab our own user info again, using OAuth this time:</p>
+
+<pre>
+$ curl -i -H &#39;Authorization: token 5199831f4dd3b79e7c5b7e0ebe75d67aa66e79d4&#39; \
+    https://api.github.com/user
+</pre>
+
+<p>Treat OAuth tokens like passwords!&nbsp;Don&#39;t share them with other users or store them in insecure places. The tokens in these examples are fake and the names have been changed to protect the innocent.</p>
+
+<p>Now that we&#39;ve got the hang of making authenticated calls, let&#39;s move along to the&nbsp;<a href="http://developer.github.com/v3/repos/">Repositories API</a>.</p>
+
+<h2>Repositories</h2>
+
+<p>Almost any meaningful use of the GitHub API will involve some level of Repository information. We can&nbsp;<a href="http://developer.github.com/v3/repos/#get">GET&nbsp;repository details</a>&nbsp;in the same way we fetched user details earlier:</p>
+
+<pre>
+$ curl -i https://api.github.com/repos/twbs/bootstrap
+</pre>
+
+<p>In the same way, we can&nbsp;<a href="http://developer.github.com/v3/repos/#list-your-repositories">view repositories for the authenticated user</a>:</p>
+
+<pre>
+$ curl -i -H &#39;Authorization: token 5199831f4dd3b79e7c5b7e0ebe75d67aa66e79d4&#39; \
+    https://api.github.com/user/repos
+</pre>
+
+<p>Or, we can&nbsp;<a href="http://developer.github.com/v3/repos/#list-user-repositories">list repositories for another user</a>:</p>
+
+<pre>
+$ curl -i https://api.github.com/users/technoweenie/repos
+</pre>
+
+<p>Or, we can&nbsp;<a href="http://developer.github.com/v3/repos/#list-organization-repositories">list repositories for an organization</a>:</p>
+
+<pre>
+$ curl -i https://api.github.com/orgs/mozilla/repos
+</pre>
+
+<p>The information returned from these calls will depend on how we authenticate:</p>
+
+<ul>
+	<li>Using Basic Authentication, the response includes all repositories the the user has access to see on github.com.</li>
+	<li>Using OAuth, private repositories are only returned if the OAuth token contains the&nbsp;repo<a href="http://developer.github.com/v3/oauth/#scopes">scope</a>.</li>
+</ul>
+
+<p>As the&nbsp;<a href="http://developer.github.com/v3/repos/">docs</a>&nbsp;indicate, these methods take a&nbsp;type&nbsp;parameter that can filter the repositories returned based on what type of access the user has for the repository. In this way, we can fetch only directly-owned repositories, organization repositories, or repositories the user collaborates on via a team.</p>
+
+<pre>
+$ curl -i &quot;https://api.github.com/users/technoweenie/repos?type=owner&quot;
+</pre>
+
+<p>In this example, we grab only those repositories that technoweenie owns, not the ones on which he collaborates. Note the quoted URL above. Depending on your shell setup, cURL sometimes requires a quoted URL or else it ignores the query string.</p>
+
+<h3>Create a repository</h3>
+
+<p>Fetching information for existing repositories is a common use case, but the GitHub API supports creating new repositories as well. To&nbsp;<a href="http://developer.github.com/v3/repos/#create">create a repository</a>, we need to&nbsp;POST&nbsp;some JSON containing the details and configuration options.</p>
+
+<pre>
+$ curl -i -H &#39;Authorization: token 5199831f4dd3b79e7c5b7e0ebe75d67aa66e79d4&#39; \
+    -d &#39;{ \
+        &quot;name&quot;: &quot;blog&quot;, \
+        &quot;auto_init&quot;: true, \
+        &quot;private&quot;: true, \
+        &quot;gitignore_template&quot;: &quot;nanoc&quot; \
+      }&#39; \
+    https://api.github.com/user/repos
+</pre>
+
+<p>In this minimal example, we create a new repository for our blog (to be served on&nbsp;<a href="http://pages.github.com/">GitHub Pages</a>, perhaps). Though the blog will be public, we&rsquo;ve made the repository private. In this single step, we&rsquo;ll also initialize it with a README and a&nbsp;<a href="http://nanoc.stoneship.org/">nanoc</a>-flavored&nbsp;<a href="https://github.com/github/gitignore">.gitignore template</a>.</p>
+
+<p>The resulting repository will be found at&nbsp;https://github.com/&lt;your_username&gt;/blog. To create a repository under an organization for which you&rsquo;re an owner, just change the API method from&nbsp;/user/repos&nbsp;to&nbsp;/orgs/&lt;org_name&gt;/repos.</p>
+
+<p>Next, let&#39;s fetch our newly created repository:</p>
+
+<pre>
+$ curl -i https://api.github.com/repos/pengwynn/blog
+
+HTTP/1.1 404 Not Found
+
+{
+    &quot;message&quot;: &quot;Not Found&quot;
+}
+</pre>
+
+<p>Oh noes! Where did it go? Since we created the repository as&nbsp;private, we need to authenticate in order to see it. If you&#39;re a grizzled HTTP user, you might expect a&nbsp;403&nbsp;instead. Since we don&#39;t want to leak information about private repositories, the GitHub API returns a&nbsp;404&nbsp;in this case, as if to say &ldquo;we can neither confirm nor deny the existence of this repository.&rdquo;</p>
