@@ -1,0 +1,42 @@
+<h1>Linux - cURL</h1>
+
+<p>2014-02-20 20:40 Thursday</p>
+
+<p><a href="http://curl.haxx.se/" target="_blank">http://curl.haxx.se/</a></p>
+
+<blockquote>
+<p>curl groks URLs</p>
+</blockquote>
+
+<p>curl is a command line tool for transferring data with URL syntax, supporting DICT, FILE, FTP, FTPS, Gopher, HTTP, HTTPS, IMAP, IMAPS, LDAP, LDAPS, POP3, POP3S, RTMP, RTSP, SCP, SFTP, SMTP, SMTPS, Telnet and TFTP. curl supports SSL certificates, HTTP POST, HTTP PUT, FTP uploading, HTTP form based upload, proxies, cookies, user+password authentication (Basic, Digest, NTLM, Negotiate, kerberos...), file transfer resume, proxy tunneling and a busload of other&nbsp;<a href="http://curl.haxx.se/docs/features.html">useful tricks</a>.</p>
+
+<p>Possibly more than&nbsp;<a href="http://daniel.haxx.se/blog/2012/05/16/300m-users/">500 million users</a>&nbsp;already, I&#39;m sure you can use it as well!</p>
+
+<table border="1">
+	<tbody>
+		<tr>
+			<td>
+			<p>curl is free and&nbsp;<a href="http://curl.haxx.se/docs/copyright.html">open software</a>&nbsp;that compiles and runs under a wide variety of operating systems. curl exists thanks to efforts from&nbsp;<a href="http://curl.haxx.se/docs/thanks.html">many contributors</a>.</p>
+
+			<p>The most recent stable version of curl is version 7.35.0, released on 29th of January 2014. Currently, 94 of the&nbsp;<a href="http://curl.haxx.se/download.html">listed archives</a>&nbsp;are of the latest version.</p>
+			</td>
+			<td>
+			<p>Use the curl&nbsp;<a href="http://curl.haxx.se/docs/manpage.html">command line tool</a>&nbsp;or use&nbsp;<a href="http://curl.haxx.se/libcurl/">libcurl</a>&nbsp;from within your own programs.</p>
+
+			<p>Found a bug or a flaw?&nbsp;<a href="http://curl.haxx.se/docs/bugs.html">Report a bug!</a></p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<h3>curl and libcurl 7.35.0 - January 29 2014</h3>
+
+<p>The curl team proudly presents the first release of the year:&nbsp;<a href="http://curl.haxx.se/download.html">curl and libcurl 7.35.0</a>. Read up on all the changes and bug fixes on the&nbsp;<a href="http://curl.haxx.se/changes.html#7_35_0">changes</a>&nbsp;page.</p>
+
+<p>Extra attention should be put on the&nbsp;<a href="http://curl.haxx.se/docs/adv_20140129.html">security advisory</a>&nbsp;we announce today.</p>
+
+<h3>curl and libcurl 7.34.0 - December 17 2013</h3>
+
+<p>The curl team proudly presents&nbsp;<a href="http://curl.haxx.se/download.html">curl and libcurl 7.34.0</a>. Read up on all the changes and bug fixes on the&nbsp;<a href="http://curl.haxx.se/changes.html#7_34_0">changes</a>&nbsp;page.</p>
+
+<p>Extra attention should be put on the&nbsp;<a href="http://curl.haxx.se/docs/adv_20131217.html">security advisory</a>&nbsp;we announce today.</p>
