@@ -1,0 +1,32 @@
+<h1>W3C - Indexed Database API</h1>
+
+<p>2014-02-23 20:47 Sunday</p>
+
+<p><a href="http://www.w3.org/TR/IndexedDB/" target="_blank">http://www.w3.org/TR/IndexedDB/</a></p>
+
+<p>HTML5 的一个重要特性是本地数据持久性，它使用户能够在线和离线访问 Web 应用程序。此外，本地数据持久性使移动应用程序更灵敏，使用的带宽更少，而且能够在低带宽场景中更高效地工作。HTML5 提供了一些本地数据持久性选项。第一个选项是&nbsp;localstorage，它支持您使用一个简单的键值对来存储数据。IndexedDB（一个更加强大的选项）支持您本地存储大量对象，并使用健壮的数据访问机制检索数据。</p>
+
+<p>IndexedDB API 取代了 Web Storage API，后者在 HTML5 规范中已不推荐使用。（但一些领先的浏览器仍然支持 Web Storage，其中包括苹果公司的 Safari 和 Opera Web 浏览器）与 Web Storage 相比，IndexedDB 具有多个优势，其中包括索引、事务处理和健壮的查询功能。</p>
+
+<h2>IndexedDB 是什么？</h2>
+
+<p>IndexedDB 是对象存储，它不同于带有表格（包含行和列的集合）的关系数据库。这是一个重要的根本区别，并且会影响您设计和构建应用的方式。</p>
+
+<h2>为什么是 IndexedDB？</h2>
+
+<p>在 2010 年 11 月 18 日，<a href="http://www.w3.org/TR/webdatabase/">W3C 宣布</a>弃用 Web SQL 数据库规范。这也就是建议网络开发人员不要再使用这种技术了，该规范也不会再获得新的更新，而且不鼓励浏览器供应商支持该技术。</p>
+
+<h2>MDN&nbsp;-&nbsp;MDN中文&nbsp;-&nbsp;IndexedDB</h2>
+
+<p><a href="https://developer.mozilla.org/zh-CN/docs/IndexedDB" target="_blank">https://developer.mozilla.org/zh-CN/docs/IndexedDB</a></p>
+
+<h3>存储空间限制</h3>
+
+<p>一个单独的数据库项目的大小没有限制。然而可能会限制每个 IndexedDB 数据库的大小。这个限制（以及用户界面对它进行断言的方式）在各个浏览器上也可能有所不同：</p>
+
+<ul>
+	<li>
+	<p>Firefox: 对 IndexedDB 数据库的大小没有限制。在用户界面上只会针对存储超过 50 MB 大小的 BLOB（二进制大对象）请求权限。这个大小的限额可以通过&nbsp;dom.indexedDB.warningQuota&nbsp;首选项进行自定义 (定义在&nbsp;<a href="http://mxr.mozilla.org/mozilla-central/source/modules/libpref/src/init/all.js">http://mxr.mozilla.org/mozilla-central/source/modules/libpref/src/init/all.js</a>)。</p>
+	</li>
+	<li>Google Chrome: 参见&nbsp;<a href="https://developers.google.com/chrome/whitepapers/storage#temporary">https://developers.google.com/chrome...rage#temporary</a></li>
+</ul>
