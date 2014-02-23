@@ -1,0 +1,704 @@
+<h1>GitHub - jekyll - blog on github</h1>
+
+<p>2012-01-31 12:03:26 +08:00 Tuesday</p>
+
+<p><a href="http://jekyllrb.com/" target="_blank">http://jekyllrb.com/</a>|<a href="https://github.com/jekyll/jekyll" target="_blank">https://github.com/jekyll/jekyll</a>|<a href="http://rubygems.org/gems/jekyll" target="_blank">http://rubygems.org/gems/jekyll</a></p>
+
+<h2>jekyllrb.com</h2>
+
+<pre>
+$ gem install jekyll
+$ jekyll new my-awesome-site
+$ cd my-awesome-site
+$ jekyll serve
+# =&gt; Now browse to http://localhost:4000</pre>
+
+<ul>
+	<li>
+	<p>2014-02-23 13:27 Sunday</p>
+
+	<p>Transform your plain text into static&nbsp;websites and&nbsp;blogs.</p>
+
+	<ul>
+		<li>
+		<p><span style="line-height:1.2em">Simple</span></p>
+
+		<p><span style="line-height:1.2em">No more databases, comment moderation, or pesky updates to install&mdash;just&nbsp;<em>your content</em>.</span></p>
+
+		<p><a href="http://jekyllrb.com/docs/usage/" style="line-height: 1.6em;">How Jekyll works &rarr;</a></p>
+		</li>
+		<li>
+		<p>Static</p>
+
+		<p><a href="http://daringfireball.net/projects/markdown/" style="line-height: 1.6em;">Markdown</a><span style="line-height:1.6em">&nbsp;(or&nbsp;</span><a href="http://textile.sitemonks.com/" style="line-height: 1.6em;">Textile</a><span style="line-height:1.6em">),&nbsp;</span><a href="http://wiki.shopify.com/Liquid" style="line-height: 1.6em;">Liquid</a><span style="line-height:1.6em">, HTML&nbsp;&amp;&nbsp;CSS go in. Static sites come out ready for deployment.</span></p>
+
+		<p><a href="http://jekyllrb.com/docs/templates/" style="line-height: 1.6em;">Jekyll template guide &rarr;</a></p>
+		</li>
+		<li>
+		<p>Blog-aware</p>
+
+		<p><span style="line-height:1.6em">Permalinks, categories, pages, posts, and custom layouts are all first-class citizens here.</span></p>
+
+		<p><a href="http://jekyllrb.com/docs/migrations/" style="line-height: 1.6em;">Migrate your blog &rarr;</a></p>
+		</li>
+	</ul>
+	</li>
+</ul>
+
+<h2>github.com/jekyll/jekyll</h2>
+
+<ul>
+	<li>
+	<p>2014-02-23 13:21 Sunday</p>
+
+	<p>Jekyll is a blog-aware, static site generator in Ruby</p>
+	</li>
+</ul>
+
+<h2>rubygems.org/gems/jekyll</h2>
+
+<ul>
+	<li>
+	<p>2012-01-31 12:03</p>
+
+	<p>Jekyll is a simple, blog aware, static site generator.</p>
+	</li>
+</ul>
+
+<pre>
+gem install jekyll</pre>
+
+<p>Gemfile</p>
+
+<pre>
+gem &quot;jekyll&quot;, &quot;~&gt; 1.3.0&quot;</pre>
+
+<p>Versions</p>
+
+<ol>
+	<li><a href="http://rubygems.org/gems/jekyll/versions/1.3.0">1.3.0</a>&nbsp;November 4, 2013&nbsp;(256 KB)</li>
+	<li><a href="http://rubygems.org/gems/jekyll/versions/1.3.0.rc">1.3.0.rc</a>&nbsp;October 29, 2013&nbsp;(255 KB)</li>
+	<li><a href="http://rubygems.org/gems/jekyll/versions/1.2.1">1.2.1</a>&nbsp;September 14, 2013&nbsp;(248 KB)</li>
+	<li><a href="http://rubygems.org/gems/jekyll/versions/1.2.0">1.2.0</a>&nbsp;September 6, 2013&nbsp;(245 KB)</li>
+	<li><a href="http://rubygems.org/gems/jekyll/versions/1.1.2">1.1.2</a>&nbsp;July 25, 2013&nbsp;(241 KB)</li>
+</ol>
+
+<p><a href="http://rubygems.org/gems/jekyll/versions">Show all versions (44 total)</a></p>
+
+<p>44 versions since November 22, 2008</p>
+
+<ol>
+	<li><a href="http://rubygems.org/gems/jekyll/versions/1.3.0">1.3.0</a>&nbsp;November 4, 2013&nbsp;(256 KB)</li>
+	<li><a href="http://rubygems.org/gems/jekyll/versions/1.3.0.rc">1.3.0.rc</a>&nbsp;October 29, 2013&nbsp;(255 KB)</li>
+	<li><a href="http://rubygems.org/gems/jekyll/versions/1.2.1">1.2.1</a>&nbsp;September 14, 2013&nbsp;(248 KB)</li>
+	<li><a href="http://rubygems.org/gems/jekyll/versions/1.2.0">1.2.0</a>&nbsp;September 6, 2013&nbsp;(245 KB)</li>
+	<li><a href="http://rubygems.org/gems/jekyll/versions/1.1.2">1.1.2</a>&nbsp;July 25, 2013&nbsp;(241 KB)</li>
+	<li><a href="http://rubygems.org/gems/jekyll/versions/1.1.1">1.1.1</a>&nbsp;July 24, 2013&nbsp;(241 KB)</li>
+	<li><a href="http://rubygems.org/gems/jekyll/versions/1.1.0">1.1.0</a>&nbsp;July 14, 2013&nbsp;(237 KB)&nbsp;yanked</li>
+	<li><a href="http://rubygems.org/gems/jekyll/versions/1.0.4">1.0.4</a>&nbsp;July 25, 2013&nbsp;(242 KB)</li>
+	<li><a href="http://rubygems.org/gems/jekyll/versions/1.0.3">1.0.3</a>&nbsp;June 7, 2013&nbsp;(242 KB)</li>
+	<li><a href="http://rubygems.org/gems/jekyll/versions/1.0.2">1.0.2</a>&nbsp;May 12, 2013&nbsp;(230 KB)</li>
+	<li><a href="http://rubygems.org/gems/jekyll/versions/1.0.1">1.0.1</a>&nbsp;May 8, 2013&nbsp;(229 KB)</li>
+	<li><a href="http://rubygems.org/gems/jekyll/versions/1.0.0">1.0.0</a>&nbsp;May 6, 2013&nbsp;(228 KB)</li>
+	<li><a href="http://rubygems.org/gems/jekyll/versions/1.0.0.rc1">1.0.0.rc1</a>&nbsp;April 16, 2013&nbsp;(209 KB)</li>
+	<li><a href="http://rubygems.org/gems/jekyll/versions/1.0.0.beta4">1.0.0.beta4</a>&nbsp;April 9, 2013&nbsp;(205 KB)</li>
+	<li><a href="http://rubygems.org/gems/jekyll/versions/1.0.0.beta3">1.0.0.beta3</a>&nbsp;April 4, 2013&nbsp;(203 KB)</li>
+	<li><a href="http://rubygems.org/gems/jekyll/versions/1.0.0.beta2">1.0.0.beta2</a>&nbsp;March 19, 2013&nbsp;(203 KB)</li>
+	<li><a href="http://rubygems.org/gems/jekyll/versions/1.0.0.beta1">1.0.0.beta1</a>&nbsp;March 14, 2013&nbsp;(203 KB)</li>
+	<li><a href="http://rubygems.org/gems/jekyll/versions/0.12.1">0.12.1</a>&nbsp;February 19, 2013&nbsp;(60 KB)</li>
+	<li><a href="http://rubygems.org/gems/jekyll/versions/0.12.0">0.12.0</a>&nbsp;December 22, 2012&nbsp;(60 KB)</li>
+	<li><a href="http://rubygems.org/gems/jekyll/versions/0.11.2">0.11.2</a>&nbsp;December 27, 2011&nbsp;(52 KB) -&gt; <span class="marker">最初 2012-01-31 应该是这个版本</span></li>
+</ol>
+
+<p>Runtime Dependencies</p>
+
+<ol>
+	<li><a href="http://rubygems.org/gems/classifier">classifier&nbsp;~&gt; 1.3</a></li>
+	<li><a href="http://rubygems.org/gems/colorator">colorator&nbsp;~&gt; 0.1</a></li>
+	<li><a href="http://rubygems.org/gems/commander">commander&nbsp;~&gt; 4.1.3</a></li>
+	<li><a href="http://rubygems.org/gems/liquid">liquid&nbsp;~&gt; 2.5.2</a></li>
+	<li><a href="http://rubygems.org/gems/listen">listen&nbsp;~&gt; 1.3</a></li>
+	<li><a href="http://rubygems.org/gems/maruku">maruku&nbsp;~&gt; 0.6.0</a></li>
+	<li><a href="http://rubygems.org/gems/pygments.rb">pygments.rb&nbsp;~&gt; 0.5.0</a></li>
+	<li><a href="http://rubygems.org/gems/redcarpet">redcarpet&nbsp;~&gt; 2.3.0</a></li>
+	<li><a href="http://rubygems.org/gems/safe_yaml">safe_yaml&nbsp;~&gt; 0.9.7</a></li>
+</ol>
+
+<p>Development Dependencies</p>
+
+<ol>
+	<li><a href="http://rubygems.org/gems/activesupport">activesupport&nbsp;~&gt; 3.2.13</a></li>
+	<li><a href="http://rubygems.org/gems/coveralls">coveralls&nbsp;~&gt; 0.7.0</a></li>
+	<li><a href="http://rubygems.org/gems/cucumber">cucumber&nbsp;~&gt; 1.3</a></li>
+	<li><a href="http://rubygems.org/gems/jekyll_test_plugin">jekyll_test_plugin&nbsp;&gt;= 0</a></li>
+	<li><a href="http://rubygems.org/gems/kramdown">kramdown&nbsp;~&gt; 1.2</a></li>
+	<li><a href="http://rubygems.org/gems/launchy">launchy&nbsp;~&gt; 2.3</a></li>
+	<li><a href="http://rubygems.org/gems/mime-types">mime-types&nbsp;~&gt; 1.5</a></li>
+	<li><a href="http://rubygems.org/gems/rake">rake&nbsp;~&gt; 10.1</a></li>
+	<li><a href="http://rubygems.org/gems/rdiscount">rdiscount&nbsp;~&gt; 1.6</a></li>
+	<li><a href="http://rubygems.org/gems/rdoc">rdoc&nbsp;~&gt; 3.11</a></li>
+	<li><a href="http://rubygems.org/gems/RedCloth">RedCloth&nbsp;~&gt; 4.2</a></li>
+	<li><a href="http://rubygems.org/gems/redgreen">redgreen&nbsp;~&gt; 1.2</a></li>
+	<li><a href="http://rubygems.org/gems/rr">rr&nbsp;~&gt; 1.1</a></li>
+	<li><a href="http://rubygems.org/gems/shoulda">shoulda&nbsp;~&gt; 3.3.2</a></li>
+	<li><a href="http://rubygems.org/gems/simplecov">simplecov&nbsp;~&gt; 0.7</a></li>
+	<li><a href="http://rubygems.org/gems/simplecov-gem-adapter">simplecov-gem-adapter&nbsp;~&gt; 1.0.1</a></li>
+</ol>
+
+<h2>Jekyll</h2>
+
+<ul>
+	<li>
+	<p>2014-02-23 13:42</p>
+
+	<p>如今会自动跳转到 https://github.com/jekyll/jekyll</p>
+	</li>
+</ul>
+
+<p><a href="https://github.com/mojombo/jekyll" target="_blank">https://github.com/mojombo/jekyll</a></p>
+
+<p>By Tom Preston-Werner, Nick Quaranto, and many awesome contributors!</p>
+
+<p>Jekyll is a simple, blog aware, static site generator. It takes a template directory (representing the raw form of a website), runs it through Textile or Markdown and Liquid converters, and spits out a complete, static website suitable for serving with Apache or your favorite web server. This is also the engine behind&nbsp;<a href="http://pages.github.com/">GitHub Pages</a>, which you can use to host your project&rsquo;s page or blog right here from GitHub.</p>
+
+<h3>Getting Started</h3>
+
+<ul>
+	<li><a href="http://wiki.github.com/mojombo/jekyll/install">Install</a>&nbsp;the gem</li>
+	<li>Read up about its&nbsp;<a href="http://wiki.github.com/mojombo/jekyll/usage">Usage</a>&nbsp;and&nbsp;<a href="http://wiki.github.com/mojombo/jekyll/configuration">Configuration</a></li>
+	<li>Take a gander at some existing&nbsp;<a href="http://wiki.github.com/mojombo/jekyll/sites">Sites</a></li>
+	<li>Fork and&nbsp;<a href="http://wiki.github.com/mojombo/jekyll/contribute">Contribute</a>&nbsp;your own modifications</li>
+	<li>Have questions? Post them on the&nbsp;<a href="http://groups.google.com/group/jekyll-rb">Mailing List</a></li>
+</ul>
+
+<p>https://github.com/mojombo/jekyll/wiki/template-data</p>
+
+<p>https://github.com/shopify/liquid/wiki/liquid-for-designers</p>
+
+<p>https://github.com/mojombo/jekyll/wiki/usage</p>
+
+<h3>Install</h3>
+
+<p>The best way to install Jekyll is via RubyGems:</p>
+
+<pre>
+$ gem install jekyll</pre>
+
+<pre>
+$ gem list jekyll
+
+*** LOCAL GEMS ***
+
+jekyll (1.3.0)</pre>
+
+<h3>Running Jekyll</h3>
+
+<p>Usually this is done through the&nbsp;jekyll&nbsp;executable, which is installed with the gem. In order to get a server up and running with your Jekyll site, run:</p>
+
+<pre>
+jekyll --server</pre>
+
+<p>and then browse to&nbsp;<a href="http://0.0.0.0:4000/">http://0.0.0.0:4000</a>. There&#39;s plenty of&nbsp;<a href="https://github.com/mojombo/jekyll/wiki/Configuration">configuration options</a>&nbsp;available to you as well.</p>
+
+<p>2013-05-07 11:31 Tuesday</p>
+
+<pre>
+$ jekyll --server
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Deprecation: Jekyll now uses subcommands instead of just switches. Run `jekyll help&#39; to find out more.
+/usr/local/Cellar/ruby/1.9.3-p286/lib/ruby/gems/1.9.1/gems/commander-4.1.3/lib/commander/runner.rb:365:in `block in require_program&#39;: program version required (Commander::Runner::CommandError)
+from /usr/local/Cellar/ruby/1.9.3-p286/lib/ruby/gems/1.9.1/gems/commander-4.1.3/lib/commander/runner.rb:364:in `each&#39;
+from /usr/local/Cellar/ruby/1.9.3-p286/lib/ruby/gems/1.9.1/gems/commander-4.1.3/lib/commander/runner.rb:364:in `require_program&#39;
+from /usr/local/Cellar/ruby/1.9.3-p286/lib/ruby/gems/1.9.1/gems/commander-4.1.3/lib/commander/runner.rb:52:in `run!&#39;
+from /usr/local/Cellar/ruby/1.9.3-p286/lib/ruby/gems/1.9.1/gems/commander-4.1.3/lib/commander/delegates.rb:11:in `run!&#39;
+from /usr/local/Cellar/ruby/1.9.3-p286/lib/ruby/gems/1.9.1/gems/commander-4.1.3/lib/commander/import.rb:10:in `block in &lt;top (required)&gt;&#39;</pre>
+
+<p>当在一个空目录中执行 jekyll --server 时，会有如下输出</p>
+
+<pre>
+$ jekyll --server
+Configuration from /Users/mlhch/github/mlhch/_config.yml
+Building site: /Users/mlhch/github/mlhch -&gt; /Users/mlhch/github/mlhch/_site
+Successfully generated site: /Users/mlhch/github/mlhch -&gt; /Users/mlhch/github/mlhch/_site
+[2012-01-31 14:13:05] INFO&nbsp; WEBrick 1.3.1
+[2012-01-31 14:13:05] INFO&nbsp; ruby 1.8.7 (2010-01-10) [universal-darwin11.0]
+[2012-01-31 14:13:05] INFO&nbsp; WEBrick::HTTPServer#start: pid=9023 port=4000
+</pre>
+
+<p>以上是曾经的 ruby 1.8.7 版本下的结果，下面是现在 ruby 1.9.3 版本下的结果。有关 iconv 的错误提示，暂且可以忽略。</p>
+
+<pre>
+$ jekyll --server
+/Users/mlhch/.rvm/rubies/ruby-1.9.3-p194/lib/ruby/site_ruby/1.9.1/rubygems/custom_require.rb:36:in `require&#39;: iconv will be deprecated in the future, use String#encode instead.
+WARNING: Could not read configuration. Using defaults (and options).
+No such file or directory - /Users/mlhch/github/mlhch/_config.yml
+Building site: /Users/mlhch/github/mlhch -&gt; /Users/mlhch/github/mlhch/_site
+Successfully generated site: /Users/mlhch/github/mlhch -&gt; /Users/mlhch/github/mlhch/_site
+[2012-08-01 15:09:30] INFO&nbsp; WEBrick 1.3.1
+[2012-08-01 15:09:30] INFO&nbsp; ruby 1.9.3 (2012-04-20) [x86_64-darwin11.4.0]
+[2012-08-01 15:09:30] INFO&nbsp; WEBrick::HTTPServer#start: pid=5464 port=4000</pre>
+
+<p>查看当前目录下，多了一个 _site 空文件夹。</p>
+
+<p>此时访问 http://localhost:4000，页面显示如下：</p>
+
+<pre>
+Forbidden
+
+no access permission to `/&#39;
+WEBrick/1.3.1 (Ruby/1.9.3/2012-04-20) at localhost:4000</pre>
+
+<p>这是因为此时 web 根目录是 _site，但是 _site/index.html 并不存在。手动创建 _site/index.html 后刷新&nbsp;http://localhost:4000，会看到&nbsp;_site/index.html 被成功访问。但这并不是 jekyll 的目的。正确的做法是在执行 jekyll --server 的目录中创建 index.html，然后重新启动 jekyll --server，则 index.html 经过处理后，自动生成新的 _site/index.html。</p>
+
+<h2>配置文件 _config.yaml 注意事项</h2>
+
+<p>2012-10-23 星期二 今天早上要回家去送奶奶去大姑家过会，然后去登记</p>
+
+<p>exclude : [models] 会排除任何层次目录中的 models 文件夹或文件</p>
+
+<p>exclude : [models/] 会只排除顶层的 models 文件夹</p>
+
+<p>复杂交情待进一步确认。</p>
+
+<h2>_posts 目录下注意事项</h2>
+
+<p>2012-10-24 23:25 星期三</p>
+
+<p>yyyy-mm-dd-title.textile 会启动 textile 解析，导致自动添加 &lt;br /&gt; 的问题，改为 yyyy-mm-dd-title.html 就好了</p>
+
+<h2>错误提示</h2>
+
+<h3>Missing dependency: RedCloth</h3>
+
+<p>根据提示安装即可</p>
+
+<pre>
+$ jekyll --server
+WARNING: Could not read configuration. Using defaults (and options).
+No such file or directory - /Users/mlhch/github/mlhch/_config.yml
+Building site: /Users/mlhch/github/mlhch -&gt; /Users/mlhch/github/mlhch/_site
+You are missing a library required for Textile. Please run:
+&nbsp; $ [sudo] gem install RedCloth
+
+ERROR: YOUR SITE COULD NOT BE BUILT:
+------------------------------------
+Missing dependency: RedCloth
+
+
+$ jekyll --server
+/Users/mlhch/.rvm/rubies/ruby-1.9.3-p194/lib/ruby/site_ruby/1.9.1/rubygems/custom_require.rb:36:in `require&#39;: iconv will be deprecated in the future, use String#encode instead.
+Configuration from /Users/mlhch/github/mlhch/_config.yml
+Building site: /Users/mlhch/github/mlhch -&gt; /Users/mlhch/github/mlhch/_site
+You are missing a library required for Textile. Please run:
+&nbsp; $ [sudo] gem install RedCloth
+
+ERROR: YOUR SITE COULD NOT BE BUILT:
+------------------------------------
+Missing dependency: RedCloth
+
+
+$ gem install RedCloth
+Fetching: RedCloth-4.2.9.gem (100%)
+Building native extensions.&nbsp; This could take a while...
+Successfully installed RedCloth-4.2.9
+1 gem installed
+Installing ri documentation for RedCloth-4.2.9...
+Installing RDoc documentation for RedCloth-4.2.9...</pre>
+
+<h2>jekyll 不支持 non-ascii 的 url</h2>
+
+<ul>
+	<li>
+	<p>.rvm/rubies/ruby-1.9.3-p194/lib/ruby/1.9.1/webrick/httpservlet/filehandler.rb:385:</p>
+
+	<pre>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; def nondisclosure_name?(name)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @options[:NondisclosureName].each{|pattern|
+require &#39;debug&#39;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if File.fnmatch(pattern, name, File::FNM_CASEFOLD)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return true
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return false
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end</pre>
+
+	<pre>
+(rdb:3) @options
+{:NondisclosureName=&gt;[&quot;.ht*&quot;, &quot;*~&quot;], :FancyIndexing=&gt;false, :HandlerTable=&gt;{}, :HandlerCallback=&gt;nil, :DirectoryCallback=&gt;nil, :FileCallback=&gt;nil, :UserDir=&gt;nil, :AcceptableLanguages=&gt;[]}
+(rdb:3) name
+&quot;_site&quot;
+(rdb:3) pattern
+&quot;.ht*&quot;</pre>
+	</li>
+	<li>
+	<p>.rvm/rubies/ruby-1.9.3-p194/lib/ruby/1.9.1/webrick/httpservlet/filehandler.rb:300:</p>
+
+	<pre>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; def set_filename(req, res)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; res.filename = @root.dup
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; path_info = req.path_info.scan(%r|/[^/]*|)
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; path_info.unshift(&quot;&quot;)&nbsp; # dummy for checking @root dir
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; while base = path_info.first
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; break if base == &quot;/&quot;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; break unless File.directory?(File.expand_path(res.filename + base))
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; shift_path_info(req, res, path_info)
+#300 &nbsp;&nbsp;&nbsp;&nbsp; call_callback(:DirectoryCallback, req, res)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if base = path_info.first
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if base == &quot;/&quot;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if file = search_index_file(req, res)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; shift_path_info(req, res, path_info, file)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; call_callback(:FileCallback, req, res)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return true
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; shift_path_info(req, res, path_info)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; elsif file = search_file(req, res, base)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; shift_path_info(req, res, path_info, file)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; call_callback(:FileCallback, req, res)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return true
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; raise HTTPStatus::NotFound, &quot;`#{req.path}&#39; not found.&quot;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return false
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end</pre>
+
+	<pre>
+(rdb:3) path_info
+[&quot;/article&quot;, &quot;/jekyll - \xE7\x94\xA8 github \xE5\x81\x9A\xE5\x8D\x9A\xE5\xAE\xA2.html&quot;]</pre>
+
+	<pre>
+(rdb:3) path_info
+[&quot;/jekyll - \xE7\x94\xA8 github \xE5\x81\x9A\xE5\x8D\x9A\xE5\xAE\xA2.html&quot;]</pre>
+	</li>
+	<li>
+	<p>.rvm/rubies/ruby-1.9.3-p194/lib/ruby/1.9.1/webrick/httpservlet/filehandler.rb:371:</p>
+
+	<pre>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; def call_callback(callback_name, req, res)
+#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if cb = @options[callback_name]
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cb.call(req, res)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end</pre>
+
+	<pre>
+(rdb:3) @options[:DirectoryCallback]
+nil</pre>
+	</li>
+	<li>
+	<p>.rvm/rubies/ruby-1.9.3-p194/lib/ruby/1.9.1/webrick/httpservlet/filehandler.rb:349:</p>
+
+	<pre>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; def search_file(req, res, basename)
+#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; langs = @options[:AcceptableLanguages]
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; path = res.filename + basename
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if File.file?(path)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return basename
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; elsif langs.size &gt; 0
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; req.accept_language.each{|lang|
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; path_with_lang = path + &quot;.#{lang}&quot;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if langs.member?(lang) &amp;&amp; File.file?(path_with_lang)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return basename + &quot;.#{lang}&quot;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (langs - req.accept_language).each{|lang|
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; path_with_lang = path + &quot;.#{lang}&quot;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if File.file?(path_with_lang)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return basename + &quot;.#{lang}&quot;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return nil
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end</pre>
+
+	<pre>
+(rdb:3) @options[:AcceptableLanguages]
+[]
+(rdb:3) res.filename
+&quot;/Library/WebServer/Documents/mlhch/_site/article&quot;
+(rdb:3) basename
+&quot;/jekyll - \xE7\x94\xA8 github \xE5\x81\x9A\xE5\x8D\x9A\xE5\xAE\xA2.html&quot;
+(rdb:3) File.file?(path)
+false</pre>
+	</li>
+	<li>
+	<p>问题最终归结为 ruby 的 File.file?(path) 方法中不支持 path 为中文等的 non-ascii 字符。</p>
+	</li>
+</ul>
+
+<p>&nbsp;</p>
+
+<h2>Contribute</h2>
+
+<p>So you&rsquo;ve got an awesome idea to throw into Jekyll. Great! Please keep the following in mind:</p>
+
+<ul>
+	<li>Contributions will not be accepted without tests.</li>
+	<li>If you&rsquo;re creating a small fix or patch to an existing feature, just a simple test will do. Please stay in the confines of the current test suite and use&nbsp;<a href="http://github.com/thoughtbot/shoulda/tree/master">Shoulda</a>&nbsp;and&nbsp;<a href="http://github.com/btakita/rr/tree/master">RR</a>.</li>
+	<li>If it&rsquo;s a brand new feature, make sure to create a new&nbsp;<a href="https://github.com/cucumber/cucumber/">Cucumber</a>&nbsp;feature and reuse steps where appropriate. Also, whipping up some documentation in your fork&rsquo;s wiki would be appreciated, and once merged it will be transferred over to the main wiki.</li>
+</ul>
+
+<h3>Test Dependencies</h3>
+
+<p>To run the test suite and build the gem you&rsquo;ll need to install Jekyll&rsquo;s dependencies. Jekyll uses Bundler, so a quick run of the bundle command and you&rsquo;re all set!</p>
+
+<pre>
+$ bundle
+</pre>
+
+<p>Before you start, run the tests and make sure that they pass (to confirm your environment is configured properly):</p>
+
+<pre>
+$ rake test
+$ rake features
+</pre>
+
+<h3>Workflow</h3>
+
+<p>Here&rsquo;s the most direct way to get your work merged into the project:</p>
+
+<ol>
+	<li>Fork the project</li>
+	<li>Clone down your fork (&nbsp;git clone git://github.com/&lt;username&gt;/jekyll.git&nbsp;)</li>
+	<li>Create a topic branch to contain your change (&nbsp;git checkout -b my_awesome_feature&nbsp;)</li>
+	<li>Hack away, add tests. Not necessarily in that order.</li>
+	<li>Make sure everything still passes by running&nbsp;rake</li>
+	<li>If necessary, rebase your commits into logical chunks, without errors</li>
+	<li>Push the branch up (&nbsp;git push origin my_awesome_feature&nbsp;)</li>
+	<li>Create an issue with a description and link to your branch</li>
+</ol>
+
+<h3>Gotchas</h3>
+
+<ul>
+	<li>If you want to bump the gem version, please put that in a separate commit. This way, the maintainers can control when the gem gets released.</li>
+	<li>Try to keep your patch(es) based from the latest commit on mojombo/jekyll. The easier it is to apply your work, the less work the maintainers have to do, which is always a good thing.</li>
+	<li>Please don&rsquo;t tag your GitHub issue with [fix], [feature], etc. The maintainers actively read the issues and will label it once they come across it.</li>
+</ul>
+
+<h2>Finally&hellip;</h2>
+
+<p>Thanks! Hacking on Jekyll should be fun, and if for some reason it&rsquo;s a pain to do let us know so we can fix it.</p>
+
+<h2>Research</h2>
+
+<p>2013-05-07 16:45</p>
+
+<ul>
+	<li>$ jekyll build -&gt;&nbsp;/usr/local/Cellar/ruby/1.9.3-p286/bin/jekyll build</li>
+	<li>/usr/local/Cellar/ruby/1.9.3-p286/lib/ruby/gems/1.9.1/gems/jekyll-1.0.0/bin/jekyll
+	<ul>
+		<li>command :build do |c|</li>
+		<li>
+		<p>options = Jekyll.configuration(options)</p>
+
+		<ul>
+			<li>
+			<p>module Jekyll</p>
+
+			<pre>
+&nbsp; def self.configuration(override)
+&nbsp;&nbsp;&nbsp; config = Configuration[Configuration::DEFAULTS]
+&nbsp;&nbsp;&nbsp; override = Configuration[override].stringify_keys
+&nbsp;&nbsp;&nbsp; config = config.read_config_files(config.config_files(override))
+
+&nbsp;&nbsp;&nbsp; # Merge DEFAULTS &lt; _config.yml &lt; override
+&nbsp;&nbsp;&nbsp; config = config.deep_merge(override).stringify_keys
+&nbsp;&nbsp;&nbsp; set_timezone(config[&#39;timezone&#39;]) if config[&#39;timezone&#39;]
+
+&nbsp;&nbsp;&nbsp; config
+&nbsp; end</pre>
+			</li>
+			<li>
+			<p>/lib/jekyll/configuration.rb</p>
+
+			<pre>
+&nbsp;&nbsp;&nbsp; def read_config_file(file)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; next_config = YAML.safe_load_file(file)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; raise &quot;Configuration file: (INVALID) #{file}&quot;.yellow if !next_config.is_a?(Hash)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Jekyll::Logger.info &quot;Configuration file:&quot;, file
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; next_config
+&nbsp;&nbsp;&nbsp; end</pre>
+
+			<pre>
+Configuration file: /Library/WebServer/Documents/journal/_config.yml</pre>
+			</li>
+		</ul>
+		</li>
+		<li>
+		<p>Jekyll::Commands::Build.process(options)</p>
+
+		<p>&nbsp;</p>
+
+		<pre>
+module Jekyll
+&nbsp; module Commands
+&nbsp;&nbsp;&nbsp; class Build &lt; Command
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; def self.process(options);return;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; site = Jekyll::Site.new(options)
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; self.build(site, options)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; self.watch(site, options) if options[&#39;watch&#39;]
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end</pre>
+
+		<ul>
+			<li>
+			<p>/lib/jekyll/site.rb, Jekyll::Site.new(options)</p>
+
+			<pre>
+module Jekyll
+&nbsp; class Site
+&nbsp;&nbsp;&nbsp; def initialize(config)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; self.config&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = config.clone
+...
+require &quot;pp&quot;;pp config;return;
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; self.reset
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; self.setup
+&nbsp;&nbsp;&nbsp; end</pre>
+
+			<p>require &quot;pp&quot;;pp config</p>
+
+			<pre>
+{&quot;source&quot;=&gt;&quot;/Library/WebServer/Documents/journal&quot;,
+&quot;destination&quot;=&gt;&quot;/Library/WebServer/Documents/journal/_site&quot;,
+&quot;plugins&quot;=&gt;&quot;_plugins&quot;,
+&quot;layouts&quot;=&gt;&quot;_layouts&quot;,
+&quot;keep_files&quot;=&gt;[&quot;.git&quot;, &quot;.svn&quot;],
+&quot;timezone&quot;=&gt;nil,
+&quot;safe&quot;=&gt;false,
+&quot;show_drafts&quot;=&gt;nil,
+&quot;limit_posts&quot;=&gt;0,
+&quot;lsi&quot;=&gt;false,
+&quot;future&quot;=&gt;true,
+&quot;pygments&quot;=&gt;true,
+&quot;markdown&quot;=&gt;&quot;maruku&quot;,
+&quot;permalink&quot;=&gt;&quot;/article/:title.html&quot;,
+&quot;baseurl&quot;=&gt;&quot;/&quot;,
+&quot;include&quot;=&gt;[&quot;.htaccess&quot;],
+&quot;exclude&quot;=&gt;[&quot;views&quot;, &quot;models/&quot;, &quot;app&quot;, &quot;protected&quot;],
+&quot;paginate_path&quot;=&gt;&quot;page:num&quot;,
+&quot;markdown_ext&quot;=&gt;&quot;markdown,mkd,mkdn,md&quot;,
+&quot;textile_ext&quot;=&gt;&quot;textile&quot;,
+&quot;port&quot;=&gt;&quot;4000&quot;,
+&quot;host&quot;=&gt;&quot;0.0.0.0&quot;,
+&quot;excerpt_separator&quot;=&gt;&quot;\n\n&quot;,
+&quot;maruku&quot;=&gt;
+&nbsp; {&quot;use_tex&quot;=&gt;false,
+&nbsp;&nbsp; &quot;use_divs&quot;=&gt;false,
+&nbsp;&nbsp; &quot;png_engine&quot;=&gt;&quot;blahtex&quot;,
+&nbsp;&nbsp; &quot;png_dir&quot;=&gt;&quot;images/latex&quot;,
+&nbsp;&nbsp; &quot;png_url&quot;=&gt;&quot;/images/latex&quot;},
+&quot;rdiscount&quot;=&gt;{&quot;extensions&quot;=&gt;[]},
+&quot;redcarpet&quot;=&gt;{&quot;extensions&quot;=&gt;[]},
+&quot;kramdown&quot;=&gt;
+&nbsp; {&quot;auto_ids&quot;=&gt;true,
+&nbsp;&nbsp; &quot;footnote_nr&quot;=&gt;1,
+&nbsp;&nbsp; &quot;entity_output&quot;=&gt;&quot;as_char&quot;,
+&nbsp;&nbsp; &quot;toc_levels&quot;=&gt;&quot;1..6&quot;,
+&nbsp;&nbsp; &quot;smart_quotes&quot;=&gt;&quot;lsquo,rsquo,ldquo,rdquo&quot;,
+&nbsp;&nbsp; &quot;use_coderay&quot;=&gt;false,
+&nbsp;&nbsp; &quot;coderay&quot;=&gt;
+&nbsp;&nbsp;&nbsp; {&quot;coderay_wrap&quot;=&gt;&quot;div&quot;,
+&nbsp;&nbsp;&nbsp;&nbsp; &quot;coderay_line_numbers&quot;=&gt;&quot;inline&quot;,
+&nbsp;&nbsp;&nbsp;&nbsp; &quot;coderay_line_number_start&quot;=&gt;1,
+&nbsp;&nbsp;&nbsp;&nbsp; &quot;coderay_tab_width&quot;=&gt;4,
+&nbsp;&nbsp;&nbsp;&nbsp; &quot;coderay_bold_every&quot;=&gt;10,
+&nbsp;&nbsp;&nbsp;&nbsp; &quot;coderay_css&quot;=&gt;&quot;style&quot;}},
+&quot;redcloth&quot;=&gt;{&quot;hard_breaks&quot;=&gt;true},
+&quot;sitename&quot;=&gt;&quot;mlhch&#39;s Journal&quot;,
+&quot;js&quot;=&gt;[]}</pre>
+			</li>
+			<li>
+			<p>&nbsp;</p>
+
+			<p>/lib/jekyll/commands/build.rb, self.build(site, options)</p>
+
+			<p>&nbsp;</p>
+
+			<pre>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; def self.build(site, options)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; source = options[&#39;source&#39;]
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; destination = options[&#39;destination&#39;]
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Jekyll::Logger.info &quot;Source:&quot;, source
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Jekyll::Logger.info &quot;Destination:&quot;, destination
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; print Jekyll::Logger.formatted_topic &quot;Generating...&quot;
+#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; self.process_site(site)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; puts &quot;done.&quot;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end</pre>
+
+			<pre>
+Configuration file: /Library/WebServer/Documents/journal/_config.yml
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Source: /Library/WebServer/Documents/journal
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Destination: /Library/WebServer/Documents/journal/_site
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Generating... done.</pre>
+
+			<ul>
+				<li>
+				<p>/lib/jekyll/command.rb, self.process_site(site)</p>
+
+				<pre>
+module Jekyll
+&nbsp; class Command
+&nbsp;&nbsp;&nbsp; def self.process_site(site)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; site.process
+&nbsp;&nbsp;&nbsp; rescue Jekyll::FatalException =&gt; e
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; puts
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Jekyll::Logger.error &quot;ERROR:&quot;, &quot;YOUR SITE COULD NOT BE BUILT:&quot;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Jekyll::Logger.error &quot;&quot;, &quot;------------------------------------&quot;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Jekyll::Logger.error &quot;&quot;, e.message
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exit(1)
+&nbsp;&nbsp;&nbsp; end
+&nbsp; end
+end
+</pre>
+				</li>
+				<li>
+				<p>/lib/jekyll/site.rb, site.process</p>
+
+				<pre>
+&nbsp;&nbsp;&nbsp; def process
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; self.reset
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; self.read
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; self.generate
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; self.render
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; self.cleanup
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; self.write
+&nbsp;&nbsp;&nbsp; end</pre>
+				</li>
+			</ul>
+			</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li>
+	<p>/lib/jekyll/site.rb,&nbsp;self.read</p>
+
+	<pre>
+&nbsp;&nbsp;&nbsp; def read
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; self.read_layouts
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; self.read_directories
+&nbsp;&nbsp;&nbsp; end</pre>
+
+	<pre>
+&nbsp;&nbsp;&nbsp; def read_layouts
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; base = File.join(self.source, self.config[&#39;layouts&#39;])
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return unless File.exists?(base)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; entries = []
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Dir.chdir(base) { entries = filter_entries(Dir[&#39;*.*&#39;]) }
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; entries.each do |f|
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; name = f.split(&quot;.&quot;)[0..-2].join(&quot;.&quot;)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; self.layouts[name] = Layout.new(self, base, f)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Jekyll::Logger.info &quot;Layout: &quot;, &quot;#{name}, #{f}&quot;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end
+&nbsp;&nbsp;&nbsp; end</pre>
+
+	<pre>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Layout:&nbsp; post-edit, post-edit.html
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Layout:&nbsp; post, post.html</pre>
+	</li>
+</ul>
