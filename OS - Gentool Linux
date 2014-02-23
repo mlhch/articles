@@ -1,0 +1,141 @@
+<h1>OS - Gentool Linux</h1>
+
+<p>2014-02-23 14:36 Sunday</p>
+
+<p><a href="http://www.gentoo.org/" target="_blank">http://www.gentoo.org/</a></p>
+
+<p>We produce Gentoo Linux, a special flavor of Linux that can be automatically optimized and customized for just about any application or need. Extreme performance, configurability and a top-notch user and developer community are all hallmarks of the Gentoo experience. To learn more, read our&nbsp;<a href="http://www.gentoo.org/main/en/about.xml">about page</a>.</p>
+
+<h2>Gentoo Handbook</h2>
+
+<p><a href="http://www.gentoo.org/doc/en/handbook/" target="_blank">http://www.gentoo.org/doc/en/handbook/</a></p>
+
+<h3>Architectures</h3>
+
+<p>Gentoo Linux is available for many architectures. But what exactly is an architecture?</p>
+
+<p>An&nbsp;architecture&nbsp;is a family of CPUs (processors) who support the same instructions. The two most prominent architectures in the desktop world are the&nbsp;x86&nbsp;architecture and thex86_64&nbsp;architecture (for which Gentoo uses the&nbsp;amd64&nbsp;notation). But many other architectures exist, such as&nbsp;sparc,&nbsp;ppc&nbsp;(the PowerPC family),&nbsp;mips,&nbsp;arm, ...</p>
+
+<p>A distribution as versatile as Gentoo supports many architectures. For that reason, you&#39;ll find that our Gentoo Handbooks are offered for many of the supported architectures. However, that might lead to some confusion as not all users are aware of the differences. Some are only aware of the CPU type or name that their system is a part of (like i686 or Intel Core i7). Below you will find a quick summary of the supported architectures and the abbreviation used in Gentoo. However, most people that do not know the architecture of their system are mostly interested in&nbsp;x86&nbsp;or&nbsp;amd64.</p>
+
+<blockquote>
+<p>Note:&nbsp;The table below gives a high-level overview of the supported architectures. The example set of CPUs or systems is nothing more than an example. If you are still not certain which architecture to pick, please read the first section of the Gentoo Handbook&#39;s second chapter (Choosing the Right Installation Medium) as this will elaborate on the supported platforms.</p>
+</blockquote>
+
+<table border="1">
+	<tbody>
+		<tr>
+			<td>Architecture</td>
+			<td>Description</td>
+			<td>Sample set of CPUs or systems</td>
+		</tr>
+		<tr>
+			<td>x86</td>
+			<td>A 32-bit architecture used by CPUs that are often said to be &quot;Intel compatible&quot;. It was, until recently, the most popular architecture for desktop PCs. Gentoo offers builds for i486 (supports all families) and i686 (supports Pentium and higher or compatible).</td>
+			<td>i486, i686, Intel Core, AMD Athlon, Intel Atom</td>
+		</tr>
+		<tr>
+			<td>x86_64<br />
+			(amd64)</td>
+			<td>A 64-bit architecture that is compatible with the x86 architecture. It was first used by AMD (under the AMD64 name) and Intel (under the EM64T name) and is now the most prominent architecture for medium and high-end desktop PCs. It is also commonly found in the server segment.</td>
+			<td>AMD Athlon 64, AMD Opteron, AMD Sempron processors, AMD Phenom, Intel Pentium 4, Pentium Core i3, i5, i7</td>
+		</tr>
+		<tr>
+			<td>ia64</td>
+			<td>A 64-bit architecture designed by Intel and used in their Intel Itanium processor series. This architecture is&nbsp;notcompatible with x86 or x86_64 (aka amd64) and is mostly found in medium and high-end server series.</td>
+			<td>Intel Itanium</td>
+		</tr>
+		<tr>
+			<td>sparc</td>
+			<td>The SPARC architecture is best known by its most common producers, Sun (now Oracle) and Fujitsu. It is used in server systems although a few workstations exist as well. In Gentoo, only SPARC64 compatible CPUs are supported.</td>
+			<td>E3000, Blade 1000, Ultra 2</td>
+		</tr>
+		<tr>
+			<td>ppc</td>
+			<td>A 32-bit architecture used by many Apple, IBM and Motorola processors. They are most commonly found in embedded systems.</td>
+			<td>Apple OldWorld, Apple NewWorld, generi Pegasos, Efika, older IBM iSeries and pSeries</td>
+		</tr>
+		<tr>
+			<td>ppc64</td>
+			<td>The 64-bit variant of the PPC architecture, popular in both embedded as well as high-end performance servers.</td>
+			<td>IBM RS/6000s, IBM pSeries, IBM iSeries</td>
+		</tr>
+		<tr>
+			<td>alpha</td>
+			<td>The Alpha architecture is a 64-bit architecture developed by Digital Equipment Corporation (DEC). It is still in use by some mid-range and high-end servers, but the architecture is slowly being faded out.</td>
+			<td>ES40, AlphaPC, UP1000, Noname</td>
+		</tr>
+		<tr>
+			<td>PA-RISC<br />
+			(hppa)</td>
+			<td>Referred to as HPPA, the PA-RISC architecture is an instruction set developed by Hewlett-Packard and was used in their mid- and high-end server series until about 2008 (after which HP started using Intel Itanium)</td>
+			<td>HP 9000, PA-8600</td>
+		</tr>
+		<tr>
+			<td>mips</td>
+			<td>Developed by MIPS Technologies, the MIPS architecture entails multiple subfamilies (called revisions) such as MIPS I, MIPS III, MIPS32, MIPS64 and more. MIPS is most common in embedded systems.</td>
+			<td>MIPS32 1074K, R16000</td>
+		</tr>
+		<tr>
+			<td>arm</td>
+			<td>This 32-bit architecture is a very popular architecture for embedded and small systems. Subarchitectures range from ARMv1 to ARMv7 (Cortex) and are often found in smartphones, tablets, handheld consoles, end-user GPS navigation systems, etc.</td>
+			<td>StrongARM, Cortex-M</td>
+		</tr>
+	</tbody>
+</table>
+
+<p>2.&nbsp;&nbsp;View the Handbook</p>
+
+<p>Assuming that you know (or at least have an idea) which architecture your system is using, you can now select your choice of handbook.</p>
+
+<table border="1">
+	<tbody>
+		<tr>
+			<td>Format</td>
+			<td>Description</td>
+			<td>Links</td>
+		</tr>
+		<tr>
+			<td>HTML</td>
+			<td>Latest version, one page per chapter, perfect for online viewing</td>
+			<td><a href="http://www.gentoo.org/doc/en/handbook/handbook-x86.xml">x86</a>,&nbsp;<a href="http://www.gentoo.org/doc/en/handbook/handbook-sparc.xml">sparc</a>,&nbsp;<a href="http://www.gentoo.org/doc/en/handbook/handbook-amd64.xml">amd64</a>,&nbsp;<a href="http://www.gentoo.org/doc/en/handbook/handbook-ppc.xml">ppc</a>,&nbsp;<a href="http://www.gentoo.org/doc/en/handbook/handbook-ppc64.xml">ppc64</a>,&nbsp;<a href="http://www.gentoo.org/doc/en/handbook/handbook-alpha.xml">alpha</a>,&nbsp;<a href="http://www.gentoo.org/doc/en/handbook/handbook-hppa.xml">hppa</a>,&nbsp;<a href="http://www.gentoo.org/doc/en/handbook/handbook-mips.xml">mips</a>,&nbsp;<a href="http://www.gentoo.org/doc/en/handbook/handbook-ia64.xml">ia64</a>,&nbsp;<a href="http://www.gentoo.org/doc/en/handbook/handbook-arm.xml">arm</a></td>
+		</tr>
+		<tr>
+			<td>HTML</td>
+			<td>Latest version, all in one page</td>
+			<td><a href="http://www.gentoo.org/doc/en/handbook/handbook-x86.xml?full=1">x86</a>,&nbsp;<a href="http://www.gentoo.org/doc/en/handbook/handbook-sparc.xml?full=1">sparc</a>,&nbsp;<a href="http://www.gentoo.org/doc/en/handbook/handbook-amd64.xml?full=1">amd64</a>,&nbsp;<a href="http://www.gentoo.org/doc/en/handbook/handbook-ppc.xml?full=1">ppc</a>,&nbsp;<a href="http://www.gentoo.org/doc/en/handbook/handbook-ppc64.xml?full=1">ppc64</a>,&nbsp;<a href="http://www.gentoo.org/doc/en/handbook/handbook-alpha.xml?full=1">alpha</a>,&nbsp;<a href="http://www.gentoo.org/doc/en/handbook/handbook-hppa.xml?full=1">hppa</a>,&nbsp;<a href="http://www.gentoo.org/doc/en/handbook/handbook-mips.xml?full=1">mips</a>,&nbsp;<a href="http://www.gentoo.org/doc/en/handbook/handbook-ia64.xml?full=1">ia64</a>,&nbsp;<a href="http://www.gentoo.org/doc/en/handbook/handbook-arm.xml?full=1">arm</a></td>
+		</tr>
+		<tr>
+			<td>HTML</td>
+			<td>Latest version, all in one page, printable version</td>
+			<td><a href="http://www.gentoo.org/doc/en/handbook/handbook-x86.xml?style=printable&amp;full=1">x86</a>,&nbsp;<a href="http://www.gentoo.org/doc/en/handbook/handbook-sparc.xml?style=printable&amp;full=1">sparc</a>,&nbsp;<a href="http://www.gentoo.org/doc/en/handbook/handbook-amd64.xml?style=printable&amp;full=1">amd64</a>,&nbsp;<a href="http://www.gentoo.org/doc/en/handbook/handbook-ppc.xml?style=printable&amp;full=1">ppc</a>,&nbsp;<a href="http://www.gentoo.org/doc/en/handbook/handbook-ppc64.xml?style=printable&amp;full=1">ppc64</a>,&nbsp;<a href="http://www.gentoo.org/doc/en/handbook/handbook-alpha.xml?style=printable&amp;full=1">alpha</a>,&nbsp;<a href="http://www.gentoo.org/doc/en/handbook/handbook-hppa.xml?style=printable&amp;full=1">hppa</a>,&nbsp;<a href="http://www.gentoo.org/doc/en/handbook/handbook-mips.xml?style=printable&amp;full=1">mips</a>,&nbsp;<a href="http://www.gentoo.org/doc/en/handbook/handbook-ia64.xml?style=printable&amp;full=1">ia64</a>,&nbsp;<a href="http://www.gentoo.org/doc/en/handbook/handbook-arm.xml?style=printable&amp;full=1">arm</a><br />
+			&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<h2>Downloads</h2>
+
+<p><a href="http://www.gentoo.org/main/en/where.xml" target="_blank">http://www.gentoo.org/main/en/where.xml</a></p>
+
+<h3>Installation media</h3>
+
+<p>Gentoo Linux is available free over the Internet. You can download Gentoo Linux (weekly autobuilds) from the appropriate iso and architecture link below.</p>
+
+<p>Please consult our&nbsp;<a href="http://www.gentoo.org/doc/en/handbook/">Gentoo Handbooks</a>&nbsp;for more information on what to download, how to install Gentoo, and how to verify the validity of our media.</p>
+
+<ul>
+	<li>alpha:&nbsp;<a href="http://distfiles.gentoo.org/releases/alpha/autobuilds/current-iso/">iso</a>&nbsp;<a href="http://distfiles.gentoo.org/releases/alpha/autobuilds/current-stage3/">stages</a></li>
+	<li><span class="marker">amd64:&nbsp;<a href="http://distfiles.gentoo.org/releases/amd64/autobuilds/current-iso/">iso</a></span>&nbsp;<a href="http://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3/">stages</a></li>
+	<li>arm:&nbsp;<a href="http://distfiles.gentoo.org/releases/arm/autobuilds/">stages</a></li>
+	<li>hppa:&nbsp;<a href="http://distfiles.gentoo.org/releases/hppa/autobuilds/">stages</a></li>
+	<li>ia64:&nbsp;<a href="http://distfiles.gentoo.org/releases/ia64/autobuilds/current-iso/">iso</a>&nbsp;<a href="http://distfiles.gentoo.org/releases/ia64/autobuilds/current-stage3/">stages</a></li>
+	<li>mips:&nbsp;<a href="http://distfiles.gentoo.org/experimental/mips/stages/">stages</a></li>
+	<li>ppc/ppc64:&nbsp;<a href="http://distfiles.gentoo.org/releases/ppc/autobuilds/current-iso/">iso</a>&nbsp;<a href="http://distfiles.gentoo.org/releases/ppc/autobuilds/">stages</a></li>
+	<li>s390/s390x:&nbsp;<a href="http://distfiles.gentoo.org/releases/s390/autobuilds/">stages</a></li>
+	<li>sh: <a href="http://distfiles.gentoo.org/releases/sh/autobuilds/">stages</a></li>
+	<li>sparc:&nbsp;<a href="http://distfiles.gentoo.org/releases/sparc/autobuilds/current-iso/">iso</a>&nbsp;<a href="http://distfiles.gentoo.org/releases/sparc/autobuilds/current-stage3/">stages</a></li>
+	<li>x86:&nbsp;<a href="http://distfiles.gentoo.org/releases/x86/autobuilds/current-iso/">iso</a>&nbsp;<a href="http://distfiles.gentoo.org/releases/x86/autobuilds/current-stage3/">stages</a></li>
+</ul>
+
+<p>If you prefer to select a local mirror yourself, see&nbsp;<a href="http://www.gentoo.org/main/en/mirrors.xml">Gentoo Mirrors</a>.</p>
