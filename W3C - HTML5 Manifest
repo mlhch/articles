@@ -4,8 +4,265 @@
 
 <p><a href="http://www.w3.org/TR/appmanifest/" target="_blank">http://www.w3.org/TR/appmanifest/</a></p>
 
-<p>&nbsp;</p>
+<h2>使用应用缓存</h2>
 
 <p><a href="https://developer.mozilla.org/zh-CN/docs/HTML/Using_the_application_cache" target="_blank">https://developer.mozilla.org/zh-CN/docs/HTML/Using_the_application_cache</a></p>
+
+<h3>开启应用缓存</h3>
+
+<p>若想为应用开启应用缓存，你需要在应用页面中的&nbsp;<a href="https://developer.mozilla.org/zh-CN/docs/HTML/Element/html">&lt;html&gt;</a>&nbsp;元素上增加&nbsp;<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/html#attr-manifest">manifest</a>&nbsp;特性，请看下面的例子：</p>
+
+<pre>
+<span class="marker">&lt;html manifest=&quot;example.appcache&quot;&gt; </span>
+  ...
+&lt;/html&gt;
+</pre>
+
+<p>manifest 特性与&nbsp;缓存清单(cache manifest)&nbsp;文件关联，这个文件包含了浏览器需要为你的应用缓存的资源(文件)列表。</p>
+
+<p>你应当在每一个意图缓存的页面上添加 manifest 特性。浏览器不会缓存不带有manifest 特性的页面，除非这个页面已经被写在清单文件内的列表里了。你没有必要添加所有你意图缓存的页面的清单文件，浏览器会将用户访问过的并带有 manifest 特性的所有页面添加进应用缓存中。</p>
+
+<p>有些浏览器，比如说firefox，当用户首次加载一个需要使用应用缓存的应用时，会显示一个提示栏。提示信息如下：</p>
+
+<p>该站点 (www.example.com) 请求在你的电脑上存储数据以供离线使用。[允许] [对此站点永不允许] [暂时不允许]</p>
+
+<h2>存储位置与清除离线缓存</h2>
+
+<p>在 Chrome 中，你可以在设置中选择 「清除浏览器数据...」 或访问&nbsp;<span class="marker">chrome://appcache-internals/</span>&nbsp;来清除缓存。Safari 在设置中有一个类似的&quot;清空缓存&quot; 选项，但是需要重启浏览器后才能生效。</p>
+
+<p>在 Firefox 中，离线缓存数据与 Firefox 配置文件是分开存储的&mdash;紧挨着硬盘缓存：</p>
+
+<ul>
+	<li>Windows Vista/7:&nbsp;C:\Users\&lt;username&gt;\AppData\Local\Mozilla\Firefox\Profiles\&lt;salt&gt;.&lt;profile name&gt;\OfflineCache</li>
+	<li>Mac/Linux:&nbsp;/Users/&lt;username&gt;/Library/Caches/Firefox/Profiles/&lt;salt&gt;.&lt;profile name&gt;/OfflineCache</li>
+</ul>
+
+<p>在 Firefox 中可以通过访问&nbsp;about:cache&nbsp;页面(在「离线缓存设置」标题下)来检查离线缓存的当前状况。 若想单独清除每个网站的离线缓存，可以使用 工具 -&gt; 选项 -&gt; 高级 -&gt; 网络 -&gt; 离线数据中的「删除」按钮。</p>
+
+<p>在 Firefox 11 之前，无论是 工具 -&gt; 清除近期历史 还是 工具 -&gt; 选项 -&gt; 高级 -&gt; 网络 -&gt; 离线数据 -&gt; 立即清除 都无法清除离线缓存。这个问题已经被修复。(点击 &ldquo;立即清除&rdquo; 只是将缓存文件清除掉，并没将缓存清单删除，所以下次载入页面是更新缓存，而非创建缓存，意味着cached和updateready事件触发机制不同，如果想要清除掉缓存清单，只能选中域，然后点击移除)</p>
+
+<h2>缓存清单文件</h2>
+
+<h3>引用一个缓存清单文件</h3>
+
+<p>web 应用中的&nbsp;manifest&nbsp;特性可以指定为缓存清单文件的相对路径或一个绝对 URL(绝对 URL 必须与应用同源)。缓存清单文件可以使用任意扩展名，但传输它的 MIME 类型必须为&nbsp;text/cache-manifest。</p>
+
+<p>注意：在 Apache 服务器上，若要设置适用于清单(.appcache)文件的 MIME 类型，可以向根目录或应用的同级目录下的一个 .htaccess 文件中增加&nbsp;AddType text/cache-manifest .appcache&nbsp;。</p>
+
+<h3>缓存清单文件中的记录</h3>
+
+<p>缓存清单文件是一个纯文本文件，它列出了所有浏览器应该缓存起来的资源，以便能够离线访问。资源使用 URI 来标识。在缓存清单文件中列出的所有记录必须拥有相同的协议、主机名与端口号。</p>
+
+<h3>示例 1：一个简单的缓存清单文件</h3>
+
+<p>下面是一个简单的缓存清单文件，example.appcache，适用于一个虚拟的网站&nbsp;www.example.com。</p>
+
+<pre>
+<span class="marker">CACHE MANIFEST
+# v1 - 2011-08-13</span>
+# This is a comment.
+http://www.example.com/index.html
+http://www.example.com/header.png
+http://www.example.com/blah/blah
+</pre>
+
+<p>一个缓存清单文件可以包含三段内容 (CACHE，&nbsp;NETWORK，&nbsp;和&nbsp;FALLBACK，&nbsp;下面详细讨论)。 在上面的例子中，没有段落标题，因此所有数据行都认为是属于显式 (CACHE) 段落，这意味着浏览器应该在应用缓存中缓存所有列出的资源。资源可以使用绝对或者相对 URL 来指定(例如&nbsp;index.html)。</p>
+
+<p>上面例子中的注释 「v1」很有必要存在。只有当清单文件发生变化时，浏览器才会去更新应用缓存。如果你要更改缓存资源(比如说，你使用了一张新的&nbsp;header.png&nbsp;图片)，你必须同时修改清单文件中的内容，以便让浏览器知道它们需要更新缓存。你可以对清单文件做任何改动，但大家都认同的最佳实践则是修正版本号。</p>
+
+<p>重要：不要在清单文件中指定清单文件本身，否则将无法让浏览器得知清单文件有新版本出现。</p>
+
+<h3>缓存清单文件中的段落：&nbsp;CACHE，&nbsp;NETWORK，与&nbsp;FALLBACK</h3>
+
+<p>清单文件可以分为三段：&nbsp;CACHE，&nbsp;NETWORK，与&nbsp;FALLBACK.</p>
+
+<p>CACHE:</p>
+
+<p>这是缓存文件中记录所属的默认段落。在&nbsp;CACHE:&nbsp;段落标题后(或直接跟在&nbsp;CACHE MANIFEST&nbsp;行后)列出的文件会在它们第一次下载完毕后缓存起来。</p>
+
+<p>NETWORK:</p>
+
+<p>在&nbsp;NETWORK:&nbsp;段落标题下列出的文件是需要与服务器连接的白名单资源。所有类似资源的请求都会绕过缓存，即使用户处于离线状态。可以使用通配符。</p>
+
+<p>FALLBACK:</p>
+
+<p>FALLBACK:&nbsp;段指定了一个后备页面，当资源无法访问时，浏览器会使用该页面。该段落的每条记录都列出两个 URI&mdash;第一个表示资源，第二个表示后备页面。两个 URI 都必须使用相对路径并且与清单文件同源。可以使用通配符。</p>
+
+<p>CACHE，&nbsp;NETWORK，&nbsp;和&nbsp;FALLBACK 段落可以以任意顺序出现在缓存清单文件中，并且每个段落可以在同一清单文件中出现多次。</p>
+
+<h3>示例 2： 一个复杂且完整的缓存清单文件</h3>
+
+<p>下面是一个更加完整的缓存清单文件，适用于一个虚拟的网站&nbsp;www.example.com：</p>
+
+<pre>
+CACHE MANIFEST
+# v1 2011-08-14
+# This is another comment
+index.html
+cache.html
+style.css
+image1.png
+
+# Use from network if available
+NETWORK:
+network.html
+
+# Fallback content
+FALLBACK:
+/ fallback.html
+</pre>
+
+<p>该例子使用了&nbsp;NETWORK&nbsp;与&nbsp;FALLBACK&nbsp;段落，指明了&nbsp;network.html&nbsp;页面必须始终从网络获取，fallback.html&nbsp;页面应该作为后备资源来提供(例如，当无法与服务器建立连接时)。</p>
+
+<h3>缓存清单文件的结构</h3>
+
+<p>缓存清单文件必须以&nbsp;text/cache-manifest&nbsp;MIME 类型来传输。所有通过 MIME 类型传输的文件必须符合本节中定义的适用于应用缓存清单的语法。</p>
+
+<p>缓存清单是 UTF-8 格式的文本文件，有可能包含一个 BOM 字符。新行可能使用换行符(U+000A)，回车(U+000D)，或回车加换行符来表示。</p>
+
+<p>缓存清单文件的第一行必须包含字符串&nbsp;CACHE MANIFEST&nbsp;(两个单词间使用一个&nbsp;U+0020&nbsp;空白)，紧接着是零或多个空白或制表符。本行的其他文本会被忽略。</p>
+
+<p>缓存清单文件的余下内容必须包含零或多个下面的行：</p>
+
+<p>空行</p>
+
+<p>你可以使用包含零或多个空白与制表符的空行。</p>
+
+<p>注释</p>
+
+<p>注释包括零或多个制表符或空白字符，紧接着是一个&nbsp;#&nbsp;字符，再然后是零或多个注释文本字符。注释只能在所在行起作用，不能追加到其他行上。这意味着你无法使用片段标识符。</p>
+
+<p>段落标题</p>
+
+<p>段落标题指定了缓存文件即将操作的段落。有三个可选的标题：</p>
+
+<blockquote>
+<table>
+	<tbody>
+		<tr>
+			<th>段落标题</th>
+			<th>解释</th>
+		</tr>
+		<tr>
+			<td>CACHE:</td>
+			<td>切换到缓存清单的显式段落(默认段落)。</td>
+		</tr>
+		<tr>
+			<td>NETWORK:</td>
+			<td>切换到缓存清单的在线白名单段落。</td>
+		</tr>
+		<tr>
+			<td>FALLBACK:</td>
+			<td>切换到缓存清单的后备资源段落。</td>
+		</tr>
+	</tbody>
+</table>
+</blockquote>
+
+<p>段落标题所在的行可以包含空白字符，段落名后的冒号 (:) 不可省略。</p>
+
+<p>段落数据</p>
+
+<p>不同段落的数据行格式有所不同。在默认 (CACHE:) 段落，每行都是一个合法的 &nbsp;URI 或 IRI ，与一个要缓存的资源相关联(本段落内不允许通配符)。每行的 URI 或 IRI 前后允许出现空白字符。在 Fallback 段落内，每行都是一个合法的 URI 或 IRI(与一个资源关联)，紧跟着一个后备资源，用于当无法与服务器建立连接时访问。在 Network 段落内，每行都是一个合法的 URI 或 IRI，关联一个需要通过网络获取的资源(本段落内可以使用通配符 *)。</p>
+
+<p>注意：相对 URI 是指相对于缓存清单的 URI，而不是包含清单的文档的 URI。</p>
+
+<p>缓存清单可以在段落内任意切换(每个段落标题可以使用多次)，而且段落允许为空。</p>
+
+<h2>一个应用缓存中的资源</h2>
+
+<p>一个应用缓存至少会包含一个资源，由 URI 指定。所有资源都属于下列类别之一：</p>
+
+<p>主记录</p>
+
+<p>这些资源被加入缓存的原因是：用户浏览的一个上下文中包含一个文档，该文档用&nbsp;manifest&nbsp;特性明确指明了它属于该缓存。</p>
+
+<p>显式记录</p>
+
+<p>这些是在应用缓存清单文件中显式列出的资源。</p>
+
+<p>网络记录</p>
+
+<p>这些是在应用缓存清单文件中作为网络记录列出的资源。</p>
+
+<p>后备记录</p>
+
+<p>这些是在应用缓存清单文件中作为后备记录列出的资源。</p>
+
+<p>注意：&nbsp;资源可以被标记为多个类别，因此可以作为多重记录来分类。例如，一条记录既可以是显式记录，也可以是一条后备记录。</p>
+
+<p>下面来详细介绍资源类别。</p>
+
+<h3>主记录</h3>
+
+<p>任意在&nbsp;<a href="https://developer.mozilla.org/zh-CN/docs/HTML/Element/html">&lt;html&gt;</a>&nbsp;元素上包含一个&nbsp;<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/html#attr-manifest">manifest</a>&nbsp;特性的 HTML 文件都可以是主记录。例如，我们拥有 HTML 文件&nbsp;<a href="http://www.foo.bar/entry.html">http://www.example.com/entry.html</a>，它看起来是这样的：</p>
+
+<pre>
+&lt;html manifest=&quot;example.appcache&quot;&gt;
+  &lt;h1&gt;Application Cache Example&lt;/h1&gt;
+&lt;/html&gt;
+</pre>
+
+<p>如果&nbsp;entry.html&nbsp;没有在&nbsp;example.appcache&nbsp;缓存清单文件中列出来，那么访问&nbsp;entry.html&nbsp;页面会使得&nbsp;entry.html&nbsp;作为一条主记录加入到应用缓存中。</p>
+
+<h3>显式记录</h3>
+
+<p>显式记录就是在缓存清单文件的&nbsp;CACHE 段落显式列出的资源。</p>
+
+<h3>网络记录</h3>
+
+<p>缓存清单文件的&nbsp;NETWORK&nbsp;段落指定了 web 应用需要在线访问的资源。一个应用缓存中的网络记录本质上来说是一个「在线白名单」&mdash;在&nbsp;NETWORK&nbsp;段落指定的 URI 会从服务器而不是缓存加载。这使得浏览器的安全模型通过限制用户让其只访问经过验证的资源来避免潜在的安全漏洞。</p>
+
+<p>举例来说，你可以使用网络记录来从服务器而不是缓存中加载并执行脚本或其他代码：</p>
+
+<pre>
+CACHE MANIFEST
+NETWORK:
+/api
+</pre>
+
+<p>上面列出的缓存清单段落能够保证对&nbsp;<a href="http://www.example.com/api/">http://www.example.com/api/</a>&nbsp;子目录中资源的请求始终通过网络加载，而不会去访问缓存。</p>
+
+<p>注意：&nbsp;简单的从清单文件中过滤主记录(在&nbsp;html 元素中拥有&nbsp;manifest&nbsp;特性的文件)并不会产生同样的结果，因为主记录会被添加到&mdash;后续访问的获取也会从&mdash;应用缓存中。</p>
+
+<h3>后备记录</h3>
+
+<p>当尝试请求资源失败时会使用后备记录。例如，缓存清单文件&nbsp;<a href="http://www.example.com/example.appcache">http://www.example.com/example.appcache</a>&nbsp;包含如下内容：</p>
+
+<pre>
+CACHE MANIFEST
+FALLBACK:
+example/bar/ example.html
+</pre>
+
+<p>任何访问&nbsp;<a href="http://www.example.com/example/bar/">http://www.example.com/example/bar/</a>&nbsp;或它的任意子目录及内容都会使浏览器发出请求，去尝试加载请求的资源。如果尝试失败(可能是由于网络连接失败或服务器问题)，浏览器将会加载&nbsp;example.html。</p>
+
+<h2>缓存状态</h2>
+
+<p>每个应用缓存都有一个状态，标示着缓存的当前状况。共享同一清单 URI 的缓存拥有相同的缓存状态，可能是其中之一：</p>
+
+<p>UNCACHED(未缓存)</p>
+
+<p>一个特殊的值，用于表明一个应用缓存对象还没有完全初始化。</p>
+
+<p>IDLE(空闲)</p>
+
+<p>应用缓存此时未处于更新过程中。</p>
+
+<p>CHECKING(检查)</p>
+
+<p>清单已经获取完毕并检查更新。</p>
+
+<p>DOWNLOADING(下载中)</p>
+
+<p>下载资源并准备加入到缓存中，这是由于清单变化引起的。</p>
+
+<p>UPDATEREADY(更新就绪)</p>
+
+<p>一个新版本的应用缓存可以使用。有一个对应的事件&nbsp;updateready，当下载完毕一个更新，并且还未使用&nbsp;swapCache() 方法激活更新时，该事件触发，而不会是&nbsp;cached&nbsp;事件。</p>
+
+<p>OBSOLETE(废弃)</p>
+
+<p>应用缓存现在被废弃。</p>
 
 <p><a href="http://www.w3school.com.cn/html5/html_5_app_cache.asp" target="_blank">http://www.w3school.com.cn/html5/html_5_app_cache.asp</a></p>
