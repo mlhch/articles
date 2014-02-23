@@ -139,3 +139,13 @@
 </ul>
 
 <p>If you prefer to select a local mirror yourself, see&nbsp;<a href="http://www.gentoo.org/main/en/mirrors.xml">Gentoo Mirrors</a>.</p>
+
+<table border="1">
+	<tbody>
+		<tr>
+			<td><a href="http://distfiles.gentoo.org/releases/amd64/autobuilds/current-iso/install-amd64-minimal-20140220.iso">install-amd64-minimal-20140220.iso</a></td>
+			<td>21-Feb-2014 23:27</td>
+			<td>254M</td>
+		</tr>
+	</tbody>
+</table>
