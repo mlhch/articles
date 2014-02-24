@@ -12,4 +12,26 @@
 
 <p>MySQL Community Server 5.6.16</p>
 
-<p>&nbsp;</p>
+<h2>重置 MySQL root 密码</h2>
+
+<ol>
+	<li>
+	<p>停止MySQL服务</p>
+	</li>
+	<li>
+	<p>跳过验证启动 MySQL</p>
+
+	<pre>
+mysqld_safe --skip-grant-tables &amp;</pre>
+	</li>
+	<li>
+	<p>登录后使用 SQL 语句重置密码</p>
+
+	<pre>
+$ mysql -u root mysql
+&gt; update user set password=Password(&#39;...&#39;) where User=&#39;root&#39;;
+&gt; flush privileges;
+</pre>
+	</li>
+	<li>重启 MySQL 即可</li>
+</ol>
