@@ -1,0 +1,31 @@
+<h1>Amazon - Price</h1>
+
+<p>2014-02-25 00:16 Tuesday</p>
+
+<p><a href="http://aws.amazon.com/cn/" target="_blank">http://aws.amazon.com/cn/</a></p>
+
+<p>今日查到之前每月 $3.5 的扣费原因：</p>
+
+<table border="1" cellpadding="3" cellspacing="1">
+	<tbody>
+		<tr>
+			<td>$0.10 per GB-month of provisioned storage</td>
+			<td>35.000 GB-Mo</td>
+			<td>3.50</td>
+		</tr>
+	</tbody>
+</table>
+
+<p>然后把所有的 EC2 清理后终止掉了。</p>
+
+<h2>查看步骤</h2>
+
+<ol>
+	<li>右上角&ldquo;我的帐户&rdquo;-&gt;&nbsp;<a href="https://portal.aws.amazon.com/gp/aws/manageYourAccount" target="_blank">https://portal.aws.amazon.com/gp/aws/manageYourAccount</a></li>
+	<li>Account Activity&nbsp;-&gt;&nbsp;<a href="https://portal.aws.amazon.com/gp/aws/developer/account" target="_blank">https://portal.aws.amazon.com/gp/aws/developer/account</a></li>
+	<li>或者使用新的&ldquo;帐单控制台&rdquo; -&gt;&nbsp;<a href="https://console.aws.amazon.com/billing/home" target="_blank">https://console.aws.amazon.com/billing/home</a></li>
+</ol>
+
+<h3>New Billing Console</h3>
+
+<p>The Account Activity page is moving to the AWS Management Console, and it has a fresh new look. You&#39;re invited to&nbsp;<a href="https://console.aws.amazon.com/billing/home">Preview the Billing Console</a>&nbsp;and to leave us feedback using the link located at the bottom of the Billing Console page.</p>
