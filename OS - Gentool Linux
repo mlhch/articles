@@ -162,6 +162,9 @@
 
 <ul>
 	<li>
+	<p>置顶：激活 swap 区很重要，用 free -m 来查看是否已经激活。今天这个问题导致 emerge gentoo-sources 失败，耗费了一天</p>
+	</li>
+	<li>
 	<p>帧缓冲（framebuffer）是Linux为显示设备提供的一个接口，把显存抽象后的一种设备，他允许上层应用程序在图形模式下直接对显示缓冲区进行读写操作。这种操作是抽象的，统一的。用户不必关心物理显存的位置、换页机制等等具体细节。这些都是由Framebuffer设备驱动来完成的。</p>
 
 	<p>帧缓冲驱动的应用广泛，在linux的桌面系统中，Xwindow服务器就是利用帧缓冲进行窗口的绘制。尤其是通过帧缓冲可显示汉字点阵，成为Linux汉化的唯一可行方案。</p>
@@ -247,6 +250,11 @@ livecd ~ # mount /dev/sda1 /mnt/gentoo/boot
 </pre>
 
 	<pre>
-livecd ~ # cd /mnt/gentoo</pre>
+livecd ~ # cd /mnt/gentoo
+</pre>
+
+	<pre>
+mount -t proc none /mnt/gentoo/proc
+mount -o bind /dev /mnt/gentoo/dev</pre>
 	</li>
 </ul>
