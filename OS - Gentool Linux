@@ -6,6 +6,10 @@
 
 <p>We produce Gentoo Linux, a special flavor of Linux that can be automatically optimized and customized for just about any application or need. Extreme performance, configurability and a top-notch user and developer community are all hallmarks of the Gentoo experience. To learn more, read our&nbsp;<a href="http://www.gentoo.org/main/en/about.xml">about page</a>.</p>
 
+<h2>百度</h2>
+
+<p>Gentoo是一个基于Linux的自由操作系统，它能为几乎任何应用程序或需求自动地作出优化和定制。追求极限的配置、性能，以及顶尖的用户和开发者社区，都是Gentoo体验的标志特点。 Gentoo的哲学是自由和选择。得益于一种称为Portage的技术，Gentoo能成为理想的安全服务器、开发工作站、专业桌面、游戏系统、嵌入式解决方案或者别的东西&mdash;&mdash;你想让它成为什么，它就可以成为什么。由于它近乎无限的适应性，可把Gentoo称作元发行版。</p>
+
 <h2>Gentoo Handbook</h2>
 
 <p><a href="http://www.gentoo.org/doc/en/handbook/" target="_blank">http://www.gentoo.org/doc/en/handbook/</a></p>
@@ -149,3 +153,100 @@
 		</tr>
 	</tbody>
 </table>
+
+<h2>安装步骤及理解</h2>
+
+<p>http://club.topsage.com/thread-2359462-1-1.html</p>
+
+<p>http://gentoo.linuxsir.org/doc/cn/handbook/hb_part1_chap1.html</p>
+
+<ul>
+	<li>
+	<p>帧缓冲（framebuffer）是Linux为显示设备提供的一个接口，把显存抽象后的一种设备，他允许上层应用程序在图形模式下直接对显示缓冲区进行读写操作。这种操作是抽象的，统一的。用户不必关心物理显存的位置、换页机制等等具体细节。这些都是由Framebuffer设备驱动来完成的。</p>
+
+	<p>帧缓冲驱动的应用广泛，在linux的桌面系统中，Xwindow服务器就是利用帧缓冲进行窗口的绘制。尤其是通过帧缓冲可显示汉字点阵，成为Linux汉化的唯一可行方案。</p>
+
+	<p>Linux FrameBuffer&nbsp;本质上只是提供了对图形设备的硬件抽象，在开发者看来，FrameBuffer&nbsp;是一块显示缓存，往显示缓存中写入特定格式的数据就意味着向屏幕输出内容。所以说<span class="marker">FrameBuffer就是一块白板</span>。例如对于初始化为16&nbsp;位色的FrameBuffer&nbsp;来说，&nbsp;FrameBuffer中的两个字节代表屏幕上一个点，从上到下，从左至右，屏幕位置与内存地址是顺序的线性关系。</p>
+
+	<p>帧缓存可以在系统存储器(内存)的任意位置，视频控制器通过访问帧缓存来刷新屏幕。&nbsp;帧缓存也叫刷新缓存&nbsp;Frame buffer&nbsp;或&nbsp;refresh buffer,&nbsp;这里的帧(frame)是指整个屏幕范围。</p>
+
+	<p>帧缓存有个地址，是在内存里。我们通过不停的向frame buffer中写入数据，&nbsp;显示控制器就自动的从frame buffer中取数据并显示出来。全部的图形都共享内存中同一个帧缓存。</p>
+
+	<p>CPU指定显示控制器工作，则显示控制器根据CPU的控制到指定的地方去取数据和指令，目前的数据一般是从显存里取，如果显存里存不下，则从内存里取，内存也放不下，则从硬盘里取，当然也不是内存放不下，而是为了节省内存的话，可以放在硬盘里，然后通过指令控制显示控制器去取。帧缓存&nbsp;Frame Buffer，里面存储的东西是一帧一帧的，&nbsp;显卡会不停的刷新Frame Buffer,&nbsp;<span class="marker">这每一帧如果不捕获的话，&nbsp;则会被丢弃，也就是说是实时的</span>。这每一帧不管是保存在内存还是显存里，都是一个显性的信息，这每一帧假设是800x600的分辨率，&nbsp;则保存的是800x600个像素点，和颜色值。</p>
+
+	<p><span class="marker">帧缓冲设备对应的设备文件为/dev/fb*</span>，如果系统有多个显示卡，Linux下还可支持多个帧缓冲设备，最多可达32&nbsp;个，分别为/dev/fb0到/dev/fb31，<span class="marker">而/dev/fb则为当前缺省的帧缓冲设备</span>，通常指向/dev/fb0。当然在嵌入式系统中支持一个显示设备就够了。帧缓冲设备为标准字符设备，主设备号为29，次设备号则从0到31。分别对应/dev/fb0-/dev/fb31。</p>
+	</li>
+	<li>
+	<p>Gentoo的LiveCD是包含了可使用的Gentoo环境的启动CD。它们允许你们从CD启动Linux。在启动过程中，它们会自动检测你的硬件和加载准确的驱动。它们是由Gentoo开发者维护的。</p>
+	</li>
+	<li>
+	<p>Portage</p>
+
+	<p>Gentoo与其他Linux的发行版最大的不同就是软件包管理方式了，叫做Portage，是从BSD借鉴过来的，兼有Debian的apt和BSD的port的优点。Portage的安装软件的方式就像是一个供应商提供给你原理和安装手册，你把材料买回家去自己组装，有点象宜家的的家具。</p>
+
+	<p>/usr/portage/ 下是提供了安装手册，分类放在那里，叫做ebuild，不过这个手册不是给你看的，是给你的系统看的，你的系统可以按照这个手册为你打造出软件来，其实你要做的只是下达一个命令而矣。&nbsp;</p>
+
+	<p>/usr/portage/distfiles下放着源代码，相当于原料，这些原料其实可以不放在那里，随时从网上下载最新的。&nbsp;</p>
+
+	<p>/usr/portage/packages 下放着在你的系统上编译出来的二进制软件，相当于成品，而 /usr/portage 的其他目录下面则是分门别类的放着产品的目录和安装手册。这是最重要的东西了。&nbsp;</p>
+
+	<p>/etc/make.conf 下存放着你的个性化参数，这是你的个性化表现。如你不想吃香菜，你就可以在里面加上一句&rdquo;-香菜&ldquo;，这样保证以后编译出来的产品里面绝对不会添加香菜这味调料。&nbsp;</p>
+	</li>
+	<li>
+	<p>Windows与Linux的使用房间的方式是不同的，Windows将硬盘划分为CDEF等区，相当于将其房子划分出CDEF等大房间，然后再让大家住进来，以后随便你让谁住到那个房间。如一般Windows要住在C:盘，其他软件放在那里你自己分配就可以了。</p>
+
+	<p>而Linux不太一样，Linux一般将所有的东西分为bin boot dev etc home lib mnt opt proc root sbin sys tmp usr var等小组，以后再加东西就按照性质分配到这几个组之中，一般不会再增加组了。房间规划好了之后，再规定这个房间归那个组用，当然也可以将几个组住一个房间里面。&nbsp;</p>
+
+	<p>/boot 组的人住在门房里，他管着开门，所以我们要将给他在门口建个房间，这个小组的人少，占地方不大，只要32M就够了。</p>
+
+	<p>还要有一个临时的仓库，以后工作间暂时不用的东西可以放在那里，它叫做交换区swap。&nbsp;</p>
+
+	<p>那个叫root的人是你，你有绝对的权威，你的房间叫做/root。&nbsp;</p>
+
+	<p>/home 组的人，是这个家的住客，以后在这个家里住的人都在/home下面以自己的名子占了一块小柜子，可以在里面放自己私人的东西。&nbsp;</p>
+
+	<p>/proc 的房间其实不是一个房间，只是工作间也就<span class="marker">内存的一个大屏幕</span>，你可以在这里看到你的工作间的工作状况。&nbsp;</p>
+
+	<p>/usr是管的公共的地方，家里的一般东西放在那里。如我们的使用手册就放在/usr/portage下面。</p>
+
+	<p>/dev管的是各种设备，水电煤气等都归他管，在你的计算机上就是所有的硬件都归他管。连我们现在要用的地皮也归他管，现在叫做/dev/hda。&nbsp;</p>
+
+	<p>还有叫做tmp的，它管一些临时的东西，你可以将东西在拿进屋子里以前暂时放在它那儿。</p>
+
+	<p>/bin管理着各种工具，你工作的时候需要什么东西可以找他要。&nbsp;</p>
+
+	<p>/sbin是只有/root才能够用的工具，一般是一些必不可少，但又比较危险的工具。</p>
+
+	<p>还有一个叫做/etc的，它管着各种规章制度，如不可以随地大小便，进屋要脱鞋等，你可以制定各种规则，让他替你执行这些规则。&nbsp;</p>
+
+	<p>有个叫做lib的，里面放着其他工具经常要用到的东西，象是各种通用的零件一样，其他的工具都可以拿来用。&nbsp;</p>
+
+	<p>/opt叫做可以选择的，一般是一些厂商的软件安装在这里，例如Java一般就安装在这里。</p>
+
+	<p>/var管理一些可变的数据，具体内容不是很固定，一般是一些文件记录log的地方，或者是一些程序存放数据的地方，你可以去看一看。&nbsp;</p>
+
+	<p>/mnt是车库，外来的东西一般就放在这里，平时这里是空着的。</p>
+	</li>
+	<li>
+	<p>查看分区结构</p>
+
+	<pre>
+livecd ~ # fdisk -l /dev/sda</pre>
+	</li>
+	<li>
+	<p>/mnt/gentoo 目录已存在，可直接挂载 sda3 到其上，作为将来的 / 目录</p>
+
+	<pre>
+livecd ~ # mount /dev/sda3 /mnt/gentoo
+</pre>
+	boot 目录则需要手动创建，并挂载 sda1 到其上。
+
+	<pre>
+livecd ~ # mkdir /mnt/gentoo/boot
+livecd ~ # mount /dev/sda1 /mnt/gentoo/boot
+</pre>
+
+	<pre>
+livecd ~ # cd /mnt/gentoo</pre>
+	</li>
+</ul>
