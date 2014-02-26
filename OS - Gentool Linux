@@ -231,6 +231,47 @@
 	<p>/mnt是车库，外来的东西一般就放在这里，平时这里是空着的。</p>
 	</li>
 	<li>
+	<p>最简步骤</p>
+
+	<ul>
+		<li>
+		<pre>
+gentoo-nofb​</pre>
+		</li>
+		<li>
+		<p>尝试不加 dopcmcia 参数</p>
+
+		<p>这个选项加载了对PCMCIA和Cardbus硬件的支持，也使得pcmcia卡的 cardmgr能够在光盘启动的时候运行起来。这个选项只有在从 PCMCIA/Cardbus设备启动的时候才需要。</p>
+		</li>
+		<li>
+		<p>使用远程终端连接还是比较方便的，至少不用反复在虚拟机中切换了。所以需要设置 root 的密码</p>
+
+		<pre>
+service sshd start
+</pre>
+
+		<pre>
+passwd</pre>
+		</li>
+	</ul>
+	</li>
+	<li>
+	<p>一开始我们先介绍块设备。最有名的块设备可能就是Linux系统中表示第一个IDE硬盘的/dev/sda。SCSI硬盘和Serial ATA硬盘都是/dev/sda。如果你正在使用内核里新的libata架构，即便IDE硬盘也会是/dev/sd*。如果你用的是旧的设备架构，你的第一个IDE硬盘将是/dev/hda</p>
+	</li>
+	<li>
+	<p>分区</p>
+
+	<p>尽管在理论上可以使用一整块磁盘来安装你的Linux系统，但是在实际中几乎从不这样做。相反，整个磁盘块设备被分割成更小、更容易管理的块设备。在AMD64系统中，这些被称作分区。</p>
+
+	<p>分区有三种类型：主分区，扩展分区和逻辑分区。</p>
+
+	<p>主分区是把自己的信息储存在MBR（主引导记录）中的分区。由于MBR非常小（512个字节），所以仅可以定义4个主分区（例如，/dev/sda1到/dev/sda4）。</p>
+
+	<p>扩展分区是一种特殊的主分区（意味着扩展分区必须是4个可能的主分区之一），它包含着更多的分区。这种分区最初并不存在，但是由于4个主分区太少了，为了能划分更多的分区，在保持向后的兼容性的前提下扩展分区诞生了。</p>
+
+	<p>逻辑分区是在扩展分区内部的分区。它们的定义不在MBR中，而是在扩展分区中。</p>
+	</li>
+	<li>
 	<p>查看分区结构</p>
 
 	<pre>
@@ -256,5 +297,33 @@ livecd ~ # cd /mnt/gentoo
 	<pre>
 mount -t proc none /mnt/gentoo/proc
 mount -o bind /dev /mnt/gentoo/dev</pre>
+	</li>
+	<li>
+	<p>make.conf 的位置在 /mnt/gentoo/etc/portage/make.conf，并不在 .../etc/make.conf</p>
+
+	<pre>
+ # cat etc/portage/make.conf
+# These settings were set by the catalyst build script that automatically
+# built this stage.
+# Please consult /usr/share/portage/config/make.conf.example for a more
+# detailed example.
+CFLAGS=&quot;-O2 -pipe&quot;
+CXXFLAGS=&quot;${CFLAGS}&quot;
+# WARNING: Changing your CHOST is not something that should be done lightly.
+# Please consult http://www.gentoo.org/doc/en/change-chost.xml before changing.
+CHOST=&quot;x86_64-pc-linux-gnu&quot;
+# These are the USE flags that were used in addition to what is provided by the
+# profile used for building.
+USE=&quot;bindist mmx sse sse2&quot;
+PORTDIR=&quot;/usr/portage&quot;
+DISTDIR=&quot;${PORTDIR}/distfiles&quot;
+PKGDIR=&quot;${PORTDIR}/packages</pre>
+	</li>
+	<li>
+	<p>&nbsp;拷贝DNS信息，此步的目的是为了执行 emerge gentoo-sources 时能够正确解析外网的域名。同时，如果选择了速度快的镜像就更好了。</p>
+
+	<pre>
+（参数&quot;-L&quot;是必须的，用来确保我们拷贝的不是一个符号链接）
+# cp -L /etc/resolv.conf /mnt/gentoo/etc/</pre>
 	</li>
 </ul>
