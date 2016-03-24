@@ -2,7 +2,7 @@
 
 <p>2012-01-31 12:03:26 +08:00 Tuesday</p>
 
-<p><a href="http://jekyllrb.com/" target="_blank">http://jekyllrb.com/</a>|<a href="https://github.com/jekyll/jekyll" target="_blank">https://github.com/jekyll/jekyll</a>|<a href="http://rubygems.org/gems/jekyll" target="_blank">http://rubygems.org/gems/jekyll</a></p>
+<p><a href="http://jekyllrb.com/" target="_blank">http://jekyllrb.com/</a>&nbsp;|&nbsp;<a href="https://github.com/jekyll/jekyll" target="_blank">https://github.com/jekyll/jekyll</a>&nbsp;|&nbsp;<a href="http://rubygems.org/gems/jekyll" target="_blank">http://rubygems.org/gems/jekyll</a></p>
 
 <h2>jekyllrb.com</h2>
 
@@ -21,25 +21,25 @@ $ jekyll serve
 
 	<ul>
 		<li>
-		<p><span style="line-height:1.2em">Simple</span></p>
+		<p>Simple</p>
 
-		<p><span style="line-height:1.2em">No more databases, comment moderation, or pesky updates to install&mdash;just&nbsp;<em>your content</em>.</span></p>
+		<p>No more databases, comment moderation, or pesky updates to install&mdash;just&nbsp;your content.</p>
 
-		<p><a href="http://jekyllrb.com/docs/usage/" style="line-height: 1.6em;">How Jekyll works &rarr;</a></p>
+		<p><a href="http://jekyllrb.com/docs/usage/">How Jekyll works &rarr;</a></p>
 		</li>
 		<li>
 		<p>Static</p>
 
-		<p><a href="http://daringfireball.net/projects/markdown/" style="line-height: 1.6em;">Markdown</a><span style="line-height:1.6em">&nbsp;(or&nbsp;</span><a href="http://textile.sitemonks.com/" style="line-height: 1.6em;">Textile</a><span style="line-height:1.6em">),&nbsp;</span><a href="http://wiki.shopify.com/Liquid" style="line-height: 1.6em;">Liquid</a><span style="line-height:1.6em">, HTML&nbsp;&amp;&nbsp;CSS go in. Static sites come out ready for deployment.</span></p>
+		<p><a href="http://daringfireball.net/projects/markdown/">Markdown</a>&nbsp;(or&nbsp;<a href="http://textile.sitemonks.com/">Textile</a>),&nbsp;<a href="http://wiki.shopify.com/Liquid">Liquid</a>, HTML&nbsp;&amp;&nbsp;CSS go in. Static sites come out ready for deployment.</p>
 
-		<p><a href="http://jekyllrb.com/docs/templates/" style="line-height: 1.6em;">Jekyll template guide &rarr;</a></p>
+		<p><a href="http://jekyllrb.com/docs/templates/">Jekyll template guide &rarr;</a></p>
 		</li>
 		<li>
 		<p>Blog-aware</p>
 
-		<p><span style="line-height:1.6em">Permalinks, categories, pages, posts, and custom layouts are all first-class citizens here.</span></p>
+		<p>Permalinks, categories, pages, posts, and custom layouts are all first-class citizens here.</p>
 
-		<p><a href="http://jekyllrb.com/docs/migrations/" style="line-height: 1.6em;">Migrate your blog &rarr;</a></p>
+		<p><a href="http://jekyllrb.com/docs/migrations/">Migrate your blog &rarr;</a></p>
 		</li>
 	</ul>
 	</li>
@@ -89,60 +89,10 @@ gem &quot;jekyll&quot;, &quot;~&gt; 1.3.0&quot;</pre>
 
 <ol>
 	<li><a href="http://rubygems.org/gems/jekyll/versions/1.3.0">1.3.0</a>&nbsp;November 4, 2013&nbsp;(256 KB)</li>
-	<li><a href="http://rubygems.org/gems/jekyll/versions/1.3.0.rc">1.3.0.rc</a>&nbsp;October 29, 2013&nbsp;(255 KB)</li>
-	<li><a href="http://rubygems.org/gems/jekyll/versions/1.2.1">1.2.1</a>&nbsp;September 14, 2013&nbsp;(248 KB)</li>
-	<li><a href="http://rubygems.org/gems/jekyll/versions/1.2.0">1.2.0</a>&nbsp;September 6, 2013&nbsp;(245 KB)</li>
-	<li><a href="http://rubygems.org/gems/jekyll/versions/1.1.2">1.1.2</a>&nbsp;July 25, 2013&nbsp;(241 KB)</li>
-	<li><a href="http://rubygems.org/gems/jekyll/versions/1.1.1">1.1.1</a>&nbsp;July 24, 2013&nbsp;(241 KB)</li>
-	<li><a href="http://rubygems.org/gems/jekyll/versions/1.1.0">1.1.0</a>&nbsp;July 14, 2013&nbsp;(237 KB)&nbsp;yanked</li>
-	<li><a href="http://rubygems.org/gems/jekyll/versions/1.0.4">1.0.4</a>&nbsp;July 25, 2013&nbsp;(242 KB)</li>
-	<li><a href="http://rubygems.org/gems/jekyll/versions/1.0.3">1.0.3</a>&nbsp;June 7, 2013&nbsp;(242 KB)</li>
-	<li><a href="http://rubygems.org/gems/jekyll/versions/1.0.2">1.0.2</a>&nbsp;May 12, 2013&nbsp;(230 KB)</li>
-	<li><a href="http://rubygems.org/gems/jekyll/versions/1.0.1">1.0.1</a>&nbsp;May 8, 2013&nbsp;(229 KB)</li>
-	<li><a href="http://rubygems.org/gems/jekyll/versions/1.0.0">1.0.0</a>&nbsp;May 6, 2013&nbsp;(228 KB)</li>
-	<li><a href="http://rubygems.org/gems/jekyll/versions/1.0.0.rc1">1.0.0.rc1</a>&nbsp;April 16, 2013&nbsp;(209 KB)</li>
-	<li><a href="http://rubygems.org/gems/jekyll/versions/1.0.0.beta4">1.0.0.beta4</a>&nbsp;April 9, 2013&nbsp;(205 KB)</li>
-	<li><a href="http://rubygems.org/gems/jekyll/versions/1.0.0.beta3">1.0.0.beta3</a>&nbsp;April 4, 2013&nbsp;(203 KB)</li>
-	<li><a href="http://rubygems.org/gems/jekyll/versions/1.0.0.beta2">1.0.0.beta2</a>&nbsp;March 19, 2013&nbsp;(203 KB)</li>
-	<li><a href="http://rubygems.org/gems/jekyll/versions/1.0.0.beta1">1.0.0.beta1</a>&nbsp;March 14, 2013&nbsp;(203 KB)</li>
+	<li>...</li>
 	<li><a href="http://rubygems.org/gems/jekyll/versions/0.12.1">0.12.1</a>&nbsp;February 19, 2013&nbsp;(60 KB)</li>
 	<li><a href="http://rubygems.org/gems/jekyll/versions/0.12.0">0.12.0</a>&nbsp;December 22, 2012&nbsp;(60 KB)</li>
-	<li><a href="http://rubygems.org/gems/jekyll/versions/0.11.2">0.11.2</a>&nbsp;December 27, 2011&nbsp;(52 KB) -&gt; <span class="marker">最初 2012-01-31 应该是这个版本</span></li>
-</ol>
-
-<p>Runtime Dependencies</p>
-
-<ol>
-	<li><a href="http://rubygems.org/gems/classifier">classifier&nbsp;~&gt; 1.3</a></li>
-	<li><a href="http://rubygems.org/gems/colorator">colorator&nbsp;~&gt; 0.1</a></li>
-	<li><a href="http://rubygems.org/gems/commander">commander&nbsp;~&gt; 4.1.3</a></li>
-	<li><a href="http://rubygems.org/gems/liquid">liquid&nbsp;~&gt; 2.5.2</a></li>
-	<li><a href="http://rubygems.org/gems/listen">listen&nbsp;~&gt; 1.3</a></li>
-	<li><a href="http://rubygems.org/gems/maruku">maruku&nbsp;~&gt; 0.6.0</a></li>
-	<li><a href="http://rubygems.org/gems/pygments.rb">pygments.rb&nbsp;~&gt; 0.5.0</a></li>
-	<li><a href="http://rubygems.org/gems/redcarpet">redcarpet&nbsp;~&gt; 2.3.0</a></li>
-	<li><a href="http://rubygems.org/gems/safe_yaml">safe_yaml&nbsp;~&gt; 0.9.7</a></li>
-</ol>
-
-<p>Development Dependencies</p>
-
-<ol>
-	<li><a href="http://rubygems.org/gems/activesupport">activesupport&nbsp;~&gt; 3.2.13</a></li>
-	<li><a href="http://rubygems.org/gems/coveralls">coveralls&nbsp;~&gt; 0.7.0</a></li>
-	<li><a href="http://rubygems.org/gems/cucumber">cucumber&nbsp;~&gt; 1.3</a></li>
-	<li><a href="http://rubygems.org/gems/jekyll_test_plugin">jekyll_test_plugin&nbsp;&gt;= 0</a></li>
-	<li><a href="http://rubygems.org/gems/kramdown">kramdown&nbsp;~&gt; 1.2</a></li>
-	<li><a href="http://rubygems.org/gems/launchy">launchy&nbsp;~&gt; 2.3</a></li>
-	<li><a href="http://rubygems.org/gems/mime-types">mime-types&nbsp;~&gt; 1.5</a></li>
-	<li><a href="http://rubygems.org/gems/rake">rake&nbsp;~&gt; 10.1</a></li>
-	<li><a href="http://rubygems.org/gems/rdiscount">rdiscount&nbsp;~&gt; 1.6</a></li>
-	<li><a href="http://rubygems.org/gems/rdoc">rdoc&nbsp;~&gt; 3.11</a></li>
-	<li><a href="http://rubygems.org/gems/RedCloth">RedCloth&nbsp;~&gt; 4.2</a></li>
-	<li><a href="http://rubygems.org/gems/redgreen">redgreen&nbsp;~&gt; 1.2</a></li>
-	<li><a href="http://rubygems.org/gems/rr">rr&nbsp;~&gt; 1.1</a></li>
-	<li><a href="http://rubygems.org/gems/shoulda">shoulda&nbsp;~&gt; 3.3.2</a></li>
-	<li><a href="http://rubygems.org/gems/simplecov">simplecov&nbsp;~&gt; 0.7</a></li>
-	<li><a href="http://rubygems.org/gems/simplecov-gem-adapter">simplecov-gem-adapter&nbsp;~&gt; 1.0.1</a></li>
+	<li><a href="http://rubygems.org/gems/jekyll/versions/0.11.2">0.11.2</a>&nbsp;December 27, 2011&nbsp;(52 KB) -&gt; <span class="marker">最初 2012-01-31 应该是这个版本</span>​</li>
 </ol>
 
 <h2>Jekyll</h2>
