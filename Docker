@@ -2,10 +2,34 @@
 
 <p>2016-04-03 00:39:29 Sunday</p>
 
-<p><a href="https://www.docker.com/" target="_blank">https://www.docker.com/</a></p>
+<p><a href="https://www.docker.com/" target="_blank">https://www.docker.com/</a>&nbsp;|&nbsp;<a href="http://www.docker.org.cn/" target="_blank">http://www.docker.org.cn/</a></p>
 
 <blockquote>
 <p>Build, Ship, Run</p>
 </blockquote>
 
 <p>An open platform for distributed applications for developers and sysadmins</p>
+
+<h2>安装</h2>
+
+<p>https://www.docker.com/products/docker-toolbox</p>
+
+<p>brew 安装的版本与官网下载的版本一致。</p>
+
+<pre>
+$ brew install docker
+==&gt; Downloading https://homebrew.bintray.com/bottles/docker-1.10.3.el_capitan.bottle.tar.gz
+######################################################################## 100.0%
+==&gt; Pouring docker-1.10.3.el_capitan.bottle.tar.gz
+==&gt; Caveats
+Bash completion has been installed to:
+  /usr/local/etc/bash_completion.d
+
+zsh completion has been installed to:
+  /usr/local/share/zsh/site-functions
+==&gt; Summary
+🍺  /usr/local/Cellar/docker/1.10.3: 10 files, 11.2M</pre>
+
+<pre>
+$ docker -v
+Docker version 1.10.3, build 20f81dd</pre>
