@@ -10,6 +10,10 @@
 
 <p>An open platform for distributed applications for developers and sysadmins</p>
 
+<h2>概念</h2>
+
+<p>用 brew 安装 docker 和 docker-machine。docker-machine 命令是 boot2docker 命令的替代，用来创建并管理 machine，供 docker 命令使用。</p>
+
 <h2>安装</h2>
 
 <p>https://www.docker.com/products/docker-toolbox</p>
@@ -32,4 +36,142 @@ zsh completion has been installed to:
 
 <pre>
 $ docker -v
+Docker version 1.10.3, build 20f81dd
+</pre>
+
+<pre>
+$ brew install docker-machine
+==&gt; Downloading https://homebrew.bintray.com/bottles/docker-machine-0.6.0.el_capitan.bottle.tar.gz
+Already downloaded: /Library/Caches/Homebrew/docker-machine-0.6.0.el_capitan.bottle.tar.gz
+==&gt; Pouring docker-machine-0.6.0.el_capitan.bottle.tar.gz
+==&gt; Caveats
+Bash completion has been installed to:
+&nbsp; /usr/local/etc/bash_completion.d
+==&gt; Summary
+🍺 &nbsp;/usr/local/Cellar/docker-machine/0.6.0: 5 files, 36.8M
+</pre>
+
+<h2>使用</h2>
+
+<h3>Use Machine to run Docker containers</h3>
+
+<p>https://docs.docker.com/machine/get-started/</p>
+
+<h4>Prerequisites</h4>
+
+<ul>
+	<li>
+	<p>Make sure you have&nbsp;<a href="https://www.virtualbox.org/wiki/Downloads" target="_blank">the latest VirtualBox</a>&nbsp;correctly installed on your system. If you used&nbsp;<a href="https://www.docker.com/products/docker-toolbox" target="_blank">Toolbox</a>&nbsp;for&nbsp;<a href="https://docs.docker.com/engine/installation/mac/" target="_blank">Mac</a>&nbsp;or&nbsp;<a href="https://docs.docker.com/engine/installation/windows/" target="_blank">Windows</a>&nbsp;to install Docker Machine, VirtualBox is automatically installed.</p>
+	</li>
+	<li>
+	<p>If you used the Quickstart Terminal to launch your first machine and set your terminal environment to point to it, a default machine was automatically created. If this is the case, you can still follow along with these steps, but create another machine and name it something other than &ldquo;default&rdquo; (e.g., staging or sandbox).</p>
+	</li>
+</ul>
+
+<p>查看是现有 machines</p>
+
+<pre>
+$ docker-machine ls
+NAME &nbsp; ACTIVE &nbsp; DRIVER &nbsp; STATE &nbsp; URL &nbsp; SWARM &nbsp; DOCKER &nbsp; ERRORS
+</pre>
+
+<p>创建 machine</p>
+
+<pre>
+$ docker-machine create --driver virtualbox default
+Creating CA: ~/.docker/machine/certs/ca.pem
+Creating client certificate: ~/.docker/machine/certs/cert.pem
+Running pre-create checks...
+(default) Image cache directory does not exist, creating it at ~/.docker/machine/cache...
+(default) No default Boot2Docker ISO found locally, downloading the latest release...
+(default) Latest release for github.com/boot2docker/boot2docker is v1.10.3
+(default) Downloading ~/.docker/machine/cache/boot2docker.iso from https://github.com/boot2docker/boot2docker/releases/download/v1.10.3/boot2docker.iso...</pre>
+
+<p>此处视网速会停滞许久，不如手动下载后放到&nbsp;~/.docker/machine/cache/boot2docker.iso</p>
+
+<pre>
+$ docker-machine create --driver virtualbox default
+Running pre-create checks...
+Creating machine...
+(default) Copying ~/.docker/machine/cache/boot2docker.iso to ~/.docker/machine/machines/default/boot2docker.iso...
+(default) Creating VirtualBox VM...
+(default) Creating SSH key...
+(default) Starting the VM...
+(default) Check network to re-create if needed...
+(default) Found a new host-only adapter: &quot;vboxnet1&quot;
+(default) Waiting for an IP...
+Waiting for machine to be running, this may take a few minutes...
+Detecting operating system of created instance...
+Waiting for SSH to be available...
+Detecting the provisioner...
+Provisioning with boot2docker...
+Copying certs to the local machine directory...
+Copying certs to the remote machine...
+Setting Docker configuration on the remote daemon...
+Checking connection to Docker...
+Docker is up and running!
+To see how to connect your Docker Client to the Docker Engine running on this virtual machine, run: docker-machine env default
+</pre>
+
+<p>再查看 machines 就有了刚创建的&nbsp;machine 了</p>
+
+<pre>
+$ docker-machine ls
+NAME &nbsp; &nbsp; &nbsp;ACTIVE &nbsp; DRIVER &nbsp; &nbsp; &nbsp; STATE &nbsp; &nbsp; URL &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; SWARM &nbsp; DOCKER &nbsp; &nbsp;ERRORS
+default &nbsp; - &nbsp; &nbsp; &nbsp; &nbsp;virtualbox &nbsp; Running &nbsp; tcp://192.168.99.100:2376 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; v1.10.3
+</pre>
+
+<p>查看 default 这个 machine 的一些信息</p>
+
+<pre>
+$ docker-machine env default
+export DOCKER_TLS_VERIFY=&quot;1&quot;
+export DOCKER_HOST=&quot;tcp://192.168.99.100:2376&quot;
+export DOCKER_CERT_PATH=&quot;/Users/mlhch/.docker/machine/machines/default&quot;
+export DOCKER_MACHINE_NAME=&quot;default&quot;
+# Run this command to configure your shell:&nbsp;
+# eval $(docker-machine env default)</pre>
+
+<p>把上述输出当作 bash 脚本执行后，其中的环境变量就可用了</p>
+
+<pre>
+$ eval $(docker-machine env default)
+</pre>
+
+<p>ssh 就这样登录了，不需要用户名和密码</p>
+
+<pre>
+$ docker-machine ssh
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ## &nbsp; &nbsp; &nbsp; &nbsp; .
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ## ## ## &nbsp; &nbsp; &nbsp; &nbsp;==
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;## ## ## ## ## &nbsp; &nbsp;===
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;\___/ ===
+&nbsp; &nbsp; &nbsp; ~~~ {~~ ~~~~ ~~~ ~~~~ ~~~ ~ / &nbsp;===- ~~~
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;\______ o &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; __/
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;\ &nbsp; &nbsp;\ &nbsp; &nbsp; &nbsp; &nbsp; __/
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; \____\_______/
+&nbsp;_ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; _ &nbsp; ____ &nbsp; &nbsp; _ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;_
+| |__ &nbsp; ___ &nbsp; ___ | |_|___ \ __| | ___ &nbsp; ___| | _____ _ __
+| &#39;_ \ / _ \ / _ \| __| __) / _` |/ _ \ / __| |/ / _ \ &#39;__|
+| |_) | (_) | (_) | |_ / __/ (_| | (_) | (__| &nbsp; &lt; &nbsp;__/ |
+|_.__/ \___/ \___/ \__|_____\__,_|\___/ \___|_|\_\___|_|
+Boot2Docker version 1.10.3, build master : 625117e - Thu Mar 10 22:09:02 UTC 2016
 Docker version 1.10.3, build 20f81dd</pre>
+
+<h2>What is Docker Machine?</h2>
+
+<blockquote>
+<p>boot2docker -&gt; Docker Machine</p>
+
+<p>https://github.com/boot2docker/boot2docker-cli -&gt; https://docs.docker.com/machine/</p>
+</blockquote>
+
+<p>Docker Machine is a tool that lets you install Docker Engine on virtual hosts, and manage the hosts with&nbsp;<code>docker-machine</code>&nbsp;commands. You can use Machine to create Docker hosts on your local Mac or Windows box, on your company network, in your data center, or on cloud providers like AWS or Digital Ocean.</p>
+
+<p>Docker Machine 是一个工具，用来在虚拟机上安装并管理 Docker Engine。</p>
+
+<p>Using&nbsp;<code>docker-machine</code>&nbsp;commands, you can start, inspect, stop, and restart a managed host, upgrade the Docker client and daemon, and configure a Docker client to talk to your host.</p>
+
+<p>使用 docker-machine 命令行，你可以启动，监视，停止和重启一个被管理的主机。</p>
+
+<p>Point the Machine CLI at a running, managed host, and you can run<code>docker</code>&nbsp;commands directly on that host. For example, run<code>docker-machine env default</code>&nbsp;to point to a host called&nbsp;<code>default</code>, follow on-screen instructions to complete&nbsp;<code>env</code>&nbsp;setup, and run&nbsp;<code>docker ps</code>,<code>docker run hello-world</code>, and so forth.</p>
