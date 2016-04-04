@@ -158,6 +158,39 @@ $ docker-machine ssh
 Boot2Docker version 1.10.3, build master : 625117e - Thu Mar 10 22:09:02 UTC 2016
 Docker version 1.10.3, build 20f81dd</pre>
 
+<h2>php-zendserver</h2>
+
+<p>2016-04-04 22:35 Monday 老婆带着朵朵跟着岳父岳母回了</p>
+
+<p>https://hub.docker.com/_/php-zendserver/</p>
+
+<pre>
+$ docker pull php-zendserver
+</pre>
+
+<p>此步执行后则可看到多了一个 image f719</p>
+
+<pre>
+$ docker images
+REPOSITORY &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;TAG &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; IMAGE ID &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;CREATED &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; SIZE
+php-zendserver &nbsp; &nbsp; &nbsp;latest &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;f7193503fb87 &nbsp; &nbsp; &nbsp; &nbsp;2 weeks ago &nbsp; &nbsp; &nbsp; &nbsp; 754.2 MB
+nginx &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; latest &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;af4b3d7d5401 &nbsp; &nbsp; &nbsp; &nbsp;3 weeks ago &nbsp; &nbsp; &nbsp; &nbsp; 190.5 MB</pre>
+
+<p>如下命令是阻断式的，无法 Ctrl+C 结束，只能通过 docker ps 查看到&nbsp;CONTAINER ID，然后</p>
+
+<pre>
+$ docker run -p 88:80 -p 10088:10081 php-zendserver
+Zend Server initialization result: success.
+Zend Server is ready for use
+Your application is available at http://172.17.0.2
+To access Zend Server, navigate to http://172.17.0.2:10081
+Your admin password is MzFhNzY1
+</pre>
+
+<p>此时真正能访问的地址是 http://`docker-machine ip`:88 和 http://`docker-machine ip`:10088</p>
+
+<p>可惜&nbsp;YOUR ZEND SERVER LICENSE HAS EXPIRED.</p>
+
 <h2>What is Docker Machine?</h2>
 
 <blockquote>
