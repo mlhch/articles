@@ -176,7 +176,7 @@ REPOSITORY &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;TAG &nbsp; &nbsp; &nbsp; &nbsp; &nb
 php-zendserver &nbsp; &nbsp; &nbsp;latest &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;f7193503fb87 &nbsp; &nbsp; &nbsp; &nbsp;2 weeks ago &nbsp; &nbsp; &nbsp; &nbsp; 754.2 MB
 nginx &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; latest &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;af4b3d7d5401 &nbsp; &nbsp; &nbsp; &nbsp;3 weeks ago &nbsp; &nbsp; &nbsp; &nbsp; 190.5 MB</pre>
 
-<p>如下命令是阻断式的，无法 Ctrl+C 结束，只能通过 docker ps 查看到&nbsp;CONTAINER ID，然后</p>
+<p>如下命令是阻断式的，无法 Ctrl+C 结束，只能通过 docker ps 查看到&nbsp;CONTAINER ID，然后 docker stop {CONTAINER ID} 来终止。</p>
 
 <pre>
 $ docker run -p 88:80 -p 10088:10081 php-zendserver
