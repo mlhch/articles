@@ -12,7 +12,26 @@
 
 <h2>概念</h2>
 
+<p>docker 在 Linux 上原生支持，所以无需借助&nbsp;docker-machine。在 Windows 或者 OSX 上则需要 docker-machine 创建 Linux&nbsp;虚拟机来得到支持。</p>
+
 <p>用 brew 安装 docker 和 docker-machine。docker-machine 命令是 boot2docker 命令的替代，用来创建并管理 machine，供 docker 命令使用。</p>
+
+<p>`docker pull &lt;repo&gt; 得到的是 image，`docker rmi &lt;image id&gt;` 可删除 image，`docker images` 可列出本地所有 image</p>
+
+<p>`docker ps -a` 列出的是所有 container，`docker rm &lt;container id&gt;` 可删除 container。</p>
+
+<h2>VirtualBox 目录映射</h2>
+
+<p>2016-04-05 20:46 Tuesday</p>
+
+<p>默认 /Users 已经映射，但其他目录的映射需要如下步骤来实现</p>
+
+<ol>
+	<li>通过 VirtualBox 的图形界面 &ldquo;设置&rdquo; -&gt; &ldquo;共享文件夹&rdquo; 手动添加共享文件夹路径 /WORK</li>
+	<li>进入虚拟机实例，执行命令 `sudo VBoxControl sharedfolder list`&nbsp;确认 /WORK 目录已经被识别</li>
+	<li>手动创建被映射目录：`sudo mkdir /WORK`</li>
+	<li>手动挂载：`sudo mount -t vboxsf WORK /WORK`</li>
+</ol>
 
 <h2>安装</h2>
 
@@ -176,7 +195,7 @@ REPOSITORY &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;TAG &nbsp; &nbsp; &nbsp; &nbsp; &nb
 php-zendserver &nbsp; &nbsp; &nbsp;latest &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;f7193503fb87 &nbsp; &nbsp; &nbsp; &nbsp;2 weeks ago &nbsp; &nbsp; &nbsp; &nbsp; 754.2 MB
 nginx &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; latest &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;af4b3d7d5401 &nbsp; &nbsp; &nbsp; &nbsp;3 weeks ago &nbsp; &nbsp; &nbsp; &nbsp; 190.5 MB</pre>
 
-<p>如下命令是阻断式的，无法 Ctrl+C 结束，只能通过 docker ps 查看到&nbsp;CONTAINER ID，然后 docker stop {CONTAINER ID} 来终止。</p>
+<p>如下命令是阻断式的，无法 Ctrl+C 结束，只能通过 docker ps 查看到&nbsp;CONTAINER ID，然后</p>
 
 <pre>
 $ docker run -p 88:80 -p 10088:10081 php-zendserver
@@ -190,6 +209,50 @@ Your admin password is MzFhNzY1
 <p>此时真正能访问的地址是 http://`docker-machine ip`:88 和 http://`docker-machine ip`:10088</p>
 
 <p>可惜&nbsp;YOUR ZEND SERVER LICENSE HAS EXPIRED.</p>
+
+<h2>php</h2>
+
+<p>2015-04-05 16:04 Tuesday 今天租房的事情算是搞定了</p>
+
+<p>观察到 fdd5d 已经存在，可推想是&ldquo;分层缓存&rdquo;在起作用，不同的 image 有着共同的祖先</p>
+
+<pre>
+$ docker pull php
+Using default tag: latest
+latest: Pulling from library/php
+
+fdd5d7827f33: Already exists&nbsp;
+a3ed95caeb02: Pull complete&nbsp;
+2f584a474c46: Pull complete&nbsp;
+b185147d01c6: Pull complete&nbsp;
+6663e6f16e95: Pull complete&nbsp;
+fd91f8bf39df: Pull complete&nbsp;
+6d7c00c29f57: Pull complete&nbsp;
+Digest: sha256:a98c4203f8d463ddc018948931ce70df4dd2204c3394cc183a5cc1f38b799c81
+Status: Downloaded newer image for php:latest</pre>
+
+<pre>
+$ docker images
+REPOSITORY &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;TAG &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; IMAGE ID &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;CREATED &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; SIZE
+php &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; latest &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;8c8eb06f7c64 &nbsp; &nbsp; &nbsp; &nbsp;2 weeks ago &nbsp; &nbsp; &nbsp; &nbsp; 483.8 MB
+php-zendserver &nbsp; &nbsp; &nbsp;latest &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;f7193503fb87 &nbsp; &nbsp; &nbsp; &nbsp;2 weeks ago &nbsp; &nbsp; &nbsp; &nbsp; 754.2 MB
+nginx &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; latest &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;af4b3d7d5401 &nbsp; &nbsp; &nbsp; &nbsp;3 weeks ago &nbsp; &nbsp; &nbsp; &nbsp; 190.5 MB
+</pre>
+
+<p>测试一：--rm 表示执行完后立即删除 container，第一个 php 是 image，第二个 php 是 container 中的 php 可执行命令</p>
+
+<pre>
+$ docker run -it --rm php php --version
+PHP 7.0.4 (cli) (built: Mar 19 2016 00:06:16) ( NTS )
+Copyright (c) 1997-2016 The PHP Group
+Zend Engine v3.0.0, Copyright (c) 1998-2016 Zend Technologies
+</pre>
+
+<p>测试二：-v 表示目录映射，需要注意的是，$PWD 指的并不是 OSX 上本机当前路径，而是 docker-machine 上的当前路径。当 $PWD 位于 VirtualBox 默认挂载的共享目录 /Users 之外时，就需要手动挂载 OSX 上的当前路径，比如 /WORK 到 docker-machine 上的 /WORK，如此 OSX 上位于 /WORK 之下的 $PWD 就和 docker-machine 上的 $PWD 对应起来了。-w 表示切换工作目录到指定目录。</p>
+
+<pre>
+$ docker run --rm -v &quot;$PWD&quot;:/var/www/aaa -w /var/www/aaa php ls -al
+</pre>
 
 <h2>What is Docker Machine?</h2>
 
