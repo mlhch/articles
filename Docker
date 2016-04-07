@@ -254,6 +254,32 @@ Zend Engine v3.0.0, Copyright (c) 1998-2016 Zend Technologies
 $ docker run --rm -v &quot;$PWD&quot;:/var/www/aaa -w /var/www/aaa php ls -al
 </pre>
 
+<h2>mysql</h2>
+
+<p>2016-04-07 08:47&nbsp;Thursday 昨天收拾好了工作室的彩钢屋</p>
+
+<p>https://hub.docker.com/_/mysql/</p>
+
+<pre>
+$ docker pull mysql:5.5
+</pre>
+
+<p>不加 -d 时，前台运行，但不响应&nbsp;Ctrl+C，所以还是加 -d 方便，但前台运行方便观察错误信息。--name 给它起个好记的名字，方便随后引用。-p 把 container 的 3306 映射到 &nbsp;docker-machine 的 3306，这样方便其它 container 连接。-v 把 docker-machine 上映射好的 /mysqldata&nbsp;挂载到 container 默认的 mysql 的&nbsp;data_dir（/var/lib/mysql）。/mysqldata 一定需要可写，通过 mount 时设定 uid=999 来实现，999 是&nbsp;container 中 mysql 用户的 id，可登录 container 查看 /etc/passwd 得到。此处单独给 mysql 映射并挂载是因为 /WORK 目录为了可写已经挂载为 docker(uid=1000) 用户，/WORK/databases/mysqldata 受此影响也属于&nbsp;docker 用户。</p>
+
+<pre>
+$ docker run -d --name mysql55 -p 3306:3306 -e MYSQL_ROOT_PASSWORD=aaaa -v /mysqldata:/var/lib/mysql:rw mysql:5.5</pre>
+
+<p>测试方式一，其中 mysql55 是上句中给生成的 container 的命名</p>
+
+<pre>
+$ docker exec -it mysql55 bash&nbsp;</pre>
+
+<p>测试方式二，其中&nbsp;mysql55 是之前生成的 container 的名字，-h 的地址是 &nbsp;container 的真正地址，而不是 docker-machine 的地址，但如果 -p 映射过的话，就可以用 docker-machine 的地址了。</p>
+
+<pre>
+$ docker run -it --link mysql55:mysql --rm mysql:5.5 sh -c &#39;exec mysql -h&quot;172.17.0.3&quot; -P&quot;3306&quot; -uroot -p&quot;aaaa&quot;&#39;
+</pre>
+
 <h2>What is Docker Machine?</h2>
 
 <blockquote>
