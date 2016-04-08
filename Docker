@@ -280,6 +280,50 @@ $ docker exec -it mysql55 bash&nbsp;</pre>
 $ docker run -it --link mysql55:mysql --rm mysql:5.5 sh -c &#39;exec mysql -h&quot;172.17.0.3&quot; -P&quot;3306&quot; -uroot -p&quot;aaaa&quot;&#39;
 </pre>
 
+<h2>postgres</h2>
+
+<p>2016-04-08 09:42 Friday</p>
+
+<p>https://hub.docker.com/_/postgres/</p>
+
+<p>本机目前 postgresql 版本是 9.4.5，故下载 postgres:9.4</p>
+
+<pre>
+$ docker pull postgres:9.4
+</pre>
+
+<p>本 image 默认已经开启了 5432 端口，所以 Dockerfile 中就不用重复了</p>
+
+<pre>
+$ cat Dockerfile&nbsp;
+FROM postgres:9.4
+
+RUN localedef -i zh_CN -c -f UTF-8 -A /usr/share/locale/locale.alias zh_CN.UTF-8
+
+ENV LANG zh_CN.utf8
+</pre>
+
+<pre>
+$ docker build -t pg .</pre>
+
+<p>同&nbsp;mysql，此处 /pgdata 也需要事先在 VirtualBox 中配置好，在 container 中 postgres 用户的 id 也是 999</p>
+
+<pre>
+$ docker run --name pg -p 5432:5432 -v /pgdata:/var/lib/postgresql/data --rm pg</pre>
+
+<p>另外需要注意的是默认 postgresql 只侦听&nbsp;localhost，所以外部表现就是 5432 端口无法连接，此时需要编辑数据库目录中的 postgresql.conf 文件，修改 listen_addresses 为 *</p>
+
+<pre>
+$ vi /WORK/databases/pgdata/postgresql.conf</pre>
+
+<pre>
+listen_addresses = &#39;*&#39; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# what IP address(es) to listen on;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # comma-separated list of addresses;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # defaults to &#39;localhost&#39;; use &#39;*&#39; for all
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # (change requires restart)
+#port = 5432 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# (change requires restart)
+</pre>
+
 <h2>What is Docker Machine?</h2>
 
 <blockquote>
