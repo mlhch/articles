@@ -309,7 +309,7 @@ $ docker build -t pg .</pre>
 <p>同&nbsp;mysql，此处 /pgdata 也需要事先在 VirtualBox 中配置好，在 container 中 postgres 用户的 id 也是 999</p>
 
 <pre>
-$ docker run --name pg -p 5432:5432 -v /pgdata:/var/lib/postgresql/data --rm pg</pre>
+$ docker run --name tp-pg -p 5432:5432 -v /pgdata:/var/lib/postgresql/data postgres-postgis</pre>
 
 <p>另外需要注意的是默认 postgresql 只侦听&nbsp;localhost，所以外部表现就是 5432 端口无法连接，此时需要编辑数据库目录中的 postgresql.conf 文件，修改 listen_addresses 为 *</p>
 
@@ -322,6 +322,47 @@ listen_addresses = &#39;*&#39; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# what IP addre
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # defaults to &#39;localhost&#39;; use &#39;*&#39; for all
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # (change requires restart)
 #port = 5432 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# (change requires restart)
+</pre>
+
+<h2>postgis</h2>
+
+<p>2016-04-09 18:16 Saturday</p>
+
+<p>在 Dockerfile 中使用如下两个命令来安装&nbsp;postgis。apt-get update 是必要的，否则 apt-get 找不到 postgis 相关的包。当前 postgis 最新版本已经是 2.2，但 /WORK/databases/pgdata 中使用的还是 2.1，所以此处需要安装 postgresql-9.4-postgis-2.1。</p>
+
+<pre>
+​RUN apt-get update
+
+RUN apt-get install -y postgresql-9.4-postgis-2.1</pre>
+
+<h2>geoserver</h2>
+
+<p>2016-04-08 13:22 Friday</p>
+
+<p>https://hub.docker.com/_/java/</p>
+
+<p>下载这个映像时需反复尝试，VPN 如果不行再尝试去掉 VPN，结果下载成了。</p>
+
+<pre>
+$ docker pull java:7-jre-alpine</pre>
+
+<p>当前 Dockerfile 很简单，解压然后待运行</p>
+
+<pre>
+$ cat Dockerfile&nbsp;
+FROM java:7-jre-alpine
+
+ENV GEOSERVER_HOME /geoserver-2.8.3
+
+ADD $GEOSERVER_HOME-bin.zip /geoserver.bin.zip
+
+RUN unzip /geoserver.bin.zip &gt; /dev/null
+</pre>
+
+<p>geoserver 的 DATA_DIR&nbsp;不需要&nbsp; mysql 和 postgres 那样的专有用户，所以直接从 /WORK 下映射即可</p>
+
+<pre>
+$ docker run --name tp-geos -p 8080:8080 -v /WORK/databases/geodata:/geoserver-2.8.3/data_dir geos /geoserver-2.8.3/bin/startup.sh
 </pre>
 
 <h2>What is Docker Machine?</h2>
