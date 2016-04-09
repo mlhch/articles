@@ -365,6 +365,8 @@ RUN unzip /geoserver.bin.zip &gt; /dev/null
 $ docker run --name tp-geos -p 8080:8080 -v /WORK/databases/geodata:/geoserver-2.8.3/data_dir geos /geoserver-2.8.3/bin/startup.sh
 </pre>
 
+<p>最后需要注意的就是 geoserver 启动后，如果有数据存储用到 postgresql 数据库的话，修改相关 host 指向 &nbsp;docker-machine 的地址就行了。</p>
+
 <h2>What is Docker Machine?</h2>
 
 <blockquote>
