@@ -260,6 +260,24 @@ $ docker run --rm -v &quot;$PWD&quot;:/var/www/aaa -w /var/www/aaa php ls -al
 
 <p>官方 httpd 映像默认把 apache2 安装在 /usr/local/apache2，apt-get install libapache2-mod-php5 后 /etc/apache2 又成为主配置目录，有点乱。不如直接用 php:5.5-apache 解决问题。</p>
 
+<p>2016-04-12 02:34 Tuesday 刚看完《移动迷宫》，正下载《移动迷宫2》，外面开始下小雨</p>
+
+<p>php-apache 默认 enable 了 mysqlnd，但并没有开启 --with-mysql=mysqlnd 选项，因此无法使用 mysql_connect 函数来连接数据库。正确的解决办法是：</p>
+
+<pre>
+​$ cat containers/php55-apache-mysql/Dockerfile&nbsp;
+FROM php:5.5-apache
+
+RUN docker-php-ext-configure mysql --with-mysql=mysqlnd &amp;&amp; \
+&nbsp; &nbsp; docker-php-ext-install mysql</pre>
+
+<p>其实此问题4天前在 smshosting 项目中已经解决了，今天白花了一天又走了一遍老路</p>
+
+<pre>
+$ gi l Dockerfile
+* 2334dfc - Ma Lian -- 2016-04-07 15:15 Feature: docker build -t sms . (4 days ago)
+</pre>
+
 <h2>mysql</h2>
 
 <p>2016-04-07 08:47&nbsp;Thursday 昨天收拾好了工作室的彩钢屋</p>
