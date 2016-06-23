@@ -20,6 +20,12 @@
 
 <p>`docker ps -a` 列出的是所有 container，`docker rm &lt;container id&gt;` 可删除 container。</p>
 
+<h2>VirtualBox 网卡配置</h2>
+
+<p>2016-06-23 22:17 Thursday</p>
+
+<p>刚刚 fm start 报错：Error checking TLS connection: Error checking and/or regenerating the certs，想来是因为最近为了让手机能够访问 docker 中的服务而添加了第三块网卡，以及相关的一些乱操作导致。折腾了一会通过 fm ls 发现 fm start 一直得不到 IP 是因为执行了命令 ip addr show dev eth1，而 eth1 对应的就是 VirtualBox 中的第二块网卡。因此 eth0 对应的第一块网卡必须有效，记得原来是&ldquo;网络地址转换（NAT）&rdquo;。然后第二块网卡选择&ldquo;仅主机（Host-Only）适配器&rdquo;后就太平了。</p>
+
 <h2>VirtualBox 目录映射</h2>
 
 <p>2016-04-05 20:46 Tuesday</p>
