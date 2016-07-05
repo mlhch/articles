@@ -39,6 +39,23 @@
 	<li>手动挂载：`sudo mount -t vboxsf WORK /WORK`</li>
 </ol>
 
+<p>2016-07-05 15:40 Tuesday</p>
+
+<p>折腾了两三天&nbsp;Wordpress，发现 docker 的性能相当差，原因在于 vboxsf 这个 VirtualBox 的共享文件系统。代之以 NFS，性能果然有了明显的提升，基本上无插件的 Wordpress 首页从 2 秒多变成了 1 秒以下</p>
+
+<pre>
+## -mask requires -net
+## -mapall=mlhch 的意思是，把远程所有用户都当作本地的 mlhch 用户，拥有 mlhch 用户的权限
+/WORK 192.168.99.100 -alldirs -mapall=mlhch</pre>
+
+<p>然后在 docker-machine 中挂载</p>
+
+<pre>
+## http://nfs.sourceforge.net/nfs-howto/ar01s05.html
+## rsize and wsize
+sudo mount 192.168.99.1:/WORK /WORK -o rw,async,noatime,rsize=32768,wsize=32768,proto=tcp
+</pre>
+
 <h2>安装</h2>
 
 <p>https://www.docker.com/products/docker-toolbox</p>
