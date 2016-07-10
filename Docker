@@ -26,6 +26,12 @@
 
 <p>刚刚 fm start 报错：Error checking TLS connection: Error checking and/or regenerating the certs，想来是因为最近为了让手机能够访问 docker 中的服务而添加了第三块网卡，以及相关的一些乱操作导致。折腾了一会通过 fm ls 发现 fm start 一直得不到 IP 是因为执行了命令 ip addr show dev eth1，而 eth1 对应的就是 VirtualBox 中的第二块网卡。因此 eth0 对应的第一块网卡必须有效，记得原来是&ldquo;网络地址转换（NAT）&rdquo;。然后第二块网卡选择&ldquo;仅主机（Host-Only）适配器&rdquo;后就太平了。</p>
 
+<p>2016-07-10 13:25 Sunday 早上10000来电说外网 ip 准备好了。今天必须得在家打扫卫生了</p>
+
+<p>绕了半天，一直困惑于为什么本机连上了 VPN，docker-machine 却对外显示还是原来的 IP，原来是因为那块在 VirtualBox 里手动添加的第三块桥接模式的网卡！！白折腾 OSX 上的 route 命令了。不过有机会倒是可继续研究 netstat -nr 列出的路由表。</p>
+
+<p>早上查到 docker 有个工具叫 pipework，可以方便地把某个窗口桥接到主机所在网络，这个太神了，有机会再研究。</p>
+
 <h2>VirtualBox 目录映射</h2>
 
 <p>2016-04-05 20:46 Tuesday</p>
