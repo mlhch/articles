@@ -72,6 +72,10 @@ Versions
 
 ## Jekyll
 
+*   2016-08-01 15:49 Monday 早上刚准备跑步出门下一阵，没跑成。中午又下一阵儿
+
+    今天升级到了 3.2.0 版本，发现 jekyll new 的项目根目录下并没有 _includes/_layouts 文件夹，却仍然能够正常生成页面，憋困了一觉，终于发现 _config.yml 中的 theme: minima 在起作用，那些缺省的模板都放在了 ~/.rvm/gems/ruby-2.3.0/gems/minima-1.0.1。
+
 *   2014-02-23 13:42
 
     如今会自动跳转到 https://github.com/jekyll/jekyll
@@ -344,11 +348,11 @@ Here’s the most direct way to get your work merged into the project:
 
 1.  Fork the project
 2.  Clone down your fork ( git clone git://github.com/<username>/jekyll.git )
-3.  Create a topic branch to contain your change ( git checkout -b my_awesome_feature )
+3.  Create a topic branch to contain your change ( git checkout -b myawesomefeature )
 4.  Hack away, add tests. Not necessarily in that order.
 5.  Make sure everything still passes by running rake
 6.  If necessary, rebase your commits into logical chunks, without errors
-7.  Push the branch up ( git push origin my_awesome_feature )
+7.  Push the branch up ( git push origin myawesomefeature )
 8.  Create an issue with a description and link to your branch
 
 ### Gotchas
