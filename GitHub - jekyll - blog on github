@@ -366,8 +366,11 @@ Thanks! Hacking on Jekyll should be fun, and if for some reason it’s a pain to
 2013-05-07 16:45
 
 *   $ jekyll build -> /usr/local/Cellar/ruby/1.9.3-p286/bin/jekyll build
+
 *   /usr/local/Cellar/ruby/1.9.3-p286/lib/ruby/gems/1.9.1/gems/jekyll-1.0.0/bin/jekyll
+
     *   command :build do |c|
+
     *   options = Jekyll.configuration(options)
 
         *   module Jekyll
