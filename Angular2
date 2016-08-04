@@ -2,6 +2,27 @@
 
 2016-08-04 11:48:54 Thursday
 
-[https://angular.io/](https://angular.io/)
+[https://angular.io/](https://angular.io/) | [https://angular.cn](https://angular.cn)
 
 本想从 https://github.com/angular/angular-seed 开始 http://mlhch.github.io/，却发现 https://github.com/angular/angular2-seed 并开始认真审视 Angular 2。注意它的前任名为 AngularJS 1，"JS" 两个字母被拿掉了。
+
+## angular2-seed
+
+https://github.com/angular/angular2-seed
+
+    $ git clone --depth=1 https://github.com/angular/angular2-seed ghpages
+    $ . /WORK/envs/node-5.6.0/bin/activate
+    $ cd ghpages && npm i && npm start
+
+*   Make sure you have [node.js](https://nodejs.org/) installed version 5+
+*   Make sure you have NPM installed version 3+
+*   run `npm start` to fire up dev server
+*   open browser to [`http://localhost:3000`](http://localhost:3000/)
+
+发现这个 angular2-seed 还挺复杂的，有好多不懂的 ts 文件。算了，还是从 quickstart 开始吧。
+
+## 5 MIN QUICKSTART
+
+https://angular.cn/docs/js/latest/quickstart.html
+
+原来 Angular 2 真坑啊，都改用 TypeScript 了！
