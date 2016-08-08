@@ -26,6 +26,20 @@ Get started with one of our guides, or jump straight into the API documentation.
 
 [http://developer.github.com/v3/](http://developer.github.com/v3/)
 
+## OAuth applications
+
+[https://developer.github.com/v3/oauth/](https://developer.github.com/v3/oauth/)
+
+2016-08-08 18:50 Monday
+
+OAuth2 is a protocol that lets external applications request authorization to private details in a user's GitHub account without getting their password. This is preferred over [Basic Authentication](https://developer.github.com/v3/auth#basic-authentication) because tokens can be limited to specific types of data, and can be revoked by users at any time.
+
+OAuth2 是一个协议，可以允许外部应用请求对用户 GitHub 帐户的私有信息的授权而不需要知道用户的密码。这比基本授权更好，因为 tokens 可以被限制为指定类型的数据，可以被用户在任何时候撤销。
+
+All developers need to [register their application](https://github.com/settings/applications/new) before getting started. A registered OAuth application is assigned a unique Client ID and Client Secret. The Client Secret should not be shared.You may create a [personal access token](https://github.com/settings/tokens/new) for your own use or implement the web flow below to allow other users to authorize your application.
+
+首先，所有开发者需要注册他们的应用。一个注册的 OAuth 应用被分配到一个唯一的 Client ID 和 Client Secret。你可以创建一个私有访问 token 来自己用，或者实现下面的网页流程来允许其他用户授权你的应用。
+
 ## Getting Started
 
 [http://developer.github.com/guides/getting-started/](http://developer.github.com/guides/getting-started/)
