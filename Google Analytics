@@ -1,11 +1,37 @@
-<h1>Google Analytics</h1>
+# Google Analytics
 
-<p>2013-11-12 23:26 Tuesday</p>
+2013-11-12 23:26 Tuesday
 
-<p><a href="http://www.google.com/analytics/" target="_blank">http://www.google.com/analytics/</a></p>
+[http://www.google.com/analytics/](http://www.google.com/analytics/)
 
-<p>github.mlhch&nbsp;(UA-3309709-7)</p>
+github.mlhch (UA-3309709-7)
 
-<p>2014-02-12 21:05 Wednsday</p>
+1.  2014-02-12 21:05 Wednsday
+    UA-3309709-8
+2.  2014-07-17 15:42 Thursday
+    http://mlhch.gicp.net/travpad.mobile/dist/
+    UA-3309709-11
 
-<p>UA-3309709-8</p>
+## 使用多个跟踪对象
+
+[https://developers.google.com/analytics/devguides/collection/analyticsjs/advanced#multipletrackers](https://developers.google.com/analytics/devguides/collection/analyticsjs/advanced#multipletrackers)
+
+摘要如下：
+
+    ga('create', 'UA-XXXX-Y', 'auto');
+    ga('create', 'UA-12345-6', 'auto', {'name': 'newTracker'});  // New tracker.
+
+    ga('send', 'pageview');
+    ga('newTracker.send', 'pageview'); // Send page view for new tracker.
+
+实际代码：
+
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-37386436-1', 'auto');
+    ga('send', 'pageview');
+    ga('create', 'UA-3309709-11', 'auto', {'name': 'ml'});
+    ga('ml.send', 'pageview');
