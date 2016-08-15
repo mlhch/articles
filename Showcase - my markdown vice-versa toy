@@ -1,0 +1,9 @@
+# Showcase - my markdown vice-versa toy
+
+2016-08-15 13:01:59 Monday
+
+Not mature yet, but a good start.
+
+The idea originally came from that I want to store all my HTML format technology articles version controlled and easy to compare difference between versions. Then I chose Git and Markdown. Git requires every character to be stable for a version, while Markdown is almost controlled by fixed characters such as blank line and indent, as long as you choose a fixed style, for example, always use "# headline" instead of "headline with many '=' in next line", *italic* instead of _italic_, and **strong** instead of __strong__, etc.
+
+Currently I leverage [to-markdown](https://github.com/domchristie/to-markdown) and [showdown](https://github.com/showdownjs/showdown), but unfortunately they are not vice-versa and have differenct coding styles. I have no sufficient time to invent a new and perfect wheel yet, so what I choose is to patch the two libraries and make something that works in the early stage. Then it is here now: [https://github.com/mlhch/markdown-upagain](https://github.com/mlhch/markdown-upagain).
